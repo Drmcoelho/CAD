@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1320 2868" role="img" aria-labelledby="title desc">
+<title id="title">Falha de sinal</title>
+<desc id="desc">CAD e insulina insuficiente: glicose sobra, mas a celula le jejum.</desc>
+<defs>
+<marker id="arrow-37c6e0" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth"><path d="M2,2 L10,6 L2,10 Z" fill="#37c6e0"/></marker><marker id="arrow-46d7b4" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth"><path d="M2,2 L10,6 L2,10 Z" fill="#46d7b4"/></marker><marker id="arrow-55d88f" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth"><path d="M2,2 L10,6 L2,10 Z" fill="#55d88f"/></marker><marker id="arrow-f2b441" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth"><path d="M2,2 L10,6 L2,10 Z" fill="#f2b441"/></marker><marker id="arrow-ef8f4c" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth"><path d="M2,2 L10,6 L2,10 Z" fill="#ef8f4c"/></marker><marker id="arrow-ff6464" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth"><path d="M2,2 L10,6 L2,10 Z" fill="#ff6464"/></marker><marker id="arrow-b18cf0" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth"><path d="M2,2 L10,6 L2,10 Z" fill="#b18cf0"/></marker>
+<pattern id="grid" width="42" height="42" patternUnits="userSpaceOnUse">
+  <path d="M42 0H0V42" fill="none" stroke="#314557" stroke-width="1" opacity=".34"/>
+</pattern>
+<linearGradient id="warm" x1="0" x2="1">
+  <stop offset="0" stop-color="#ef8f4c"/>
+  <stop offset="1" stop-color="#ff6464"/>
+</linearGradient>
+<linearGradient id="cool" x1="0" x2="1">
+  <stop offset="0" stop-color="#37c6e0"/>
+  <stop offset="1" stop-color="#46d7b4"/>
+</linearGradient>
+</defs>
+<rect width="1320" height="2868" fill="#101820"/>
+<circle cx="1160" cy="40" r="310" fill="#37c6e0" opacity=".08"/>
+<circle cx="120" cy="2770" r="380" fill="#ef8f4c" opacity=".06"/>
+<rect x="48" y="46" width="1224" height="2776" rx="42" fill="none" stroke="#314557" stroke-width="2"/>
+<text x="88" y="126" font-family="JetBrains Mono, SFMono-Regular, Menlo, monospace" font-size="24" font-weight="900" fill="#37c6e0" letter-spacing="5">CAD 360 · M01</text>
+<text x="88" y="204" font-family="Avenir Next, Inter, Arial, sans-serif" font-size="58" font-weight="900" fill="#ffffff">Falha de sinal</text>
+<text x="90" y="258" font-family="Avenir Next, Inter, Arial, sans-serif" font-size="28" font-weight="500" fill="#aebdcc">CAD e insulina insuficiente: glicose sobra, mas a celula le jejum.</text>
+<line x1="88" y1="306" x2="1232" y2="306" stroke="#314557" stroke-width="2"/>
+<rect x="88" y="370" width="1144" height="420" rx="26" fill="#172330" stroke="#314557" stroke-width="2" opacity="1"/>
+<rect x="116" y="396" width="58" height="58" rx="16" fill="#1d2b3a" stroke="#ef8f4c" stroke-width="2" opacity="1"/>
+<text x="145" y="436" text-anchor="middle" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="24" font-weight="900" fill="#ef8f4c" opacity="1">1</text>
+<text x="192" y="436" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="28" font-weight="850" fill="#ffffff" opacity="1">Cascata fisiologica central</text>
+<rect x="150" y="500" width="220" height="82" rx="41.0" fill="#ff6464" stroke="#314557" stroke-width="1.5"/>
+<text x="260.0" y="550.0" text-anchor="middle" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="25" font-weight="850" fill="#101820" opacity="1">insulina baixa</text>
+<rect x="430" y="500" width="220" height="82" rx="41.0" fill="#f2b441" stroke="#314557" stroke-width="1.5"/>
+<text x="540.0" y="550.0" text-anchor="middle" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="25" font-weight="850" fill="#101820" opacity="1">glucagon/catecol</text>
+<rect x="710" y="500" width="220" height="82" rx="41.0" fill="#ef8f4c" stroke="#314557" stroke-width="1.5"/>
+<text x="820.0" y="550.0" text-anchor="middle" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="25" font-weight="850" fill="#101820" opacity="1">lipólise</text>
+<rect x="990" y="500" width="190" height="82" rx="41.0" fill="#b18cf0" stroke="#314557" stroke-width="1.5"/>
+<text x="1085.0" y="550.0" text-anchor="middle" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="25" font-weight="850" fill="#101820" opacity="1">β-OHB</text>
+<line x1="382" y1="541" x2="418" y2="541" stroke="#ef8f4c" stroke-width="5" stroke-linecap="round" marker-end="url(#arrow-ef8f4c"/>
+<line x1="662" y1="541" x2="698" y2="541" stroke="#ef8f4c" stroke-width="5" stroke-linecap="round" marker-end="url(#arrow-ef8f4c"/>
+<line x1="942" y1="541" x2="978" y2="541" stroke="#ef8f4c" stroke-width="5" stroke-linecap="round" marker-end="url(#arrow-ef8f4c"/>
+<text x="150" y="648" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="29" font-weight="650" fill="#edf5fb" opacity="1">A doenca nao nasce da glicose alta: nasce da ausencia de freio hormonal</text>
+<text x="150" y="685.12" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="29" font-weight="650" fill="#edf5fb" opacity="1">sobre lipolise e cetogenese. A glicose e visivel; a cetona e causal.</text>
+<rect x="88" y="860" width="530" height="520" rx="26" fill="#172330" stroke="#314557" stroke-width="2" opacity="1"/>
+<rect x="116" y="886" width="58" height="58" rx="16" fill="#1d2b3a" stroke="#37c6e0" stroke-width="2" opacity="1"/>
+<text x="145" y="926" text-anchor="middle" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="24" font-weight="900" fill="#37c6e0" opacity="1">2</text>
+<text x="192" y="926" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="28" font-weight="850" fill="#ffffff" opacity="1">O loop que se sustenta</text>
+<rect x="190" y="1010" width="240" height="58" rx="29.0" fill="#1d2b3a" stroke="#314557" stroke-width="1.5"/>
+<text x="310.0" y="1046.56" text-anchor="middle" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="21" font-weight="850" fill="#edf5fb" opacity="1">hiperglicemia</text>
+<rect x="390" y="1115" width="240" height="58" rx="29.0" fill="#1d2b3a" stroke="#314557" stroke-width="1.5"/>
+<text x="510.0" y="1151.56" text-anchor="middle" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="21" font-weight="850" fill="#edf5fb" opacity="1">diurese osmótica</text>
+<rect x="270" y="1260" width="240" height="58" rx="29.0" fill="#1d2b3a" stroke="#314557" stroke-width="1.5"/>
+<text x="390.0" y="1296.56" text-anchor="middle" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="21" font-weight="850" fill="#edf5fb" opacity="1">↓ volume / ↓ TFG</text>
+<rect x="120" y="1145" width="240" height="58" rx="29.0" fill="#1d2b3a" stroke="#314557" stroke-width="1.5"/>
+<text x="240.0" y="1181.56" text-anchor="middle" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="21" font-weight="850" fill="#edf5fb" opacity="1">menos clearance</text>
+<line x1="310" y1="1045" x2="418" y2="1110" stroke="#37c6e0" stroke-width="5" stroke-linecap="round" marker-end="url(#arrow-37c6e0"/>
+<line x1="485" y1="1165" x2="420" y2="1245" stroke="#37c6e0" stroke-width="5" stroke-linecap="round" marker-end="url(#arrow-37c6e0"/>
+<line x1="260" y1="1260" x2="180" y2="1200" stroke="#37c6e0" stroke-width="5" stroke-linecap="round" marker-end="url(#arrow-37c6e0"/>
+<line x1="170" y1="1130" x2="210" y2="1045" stroke="#37c6e0" stroke-width="5" stroke-linecap="round" marker-end="url(#arrow-37c6e0"/>
+<text x="128" y="1328" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="24" font-weight="500" fill="#aebdcc" opacity="1">Volume quebra o ciclo; insulina</text>
+<text x="128" y="1358.72" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="24" font-weight="500" fill="#aebdcc" opacity="1">fecha a cetogênese. Ordem importa</text>
+<text x="128" y="1389.44" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="24" font-weight="500" fill="#aebdcc" opacity="1">quando o K esta fragil.</text>
+<rect x="668" y="860" width="564" height="520" rx="26" fill="#172330" stroke="#314557" stroke-width="2" opacity="1"/>
+<rect x="696" y="886" width="58" height="58" rx="16" fill="#1d2b3a" stroke="#55d88f" stroke-width="2" opacity="1"/>
+<text x="725" y="926" text-anchor="middle" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="24" font-weight="900" fill="#55d88f" opacity="1">3</text>
+<text x="772" y="926" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="28" font-weight="850" fill="#ffffff" opacity="1">Tradução à beira do leito</text>
+<rect x="720" y="970" width="340" height="56" rx="28.0" fill="#37c6e0" stroke="#314557" stroke-width="1.5"/>
+<text x="890.0" y="1005.92" text-anchor="middle" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="22" font-weight="850" fill="#101820" opacity="1">glicose cai cedo</text>
+<rect x="720" y="1052" width="340" height="56" rx="28.0" fill="#b18cf0" stroke="#314557" stroke-width="1.5"/>
+<text x="890.0" y="1087.92" text-anchor="middle" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="22" font-weight="850" fill="#101820" opacity="1">gap/cetona fecha depois</text>
+<rect x="720" y="1134" width="340" height="56" rx="28.0" fill="#f2b441" stroke="#314557" stroke-width="1.5"/>
+<text x="890.0" y="1169.92" text-anchor="middle" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="22" font-weight="850" fill="#101820" opacity="1">K despenca com tratamento</text>
+<rect x="720" y="1216" width="340" height="56" rx="28.0" fill="#ef8f4c" stroke="#314557" stroke-width="1.5"/>
+<text x="890.0" y="1251.92" text-anchor="middle" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="22" font-weight="850" fill="#101820" opacity="1">cloro pode segurar o pH</text>
+<text x="720" y="1315" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="24" font-weight="650" fill="#edf5fb" opacity="1">Lei operacional: titule pela</text>
+<text x="720" y="1345.72" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="24" font-weight="650" fill="#edf5fb" opacity="1">cetose/gap e proteja K. Glicemia</text>
+<text x="720" y="1376.44" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="24" font-weight="650" fill="#edf5fb" opacity="1">isolada e o pior volante possivel.</text>
+<rect x="88" y="1460" width="1144" height="1020" rx="26" fill="#172330" stroke="#314557" stroke-width="2" opacity="1"/>
+<rect x="116" y="1486" width="58" height="58" rx="16" fill="#1d2b3a" stroke="#b18cf0" stroke-width="2" opacity="1"/>
+<text x="145" y="1526" text-anchor="middle" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="24" font-weight="900" fill="#b18cf0" opacity="1">4</text>
+<text x="192" y="1526" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="28" font-weight="850" fill="#ffffff" opacity="1">A régua mental</text>
+<text x="150" y="1585" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="28" font-weight="850" fill="#ffffff" opacity="1">Glicose</text>
+<text x="390" y="1585" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="25" font-weight="750" fill="#37c6e0" opacity="1">marcador barulhento</text>
+<text x="680" y="1585" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="24" font-weight="520" fill="#aebdcc" opacity="1">desce antes da doença</text>
+<text x="680" y="1615.72" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="24" font-weight="520" fill="#aebdcc" opacity="1">resolver</text>
+<line x1="140" y1="1617" x2="1180" y2="1617" stroke="#314557" stroke-width="1.5"/>
+<text x="150" y="1717" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="28" font-weight="850" fill="#ffffff" opacity="1">β-OHB/gap</text>
+<text x="390" y="1717" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="25" font-weight="750" fill="#37c6e0" opacity="1">eixo da doença</text>
+<text x="680" y="1717" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="24" font-weight="520" fill="#aebdcc" opacity="1">manda na duração da insulina</text>
+<line x1="140" y1="1749" x2="1180" y2="1749" stroke="#314557" stroke-width="1.5"/>
+<text x="150" y="1849" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="28" font-weight="850" fill="#ffffff" opacity="1">K sérico</text>
+<text x="390" y="1849" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="25" font-weight="750" fill="#37c6e0" opacity="1">fotografia ruim do estoque</text>
+<text x="680" y="1849" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="24" font-weight="520" fill="#aebdcc" opacity="1">define se insulina é segura</text>
+<line x1="140" y1="1881" x2="1180" y2="1881" stroke="#314557" stroke-width="1.5"/>
+<text x="150" y="1981" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="28" font-weight="850" fill="#ffffff" opacity="1">Cloro</text>
+<text x="390" y="1981" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="25" font-weight="750" fill="#37c6e0" opacity="1">assinatura do tratamento</text>
+<text x="680" y="1981" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="24" font-weight="520" fill="#aebdcc" opacity="1">explica pH baixo residual</text>
+<line x1="140" y1="2013" x2="1180" y2="2013" stroke="#314557" stroke-width="1.5"/>
+<text x="150" y="2113" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="28" font-weight="850" fill="#ffffff" opacity="1">Osm efetiva</text>
+<text x="390" y="2113" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="25" font-weight="750" fill="#37c6e0" opacity="1">tonicidade</text>
+<text x="680" y="2113" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="24" font-weight="520" fill="#aebdcc" opacity="1">guia risco neurológico em</text>
+<text x="680" y="2143.72" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="24" font-weight="520" fill="#aebdcc" opacity="1">HHS/misto</text>
+<line x1="140" y1="2145" x2="1180" y2="2145" stroke="#314557" stroke-width="1.5"/>
+<rect x="235" y="2365" width="850" height="72" rx="36.0" fill="#1d2b3a" stroke="#314557" stroke-width="1.5"/>
+<text x="660.0" y="2411.08" text-anchor="middle" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="28" font-weight="850" fill="#ffffff" opacity="1">A glicose e o ruído; a cetona e o crime; o potássio e a trava.</text>
+</svg>

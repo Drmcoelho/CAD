@@ -1,0 +1,594 @@
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CAD 360 — Núcleo (socrático + canônico)</title>
+<style>
+:root{--bg:#0e141b;--p:#161d26;--p2:#1b2531;--line:#243040;--line2:#2f3e52;
+--tx:#e6edf3;--mut:#8394a6;--teal:#37c6e0;--grn:#46d18a;--red:#ff5d5d;--amb:#ffb454;--vio:#b78cff;
+--mono:ui-monospace,Menlo,Consolas,monospace}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.55 -apple-system,Segoe UI,Roboto,sans-serif;-webkit-text-size-adjust:100%}
+.wrap{max-width:1140px;margin:0 auto;padding:0 16px 90px}
+h1{font-size:24px;margin:0;letter-spacing:-.3px}.sub{color:var(--mut);font-size:13px;margin:2px 0 0}
+header{padding:20px 0 6px}
+.stamp{display:inline-block;margin-top:9px;font-size:11px;color:var(--teal);border:1px solid var(--line2);border-radius:20px;padding:3px 11px}
+nav.tabs{position:sticky;top:0;z-index:20;background:rgba(14,20,27,.93);backdrop-filter:blur(8px);
+display:flex;gap:6px;padding:9px 0;border-bottom:1px solid var(--line);margin-bottom:6px;overflow-x:auto;-webkit-overflow-scrolling:touch}
+nav.tabs button{flex:1 0 auto;min-width:90px;white-space:nowrap;background:var(--p);border:1px solid var(--line2);color:var(--mut);border-radius:10px;
+padding:9px 8px;font:600 13px/1 inherit;cursor:pointer}
+nav.tabs button.on{color:var(--tx);border-color:var(--teal);background:var(--p2)}
+section.tab{display:none;animation:f .18s ease}section.tab.on{display:block}
+@keyframes f{from{opacity:.4}to{opacity:1}}
+.lab{color:var(--mut);font-size:11px;letter-spacing:.06em;text-transform:uppercase;margin:24px 0 8px}
+.panel{background:var(--p);border:1px solid var(--line);border-radius:14px;padding:14px 15px;margin:10px 0}
+table{border-collapse:collapse;width:100%;font-size:13.5px}
+th,td{border:1px solid var(--line);padding:7px 10px;text-align:left;vertical-align:top}
+th{background:var(--p2);color:var(--mut);font-weight:600;font-size:11px;letter-spacing:.04em;text-transform:uppercase}
+td .v{font-family:var(--mono)}.tscroll{overflow-x:auto}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:13px}
+.calc{background:var(--p);border:1px solid var(--line);border-radius:12px;padding:13px}
+.calc h3{margin:0 0 2px;font-size:15.5px}.calc .f{font-family:var(--mono);color:var(--mut);font-size:11.5px;margin:0 0 9px}
+.row{display:flex;flex-wrap:wrap;gap:8px 10px;margin-bottom:10px}
+.fld{display:flex;flex-direction:column;gap:2px}
+.fld label{font-size:10.5px;color:var(--mut);text-transform:uppercase;letter-spacing:.04em}
+.fld input,.fld select{background:var(--p2);border:1px solid var(--line2);color:var(--tx);border-radius:8px;padding:6px 8px;font-family:var(--mono);font-size:14px}
+.fld input{width:78px}.fld select{font-family:inherit;font-size:13px}
+.fld input:focus,.fld select:focus{outline:none;border-color:var(--teal)}
+.out{border-top:1px solid var(--line);padding-top:9px}.out .big{font-family:var(--mono);font-size:22px;font-weight:700}
+.chip{display:inline-block;font-size:11.5px;padding:2px 9px;border-radius:20px;border:1px solid;margin-top:6px;line-height:1.4}
+.g{color:var(--grn);border-color:#22503a;background:#10201a}.a{color:var(--amb);border-color:#5a4520;background:#1f1a12}
+.r{color:var(--red);border-color:#5a2730;background:#1f1416}.t{color:var(--teal);border-color:#1d4a57;background:#0e1f25}
+details{margin-top:10px;border-top:1px dashed var(--line2);padding-top:8px}
+details>summary{cursor:pointer;color:var(--teal);font-size:12.5px;font-weight:600;list-style:none}
+details>summary::-webkit-details-marker{display:none}
+details>summary::before{content:"▸ ";color:var(--mut)}details[open]>summary::before{content:"▾ "}
+.why{font-size:13px;margin-top:8px;line-height:1.55}.why b{color:var(--teal)}
+.ex{margin-top:8px;font-size:13px}.ex .stem{color:var(--tx)}
+.ans{margin-top:6px;color:var(--grn);font-size:12.5px;line-height:1.55;display:none;background:#10201a;border:1px solid #22503a;border-radius:8px;padding:8px 10px}
+.ans.show{display:block}.ans b{color:var(--tx)}
+.exbtn{margin-top:6px;background:var(--p2);border:1px solid var(--line2);color:var(--teal);border-radius:8px;padding:4px 10px;font-size:12px;cursor:pointer}
+.xlink{color:var(--teal);font-size:12px;text-decoration:none;border-bottom:1px dotted var(--teal);cursor:pointer}
+.drow{display:grid;grid-template-columns:120px 1fr;border:1px solid var(--line);border-radius:10px;overflow:hidden;margin-bottom:8px}
+.drow>div{padding:9px 11px}.dk{font-family:var(--mono);font-weight:700;display:flex;align-items:center}
+.dv{border-left:1px solid var(--line);font-size:13.5px}
+.dk.red{background:#1f1416;color:var(--red)}.dk.grn{background:#10201a;color:var(--grn)}.dk.teal{background:#0e1f25;color:var(--teal)}
+.step{background:var(--p);border:1px solid var(--line);border-radius:12px;padding:12px 13px;margin:9px 0}
+.step .q{font-weight:600;font-size:14.5px;margin-bottom:2px}
+.step .meta{color:var(--mut);font-size:11px;text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px}
+.step .sa{display:none;font-size:13px;line-height:1.55;border-top:1px dashed var(--line2);padding-top:8px;margin-top:8px}
+.step .sa.show{display:block}
+.step button.rev{background:var(--p2);border:1px solid var(--line2);color:var(--teal);border-radius:8px;padding:5px 12px;font-size:12.5px;cursor:pointer}
+/* module blocks */
+.mod{background:var(--p);border:1px solid var(--line);border-radius:14px;padding:14px 15px;margin:10px 0}
+.modblk{border-left:3px solid var(--line2);padding:2px 0 2px 11px;margin:11px 0;font-size:13.5px;line-height:1.55}
+.modblk .mt{display:block;color:var(--mut);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;margin-bottom:3px}
+.modblk.caso{border-color:var(--teal)}.modblk.trap{border-color:var(--red)}.modblk.pearl{border-color:var(--amb)}
+.modblk.proj{border-color:var(--vio)}.modblk.eq{border-color:var(--grn)}
+.leis{counter-reset:l;list-style:none;padding:0;margin:0}
+.leis li{counter-increment:l;position:relative;padding:9px 12px 9px 40px;border:1px solid var(--line);border-radius:10px;margin-bottom:7px;font-size:13.5px;line-height:1.5}
+.leis li::before{content:counter(l);position:absolute;left:11px;top:9px;font-family:var(--mono);color:var(--teal);font-weight:700}
+kbd{font-family:var(--mono);background:var(--p2);border:1px solid var(--line2);border-radius:5px;padding:0 5px;font-size:12px}
+.foot{color:var(--mut);font-size:11.5px;margin-top:12px;line-height:1.55}a{color:var(--teal)}
+.rel{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.rel a{background:var(--p2);border:1px solid var(--line2);border-radius:9px;padding:7px 12px;text-decoration:none;font-size:12.5px}
+.callout{border-left:3px solid var(--amb);background:#1a1710;border-radius:0 10px 10px 0;padding:10px 13px;margin:10px 0;font-size:13px}
+.gov{border-left:3px solid var(--vio);background:#15121d;border-radius:0 10px 10px 0;padding:11px 13px;font-size:13px;line-height:1.55}
+/* fisiologia + sims */
+.physblk{border-left:3px solid var(--teal);background:#0f1a1f;border-radius:0 12px 12px 0;padding:12px 14px;margin:10px 0;font-size:13.5px;line-height:1.6}
+.physblk.kidney{border-color:var(--grn);background:#0f1a15}
+.physblk h4{margin:0 0 6px;font-size:15px}
+.physblk .mech{margin:8px 0;padding-left:12px;border-left:1px solid var(--line2)}.physblk .mech b{color:var(--teal)}
+.physblk.kidney .mech b{color:var(--grn)}
+.simwrap{background:var(--p);border:1px solid var(--line);border-radius:12px;padding:12px 13px;margin:10px 0}
+.simwrap h4{margin:0 0 3px;font-size:14.5px}.simwrap .cap{color:var(--mut);font-size:12px;margin-bottom:9px;line-height:1.45}
+canvas{display:block;width:100%;background:#0c1218;border:1px solid var(--line);border-radius:8px;touch-action:none}
+.ctrls{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;margin-top:11px}
+.ctrl{display:flex;flex-direction:column;gap:3px;min-width:150px;flex:1}
+.ctrl label{font-size:11.5px;color:var(--mut)}.ctrl input[type=range]{width:100%;accent-color:var(--teal)}
+.seg{display:inline-flex;border:1px solid var(--line2);border-radius:8px;overflow:hidden}
+.seg button{background:var(--p2);border:0;color:var(--mut);padding:6px 13px;font:600 12.5px inherit;cursor:pointer}
+.seg button.on{background:var(--teal);color:#06222b}
+.simout{margin-top:10px;font-size:13px;line-height:1.55}.simout .k{font-family:var(--mono);color:var(--tx)}
+/* quiz */
+.scorebar{position:sticky;top:54px;z-index:10;background:var(--p2);border:1px solid var(--line2);border-radius:10px;padding:8px 13px;margin:8px 0;font-size:13px}
+.scorebar b{font-family:var(--mono);color:var(--teal)}
+.qcard{background:var(--p);border:1px solid var(--line);border-radius:12px;padding:13px 14px;margin:10px 0}
+.qtype{display:inline-block;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--mut);border:1px solid var(--line2);border-radius:6px;padding:1px 7px;margin-bottom:7px}
+.qstem{font-size:14px;font-weight:600;margin-bottom:9px;line-height:1.45}
+.opt{display:block;width:100%;text-align:left;background:var(--p2);border:1px solid var(--line2);color:var(--tx);border-radius:9px;padding:9px 11px;margin-bottom:7px;font:inherit;font-size:13.5px;cursor:pointer}
+.opt:hover:not(:disabled){border-color:var(--teal)}
+.opt.ok{border-color:#22503a;background:#10201a;color:var(--grn)}.opt.no{border-color:#5a2730;background:#1f1416;color:var(--red)}
+.opt:disabled{cursor:default;opacity:.92}
+.qexp{display:none;margin-top:8px;font-size:12.5px;line-height:1.55;color:var(--mut);border-top:1px dashed var(--line2);padding-top:8px}
+.qexp.show{display:block}.qexp b{color:var(--tx)}
+.vfrow{display:flex;gap:8px}.vfrow .opt{flex:1;text-align:center}
+.subq{border-left:2px solid var(--line2);padding-left:12px;margin:11px 0}
+</style></head><body>
+<div class="wrap">
+<header><h1>CAD 360 — Núcleo</h1>
+<p class="sub">Socrático (entender) + canônico (calcular) + atlas, uma coisa só. Todo número vem de um objeto <code>CANON</code> único.</p>
+<span class="stamp" id="stamp"></span></header>
+
+<nav class="tabs">
+ <button data-tab="entender" class="on">🧠 Entender</button>
+ <button data-tab="fisio">🫁 Fisiologia</button>
+ <button data-tab="calcular">🧮 Calcular</button>
+ <button data-tab="provao">📝 Provão</button>
+ <button data-tab="atlas">🗺️ Atlas</button>
+ <button data-tab="ref">📌 Referência</button>
+</nav>
+
+<!-- ENTENDER -->
+<section class="tab on" id="entender">
+ <div class="callout">A gasometria é um <b>filme</b>, não uma foto. A pergunta nunca é "qual o número?" — é "para onde o sistema está indo e o que ele está escondendo?". Esta aba treina a leitura; a aba <span class="goto xlink" data-go="calcular">Calcular</span> faz a conta.</div>
+ <div class="lab">Escada de leitura ácido-base — pergunte nesta ordem</div>
+ <div id="ladder"></div>
+ <div class="lab">Módulo socrático A · CAD euglicêmica — o destro que mente</div>
+ <div class="mod" id="modA"></div>
+ <div class="lab">Módulo socrático B · o cloro e o "pH que não fecha"</div>
+ <div class="mod" id="modB"></div>
+</section>
+
+<!-- FISIOLOGIA -->
+<section class="tab" id="fisio">
+ <div class="callout">As fórmulas não são conta por conta — são <b>janelas para dois órgãos</b>. O pulmão move o pCO₂; o rim move água, cloro, potássio e o bicarbonato. Aqui está a fisiopatologia-raiz, com dois simuladores para <b>mexer</b> e ver o sistema responder.</div>
+
+ <div class="lab">O pulmão — a compensação que tem limite</div>
+ <div class="physblk">
+  <h4>🫁 Por que a respiração fica profunda (Kussmaul)</h4>
+  A acidemia estimula quimiorreceptores (central bulbar + corpúsculos carotídeos) → sobe o <i>drive</i> → respiração <b>profunda</b> (alto volume corrente), não só rápida → <b>lava CO₂</b> → o pCO₂ cai → o pH sobe de volta em parte. É <b>compensação, não correção</b>: o HCO₃ segue baixo; o pulmão só compra tempo.
+  <div class="mech"><b>Winter</b> quantifica o esforço: pCO₂ esperada = 1,5·HCO₃ + 8. É "quanto o pulmão deveria estar soprando".</div>
+  <div class="mech"><b>O limite.</b> O pulmão tem piso (~pCO₂ 10–12 mmHg) — não compensa infinitamente. E cansa.</div>
+  <div class="mech"><b>Armadilha de handoff.</b> pCO₂ "normal" (40) numa CAD grave não é bom sinal — é o pulmão <b>falhando</b> (deveria estar em ~20). RR caindo + pCO₂ subindo = fadiga do drive, acidose respiratória somada, não "acalmou".</div>
+ </div>
+ <div class="simwrap">
+  <h4>Simulador · plano ácido-base (pCO₂ × HCO₃)</h4>
+  <div class="cap">As curvas coloridas são iso-pH (Henderson-Hasselbalch); a faixa tracejada é a compensação de Winter. Mova o HCO₃ (rim) e veja o pulmão precisar cair na faixa para segurar o pH.</div>
+  <canvas id="dav"></canvas>
+  <div class="ctrls">
+   <div class="ctrl"><label>HCO₃ · metabólico/rim — <span id="dav_h">8</span> mEq/L</label><input id="dav_hs" type="range" min="4" max="34" step="0.5" value="8"></div>
+   <div class="ctrl"><label>pCO₂ · respiratório/pulmão — <span id="dav_p">20</span> mmHg</label><input id="dav_ps" type="range" min="10" max="70" step="1" value="20"></div>
+  </div>
+  <div class="simout" id="dav_out"></div>
+ </div>
+
+ <div class="lab">O rim — o órgão central da CAD</div>
+ <div class="physblk kidney">
+  <h4>🫘 Cinco trabalhos do rim, cinco raízes clínicas</h4>
+  <div class="mech"><b>1 · Diurese osmótica.</b> Glicose acima do limiar renal (~180 mg/dL) → glicosúria → arrasta água + Na + K + Mg + fosfato. <i>Raiz</i> da hipovolemia e da depleção eletrolítica que você repõe.</div>
+  <div class="mech"><b>2 · Cetoânion excretado = bicarbonato jogado fora.</b> O rim excreta β-OHB⁻ e acetoacetato⁻ (com Na/K). Cada cetoânion perdido na urina é um <b>bicarbonato que não será regenerado</b>. Quando a perfusão volta, o rim despeja cetoânion → o gap fecha, mas o HCO₃ demora. <i>Raiz</i> do "pH que não fecha".</div>
+  <div class="mech"><b>3 · Carga de cloro.</b> SF 0,9% entrega Cl 154 mEq/L; o rim não excreta esse cloro rápido → acidose hiperclorêmica de gap normal (24–48 h). <i>Raiz</i> da cauda hiperclorêmica.</div>
+  <div class="mech"><b>4 · Paradoxo do potássio.</b> Deficiência de insulina + acidemia → K sai da célula (shift transcelular) → K sérico normal/alto <b>apesar</b> de depleção corporal total (perdido na diurese). A insulina joga K de volta → K sérico despenca. <i>Raiz</i> de repor antes e adiar insulina se < 3,5.</div>
+  <div class="mech"><b>5 · Regeneração lenta de bicarbonato.</b> O rim regenera HCO₃ por amoniagênese + acidez titulável — devagar. <i>Raiz</i> de o HCO₃ subir por último, mesmo com a cetose resolvida.</div>
+ </div>
+ <div class="simwrap">
+  <h4>Simulador · a cauda de cloro no tempo (SF × balanceado)</h4>
+  <div class="cap">Modelo didático (não é integração numérica). A mesma cetose resolve nos dois; o fluido decide se o rim ganha uma cauda de cloro. Escorregue o tempo.</div>
+  <div class="seg" style="margin-bottom:9px"><button id="clo_sf" class="on">SF 0,9%</button><button id="clo_ring">Ringer/balanceado</button></div>
+  <canvas id="clo"></canvas>
+  <div class="ctrls"><div class="ctrl"><label>Tempo de tratamento — <span id="clo_t">12</span> h</label><input id="clo_ts" type="range" min="0" max="48" step="1" value="12"></div></div>
+  <div class="simout" id="clo_out"></div>
+ </div>
+
+ <div class="lab">Síntese — as fórmulas são janelas para os órgãos</div>
+ <div class="panel" style="font-size:13.5px;line-height:1.6"><b>Winter</b> → o pulmão. <b>Na corrigido / osm efetiva</b> → o manejo de água do rim. <b>Δ/Δ</b> → a perda de cetoânion e a retenção de cloro pelo rim. <b>AG</b> → o ácido que o rim tenta excretar. Nenhum número é abstrato: cada um mede um órgão trabalhando — ou falhando. <span class="goto xlink" data-go="calcular">→ ir para as calculadoras</span></div>
+</section>
+
+<!-- CALCULAR -->
+<section class="tab" id="calcular">
+ <div class="callout">Cada calculadora: <b>a conta</b>, <b>o que significa / por que importa</b> (mecanismo) e um <b>exercício</b>. Pré-preenchidas com o exemplo do Módulo 4 para conferência.</div>
+ <div class="lab">Calculadoras vivas — computam do CANON</div>
+ <div class="grid" id="calcs"></div>
+ <div class="lab">Compensação esperada — os 4 distúrbios primários</div>
+ <div class="panel" id="compCard"></div>
+ <div class="lab">Banco de exercícios de cálculo — cada um ensina uma lição distinta</div>
+ <div id="banco"></div>
+</section>
+
+<!-- PROVÃO -->
+<section class="tab" id="provao">
+ <div class="callout">Quatro formatos, uma fonte de verdade. <b>Múltipla escolha</b> e <b>V/F</b> corrigem na hora e contam placar; <b>dissertativas</b> revelam resposta-modelo; <b>casos clínicos</b> misturam os formatos. Tudo ancorado no CANON.</div>
+ <div class="scorebar">Objetivas: <b id="score_r">0</b> / <b id="score_t">0</b> corretas</div>
+ <div id="quiz"></div>
+</section>
+
+<!-- ATLAS -->
+<section class="tab" id="atlas">
+ <div class="callout">O aluno não "estuda os fenótipos" — <b>produz o atlas</b>. Produzir força o raciocínio. Aqui: a galeria, as 12 leis destiladas e os três projetos que transformam leitura em entregável.</div>
+ <div class="lab">Galeria de fenótipos — a mesma doença em várias faces</div>
+ <div class="panel tscroll"><table id="fenoTable"></table></div>
+ <div class="lab">As 12 leis operacionais de CAD 360</div>
+ <ol class="leis" id="leis"></ol>
+ <div class="lab">Didática aplicada a projeto — o aluno constrói</div>
+ <div id="projetos"></div>
+</section>
+
+<!-- REFERÊNCIA -->
+<section class="tab" id="ref">
+ <div class="lab">Apêndice A — fonte de verdade (renderizada do CANON)</div>
+ <div class="panel tscroll"><table id="canonTable"></table></div>
+ <div class="lab">Δ/Δ — interpretação canônica</div>
+ <div class="panel" id="ddTable"></div><div class="foot" id="ddFoot"></div>
+ <div class="lab">Potássio — decisão canônica (consenso 2024)</div>
+ <div class="panel" id="kTable"></div>
+ <div class="lab">Insulina — algoritmo canônico</div>
+ <div class="panel" id="insTable"></div>
+ <div class="lab">Compensação — fórmulas de referência</div>
+ <div class="panel tscroll"><table id="compRef"></table></div>
+ <div class="lab">Governança — regime de uso pessoal</div>
+ <div class="panel"><div class="gov" id="gov"></div></div>
+ <div class="lab">Material relacionado</div>
+ <div class="panel"><div class="rel">
+   <a href="../tratado/index.html">📖 Tratado CAD (bolso/plantão/profundo)</a>
+   <a href="../painel/index.html">📈 Painel de evolução gasométrica</a>
+   <a href="../docs/auditoria.pdf">📝 Auditoria + núcleo pedagógico (PDF)</a>
+ </div><div class="foot">Links relativos: funcionam com os arquivos lado a lado (mesma pasta no GitHub Pages).</div></div>
+ <div class="foot" id="finalFoot"></div>
+</section>
+</div>
+
+<script>
+/* ================= CANON — única fonte de verdade (consenso 2024) ================= */
+const CANON={
+ fonte:"Umpierrez et al., Diabetes Care 2024;47(8):1257–1275 (ADA/EASD/JBDS/AACE/DTS)",versao:"2024",
+ diagnostico:{glicose:200,bhb:3.0,cetonuria:"≥ 2+",ph:7.30,hco3:18,nota:"AG removido dos critérios formais"},
+ potassio:{repor_abaixo:5.0,alvo:[4,5],adiar_insulina_abaixo:3.5,reiniciar_acima:3.5,taxa_baixo:"10 mmol/h"},
+ bicarbonato:{gatilho:"pH (independe do nível de HCO₃)",absoluto_ph:6.9,consenso_ph:7.0,rotina:false},
+ fosfato:{repor_abaixo:1.0,unidade:"mmol/L (~3,1 mg/dL)",cond:"+ sintomático"},
+ insulina:{inicio:0.1,reduz_para:0.05,glicose_reduz:250,unidade:"U/kg/h"},
+ resolucao:{bhb_abaixo:0.6,ph_acima:7.3,hco3_acima:18,glicose_adjunta:200},
+ naCorr:{fator_padrao:1.6,fator_alto:2.4,glicose_limiar:400},
+ deltaDelta:{fronteiras:[1,2]},agNormal:[8,12],albRef:4.0,osm:{hhs_efetiva:320,hhs_efetiva_2024:300},
+ comp:{
+  ma:{nome:"Acidose metabólica",eixo:"pco2",f:"pCO₂ esp = 1,5·HCO₃ + 8",band:2,calc:h=>1.5*h+8},
+  mk:{nome:"Alcalose metabólica",eixo:"pco2",f:"pCO₂ esp = 0,7·HCO₃ + 21",band:2,calc:h=>0.7*h+21},
+  ra_ac:{nome:"Acidose respiratória aguda",eixo:"hco3",f:"HCO₃ esp = 24 + 0,1·(pCO₂−40)",band:2,calc:(h,c)=>24+0.1*(c-40)},
+  ra_cr:{nome:"Acidose respiratória crônica",eixo:"hco3",f:"HCO₃ esp = 24 + 0,35·(pCO₂−40)",band:3,calc:(h,c)=>24+0.35*(c-40)},
+  rk_ac:{nome:"Alcalose respiratória aguda",eixo:"hco3",f:"HCO₃ esp = 24 − 0,2·(40−pCO₂)",band:2,calc:(h,c)=>24-0.2*(40-c)},
+  rk_cr:{nome:"Alcalose respiratória crônica",eixo:"hco3",f:"HCO₃ esp = 24 − 0,4·(40−pCO₂)",band:3,calc:(h,c)=>24-0.4*(40-c)}
+ }
+};
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const r=(x,n=1)=>x==null||isNaN(x)?'—':(Math.round(x*10**n)/10**n).toFixed(n);
+const num=id=>{const el=$('#'+id);if(!el)return null;const v=parseFloat(el.value);return isNaN(v)?null:v;};
+$('#stamp').textContent='CANON v'+CANON.versao+' · '+CANON.fonte;
+let _rv=0;
+function mkReveal(stem,ans){_rv++;const id='rv'+_rv;return `<div class="ex"><div class="stem">${stem}</div><button class="exbtn" data-target="${id}">ver resposta</button><div class="ans" id="${id}">${ans}</div></div>`;}
+
+/* tabs + delegated reveals/links */
+$$('nav.tabs button').forEach(b=>b.onclick=()=>showTab(b.dataset.tab));
+function showTab(id){$$('nav.tabs button').forEach(b=>b.classList.toggle('on',b.dataset.tab===id));
+ $$('section.tab').forEach(s=>s.classList.toggle('on',s.id===id));window.scrollTo({top:0,behavior:'smooth'});
+ if(id==='fisio')requestAnimationFrame(()=>{davDraw();cloDraw();});}
+document.addEventListener('click',e=>{const t=e.target;
+ if(t.classList.contains('exbtn')&&t.dataset.target){const el=$('#'+t.dataset.target);el.classList.toggle('show');
+  t.textContent=el.classList.contains('show')?'ocultar':'ver resposta';}
+ if(t.classList.contains('goto')&&t.dataset.go){e.preventDefault();showTab(t.dataset.go);}});
+
+/* ================= CALCULADORAS ================= */
+function agInterp(ag){const[a,b]=CANON.agNormal;return ag>b?['a',`> ${b} → há ácido não medido (cetona/lactato). Ponto de partida, não diagnóstico.`]:['g',`dentro do normal (${a}–${b}).`];}
+function ddInterp(dd){const[a,b]=CANON.deltaDelta.fronteiras;
+ if(dd<a)return['a',`< ${a} → componente hiperclorêmico / gap normal ganhando peso (cauda de SF ou perda de HCO₃).`];
+ if(dd<=b)return['g',`${a}–${b} → AGMA de gap elevado "pura" (CAD isolada).`];
+ return['a',`> ${b} → alcalose metabólica concomitante ou HCO₃ previamente alto.`];}
+const CALCS=[
+ {id:'ag',t:'Ânion gap',f:'AG = Na − (Cl + HCO₃)',in:[['na','Na⁺',132],['cl','Cl⁻',96],['hco3','HCO₃',11]],
+  calc:v=>{const ag=v.na-(v.cl+v.hco3);const[c,txt]=agInterp(ag);return{val:r(ag,1),chip:c,txt};},
+  why:`O AG conta os <b>ânions que o laboratório não mede</b>. Na CAD, o "extra" é o cetoácido (β-OHB, acetoacetato) invisível — <b>o tamanho do gap ≈ o tamanho da cetose</b>. É o termômetro da cetoacidose quando não há β-OHB seriado; mas é proxy contaminado (albumina, lactato), por isso precisa de correção.`,
+  ex:{stem:'Na 140, Cl 104, HCO₃ 10 → AG?',ans:'AG = 140 − (104 + 10) = <b>26</b> → gap alto, ácido não medido presente.'},go:'entender'},
+ {id:'agc',t:'AG corrigido',f:'AGc = AG + 2,5 × (4,0 − albumina)',in:[['na2','Na⁺',132],['cl2','Cl⁻',96],['hco32','HCO₃',11],['alb','Alb',2.8]],
+  calc:v=>{const ag=v.na2-(v.cl2+v.hco32);const agc=ag+2.5*(CANON.albRef-v.alb);return{val:r(agc,1),chip:v.alb<CANON.albRef?'a':'g',txt:`AG ${r(ag,1)} → AGc ${r(agc,1)}. `+(v.alb<CANON.albRef?'A hipoalbuminemia escondia gap.':'Sem correção relevante.')};},
+  why:`A albumina é o maior ânion "não medido" <b>normal</b> (~2,5 mEq/L por g/dL). Albumina baixa <b>rebaixa o gap basal</b> — uma acidose de gap alto real pode ler "normal". Corrigir <b>desmascara a cetose</b>.`,
+  ex:{stem:'AG 26, albumina 2,5 → AGc?',ans:'AGc = 26 + 2,5×(4,0 − 2,5) = <b>29,8</b> → a hipoalbuminemia escondia ~4 pontos de gap.'},go:'entender'},
+ {id:'dd',t:'Δ/Δ (delta-delta)',f:'Δ/Δ = (AGc − 12) / (24 − HCO₃)',in:[['agcIn','AGc',28],['hco33','HCO₃',11]],
+  calc:v=>{const dd=(v.agcIn-12)/(24-v.hco33);const[c,txt]=ddInterp(dd);return{val:r(dd,2),chip:c,txt};},
+  why:`Compara <b>quanto o gap subiu</b> contra <b>quanto o bicarbonato caiu</b>. Cetoacidose pura: cada cetoácido consome ~1 bicarbonato → ~1. Caiu <b>mais</b> que o gap subiu (< 1) → <b>acidose hiperclorêmica</b> somada (SF, perda de cetoânion). Caiu <b>menos</b> (> 2) → <b>alcalose</b> somada. É o detector do distúrbio misto atrás de um pH único.`,
+  ex:{stem:'AGc 28, HCO₃ 8 → Δ/Δ?',ans:'Δ/Δ = (28−12)/(24−8) = 16/16 = <b>1,0</b> → faixa 1–2 = AGMA de gap elevado pura.'},go:'entender'},
+ {id:'nac',t:'Na corrigido',f:'Na + fator × (glicose − 100)/100 · 2,4 se glicose > 400',in:[['naM','Na⁺',132],['glu','Glicose',428]],
+  calc:v=>{const f=v.glu>CANON.naCorr.glicose_limiar?CANON.naCorr.fator_alto:CANON.naCorr.fator_padrao;const nc=v.naM+f*(v.glu-100)/100;return{val:r(nc,1),chip:'t',txt:`fator ${r(f,1)} (glicose ${v.glu>CANON.naCorr.glicose_limiar?'> ':'≤ '}${CANON.naCorr.glicose_limiar}). "${r(v.naM,0)}" → ${r(nc,1)}.`};},
+  why:`A glicose puxa água pra dentro do vaso, <b>diluindo o sódio</b>. O Na medido está <b>falsamente baixo</b> (~1,6–2,4 mEq por 100 mg/dL acima de 100). Corrigir revela a <b>água livre real</b>: um Na "normal" com glicose 600 é hipernatremia mascarada — importa para HHS e tonicidade do fluido.`,
+  ex:{stem:'Na 130, glicose 600 → Na corrigido?',ans:'Glicose > 400 → fator 2,4. Na⁺c = 130 + 2,4×5 = <b>142</b> → o "130" era hipernatremia disfarçada.'},go:'entender'},
+ {id:'osm',t:'Osmolaridade efetiva',f:'Osm = 2 × Na + glicose/18 · (ureia NÃO entra)',in:[['naO','Na⁺',132],['gluO','Glicose',428]],
+  calc:v=>{const o=2*v.naO+v.gluO/18;return{val:r(o,0),chip:o>CANON.osm.hhs_efetiva?'a':'g',txt:(o>CANON.osm.hhs_efetiva?`> ${CANON.osm.hhs_efetiva} → eixo HHS/neurológico.`:'abaixo do limiar de HHS.')+' Efetiva = tonicidade.'};},
+  why:`Só <b>Na e glicose</b> geram gradiente na membrana (tonicidade); a <b>ureia atravessa livre</b> e não conta. A efetiva dita encolhimento/inchaço celular, o <b>risco de edema na correção</b> e o <b>eixo HHS</b>. A total (com ureia) só serve para o osm-gap (álcoois tóxicos).`,
+  ex:{stem:'Na 142, glicose 600 → osm efetiva?',ans:'Osm = 2×142 + 600/18 = 284 + 33,3 = <b>317</b> → beirando o eixo HHS (efetiva > 320; comentário 2024 propõe > 300).'},go:'entender'}
+];
+function renderCalc(c){
+ const el=document.createElement('div');el.className='calc';
+ el.innerHTML=`<h3>${c.t}</h3><div class="f">${c.f}</div>
+  <div class="row">${c.in.map(i=>`<div class="fld"><label>${i[1]}</label><input id="${i[0]}" type="number" step="any" value="${i[2]}"></div>`).join('')}</div>
+  <div class="out"><span class="big" id="${c.id}_v">—</span><div class="chip" id="${c.id}_c"></div></div>
+  <details><summary>O que significa · por que importa</summary><div class="why">${c.why} <span class="goto xlink" data-go="${c.go}">→ ver no raciocínio</span></div></details>
+  ${mkReveal('<b>Exercício.</b> '+c.ex.stem,c.ex.ans)}`;
+ $('#calcs').appendChild(el);
+ const upd=()=>{const v={};c.in.forEach(i=>v[i[0]]=num(i[0]));const anyNull=c.in.some(i=>v[i[0]]==null);
+  const vv=$('#'+c.id+'_v'),cc=$('#'+c.id+'_c');
+  if(anyNull){vv.textContent='—';cc.className='chip';cc.textContent='';return;}
+  const res=c.calc(v);vv.textContent=res.val;cc.className='chip '+res.chip;cc.textContent=res.txt;};
+ c.in.forEach(i=>$('#'+i[0]).addEventListener('input',upd));upd();
+}
+CALCS.forEach(renderCalc);
+
+/* compensação */
+function suggestPrimary(ph,h,c){if(ph==null||h==null||c==null)return null;
+ const lowH=h<22,highH=h>26,highC=c>45,lowC=c<35;
+ if(ph<7.35){if(lowH)return'ma';if(highC)return'ra_ac';return'ma';}
+ if(ph>7.45){if(highH)return'mk';if(lowC)return'rk_ac';return'mk';}
+ if(lowH||highC)return lowH?'ma':'ra_ac';if(highH||lowC)return highH?'mk':'rk_ac';return'ma';}
+function renderComp(){
+ const opts=Object.entries(CANON.comp).map(([k,v])=>`<option value="${k}">${v.nome}</option>`).join('');
+ $('#compCard').innerHTML=`<div class="row" style="align-items:flex-end">
+   <div class="fld"><label>pH</label><input id="cph" type="number" step="any" value="7.15"></div>
+   <div class="fld"><label>HCO₃</label><input id="chco3" type="number" step="any" value="6"></div>
+   <div class="fld"><label>pCO₂ medida</label><input id="cpco2" type="number" step="any" value="30"></div>
+   <div class="fld" style="min-width:210px"><label>Distúrbio primário</label><select id="cprim">${opts}</select></div></div>
+  <div class="out"><span class="big" id="comp_v">—</span><div class="chip" id="comp_c"></div><div class="foot" id="comp_sug"></div></div>
+  <details><summary>O que significa · por que importa</summary><div class="why">Pulmão e rim compensam de forma <b>previsível</b>. A fórmula diz o valor que o sistema <b>deveria</b> alcançar. Medido ≠ esperado → <b>segundo distúrbio somado</b>. Um pCO₂ "normal" de 40 numa CAD grave é <b>insuficiência respiratória</b> — deveria estar em ~20. Cada primário tem sua compensação; o desvio denuncia o oculto.</div></details>
+  ${mkReveal('<b>Exercício.</b> Alcalose metabólica, HCO₃ 34 → pCO₂ esperada?','pCO₂ esp = 0,7×34 + 21 = <b>44,8</b> mmHg (±2). Medida abaixo = alcalose respiratória somada; acima = acidose respiratória somada.')}`;
+ const upd=()=>{const ph=num('cph'),h=num('chco3'),c=num('cpco2');const sel=$('#cprim'),sug=suggestPrimary(ph,h,c);
+  if($('#comp_sug'))$('#comp_sug').innerHTML=sug?`Sugerido pelos valores: <b>${CANON.comp[sug].nome}</b> — trocável acima.`:'';
+  const D=CANON.comp[sel.value],vv=$('#comp_v'),cc=$('#comp_c');
+  if(h==null){vv.textContent='—';cc.className='chip';cc.textContent='';return;}
+  const exp=D.calc(h,c),measured=D.eixo==='pco2'?c:h;
+  vv.textContent=(D.eixo==='pco2'?'pCO₂ esp ':'HCO₃ esp ')+r(exp,1)+' ± '+D.band;
+  if(measured==null){cc.className='chip t';cc.textContent=D.f;return;}
+  const lo=exp-D.band,hi=exp+D.band,addAcid=D.eixo==='pco2'?'acidose respiratória associada':'acidose metabólica associada',addAlk=D.eixo==='pco2'?'alcalose respiratória associada':'alcalose metabólica associada';
+  let cls,txt;
+  if(measured>hi){cls='r';txt=`medido ${r(measured,1)} > ${r(hi,1)} → ${addAcid}.`;}
+  else if(measured<lo){cls='t';txt=`medido ${r(measured,1)} < ${r(lo,1)} → ${addAlk}.`;}
+  else{cls='g';txt=`medido ${r(measured,1)} dentro de ${r(lo,1)}–${r(hi,1)} → compensação adequada.`;}
+  cc.className='chip '+cls;cc.textContent=txt;};
+ ['cph','chco3','cpco2'].forEach(id=>$('#'+id).addEventListener('input',()=>{const s=suggestPrimary(num('cph'),num('chco3'),num('cpco2'));if(s)$('#cprim').value=s;upd();}));
+ $('#cprim').addEventListener('change',upd);const s0=suggestPrimary(7.15,6,30);if(s0)$('#cprim').value=s0;upd();
+}
+renderComp();
+
+/* banco B-1..B-6 */
+const BANCO=[
+ ['B-1 · AG simples','Na 140, Cl 104, HCO₃ 10. Calcule o ânion-gap.','AG = 140 − (104 + 10) = <b>26</b>. <i>Lição:</i> gap alto = ácido não medido (cetona/lactato). Ponto de partida, não diagnóstico.'],
+ ['B-2 · AG corrigido p/ albumina','AG = 26, albumina 2,5 g/dL. Calcule o AGc.','AGc = 26 + 2,5·(4,0 − 2,5) = <b>29,8</b>. <i>Lição:</i> hipoalbuminemia ESCONDE gap — cada 1 g/dL abaixo de 4 mascara ~2,5. Sem corrigir, você subestima a cetose.'],
+ ['B-3 · Δ/Δ','AGc = 28, HCO₃ = 8. Calcule e interprete.','Δ/Δ = (28−12)/(24−8) = 16/16 = <b>1,0</b> → AGMA de gap elevado pura. <i>Lição:</i> 1 é a fronteira; abaixo entra componente hiperclorêmico.'],
+ ['B-4 · Winter','HCO₃ = 6, pCO₂ medido = 30. A compensação está adequada?','Esperado = 1,5·6 + 8 = 17 ± 2 (15–19). Medido 30 > 19 → o pulmão NÃO baixou o CO₂ o quanto deveria = <b>acidose respiratória concomitante</b> (drive cansando). <i>Lição:</i> Winter detecta o distúrbio respiratório escondido.'],
+ ['B-5 · Na corrigido','Na medido 130, glicose 600. Calcule (escolha o fator).','Glicose > 400 → fator 2,4. NaC = 130 + 2,4·(600−100)/100 = <b>142</b>. <i>Lição:</i> a hiperglicemia mascara hipernatremia; o "130" tranquilizador é 142 — território de HHS-overlap.'],
+ ['B-6 · Osmolaridade efetiva','Na 142, glicose 600. Calcule e interprete.','Osm = 2·142 + 600/18 = <b>317</b>. <i>Lição:</i> > 320 entra no eixo HHS/neurológico — a velocidade de queda osmolar passa a importar tanto quanto o gap.']
+];
+$('#banco').innerHTML=BANCO.map(x=>`<div class="panel" style="padding:12px 13px"><div style="font-weight:600;font-size:14px;margin-bottom:3px">${x[0]}</div>${mkReveal(x[1],x[2])}</div>`).join('');
+
+/* ================= ENTENDER — escada + módulos 10-tempos ================= */
+function stepEl(q,meta,a){const d=document.createElement('div');d.className='step';
+ d.innerHTML=`<div class="q">${q}</div><div class="meta">${meta}</div><button class="rev">pensar → revelar</button><div class="sa">${a}</div>`;
+ d.querySelector('.rev').onclick=()=>{const an=d.querySelector('.sa');an.classList.toggle('show');
+  d.querySelector('.rev').textContent=an.classList.contains('show')?'ocultar':'pensar → revelar';};return d;}
+const LADDER=[
+ ['1 · O pH é de acidemia ou alcalemia?','ponto de partida','pH < 7,35 = acidemia; > 7,45 = alcalemia; entre = normal <u>ou</u> distúrbio misto que se cancela. Um pH normal <b>não</b> exclui doença. <span class="goto xlink" data-go="calcular">→ calcular</span>'],
+ ['2 · Qual o distúrbio primário — metabólico ou respiratório?','HCO₃ vs pCO₂','Olhe quem se moveu no sentido do pH. Acidemia com HCO₃ baixo = acidose metabólica (a CAD). O primário é o que "explica" a direção do pH.'],
+ ['3 · A compensação é adequada? Há distúrbio somado?','Winter e as demais','Calcule o esperado (Winter para acidose metabólica; as outras três fórmulas para os outros distúrbios). Fora do esperado = <b>segundo distúrbio</b>. pCO₂ "normal" numa CAD grave é o pulmão cansando. <span class="goto xlink" data-go="calcular">→ compensação</span>'],
+ ['4 · O ânion gap está alto? (corrigido pela albumina)','AGc','AG alto confirma ácido não medido — na CAD, os cetoácidos. Corrija pela albumina: hipoalbuminemia esconde gap. <span class="goto xlink" data-go="calcular">→ calcular</span>'],
+ ['5 · O Δ/Δ revela um distúrbio metabólico oculto?','delta-delta','~1 = cetoacidose pura. < 1 = cauda hiperclorêmica somada. > 2 = alcalose somada. É aqui que o "pH que não fecha" aparece. <span class="goto xlink" data-go="calcular">→ calcular</span>'],
+ ['6 · Qual a tonicidade — Na corrigido e osm efetiva?','água livre e HHS','Corrija o Na (revela hipernatremia mascarada) e calcule a osm efetiva (tonicidade, eixo HHS, risco de edema). Fluido e velocidade dependem disso. <span class="goto xlink" data-go="calcular">→ calcular</span>']
+];
+LADDER.forEach(x=>$('#ladder').appendChild(stepEl(x[0],x[1],x[2])));
+
+function renderModule(host,M){
+ host.innerHTML=`<div class="modblk caso"><span class="mt">Caso de abertura</span>${M.caso}</div>
+  <div class="modblk"><span class="mt">Escada socrática</span></div>`;
+ const ld=document.createElement('div');host.appendChild(ld);
+ M.ladder.forEach((x,i)=>ld.appendChild(stepEl('Q'+(i+1)+'. '+x[0],x[2]||'raciocínio',x[1])));
+ const tail=document.createElement('div');
+ tail.innerHTML=`<div class="modblk eq"><span class="mt">Equação central</span>${M.eq}</div>
+  <div class="modblk trap"><span class="mt">Armadilha</span>${M.trap}</div>
+  <div class="modblk pearl"><span class="mt">Pérola</span>${M.pearl}</div>
+  <div class="modblk"><span class="mt">Mini-simulação (especificação)</span>${M.sim}</div>
+  <div class="modblk"><span class="mt">Exercício com gabarito comentado</span>${mkReveal(M.ex.stem,M.ex.gab)}</div>
+  <div class="modblk proj"><span class="mt">Atividade por projeto</span>${M.atv}</div>`;
+ host.appendChild(tail);
+}
+renderModule($('#modA'),{
+ caso:`Mulher, 62 anos, DM2 em empagliflozina + metformina. Há 3 dias com infecção urinária e baixa ingesta. Chega prostrada, respiração um pouco profunda. Destro capilar: 164 mg/dL. A enfermeira comenta: "a glicose tá boa".`,
+ ladder:[
+  ['Destro 164. Você descartou CAD?','Não. O destro diz a glicemia daquele instante. Não diz cetose, acidose, potássio corporal, tendência, nem se pode iniciar insulina.'],
+  ['Que exame abre ou fecha o diagnóstico?','β-hidroxibutirato + gasometria. A cetose é a doença; a glicose é barulho.'],
+  ['Gaso: pH 7,24 · HCO₃ 10 · βHB 5,8 · Na 137 · Cl 101 · K 4,1 · lactato 1,2. Há CAD?','Sim. βHB ≥ 3 + pH < 7,3 + DM = CAD. Glicose modesta (164) = fenótipo euglicêmico.'],
+  ['Por que a glicose está "normal" com cetogênese desenfreada?','SGLT2 → glicosúria contínua escoa glicose pelo rim; somado à baixa ingesta, a glicemia fica modesta enquanto a lipólise/cetogênese roda solta. A glicose baixa esconde a doença.'],
+  ['Posso deixar sem insulina porque a glicose é 164?','Não. A doença é cetogênese; sem insulina ela não fecha. Glicose normal não significa "não dar insulina" — significa "dar insulina com glicose".'],
+  ['Como dou insulina sem causar hipoglicemia?','Dextrose IV junto desde o início. A glicose é o cinto de segurança que permite manter a insulina para fechar a cetogênese.'],
+  ['O que mais é obrigatório?','Suspender o SGLT2. Enquanto ele roda, perpetua a glicosúria e a cetogênese — é o motor do quadro.']
+ ],
+ eq:`O diagnóstico fecha <b>sem a glicose</b>: βHB ≥ 3,0 mmol/L + pH < 7,30 e/ou HCO₃ < 18. Confirme que não é HHS pela osm efetiva: Osm = 2·137 + 164/18 = 274 + 9,1 = <b>283</b> → normal. É CAD, não HHS.`,
+ trap:`Confiar no destro e rotular "não é CAD, a glicose está boa". Na euglicêmica, esse é o erro que mata o diagnóstico — e o SGLT2 é o gatilho mais comum (e até ~30% das CAD na gestação são euglicêmicas).`,
+ pearl:`O destro é o mentiroso da sala; a cetona é a testemunha. A glicose é barulhenta, a cetona é a doença.`,
+ sim:`Botões: [manter SGLT2 / suspender] e [só volume / insulina + dextrose]. O aluno vê βHB e o gap corrigido. Só caem quando a insulina liga; com "só volume", diluem mas não fecham — e o cloro começa a subir. Com SGLT2 mantido, o βHB resiste.`,
+ ex:{stem:`<b>Exercício A1.</b> Diabética, glicose 138, pH 7,22, HCO₃ 9, Na 136, Cl 101, βHB 5,8, K 4,1, lactato 1,2; usa dapagliflozina. Há CAD? É euglicêmica? Posso deixar sem insulina? Qual o fluido inicial? Quando entra a glicose? Risco de tratar só com volume?`,
+  gab:`<b>Cálculo:</b> AG = 136 − (101 + 9) = 26. AGc (alb 4,0) = 26. Δ/Δ = 14/15 = 0,93 → limítrofe (logo abaixo de 1); não chamar de pura sem olhar tendência e Cl. Winter = 1,5·9 + 8 = 21,5 ± 2. <b>(a)</b> Sim — βHB 5,8 + pH 7,22 fecham CAD. <b>(b)</b> Sim — glicose 138 = euglicêmica. <b>(c)</b> Não — trata-se a cetogênese, não a glicose. <b>(d)</b> Cristaloide balanceado (Ringer) por volume — evita alimentar a futura cauda hiperclorêmica. <b>(e)</b> Dextrose IV desde já (glicose 138 e vai cair). Insulina 0,1 U/kg/h porque K 4,1 ≥ 3,5. <b>(f)</b> Só volume dilui mas não desliga a cetogênese; sem suspender a dapagliflozina, o motor continua ligado.`},
+ atv:`Produza um cartão de fenótipo "euglicêmica" para o atlas: preencha a linha (glicose / cetona / pH-HCO₃ / gap / risco) e escreva a frase-armadilha de uma linha. <b>Critério de aceite:</b> a frase impede o erro do destro sem citar protocolo.`
+});
+renderModule($('#modB'),{
+ caso:`48 h de CAD em tratamento. O gap corrigido caiu de 21 para 16 — a cetose está saindo. Mas o pH segue 7,29 e o HCO₃ preso em ~12. O plantonista que assume pergunta: "por que não melhora? aumento a insulina?"`,
+ ladder:[
+  ['O gap corrigido caiu. A cetose está resolvendo?','Sim. Gap caindo = cetona saindo do sangue.'],
+  ['Se a cetose sai, por que o HCO₃ não sobe e o pH não fecha?','Porque a acidose trocou de natureza: virou hiperclorêmica de gap normal. A cadeira que era da cetona agora é do cloro.'],
+  ['De onde veio o cloro?','Do SF 0,9% em grande volume — Cl 154 mmol/L, muito acima do plasma. A ressuscitação fabricou a acidose tardia.'],
+  ['Como provo isso no número?','O par diagnóstico: Δ/Δ caindo (de 0,88 para 0,40 = metade da acidemia agora é gap normal) enquanto o Cl sobe (99 → 106). Os dois juntos = cauda hiperclorêmica.'],
+  ['Insulina conserta esse pH?','Não. Insulina fecha cetogênese; não excreta cloro. Quem resolve o cloro é o rim, com tempo. Empilhar insulina aqui só reabre o dente-de-serra (hipoglicemia, hipocalemia).'],
+  ['Então o que fazer?','Parar de alimentar cloro (trocar SF por balanceado), dar tempo ao rim, e NÃO interpretar o HCO₃ baixo tardio como cetose persistente.']
+ ],
+ eq:`Δ/Δ = (AGc − 12) / (24 − HCO₃). Convenção de CAD 360: <b>&lt; 1</b> hiperclorêmica ganhando peso · <b>1–2</b> AGMA pura · <b>&gt; 2</b> alcalose associada. <span class="goto xlink" data-go="calcular">→ calcular Δ/Δ</span>`,
+ trap:`Ler o HCO₃ baixo tardio como "ainda em CAD" e responder com mais insulina / manter jejum / repetir bolus. Isso reabre o dente-de-serra iatrogênico e trata um problema (cloro) com a ferramenta errada (insulina).`,
+ pearl:`A cetose saiu; o cloro ficou sentado na cadeira dela. O pH pode melhorar antes da doença resolver; o HCO₃ pode continuar baixo depois dela ter resolvido.`,
+ sim:`Escolha do fluido no início: [SF 0,9% / Ringer]. Rode a série no tempo e veja a cauda hiperclorêmica crescer (SF) ou não (Ringer); observe Δ/Δ e Cl divergirem no SF. Ensina, em um clique, por que balanceado resolve mais rápido.`,
+ ex:{stem:`<b>Exercício B1 (série de-identificada).</b> Ponto tardio: Na 135,9 · Cl 105 · HCO₃ 13,6 · glicose 133 · albumina 4,5. Antes (12 h): Cl 99 · HCO₃ 13,4 · gap corrigido 21,3 · Δ/Δ 0,88. Calcule AG, AGc e Δ/Δ no ponto tardio. A acidose residual é cetose ou cloro? A conduta é mais insulina ou outra coisa?`,
+  gab:`<b>Cálculo:</b> AG = 135,9 − (105 + 13,6) = 17,3. AGc = 17,3 + 2,5·(4,0 − 4,5) = <b>16,1</b>. Δ/Δ = (16,1 − 12)/(24 − 13,6) = 4,1/10,4 = <b>0,39</b>. <b>(a)</b> AGc 16,1; Δ/Δ 0,39. <b>(b)</b> vs. 12 h (Δ/Δ 0,88, Cl 99): o Δ/Δ desabou e o Cl subiu 99 → 105. Metade da acidemia agora é cloro — cauda hiperclorêmica crescendo. <b>(c)</b> Não é mais insulina. É trocar SF por balanceado e dar tempo ao rim; a cetose já quase resolveu (gap 21 → 16). Insulina aqui não toca nesse pH e só arrisca hipoglicemia/hipocalemia.`},
+ atv:`Pegue uma série temporal e produza a leitura do ponto de virada: identifique onde "a doença trocou de mãos" (cetose → cloro) plotando AGc, Cl e HCO₃ juntos, e escreva o handoff de uma linha que impede o próximo plantonista de empilhar insulina. <b>Critério:</b> a linha nomeia o cloro e desautoriza o reflexo da insulina, sem jargão.`
+});
+
+/* ================= ATLAS ================= */
+const FENO=[
+ ['CAD clássica','alta','alta','acidose','subestimar K e volume'],
+ ['CAD euglicêmica','normal/modesta','alta','acidose','perder o dx pelo destro'],
+ ['Pré-CAD / cetose','variável','alta/subindo','sem acidose ainda','esperar a acidose para agir'],
+ ['CAD parcialmente tratada','menor','ainda alta','pH melhorando','desligar insulina cedo'],
+ ['CAD + HHS','muito alta','alta','acidose','osmolaridade e Na corrigido'],
+ ['CAD hiperclorêmica (tardia)','controlada','baixa/ausente','pH preso','tratar cloro com insulina'],
+ ['CAD + sepse/lactato','variável','alta','mista','atribuir tudo à cetose'],
+ ['Cetose alcoólica/jejum','baixa/normal','alta','variável','confundir com CAD diabética']
+];
+$('#fenoTable').innerHTML='<tr><th>Fenótipo</th><th>Glicose</th><th>Cetona</th><th>pH/HCO₃</th><th>Risco principal</th></tr>'+
+ FENO.map(x=>`<tr><td><b>${x[0]}</b></td><td>${x[1]}</td><td>${x[2]}</td><td>${x[3]}</td><td>${x[4]}</td></tr>`).join('');
+const LEIS=[
+ 'CAD é doença de cetona, não de glicose.',
+ 'Glicose baixa/modesta não exclui CAD.',
+ 'K normal/alto não exclui déficit corporal total.',
+ 'Insulina fecha cetogênese, mas mata se o K estiver baixo (< 3,5 → adiar; reiniciar > 3,5).',
+ 'Glicose IV é ferramenta para permitir insulina, não só "tratar hipoglicemia".',
+ 'Cloro alto mantém a acidose depois que a cetose resolveu.',
+ 'Bicarbonato é exceção guiada pelo <b>pH</b> (≤ 6,9 absoluto; consenso 2024 escreve &lt; 7,0) e independe do nível de HCO₃ — não é reflexo.',
+ 'Urina cetônica atrasa e engana (βHB vs acetoacetato).',
+ 'Gasometria isolada é foto; série temporal é filme.',
+ 'Idoso/renal/cardíaco não recebe volume "automático".',
+ 'Jejum não significa ausência de glicose IV.',
+ 'Resolução laboratorial não é alta clínica automática.'
+];
+$('#leis').innerHTML=LEIS.map(x=>`<li>${x}</li>`).join('');
+const PROJ=[
+ ['Projeto 1 — Galeria de fenótipos (preencher e defender)','Dada a tabela esqueleto, preencha cada linha e, para cada fenótipo, escreva a "frase-armadilha" e o "primeiro movimento". <b>Critério de aceite por linha:</b> a frase-armadilha impede um erro real de plantão.'],
+ ['Projeto 2 — Ler um filme','Receba uma série temporal crua (6 pontos) e produza: (1) o derivado de cada ponto (AGc, Δ/Δ, Winter), (2) a narrativa de uma linha por ponto, (3) o handoff final. É o que o painel de evolução já faz — aqui você faz à mão primeiro, depois confere. Aprender a fórmula construindo o gráfico.'],
+ ['Projeto 3 — A lei operacional','Ao final, escreva as leis operacionais com suas palavras e defenda cada uma com um caso da galeria. As doze estão acima — reescrevê-las de memória é o teste.']
+];
+$('#projetos').innerHTML=PROJ.map(x=>`<div class="panel" style="padding:12px 13px"><div style="font-weight:600;font-size:14px;margin-bottom:4px">${x[0]}</div><div style="font-size:13.5px;line-height:1.55">${x[1]}</div></div>`).join('');
+
+/* ================= REFERÊNCIA ================= */
+const D=CANON;
+$('#canonTable').innerHTML='<tr><th>Decisão</th><th>Valor canônico ('+D.versao+')</th></tr>'+[
+ ['Diagnóstico',`glicose ≥ ${D.diagnostico.glicose} (ou DM) + βHB ≥ ${r(D.diagnostico.bhb,1)} mmol/L (ou cetonúria ${D.diagnostico.cetonuria}) + pH < ${r(D.diagnostico.ph,2)} e/ou HCO₃ < ${D.diagnostico.hco3}. ${D.diagnostico.nota}.`],
+ ['Potássio',`repor quando < ${r(D.potassio.repor_abaixo,1)} (manter ${D.potassio.alvo[0]}–${D.potassio.alvo[1]}). K < ${r(D.potassio.adiar_insulina_abaixo,1)} → repor ${D.potassio.taxa_baixo} e ADIAR insulina até > ${r(D.potassio.reiniciar_acima,1)}.`],
+ ['Bicarbonato',`<b>não é rotina.</b> Gatilho é o <b>pH</b>, independe do nível de HCO₃. Considerar só em acidose grave: consenso 2024 escreve pH < ${r(D.bicarbonato.consenso_ph,1)}; limiar clássico/absoluto (fronteira de "sem benefício acima") é pH ≤ ${r(D.bicarbonato.absoluto_ph,1)}. Abaixo disso não há RCT que guie: é decisão de terapia intensiva conforme gravidade, protocolo local e risco (hipocalemia, CO₂/SNC).`],
+ ['Fosfato',`somente < ${r(D.fosfato.repor_abaixo,1)} ${D.fosfato.unidade} ${D.fosfato.cond}.`],
+ ['Insulina',`${r(D.insulina.inicio,2)} ${D.insulina.unidade} IV; reduzir a ${r(D.insulina.reduz_para,2)} quando glicose < ${D.insulina.glicose_reduz} e adicionar dextrose; manter até resolução.`],
+ ['Resolução',`βHB < ${r(D.resolucao.bhb_abaixo,1)} E (pH ≥ ${r(D.resolucao.ph_acima,1)} OU HCO₃ ≥ ${D.resolucao.hco3_acima}); glicose < ${D.resolucao.glicose_adjunta} é adjunta.`],
+ ['Na corrigido',`fator ${r(D.naCorr.fator_padrao,1)} (${r(D.naCorr.fator_alto,1)} se glicose > ${D.naCorr.glicose_limiar}).`],
+ ['Osm / HHS',`efetiva = 2·Na + glicose/18 (ureia fora). Eixo HHS: efetiva > ${D.osm.hhs_efetiva} (comentário 2024 propõe > ${D.osm.hhs_efetiva_2024}, ou total > 320).`],
+ ['Δ/Δ',`fronteiras em ${D.deltaDelta.fronteiras[0]} e ${D.deltaDelta.fronteiras[1]}.`]
+].map(x=>`<tr><td><b>${x[0]}</b></td><td>${x[1]}</td></tr>`).join('');
+const[a,b]=CANON.deltaDelta.fronteiras;
+$('#ddTable').innerHTML=`<table><tr><th>Δ/Δ</th><th>Leitura</th></tr>
+ <tr><td class="v">&lt; ${a}</td><td>acidose hiperclorêmica / gap normal ganhando peso (cauda do tratamento ou perda de HCO₃)</td></tr>
+ <tr><td class="v">${a} – ${b}</td><td>AGMA de gap elevado <b>"pura"</b> (CAD isolada)</td></tr>
+ <tr><td class="v">&gt; ${b}</td><td>alcalose metabólica concomitante ou HCO₃ previamente alto</td></tr></table>`;
+$('#ddFoot').innerHTML=`Existe convenção mais granular (0,4 e 0,8). CAD 360 usa <kbd>1</kbd> e <kbd>2</kbd> para bater com o painel de evolução. <b>Correção vs. prancha:</b> a faixa 0,4–0,8 <u>não</u> é a "pura" — sob esta convenção a pura é 1–2.`;
+const K=CANON.potassio;
+$('#kTable').innerHTML=`<div class="drow"><div class="dk red">K &lt; ${r(K.adiar_insulina_abaixo,1)}</div><div class="dv">SEGURAR insulina · repor ${K.taxa_baixo} · reiniciar quando K ≥ ${r(K.reiniciar_acima,1)}</div></div>
+ <div class="drow"><div class="dk grn">${r(K.adiar_insulina_abaixo,1)} – ${r(K.repor_abaixo,1)}</div><div class="dv">INICIAR insulina + repor K (manter ${K.alvo[0]}–${K.alvo[1]})</div></div>
+ <div class="drow"><div class="dk teal">≥ ${r(K.repor_abaixo,1)}</div><div class="dv">INICIAR insulina sem K inicial · reavaliar K a cada 2 h</div></div>`;
+const I=CANON.insulina,RE=CANON.resolucao;
+$('#insTable').innerHTML=`<div class="drow"><div class="dk teal">Início</div><div class="dv">CAD + K ≥ ${r(K.adiar_insulina_abaixo,1)} → ${r(I.inicio,2)} ${I.unidade}.</div></div>
+ <div class="drow"><div class="dk grn">Glicose &lt; ${I.glicose_reduz}<br>ou euglicêmica</div><div class="dv">adicionar dextrose e reduzir a ${r(I.reduz_para,2)} ${I.unidade}. Glicose é cinto de segurança para <b>manter</b> a insulina.</div></div>
+ <div class="drow"><div class="dk red">K &lt; ${r(K.adiar_insulina_abaixo,1)}</div><div class="dv">segurar; repor K; <b>reiniciar quando K ≥ ${r(K.reiniciar_acima,1)}</b> (sem piso de 3,3).</div></div>
+ <div class="drow"><div class="dk teal">Resolução</div><div class="dv">manter até βHB &lt; ${r(RE.bhb_abaixo,1)} <b>E</b> (pH ≥ ${r(RE.ph_acima,1)} OU HCO₃ ≥ ${RE.hco3_acima}).</div></div>`;
+$('#compRef').innerHTML='<tr><th>Distúrbio primário</th><th>Compensação esperada</th></tr>'+
+ Object.values(CANON.comp).map(v=>`<tr><td><b>${v.nome}</b></td><td class="v">${v.f} <span style="color:var(--mut)">± ${v.band}</span></td></tr>`).join('');
+$('#gov').innerHTML=`<b>CAD 360 é ferramenta de uso pessoal do autor</b>, humano-no-loop de toda decisão — não é dispositivo colocado no mercado e, nesse regime, fica <b>fora de SaMD</b>. Três condições permanecem válidas: (1) validação contra a fonte de verdade do Apêndice A; (2) responsabilidade clínica integral do autor por qualquer saída usada em paciente real; (3) <b>tripwire</b> — compartilhar, ceder a outro clínico ou embarcar em fluxo institucional sobre paciente real reclassifica como SaMD e exige o gate regulatório completo.
+ <div style="margin-top:9px"><span style="color:var(--mut);font-size:11px;letter-spacing:.05em;text-transform:uppercase">Reabrir o plano quando</span><br>
+ • sair diretriz nova (pós-2024) que mude um limiar canônico → reabrir o Apêndice A e propagar;<br>
+ • a intenção mudar de uso pessoal para distribuição → o tripwire dispara (triagem SaMD antes de qualquer release);<br>
+ • um módulo não superar o tratado num teste com par → executar o kill (dobrar de volta como capítulo do tratado).</div>`;
+$('#finalFoot').innerHTML=`Tudo aqui é renderizado do objeto <kbd>CANON</kbd> no topo do arquivo — um número, um lugar. Mudou uma diretriz? Edite <u>um</u> valor e a referência, as calculadoras, as leis e as tabelas se atualizam juntas. Esta é a camada que as pranchas visuais devem obedecer.`;
+
+/* ================= SIMULADORES (canvas) ================= */
+/* Diagrama ácido-base pCO2 x HCO3 */
+const davSt={hco3:8,pco2:20};
+function davDraw(){
+ const cv=$('#dav');if(!cv)return;const ctx=cv.getContext('2d');
+ const cssW=(cv.parentElement.clientWidth||600)-2,cssH=Math.min(400,Math.max(260,cssW*0.66));
+ const dpr=window.devicePixelRatio||1;cv.width=cssW*dpr;cv.height=cssH*dpr;cv.style.height=cssH+'px';ctx.setTransform(dpr,0,0,dpr,0,0);
+ const mL=42,mR=16,mT=12,mB=30,W=cssW-mL-mR,H=cssH-mT-mB,pMin=10,pMax=80,hMin=0,hMax=40;
+ const X=p=>mL+(p-pMin)/(pMax-pMin)*W,Y=h=>mT+(1-(h-hMin)/(hMax-hMin))*H;
+ ctx.clearRect(0,0,cssW,cssH);ctx.font='11px system-ui';ctx.lineWidth=1;
+ ctx.strokeStyle='#243040';
+ for(let p=10;p<=80;p+=10){ctx.globalAlpha=.22;ctx.beginPath();ctx.moveTo(X(p),mT);ctx.lineTo(X(p),mT+H);ctx.stroke();ctx.globalAlpha=1;ctx.fillStyle='#8394a6';ctx.fillText(p,X(p)-6,mT+H+15);}
+ for(let h=0;h<=40;h+=10){ctx.globalAlpha=.22;ctx.beginPath();ctx.moveTo(mL,Y(h));ctx.lineTo(mL+W,Y(h));ctx.stroke();ctx.globalAlpha=1;ctx.fillStyle='#8394a6';ctx.fillText(h,mL-26,Y(h)+3);}
+ ctx.fillStyle='#8394a6';ctx.fillText('pCO₂ (mmHg)',mL+W/2-30,cssH-3);
+ ctx.save();ctx.translate(11,mT+H/2+24);ctx.rotate(-Math.PI/2);ctx.fillText('HCO₃ (mEq/L)',0,0);ctx.restore();
+ const phs=[[6.9,'#ff5d5d'],[7.1,'#ffb454'],[7.2,'#e0c94a'],[7.3,'#46d18a'],[7.4,'#37c6e0'],[7.5,'#b78cff']];
+ phs.forEach(([ph,col])=>{ctx.strokeStyle=col;ctx.globalAlpha=.5;ctx.beginPath();let f=true;
+  for(let p=pMin;p<=pMax;p+=1){const h=0.03*p*Math.pow(10,ph-6.1);if(h<hMin||h>hMax){f=true;continue;}const x=X(p),y=Y(h);f?(ctx.moveTo(x,y),f=false):ctx.lineTo(x,y);}
+  ctx.stroke();ctx.globalAlpha=.9;ctx.fillStyle=col;let lp=pMax,lh=0.03*lp*Math.pow(10,ph-6.1);if(lh>hMax){lh=hMax-1;lp=lh/(0.03*Math.pow(10,ph-6.1));}ctx.fillText(ph.toFixed(1),X(lp)-22,Y(lh)+(ph>=7.4?11:-3));ctx.globalAlpha=1;});
+ ctx.strokeStyle='#37c6e0';ctx.setLineDash([5,4]);
+ [-2,0,2].forEach(off=>{ctx.globalAlpha=off===0?.8:.35;ctx.beginPath();let f=true;for(let h=1;h<=26;h+=0.5){const p=1.5*h+8+off;if(p<pMin||p>pMax){f=true;continue;}const x=X(p),y=Y(h);f?(ctx.moveTo(x,y),f=false):ctx.lineTo(x,y);}ctx.stroke();});
+ ctx.setLineDash([]);ctx.globalAlpha=1;ctx.fillStyle='#37c6e0';ctx.fillText('Winter',X(1.5*22+8)-8,Y(22)-4);
+ ctx.fillStyle='#8394a6';ctx.beginPath();ctx.arc(X(40),Y(24),3,0,7);ctx.fill();
+ ctx.fillStyle='#fff';ctx.strokeStyle='#37c6e0';ctx.lineWidth=2.5;ctx.beginPath();ctx.arc(X(davSt.pco2),Y(davSt.hco3),6,0,7);ctx.fill();ctx.stroke();
+}
+function davUpd(){const h=davSt.hco3,p=davSt.pco2,ph=6.1+Math.log10(h/(0.03*p));let prim,comp='';
+ if(h<22){prim='acidose metabólica';const e=1.5*h+8;comp=p>e+2?'+ acidose respiratória (pulmão não baixou o CO₂ o bastante — cansando)':p<e-2?'+ alcalose respiratória (hiperventilando além do esperado)':'compensação de Winter adequada';}
+ else if(h>26){prim='alcalose metabólica';const e=0.7*h+21;comp=p>e+2?'+ acidose respiratória':p<e-2?'+ alcalose respiratória':'compensação adequada';}
+ else{prim=p>45?'acidose respiratória':p<35?'alcalose respiratória':'próximo do normal';}
+ $('#dav_out').innerHTML=`pH = <span class="k">${ph.toFixed(2)}</span> · <b>${prim}</b>${comp?' — '+comp:''}.`;davDraw();}
+/* Cauda de cloro no tempo */
+const cloSt={t:12,fluid:'sf'};
+function cloModel(t,fl){const AGc=12+16*Math.exp(-t/12);const Cl=fl==='sf'?99+16*(1-Math.exp(-t/18)):99+5*(1-Math.exp(-t/18));const HCO3=Math.max(5,24-(AGc-12)-(Cl-99));const dd=(24-HCO3)>0.1?(AGc-12)/(24-HCO3):0;return{AGc,Cl,HCO3,dd};}
+function cloDraw(){const cv=$('#clo');if(!cv)return;const ctx=cv.getContext('2d');
+ const cssW=(cv.parentElement.clientWidth||600)-2,cssH=Math.min(300,Math.max(210,cssW*0.5));
+ const dpr=window.devicePixelRatio||1;cv.width=cssW*dpr;cv.height=cssH*dpr;cv.style.height=cssH+'px';ctx.setTransform(dpr,0,0,dpr,0,0);
+ const mL=38,mR=44,mT=14,mB=26,W=cssW-mL-mR,H=cssH-mT-mB;
+ const X=t=>mL+t/48*W,Yh=v=>mT+(1-(v-5)/20)*H,Yc=v=>mT+(1-(v-95)/25)*H;
+ ctx.clearRect(0,0,cssW,cssH);ctx.font='11px system-ui';ctx.strokeStyle='#243040';
+ for(let t=0;t<=48;t+=12){ctx.globalAlpha=.22;ctx.beginPath();ctx.moveTo(X(t),mT);ctx.lineTo(X(t),mT+H);ctx.stroke();ctx.globalAlpha=1;ctx.fillStyle='#8394a6';ctx.fillText(t+'h',X(t)-8,mT+H+15);}
+ ctx.fillStyle='#46d18a';[5,15,25].forEach(v=>ctx.fillText(v,mL-24,Yh(v)+3));
+ ctx.fillStyle='#ffb454';[95,110,120].forEach(v=>ctx.fillText(v,mL+W+6,Yc(v)+3));
+ ctx.strokeStyle='#46d18a';ctx.globalAlpha=.25;ctx.setLineDash([4,4]);ctx.beginPath();ctx.moveTo(mL,Yh(24));ctx.lineTo(mL+W,Yh(24));ctx.stroke();ctx.setLineDash([]);ctx.globalAlpha=1;
+ const cv2=(fn,Yf,col)=>{ctx.strokeStyle=col;ctx.lineWidth=2.5;ctx.beginPath();for(let t=0;t<=48;t+=1){const y=Yf(fn(t));t===0?ctx.moveTo(X(t),y):ctx.lineTo(X(t),y);}ctx.stroke();};
+ cv2(t=>cloModel(t,cloSt.fluid).HCO3,Yh,'#46d18a');
+ cv2(t=>cloModel(t,cloSt.fluid).Cl,Yc,'#ffb454');
+ ctx.strokeStyle='#37c6e0';ctx.globalAlpha=.7;ctx.beginPath();ctx.moveTo(X(cloSt.t),mT);ctx.lineTo(X(cloSt.t),mT+H);ctx.stroke();ctx.globalAlpha=1;
+ ctx.fillStyle='#46d18a';ctx.fillText('HCO₃',mL+4,mT+11);ctx.fillStyle='#ffb454';ctx.fillText('Cl⁻',mL+50,mT+11);
+}
+function cloUpd(){const m=cloModel(cloSt.t,cloSt.fluid);const dd=m.dd<1?'< 1 → cauda hiperclorêmica':(m.dd<=2?'1–2 → AGMA pura':'> 2');
+ $('#clo_out').innerHTML=`t = ${cloSt.t} h · <b>${cloSt.fluid==='sf'?'SF 0,9%':'Ringer'}</b> → AGc <span class="k">${m.AGc.toFixed(1)}</span> · Cl <span class="k">${m.Cl.toFixed(0)}</span> · HCO₃ <span class="k">${m.HCO3.toFixed(1)}</span> · Δ/Δ <span class="k">${m.dd.toFixed(2)}</span> (${dd}). <span style="color:var(--mut)">${cloSt.fluid==='sf'?'A cetose resolve, mas o cloro sobe e o HCO₃ fica preso — o pH não fecha.':'Cloro contido: o HCO₃ recupera junto com a cetose.'}</span>`;cloDraw();}
+$('#dav_hs').addEventListener('input',e=>{davSt.hco3=+e.target.value;$('#dav_h').textContent=davSt.hco3;davUpd();});
+$('#dav_ps').addEventListener('input',e=>{davSt.pco2=+e.target.value;$('#dav_p').textContent=davSt.pco2;davUpd();});
+$('#clo_ts').addEventListener('input',e=>{cloSt.t=+e.target.value;$('#clo_t').textContent=cloSt.t;cloUpd();});
+$('#clo_sf').onclick=()=>{cloSt.fluid='sf';$('#clo_sf').classList.add('on');$('#clo_ring').classList.remove('on');cloUpd();};
+$('#clo_ring').onclick=()=>{cloSt.fluid='ring';$('#clo_ring').classList.add('on');$('#clo_sf').classList.remove('on');cloUpd();};
+window.addEventListener('resize',()=>{if($('#fisio').classList.contains('on')){davDraw();cloDraw();}});
+davUpd();cloUpd();
+
+/* ================= PROVÃO (motor de questões) ================= */
+let SCORE={r:0,t:0};
+function bump(ok){SCORE.t++;if(ok)SCORE.r++;$('#score_r').textContent=SCORE.r;$('#score_t').textContent=SCORE.t;}
+function objBlock(item){const w=document.createElement('div');const vf=item.type==='vf';
+ w.innerHTML=`<div class="qtype">${vf?'Verdadeiro / Falso':'Múltipla escolha'}</div><div class="qstem">${item.q}</div>`;
+ const opts=document.createElement('div');if(vf)opts.className='vfrow';
+ const choices=vf?[['Verdadeiro',true],['Falso',false]]:item.opts.map((o,i)=>[o,i]);
+ const exp=document.createElement('div');exp.className='qexp';exp.innerHTML='<b>Gabarito.</b> '+item.exp;
+ choices.forEach(([label,val])=>{const b=document.createElement('button');b.className='opt';b.innerHTML=label;
+  b.onclick=()=>{const ok=val===item.correct;
+   [...opts.children].forEach((c,i)=>{c.disabled=true;const cv=vf?[true,false][i]:i;if(cv===item.correct)c.classList.add('ok');});
+   if(!ok)b.classList.add('no');exp.classList.add('show');bump(ok);};
+  opts.appendChild(b);});
+ w.appendChild(opts);w.appendChild(exp);return w;}
+function dissBlock(item){const w=document.createElement('div');
+ w.innerHTML=`<div class="qtype">Dissertativa</div><div class="qstem">${item.q}</div>`+mkReveal('<span style="color:var(--mut);font-size:12px">Pense e escreva sua resposta; depois compare.</span>','<b>Resposta-modelo.</b> '+item.model);return w;}
+const QUIZ=[
+ {type:'mcq',q:'Mulher em uso de SGLT2, glicose 150, βHB 5,2, pH 7,20. Conduta inicial mais correta?',opts:['Não iniciar insulina — a glicose está normal','Insulina + dextrose desde já e suspender o SGLT2','Só volume; reavaliar em 6 h','Bicarbonato, pela acidose'],correct:1,exp:'CAD euglicêmica. A doença é a cetogênese, não a glicose. Insulina fecha a cetose; a dextrose é o cinto de segurança para mantê-la; o SGLT2 é o motor e precisa parar.'},
+ {type:'vf',q:'Glicemia normal exclui cetoacidose diabética.',correct:false,exp:'Falso. Na euglicêmica (SGLT2, jejum, gestação) a cetose corre com glicose normal. O diagnóstico é βHB + acidose, não a glicemia.'},
+ {type:'mcq',q:'CAD à chegada, K 3,2 mEq/L. Primeiro passo?',opts:['Iniciar insulina imediatamente','Segurar insulina, repor K e iniciar quando K ≥ 3,5','Bicarbonato','Insulina e K juntos, na mesma velocidade'],correct:1,exp:'Insulina empurra K para dentro da célula — com K < 3,5 pode precipitar arritmia. Repor primeiro; reiniciar a insulina acima de 3,5 (não 3,3).'},
+ {type:'vf',q:'A insulina pode ser reiniciada assim que o K atingir 3,3 mEq/L.',correct:false,exp:'Falso. O canon 2024 usa > 3,5 como o número único de reinício. 3,3 é um piso antigo (2009).'},
+ {type:'mcq',q:'CAD tratada há 24 h: gap corrigido caindo, Cl subindo, Δ/Δ 0,5. O que é o pH ainda baixo?',opts:['AGMA pura persistente','Cauda hiperclorêmica — componente de gap normal somado','Alcalose metabólica','Recidiva da cetose'],correct:1,exp:'Δ/Δ < 1 com Cl subindo: o bicarbonato caiu mais do que o gap explica. É cloro (SF), não cetona. Insulina não conserta — quem resolve é o rim, com tempo.'},
+ {type:'vf',q:'Δ/Δ na faixa 0,4–0,8 é a faixa "pura" da cetoacidose.',correct:false,exp:'Falso. Na convenção do canon (fronteiras 1 e 2), a pura é 1–2; abaixo de 1 já há componente hiperclorêmico. Rotular 0,4–0,8 como "pura" foi o erro corrigido.'},
+ {type:'mcq',q:'Quando o bicarbonato é considerado na CAD?',opts:['Quando o HCO₃ sérico está muito baixo (< 5)','Guiado pelo pH (≤ 6,9 absoluto; consenso 2024 escreve < 7,0), independe do HCO₃','Sempre que a acidose for grave','Quando o pH < 7,3'],correct:1,exp:'O gatilho é o pH, não o nível de bicarbonato. Acima de ~6,9 não há benefício; abaixo, nem dado nem consenso. Não é reflexo.'},
+ {type:'vf',q:'A ureia entra na osmolaridade efetiva.',correct:false,exp:'Falso. A ureia atravessa a membrana livremente e não gera gradiente. Efetiva = 2·Na + glicose/18; a ureia só entra na osm total para o osm-gap.'},
+ {type:'diss',q:'Explique, pela fisiologia do rim, por que o pH pode não fechar mesmo com a cetose resolvida.',model:'Três raízes renais: (1) o rim excretou cetoânions na urina — bicarbonato "potencial" perdido, que não volta a regenerar HCO₃; (2) o SF 0,9% impôs carga de cloro que o rim leva 24–48 h para excretar → acidose hiperclorêmica de gap normal; (3) a regeneração renal de HCO₃ (amoniagênese, acidez titulável) é lenta. Gap fecha, Δ/Δ cai abaixo de 1, HCO₃ recupera por último.'},
+ {type:'diss',q:'Por que um pCO₂ de 40 mmHg numa CAD grave é sinal de alarme?',model:'Pela Winter, para um HCO₃ muito baixo o pCO₂ esperado seria ~20 (o pulmão deveria hiperventilar). pCO₂ 40 = o pulmão não está compensando; está falhando/cansando (fadiga do drive) = acidose respiratória somada. RR caindo + pCO₂ subindo não é "acalmar", é descompensar.'},
+ {type:'case',stem:'Homem, 58 anos, DM2 em dapagliflozina, quadro infeccioso. Glicose 168, pH 7,18, HCO₃ 10, βHB 5,6, Na 137, Cl 102, K 4,3.',subs:[
+  {type:'mcq',q:'Diagnóstico e fenótipo?',opts:['Não é CAD — glicose normal','CAD euglicêmica','HHS','Acidose láctica isolada'],correct:1,exp:'βHB 5,6 + pH 7,18 fecham CAD; glicose 168 = euglicêmica (SGLT2).'},
+  {type:'vf',q:'A conduta inclui suspender a dapagliflozina.',correct:true,exp:'Verdadeiro. O SGLT2 perpetua a glicosúria e a cetogênese — é o gatilho e precisa parar.'},
+  {type:'diss',q:'Qual o fluido inicial e por quê?',model:'Cristaloide balanceado (Ringer) por volume — evita alimentar a futura cauda hiperclorêmica que o SF 0,9% fabricaria. Insulina 0,1 U/kg/h com dextrose (K 4,3 ≥ 3,5 permite iniciar).'}
+ ]}
+];
+(function renderQuiz(){const host=$('#quiz');QUIZ.forEach(item=>{const card=document.createElement('div');card.className='qcard';
+ if(item.type==='case'){card.innerHTML=`<div class="qtype">Caso clínico · formatos mistos</div><div class="qstem">${item.stem}</div>`;
+  item.subs.forEach(s=>{const sub=document.createElement('div');sub.className='subq';sub.appendChild(s.type==='diss'?dissBlock(s):objBlock(s));card.appendChild(sub);});}
+ else if(item.type==='diss'){card.appendChild(dissBlock(item));}
+ else{card.appendChild(objBlock(item));}
+ host.appendChild(card);});})();
+</script>
+</body></html>

@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1320 2868" role="img" aria-labelledby="title desc">
+<title id="title">Bicarbonato</title>
+<desc id="desc">Excecao extrema, nao reflexo de gasometria feia.</desc>
+<defs>
+<marker id="arrow-37c6e0" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth"><path d="M2,2 L10,6 L2,10 Z" fill="#37c6e0"/></marker><marker id="arrow-46d7b4" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth"><path d="M2,2 L10,6 L2,10 Z" fill="#46d7b4"/></marker><marker id="arrow-55d88f" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth"><path d="M2,2 L10,6 L2,10 Z" fill="#55d88f"/></marker><marker id="arrow-f2b441" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth"><path d="M2,2 L10,6 L2,10 Z" fill="#f2b441"/></marker><marker id="arrow-ef8f4c" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth"><path d="M2,2 L10,6 L2,10 Z" fill="#ef8f4c"/></marker><marker id="arrow-ff6464" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth"><path d="M2,2 L10,6 L2,10 Z" fill="#ff6464"/></marker><marker id="arrow-b18cf0" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth"><path d="M2,2 L10,6 L2,10 Z" fill="#b18cf0"/></marker>
+<pattern id="grid" width="42" height="42" patternUnits="userSpaceOnUse">
+  <path d="M42 0H0V42" fill="none" stroke="#314557" stroke-width="1" opacity=".34"/>
+</pattern>
+<linearGradient id="warm" x1="0" x2="1">
+  <stop offset="0" stop-color="#ef8f4c"/>
+  <stop offset="1" stop-color="#ff6464"/>
+</linearGradient>
+<linearGradient id="cool" x1="0" x2="1">
+  <stop offset="0" stop-color="#37c6e0"/>
+  <stop offset="1" stop-color="#46d7b4"/>
+</linearGradient>
+</defs>
+<rect width="1320" height="2868" fill="#101820"/>
+<circle cx="1160" cy="40" r="310" fill="#37c6e0" opacity=".08"/>
+<circle cx="120" cy="2770" r="380" fill="#ef8f4c" opacity=".06"/>
+<rect x="48" y="46" width="1224" height="2776" rx="42" fill="none" stroke="#314557" stroke-width="2"/>
+<text x="88" y="126" font-family="JetBrains Mono, SFMono-Regular, Menlo, monospace" font-size="24" font-weight="900" fill="#37c6e0" letter-spacing="5">CAD 360 · M08</text>
+<text x="88" y="204" font-family="Avenir Next, Inter, Arial, sans-serif" font-size="58" font-weight="900" fill="#ffffff">Bicarbonato</text>
+<text x="90" y="258" font-family="Avenir Next, Inter, Arial, sans-serif" font-size="28" font-weight="500" fill="#aebdcc">Excecao extrema, nao reflexo de gasometria feia.</text>
+<line x1="88" y1="306" x2="1232" y2="306" stroke="#314557" stroke-width="2"/>
+<rect x="88" y="370" width="1144" height="520" rx="26" fill="#172330" stroke="#314557" stroke-width="2" opacity="1"/>
+<rect x="116" y="396" width="58" height="58" rx="16" fill="#1d2b3a" stroke="#ff6464" stroke-width="2" opacity="1"/>
+<text x="145" y="436" text-anchor="middle" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="24" font-weight="900" fill="#ff6464" opacity="1">1</text>
+<text x="192" y="436" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="28" font-weight="850" fill="#ffffff" opacity="1">Bicarbonato não é tratamento da CAD</text>
+<text x="150" y="530" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="42" font-weight="900" fill="#55d88f" opacity="1">fluido + insulina</text>
+<text x="150" y="610" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="34" font-weight="850" fill="#ffffff" opacity="1">corrigem a acidose cetótica</text>
+<text x="150" y="715" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="30" font-weight="600" fill="#aebdcc" opacity="1">Bicarbonato pode mascarar evolução, piorar K e aumentar</text>
+<text x="150" y="753.4" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="30" font-weight="600" fill="#aebdcc" opacity="1">CO2. A exceção extrema exige contexto crítico e julgamento</text>
+<text x="150" y="791.8" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="30" font-weight="600" fill="#aebdcc" opacity="1">de UTI.</text>
+<rect x="88" y="980" width="540" height="650" rx="26" fill="#172330" stroke="#314557" stroke-width="2" opacity="1"/>
+<rect x="116" y="1006" width="58" height="58" rx="16" fill="#1d2b3a" stroke="#f2b441" stroke-width="2" opacity="1"/>
+<text x="145" y="1046" text-anchor="middle" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="24" font-weight="900" fill="#f2b441" opacity="1">2</text>
+<text x="192" y="1046" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="28" font-weight="850" fill="#ffffff" opacity="1">Quando considerar</text>
+<rect x="145" y="1120" width="350" height="72" rx="36.0" fill="#f2b441" stroke="#314557" stroke-width="1.5"/>
+<text x="320.0" y="1168.24" text-anchor="middle" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="34" font-weight="850" fill="#101820" opacity="1">pH &lt; 7,0</text>
+<text x="145" y="1265" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="28" font-weight="700" fill="#edf5fb" opacity="1">Regra didática: considerar, não</text>
+<text x="145" y="1300.84" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="28" font-weight="700" fill="#edf5fb" opacity="1">automatizar. Choque, arritmia,</text>
+<text x="145" y="1336.6799999999998" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="28" font-weight="700" fill="#edf5fb" opacity="1">drive respiratório e protocolo</text>
+<text x="145" y="1372.5199999999998" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="28" font-weight="700" fill="#edf5fb" opacity="1">local ainda importam.</text>
+<rect x="692" y="980" width="540" height="650" rx="26" fill="#172330" stroke="#314557" stroke-width="2" opacity="1"/>
+<rect x="720" y="1006" width="58" height="58" rx="16" fill="#1d2b3a" stroke="#ef8f4c" stroke-width="2" opacity="1"/>
+<text x="749" y="1046" text-anchor="middle" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="24" font-weight="900" fill="#ef8f4c" opacity="1">3</text>
+<text x="796" y="1046" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="28" font-weight="850" fill="#ffffff" opacity="1">Quando não resolve</text>
+<rect x="755" y="1120" width="360" height="64" rx="32.0" fill="#ef8f4c" stroke="#314557" stroke-width="1.5"/>
+<text x="935.0" y="1160.64" text-anchor="middle" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="24" font-weight="850" fill="#101820" opacity="1">pH baixo tardio + Cl alto</text>
+<text x="755" y="1260" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="27" font-weight="700" fill="#edf5fb" opacity="1">Se Δ/Δ &lt; 1 e cloro subiu, o</text>
+<text x="755" y="1294.56" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="27" font-weight="700" fill="#edf5fb" opacity="1">problema é cauda hiperclorêmica.</text>
+<text x="755" y="1329.12" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="27" font-weight="700" fill="#edf5fb" opacity="1">O rim e o fluido certo resolvem;</text>
+<text x="755" y="1363.6799999999998" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="27" font-weight="700" fill="#edf5fb" opacity="1">bicarbonato não muda a causa.</text>
+<rect x="88" y="1730" width="1144" height="620" rx="26" fill="#172330" stroke="#314557" stroke-width="2" opacity="1"/>
+<rect x="116" y="1756" width="58" height="58" rx="16" fill="#1d2b3a" stroke="#b18cf0" stroke-width="2" opacity="1"/>
+<text x="145" y="1796" text-anchor="middle" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="24" font-weight="900" fill="#b18cf0" opacity="1">4</text>
+<text x="192" y="1796" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="28" font-weight="850" fill="#ffffff" opacity="1">Armadilha</text>
+<text x="150" y="1870" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="32" font-weight="760" fill="#edf5fb" opacity="1">Responder à gasometria feia sem perguntar que acidose é</text>
+<text x="150" y="1910.96" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="32" font-weight="760" fill="#edf5fb" opacity="1">essa. Cetose ativa pede insulina; hipercloremia pede</text>
+<text x="150" y="1951.92" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="32" font-weight="760" fill="#edf5fb" opacity="1">tempo, rim, balanceado e menos reflexo.</text>
+<rect x="250" y="2215" width="820" height="72" rx="36.0" fill="#1d2b3a" stroke="#314557" stroke-width="1.5"/>
+<text x="660.0" y="2261.08" text-anchor="middle" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="28" font-weight="850" fill="#ffffff" opacity="1">Bicarbonato é ferramenta rara, não botão de pânico.</text>
+</svg>

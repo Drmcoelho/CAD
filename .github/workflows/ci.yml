@@ -1,0 +1,18 @@
+name: ci
+on: [push, pull_request]
+jobs:
+  consistency:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: testes do core
+        run: node core/cad_core.test.js
+      - name: fixtures clínicas
+        run: node core/fixtures.test.js
+      - name: portão de consistência (fonte única)
+        run: node scripts/check_consistency.js
+      - name: links locais
+        run: node scripts/test_links.js

@@ -1,0 +1,18 @@
+{
+  "version": "CAD360-ApA-2026-07-01",
+  "note": "Casos de regressão. Cada um é recomputado pelo core em fixtures.test.js; divergência quebra o build. Cobrem as bandas de Δ/Δ (<1, =1, >2) e a osm efetiva por Na medido.",
+  "deltaRatio": [
+    { "id": "dd-071", "na": 140, "cl": 108, "hco3": 10, "albumin": 4.0, "expectRatio": 0.71, "expectBand": "<1", "lesson": "cauda hiperclorêmica somada; não é AGMA pura (EX01)" },
+    { "id": "dd-093", "na": 140, "cl": 105, "hco3": 9,  "albumin": 4.0, "expectRatio": 0.93, "expectBand": "<1", "lesson": "limítrofe logo abaixo de 1; olhar tendência/Cl antes de chamar de pura (A1)" },
+    { "id": "dd-100", "na": 140, "cl": 104, "hco3": 12, "albumin": 4.0, "expectRatio": 1.00, "expectBand": "1-2", "lesson": "fronteira: AGMA de gap alto limpa" },
+    { "id": "dd-210", "na": 145, "cl": 98,  "hco3": 14, "albumin": 4.0, "expectRatio": 2.10, "expectBand": ">2", "lesson": "alcalose metabólica associada ou HCO3 prévio alto" }
+  ],
+  "osmolality": [
+    { "id": "osm-2878", "na": 140, "glucose": 140, "expectEffective": 287.8, "lesson": "osm efetiva com Na medido; ureia fora" },
+    { "id": "osm-cadhhs", "na": 130, "glucose": 600, "correctedNa": 142, "expectEffective": 293.3, "lesson": "CAD+HHS (EX04): efetiva usa Na MEDIDO (293,3), não o corrigido (evita 317,3); 293 ainda < 320" }
+  ],
+  "potassium": [
+    { "id": "k-32", "k": 3.2, "expectInsulin": "hold", "lesson": "K < 3,5 trava insulina (EX03)" },
+    { "id": "k-50", "k": 5.0, "expectReplace": false, "lesson": "K ≥ 5,0 sem reposição inicial (operador ≥, não >)" }
+  ]
+}

@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1320 2868" role="img" aria-labelledby="title desc">
+<title id="title">Exercício: K trava a insulina</title>
+<desc id="desc">O diagnóstico pode estar certo e a insulina ainda estar proibida.</desc>
+<defs>
+<marker id="arrow-37c6e0" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth"><path d="M2,2 L10,6 L2,10 Z" fill="#37c6e0"/></marker><marker id="arrow-46d7b4" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth"><path d="M2,2 L10,6 L2,10 Z" fill="#46d7b4"/></marker><marker id="arrow-55d88f" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth"><path d="M2,2 L10,6 L2,10 Z" fill="#55d88f"/></marker><marker id="arrow-f2b441" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth"><path d="M2,2 L10,6 L2,10 Z" fill="#f2b441"/></marker><marker id="arrow-ef8f4c" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth"><path d="M2,2 L10,6 L2,10 Z" fill="#ef8f4c"/></marker><marker id="arrow-ff6464" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth"><path d="M2,2 L10,6 L2,10 Z" fill="#ff6464"/></marker><marker id="arrow-b18cf0" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth"><path d="M2,2 L10,6 L2,10 Z" fill="#b18cf0"/></marker>
+<pattern id="grid" width="42" height="42" patternUnits="userSpaceOnUse">
+  <path d="M42 0H0V42" fill="none" stroke="#314557" stroke-width="1" opacity=".34"/>
+</pattern>
+<linearGradient id="warm" x1="0" x2="1">
+  <stop offset="0" stop-color="#ef8f4c"/>
+  <stop offset="1" stop-color="#ff6464"/>
+</linearGradient>
+<linearGradient id="cool" x1="0" x2="1">
+  <stop offset="0" stop-color="#37c6e0"/>
+  <stop offset="1" stop-color="#46d7b4"/>
+</linearGradient>
+</defs>
+<rect width="1320" height="2868" fill="#101820"/>
+<circle cx="1160" cy="40" r="310" fill="#37c6e0" opacity=".08"/>
+<circle cx="120" cy="2770" r="380" fill="#ef8f4c" opacity=".06"/>
+<rect x="48" y="46" width="1224" height="2776" rx="42" fill="none" stroke="#314557" stroke-width="2"/>
+<text x="88" y="126" font-family="JetBrains Mono, SFMono-Regular, Menlo, monospace" font-size="24" font-weight="900" fill="#37c6e0" letter-spacing="5">CAD 360 · EX03</text>
+<text x="88" y="204" font-family="Avenir Next, Inter, Arial, sans-serif" font-size="58" font-weight="900" fill="#ffffff">Exercício: K trava a insulina</text>
+<text x="90" y="258" font-family="Avenir Next, Inter, Arial, sans-serif" font-size="28" font-weight="500" fill="#aebdcc">O diagnóstico pode estar certo e a insulina ainda estar proibida.</text>
+<line x1="88" y1="306" x2="1232" y2="306" stroke="#314557" stroke-width="2"/>
+<rect x="88" y="370" width="1144" height="500" rx="26" fill="#172330" stroke="#314557" stroke-width="2" opacity="1"/>
+<rect x="116" y="396" width="58" height="58" rx="16" fill="#1d2b3a" stroke="#37c6e0" stroke-width="2" opacity="1"/>
+<text x="145" y="436" text-anchor="middle" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="24" font-weight="900" fill="#37c6e0" opacity="1">1</text>
+<text x="192" y="436" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="28" font-weight="850" fill="#ffffff" opacity="1">Dados</text>
+<rect x="145" y="520" width="165" height="150" rx="20" fill="#0d141b" stroke="#314557" stroke-width="2" opacity="1"/>
+<text x="227" y="575" text-anchor="middle" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="23" font-weight="850" fill="#aebdcc" opacity="1">gli</text>
+<text x="227" y="640" text-anchor="middle" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="40" font-weight="950" fill="#ffffff" opacity="1">310</text>
+<rect x="355" y="520" width="165" height="150" rx="20" fill="#0d141b" stroke="#314557" stroke-width="2" opacity="1"/>
+<text x="437" y="575" text-anchor="middle" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="23" font-weight="850" fill="#aebdcc" opacity="1">pH</text>
+<text x="437" y="640" text-anchor="middle" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="40" font-weight="950" fill="#ffffff" opacity="1">7.19</text>
+<rect x="565" y="520" width="165" height="150" rx="20" fill="#0d141b" stroke="#314557" stroke-width="2" opacity="1"/>
+<text x="647" y="575" text-anchor="middle" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="23" font-weight="850" fill="#aebdcc" opacity="1">HCO3</text>
+<text x="647" y="640" text-anchor="middle" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="40" font-weight="950" fill="#ffffff" opacity="1">8</text>
+<rect x="775" y="520" width="165" height="150" rx="20" fill="#0d141b" stroke="#314557" stroke-width="2" opacity="1"/>
+<text x="857" y="575" text-anchor="middle" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="23" font-weight="850" fill="#aebdcc" opacity="1">β-OHB</text>
+<text x="857" y="640" text-anchor="middle" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="40" font-weight="950" fill="#ffffff" opacity="1">6.1</text>
+<rect x="985" y="520" width="165" height="150" rx="20" fill="#0d141b" stroke="#314557" stroke-width="2" opacity="1"/>
+<text x="1067" y="575" text-anchor="middle" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="23" font-weight="850" fill="#aebdcc" opacity="1">K</text>
+<text x="1067" y="640" text-anchor="middle" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="40" font-weight="950" fill="#ffffff" opacity="1">3.2</text>
+<rect x="88" y="960" width="540" height="620" rx="26" fill="#172330" stroke="#314557" stroke-width="2" opacity="1"/>
+<rect x="116" y="986" width="58" height="58" rx="16" fill="#1d2b3a" stroke="#b18cf0" stroke-width="2" opacity="1"/>
+<text x="145" y="1026" text-anchor="middle" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="24" font-weight="900" fill="#b18cf0" opacity="1">2</text>
+<text x="192" y="1026" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="28" font-weight="850" fill="#ffffff" opacity="1">Leitura</text>
+<text x="145" y="1100" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="30" font-weight="760" fill="#edf5fb" opacity="1">β-OHB 6,1 + pH 7,19 + HCO3 8 =</text>
+<text x="145" y="1138.4" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="30" font-weight="760" fill="#edf5fb" opacity="1">CAD. Mas K 3,2 muda a ordem.</text>
+<rect x="145" y="1360" width="380" height="72" rx="36.0" fill="#ff6464" stroke="#314557" stroke-width="1.5"/>
+<text x="335.0" y="1405.36" text-anchor="middle" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="26" font-weight="850" fill="#101820" opacity="1">CAD sim; insulina ainda não</text>
+<rect x="692" y="960" width="540" height="620" rx="26" fill="#172330" stroke="#314557" stroke-width="2" opacity="1"/>
+<rect x="720" y="986" width="58" height="58" rx="16" fill="#1d2b3a" stroke="#f2b441" stroke-width="2" opacity="1"/>
+<text x="749" y="1026" text-anchor="middle" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="24" font-weight="900" fill="#f2b441" opacity="1">3</text>
+<text x="796" y="1026" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="28" font-weight="850" fill="#ffffff" opacity="1">Conduta</text>
+<rect x="755" y="1100" width="360" height="58" rx="29.0" fill="#f2b441" stroke="#314557" stroke-width="1.5"/>
+<text x="935.0" y="1137.28" text-anchor="middle" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="23" font-weight="850" fill="#101820" opacity="1">repor K</text>
+<rect x="755" y="1186" width="360" height="58" rx="29.0" fill="#ff6464" stroke="#314557" stroke-width="1.5"/>
+<text x="935.0" y="1223.28" text-anchor="middle" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="23" font-weight="850" fill="#101820" opacity="1">monitorizar ECG</text>
+<rect x="755" y="1272" width="360" height="58" rx="29.0" fill="#37c6e0" stroke="#314557" stroke-width="1.5"/>
+<text x="935.0" y="1309.28" text-anchor="middle" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="23" font-weight="850" fill="#101820" opacity="1">rechecar</text>
+<rect x="755" y="1358" width="360" height="58" rx="29.0" fill="#55d88f" stroke="#314557" stroke-width="1.5"/>
+<text x="935.0" y="1395.28" text-anchor="middle" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="23" font-weight="850" fill="#101820" opacity="1">insulina quando K &gt;=3,5</text>
+<rect x="88" y="1690" width="1144" height="520" rx="26" fill="#172330" stroke="#314557" stroke-width="2" opacity="1"/>
+<rect x="116" y="1716" width="58" height="58" rx="16" fill="#1d2b3a" stroke="#55d88f" stroke-width="2" opacity="1"/>
+<text x="145" y="1756" text-anchor="middle" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="24" font-weight="900" fill="#55d88f" opacity="1">4</text>
+<text x="192" y="1756" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="28" font-weight="850" fill="#ffffff" opacity="1">Resposta</text>
+<text x="150" y="1830" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="32" font-weight="780" fill="#edf5fb" opacity="1">Ha CAD, mas K &lt; 3,5 bloqueia insulina: repor K primeiro, monitorizar e</text>
+<text x="150" y="1870.96" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="32" font-weight="780" fill="#edf5fb" opacity="1">iniciar insulina apenas quando K &gt;= 3,5.</text>
+<rect x="235" y="2130" width="850" height="74" rx="37.0" fill="#1d2b3a" stroke="#314557" stroke-width="1.5"/>
+<text x="660.0" y="2177.08" text-anchor="middle" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="28" font-weight="850" fill="#ffffff" opacity="1">A trava do K vem antes da vontade de fechar o gap.</text>
+</svg>

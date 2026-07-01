@@ -1,0 +1,103 @@
+{
+  "project": "CAD 360 - lote 2",
+  "version": "2026-07-01",
+  "depends_on": "../core/cad_core.js",
+  "modules": [
+    {
+      "id": "M07",
+      "title": "Potassio",
+      "subtitle": "O K serico parece numero; na CAD ele e permissao ou proibicao.",
+      "canon": [
+        "K < 3,5: adiar insulina, repor K e monitorizar.",
+        "K 3,5-5,0: insulina permitida com reposicao para alvo 4-5.",
+        "K >= 5,0: sem K inicial; ECG e recheck frequente.",
+        "K normal na chegada nao exclui deficit corporal total."
+      ]
+    },
+    {
+      "id": "M08",
+      "title": "Bicarbonato",
+      "subtitle": "Excecao extrema, nao reflexo de gasometria feia.",
+      "canon": [
+        "Nao e rotina: fluido + insulina corrigem a acidose cetotica.",
+        "Considerar em acidose extrema, em geral pH < 7,0, conforme contexto/UTI.",
+        "Risco: hipocalemia, CO2/SNC e mascaramento da evolucao.",
+        "Se pH baixo tardio for cloro, bicarbonato nao e solucao causal."
+      ]
+    },
+    {
+      "id": "M09",
+      "title": "Jejum e transicao",
+      "subtitle": "Jejum nao significa ausencia de glicose IV.",
+      "canon": [
+        "Glicose IV permite manter insulina quando a glicemia cai antes da cetose.",
+        "Transicao exige sobreposicao de insulina subcutanea com IV.",
+        "Dieta so quando paciente tolera via oral e risco de aspiracao/vomitos caiu.",
+        "Glicemia normal nao e resolucao: beta-OHB/gap ainda mandam."
+      ]
+    },
+    {
+      "id": "M10",
+      "title": "Gasometria como filme",
+      "subtitle": "Uma gaso e foto; serie temporal mostra quem esta vencendo.",
+      "canon": [
+        "Leia pH, pCO2/Winter, HCO3/BE, lactato, Na/K/Cl, AGc, delta/delta e osm efetiva.",
+        "pH pode melhorar antes de a cetose resolver.",
+        "HCO3 pode seguir baixo depois da cetose por cauda hipercloremica.",
+        "O ponto de virada e quando a doenca troca de maos: cetose para cloro."
+      ]
+    },
+    {
+      "id": "M11",
+      "title": "Compensacao lenta",
+      "subtitle": "O corpo nao obedece a planilha na mesma velocidade.",
+      "canon": [
+        "Glicose cai em horas; cetose fecha depois.",
+        "Rim precisa perfusao e tempo para regenerar bicarbonato e excretar cloro.",
+        "Urina cetonica pode enganar pela conversao beta-OHB para AcAc.",
+        "Oscilacao amortecida pode ser convergencia, nao falha."
+      ]
+    },
+    {
+      "id": "M12",
+      "title": "Condutas por perfil",
+      "subtitle": "A decisao muda quando muda o eixo dominante.",
+      "canon": [
+        "Classica: volume, insulina se K seguro, K antecipatorio e gatilho.",
+        "Euglicemica: insulina com dextrose; suspender SGLT2.",
+        "HHS/mista: osm efetiva, Na corrigido e velocidade importam.",
+        "DRC/idoso/ICC: volume fracionado e reavaliacao real."
+      ]
+    }
+  ],
+  "exercises": [
+    {
+      "id": "EX03",
+      "title": "Exercicio: K trava a insulina",
+      "case": {
+        "glucose": 310,
+        "ph": 7.19,
+        "hco3": 8,
+        "beta_hydroxybutyrate": 6.1,
+        "k": 3.2
+      },
+      "answer": "Ha CAD, mas K < 3,5 bloqueia insulina: repor K primeiro, monitorizar e iniciar insulina apenas quando K >= 3,5."
+    },
+    {
+      "id": "EX04",
+      "title": "Exercicio: CAD + HHS",
+      "case": {
+        "na": 130,
+        "glucose": 600,
+        "ph": 7.28,
+        "hco3": 16,
+        "beta_hydroxybutyrate": 3.8,
+        "corrected_na": 142,
+        "effective_osm": 293.3,
+        "effective_osm_prev_error": 317.3,
+        "osm_note": "Osm efetiva usa Na MEDIDO (130): 2*130+600/18=293,3. O 317,3 usava Na corrigido (dupla-conta a glicose)."
+      },
+      "answer": "Fenotipo misto em formacao: cetose acidotica (beta-OHB 3,8; pH 7,28) + eixo hiperosmolar emergente. Osm efetiva 293,3 (Na medido) ainda NAO cruza o limiar HHS (>320); porem o Na corrigido 142 revela deficit de agua livre/hipernatremia que aparece ao corrigir a glicose. Osm e velocidade entram no comando sem abandonar a cetose."
+    }
+  ]
+}

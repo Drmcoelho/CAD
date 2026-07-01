@@ -1,0 +1,155 @@
+{
+  "project": "CAD 360 - lote 1 regenerado",
+  "version": "2026-07-01",
+  "clinical_policy": {
+    "source_of_truth": "Umpierrez et al., Diabetes Care 2024;47(8):1257-1275 (ADA/EASD/JBDS/AACE/DTS)",
+    "diagnosis": {
+      "rule": "glicose >= 200 mg/dL ou DM conhecido + beta-OHB >= 3,0 mmol/L ou cetonuria >= 2+ + pH < 7,30 e/ou HCO3 < 18",
+      "anion_gap": "removido dos criterios formais; permanece ferramenta operacional para titulação e distúrbios mistos"
+    },
+    "potassium": {
+      "replace_when_below": 5.0,
+      "target": "4-5 mmol/L",
+      "hold_insulin_below": 3.5,
+      "rule": "K < 3,5: adiar insulina e repor K; 3,5-5,0: insulina permitida com reposicao; >=5,0: sem K inicial, ECG/recheck"
+    },
+    "insulin": {
+      "initial": "0,1 U/kg/h",
+      "reduced": "0,05 U/kg/h quando glicose < 250 mg/dL",
+      "rule": "manter ate resolucao da cetose; glicose baixa/modesta exige dextrose, nao desligar insulina"
+    },
+    "sodium_correction": {
+      "default_factor": 1.6,
+      "severe_hyperglycemia_factor": 2.4,
+      "severe_threshold_glucose": 400
+    },
+    "resolution": {
+      "rule": "beta-OHB < 0,6 e (pH >= 7,3 ou HCO3 >= 18); glicose < 200 e adjunta, nao criterio primario"
+    },
+    "delta_ratio": {
+      "formula": "(AGc - 12) / (24 - HCO3)",
+      "canon": [
+        {
+          "range": "< 1",
+          "label": "AGMA + cauda hipercloremica/NAGMA",
+          "meaning": "O bicarbonato caiu mais do que o gap subiu; parte da acidose nao e cetona e nao responde a insulina."
+        },
+        {
+          "range": "1-2",
+          "label": "AGMA de gap alto mais limpa",
+          "meaning": "Padrao esperado da cetoacidose sem componente metabolico importante somado."
+        },
+        {
+          "range": "> 2",
+          "label": "alcalose metabolica associada ou HCO3 previo alto",
+          "meaning": "O gap subiu mais do que o bicarbonato caiu; procure vomitos, diuretico, contracao, bicarbonato previo."
+        }
+      ],
+      "note": "A ancora operacional do projeto e <1 / 1-2 / >2 para impedir conflito entre pranchas e calculadoras."
+    },
+    "osmolality": {
+      "default": {
+        "name": "osmolaridade efetiva",
+        "formula": "2 x Na + glicose/18",
+        "use": "tonicidade em CAD/HHS, risco neurologico e velocidade de correcao"
+      },
+      "osm_gap_only": {
+        "name": "osmolaridade calculada total",
+        "formula": "2 x Na + glicose/18 + BUN/2,8 (ou ureia/6)",
+        "use": "apenas para comparar com osm medida e calcular osm-gap"
+      },
+      "rule": "Ureia atravessa membrana e nao deve entrar no default de tonicidade."
+    }
+  },
+  "phenotypes": [
+    {
+      "name": "CAD classica",
+      "glucose": "alta",
+      "ketone": "alta",
+      "acid": "acidose",
+      "risk": "subestimar K/volume"
+    },
+    {
+      "name": "CAD euglicemica",
+      "glucose": "normal/modesta",
+      "ketone": "alta",
+      "acid": "acidose",
+      "risk": "perder pelo destro"
+    },
+    {
+      "name": "Pre-CAD/cetose",
+      "glucose": "variavel",
+      "ketone": "subindo",
+      "acid": "sem acidose",
+      "risk": "esperar piorar"
+    },
+    {
+      "name": "Parcialmente tratada",
+      "glucose": "menor",
+      "ketone": "ainda alta",
+      "acid": "pH melhora",
+      "risk": "desligar insulina"
+    },
+    {
+      "name": "CAD + HHS",
+      "glucose": "muito alta",
+      "ketone": "alta/var.",
+      "acid": "acidose",
+      "risk": "osm/Na corrigido"
+    },
+    {
+      "name": "Hipercloremica tardia",
+      "glucose": "controlada",
+      "ketone": "baixa/aus.",
+      "acid": "pH preso",
+      "risk": "tratar cloro c/ insulina"
+    },
+    {
+      "name": "CAD + sepse/lactato",
+      "glucose": "variavel",
+      "ketone": "alta",
+      "acid": "mista",
+      "risk": "atribuir tudo a cetose"
+    },
+    {
+      "name": "Alcoolica/jejum",
+      "glucose": "baixa/normal",
+      "ketone": "alta",
+      "acid": "variavel",
+      "risk": "confundir com CAD"
+    }
+  ],
+  "examples": {
+    "module4_clean_ag": {
+      "na": 135,
+      "cl": 99,
+      "hco3": 11,
+      "albumin": 2.8,
+      "glucose": 320,
+      "ag": 25,
+      "agc": 28,
+      "delta_ratio": 1.23,
+      "winter": "24,5 +/- 2",
+      "effective_osm": 287.8,
+      "interpretation": "Delta/delta entre 1 e 2: AGMA de gap alto mais limpa."
+    },
+    "exercise_delta_071": {
+      "na": 138,
+      "cl": 106,
+      "hco3": 10,
+      "ag": 22,
+      "delta_ratio": 0.71,
+      "glucose": 190,
+      "effective_osm": 286.6,
+      "interpretation": "Delta/delta < 1: cauda hipercloremica, nao AGMA pura."
+    },
+    "osmolality_pair": {
+      "na": 136,
+      "glucose": 360,
+      "bun": 42,
+      "effective_osm": 292,
+      "total_calculated_osm": 307,
+      "interpretation": "A tonicidade efetiva e 292; 307 so entra se a pergunta for osm-gap."
+    }
+  }
+}

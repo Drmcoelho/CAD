@@ -1,0 +1,255 @@
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Evolução gasométrica — série cronológica</title>
+<style>
+:root{--bg:#0e141b;--p:#161d26;--p2:#1b2531;--line:#243040;--line2:#2f3e52;
+--tx:#e6edf3;--mut:#7c8a9a;--teal:#37c6e0;--grn:#46d18a;--red:#ff5d5d;--amb:#ffb454;--vio:#b78cff;--mono:ui-monospace,Menlo,Consolas,monospace}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.55 -apple-system,Segoe UI,Roboto,sans-serif;-webkit-text-size-adjust:100%}
+.wrap{max-width:1180px;margin:0 auto;padding:22px 18px 80px}
+h1{font-size:25px;margin:0 0 2px;letter-spacing:-.3px}
+.sub{color:var(--mut);font-size:14px;margin:0 0 4px}
+.deid{color:var(--amb);font-size:12.5px;margin:8px 0 0}
+.panel{background:var(--p);border:1px solid var(--line);border-radius:14px;padding:16px 16px;margin:16px 0}
+.lab{color:var(--mut);font-size:11px;letter-spacing:.06em;text-transform:uppercase}
+/* stepper */
+.step{display:flex;gap:8px;flex-wrap:wrap;align-items:stretch;margin:6px 0 0}
+.chip{flex:1 1 150px;min-width:140px;text-align:left;background:var(--p2);border:1px solid var(--line);border-left:4px solid var(--line2);
+border-radius:10px;padding:9px 11px;cursor:pointer;transition:.12s;color:var(--tx)}
+.chip:hover{border-color:var(--teal)}
+.chip.on{border-color:var(--teal);border-left-color:var(--teal);background:#13202a}
+.chip .t{font-size:11.5px;color:var(--mut)}
+.chip .ph{font-family:var(--mono);font-size:21px;font-weight:700}
+.chip .tag{display:inline-block;font-size:10px;padding:1px 6px;border-radius:20px;border:1px solid var(--line2);color:var(--mut);margin-top:3px}
+.nav{display:flex;gap:8px;margin:12px 0 0}
+.nav button{background:var(--p2);border:1px solid var(--line2);color:var(--tx);border-radius:9px;padding:7px 14px;cursor:pointer;font-size:14px}
+.nav button:hover{border-color:var(--teal)}
+/* detail */
+.dgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:12px}
+@media(max-width:720px){.dgrid{grid-template-columns:1fr}}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:3px 12px;font-size:14px}
+.kv .k{color:var(--mut)}
+.kv .v{font-family:var(--mono);text-align:right}
+.flags{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 0}
+.fl{font-size:11.5px;padding:2px 9px;border-radius:20px;border:1px solid}
+.fl.r{color:var(--red);border-color:#5a2730;background:#1f1416}
+.fl.a{color:var(--amb);border-color:#5a4520;background:#1f1a12}
+.fl.g{color:var(--grn);border-color:#22503a;background:#10201a}
+.fl.t{color:var(--teal);border-color:#1d4a57;background:#0e1f25}
+.nar{margin:12px 0 0;font-size:14.5px;line-height:1.62}
+.nar b{color:var(--tx)}
+.hl-red{color:var(--red);font-weight:600}.hl-grn{color:var(--grn);font-weight:600}.hl-amb{color:var(--amb);font-weight:600}.hl-teal{color:var(--teal);font-weight:600}
+/* charts grid */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:14px}
+.mini{background:var(--p);border:1px solid var(--line);border-radius:12px;padding:10px 10px 6px}
+.mini h3{margin:0 0 1px;font-size:13.5px;display:flex;justify-content:space-between;align-items:baseline}
+.mini h3 .u{color:var(--mut);font-weight:400;font-size:11px}
+.mini .cur{font-family:var(--mono);font-size:12px;color:var(--mut)}
+.mini svg{display:block;width:100%;height:auto;margin-top:2px}
+table{border-collapse:collapse;width:100%;font-size:12.5px;font-family:var(--mono)}
+th,td{border:1px solid var(--line);padding:5px 7px;text-align:right;white-space:nowrap}
+th{background:var(--p2);color:var(--mut);font-weight:600;position:sticky;top:0}
+td.l,th.l{text-align:left}
+.tscroll{overflow-x:auto}
+.legend{color:var(--mut);font-size:12px;margin-top:8px}
+.legend b{color:var(--tx)}
+</style></head><body>
+<div class="wrap">
+<h1>Evolução gasométrica — série cronológica</h1>
+<p class="sub">Seis pontos reais extraídos de três laudos + resultados anteriores · RAPIDPoint 500e · 27/06 → 29/06/2026</p>
+<p class="deid">Paciente de-identificada — apenas série fisiológica. Albumina assumida = 4,5 g/dL (da base; não vem na gaso) para o gap corrigido. Eletrólitos do ponto P1 vieram corrompidos no aparelho (metaHb 98,3 / Na 97,9) e foram descartados; o ácido-base de P1 é válido.</p>
+
+<div class="panel">
+  <div class="lab">Linha do tempo — toque um ponto</div>
+  <div class="step" id="step"></div>
+  <div class="nav"><button onclick="sel(Math.max(0,cur-1))">‹ anterior</button><button onclick="sel(Math.min(S.length-1,cur+1))">próximo ›</button></div>
+</div>
+
+<div class="panel" id="detail"></div>
+
+<div class="lab" style="margin:18px 0 6px">Cada parâmetro no tempo — o ponto selecionado fica destacado</div>
+<div class="grid" id="grid"></div>
+
+<div class="panel" id="synth"></div>
+
+<div class="panel">
+  <div class="lab">Tabela auditável — bruto + derivado</div>
+  <div class="tscroll" id="tbl" style="margin-top:8px"></div>
+  <div class="legend"><b>Win</b> pCO₂ esperada de Winter (1,5·HCO₃+8 ±2) · <b>AGc</b> gap corrigido p/ albumina · <b>Δ/Δ</b> (AGc−12)/(24−HCO₃) · <b>NaC</b> Na corrigido p/ glicose · <b>Osm</b> efetiva. Valores em branco = não medido/descartado.</div>
+</div>
+</div>
+
+<script>
+var ALB=4.5;
+// raw series (cronológica)
+var S=[
+ {id:'P1',d:'27/06',h:'fundo',tp:'art',ph:7.15,pco2:17.3,po2:140.7,hco3:5.8,be:-20.9,so2:41.0,na:null,k:null,ca:null,cl:null,glu:null,lac:3.13,ht:41,hb:13.9,elBad:true},
+ {id:'P2',d:'27/06',h:'',tp:'art',ph:7.23,pco2:18.4,po2:140.7,hco3:7.5,be:-17.9,so2:98.7,na:132.3,k:4.2,ca:4.9,cl:103,glu:272,lac:1.72,ht:38,hb:13.0},
+ {id:'P3',d:'28/06',h:'manhã',tp:'ven',ph:7.36,pco2:24.1,po2:49.2,hco3:13.4,be:-10.3,so2:85.6,na:135.0,k:3.0,ca:4.4,cl:99,glu:217,lac:2.05,ht:34,hb:11.7},
+ {id:'P4',d:'28/06',h:'13:28',tp:'art',ph:7.30,pco2:22.9,po2:115.3,hco3:11.2,be:-13.1,so2:98.0,na:135.1,k:3.7,ca:4.5,cl:104,glu:214,lac:1.19,ht:36,hb:12.2},
+ {id:'P5',d:'28/06',h:'18:15',tp:'art',ph:7.32,pco2:26.6,po2:116.4,hco3:13.6,be:-10.8,so2:98.1,na:135.9,k:3.3,ca:4.5,cl:105,glu:133,lac:1.58,ht:34,hb:11.7},
+ {id:'P6',d:'29/06',h:'00:09',tp:'art',ph:7.29,pco2:24.9,po2:132.3,hco3:11.8,be:-13.0,so2:98.6,na:135.9,k:3.67,ca:4.6,cl:106,glu:220,lac:1.19,ht:null,hb:null},
+];
+// compute derived
+S.forEach(function(p){
+  p.win=1.5*p.hco3+8;
+  p.winSt = p.tp==='ven' ? 'ven' : (Math.abs(p.pco2-p.win)<=2?'ok':(p.pco2>p.win+2?'hi':'lo'));
+  if(!p.elBad && p.na!=null && p.cl!=null){
+    p.ag=p.na-(p.cl+p.hco3); p.agc=p.ag+2.5*(4.0-ALB); p.dd=(p.agc-12)/(24-p.hco3);
+    if(p.glu!=null){var f=p.glu>400?2.4:1.6; p.nac=p.na+f*(p.glu-100)/100; p.osm=2*p.na+p.glu/18;}
+  }
+});
+var cur=4; // start at P5 (a gaso do tratado)
+function r(x,n){return x==null?'—':(Math.round(x*Math.pow(10,n))/Math.pow(10,n)).toFixed(n);}
+
+// narratives per spot
+var NAR=[
+ ['O fundo do poço.', '<b>HCO₃ 5,8 · BE −20,9</b> — a acidose mais grave da série. <span class="hl-teal">pCO₂ 17,3 = Kussmaul no talo</span>: Winter esperava 16,7±2, ela está no limite máximo da compensação — não há mais pulmão a dar. <span class="hl-amb">Lactato 3,13 elevado</span>: aqui <em>havia</em> componente de hipoperfusão/catecolamina somado à cetose — não acidose lática primária (some adiante com volume). Os íons do aparelho vieram corrompidos (metaHb 98,3, Na 97,9, K 0,1): amostra ruim, ignore os eletrólitos deste ponto. Ponto de partida catastrófico, respiração no limite.'],
+ ['Ressuscitação começa a morder.', '<b>HCO₃ 7,5 · gap corrigido 20,6 · Δ/Δ 0,52</b> — cetoacidose ainda manda, mas a cauda hiperclorêmica já nasce. <span class="hl-amb">Glicose 272</span> alta; <span class="hl-grn">K 4,2</span> ainda protegido (acidose + falta de insulina seguram K fora da célula — o déficit real está mascarado). <span class="hl-grn">Lactato 1,72</span>, já caindo = perfusão melhorando. Winter ok (18,4 vs 19,2). O gap altíssimo é a verdade; o K tranquilo é a ilusão.'],
+ ['O overshoot — e o nadir do K.', 'Amostra <span class="hl-teal">VENOSA</span> (pO₂ 49, SO₂ 85,6) → pH venoso 7,36 ≈ arterial <b>~7,39–7,40</b>: a <span class="hl-amb">alcalemia transitória que prevíamos</span>. HCO₃ subiu (13,4) sem o pCO₂ acompanhar — o drive alto de base mantém a hiperventilação e o pH ultrapassa o setpoint. O preço bateu no potássio no mesmo instante: <span class="hl-red">K 3,0</span>, o vale da série — o shift pós-insulina desmascarando o déficit. Δ/Δ 0,88 = aqui a acidose estava mais "limpa" (Cl 99, o menor). Pela regra 2024 (K<3,5), <span class="hl-red">este é o ponto que obrigava segurar insulina</span>. Pico de pH e vale de K são os dois lados da mesma insulina.'],
+ ['Volta pro corredor.', '<b>HCO₃ 11,2 · gap corrigido 18,6 · Δ/Δ 0,52.</b> <span class="hl-grn">K resgatado para 3,7</span> (reposição funcionou). <span class="hl-grn">Lactato 1,19 normalizou</span> — perfusão restaurada, confirmando que o lactato alto era hipoperfusão, não acidose lática. Glicose 214. O sistema voltou ao corredor; K e lactato resolvidos, gap ainda aberto. (HCO₃ "caiu" do ponto anterior porque aquele era venoso — não é piora.)'],
+ ['Cetose minguando, cloro dominando.', '<b>Gap corrigido 16,1 · Δ/Δ 0,39</b> — agora <span class="hl-amb">metade da acidemia é cloro</span>, não cetona. <span class="hl-teal">Glicose 133</span>, o menor: momento de <b>ligar dextrose, não desligar insulina</b> (gap aberto com glicose baixa). <span class="hl-red">K dipou de novo para 3,3</span> — a oscilação em torno do 3,5. Cl 105 subindo. Winter perfeito (26,6 vs 28,4). A gaso central do tratado.'],
+ ['Platô oscilatório.', '<b>Gap corrigido 16,9 · Δ/Δ 0,40 · Cl 106</b> (o mais alto — cloro acumulando). <span class="hl-grn">K 3,67</span>, glicose 220 (subiu de novo, oscilando), lactato 1,19. Estado estacionário: o pH "não fecha" porque o que resta é <span class="hl-amb">cauda hiperclorêmica</span> (Δ/Δ 0,40) + cetose residual mínima (gap 16,9). Não é falha — é o piso de cloro, que resolve com rim + Ringer em 24–48h. A envoltória dos vales subiu: <span class="hl-grn">convergência</span>.'],
+];
+
+function flags(p){
+  var o=[];
+  if(p.tp==='ven') o.push('<span class="fl t">venosa</span>');
+  if(p.elBad) o.push('<span class="fl r">eletrólitos descartados</span>');
+  if(p.k!=null && p.k<3.5) o.push('<span class="fl r">K &lt; 3,5 → adia insulina</span>');
+  if(p.agc!=null && p.agc>=16) o.push('<span class="fl a">gap '+r(p.agc,1)+' → cetose ativa</span>');
+  if(p.dd!=null && p.dd<1) o.push('<span class="fl a">Δ/Δ &lt; 1 → cauda hiperclorêmica</span>');
+  if(p.winSt==='ok') o.push('<span class="fl g">Winter adequado</span>');
+  if(p.lac!=null && p.lac>1.6) o.push('<span class="fl a">lactato ↑ '+r(p.lac,2)+'</span>');
+  if(p.glu!=null && p.glu<200 && p.agc!=null && p.agc>12) o.push('<span class="fl t">glicose baixa + gap aberto → dextrose</span>');
+  return o.join('');
+}
+function detail(i){
+  var p=S[i];
+  var raw=[['pH',r(p.ph,2)],['pCO₂',r(p.pco2,1)+' mmHg'],['pO₂',r(p.po2,1)],['HCO₃',r(p.hco3,1)],['BE',r(p.be,1)],['SO₂',r(p.so2,1)+'%'],
+    ['Na⁺',r(p.na,1)],['K⁺',r(p.k,2)],['Cl⁻',r(p.cl,0)],['Glicose',r(p.glu,0)],['Lactato',r(p.lac,2)],['Hb / Ht',(p.hb==null?'—':r(p.hb,1))+' / '+(p.ht==null?'—':r(p.ht,0))]];
+  var der=[['Ânion-gap',r(p.ag,1)],['Gap corrigido',r(p.agc,1)],['Δ/Δ',r(p.dd,2)],['Winter esperada',r(p.win,1)+' ±2'],['Na corrigido',r(p.nac,1)],['Osm efetiva',r(p.osm,0)]];
+  function kv(a){return '<div class="kv">'+a.map(function(x){return '<div class="k">'+x[0]+'</div><div class="v">'+x[1]+'</div>';}).join('')+'</div>';}
+  document.getElementById('detail').innerHTML=
+    '<div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px">'+
+    '<div><span class="lab">'+p.d+' · '+(p.h||'—')+(p.tp==='ven'?' · venosa':'')+'</span><div style="font-family:var(--mono);font-size:30px;font-weight:700">pH '+r(p.ph,2)+'</div></div>'+
+    '<div class="flags" style="justify-content:flex-end">'+flags(p)+'</div></div>'+
+    '<div class="dgrid"><div><div class="lab" style="margin-bottom:6px">Bruto</div>'+kv(raw)+'</div>'+
+    '<div><div class="lab" style="margin-bottom:6px">Derivado'+(p.elBad?' (indisponível)':'')+'</div>'+kv(der)+'</div></div>'+
+    '<div class="nar"><b>'+NAR[i][0]+'</b> '+NAR[i][1]+'</div>';
+}
+function stepper(){
+  document.getElementById('step').innerHTML=S.map(function(p,i){
+    return '<button class="chip'+(i===cur?' on':'')+'" onclick="sel('+i+')">'+
+    '<div class="t">'+p.d+' · '+(p.h||'—')+'</div><div class="ph">'+r(p.ph,2)+'</div>'+
+    '<span class="tag">'+(p.tp==='ven'?'venosa':'arterial')+(p.k!=null&&p.k<3.5?' · K↓':'')+'</span></button>';
+  }).join('');
+}
+function sel(i){cur=i;stepper();detail(i);drawAll();}
+
+// ---- mini charts ----
+var CHARTS=[
+ {k:'ph',t:'pH',u:'',dec:2,band:[7.35,7.45],good:'band'},
+ {k:'hco3',t:'HCO₃',u:'mmol/L',dec:1,band:[22,26],good:'band'},
+ {k:'pco2',t:'pCO₂',u:'mmHg',dec:1,band:[35,45],good:'band',note:'baixo = compensação'},
+ {k:'agc',t:'Gap corrigido',u:'',dec:1,refLo:12,good:'below12'},
+ {k:'dd',t:'Δ/Δ',u:'',dec:2,refLo:1,refHi:2,good:'dd'},
+ {k:'cl',t:'Cl⁻',u:'mmol/L',dec:0,band:[96,108],good:'band',note:'subindo = cloro acumulando'},
+ {k:'k',t:'K⁺',u:'mmol/L',dec:2,band:[4,5],ref:[3.5,5.0],good:'band'},
+ {k:'glu',t:'Glicose',u:'mg/dL',dec:0,band:[150,200],good:'band',note:'alvo no tratamento'},
+ {k:'lac',t:'Lactato',u:'mmol/L',dec:2,band:[0.5,1.6],good:'band'},
+ {k:'nac',t:'Na corrigido',u:'mmol/L',dec:1,band:[135,145],good:'band'},
+ {k:'osm',t:'Osm efetiva',u:'mOsm/kg',dec:0,band:[280,295],good:'band'},
+ {k:'hb',t:'Hemoglobina',u:'g/dL',dec:1,band:[12,16],good:'band',note:'caindo = hemodiluição'},
+];
+function CP(){var L=document.body.classList.contains('lighttheme');
+ return L?{bg:'#fff',ax:'#5b6770',grid:'#dbe3ea',tx:'#5b6770',line:'#1c7c8c',band:'#e3eef2',
+   inr:'#1e7e4f',out:'#b03a2e',sel:'#0e7490',refl:'#b7791f'}
+  :{bg:'#161d26',ax:'#2f3e52',grid:'#1b2531',tx:'#7c8a9a',line:'#37c6e0',band:'#10202a',
+   inr:'#46d18a',out:'#ff5d5d',sel:'#ffb454',refl:'#ffb454'};}
+function inRange(c,v){
+  if(v==null)return null;
+  if(c.band)return v>=c.band[0]&&v<=c.band[1];
+  if(c.good==='below12')return v<=12;
+  if(c.good==='dd')return v>=1; // <1 hyperchloremic flagged
+  return true;
+}
+function drawMini(c){
+  var P=CP(); var W=330,H=158,padL=34,padR=12,padT=12,padB=22, x0=padL,x1=W-padR,y0=H-padB,y1=padT;
+  var vals=S.map(function(p){return p[c.k];});
+  var present=vals.map(function(v,i){return v==null?null:{i:i,v:v};}).filter(Boolean);
+  var ys=present.map(function(o){return o.v;});
+  var lo=Math.min.apply(null,ys), hi=Math.max.apply(null,ys);
+  if(c.band){lo=Math.min(lo,c.band[0]);hi=Math.max(hi,c.band[1]);}
+  if(c.refLo!=null){lo=Math.min(lo,c.refLo);hi=Math.max(hi,c.refLo);}
+  if(c.refHi!=null){hi=Math.max(hi,c.refHi);}
+  if(c.ref){lo=Math.min(lo,c.ref[0]);hi=Math.max(hi,c.ref[1]);}
+  var pad=(hi-lo)*0.16||1; lo-=pad; hi+=pad;
+  function X(i){return x0+(x1-x0)*(i/(S.length-1));}
+  function Y(v){return y0+(y1-y0)*((v-lo)/(hi-lo));}
+  var s='<rect x="0" y="0" width="'+W+'" height="'+H+'" fill="'+P.bg+'" rx="0"/>';
+  // band
+  if(c.band){var by1=Y(c.band[1]),by0=Y(c.band[0]); s+='<rect x="'+x0+'" y="'+by1+'" width="'+(x1-x0)+'" height="'+(by0-by1)+'" fill="'+P.band+'"/>';}
+  // ref lines
+  function refLine(v,col,dash){s+='<line x1="'+x0+'" y1="'+Y(v)+'" x2="'+x1+'" y2="'+Y(v)+'" stroke="'+col+'" stroke-width="1" stroke-dasharray="'+(dash||'4 4')+'"/>';}
+  if(c.refLo!=null)refLine(c.refLo,P.refl);
+  if(c.refHi!=null)refLine(c.refHi,P.refl);
+  if(c.ref){refLine(c.ref[0],P.refl);refLine(c.ref[1],P.refl);}
+  // axes
+  s+='<line x1="'+x0+'" y1="'+y0+'" x2="'+x1+'" y2="'+y0+'" stroke="'+P.ax+'" stroke-width="1.2"/>';
+  s+='<line x1="'+x0+'" y1="'+y1+'" x2="'+x0+'" y2="'+y0+'" stroke="'+P.ax+'" stroke-width="1.2"/>';
+  // y labels (lo/hi)
+  s+='<text x="'+(x0-4)+'" y="'+(Y(hi-pad*0.2)+3)+'" text-anchor="end" font-size="9" fill="'+P.tx+'">'+r(hi-pad,c.dec)+'</text>';
+  s+='<text x="'+(x0-4)+'" y="'+(Y(lo+pad*0.2)+3)+'" text-anchor="end" font-size="9" fill="'+P.tx+'">'+r(lo+pad,c.dec)+'</text>';
+  // x labels
+  S.forEach(function(p,i){s+='<text x="'+X(i)+'" y="'+(H-7)+'" text-anchor="middle" font-size="8.5" fill="'+P.tx+'">'+(i===2&&p.tp==='ven'?'ven':p.h||p.d.slice(0,5))+'</text>';});
+  // line (break at nulls)
+  var d='',started=false;
+  present.forEach(function(o,idx){ d+=(idx===0?'M':'L')+X(o.i)+' '+Y(o.v); });
+  s+='<path d="'+d+'" fill="none" stroke="'+P.line+'" stroke-width="2"/>';
+  // points
+  present.forEach(function(o){
+    var ir=inRange(c,o.v); var col=ir===false?P.out:P.inr;
+    var rad=o.i===cur?5.4:3.4;
+    if(o.i===cur) s+='<circle cx="'+X(o.i)+'" cy="'+Y(o.v)+'" r="'+(rad+3)+'" fill="none" stroke="'+P.sel+'" stroke-width="1.6"/>';
+    s+='<circle cx="'+X(o.i)+'" cy="'+Y(o.v)+'" r="'+rad+'" fill="'+col+'" style="cursor:pointer" onclick="sel('+o.i+')"/>';
+    if(o.i===cur||o.i===0||o.i===S.length-1) s+='<text x="'+X(o.i)+'" y="'+(Y(o.v)-8)+'" text-anchor="middle" font-size="9.5" font-weight="600" fill="'+(o.i===cur?P.sel:P.tx)+'">'+r(o.v,c.dec)+'</text>';
+  });
+  return '<svg viewBox="0 0 '+W+' '+H+'" preserveAspectRatio="xMidYMid meet">'+s+'</svg>';
+}
+function drawAll(){
+  document.getElementById('grid').innerHTML=CHARTS.map(function(c){
+    var pv=S[cur][c.k];
+    return '<div class="mini"><h3><span>'+c.t+'</span><span class="u">'+c.u+'</span></h3>'+
+      '<div class="cur">ponto: '+(pv==null?'—':r(pv,c.dec))+(c.note?' · '+c.note:'')+'</div>'+drawMini(c)+'</div>';
+  }).join('');
+}
+function synth(){
+  document.getElementById('synth').innerHTML=
+   '<div class="lab">Síntese da curva</div>'+
+   '<div class="nar">'+
+   '<b>pH</b> → vales subindo 7,15 → 7,23 → ~7,29–7,32, com o blip venoso 7,36 (arterial ~7,39) = <span class="hl-grn">oscilação amortecida convergindo</span>, não perde-ganha estático.<br>'+
+   '<b>HCO₃</b> → recuperação dramática 5,8 → ~12–14, depois oscila: ressuscitação funciona.<br>'+
+   '<b>Gap corrigido</b> → 20,6 → ~16–17 e <span class="hl-amb">platô acima de 12</span>: cetose resolvendo, mas resíduo persiste.<br>'+
+   '<b>Δ/Δ + Cl</b> → o par que explica o pH que não fecha: Cl 99 → 106 enquanto Δ/Δ cai 0,88 → 0,40. <span class="hl-amb">A cauda hiperclorêmica está crescendo</span> — a própria ressuscitação fabrica o pH baixo residual. Insulina não conserta isso.<br>'+
+   '<b>K</b> → 4,2 → <span class="hl-red">3,0 (nadir no overshoot)</span> → oscila 3,3–3,7 em torno do limiar 3,5: o nó limitante, o que força as pausas de insulina.<br>'+
+   '<b>Lactato</b> → 3,13 → 1,19: era <span class="hl-grn">hipoperfusão, resolveu com volume</span> — não acidose lática. Valida titular ao gap e usar Ringer.<br>'+
+   '<b>Glicose</b> → 272 → 133 → 220, oscilando e <span class="hl-teal">desacoplada do gap</span> (gap aberto com glicose 133): titular pela cetose, não pela glicemia.<br>'+
+   '<b>Na corrigido / Osm</b> → estáveis (~136–138 / ~279–284): sem componente hiperosmolar, sem déficit de água livre. Não é HHS.<br>'+
+   '<b>Hb/Ht</b> → 13,9 → 11,7: hemodiluição da ressuscitação, não sangramento.'+
+   '<br><br>Leitura única: <span class="hl-grn">sistema convergindo</span>. O pH baixo terminal é cada vez mais cloro (resolve sozinho com rim), a cetose residual é pequena e estável, o K é a variável a blindar. Conduta coerente com a §7: titular ao gap, K antecipatório alvo 4–5, balanceado no lugar de SF (para parar de alimentar o Cl), e <em>diminuir</em> a frequência de intervenções — a envoltória já sobe.</div>';
+}
+function table(){
+  var cols=[['id','pt'],['ph','pH',2],['pco2','pCO₂',1],['hco3','HCO₃',1],['win','Win',1],['ag','AG',1],['agc','AGc',1],['dd','Δ/Δ',2],['cl','Cl',0],['k','K',2],['glu','Glu',0],['lac','Lac',2],['nac','NaC',1],['osm','Osm',0],['hb','Hb',1]];
+  var th='<tr>'+cols.map(function(c,i){return '<th class="'+(i===0?'l':'')+'">'+c[1]+'</th>';}).join('')+'</tr>';
+  var rows=S.map(function(p){return '<tr>'+cols.map(function(c,i){
+    var v=p[c[0]];
+    if(c[0]==='id')return '<td class="l">'+p.id+' '+p.d+' '+(p.h||'')+(p.tp==='ven'?' (v)':'')+'</td>';
+    return '<td>'+(v==null?'—':r(v,c[2]))+'</td>';
+  }).join('')+'</tr>';}).join('');
+  document.getElementById('tbl').innerHTML='<table>'+th+rows+'</table>';
+}
+window.__redraw=function(){drawAll();}; // for light capture
+stepper();detail(cur);drawAll();synth();table();
+</script>
+</body></html>
