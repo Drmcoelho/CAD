@@ -116,6 +116,33 @@ function testDiagnosisAndResolution() {
     }),
     false
   );
+
+  // eixo acido e um OR: um so marcador (VBG so com pH, ou bioquimica so com HCO3) basta.
+  assert.strictEqual(
+    hasDka({ knownDiabetes: true, glucoseMgDl: 138, betaHydroxybutyrateMmolL: 5.8, ph: 7.22 }),
+    true
+  );
+  assert.strictEqual(
+    hasDka({ knownDiabetes: true, glucoseMgDl: 138, betaHydroxybutyrateMmolL: 5.8, hco3: 9 }),
+    true
+  );
+  // um eixo acido normal (sem o outro) nao fecha CAD
+  assert.strictEqual(
+    hasDka({ knownDiabetes: true, glucoseMgDl: 138, betaHydroxybutyrateMmolL: 5.8, hco3: 20 }),
+    false
+  );
+  // resolucao lida por um unico eixo
+  assert.strictEqual(isResolvedDka({ betaHydroxybutyrateMmolL: 0.5, hco3: 18 }), true);
+  assert.strictEqual(isResolvedDka({ betaHydroxybutyrateMmolL: 0.5, ph: 7.31 }), true);
+  // mas faltar AMBOS os eixos acidos e erro claro, nao silencio
+  assert.throws(
+    () => hasDka({ knownDiabetes: true, glucoseMgDl: 138, betaHydroxybutyrateMmolL: 5.8 }),
+    /at least one of ph or hco3/
+  );
+  assert.throws(
+    () => isResolvedDka({ betaHydroxybutyrateMmolL: 0.5 }),
+    /at least one of ph or hco3/
+  );
 }
 
 function testSourceAndCorePolicyDoNotDrift() {

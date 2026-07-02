@@ -46,6 +46,10 @@ function requiredNumber(name, value) {
   return value;
 }
 
+function isProvided(value) {
+  return value !== undefined && value !== null;
+}
+
 function round(value, decimals = 2) {
   const factor = 10 ** decimals;
   return Math.round((value + Number.EPSILON) * factor) / factor;
@@ -167,24 +171,34 @@ function insulinPlan({ kMmolL, glucoseMgDl }) {
   };
 }
 
-function hasDka({ knownDiabetes = false, glucoseMgDl, betaHydroxybutyrateMmolL, ph, hco3 }) {
+function hasDka({ knownDiabetes = false, glucoseMgDl, betaHydroxybutyrateMmolL, ph = null, hco3 = null }) {
   const glucoseAxis = knownDiabetes || requiredNumber("glucoseMgDl", glucoseMgDl) >= POLICY.diagnosis.glucoseMgDl;
   const ketoneAxis =
     requiredNumber("betaHydroxybutyrateMmolL", betaHydroxybutyrateMmolL) >=
     POLICY.diagnosis.betaHydroxybutyrateMmolL;
-  const acidAxis =
-    requiredNumber("ph", ph) < POLICY.diagnosis.ph ||
-    requiredNumber("hco3", hco3) < POLICY.diagnosis.bicarbonateMmolL;
+  // Eixo acido e um OR (pH <7,30 e/ou HCO3 <18): basta um dos dois estar disponivel;
+  // exigir ambos rejeitaria uma VBG so com pH, ou uma bioquimica so com HCO3.
+  if (!isProvided(ph) && !isProvided(hco3)) {
+    throw new TypeError("hasDka requires at least one of ph or hco3");
+  }
+  let acidAxis = false;
+  if (isProvided(ph)) acidAxis = acidAxis || requiredNumber("ph", ph) < POLICY.diagnosis.ph;
+  if (isProvided(hco3)) acidAxis = acidAxis || requiredNumber("hco3", hco3) < POLICY.diagnosis.bicarbonateMmolL;
   return glucoseAxis && ketoneAxis && acidAxis;
 }
 
-function isResolvedDka({ betaHydroxybutyrateMmolL, ph, hco3 }) {
-  return (
+function isResolvedDka({ betaHydroxybutyrateMmolL, ph = null, hco3 = null }) {
+  const ketoneResolved =
     requiredNumber("betaHydroxybutyrateMmolL", betaHydroxybutyrateMmolL) <
-      POLICY.resolution.betaHydroxybutyrateBelowMmolL &&
-    (requiredNumber("ph", ph) >= POLICY.resolution.phAtLeast ||
-      requiredNumber("hco3", hco3) >= POLICY.resolution.bicarbonateAtLeastMmolL)
-  );
+    POLICY.resolution.betaHydroxybutyrateBelowMmolL;
+  // Mesma logica de OR do diagnostico: a resolucao acida pode ser lida por pH OU HCO3.
+  if (!isProvided(ph) && !isProvided(hco3)) {
+    throw new TypeError("isResolvedDka requires at least one of ph or hco3");
+  }
+  let acidResolved = false;
+  if (isProvided(ph)) acidResolved = acidResolved || requiredNumber("ph", ph) >= POLICY.resolution.phAtLeast;
+  if (isProvided(hco3)) acidResolved = acidResolved || requiredNumber("hco3", hco3) >= POLICY.resolution.bicarbonateAtLeastMmolL;
+  return ketoneResolved && acidResolved;
 }
 
 module.exports = {
