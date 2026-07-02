@@ -226,6 +226,48 @@ canvas{display:block;width:100%;background:#0c1218;border:1px solid var(--line);
 </section>
 </div>
 
+<!-- POLICY legível por máquina: espelho EXATO de core/cad_core.js.
+     O portão scripts/check_consistency.js [7] faz deep-equal deste bloco contra o
+     core; qualquer divergência de valor quebra o build. Não editar à mão — deriva do core. -->
+<script type="application/json" id="canon">
+{
+  "version": "CAD360-ApA-2026-07-01",
+  "source": "Umpierrez et al. Hyperglycemic Crises in Adults With Diabetes: A Consensus Report. Diabetes Care 2024;47(8):1257-1275.",
+  "diagnosis": {
+    "glucoseMgDl": 200,
+    "betaHydroxybutyrateMmolL": 3,
+    "ph": 7.3,
+    "bicarbonateMmolL": 18
+  },
+  "potassium": {
+    "replaceBelowMmolL": 5,
+    "targetLowMmolL": 4,
+    "targetHighMmolL": 5,
+    "holdInsulinBelowMmolL": 3.5
+  },
+  "bicarbonate": {
+    "considerBelowPh": 7
+  },
+  "phosphate": {
+    "considerBelowMmolL": 1
+  },
+  "insulin": {
+    "initialUnitsKgHour": 0.1,
+    "reducedUnitsKgHour": 0.05,
+    "reduceGlucoseBelowMgDl": 250
+  },
+  "resolution": {
+    "betaHydroxybutyrateBelowMmolL": 0.6,
+    "phAtLeast": 7.3,
+    "bicarbonateAtLeastMmolL": 18
+  },
+  "sodiumCorrection": {
+    "factorDefault": 1.6,
+    "factorSevereHyperglycemia": 2.4,
+    "severeHyperglycemiaAboveMgDl": 400
+  }
+}
+</script>
 <script>
 /* ================= CANON — única fonte de verdade (consenso 2024) ================= */
 const CANON={
@@ -247,6 +289,26 @@ const CANON={
   rk_cr:{nome:"Alcalose respiratória crônica",eixo:"hco3",f:"HCO₃ esp = 24 − 0,4·(40−pCO₂)",band:3,calc:(h,c)=>24-0.4*(40-c)}
  }
 };
+/* self-check em runtime: o CANON renderizável não pode divergir do POLICY embutido
+   (bloco id="canon", espelho do core). Falha ruidosa no console, nunca quebra a página. */
+(function(){
+ try{
+  const el=document.getElementById('canon'); if(!el) return;
+  const P=JSON.parse(el.textContent);
+  const pairs=[
+   [CANON.diagnostico.glicose,P.diagnosis.glucoseMgDl],[CANON.diagnostico.bhb,P.diagnosis.betaHydroxybutyrateMmolL],
+   [CANON.diagnostico.ph,P.diagnosis.ph],[CANON.diagnostico.hco3,P.diagnosis.bicarbonateMmolL],
+   [CANON.potassio.repor_abaixo,P.potassium.replaceBelowMmolL],[CANON.potassio.adiar_insulina_abaixo,P.potassium.holdInsulinBelowMmolL],
+   [CANON.bicarbonato.consenso_ph,P.bicarbonate.considerBelowPh],[CANON.fosfato.repor_abaixo,P.phosphate.considerBelowMmolL],
+   [CANON.insulina.inicio,P.insulin.initialUnitsKgHour],[CANON.insulina.reduz_para,P.insulin.reducedUnitsKgHour],
+   [CANON.insulina.glicose_reduz,P.insulin.reduceGlucoseBelowMgDl],[CANON.resolucao.bhb_abaixo,P.resolution.betaHydroxybutyrateBelowMmolL],
+   [CANON.naCorr.fator_padrao,P.sodiumCorrection.factorDefault],[CANON.naCorr.fator_alto,P.sodiumCorrection.factorSevereHyperglycemia],
+   [CANON.naCorr.glicose_limiar,P.sodiumCorrection.severeHyperglycemiaAboveMgDl]
+  ];
+  const bad=pairs.filter(([a,b])=>a!==b);
+  if(bad.length) console.error('CANON ⇄ POLICY divergência:',bad);
+ }catch(e){ console.error('canon self-check falhou:',e); }
+})();
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const r=(x,n=1)=>x==null||isNaN(x)?'—':(Math.round(x*10**n)/10**n).toFixed(n);
 const num=id=>{const el=$('#'+id);if(!el)return null;const v=parseFloat(el.value);return isNaN(v)?null:v;};

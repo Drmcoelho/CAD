@@ -1,5 +1,8 @@
 # CAD 360
 
+[![ci](https://github.com/Drmcoelho/CAD/actions/workflows/ci.yml/badge.svg)](https://github.com/Drmcoelho/CAD/actions/workflows/ci.yml)
+[![License: CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg)](./LICENSE)
+
 Sistema educacional canônico de **cetoacidose diabética como sistema dinâmico**.
 Uso pessoal, não-SaMD (autor como humano-no-loop). Offline, single-file, versionado.
 

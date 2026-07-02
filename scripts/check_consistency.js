@@ -79,6 +79,26 @@ const banned = [
 ];
 banned.forEach(([re, label]) => (re.test(html) ? bad("HTML contem " + label) : ok("HTML sem " + label)));
 
+console.log("\n[7] app/index.html expoe POLICY em <script type=application/json id=canon> — deep-equal vs core");
+{
+  const assert = require("assert");
+  const m = html.match(/<script[^>]*id="canon"[^>]*>([\s\S]*?)<\/script>/);
+  if (!m) {
+    bad("app: bloco JSON id=canon ausente");
+  } else {
+    let embedded = null;
+    try { embedded = JSON.parse(m[1]); } catch (e) { bad("app: bloco canon nao e JSON valido: " + e.message); }
+    if (embedded) {
+      try {
+        assert.deepStrictEqual(embedded, JSON.parse(JSON.stringify(P)));
+        ok("app: bloco canon == core.POLICY (valor-a-valor)");
+      } catch (e) {
+        bad("app: bloco canon DIVERGE de core.POLICY (" + (e.message || "").split("\n")[0] + ")");
+      }
+    }
+  }
+}
+
 console.log("");
 if (fails) { console.error(`CONSISTENCIA: ${fails} FALHA(S).`); process.exit(1); }
 console.log("CONSISTENCIA: tudo alinhado a fonte de verdade.");

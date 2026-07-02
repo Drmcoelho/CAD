@@ -3,6 +3,9 @@
   "version": "2026.7.1",
   "description": "CAD 360 — sistema educacional canônico de cetoacidose diabética (uso pessoal, não-SaMD).",
   "private": true,
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "test": "node core/cad_core.test.js && node core/fixtures.test.js",
     "check": "node scripts/check_consistency.js && node scripts/test_links.js",
@@ -10,5 +13,5 @@
     "pranchas:lote1": "cd pranchas/lote1 && python3 generate_cad_lote1.py",
     "pranchas:lote2": "cd pranchas/lote2 && python3 generate_cad_lote2.py"
   },
-  "license": "UNLICENSED"
+  "license": "CC-BY-NC-SA-4.0"
 }
