@@ -29,6 +29,6 @@ Estado do canon por camada, na versão `CAD360-ApA-2026-07-01`. O que estiver �
 
 ## Aberto / próximo
 - [x] ~~Regenerar EX04 (SVG/PNG)~~ — feito; template agora data-driven.
-- [ ] (Opcional) Sincronizar `docs/auditoria` — está desatualizada vs. o `app/` em dois pontos (bicarbonato ≤6,9; compensação dos 4 distúrbios).
-- [ ] (Opcional) Fazer o `app/index.html` expor seu `CANON` como bloco `<script type="application/json">` para o portão validar valor-a-valor (hoje valida por presença/ausência de tokens).
+- [x] ~~Sincronizar `docs/auditoria`~~ — reconciliado em `docs/auditoria-erratum.md` (Δ/Δ 0,93 = limítrofe, não "quase pura"; bicarbonato consenso pH<7,0 + fronteira ≤6,9; compensação dos 4 distúrbios). Pontos 1–2 já aplicados no `.docx`-fonte; regeneração do PDF pendente de ambiente com LibreOffice (por ora binários inalterados para não divergir `.docx`⇄`.pdf`).
+- [x] ~~Fazer o `app/index.html` expor seu `CANON` como bloco `<script type="application/json">`~~ — feito; bloco `id="canon"` (espelho do core) + self-check em runtime. `check_consistency.js` passo [7] faz deep-equal contra `core.POLICY` (valida valor-a-valor, não mais só token).
 - [ ] Próximos lotes de pranchas: auditar contra o mesmo `check_consistency.js` antes de commitar.

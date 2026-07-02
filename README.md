@@ -37,7 +37,7 @@ Nada renderiza um limiar "na mão". Mudou uma diretriz? Edita-se **um** valor em
 | `tratado/` | `index.html` — tratado maximalista (bolso/plantão/profundo). |
 | `painel/` | `index.html` — painel de evolução gasométrica (série temporal de-identificada). |
 | `pranchas/` | `lote1/` (M01–M06 + EX01–EX02) e `lote2/` (M07–M12 + EX03–EX04). Cada lote: `svg/` (vetorial, versionável), `png/`, `source/*.json` (o canon aplicado à imagem), `generate_*.py`. `revisao-m2-m4-m6.png` documenta a correção do K. |
-| `docs/` | Auditoria + reescrita + núcleo pedagógico (PDF/DOCX). |
+| `docs/` | Auditoria + reescrita + núcleo pedagógico (PDF/DOCX). `auditoria-erratum.md` reconcilia o corpo da auditoria com o canon atual (Δ/Δ, bicarbonato ≤6,9, compensação). |
 | `scripts/` | `check_consistency.js` — o portão de fonte única. |
 
 ## Rodar
