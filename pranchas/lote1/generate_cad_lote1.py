@@ -113,7 +113,7 @@ class Board:
     def arrow(self, x1: float, y1: float, x2: float, y2: float, color: str = C["blue"], width: int = 5) -> None:
         self.add(
             f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="{color}" '
-            f'stroke-width="{width}" stroke-linecap="round" marker-end="url(#arrow-{color[1:]}"/>'
+            f'stroke-width="{width}" stroke-linecap="round" marker-end="url(#arrow-{color[1:]})"/>'
         )
 
     def base(self) -> str:

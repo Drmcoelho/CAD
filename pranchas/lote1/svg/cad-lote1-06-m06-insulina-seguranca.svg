@@ -29,25 +29,25 @@
 <text x="192" y="436" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="28" font-weight="850" fill="#ffffff" opacity="1">Algoritmo mínimo</text>
 <rect x="160" y="500" width="430" height="92" rx="20" fill="#0d141b" stroke="#b18cf0" stroke-width="2" opacity="1"/>
 <text x="190" y="558" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="27" font-weight="850" fill="#ffffff" opacity="1">cetose + acidose?</text>
-<line x1="600" y1="546" x2="720" y2="546" stroke="#b18cf0" stroke-width="5" stroke-linecap="round" marker-end="url(#arrow-b18cf0"/>
+<line x1="600" y1="546" x2="720" y2="546" stroke="#b18cf0" stroke-width="5" stroke-linecap="round" marker-end="url(#arrow-b18cf0)"/>
 <rect x="750" y="514" width="360" height="64" rx="32.0" fill="#b18cf0" stroke="#314557" stroke-width="1.5"/>
 <text x="930.0" y="554.28" text-anchor="middle" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="23" font-weight="850" fill="#101820" opacity="1">sim: tratar CAD</text>
-<line x1="375" y1="610" x2="375" y2="650" stroke="#788b9e" stroke-width="5" stroke-linecap="round" marker-end="url(#arrow-788b9e"/>
+<line x1="375" y1="610" x2="375" y2="650" stroke="#788b9e" stroke-width="5" stroke-linecap="round" marker-end="url(#arrow-788b9e)"/>
 <rect x="160" y="650" width="430" height="92" rx="20" fill="#0d141b" stroke="#f2b441" stroke-width="2" opacity="1"/>
 <text x="190" y="708" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="27" font-weight="850" fill="#ffffff" opacity="1">K &gt;= 3,5?</text>
-<line x1="600" y1="696" x2="720" y2="696" stroke="#f2b441" stroke-width="5" stroke-linecap="round" marker-end="url(#arrow-f2b441"/>
+<line x1="600" y1="696" x2="720" y2="696" stroke="#f2b441" stroke-width="5" stroke-linecap="round" marker-end="url(#arrow-f2b441)"/>
 <rect x="750" y="664" width="360" height="64" rx="32.0" fill="#f2b441" stroke="#314557" stroke-width="1.5"/>
 <text x="930.0" y="704.28" text-anchor="middle" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="23" font-weight="850" fill="#101820" opacity="1">não: repor K antes</text>
-<line x1="375" y1="760" x2="375" y2="800" stroke="#788b9e" stroke-width="5" stroke-linecap="round" marker-end="url(#arrow-788b9e"/>
+<line x1="375" y1="760" x2="375" y2="800" stroke="#788b9e" stroke-width="5" stroke-linecap="round" marker-end="url(#arrow-788b9e)"/>
 <rect x="160" y="800" width="430" height="92" rx="20" fill="#0d141b" stroke="#55d88f" stroke-width="2" opacity="1"/>
 <text x="190" y="858" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="27" font-weight="850" fill="#ffffff" opacity="1">glicose &lt; 250?</text>
-<line x1="600" y1="846" x2="720" y2="846" stroke="#55d88f" stroke-width="5" stroke-linecap="round" marker-end="url(#arrow-55d88f"/>
+<line x1="600" y1="846" x2="720" y2="846" stroke="#55d88f" stroke-width="5" stroke-linecap="round" marker-end="url(#arrow-55d88f)"/>
 <rect x="750" y="814" width="360" height="64" rx="32.0" fill="#55d88f" stroke="#314557" stroke-width="1.5"/>
 <text x="930.0" y="854.28" text-anchor="middle" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="23" font-weight="850" fill="#101820" opacity="1">sim: dextrose junto</text>
-<line x1="375" y1="910" x2="375" y2="950" stroke="#788b9e" stroke-width="5" stroke-linecap="round" marker-end="url(#arrow-788b9e"/>
+<line x1="375" y1="910" x2="375" y2="950" stroke="#788b9e" stroke-width="5" stroke-linecap="round" marker-end="url(#arrow-788b9e)"/>
 <rect x="160" y="950" width="430" height="92" rx="20" fill="#0d141b" stroke="#37c6e0" stroke-width="2" opacity="1"/>
 <text x="190" y="1008" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="27" font-weight="850" fill="#ffffff" opacity="1">gap/cetona fechou?</text>
-<line x1="600" y1="996" x2="720" y2="996" stroke="#37c6e0" stroke-width="5" stroke-linecap="round" marker-end="url(#arrow-37c6e0"/>
+<line x1="600" y1="996" x2="720" y2="996" stroke="#37c6e0" stroke-width="5" stroke-linecap="round" marker-end="url(#arrow-37c6e0)"/>
 <rect x="750" y="964" width="360" height="64" rx="32.0" fill="#37c6e0" stroke="#314557" stroke-width="1.5"/>
 <text x="930.0" y="1004.28" text-anchor="middle" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="23" font-weight="850" fill="#101820" opacity="1">não: manter insulina</text>
 <rect x="88" y="1190" width="540" height="610" rx="26" fill="#172330" stroke="#314557" stroke-width="2" opacity="1"/>

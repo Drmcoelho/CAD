@@ -393,10 +393,14 @@ function renderComp(){
   const exp=D.calc(h,c),measured=D.eixo==='pco2'?c:h;
   vv.textContent=(D.eixo==='pco2'?'pCO₂ esp ':'HCO₃ esp ')+r(exp,1)+' ± '+D.band;
   if(measured==null){cc.className='chip t';cc.textContent=D.f;return;}
-  const lo=exp-D.band,hi=exp+D.band,addAcid=D.eixo==='pco2'?'acidose respiratória associada':'acidose metabólica associada',addAlk=D.eixo==='pco2'?'alcalose respiratória associada':'alcalose metabólica associada';
+  const lo=exp-D.band,hi=exp+D.band;
+  // eixo pco2 (compensação respiratória): medido alto = acidose respiratória, baixo = alcalose respiratória.
+  // eixo hco3 (compensação metabólica): medido alto = alcalose metabólica (excesso de base), baixo = acidose metabólica (déficit de base).
+  const high=D.eixo==='pco2'?{t:'acidose respiratória associada',c:'r'}:{t:'alcalose metabólica associada',c:'t'};
+  const low =D.eixo==='pco2'?{t:'alcalose respiratória associada',c:'t'}:{t:'acidose metabólica associada',c:'r'};
   let cls,txt;
-  if(measured>hi){cls='r';txt=`medido ${r(measured,1)} > ${r(hi,1)} → ${addAcid}.`;}
-  else if(measured<lo){cls='t';txt=`medido ${r(measured,1)} < ${r(lo,1)} → ${addAlk}.`;}
+  if(measured>hi){cls=high.c;txt=`medido ${r(measured,1)} > ${r(hi,1)} → ${high.t}.`;}
+  else if(measured<lo){cls=low.c;txt=`medido ${r(measured,1)} < ${r(lo,1)} → ${low.t}.`;}
   else{cls='g';txt=`medido ${r(measured,1)} dentro de ${r(lo,1)}–${r(hi,1)} → compensação adequada.`;}
   cc.className='chip '+cls;cc.textContent=txt;};
  ['cph','chco3','cpco2'].forEach(id=>$('#'+id).addEventListener('input',()=>{const s=suggestPrimary(num('cph'),num('chco3'),num('cpco2'));if(s)$('#cprim').value=s;upd();}));
