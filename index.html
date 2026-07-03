@@ -1,0 +1,39 @@
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CAD 360</title>
+<style>
+:root{--bg:#0e141b;--p:#161d26;--line:#243040;--line2:#2f3e52;--tx:#e6edf3;--mut:#8394a6;--teal:#37c6e0}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.6 -apple-system,Segoe UI,Roboto,sans-serif}
+.wrap{max-width:760px;margin:0 auto;padding:34px 18px 80px}
+h1{font-size:30px;margin:0;letter-spacing:-.5px}.sub{color:var(--mut);margin:6px 0 2px}
+.src{color:var(--teal);font-size:12.5px;border:1px solid var(--line2);border-radius:20px;padding:3px 12px;display:inline-block;margin-top:10px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;margin-top:26px}
+a.card{display:block;background:var(--p);border:1px solid var(--line);border-radius:14px;padding:15px 16px;text-decoration:none;color:var(--tx);transition:border-color .15s}
+a.card:hover{border-color:var(--teal)}
+a.card .t{font-weight:700;font-size:16px}a.card .d{color:var(--mut);font-size:13px;margin-top:3px}
+.lab{color:var(--mut);font-size:11px;letter-spacing:.07em;text-transform:uppercase;margin:28px 0 4px}
+.foot{color:var(--mut);font-size:12.5px;margin-top:30px;border-top:1px solid var(--line);padding-top:14px;line-height:1.6}
+code{font-family:ui-monospace,Menlo,monospace;background:var(--p);border:1px solid var(--line2);border-radius:5px;padding:0 5px;font-size:13px}
+</style></head><body><div class="wrap">
+<h1>CAD 360</h1>
+<p class="sub">Cetoacidose diabética como sistema dinâmico — sistema educacional canônico.</p>
+<span class="src">Consenso 2024 · Umpierrez et al., Diabetes Care 47(8):1257–1275</span>
+
+<div class="lab">Ferramentas interativas</div>
+<div class="grid">
+ <a class="card" href="app/"><div class="t">🧠 Núcleo</div><div class="d">Socrático + calculadoras vivas + fisiologia (rim/pulmão) com simuladores + provão. 6 abas.</div></a>
+ <a class="card" href="painel/"><div class="t">📈 Painel de evolução</div><div class="d">A gasometria como filme: série temporal de-identificada, 6 pontos, convergência e cauda de cloro.</div></a>
+ <a class="card" href="tratado/"><div class="t">📖 Tratado</div><div class="d">Bolso / plantão / profundo. §0–12, maximalista, com calculadoras.</div></a>
+</div>
+
+<div class="lab">Pranchas (atlas visual)</div>
+<div class="grid">
+ <a class="card" href="pranchas/lote1/contact-sheet.png"><div class="t">🗺️ Lote 1</div><div class="d">M01–M06 + EX01–EX02. SVG vetorial + PNG + JSON-fonte.</div></a>
+ <a class="card" href="pranchas/lote2/contact-sheet.png"><div class="t">🗺️ Lote 2</div><div class="d">M07–M12 + EX03–EX04. Mesma doutrina, mesma fonte.</div></a>
+</div>
+
+<div class="foot">
+ Fonte de verdade única em <code>core/cad_core.js</code> + <code>canon/policy.json</code>; um portão de CI (<code>scripts/check_consistency.js</code>) quebra o build se qualquer camada divergir. Uso pessoal, não-SaMD — ver <code>README.md</code> e <code>STATUS.md</code>.<br>
+ Dr. Matheus M. Coelho · CRM-SP 151.318 · Limeira/SP.
+</div>
+</div></body></html>

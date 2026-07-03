@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1320 2868" role="img" aria-labelledby="title desc">
+<title id="title">Insulina com segurança</title>
+<desc id="desc">Insulina fecha cetogênese; glicose permite continuar; K decide se pode.</desc>
+<defs>
+<marker id="arrow-37c6e0" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth"><path d="M2,2 L10,6 L2,10 Z" fill="#37c6e0"/></marker><marker id="arrow-46d7b4" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth"><path d="M2,2 L10,6 L2,10 Z" fill="#46d7b4"/></marker><marker id="arrow-55d88f" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth"><path d="M2,2 L10,6 L2,10 Z" fill="#55d88f"/></marker><marker id="arrow-f2b441" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth"><path d="M2,2 L10,6 L2,10 Z" fill="#f2b441"/></marker><marker id="arrow-ef8f4c" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth"><path d="M2,2 L10,6 L2,10 Z" fill="#ef8f4c"/></marker><marker id="arrow-ff6464" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth"><path d="M2,2 L10,6 L2,10 Z" fill="#ff6464"/></marker><marker id="arrow-b18cf0" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth"><path d="M2,2 L10,6 L2,10 Z" fill="#b18cf0"/></marker>
+<pattern id="grid" width="42" height="42" patternUnits="userSpaceOnUse">
+  <path d="M42 0H0V42" fill="none" stroke="#314557" stroke-width="1" opacity=".34"/>
+</pattern>
+<linearGradient id="warm" x1="0" x2="1">
+  <stop offset="0" stop-color="#ef8f4c"/>
+  <stop offset="1" stop-color="#ff6464"/>
+</linearGradient>
+<linearGradient id="cool" x1="0" x2="1">
+  <stop offset="0" stop-color="#37c6e0"/>
+  <stop offset="1" stop-color="#46d7b4"/>
+</linearGradient>
+</defs>
+<rect width="1320" height="2868" fill="#101820"/>
+<circle cx="1160" cy="40" r="310" fill="#37c6e0" opacity=".08"/>
+<circle cx="120" cy="2770" r="380" fill="#ef8f4c" opacity=".06"/>
+<rect x="48" y="46" width="1224" height="2776" rx="42" fill="none" stroke="#314557" stroke-width="2"/>
+<text x="88" y="126" font-family="JetBrains Mono, SFMono-Regular, Menlo, monospace" font-size="24" font-weight="900" fill="#37c6e0" letter-spacing="5">CAD 360 · M06</text>
+<text x="88" y="204" font-family="Avenir Next, Inter, Arial, sans-serif" font-size="58" font-weight="900" fill="#ffffff">Insulina com segurança</text>
+<text x="90" y="258" font-family="Avenir Next, Inter, Arial, sans-serif" font-size="28" font-weight="500" fill="#aebdcc">Insulina fecha cetogênese; glicose permite continuar; K decide se pode.</text>
+<line x1="88" y1="306" x2="1232" y2="306" stroke="#314557" stroke-width="2"/>
+<rect x="88" y="370" width="1144" height="730" rx="26" fill="#172330" stroke="#314557" stroke-width="2" opacity="1"/>
+<rect x="116" y="396" width="58" height="58" rx="16" fill="#1d2b3a" stroke="#37c6e0" stroke-width="2" opacity="1"/>
+<text x="145" y="436" text-anchor="middle" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="24" font-weight="900" fill="#37c6e0" opacity="1">1</text>
+<text x="192" y="436" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="28" font-weight="850" fill="#ffffff" opacity="1">Algoritmo mínimo</text>
+<rect x="160" y="500" width="430" height="92" rx="20" fill="#0d141b" stroke="#b18cf0" stroke-width="2" opacity="1"/>
+<text x="190" y="558" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="27" font-weight="850" fill="#ffffff" opacity="1">cetose + acidose?</text>
+<line x1="600" y1="546" x2="720" y2="546" stroke="#b18cf0" stroke-width="5" stroke-linecap="round" marker-end="url(#arrow-b18cf0)"/>
+<rect x="750" y="514" width="360" height="64" rx="32.0" fill="#b18cf0" stroke="#314557" stroke-width="1.5"/>
+<text x="930.0" y="554.28" text-anchor="middle" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="23" font-weight="850" fill="#101820" opacity="1">sim: tratar CAD</text>
+<line x1="375" y1="610" x2="375" y2="650" stroke="#788b9e" stroke-width="5" stroke-linecap="round" marker-end="url(#arrow-788b9e)"/>
+<rect x="160" y="650" width="430" height="92" rx="20" fill="#0d141b" stroke="#f2b441" stroke-width="2" opacity="1"/>
+<text x="190" y="708" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="27" font-weight="850" fill="#ffffff" opacity="1">K &gt;= 3,5?</text>
+<line x1="600" y1="696" x2="720" y2="696" stroke="#f2b441" stroke-width="5" stroke-linecap="round" marker-end="url(#arrow-f2b441)"/>
+<rect x="750" y="664" width="360" height="64" rx="32.0" fill="#f2b441" stroke="#314557" stroke-width="1.5"/>
+<text x="930.0" y="704.28" text-anchor="middle" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="23" font-weight="850" fill="#101820" opacity="1">não: repor K antes</text>
+<line x1="375" y1="760" x2="375" y2="800" stroke="#788b9e" stroke-width="5" stroke-linecap="round" marker-end="url(#arrow-788b9e)"/>
+<rect x="160" y="800" width="430" height="92" rx="20" fill="#0d141b" stroke="#55d88f" stroke-width="2" opacity="1"/>
+<text x="190" y="858" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="27" font-weight="850" fill="#ffffff" opacity="1">glicose &lt; 250?</text>
+<line x1="600" y1="846" x2="720" y2="846" stroke="#55d88f" stroke-width="5" stroke-linecap="round" marker-end="url(#arrow-55d88f)"/>
+<rect x="750" y="814" width="360" height="64" rx="32.0" fill="#55d88f" stroke="#314557" stroke-width="1.5"/>
+<text x="930.0" y="854.28" text-anchor="middle" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="23" font-weight="850" fill="#101820" opacity="1">sim: dextrose junto</text>
+<line x1="375" y1="910" x2="375" y2="950" stroke="#788b9e" stroke-width="5" stroke-linecap="round" marker-end="url(#arrow-788b9e)"/>
+<rect x="160" y="950" width="430" height="92" rx="20" fill="#0d141b" stroke="#37c6e0" stroke-width="2" opacity="1"/>
+<text x="190" y="1008" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="27" font-weight="850" fill="#ffffff" opacity="1">gap/cetona fechou?</text>
+<line x1="600" y1="996" x2="720" y2="996" stroke="#37c6e0" stroke-width="5" stroke-linecap="round" marker-end="url(#arrow-37c6e0)"/>
+<rect x="750" y="964" width="360" height="64" rx="32.0" fill="#37c6e0" stroke="#314557" stroke-width="1.5"/>
+<text x="930.0" y="1004.28" text-anchor="middle" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="23" font-weight="850" fill="#101820" opacity="1">não: manter insulina</text>
+<rect x="88" y="1190" width="540" height="610" rx="26" fill="#172330" stroke="#314557" stroke-width="2" opacity="1"/>
+<rect x="116" y="1216" width="58" height="58" rx="16" fill="#1d2b3a" stroke="#55d88f" stroke-width="2" opacity="1"/>
+<text x="145" y="1256" text-anchor="middle" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="24" font-weight="900" fill="#55d88f" opacity="1">2</text>
+<text x="192" y="1256" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="28" font-weight="850" fill="#ffffff" opacity="1">Glicose não é freio</text>
+<text x="145" y="1320" text-anchor="start" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="38" font-weight="900" fill="#55d88f" opacity="1">glicose 133</text>
+<text x="145" y="1385" text-anchor="start" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="38" font-weight="900" fill="#ff6464" opacity="1">+ gap aberto</text>
+<text x="145" y="1480" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="29" font-weight="500" fill="#aebdcc" opacity="1">Isso não manda desligar insulina.</text>
+<text x="145" y="1517.12" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="29" font-weight="500" fill="#aebdcc" opacity="1">Manda ligar dextrose para permitir</text>
+<text x="145" y="1554.2399999999998" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="29" font-weight="500" fill="#aebdcc" opacity="1">insulina ate a cetose fechar.</text>
+<rect x="145" y="1710" width="400" height="62" rx="31.0" fill="#55d88f" stroke="#314557" stroke-width="1.5"/>
+<text x="345.0" y="1749.28" text-anchor="middle" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="23" font-weight="850" fill="#101820" opacity="1">dextrose = cinto de segurança</text>
+<rect x="692" y="1190" width="540" height="610" rx="26" fill="#172330" stroke="#314557" stroke-width="2" opacity="1"/>
+<rect x="720" y="1216" width="58" height="58" rx="16" fill="#1d2b3a" stroke="#f2b441" stroke-width="2" opacity="1"/>
+<text x="749" y="1256" text-anchor="middle" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="24" font-weight="900" fill="#f2b441" opacity="1">3</text>
+<text x="796" y="1256" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="28" font-weight="850" fill="#ffffff" opacity="1">K é a trava</text>
+<rect x="755" y="1320" width="390" height="250" rx="18" fill="#0d141b" stroke="#314557" stroke-width="2" opacity="1"/>
+<rect x="779" y="1344" width="342" height="192" fill="url(#grid)" opacity=".55"/>
+<path d="M797.0,1378.7 L909.0,1428.8 L1005.0,1479.0 L1117.0,1507.7" fill="none" stroke="#f2b441" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="797" cy="1378.6666666666667" r="8" fill="#f2b441" stroke="#101820" stroke-width="3"/>
+<circle cx="909.0" cy="1428.8333333333333" r="8" fill="#f2b441" stroke="#101820" stroke-width="3"/>
+<circle cx="1005.0" cy="1479.0" r="8" fill="#f2b441" stroke="#101820" stroke-width="3"/>
+<circle cx="1117" cy="1507.6666666666667" r="8" fill="#f2b441" stroke="#101820" stroke-width="3"/>
+<text x="783" y="1354" text-anchor="start" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="22" font-weight="900" fill="#f2b441" opacity="1">K sérico</text>
+<text x="755" y="1630" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="26" font-weight="500" fill="#aebdcc" opacity="1">K normal na chegada pode</text>
+<text x="755" y="1663.28" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="26" font-weight="500" fill="#aebdcc" opacity="1">esconder déficit corporal.</text>
+<text x="755" y="1696.56" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="26" font-weight="500" fill="#aebdcc" opacity="1">Insulina e volume revelam o</text>
+<text x="755" y="1729.84" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="26" font-weight="500" fill="#aebdcc" opacity="1">buraco.</text>
+<rect x="88" y="1885" width="1144" height="540" rx="26" fill="#172330" stroke="#314557" stroke-width="2" opacity="1"/>
+<rect x="116" y="1911" width="58" height="58" rx="16" fill="#1d2b3a" stroke="#ff6464" stroke-width="2" opacity="1"/>
+<text x="145" y="1951" text-anchor="middle" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="24" font-weight="900" fill="#ff6464" opacity="1">4</text>
+<text x="192" y="1951" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="28" font-weight="850" fill="#ffffff" opacity="1">Regra de plantão: Apêndice A</text>
+<text x="150" y="2015" text-anchor="start" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="29" font-weight="900" fill="#f2b441" opacity="1">K &lt; 3,5</text>
+<text x="520" y="2015" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="26" font-weight="650" fill="#edf5fb" opacity="1">segurar insulina, repor K e</text>
+<text x="520" y="2048.28" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="26" font-weight="650" fill="#edf5fb" opacity="1">monitorizar</text>
+<text x="150" y="2097" text-anchor="start" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="29" font-weight="900" fill="#f2b441" opacity="1">K 3,5-5,0</text>
+<text x="520" y="2097" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="26" font-weight="650" fill="#edf5fb" opacity="1">insulina permitida + K para alvo 4-5</text>
+<text x="150" y="2179" text-anchor="start" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="29" font-weight="900" fill="#f2b441" opacity="1">K &gt;= 5,0</text>
+<text x="520" y="2179" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="26" font-weight="650" fill="#edf5fb" opacity="1">sem K inicial, ECG e recheck</text>
+<text x="520" y="2212.28" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="26" font-weight="650" fill="#edf5fb" opacity="1">frequente</text>
+<text x="150" y="2261" text-anchor="start" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="29" font-weight="900" fill="#f2b441" opacity="1">gli baixa/modesta</text>
+<text x="520" y="2261" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="26" font-weight="650" fill="#edf5fb" opacity="1">dextrose junto; não abandonar cetose</text>
+<rect x="205" y="2370" width="910" height="72" rx="36.0" fill="#1d2b3a" stroke="#314557" stroke-width="1.5"/>
+<text x="660.0" y="2415.72" text-anchor="middle" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="27" font-weight="850" fill="#ffffff" opacity="1">Alvo K 4-5. A doutrina do projeto é K &lt;5,0.</text>
+</svg>

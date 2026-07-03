@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1320 2868" role="img" aria-labelledby="title desc">
+<title id="title">Laboratório mínimo</title>
+<desc id="desc">Cada exame responde uma pergunta; nenhum responde todas.</desc>
+<defs>
+<marker id="arrow-37c6e0" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth"><path d="M2,2 L10,6 L2,10 Z" fill="#37c6e0"/></marker><marker id="arrow-46d7b4" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth"><path d="M2,2 L10,6 L2,10 Z" fill="#46d7b4"/></marker><marker id="arrow-55d88f" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth"><path d="M2,2 L10,6 L2,10 Z" fill="#55d88f"/></marker><marker id="arrow-f2b441" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth"><path d="M2,2 L10,6 L2,10 Z" fill="#f2b441"/></marker><marker id="arrow-ef8f4c" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth"><path d="M2,2 L10,6 L2,10 Z" fill="#ef8f4c"/></marker><marker id="arrow-ff6464" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth"><path d="M2,2 L10,6 L2,10 Z" fill="#ff6464"/></marker><marker id="arrow-b18cf0" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth"><path d="M2,2 L10,6 L2,10 Z" fill="#b18cf0"/></marker>
+<pattern id="grid" width="42" height="42" patternUnits="userSpaceOnUse">
+  <path d="M42 0H0V42" fill="none" stroke="#314557" stroke-width="1" opacity=".34"/>
+</pattern>
+<linearGradient id="warm" x1="0" x2="1">
+  <stop offset="0" stop-color="#ef8f4c"/>
+  <stop offset="1" stop-color="#ff6464"/>
+</linearGradient>
+<linearGradient id="cool" x1="0" x2="1">
+  <stop offset="0" stop-color="#37c6e0"/>
+  <stop offset="1" stop-color="#46d7b4"/>
+</linearGradient>
+</defs>
+<rect width="1320" height="2868" fill="#101820"/>
+<circle cx="1160" cy="40" r="310" fill="#37c6e0" opacity=".08"/>
+<circle cx="120" cy="2770" r="380" fill="#ef8f4c" opacity=".06"/>
+<rect x="48" y="46" width="1224" height="2776" rx="42" fill="none" stroke="#314557" stroke-width="2"/>
+<text x="88" y="126" font-family="JetBrains Mono, SFMono-Regular, Menlo, monospace" font-size="24" font-weight="900" fill="#37c6e0" letter-spacing="5">CAD 360 · M03</text>
+<text x="88" y="204" font-family="Avenir Next, Inter, Arial, sans-serif" font-size="58" font-weight="900" fill="#ffffff">Laboratório mínimo</text>
+<text x="90" y="258" font-family="Avenir Next, Inter, Arial, sans-serif" font-size="28" font-weight="500" fill="#aebdcc">Cada exame responde uma pergunta; nenhum responde todas.</text>
+<line x1="88" y1="306" x2="1232" y2="306" stroke="#314557" stroke-width="2"/>
+<rect x="88" y="370" width="1144" height="560" rx="26" fill="#172330" stroke="#314557" stroke-width="2" opacity="1"/>
+<rect x="116" y="396" width="58" height="58" rx="16" fill="#1d2b3a" stroke="#37c6e0" stroke-width="2" opacity="1"/>
+<text x="145" y="436" text-anchor="middle" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="24" font-weight="900" fill="#37c6e0" opacity="1">1</text>
+<text x="192" y="436" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="28" font-weight="850" fill="#ffffff" opacity="1">O que cada dado sabe dizer</text>
+<text x="140" y="505" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="28" font-weight="850" fill="#ffffff" opacity="1">Dextro</text>
+<text x="350" y="505" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="24" font-weight="720" fill="#55d88f" opacity="1">glicose agora</text>
+<text x="710" y="505" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="23" font-weight="520" fill="#aebdcc" opacity="1">não mede cetose nem resolução</text>
+<line x1="130" y1="539" x2="1188" y2="539" stroke="#314557" stroke-width="1.4"/>
+<text x="140" y="589" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="28" font-weight="850" fill="#ffffff" opacity="1">Gasometria</text>
+<text x="350" y="589" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="24" font-weight="720" fill="#55d88f" opacity="1">pH, pCO2, HCO3, lactato</text>
+<text x="710" y="589" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="23" font-weight="520" fill="#aebdcc" opacity="1">não mede estoque corporal de K</text>
+<line x1="130" y1="623" x2="1188" y2="623" stroke="#314557" stroke-width="1.4"/>
+<text x="140" y="673" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="28" font-weight="850" fill="#ffffff" opacity="1">Ionograma</text>
+<text x="350" y="673" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="24" font-weight="720" fill="#55d88f" opacity="1">Na/K/Cl e coerência</text>
+<text x="710" y="673" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="23" font-weight="520" fill="#aebdcc" opacity="1">não prova causa da acidose</text>
+<line x1="130" y1="707" x2="1188" y2="707" stroke="#314557" stroke-width="1.4"/>
+<text x="140" y="757" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="28" font-weight="850" fill="#ffffff" opacity="1">β-OHB</text>
+<text x="350" y="757" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="24" font-weight="720" fill="#55d88f" opacity="1">cetona causal</text>
+<text x="710" y="757" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="23" font-weight="520" fill="#aebdcc" opacity="1">melhor marcador de resolução</text>
+<line x1="130" y1="791" x2="1188" y2="791" stroke="#314557" stroke-width="1.4"/>
+<text x="140" y="841" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="28" font-weight="850" fill="#ffffff" opacity="1">Urina</text>
+<text x="350" y="841" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="24" font-weight="720" fill="#55d88f" opacity="1">AcAc/acetona</text>
+<text x="710" y="841" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="23" font-weight="520" fill="#aebdcc" opacity="1">pode piorar enquanto melhora</text>
+<line x1="130" y1="875" x2="1188" y2="875" stroke="#314557" stroke-width="1.4"/>
+<rect x="88" y="1020" width="540" height="630" rx="26" fill="#172330" stroke="#314557" stroke-width="2" opacity="1"/>
+<rect x="116" y="1046" width="58" height="58" rx="16" fill="#1d2b3a" stroke="#b18cf0" stroke-width="2" opacity="1"/>
+<text x="145" y="1086" text-anchor="middle" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="24" font-weight="900" fill="#b18cf0" opacity="1">2</text>
+<text x="192" y="1086" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="28" font-weight="850" fill="#ffffff" opacity="1">Urina cetônica: atraso redox</text>
+<text x="145" y="1160" text-anchor="start" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="42" font-weight="900" fill="#ffffff" opacity="1">β-OHB  ⇄  AcAc</text>
+<text x="145" y="1245" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="27" font-weight="500" fill="#aebdcc" opacity="1">No pico da CAD predomina β-OHB. A</text>
+<text x="145" y="1279.56" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="27" font-weight="500" fill="#aebdcc" opacity="1">fita detecta AcAc, nao β-OHB. Na</text>
+<text x="145" y="1314.12" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="27" font-weight="500" fill="#aebdcc" opacity="1">melhora, β-OHB vira AcAc e a urina</text>
+<text x="145" y="1348.6799999999998" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="27" font-weight="500" fill="#aebdcc" opacity="1">pode parecer pior.</text>
+<rect x="145" y="1510" width="385" height="60" rx="30.0" fill="#b18cf0" stroke="#314557" stroke-width="1.5"/>
+<text x="337.5" y="1548.64" text-anchor="middle" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="24" font-weight="850" fill="#101820" opacity="1">não titule por fita isolada</text>
+<rect x="692" y="1020" width="540" height="630" rx="26" fill="#172330" stroke="#314557" stroke-width="2" opacity="1"/>
+<rect x="720" y="1046" width="58" height="58" rx="16" fill="#1d2b3a" stroke="#ef8f4c" stroke-width="2" opacity="1"/>
+<text x="749" y="1086" text-anchor="middle" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="24" font-weight="900" fill="#ef8f4c" opacity="1">3</text>
+<text x="796" y="1086" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="28" font-weight="850" fill="#ffffff" opacity="1">Osmolaridade: rótulo obrigatório</text>
+<rect x="740" y="1138" width="438" height="190" rx="22" fill="#0d141b" stroke="#55d88f" stroke-width="2" opacity="1"/>
+<text x="768" y="1184" text-anchor="start" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="22" font-weight="850" fill="#55d88f" opacity="1">default em CAD/HHS</text>
+<text x="768" y="1236" text-anchor="start" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="29" font-weight="850" fill="#ffffff" opacity="1">2Na + glicose/18</text>
+<text x="768" y="1278" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="20" font-weight="520" fill="#aebdcc" opacity="1">osm efetiva =</text>
+<text x="768" y="1303.6" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="20" font-weight="520" fill="#aebdcc" opacity="1">tonicidade; ureia fica</text>
+<text x="768" y="1329.1999999999998" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="20" font-weight="520" fill="#aebdcc" opacity="1">fora.</text>
+<rect x="740" y="1360" width="438" height="190" rx="22" fill="#0d141b" stroke="#f2b441" stroke-width="2" opacity="1"/>
+<text x="768" y="1406" text-anchor="start" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="22" font-weight="850" fill="#f2b441" opacity="1">somente osm-gap</text>
+<text x="768" y="1458" text-anchor="start" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="29" font-weight="850" fill="#ffffff" opacity="1">2Na + glic/18 + BUN/2,8</text>
+<text x="768" y="1500" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="20" font-weight="520" fill="#aebdcc" opacity="1">ou ureia/6; comparar com</text>
+<text x="768" y="1525.6" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="20" font-weight="520" fill="#aebdcc" opacity="1">osm medida.</text>
+<rect x="88" y="1735" width="1144" height="620" rx="26" fill="#172330" stroke="#314557" stroke-width="2" opacity="1"/>
+<rect x="116" y="1761" width="58" height="58" rx="16" fill="#1d2b3a" stroke="#46d7b4" stroke-width="2" opacity="1"/>
+<text x="145" y="1801" text-anchor="middle" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="24" font-weight="900" fill="#46d7b4" opacity="1">4</text>
+<text x="192" y="1801" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="28" font-weight="850" fill="#ffffff" opacity="1">Leitura em camadas</text>
+<rect x="145" y="1855" width="340" height="52" rx="26.0" fill="#1d2b3a" stroke="#314557" stroke-width="1.5"/>
+<text x="315.0" y="1888.92" text-anchor="middle" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="22" font-weight="850" fill="#edf5fb" opacity="1">1. pH</text>
+<rect x="665" y="1855" width="340" height="52" rx="26.0" fill="#1d2b3a" stroke="#314557" stroke-width="1.5"/>
+<text x="835.0" y="1888.92" text-anchor="middle" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="22" font-weight="850" fill="#edf5fb" opacity="1">2. pCO2/Winter</text>
+<rect x="145" y="1937" width="340" height="52" rx="26.0" fill="#1d2b3a" stroke="#314557" stroke-width="1.5"/>
+<text x="315.0" y="1970.92" text-anchor="middle" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="22" font-weight="850" fill="#edf5fb" opacity="1">3. HCO3/BE</text>
+<rect x="665" y="1937" width="340" height="52" rx="26.0" fill="#1d2b3a" stroke="#314557" stroke-width="1.5"/>
+<text x="835.0" y="1970.92" text-anchor="middle" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="22" font-weight="850" fill="#edf5fb" opacity="1">4. lactato</text>
+<rect x="145" y="2019" width="340" height="52" rx="26.0" fill="#1d2b3a" stroke="#314557" stroke-width="1.5"/>
+<text x="315.0" y="2052.92" text-anchor="middle" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="22" font-weight="850" fill="#edf5fb" opacity="1">5. Na/K/Cl</text>
+<rect x="665" y="2019" width="340" height="52" rx="26.0" fill="#1d2b3a" stroke="#314557" stroke-width="1.5"/>
+<text x="835.0" y="2052.92" text-anchor="middle" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="22" font-weight="850" fill="#edf5fb" opacity="1">6. AG corrigido</text>
+<rect x="145" y="2101" width="340" height="52" rx="26.0" fill="#1d2b3a" stroke="#314557" stroke-width="1.5"/>
+<text x="315.0" y="2134.92" text-anchor="middle" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="22" font-weight="850" fill="#edf5fb" opacity="1">7. Δ/Δ</text>
+<rect x="665" y="2101" width="340" height="52" rx="26.0" fill="#1d2b3a" stroke="#314557" stroke-width="1.5"/>
+<text x="835.0" y="2134.92" text-anchor="middle" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="22" font-weight="850" fill="#edf5fb" opacity="1">8. osm efetiva</text>
+<rect x="145" y="2183" width="340" height="52" rx="26.0" fill="#1d2b3a" stroke="#314557" stroke-width="1.5"/>
+<text x="315.0" y="2216.92" text-anchor="middle" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="22" font-weight="850" fill="#edf5fb" opacity="1">9. tendência temporal</text>
+<rect x="665" y="2183" width="340" height="52" rx="26.0" fill="#1d2b3a" stroke="#314557" stroke-width="1.5"/>
+<text x="835.0" y="2216.92" text-anchor="middle" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="22" font-weight="850" fill="#edf5fb" opacity="1">10. paciente</text>
+<rect x="245" y="2255" width="830" height="70" rx="35.0" fill="#46d7b4" stroke="#314557" stroke-width="1.5"/>
+<text x="660.0" y="2300.08" text-anchor="middle" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="28" font-weight="850" fill="#101820" opacity="1">Gasometria isolada é fotografia; série temporal é filme.</text>
+</svg>

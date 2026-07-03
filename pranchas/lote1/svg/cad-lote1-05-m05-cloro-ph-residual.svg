@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1320 2868" role="img" aria-labelledby="title desc">
+<title id="title">Cloro e pH residual</title>
+<desc id="desc">Quando a cetose sai e o cloro fica segurando o bicarbonato.</desc>
+<defs>
+<marker id="arrow-37c6e0" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth"><path d="M2,2 L10,6 L2,10 Z" fill="#37c6e0"/></marker><marker id="arrow-46d7b4" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth"><path d="M2,2 L10,6 L2,10 Z" fill="#46d7b4"/></marker><marker id="arrow-55d88f" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth"><path d="M2,2 L10,6 L2,10 Z" fill="#55d88f"/></marker><marker id="arrow-f2b441" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth"><path d="M2,2 L10,6 L2,10 Z" fill="#f2b441"/></marker><marker id="arrow-ef8f4c" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth"><path d="M2,2 L10,6 L2,10 Z" fill="#ef8f4c"/></marker><marker id="arrow-ff6464" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth"><path d="M2,2 L10,6 L2,10 Z" fill="#ff6464"/></marker><marker id="arrow-b18cf0" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth"><path d="M2,2 L10,6 L2,10 Z" fill="#b18cf0"/></marker>
+<pattern id="grid" width="42" height="42" patternUnits="userSpaceOnUse">
+  <path d="M42 0H0V42" fill="none" stroke="#314557" stroke-width="1" opacity=".34"/>
+</pattern>
+<linearGradient id="warm" x1="0" x2="1">
+  <stop offset="0" stop-color="#ef8f4c"/>
+  <stop offset="1" stop-color="#ff6464"/>
+</linearGradient>
+<linearGradient id="cool" x1="0" x2="1">
+  <stop offset="0" stop-color="#37c6e0"/>
+  <stop offset="1" stop-color="#46d7b4"/>
+</linearGradient>
+</defs>
+<rect width="1320" height="2868" fill="#101820"/>
+<circle cx="1160" cy="40" r="310" fill="#37c6e0" opacity=".08"/>
+<circle cx="120" cy="2770" r="380" fill="#ef8f4c" opacity=".06"/>
+<rect x="48" y="46" width="1224" height="2776" rx="42" fill="none" stroke="#314557" stroke-width="2"/>
+<text x="88" y="126" font-family="JetBrains Mono, SFMono-Regular, Menlo, monospace" font-size="24" font-weight="900" fill="#37c6e0" letter-spacing="5">CAD 360 · M05</text>
+<text x="88" y="204" font-family="Avenir Next, Inter, Arial, sans-serif" font-size="58" font-weight="900" fill="#ffffff">Cloro e pH residual</text>
+<text x="90" y="258" font-family="Avenir Next, Inter, Arial, sans-serif" font-size="28" font-weight="500" fill="#aebdcc">Quando a cetose sai e o cloro fica segurando o bicarbonato.</text>
+<line x1="88" y1="306" x2="1232" y2="306" stroke="#314557" stroke-width="2"/>
+<rect x="88" y="370" width="1144" height="760" rx="26" fill="#172330" stroke="#314557" stroke-width="2" opacity="1"/>
+<rect x="116" y="396" width="58" height="58" rx="16" fill="#1d2b3a" stroke="#ef8f4c" stroke-width="2" opacity="1"/>
+<text x="145" y="436" text-anchor="middle" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="24" font-weight="900" fill="#ef8f4c" opacity="1">1</text>
+<text x="192" y="436" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="28" font-weight="850" fill="#ffffff" opacity="1">A assinatura da cauda hiperclorêmica</text>
+<rect x="140" y="505" width="490" height="300" rx="18" fill="#0d141b" stroke="#314557" stroke-width="2" opacity="1"/>
+<rect x="164" y="529" width="442" height="242" fill="url(#grid)" opacity=".55"/>
+<path d="M182.0,559.7 L287.0,609.0 L392.0,658.3 L497.0,695.3 L602.0,720.0" fill="none" stroke="#55d88f" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="182" cy="559.6666666666667" r="8" fill="#55d88f" stroke="#101820" stroke-width="3"/>
+<circle cx="287.0" cy="609.0" r="8" fill="#55d88f" stroke="#101820" stroke-width="3"/>
+<circle cx="392.0" cy="658.3333333333334" r="8" fill="#55d88f" stroke="#101820" stroke-width="3"/>
+<circle cx="497.0" cy="695.3333333333334" r="8" fill="#55d88f" stroke="#101820" stroke-width="3"/>
+<circle cx="602" cy="720.0" r="8" fill="#55d88f" stroke="#101820" stroke-width="3"/>
+<text x="168" y="539" text-anchor="start" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="22" font-weight="900" fill="#55d88f" opacity="1">AG corrigido ↓</text>
+<rect x="690" y="505" width="490" height="300" rx="18" fill="#0d141b" stroke="#314557" stroke-width="2" opacity="1"/>
+<rect x="714" y="529" width="442" height="242" fill="url(#grid)" opacity=".55"/>
+<path d="M732.0,715.4 L837.0,673.8 L942.0,632.1 L1047.0,590.5 L1152.0,562.8" fill="none" stroke="#ef8f4c" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="732" cy="715.375" r="8" fill="#ef8f4c" stroke="#101820" stroke-width="3"/>
+<circle cx="837.0" cy="673.75" r="8" fill="#ef8f4c" stroke="#101820" stroke-width="3"/>
+<circle cx="942.0" cy="632.125" r="8" fill="#ef8f4c" stroke="#101820" stroke-width="3"/>
+<circle cx="1047.0" cy="590.5" r="8" fill="#ef8f4c" stroke="#101820" stroke-width="3"/>
+<circle cx="1152" cy="562.75" r="8" fill="#ef8f4c" stroke="#101820" stroke-width="3"/>
+<text x="718" y="539" text-anchor="start" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="22" font-weight="900" fill="#ef8f4c" opacity="1">Cloro ↑</text>
+<rect x="140" y="835" width="490" height="240" rx="18" fill="#0d141b" stroke="#314557" stroke-width="2" opacity="1"/>
+<rect x="164" y="859" width="442" height="182" fill="url(#grid)" opacity=".55"/>
+<path d="M182.0,980.7 L287.0,948.3 L392.0,920.5 L497.0,911.3 L602.0,906.7" fill="none" stroke="#37c6e0" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="182" cy="980.7142857142856" r="8" fill="#37c6e0" stroke="#101820" stroke-width="3"/>
+<circle cx="287.0" cy="948.3142857142859" r="8" fill="#37c6e0" stroke="#101820" stroke-width="3"/>
+<circle cx="392.0" cy="920.5428571428571" r="8" fill="#37c6e0" stroke="#101820" stroke-width="3"/>
+<circle cx="497.0" cy="911.2857142857144" r="8" fill="#37c6e0" stroke="#101820" stroke-width="3"/>
+<circle cx="602" cy="906.6571428571432" r="8" fill="#37c6e0" stroke="#101820" stroke-width="3"/>
+<text x="168" y="869" text-anchor="start" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="22" font-weight="900" fill="#37c6e0" opacity="1">pH melhora pouco</text>
+<rect x="690" y="835" width="490" height="240" rx="18" fill="#0d141b" stroke="#314557" stroke-width="2" opacity="1"/>
+<rect x="714" y="859" width="442" height="182" fill="url(#grid)" opacity=".55"/>
+<path d="M732.0,902.8 L837.0,940.6 L942.0,961.1 L1047.0,978.4 L1152.0,995.7" fill="none" stroke="#ff6464" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="732" cy="902.8" r="8" fill="#ff6464" stroke="#101820" stroke-width="3"/>
+<circle cx="837.0" cy="940.6" r="8" fill="#ff6464" stroke="#101820" stroke-width="3"/>
+<circle cx="942.0" cy="961.12" r="8" fill="#ff6464" stroke="#101820" stroke-width="3"/>
+<circle cx="1047.0" cy="978.4" r="8" fill="#ff6464" stroke="#101820" stroke-width="3"/>
+<circle cx="1152" cy="995.68" r="8" fill="#ff6464" stroke="#101820" stroke-width="3"/>
+<text x="718" y="869" text-anchor="start" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="22" font-weight="900" fill="#ff6464" opacity="1">Δ/Δ cai &lt;1</text>
+<rect x="88" y="1210" width="540" height="660" rx="26" fill="#172330" stroke="#314557" stroke-width="2" opacity="1"/>
+<rect x="116" y="1236" width="58" height="58" rx="16" fill="#1d2b3a" stroke="#ff6464" stroke-width="2" opacity="1"/>
+<text x="145" y="1276" text-anchor="middle" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="24" font-weight="900" fill="#ff6464" opacity="1">2</text>
+<text x="192" y="1276" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="28" font-weight="850" fill="#ffffff" opacity="1">O erro de conduta</text>
+<text x="145" y="1340" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="30" font-weight="700" fill="#edf5fb" opacity="1">Ler pH baixo residual como 'cetose</text>
+<text x="145" y="1378.4" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="30" font-weight="700" fill="#edf5fb" opacity="1">não tratada' e subir insulina</text>
+<text x="145" y="1416.8000000000002" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="30" font-weight="700" fill="#edf5fb" opacity="1">fabrica hipoglicemia e</text>
+<text x="145" y="1455.2000000000003" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="30" font-weight="700" fill="#edf5fb" opacity="1">hipocalemia.</text>
+<rect x="145" y="1585" width="400" height="66" rx="33.0" fill="#ff6464" stroke="#314557" stroke-width="1.5"/>
+<text x="345.0" y="1627.0" text-anchor="middle" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="25" font-weight="850" fill="#101820" opacity="1">cloro não obedece insulina</text>
+<text x="145" y="1715" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="26" font-weight="500" fill="#aebdcc" opacity="1">Se AG/cetona converge e Δ/Δ &lt; 1,</text>
+<text x="145" y="1748.28" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="26" font-weight="500" fill="#aebdcc" opacity="1">o alvo muda: pare de perseguir</text>
+<text x="145" y="1781.56" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="26" font-weight="500" fill="#aebdcc" opacity="1">pH com insulina.</text>
+<rect x="692" y="1210" width="540" height="660" rx="26" fill="#172330" stroke="#314557" stroke-width="2" opacity="1"/>
+<rect x="720" y="1236" width="58" height="58" rx="16" fill="#1d2b3a" stroke="#55d88f" stroke-width="2" opacity="1"/>
+<text x="749" y="1276" text-anchor="middle" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="24" font-weight="900" fill="#55d88f" opacity="1">3</text>
+<text x="796" y="1276" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="28" font-weight="850" fill="#ffffff" opacity="1">O ajuste certo</text>
+<rect x="755" y="1340" width="360" height="60" rx="30.0" fill="#46d7b4" stroke="#314557" stroke-width="1.5"/>
+<text x="935.0" y="1378.28" text-anchor="middle" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="23" font-weight="850" fill="#101820" opacity="1">balanceado quando possível</text>
+<rect x="755" y="1436" width="360" height="60" rx="30.0" fill="#f2b441" stroke="#314557" stroke-width="1.5"/>
+<text x="935.0" y="1474.28" text-anchor="middle" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="23" font-weight="850" fill="#101820" opacity="1">K antecipatório</text>
+<rect x="755" y="1532" width="360" height="60" rx="30.0" fill="#b18cf0" stroke="#314557" stroke-width="1.5"/>
+<text x="935.0" y="1570.28" text-anchor="middle" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="23" font-weight="850" fill="#101820" opacity="1">titular por gap/cetona</text>
+<rect x="755" y="1628" width="360" height="60" rx="30.0" fill="#55d88f" stroke="#314557" stroke-width="1.5"/>
+<text x="935.0" y="1666.28" text-anchor="middle" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="23" font-weight="850" fill="#101820" opacity="1">aceitar piso hiperclorêmico</text>
+<rect x="88" y="1960" width="1144" height="390" rx="26" fill="#172330" stroke="#314557" stroke-width="2" opacity="1"/>
+<rect x="116" y="1986" width="58" height="58" rx="16" fill="#1d2b3a" stroke="#b18cf0" stroke-width="2" opacity="1"/>
+<text x="145" y="2026" text-anchor="middle" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="24" font-weight="900" fill="#b18cf0" opacity="1">4</text>
+<text x="192" y="2026" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="28" font-weight="850" fill="#ffffff" opacity="1">Interpretação operacional</text>
+<text x="145" y="2090" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="31" font-weight="700" fill="#edf5fb" opacity="1">Δ/Δ &lt; 1 não diz 'CAD pura'. Diz o oposto: há componente</text>
+<text x="145" y="2129.68" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="31" font-weight="700" fill="#edf5fb" opacity="1">normal-gap/hiperclorêmico somado. Na CAD em resolução, isso costuma ser a</text>
+<text x="145" y="2169.3599999999997" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="31" font-weight="700" fill="#edf5fb" opacity="1">ressuscitação aparecendo no laboratório.</text>
+<rect x="235" y="2300" width="850" height="72" rx="36.0" fill="#1d2b3a" stroke="#314557" stroke-width="1.5"/>
+<text x="660.0" y="2345.72" text-anchor="middle" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="27" font-weight="850" fill="#ffffff" opacity="1">Gap manda na cetose; cloro explica o pH que ficou para trás.</text>
+</svg>

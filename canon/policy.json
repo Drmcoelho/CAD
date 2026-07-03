@@ -1,0 +1,64 @@
+{
+  "version": "CAD360-ApA-2026-07-01",
+  "source": "Umpierrez et al. Hyperglycemic Crises in Adults With Diabetes: A Consensus Report. Diabetes Care 2024;47(8):1257-1275.",
+  "note": "Fonte de verdade única do projeto CAD 360. Todo módulo, calculadora, prancha e o tratado renderizam a partir daqui. Divergência = build quebrado (ver scripts/check_consistency.js).",
+  "diagnosis": {
+    "glucoseMgDl": 200,
+    "betaHydroxybutyrateMmolL": 3.0,
+    "ketonuriaAtLeast": "2+",
+    "ph": 7.30,
+    "bicarbonateMmolL": 18,
+    "note": "Anion gap removido dos criterios formais em 2024."
+  },
+  "potassium": {
+    "replaceBelowMmolL": 5.0,
+    "targetLowMmolL": 4.0,
+    "targetHighMmolL": 5.0,
+    "holdInsulinBelowMmolL": 3.5,
+    "restartInsulinAboveMmolL": 3.5,
+    "note": "K < 3,5 adia insulina e repoe 10 mmol/h; reinicio > 3,5 (nao 3,3). O antigo 5,5 (JBDS) nao e doutrina deste projeto."
+  },
+  "bicarbonate": {
+    "isRoutine": false,
+    "trigger": "pH (independe do nivel de HCO3)",
+    "considerBelowPh": 7.0,
+    "noBenefitAbovePh": 6.9,
+    "note": "Gatilho e o pH, nao o HCO3. Consenso 2024 escreve pH < 7,0; fronteira de evidencia (sem beneficio acima) e pH <= 6,9 - abaixo disso nem dado nem consenso."
+  },
+  "phosphate": {
+    "considerBelowMmolL": 1.0,
+    "condition": "sintomatico"
+  },
+  "insulin": {
+    "initialUnitsKgHour": 0.1,
+    "reducedUnitsKgHour": 0.05,
+    "reduceGlucoseBelowMgDl": 250
+  },
+  "resolution": {
+    "betaHydroxybutyrateBelowMmolL": 0.6,
+    "phAtLeast": 7.3,
+    "bicarbonateAtLeastMmolL": 18,
+    "glucoseAdjunctMgDl": 200
+  },
+  "sodiumCorrection": {
+    "factorDefault": 1.6,
+    "factorSevereHyperglycemia": 2.4,
+    "severeHyperglycemiaAboveMgDl": 400
+  },
+  "deltaRatio": {
+    "formula": "(AGc - 12) / (24 - HCO3)",
+    "boundaries": [1, 2],
+    "bands": {
+      "<1": "AGMA + cauda hipercloremica/NAGMA (nao chamar de pura)",
+      "1-2": "AGMA de gap alto mais limpa",
+      ">2": "alcalose metabolica associada ou HCO3 previo alto"
+    }
+  },
+  "osmolality": {
+    "effectiveFormula": "2 * Na_medido + glicose/18",
+    "totalFormula": "efetiva + BUN/2.8 (ou ureia/6)",
+    "hhsEffectiveThreshold": 320,
+    "hhsEffectiveThreshold2024Comment": 300,
+    "rule": "A osm efetiva usa Na MEDIDO. Nao usar Na corrigido (dupla-conta a glicose). A ureia entra apenas na osm total, para osm-gap."
+  }
+}

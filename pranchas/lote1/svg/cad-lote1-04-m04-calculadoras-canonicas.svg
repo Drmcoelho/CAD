@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1320 2868" role="img" aria-labelledby="title desc">
+<title id="title">Calculadoras canônicas</title>
+<desc id="desc">Uma fonte de verdade para AG, Δ/Δ, Winter, Na corrigido e osm efetiva.</desc>
+<defs>
+<marker id="arrow-37c6e0" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth"><path d="M2,2 L10,6 L2,10 Z" fill="#37c6e0"/></marker><marker id="arrow-46d7b4" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth"><path d="M2,2 L10,6 L2,10 Z" fill="#46d7b4"/></marker><marker id="arrow-55d88f" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth"><path d="M2,2 L10,6 L2,10 Z" fill="#55d88f"/></marker><marker id="arrow-f2b441" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth"><path d="M2,2 L10,6 L2,10 Z" fill="#f2b441"/></marker><marker id="arrow-ef8f4c" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth"><path d="M2,2 L10,6 L2,10 Z" fill="#ef8f4c"/></marker><marker id="arrow-ff6464" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth"><path d="M2,2 L10,6 L2,10 Z" fill="#ff6464"/></marker><marker id="arrow-b18cf0" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth"><path d="M2,2 L10,6 L2,10 Z" fill="#b18cf0"/></marker>
+<pattern id="grid" width="42" height="42" patternUnits="userSpaceOnUse">
+  <path d="M42 0H0V42" fill="none" stroke="#314557" stroke-width="1" opacity=".34"/>
+</pattern>
+<linearGradient id="warm" x1="0" x2="1">
+  <stop offset="0" stop-color="#ef8f4c"/>
+  <stop offset="1" stop-color="#ff6464"/>
+</linearGradient>
+<linearGradient id="cool" x1="0" x2="1">
+  <stop offset="0" stop-color="#37c6e0"/>
+  <stop offset="1" stop-color="#46d7b4"/>
+</linearGradient>
+</defs>
+<rect width="1320" height="2868" fill="#101820"/>
+<circle cx="1160" cy="40" r="310" fill="#37c6e0" opacity=".08"/>
+<circle cx="120" cy="2770" r="380" fill="#ef8f4c" opacity=".06"/>
+<rect x="48" y="46" width="1224" height="2776" rx="42" fill="none" stroke="#314557" stroke-width="2"/>
+<text x="88" y="126" font-family="JetBrains Mono, SFMono-Regular, Menlo, monospace" font-size="24" font-weight="900" fill="#37c6e0" letter-spacing="5">CAD 360 · M04</text>
+<text x="88" y="204" font-family="Avenir Next, Inter, Arial, sans-serif" font-size="58" font-weight="900" fill="#ffffff">Calculadoras canônicas</text>
+<text x="90" y="258" font-family="Avenir Next, Inter, Arial, sans-serif" font-size="28" font-weight="500" fill="#aebdcc">Uma fonte de verdade para AG, Δ/Δ, Winter, Na corrigido e osm efetiva.</text>
+<line x1="88" y1="306" x2="1232" y2="306" stroke="#314557" stroke-width="2"/>
+<rect x="88" y="370" width="1144" height="620" rx="26" fill="#172330" stroke="#314557" stroke-width="2" opacity="1"/>
+<rect x="116" y="396" width="58" height="58" rx="16" fill="#1d2b3a" stroke="#37c6e0" stroke-width="2" opacity="1"/>
+<text x="145" y="436" text-anchor="middle" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="24" font-weight="900" fill="#37c6e0" opacity="1">1</text>
+<text x="192" y="436" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="28" font-weight="850" fill="#ffffff" opacity="1">Seis calculadoras do core</text>
+<text x="140" y="492" text-anchor="start" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="21" font-weight="900" fill="#37c6e0" opacity="1">AG</text>
+<text x="365" y="492" text-anchor="start" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="22" font-weight="850" fill="#ffffff" opacity="1">Na - (Cl + HCO3)</text>
+<text x="845" y="492" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="19" font-weight="500" fill="#aebdcc" opacity="1">ânions não medidos;</text>
+<text x="845" y="516.32" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="19" font-weight="500" fill="#aebdcc" opacity="1">normal operacional 8-12</text>
+<text x="140" y="568" text-anchor="start" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="21" font-weight="900" fill="#37c6e0" opacity="1">AGc</text>
+<text x="365" y="568" text-anchor="start" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="22" font-weight="850" fill="#ffffff" opacity="1">AG + 2,5 x (4 - albumina)</text>
+<text x="845" y="568" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="19" font-weight="500" fill="#aebdcc" opacity="1">hipoalbuminemia esconde</text>
+<text x="845" y="592.32" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="19" font-weight="500" fill="#aebdcc" opacity="1">gap</text>
+<text x="140" y="644" text-anchor="start" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="21" font-weight="900" fill="#37c6e0" opacity="1">Δ/Δ</text>
+<text x="365" y="644" text-anchor="start" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="22" font-weight="850" fill="#ffffff" opacity="1">(AGc - 12) / (24 - HCO3)</text>
+<text x="845" y="644" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="19" font-weight="500" fill="#aebdcc" opacity="1">detecta mistura</text>
+<text x="845" y="668.32" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="19" font-weight="500" fill="#aebdcc" opacity="1">hiperclorêmica ou</text>
+<text x="845" y="692.6400000000001" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="19" font-weight="500" fill="#aebdcc" opacity="1">alcalose somada</text>
+<text x="140" y="720" text-anchor="start" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="21" font-weight="900" fill="#37c6e0" opacity="1">Winter</text>
+<text x="365" y="720" text-anchor="start" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="22" font-weight="850" fill="#ffffff" opacity="1">1,5 x HCO3 + 8 +/- 2</text>
+<text x="845" y="720" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="19" font-weight="500" fill="#aebdcc" opacity="1">testa compensação</text>
+<text x="845" y="744.32" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="19" font-weight="500" fill="#aebdcc" opacity="1">respiratória</text>
+<text x="140" y="796" text-anchor="start" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="21" font-weight="900" fill="#37c6e0" opacity="1">Na corr</text>
+<text x="365" y="796" text-anchor="start" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="22" font-weight="850" fill="#ffffff" opacity="1">Na + fator x ((gli-100)/100)</text>
+<text x="845" y="796" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="19" font-weight="500" fill="#aebdcc" opacity="1">fator 1,6; usar 2,4 se</text>
+<text x="845" y="820.32" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="19" font-weight="500" fill="#aebdcc" opacity="1">glicose &gt;400</text>
+<text x="140" y="872" text-anchor="start" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="21" font-weight="900" fill="#37c6e0" opacity="1">Osm efetiva</text>
+<text x="365" y="872" text-anchor="start" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="22" font-weight="850" fill="#ffffff" opacity="1">2 x Na + glicose/18</text>
+<text x="845" y="872" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="19" font-weight="500" fill="#aebdcc" opacity="1">default para tonicidade</text>
+<text x="845" y="896.32" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="19" font-weight="500" fill="#aebdcc" opacity="1">em CAD/HHS</text>
+<rect x="88" y="1040" width="1144" height="760" rx="26" fill="#172330" stroke="#314557" stroke-width="2" opacity="1"/>
+<rect x="116" y="1066" width="58" height="58" rx="16" fill="#1d2b3a" stroke="#ff6464" stroke-width="2" opacity="1"/>
+<text x="145" y="1106" text-anchor="middle" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="24" font-weight="900" fill="#ff6464" opacity="1">2</text>
+<text x="192" y="1106" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="28" font-weight="850" fill="#ffffff" opacity="1">Δ/Δ corrigido: sem rótulo invertido</text>
+<rect x="145" y="1168" width="980" height="148" rx="24" fill="#0d141b" stroke="#ef8f4c" stroke-width="2" opacity="1"/>
+<rect x="175" y="1200" width="150" height="68" rx="34.0" fill="#ef8f4c" stroke="#314557" stroke-width="1.5"/>
+<text x="250.0" y="1246.24" text-anchor="middle" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="34" font-weight="850" fill="#101820" opacity="1">&lt; 1</text>
+<text x="365" y="1223" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="27" font-weight="900" fill="#ffffff" opacity="1">AGMA + cauda hipercloremica/NAGMA</text>
+<text x="365" y="1262" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="22" font-weight="520" fill="#aebdcc" opacity="1">O bicarbonato caiu mais do que o gap subiu; parte da</text>
+<text x="365" y="1290.16" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="22" font-weight="520" fill="#aebdcc" opacity="1">acidose nao e cetona e nao responde a insulina.</text>
+<rect x="145" y="1346" width="980" height="148" rx="24" fill="#0d141b" stroke="#55d88f" stroke-width="2" opacity="1"/>
+<rect x="175" y="1378" width="150" height="68" rx="34.0" fill="#55d88f" stroke="#314557" stroke-width="1.5"/>
+<text x="250.0" y="1424.24" text-anchor="middle" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="34" font-weight="850" fill="#101820" opacity="1">1-2</text>
+<text x="365" y="1401" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="27" font-weight="900" fill="#ffffff" opacity="1">AGMA de gap alto mais limpa</text>
+<text x="365" y="1440" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="22" font-weight="520" fill="#aebdcc" opacity="1">Padrao esperado da cetoacidose sem componente</text>
+<text x="365" y="1468.16" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="22" font-weight="520" fill="#aebdcc" opacity="1">metabolico importante somado.</text>
+<rect x="145" y="1524" width="980" height="148" rx="24" fill="#0d141b" stroke="#b18cf0" stroke-width="2" opacity="1"/>
+<rect x="175" y="1556" width="150" height="68" rx="34.0" fill="#b18cf0" stroke="#314557" stroke-width="1.5"/>
+<text x="250.0" y="1602.24" text-anchor="middle" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="34" font-weight="850" fill="#101820" opacity="1">&gt; 2</text>
+<text x="365" y="1579" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="27" font-weight="900" fill="#ffffff" opacity="1">alcalose metabolica associada ou HCO3 previo alto</text>
+<text x="365" y="1618" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="22" font-weight="520" fill="#aebdcc" opacity="1">O gap subiu mais do que o bicarbonato caiu; procure</text>
+<text x="365" y="1646.16" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="22" font-weight="520" fill="#aebdcc" opacity="1">vomitos, diuretico, contracao, bicarbonato previo.</text>
+<rect x="175" y="1705" width="950" height="62" rx="31.0" fill="#1d2b3a" stroke="#314557" stroke-width="1.5"/>
+<text x="650.0" y="1744.28" text-anchor="middle" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="23" font-weight="850" fill="#ffffff" opacity="1">Canon: &lt;1 = hiperclorêmica somada · 1-2 = AGMA limpa · &gt;2 = alcalose</text>
+<rect x="88" y="1895" width="548" height="550" rx="26" fill="#172330" stroke="#314557" stroke-width="2" opacity="1"/>
+<rect x="116" y="1921" width="58" height="58" rx="16" fill="#1d2b3a" stroke="#55d88f" stroke-width="2" opacity="1"/>
+<text x="145" y="1961" text-anchor="middle" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="24" font-weight="900" fill="#55d88f" opacity="1">3</text>
+<text x="192" y="1961" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="28" font-weight="850" fill="#ffffff" opacity="1">Exemplo validado</text>
+<text x="145" y="2015" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="24" font-weight="700" fill="#aebdcc" opacity="1">Na/Cl/HCO3</text>
+<text x="570" y="2015" text-anchor="end" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="28" font-weight="900" fill="#ffffff" opacity="1">135/99/11</text>
+<text x="145" y="2073" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="24" font-weight="700" fill="#aebdcc" opacity="1">AG</text>
+<text x="570" y="2073" text-anchor="end" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="28" font-weight="900" fill="#ffffff" opacity="1">25</text>
+<text x="145" y="2131" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="24" font-weight="700" fill="#aebdcc" opacity="1">albumina</text>
+<text x="570" y="2131" text-anchor="end" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="28" font-weight="900" fill="#ffffff" opacity="1">2.8</text>
+<text x="145" y="2189" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="24" font-weight="700" fill="#aebdcc" opacity="1">AGc</text>
+<text x="570" y="2189" text-anchor="end" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="28" font-weight="900" fill="#ffffff" opacity="1">28</text>
+<text x="145" y="2247" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="24" font-weight="700" fill="#aebdcc" opacity="1">Δ/Δ</text>
+<text x="570" y="2247" text-anchor="end" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="28" font-weight="900" fill="#ffffff" opacity="1">1.23</text>
+<text x="145" y="2305" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="24" font-weight="700" fill="#aebdcc" opacity="1">Winter</text>
+<text x="570" y="2305" text-anchor="end" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="28" font-weight="900" fill="#ffffff" opacity="1">24,5 +/- 2</text>
+<text x="145" y="2363" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="24" font-weight="700" fill="#aebdcc" opacity="1">Osm efetiva</text>
+<text x="570" y="2363" text-anchor="end" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="28" font-weight="900" fill="#ffffff" opacity="1">287.8</text>
+<rect x="145" y="2460" width="420" height="56" rx="28.0" fill="#55d88f" stroke="#314557" stroke-width="1.5"/>
+<text x="355.0" y="2496.28" text-anchor="middle" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="23" font-weight="850" fill="#101820" opacity="1">Δ/Δ 1,23 = AGMA limpa</text>
+<rect x="684" y="1895" width="548" height="550" rx="26" fill="#172330" stroke="#314557" stroke-width="2" opacity="1"/>
+<rect x="712" y="1921" width="58" height="58" rx="16" fill="#1d2b3a" stroke="#f2b441" stroke-width="2" opacity="1"/>
+<text x="741" y="1961" text-anchor="middle" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="24" font-weight="900" fill="#f2b441" opacity="1">4</text>
+<text x="788" y="1961" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="28" font-weight="850" fill="#ffffff" opacity="1">Osm: não misturar usos</text>
+<rect x="735" y="2015" width="440" height="190" rx="22" fill="#0d141b" stroke="#55d88f" stroke-width="2" opacity="1"/>
+<text x="763" y="2061" text-anchor="start" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="22" font-weight="850" fill="#55d88f" opacity="1">tonicidade</text>
+<text x="763" y="2113" text-anchor="start" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="29" font-weight="850" fill="#ffffff" opacity="1">2Na + gli/18</text>
+<text x="763" y="2155" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="20" font-weight="520" fill="#aebdcc" opacity="1">uso default em CAD/HHS.</text>
+<rect x="735" y="2235" width="440" height="190" rx="22" fill="#0d141b" stroke="#f2b441" stroke-width="2" opacity="1"/>
+<text x="763" y="2281" text-anchor="start" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="22" font-weight="850" fill="#f2b441" opacity="1">osm-gap</text>
+<text x="763" y="2333" text-anchor="start" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="29" font-weight="850" fill="#ffffff" opacity="1">+ BUN/2,8 ou ureia/6</text>
+<text x="763" y="2375" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="20" font-weight="520" fill="#aebdcc" opacity="1">so quando houver osm</text>
+<text x="763" y="2400.6" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="20" font-weight="520" fill="#aebdcc" opacity="1">medida.</text>
+<rect x="175" y="2550" width="970" height="135" rx="40" fill="#ff6464" stroke="#ff6464" stroke-width="2" opacity="1"/>
+<text x="235" y="2612" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="27" font-weight="900" fill="#101820" opacity="1">Número certo com rótulo errado ainda ensina erro. Aqui a</text>
+<text x="235" y="2646.56" text-anchor="start" font-family="Inter, Avenir Next, Arial, sans-serif" font-size="27" font-weight="900" fill="#101820" opacity="1">aritmética e o rótulo são versionados.</text>
+</svg>
