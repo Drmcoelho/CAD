@@ -187,9 +187,34 @@ td.num,th.num{text-align:right;font-family:var(--mono);font-size:.84rem}
 .kbd{font-family:var(--mono);font-size:.82em;border:1px solid var(--line2);border-bottom-width:2px;border-radius:5px;padding:1px 5px;background:var(--bg3)}
 .footer{margin-top:50px;padding-top:18px;border-top:1px solid var(--line);color:var(--tx3);font-size:.8rem}
 .anchor{position:relative;top:-58px;visibility:hidden}
+
+/* Marco — Tutor de classificação (reusa .box.key; ttut- evita colisão com #g_/#i_/#k_ e com #t_ de perfis/) */
+.ttut-cap{color:var(--tx3);font-size:.85rem;margin:0 0 12px}
+.ttut-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(105px,1fr));gap:8px}
+.ttut-grid label{display:flex;flex-direction:column;font-size:.7rem;color:var(--tx3);gap:3px}
+.ttut-grid input{background:var(--bg);border:1px solid var(--line2);border-radius:7px;color:var(--tx);padding:6px 8px;font-size:.88rem;font-family:var(--mono);width:100%}
+.ttut-secondary{margin-top:12px;padding-top:10px;border-top:1px dashed var(--line2)}
+.ttut-secondary>label{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:.78rem;color:var(--tx3)}
+.ttut-secondary input{background:var(--bg);border:1px solid var(--line2);border-radius:7px;color:var(--tx);padding:5px 8px;font-size:.82rem;font-family:var(--mono);width:110px}
+.ttut-sec-note{color:var(--tx3);font-size:.7rem;font-weight:400}
+.ttut-caveat{color:var(--warn);font-size:.78rem;margin:8px 0 0;line-height:1.5}
+.ttut-caveat b{color:var(--warn)}
+.ttut-flags{display:flex;flex-wrap:wrap;gap:16px;margin-top:10px;font-size:.82rem;color:var(--tx3)}
+.ttut-flags label{display:flex;align-items:center;gap:6px}
+.ttut-out{margin-top:14px}
+a.ttut-match{background:var(--bg3);border:1px solid var(--line2);border-radius:10px;padding:9px 13px;margin-top:8px;display:block;text-decoration:none;color:var(--tx);border-bottom-width:1px}
+a.ttut-match:hover{border-color:var(--accent)}
+.ttut-match .nm{font-weight:700;color:var(--accent);font-size:.9rem}
+.ttut-match .rs{color:var(--tx3);font-size:.8rem;margin-top:2px}
+.ttut-computed{font-family:var(--mono);font-size:.76rem;color:var(--tx3);margin-top:10px;border-top:1px solid var(--line);padding-top:8px}
+.ttut-empty,.ttut-missing{font-size:.82rem;margin:4px 0}
+.ttut-empty{color:var(--tx3)}.ttut-missing{color:var(--warn)}
 </style>
 </head>
 <body>
+<script type="application/json" id="profile-names-data">
+[{"id":"classica","nome":"CAD clássica"},{"id":"euglicemica","nome":"CAD euglicêmica"},{"id":"pre-cad","nome":"Pré-CAD / cetose sem acidose"},{"id":"parcial","nome":"CAD parcialmente tratada"},{"id":"cad-hhs","nome":"CAD + HHS (sobreposição)"},{"id":"hipercloremica","nome":"CAD hiperclorêmica (tardia)"},{"id":"sepse-lactato","nome":"CAD + sepse / lactato (acidose mista)"},{"id":"alcoolica-jejum","nome":"Cetose alcoólica / de jejum (não-diabética)"},{"id":"dialitica","nome":"CAD em DRC dialítica (hemodiálise)"}]
+</script>
 
 <div class="topbar">
   <div class="brand">CAD · Tratado <small>bolso / plantão / profundo</small></div>
@@ -219,6 +244,7 @@ td.num,th.num{text-align:right;font-family:var(--mono);font-size:.84rem}
 <details class="toc" open>
   <summary>Índice</summary>
   <ol>
+    <li><a href="#marco">Marco — classifique o perfil antes de ler</a></li>
     <li><a href="#bolso">0 · Bolso — cartões de 30s</a></li>
     <li><a href="#fisio">1 · Fisiopatologia completa</a></li>
     <li><a href="#dx">2 · Diagnóstico & critérios 2024</a></li>
@@ -234,6 +260,38 @@ td.num,th.num{text-align:right;font-family:var(--mono);font-size:.84rem}
     <li><a href="#ref">12 · Referências & metas</a></li>
   </ol>
 </details>
+
+<!-- ============================ MARCO — TUTOR ============================ -->
+<span id="marco" class="anchor"></span>
+<section class="sec">
+<h2>Marco — classifique o perfil antes de ler</h2>
+<p class="sub" style="color:var(--tx2)">Digite os labs do caso; o classificador (o mesmo <code style="font-family:var(--mono);font-size:.82em">core/cad_core.js</code> do resto do projeto — nenhuma fórmula duplicada aqui) aponta o(s) perfil(is) mais prováveis, o porquê, e o link direto para a fisiopatologia + tratamento detalhado em <a href="../perfis/">perfis/</a>. Evita ler o tratado inteiro quando o que importa é uma seção específica. Não substitui julgamento clínico.</p>
+<div class="box key">
+ <span class="bt">Tutor de classificação</span>
+ <p class="ttut-cap">Cetonúria em cruzes é o eixo cetônico primário (padrão real no Brasil); β-HB sérico é secundário/opcional.</p>
+ <div class="ttut-grid">
+  <label>Na⁺ <input type="number" id="tt_na" step="0.1" placeholder="mEq/L"></label>
+  <label>Cl⁻ <input type="number" id="tt_cl" step="0.1" placeholder="mEq/L"></label>
+  <label>HCO₃ <input type="number" id="tt_hco3" step="0.1" placeholder="mEq/L"></label>
+  <label>Glicose <input type="number" id="tt_glu" step="1" placeholder="mg/dL"></label>
+  <label>Cetonúria (cruzes) <input type="number" id="tt_cet" min="0" max="4" step="1" placeholder="1 a 4+"></label>
+  <label>pH <input type="number" id="tt_ph" step="0.01" placeholder="7,xx"></label>
+  <label>Albumina <input type="number" id="tt_alb" step="0.1" placeholder="4,0"></label>
+  <label>K⁺ <input type="number" id="tt_k" step="0.1" placeholder="opcional"></label>
+  <label>Lactato <input type="number" id="tt_lac" step="0.1" placeholder="opcional"></label>
+ </div>
+ <div class="ttut-secondary">
+  <label>β-HB sérico <span class="ttut-sec-note">(se disponível — substitui a cetonúria acima quando presente)</span> <input type="number" id="tt_bhb" step="0.1" placeholder="mmol/L, opcional"></label>
+  <p class="ttut-caveat">⚠️ Cetonúria mede <b>acetoacetato</b>, não β-HB. Durante o tratamento o β-HB se converte em acetoacetato — a cetonúria pode <b>piorar (mais cruzes)</b> enquanto o paciente melhora. Serve para <b>diagnóstico</b>, não confirma <b>resolução</b>.</p>
+ </div>
+ <div class="ttut-flags">
+  <label><input type="checkbox" id="tt_dm" checked> Diabetes conhecido</label>
+  <label><input type="checkbox" id="tt_sepsis"> Suspeita de sepse/choque</label>
+  <label><input type="checkbox" id="tt_dial"> DRC dialítica (hemodiálise)</label>
+ </div>
+ <div id="ttut_out" class="ttut-out"></div>
+</div>
+</section>
 
 <!-- ============================ 0 · BOLSO ============================ -->
 <span id="bolso" class="anchor"></span>
@@ -648,6 +706,7 @@ flowchart TD
 <tbody>
 <tr><td>SF 0,9%</td><td class="num">154</td><td class="num hi-d">154</td><td>—</td><td>carga de cloro → <b>acidose hiperclorêmica iatrogênica</b></td></tr>
 <tr><td>Ringer lactato</td><td class="num">130</td><td class="num hi-s">109</td><td>lactato 28</td><td>menos Cl + precursor de HCO₃ (fígado converte lactato→HCO₃)</td></tr>
+<tr><td>Ringer simples (s/ tampão)</td><td class="num">147</td><td class="num hi-d">156</td><td>—</td><td>sem lactato, mas carga de Cl comparável ao SF — resolve o desconforto com o tampão, não o cloro</td></tr>
 <tr><td>Plasma-Lyte</td><td class="num">140</td><td class="num hi-s">98</td><td>acetato/gluconato</td><td>o mais fisiológico; tampão sem depender do fígado</td></tr>
 </tbody>
 </table>
@@ -656,6 +715,12 @@ flowchart TD
 <span class="bt">Evidência & mecanismo</span>
 <p>Ensaios em CAD (e os grandes SMART e SALT-ED em geral) apontam <strong>cristaloide balanceado &gt; SF</strong>: resolução de CAD mais rápida, menos acidose hiperclorêmica, menor tempo de infusão de insulina. O medo reflexo de "lactato na acidose" <strong>não se aplica</strong>: o lactato exógeno do Ringer é <em>metabolizado a bicarbonato</em> se perfusão/metabolismo estão preservados — precursor de tampão, não ácido. A CAD <em>pode</em> cursar com lactato elevado (catecolaminas via glicólise β2, hipoperfusão); isso não contraindica o Ringer, mas cheque o lactato real e o contexto antes de assumir.</p>
 <p><strong>Glicemia &lt; 200–250</strong> → adicione SG 5–10% e <em>mantenha o balanceado por baixo</em>. Erro comum: trocar tudo por SG puro — que hidrata e dá água livre, mas não traz tampão e ainda pode diluir o Na rápido demais. O desenho elegante da fase "glicemia normal, gap aberto" é <strong>balanceado (volume + tampão) + dextrose (piso glicêmico) + K (por dentro)</strong>, simultâneos.</p>
+</div>
+<div class="box warn">
+<span class="bt">Dois vieses contra o Ringer lactato — só um é real</span>
+<p><strong>Medo de que o lactato "piore a acidose".</strong> Praticamente infundado — viés cultural/histórico de formação, não farmacológico. Como acima: o lactato exógeno (28 mEq/L no RL) vira bicarbonato no fígado quando a perfusão está preservada — é precursor de tampão, não ácido a mais. Esse medo é o motivo real pelo qual muita gente evita o RL na CAD por desconhecimento, apesar de ele tender a ser a escolha mais correta na maioria dos cenários.</p>
+<p><strong>Medo do K do Ringer lactato num paciente hipercalêmico.</strong> Esse é <em>plausível</em> — o RL carrega ~4 mEq/L de K, e a CAD tipicamente chega com K sérico normal-alto (mesmo com K corporal total depletado, §1.5). Ainda assim, 4 mEq/L num litro correndo em horas raramente muda a trajetória — a insulina que você vai iniciar em minutos já desloca K para dentro da célula.</p>
+<p class="miniref"><strong>Onde a pausa vira decisão real: hipercalemia extrema</strong> (K francamente elevado — por exemplo na faixa de 6,0–6,5, com risco de arritmia iminente; não há um corte numérico único de consenso para isto, é julgamento de gravidade). Aí a alternativa citada na prática é o <strong>Ringer simples</strong> (sem lactato) — mas ele <em>não resolve</em> o K (mesma carga, ~4 mEq/L) nem o cloro (comparável ao SF): resolve especificamente o desconforto com o lactato, não a hipercalemia em si. Se a hipercalemia é o problema real, trate a hipercalemia (cálcio, insulina/glicose, medidas de deslocamento) — o cristaloide escolhido é coadjuvante, não a solução. <em>Este parágrafo é inferência/padrão de prática, não um número do consenso 2024 — tratado como tal, fora do <code>core</code>.</em></p>
 </div>
 <div class="box warn">
 <span class="bt">A exceção do sódio</span>
@@ -682,6 +747,11 @@ flowchart TD
 </tbody>
 </table>
 </div>
+<div class="box warn">
+<span class="bt">A exceção da exceção — CAD severa com K baixo, quando não dá para esperar</span>
+<p>A tabela acima é a doutrina padrão: <strong>K &lt; 3,5 → segure a insulina</strong> até repor. Está certo na maioria dos casos — insulina com K baixo empurra ainda mais K para dentro da célula e pode precipitar arritmia. Mas há um padrão de prática de UTI para quadros verdadeiramente graves (choque, rebaixamento, acidose extrema) onde <strong>não dá para atrasar o início da insulina</strong> à espera do K subir: nesses casos, um manejo mais agressivo inicia a insulina já com <strong>K na faixa de 3,0–3,4</strong>, em <strong>taxa reduzida/cautelosa</strong> — não a dose plena —, <strong>em paralelo</strong>, não em sequência, com reposição agressiva de K (tipicamente dois acessos/bombas correndo ao mesmo tempo: uma de insulina, outra de dextrose a 10% + K).</p>
+<p class="miniref"><strong>Isto é padrão de prática de terapia intensiva / inferência informada — não a doutrina padrão desta ferramenta</strong> (que segue "segurar insulina abaixo de 3,5" para o caso geral, tabela acima). Exige K sérico seriado (1–2h), ECG contínuo e capacidade real de resposta rápida a uma queda adicional do K. Fora do contexto de gravidade que justifica o risco, siga a tabela.</p>
+</div>
 <div class="box key">
 <span class="bt">Mire 4–5, não o piso</span>
 <p>O alvo importa politicamente tanto quanto fisiologicamente: um K de 4–5 <strong>remove a desculpa</strong> de parar a insulina. K em 3,4 vive te empurrando para a pausa, a pausa reabre a cetose, e o dente-de-serra recomeça (§7). Reposição <strong>antecipatória</strong> — corra na frente da queda prevista pela conta da §1.5, não atrás dela. Carregue o K junto com a dextrose. <em>Cheque Mg</em>: hipomagnesemia faz o K não subir por mais que você reponha (cofator da Na/K-ATPase e da reabsorção tubular de K).</p>
@@ -690,7 +760,19 @@ flowchart TD
 <h3>5.4 · Fosfato e magnésio</h3>
 <p>Depletados pela diurese osmótica e pelos ciclos de realimentação. Reposição <strong>rotineira de fosfato não melhora desfecho</strong> e arrisca hipocalcemia — o consenso 2024 só considera repor se <strong>PO₄ &lt; 1,0 mmol/L (~3,1 mg/dL)</strong> com fraqueza muscular ou comprometimento cardíaco/respiratório. (A definição clássica de hipofosfatemia <em>grave</em> é &lt; 0,32 mmol/L ≈ 1,0 mg/dL — confronte a unidade do seu laboratório.) <strong>Mg</strong>: corrija se baixo, sobretudo se o K não sobe ou há arritmia.</p>
 
-<h3>5.5 · Bicarbonato — a seção mais curta de propósito</h3>
+<h3>5.5 · Dieta oral vs jejum — quando manter, quando impor</h3>
+<p>Não é uma variável do <code>core</code> — é decisão situacional, mas com critérios reconhecíveis:</p>
+<div class="box safe">
+<span class="bt">Quando manter dieta/via oral</span>
+<p>CAD leve a moderada, paciente <strong>alerta, sem vômitos ativos, sem íleo, hemodinamicamente estável</strong>, capaz de proteger a via aérea: manter ingesta oral (líquidos, depois dieta) é seguro e antecipa a transição IV→SC (§6). O consenso 2024 endossa manejo de CAD leve/moderada com insulina SC + hidratação oral/enteral fora de UTI em casos selecionados. Jejum "por rotina" só porque é CAD não tem base — atrasa a resolução metabólica (que depende de calorias + insulina, não só de insulina) e prolonga acesso/cateter sem necessidade.</p>
+</div>
+<div class="box danger">
+<span class="bt">Quando impor jejum</span>
+<p>Rebaixamento do nível de consciência, vômitos persistentes, íleo/distensão abdominal, instabilidade hemodinâmica, necessidade de procedimento/via aérea, ou HHS com osm muito elevada e sensório comprometido (perfil <a href="../perfis/#p-cad-hhs">CAD+HHS</a>): aqui o risco de aspiração supera o benefício calórico, e a via é IV exclusiva até a situação virar.</p>
+</div>
+<p class="miniref">Zona cinzenta: paciente melhorando, gap fechando, mas ainda com náusea leve — titule por resposta (reintroduzir líquidos claros, escalar conforme tolerância) em vez de aplicar um corte numérico. Julgamento clínico apoiado por segurança de via aérea, não um limiar do <code>core</code>.</p>
+
+<h3>5.6 · Bicarbonato — a seção mais curta de propósito</h3>
 <div class="box danger">
 <span class="bt">Praticamente nunca</span>
 <p>O consenso 2024 só considera bicarbonato em acidose grave (<strong>pH &lt; 7,0</strong>) com instabilidade — controverso, sem mortalidade melhorada; revisões situam a ausência de benefício já acima de ~6,9–7,0. Danos: <strong>piora a hipocalemia</strong> (empurra K para dentro — agrava justo a variável limitante), <strong>atrasa o clearance de cetona</strong>, gera <strong>acidose liquórica paradoxal</strong> (CO₂ cruza a barreira mais rápido que HCO₃) e desvia a curva de dissociação da O₂. Fazer bicarbonato num pH ≥ 7,0 é adicionar um confundidor ao seu delta-delta (§3) e um problema de K ao seu plantão. Se a colega fez, registre — isso infla o HCO₃ medido e mascara o gap real.</p>
@@ -3289,6 +3371,48 @@ try{
       }});
   }
 }catch(e){console.warn('mermaid init',e);}
+</script>
+<script src="../core/cad_core.js"></script>
+<script>
+(function(){
+ const $=s=>document.querySelector(s);
+ let names=[];
+ try{names=JSON.parse(document.getElementById('profile-names-data').textContent);}catch(e){names=[];}
+ const byId=Object.fromEntries(names.map(p=>[p.id,p]));
+ const FIELD_LABEL={na:'Na',cl:'Cl',hco3:'HCO₃',glucoseMgDl:'Glicose',ph:'pH','betaHydroxybutyrateMmolL|ketonuriaCruzes':'cetonúria (cruzes) ou β-HB'};
+ function ttutRender(){
+  const out=$('#ttut_out');
+  if(!window.CadCore){out.innerHTML='<p class="ttut-missing">core indisponível (falha ao carregar core/cad_core.js).</p>';return;}
+  const g=id=>{const el=document.getElementById(id);const v=parseFloat(el.value);return isNaN(v)?null:v;};
+  const input={
+   na:g('tt_na'),cl:g('tt_cl'),hco3:g('tt_hco3'),glucoseMgDl:g('tt_glu'),
+   ketonuriaCruzes:g('tt_cet'),betaHydroxybutyrateMmolL:g('tt_bhb'),ph:g('tt_ph'),
+   albumin:g('tt_alb')??4.0,kMmolL:g('tt_k'),lactateMmolL:g('tt_lac'),
+   knownDiabetes:$('#tt_dm').checked,suspectedSepsis:$('#tt_sepsis').checked,
+   dialysisDependent:$('#tt_dial').checked,
+  };
+  const r=window.CadCore.classifyDkaProfile(input);
+  if(r.insufficient){
+   out.innerHTML='<p class="ttut-missing">Preencha: '+r.missing.map(m=>FIELD_LABEL[m]||m).join(', ')+'.</p>';
+   return;
+  }
+  const matches=r.matches.filter(m=>m.id),notes=r.matches.filter(m=>!m.id);
+  let html=matches.length
+   ? matches.map(m=>`<a class="ttut-match" href="../perfis/#p-${m.id}"><div class="nm">→ ${byId[m.id]?byId[m.id].nome:m.id}</div><div class="rs">${m.reason}</div></a>`).join('')
+   : '<p class="ttut-empty">Nenhum perfil específico identificado com estes valores (critério de CAD não fechado). Isto NÃO exclui outras causas de acidose — avalie clinicamente.</p>';
+  html+=notes.map(n=>`<p class="ttut-empty">${n.reason}</p>`).join('');
+  const c=r.computed;
+  const resolvedTxt=c.isResolvedDka===null?'incerto (sem β-HB sérico)':c.isResolvedDka;
+  const markerTxt=c.ketoneMarker==='cetonuriaCruzes'?'cetonúria':'β-HB';
+  html+=`<div class="ttut-computed">AG ${c.ag} · AGc ${c.agc} · Δ/Δ ${c.deltaRatio??'—'}${c.deltaBand?' ('+c.deltaBand+')':''} · Osm efetiva ${c.effectiveOsmolality} · eixo cetônico: ${markerTxt} · hasDka() ${c.hasDka} · isResolvedDka() ${resolvedTxt}</div>`;
+  out.innerHTML=html;
+ }
+ ['tt_na','tt_cl','tt_hco3','tt_glu','tt_cet','tt_bhb','tt_ph','tt_alb','tt_k','tt_lac'].forEach(id=>$('#'+id).addEventListener('input',ttutRender));
+ $('#tt_dm').addEventListener('change',ttutRender);
+ $('#tt_sepsis').addEventListener('change',ttutRender);
+ $('#tt_dial').addEventListener('change',ttutRender);
+ ttutRender();
+})();
 </script>
 </body>
 </html>

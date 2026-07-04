@@ -233,7 +233,10 @@ function isResolvedDka({ betaHydroxybutyrateMmolL, ph = null, hco3 = null }) {
  *
  * Entrada minima: na, cl, hco3, glucoseMgDl, betaHydroxybutyrateMmolL, ph.
  * Opcionais: albumin (default 4.0), kMmolL, lactateMmolL, knownDiabetes,
- * suspectedSepsis (flag de contexto quando o lactato nao foi medido).
+ * suspectedSepsis (flag de contexto quando o lactato nao foi medido),
+ * dialysisDependent (DRC dialitica — sem clearance renal de glicose/K, a
+ * heuristica usual de glicose/osm para euglicemica/cad-hhs nao se aplica;
+ * aponta direto para o perfil "dialitica" quando hasDka() fecha).
  * Se faltar algo essencial, devolve {insufficient:true, missing:[...]}.
  */
 function classifyDkaProfile(input) {
@@ -251,6 +254,7 @@ function classifyDkaProfile(input) {
   const knownDiabetes = !!input.knownDiabetes;
   const lactate = input.lactateMmolL ?? null;
   const suspectedSepsis = !!input.suspectedSepsis;
+  const dialysisDependent = !!input.dialysisDependent;
 
   const ag = anionGap(na, cl, hco3);
   const agc = correctedAnionGap(ag, albumin);
@@ -285,8 +289,15 @@ function classifyDkaProfile(input) {
       add("hipercloremica", "...OU cauda hiperclorêmica já instalada. A distinção exige β-HB sérico: cetonúria não confirma resolução (acetoacetato pode subir durante o tratamento mesmo com a cetose resolvendo).");
     }
   } else if (dka) {
-    if (glu < POLICY.insulin.reduceGlucoseBelowMgDl) add("euglicemica", `glicose ${glu} < ${POLICY.insulin.reduceGlucoseBelowMgDl} apesar de hasDka() verdadeiro — fenótipo euglicêmico (SGLT2i/jejum/gestação/etilismo).`);
-    if (glu >= 500 || osmEff > 300) add("cad-hhs", `glicose muito alta${osmEff > 300 ? ` e osm efetiva ${round(osmEff, 1)} > 300` : ""} — considerar sobreposição com HHS.`);
+    if (dialysisDependent) {
+      add("dialitica", "DRC dialítica — sem clearance renal, a glicose não tem via de escape (diurese osmótica) e o K carece de via de excreção; volume/K/ácido-base seguem lógica distinta da CAD com função renal preservada.");
+      if (osmEff > 300) {
+        matches.push({ id: null, reason: `osm efetiva ${round(osmEff, 1)} > 300 — território hiperosmolar acentuado pela ausência de clearance renal de glicose, não necessariamente sobreposição do fenótipo CAD+HHS.` });
+      }
+    } else {
+      if (glu < POLICY.insulin.reduceGlucoseBelowMgDl) add("euglicemica", `glicose ${glu} < ${POLICY.insulin.reduceGlucoseBelowMgDl} apesar de hasDka() verdadeiro — fenótipo euglicêmico (SGLT2i/jejum/gestação/etilismo).`);
+      if (glu >= 500 || osmEff > 300) add("cad-hhs", `glicose muito alta${osmEff > 300 ? ` e osm efetiva ${round(osmEff, 1)} > 300` : ""} — considerar sobreposição com HHS.`);
+    }
     if ((lactate != null && lactate >= 4) || suspectedSepsis) add("sepse-lactato", "lactato elevado e/ou contexto séptico — acidose provavelmente mista (cetona + lactato).");
     if (!matches.length) add("classica", "critério de CAD fechado (hasDka verdadeiro), sem sinal específico de outro fenótipo — apresentação clássica.");
   }

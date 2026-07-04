@@ -81,6 +81,7 @@ a.home{color:var(--teal);text-decoration:none}
  <div class="tut-flags">
   <label><input type="checkbox" id="t_dm" checked> Diabetes conhecido</label>
   <label><input type="checkbox" id="t_sepsis"> Suspeita de sepse/choque</label>
+  <label><input type="checkbox" id="t_dial"> DRC dialítica (hemodiálise)</label>
  </div>
  <div id="tut_out" class="tut-out"></div>
 </div>
@@ -579,6 +580,72 @@ a.home{color:var(--teal);text-decoration:none}
      "knownDiabetes": false
     }
    }
+  },
+  {
+   "id": "dialitica",
+   "nome": "CAD em DRC dialítica (hemodiálise)",
+   "contexto": "Paciente com doença renal crônica dialítica, anúrico/oligúrico, cursando CAD. Sem função renal, a fisiologia muda em quase todo eixo — não é a mesma doença com um comorbidade a mais.",
+   "fisiopatologia": [
+    {
+     "passo": "Sem diurese osmótica",
+     "texto": "Na CAD clássica, a glicosúria acima do limiar renal arrasta água e eletrólitos para a urina — é o que gera a desidratação clássica, mas também o que 'derruba' a glicose com o tempo. Sem função renal, essa via de escape não existe: a glicose sobe sem teto, e a apresentação tende a ficar mais hiperosmolar, não mais hipovolêmica, do que a CAD em quem tem rim."
+    },
+    {
+     "passo": "Potássio sem via de saída",
+     "texto": "Hipercalemia basal é comum (falha de excreção renal) e a acidose + déficit de insulina somam a isso. A insulina/dextrose desloca K para dentro da célula — mesmo mecanismo de sempre — mas não há rim para excretar o excesso se a reposição errar a mão, nem para 'consertar sozinho' um K que suba demais."
+    },
+    {
+     "passo": "HCO₃ crônico sobre agudo",
+     "texto": "Muitos desses pacientes já vivem com HCO₃ basal baixo (acidose metabólica da própria DRC, cronicamente compensada). O desafio é separar o degrau agudo da cetoacidose do platô crônico da doença renal — o mesmo HCO₃ absoluto significa coisas diferentes nos dois contextos."
+    },
+    {
+     "passo": "Diálise como via de correção definitiva",
+     "texto": "Sem rim, a correção completa de K, volume e ácido-base eventualmente depende da diálise — insulina e fluido tratam a cetose, mas não substituem a função renal ausente."
+    }
+   ],
+   "marcadores": {
+    "glicose": "pode ser extrema — sem o teto imposto pela glicosúria",
+    "cetona": "eixo cetônico habitual (cetonúria/βHB), inalterado pela função renal",
+    "acidobase": "AG alto sobreposto a possível base crônica já baixa",
+    "gap": "cálculo válido, mas compare com o HCO₃ basal conhecido do paciente antes de rotular 'quanto' é agudo",
+    "osm": "tende ao território do HHS mesmo sem cruzar o critério — pela ausência de clearance renal de glicose, não por sobreposição de fenótipo"
+   },
+   "tratamento": [
+    {
+     "eixo": "Volume — cautela, não o protocolo padrão",
+     "texto": "Ressuscitação agressiva num anúrico arrisca edema agudo de pulmão real — não há urina para 'absorver' o excesso. Volumes menores, reavaliação frequente, e considerar exame/USG à beira-leito para guiar — ver também §5.1 do tratado (a mesma lógica de cristaloide se aplica, mas a taxa e o volume, não)."
+    },
+    {
+     "eixo": "Potássio — mesmo mecanismo, sem rede de segurança",
+     "texto": "Insulina/dextrose já desloca K para dentro da célula tratando a cetose — muitas vezes é tratamento suficiente para a hipercalemia inicial. Repor K de rotina (como na tabela padrão do tratado §5.3) é mais arriscado aqui: se a hipercalemia inicial for real, a exceção de hipercalemia extrema do §5.1 (Ringer simples, cautela com o K exógeno) é diretamente relevante — este é exatamente o perfil em que aquele parágrafo importa."
+    },
+    {
+     "eixo": "Insulina — mesma dose, expectativa de queda diferente",
+     "texto": "A taxa por peso (0,1 U/kg/h) não muda, mas a regra de 'queda de ~3 mEq/L/h' foi ensinada pensando em clearance renal contribuindo para a queda glicêmica. Sem rim, a glicose cai só pelo que a insulina consegue metabolizar — pode ser mais lento que o esperado, e isso não significa que a insulina 'não está funcionando'."
+    },
+    {
+     "eixo": "Diálise emergencial",
+     "texto": "Indicações a considerar com nefrologia: hipercalemia refratária ao manejo clínico, sobrecarga de volume/edema pulmonar, ou acidose grave refratária — sem rim, não há compensação renal alguma para 'esperar melhorar sozinha'."
+    }
+   ],
+   "armadilha": "Aplicar o protocolo de volume padrão (agressivo) num anúrico — risco real de edema agudo de pulmão. Ou assumir que o K vai se comportar como em quem tem rim — pode não cair como esperado, ou faltar via de escape se a reposição for feita por rotina.",
+   "incerteza": "Sem diurese para guiar volume, o status volêmico depende de exame clínico/USG à beira-leito, não de um número. O momento de diálise emergencial é decisão conjunta com nefrologia — não um limiar do core.",
+   "caso": {
+    "vinheta": "58 anos, DRC dialítica (hemodiálise 3x/semana, última sessão há 2 dias), anúrica, admitida com vômitos e sonolência. Na 138 · Cl 94 · HCO₃ 8 · albumina 3,2 · glicose 780 · K 6,3 · cetonúria 4+ · pH 6,98.",
+    "leitura": "AG = 138 − (94+8) = 36; corrigido para albumina 3,2 → AGc = 36 + 2,5·(4,0−3,2) = 38. Δ/Δ = (38−12)/(24−8) = 1,63 → banda 1–2, AGMA de gap alto limpa (mas compare com o HCO₃ basal do paciente em diálise, que pode já rodar baixo antes deste episódio). Osm efetiva = 2·138 + 780/18 = 319,3 — a um passo do critério de HHS (>320), não por sobreposição de fenótipo, mas porque a glicose não tem via renal de clearance: em qualquer paciente com rim funcionante, esse mesmo tempo de doença já teria perdido glicose na urina. hasDka() = verdadeiro (cetonúria 4+ fecha o eixo cetônico; pH e HCO₃ fecham o eixo ácido). isResolvedDka(): incerto — sem β-HB sérico disponível neste caso agudo. K 6,3 já preocupa por arritmia antes mesmo de qualquer reposição: aqui a insulina/dextrose já cumpre o papel duplo de tratar a cetose e deslocar K para dentro da célula, mas a decisão sobre diálise emergencial (hipercalemia refratária, sobrecarga de volume) é clínica, não deste cálculo.",
+    "labs": {
+     "na": 138,
+     "cl": 94,
+     "hco3": 8,
+     "alb": 3.2,
+     "glu": 780,
+     "k": 6.3,
+     "cet": 4,
+     "ph": 6.98,
+     "knownDiabetes": true,
+     "dialysisDependent": true
+    }
+   }
   }
  ]
 }
@@ -629,6 +696,7 @@ a.home{color:var(--teal);text-decoration:none}
    ketonuriaCruzes:g('t_cet'),betaHydroxybutyrateMmolL:g('t_bhb'),ph:g('t_ph'),
    albumin:g('t_alb')??4.0,kMmolL:g('t_k'),lactateMmolL:g('t_lac'),
    knownDiabetes:$('#t_dm').checked,suspectedSepsis:$('#t_sepsis').checked,
+   dialysisDependent:$('#t_dial').checked,
   };
   const r=window.CadCore.classifyDkaProfile(input);
   if(r.insufficient){
@@ -649,6 +717,7 @@ a.home{color:var(--teal);text-decoration:none}
  ['t_na','t_cl','t_hco3','t_glu','t_cet','t_bhb','t_ph','t_alb','t_k','t_lac'].forEach(id=>$('#'+id).addEventListener('input',tutRender));
  $('#t_dm').addEventListener('change',tutRender);
  $('#t_sepsis').addEventListener('change',tutRender);
+ $('#t_dial').addEventListener('change',tutRender);
  tutRender();
 })();
 </script>

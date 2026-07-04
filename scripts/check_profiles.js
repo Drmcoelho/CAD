@@ -12,9 +12,9 @@
  * o build quebra — a mesma filosofia de fonte única do resto do projeto,
  * aplicada à prosa clínica dos casos.
  *
- * 3. classifyDkaProfile() (o "Tutor" de perfis/) classifica cada um dos 8
+ * 3. classifyDkaProfile() (o "Tutor" de perfis/) classifica cada um dos 9
  *    casos como o SEU PRÓPRIO perfil (top match) — regressão do classificador
- *    contra os únicos 8 casos-gabarito que existem no projeto.
+ *    contra os únicos 9 casos-gabarito que existem no projeto.
  *
  *   node scripts/check_profiles.js
  */
@@ -34,7 +34,7 @@ const near = (txt, val) => {
   return nums.some((n) => Math.abs(n - val) <= 0.05);
 };
 
-console.log("[check_profiles] recalculando os 8 casos sintéticos pelo core\n");
+console.log("[check_profiles] recalculando os 9 casos sintéticos pelo core\n");
 
 for (const perfil of profiles.perfis) {
   const { labs, leitura } = perfil.caso;
@@ -52,6 +52,7 @@ for (const perfil of profiles.perfis) {
       knownDiabetes: !!labs.knownDiabetes,
       glucoseMgDl: labs.glu,
       betaHydroxybutyrateMmolL: labs.bhb,
+      ketonuriaCruzes: labs.cet ?? null,
       ph: labs.ph,
       hco3: labs.hco3,
     });
@@ -72,8 +73,10 @@ for (const perfil of profiles.perfis) {
   // classifyDkaProfile() deve apontar o proprio caso de volta para o seu perfil
   const cls = core.classifyDkaProfile({
     na: labs.na, cl: labs.cl, hco3: labs.hco3, glucoseMgDl: labs.glu,
-    betaHydroxybutyrateMmolL: labs.bhb, ph: labs.ph, albumin: labs.alb,
+    betaHydroxybutyrateMmolL: labs.bhb, ketonuriaCruzes: labs.cet ?? null,
+    ph: labs.ph, albumin: labs.alb,
     knownDiabetes: labs.knownDiabetes, lactateMmolL: labs.lactato ?? null,
+    dialysisDependent: !!labs.dialysisDependent,
   });
   const ids = cls.matches.filter((m) => m.id).map((m) => m.id);
   ids[0] === perfil.id
@@ -83,4 +86,4 @@ for (const perfil of profiles.perfis) {
 
 console.log("");
 if (fails) { console.error(`check_profiles: ${fails} FALHA(S).`); process.exit(1); }
-console.log("check_profiles: os 8 casos sintéticos batem com o core (AG/AGc + hasDka/isResolvedDka).");
+console.log("check_profiles: os 9 casos sintéticos batem com o core (AG/AGc + hasDka/isResolvedDka).");

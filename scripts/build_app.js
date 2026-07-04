@@ -13,6 +13,10 @@
  *     - atlas-data     ← content/atlas.json     (cálculo, escada, fenótipos, leis, projetos)
  *   perfis/index.html:
  *     - profiles-data  ← content/profiles.json  (fisiopatologia + tratamento por perfil)
+ *   tratado/index.html:
+ *     - profile-names-data ← content/profiles.json, projetado a {id,nome} (o Tutor só
+ *       precisa do nome pra rotular o match e link para ../perfis/#p-<id>; a prosa
+ *       completa não é duplicada aqui)
  *
  *   node scripts/build_app.js          # reescreve os blocos a partir das fontes
  *   node scripts/build_app.js --check  # falha (exit 1) se algum bloco divergir
@@ -44,7 +48,15 @@ const FILES = {
   "perfis/index.html": [
     { id: "profiles-data", text: jsonText("content/profiles.json", readRaw("content/profiles.json")) },
   ],
+  "tratado/index.html": [
+    { id: "profile-names-data", text: JSON.stringify(profileNames()) },
+  ],
 };
+
+function profileNames() {
+  const profiles = jsonText("content/profiles.json", readRaw("content/profiles.json"));
+  return JSON.parse(profiles).perfis.map((p) => ({ id: p.id, nome: p.nome }));
+}
 
 const stale = [];
 const writes = [];
