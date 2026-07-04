@@ -1,0 +1,113 @@
+[
+ {
+  "type": "mcq",
+  "q": "Mulher em uso de SGLT2, glicose 150, βHB 5,2, pH 7,20. Conduta inicial mais correta?",
+  "opts": [
+   "Não iniciar insulina — a glicose está normal",
+   "Insulina + dextrose desde já e suspender o SGLT2",
+   "Só volume; reavaliar em 6 h",
+   "Bicarbonato, pela acidose"
+  ],
+  "correct": 1,
+  "exp": "CAD euglicêmica. A doença é a cetogênese, não a glicose. Insulina fecha a cetose; a dextrose é o cinto de segurança para mantê-la; o SGLT2 é o motor e precisa parar."
+ },
+ {
+  "type": "vf",
+  "q": "Glicemia normal exclui cetoacidose diabética.",
+  "correct": false,
+  "exp": "Falso. Na euglicêmica (SGLT2, jejum, gestação) a cetose corre com glicose normal. O diagnóstico é βHB + acidose, não a glicemia."
+ },
+ {
+  "type": "mcq",
+  "q": "CAD à chegada, K 3,2 mEq/L. Primeiro passo?",
+  "opts": [
+   "Iniciar insulina imediatamente",
+   "Segurar insulina, repor K e iniciar quando K ≥ 3,5",
+   "Bicarbonato",
+   "Insulina e K juntos, na mesma velocidade"
+  ],
+  "correct": 1,
+  "exp": "Insulina empurra K para dentro da célula — com K < 3,5 pode precipitar arritmia. Repor primeiro; reiniciar a insulina acima de 3,5 (não 3,3)."
+ },
+ {
+  "type": "vf",
+  "q": "A insulina pode ser reiniciada assim que o K atingir 3,3 mEq/L.",
+  "correct": false,
+  "exp": "Falso. O canon 2024 usa > 3,5 como o número único de reinício. 3,3 é um piso antigo (2009)."
+ },
+ {
+  "type": "mcq",
+  "q": "CAD tratada há 24 h: gap corrigido caindo, Cl subindo, Δ/Δ 0,5. O que é o pH ainda baixo?",
+  "opts": [
+   "AGMA pura persistente",
+   "Cauda hiperclorêmica — componente de gap normal somado",
+   "Alcalose metabólica",
+   "Recidiva da cetose"
+  ],
+  "correct": 1,
+  "exp": "Δ/Δ < 1 com Cl subindo: o bicarbonato caiu mais do que o gap explica. É cloro (SF), não cetona. Insulina não conserta — quem resolve é o rim, com tempo."
+ },
+ {
+  "type": "vf",
+  "q": "Δ/Δ na faixa 0,4–0,8 é a faixa \"pura\" da cetoacidose.",
+  "correct": false,
+  "exp": "Falso. Na convenção do canon (fronteiras 1 e 2), a pura é 1–2; abaixo de 1 já há componente hiperclorêmico. Rotular 0,4–0,8 como \"pura\" foi o erro corrigido."
+ },
+ {
+  "type": "mcq",
+  "q": "Quando o bicarbonato é considerado na CAD?",
+  "opts": [
+   "Quando o HCO₃ sérico está muito baixo (< 5)",
+   "Guiado pelo pH (≤ 6,9 absoluto; consenso 2024 escreve < 7,0), independe do HCO₃",
+   "Sempre que a acidose for grave",
+   "Quando o pH < 7,3"
+  ],
+  "correct": 1,
+  "exp": "O gatilho é o pH, não o nível de bicarbonato. Acima de ~6,9 não há benefício; abaixo, nem dado nem consenso. Não é reflexo."
+ },
+ {
+  "type": "vf",
+  "q": "A ureia entra na osmolaridade efetiva.",
+  "correct": false,
+  "exp": "Falso. A ureia atravessa a membrana livremente e não gera gradiente. Efetiva = 2·Na + glicose/18; a ureia só entra na osm total para o osm-gap."
+ },
+ {
+  "type": "diss",
+  "q": "Explique, pela fisiologia do rim, por que o pH pode não fechar mesmo com a cetose resolvida.",
+  "model": "Três raízes renais: (1) o rim excretou cetoânions na urina — bicarbonato \"potencial\" perdido, que não volta a regenerar HCO₃; (2) o SF 0,9% impôs carga de cloro que o rim leva 24–48 h para excretar → acidose hiperclorêmica de gap normal; (3) a regeneração renal de HCO₃ (amoniagênese, acidez titulável) é lenta. Gap fecha, Δ/Δ cai abaixo de 1, HCO₃ recupera por último."
+ },
+ {
+  "type": "diss",
+  "q": "Por que um pCO₂ de 40 mmHg numa CAD grave é sinal de alarme?",
+  "model": "Pela Winter, para um HCO₃ muito baixo o pCO₂ esperado seria ~20 (o pulmão deveria hiperventilar). pCO₂ 40 = o pulmão não está compensando; está falhando/cansando (fadiga do drive) = acidose respiratória somada. RR caindo + pCO₂ subindo não é \"acalmar\", é descompensar."
+ },
+ {
+  "type": "case",
+  "stem": "Homem, 58 anos, DM2 em dapagliflozina, quadro infeccioso. Glicose 168, pH 7,18, HCO₃ 10, βHB 5,6, Na 137, Cl 102, K 4,3.",
+  "subs": [
+   {
+    "type": "mcq",
+    "q": "Diagnóstico e fenótipo?",
+    "opts": [
+     "Não é CAD — glicose normal",
+     "CAD euglicêmica",
+     "HHS",
+     "Acidose láctica isolada"
+    ],
+    "correct": 1,
+    "exp": "βHB 5,6 + pH 7,18 fecham CAD; glicose 168 = euglicêmica (SGLT2)."
+   },
+   {
+    "type": "vf",
+    "q": "A conduta inclui suspender a dapagliflozina.",
+    "correct": true,
+    "exp": "Verdadeiro. O SGLT2 perpetua a glicosúria e a cetogênese — é o gatilho e precisa parar."
+   },
+   {
+    "type": "diss",
+    "q": "Qual o fluido inicial e por quê?",
+    "model": "Cristaloide balanceado (Ringer) por volume — evita alimentar a futura cauda hiperclorêmica que o SF 0,9% fabricaria. Insulina 0,1 U/kg/h com dextrose (K 4,3 ≥ 3,5 permite iniciar)."
+   }
+  ]
+ }
+]
