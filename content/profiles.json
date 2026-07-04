@@ -489,7 +489,7 @@
   {
    "id": "dialitica",
    "nome": "CAD em DRC dialítica (hemodiálise)",
-   "contexto": "Paciente com doença renal crônica dialítica, anúrico/oligúrico, cursando CAD. Sem função renal, a fisiologia muda em quase todo eixo — não é a mesma doença com um comorbidade a mais.",
+   "contexto": "Paciente com doença renal crônica dialítica, anúrico/oligúrico, cursando CAD. Sem função renal, a fisiologia muda em quase todo eixo — não é a mesma doença com uma comorbidade a mais.",
    "fisiopatologia": [
     {
      "passo": "Sem diurese osmótica",
@@ -526,7 +526,7 @@
     },
     {
      "eixo": "Insulina — mesma dose, expectativa de queda diferente",
-     "texto": "A taxa por peso (0,1 U/kg/h) não muda, mas a regra de 'queda de ~3 mEq/L/h' foi ensinada pensando em clearance renal contribuindo para a queda glicêmica. Sem rim, a glicose cai só pelo que a insulina consegue metabolizar — pode ser mais lento que o esperado, e isso não significa que a insulina 'não está funcionando'."
+     "texto": "A taxa por peso (0,1 U/kg/h) não muda, mas a regra de 'queda de ~50-75 mg/dL/h' foi ensinada pensando em clearance renal contribuindo para a queda glicêmica. Sem rim, a glicose cai só pelo que a insulina consegue metabolizar — pode ser mais lento que o esperado, e isso não significa que a insulina 'não está funcionando'."
     },
     {
      "eixo": "Diálise emergencial",
