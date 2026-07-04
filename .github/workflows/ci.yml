@@ -12,6 +12,8 @@ jobs:
         run: node core/cad_core.test.js
       - name: fixtures clínicas
         run: node core/fixtures.test.js
+      - name: CANON como artefato de build (app em sincronia com o core)
+        run: node scripts/build_app.js --check
       - name: portão de consistência (fonte única)
         run: node scripts/check_consistency.js
       - name: links locais
