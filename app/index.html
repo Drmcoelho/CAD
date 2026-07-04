@@ -469,6 +469,160 @@ canvas{display:block;width:100%;background:#0c1218;border:1px solid var(--line);
  }
 }
 </script>
+<script type="application/json" id="atlas-data">
+{
+ "banco": [
+  [
+   "B-1 · AG simples",
+   "Na 140, Cl 104, HCO₃ 10. Calcule o ânion-gap.",
+   "AG = 140 − (104 + 10) = <b>26</b>. <i>Lição:</i> gap alto = ácido não medido (cetona/lactato). Ponto de partida, não diagnóstico."
+  ],
+  [
+   "B-2 · AG corrigido p/ albumina",
+   "AG = 26, albumina 2,5 g/dL. Calcule o AGc.",
+   "AGc = 26 + 2,5·(4,0 − 2,5) = <b>29,8</b>. <i>Lição:</i> hipoalbuminemia ESCONDE gap — cada 1 g/dL abaixo de 4 mascara ~2,5. Sem corrigir, você subestima a cetose."
+  ],
+  [
+   "B-3 · Δ/Δ",
+   "AGc = 28, HCO₃ = 8. Calcule e interprete.",
+   "Δ/Δ = (28−12)/(24−8) = 16/16 = <b>1,0</b> → AGMA de gap elevado pura. <i>Lição:</i> 1 é a fronteira; abaixo entra componente hiperclorêmico."
+  ],
+  [
+   "B-4 · Winter",
+   "HCO₃ = 6, pCO₂ medido = 30. A compensação está adequada?",
+   "Esperado = 1,5·6 + 8 = 17 ± 2 (15–19). Medido 30 > 19 → o pulmão NÃO baixou o CO₂ o quanto deveria = <b>acidose respiratória concomitante</b> (drive cansando). <i>Lição:</i> Winter detecta o distúrbio respiratório escondido."
+  ],
+  [
+   "B-5 · Na corrigido",
+   "Na medido 130, glicose 600. Calcule (escolha o fator).",
+   "Glicose > 400 → fator 2,4. NaC = 130 + 2,4·(600−100)/100 = <b>142</b>. <i>Lição:</i> a hiperglicemia mascara hipernatremia; o \"130\" tranquilizador é 142 — território de HHS-overlap."
+  ],
+  [
+   "B-6 · Osmolaridade efetiva",
+   "Na 142, glicose 600. Calcule e interprete.",
+   "Osm = 2·142 + 600/18 = <b>317</b>. <i>Lição:</i> > 320 entra no eixo HHS/neurológico — a velocidade de queda osmolar passa a importar tanto quanto o gap."
+  ]
+ ],
+ "ladder": [
+  [
+   "1 · O pH é de acidemia ou alcalemia?",
+   "ponto de partida",
+   "pH < 7,35 = acidemia; > 7,45 = alcalemia; entre = normal <u>ou</u> distúrbio misto que se cancela. Um pH normal <b>não</b> exclui doença. <span class=\"goto xlink\" data-go=\"calcular\">→ calcular</span>"
+  ],
+  [
+   "2 · Qual o distúrbio primário — metabólico ou respiratório?",
+   "HCO₃ vs pCO₂",
+   "Olhe quem se moveu no sentido do pH. Acidemia com HCO₃ baixo = acidose metabólica (a CAD). O primário é o que \"explica\" a direção do pH."
+  ],
+  [
+   "3 · A compensação é adequada? Há distúrbio somado?",
+   "Winter e as demais",
+   "Calcule o esperado (Winter para acidose metabólica; as outras três fórmulas para os outros distúrbios). Fora do esperado = <b>segundo distúrbio</b>. pCO₂ \"normal\" numa CAD grave é o pulmão cansando. <span class=\"goto xlink\" data-go=\"calcular\">→ compensação</span>"
+  ],
+  [
+   "4 · O ânion gap está alto? (corrigido pela albumina)",
+   "AGc",
+   "AG alto confirma ácido não medido — na CAD, os cetoácidos. Corrija pela albumina: hipoalbuminemia esconde gap. <span class=\"goto xlink\" data-go=\"calcular\">→ calcular</span>"
+  ],
+  [
+   "5 · O Δ/Δ revela um distúrbio metabólico oculto?",
+   "delta-delta",
+   "~1 = cetoacidose pura. < 1 = cauda hiperclorêmica somada. > 2 = alcalose somada. É aqui que o \"pH que não fecha\" aparece. <span class=\"goto xlink\" data-go=\"calcular\">→ calcular</span>"
+  ],
+  [
+   "6 · Qual a tonicidade — Na corrigido e osm efetiva?",
+   "água livre e HHS",
+   "Corrija o Na (revela hipernatremia mascarada) e calcule a osm efetiva (tonicidade, eixo HHS, risco de edema). Fluido e velocidade dependem disso. <span class=\"goto xlink\" data-go=\"calcular\">→ calcular</span>"
+  ]
+ ],
+ "feno": [
+  [
+   "CAD clássica",
+   "alta",
+   "alta",
+   "acidose",
+   "subestimar K e volume"
+  ],
+  [
+   "CAD euglicêmica",
+   "normal/modesta",
+   "alta",
+   "acidose",
+   "perder o dx pelo destro"
+  ],
+  [
+   "Pré-CAD / cetose",
+   "variável",
+   "alta/subindo",
+   "sem acidose ainda",
+   "esperar a acidose para agir"
+  ],
+  [
+   "CAD parcialmente tratada",
+   "menor",
+   "ainda alta",
+   "pH melhorando",
+   "desligar insulina cedo"
+  ],
+  [
+   "CAD + HHS",
+   "muito alta",
+   "alta",
+   "acidose",
+   "osmolaridade e Na corrigido"
+  ],
+  [
+   "CAD hiperclorêmica (tardia)",
+   "controlada",
+   "baixa/ausente",
+   "pH preso",
+   "tratar cloro com insulina"
+  ],
+  [
+   "CAD + sepse/lactato",
+   "variável",
+   "alta",
+   "mista",
+   "atribuir tudo à cetose"
+  ],
+  [
+   "Cetose alcoólica/jejum",
+   "baixa/normal",
+   "alta",
+   "variável",
+   "confundir com CAD diabética"
+  ]
+ ],
+ "leis": [
+  "CAD é doença de cetona, não de glicose.",
+  "Glicose baixa/modesta não exclui CAD.",
+  "K normal/alto não exclui déficit corporal total.",
+  "Insulina fecha cetogênese, mas mata se o K estiver baixo (< 3,5 → adiar; reiniciar > 3,5).",
+  "Glicose IV é ferramenta para permitir insulina, não só \"tratar hipoglicemia\".",
+  "Cloro alto mantém a acidose depois que a cetose resolveu.",
+  "Bicarbonato é exceção guiada pelo <b>pH</b> (≤ 6,9 absoluto; consenso 2024 escreve &lt; 7,0) e independe do nível de HCO₃ — não é reflexo.",
+  "Urina cetônica atrasa e engana (βHB vs acetoacetato).",
+  "Gasometria isolada é foto; série temporal é filme.",
+  "Idoso/renal/cardíaco não recebe volume \"automático\".",
+  "Jejum não significa ausência de glicose IV.",
+  "Resolução laboratorial não é alta clínica automática."
+ ],
+ "proj": [
+  [
+   "Projeto 1 — Galeria de fenótipos (preencher e defender)",
+   "Dada a tabela esqueleto, preencha cada linha e, para cada fenótipo, escreva a \"frase-armadilha\" e o \"primeiro movimento\". <b>Critério de aceite por linha:</b> a frase-armadilha impede um erro real de plantão."
+  ],
+  [
+   "Projeto 2 — Ler um filme",
+   "Receba uma série temporal crua (6 pontos) e produza: (1) o derivado de cada ponto (AGc, Δ/Δ, Winter), (2) a narrativa de uma linha por ponto, (3) o handoff final. É o que o painel de evolução já faz — aqui você faz à mão primeiro, depois confere. Aprender a fórmula construindo o gráfico."
+  ],
+  [
+   "Projeto 3 — A lei operacional",
+   "Ao final, escreva as leis operacionais com suas palavras e defenda cada uma com um caso da galeria. As doze estão acima — reescrevê-las de memória é o teste."
+  ]
+ ]
+}
+</script>
 <script>
 /* ================= CANON — única fonte de verdade (consenso 2024) ================= */
 const CANON={
@@ -610,14 +764,8 @@ function renderComp(){
 renderComp();
 
 /* banco B-1..B-6 */
-const BANCO=[
- ['B-1 · AG simples','Na 140, Cl 104, HCO₃ 10. Calcule o ânion-gap.','AG = 140 − (104 + 10) = <b>26</b>. <i>Lição:</i> gap alto = ácido não medido (cetona/lactato). Ponto de partida, não diagnóstico.'],
- ['B-2 · AG corrigido p/ albumina','AG = 26, albumina 2,5 g/dL. Calcule o AGc.','AGc = 26 + 2,5·(4,0 − 2,5) = <b>29,8</b>. <i>Lição:</i> hipoalbuminemia ESCONDE gap — cada 1 g/dL abaixo de 4 mascara ~2,5. Sem corrigir, você subestima a cetose.'],
- ['B-3 · Δ/Δ','AGc = 28, HCO₃ = 8. Calcule e interprete.','Δ/Δ = (28−12)/(24−8) = 16/16 = <b>1,0</b> → AGMA de gap elevado pura. <i>Lição:</i> 1 é a fronteira; abaixo entra componente hiperclorêmico.'],
- ['B-4 · Winter','HCO₃ = 6, pCO₂ medido = 30. A compensação está adequada?','Esperado = 1,5·6 + 8 = 17 ± 2 (15–19). Medido 30 > 19 → o pulmão NÃO baixou o CO₂ o quanto deveria = <b>acidose respiratória concomitante</b> (drive cansando). <i>Lição:</i> Winter detecta o distúrbio respiratório escondido.'],
- ['B-5 · Na corrigido','Na medido 130, glicose 600. Calcule (escolha o fator).','Glicose > 400 → fator 2,4. NaC = 130 + 2,4·(600−100)/100 = <b>142</b>. <i>Lição:</i> a hiperglicemia mascara hipernatremia; o "130" tranquilizador é 142 — território de HHS-overlap.'],
- ['B-6 · Osmolaridade efetiva','Na 142, glicose 600. Calcule e interprete.','Osm = 2·142 + 600/18 = <b>317</b>. <i>Lição:</i> > 320 entra no eixo HHS/neurológico — a velocidade de queda osmolar passa a importar tanto quanto o gap.']
-];
+const ATLAS=JSON.parse(document.getElementById('atlas-data').textContent);
+const BANCO=ATLAS.banco;
 $('#banco').innerHTML=BANCO.map(x=>`<div class="panel" style="padding:12px 13px"><div style="font-weight:600;font-size:14px;margin-bottom:3px">${x[0]}</div>${mkReveal(x[1],x[2])}</div>`).join('');
 
 /* ================= ENTENDER — escada + módulos 10-tempos ================= */
@@ -625,14 +773,7 @@ function stepEl(q,meta,a){const d=document.createElement('div');d.className='ste
  d.innerHTML=`<div class="q">${q}</div><div class="meta">${meta}</div><button class="rev">pensar → revelar</button><div class="sa">${a}</div>`;
  d.querySelector('.rev').onclick=()=>{const an=d.querySelector('.sa');an.classList.toggle('show');
   d.querySelector('.rev').textContent=an.classList.contains('show')?'ocultar':'pensar → revelar';};return d;}
-const LADDER=[
- ['1 · O pH é de acidemia ou alcalemia?','ponto de partida','pH < 7,35 = acidemia; > 7,45 = alcalemia; entre = normal <u>ou</u> distúrbio misto que se cancela. Um pH normal <b>não</b> exclui doença. <span class="goto xlink" data-go="calcular">→ calcular</span>'],
- ['2 · Qual o distúrbio primário — metabólico ou respiratório?','HCO₃ vs pCO₂','Olhe quem se moveu no sentido do pH. Acidemia com HCO₃ baixo = acidose metabólica (a CAD). O primário é o que "explica" a direção do pH.'],
- ['3 · A compensação é adequada? Há distúrbio somado?','Winter e as demais','Calcule o esperado (Winter para acidose metabólica; as outras três fórmulas para os outros distúrbios). Fora do esperado = <b>segundo distúrbio</b>. pCO₂ "normal" numa CAD grave é o pulmão cansando. <span class="goto xlink" data-go="calcular">→ compensação</span>'],
- ['4 · O ânion gap está alto? (corrigido pela albumina)','AGc','AG alto confirma ácido não medido — na CAD, os cetoácidos. Corrija pela albumina: hipoalbuminemia esconde gap. <span class="goto xlink" data-go="calcular">→ calcular</span>'],
- ['5 · O Δ/Δ revela um distúrbio metabólico oculto?','delta-delta','~1 = cetoacidose pura. < 1 = cauda hiperclorêmica somada. > 2 = alcalose somada. É aqui que o "pH que não fecha" aparece. <span class="goto xlink" data-go="calcular">→ calcular</span>'],
- ['6 · Qual a tonicidade — Na corrigido e osm efetiva?','água livre e HHS','Corrija o Na (revela hipernatremia mascarada) e calcule a osm efetiva (tonicidade, eixo HHS, risco de edema). Fluido e velocidade dependem disso. <span class="goto xlink" data-go="calcular">→ calcular</span>']
-];
+const LADDER=ATLAS.ladder;
 LADDER.forEach(x=>$('#ladder').appendChild(stepEl(x[0],x[1],x[2])));
 
 function renderModule(host,M){
@@ -654,38 +795,12 @@ renderModule($('#modA'),CASES.A);
 renderModule($('#modB'),CASES.B);
 
 /* ================= ATLAS ================= */
-const FENO=[
- ['CAD clássica','alta','alta','acidose','subestimar K e volume'],
- ['CAD euglicêmica','normal/modesta','alta','acidose','perder o dx pelo destro'],
- ['Pré-CAD / cetose','variável','alta/subindo','sem acidose ainda','esperar a acidose para agir'],
- ['CAD parcialmente tratada','menor','ainda alta','pH melhorando','desligar insulina cedo'],
- ['CAD + HHS','muito alta','alta','acidose','osmolaridade e Na corrigido'],
- ['CAD hiperclorêmica (tardia)','controlada','baixa/ausente','pH preso','tratar cloro com insulina'],
- ['CAD + sepse/lactato','variável','alta','mista','atribuir tudo à cetose'],
- ['Cetose alcoólica/jejum','baixa/normal','alta','variável','confundir com CAD diabética']
-];
+const FENO=ATLAS.feno;
 $('#fenoTable').innerHTML='<tr><th>Fenótipo</th><th>Glicose</th><th>Cetona</th><th>pH/HCO₃</th><th>Risco principal</th></tr>'+
  FENO.map(x=>`<tr><td><b>${x[0]}</b></td><td>${x[1]}</td><td>${x[2]}</td><td>${x[3]}</td><td>${x[4]}</td></tr>`).join('');
-const LEIS=[
- 'CAD é doença de cetona, não de glicose.',
- 'Glicose baixa/modesta não exclui CAD.',
- 'K normal/alto não exclui déficit corporal total.',
- 'Insulina fecha cetogênese, mas mata se o K estiver baixo (< 3,5 → adiar; reiniciar > 3,5).',
- 'Glicose IV é ferramenta para permitir insulina, não só "tratar hipoglicemia".',
- 'Cloro alto mantém a acidose depois que a cetose resolveu.',
- 'Bicarbonato é exceção guiada pelo <b>pH</b> (≤ 6,9 absoluto; consenso 2024 escreve &lt; 7,0) e independe do nível de HCO₃ — não é reflexo.',
- 'Urina cetônica atrasa e engana (βHB vs acetoacetato).',
- 'Gasometria isolada é foto; série temporal é filme.',
- 'Idoso/renal/cardíaco não recebe volume "automático".',
- 'Jejum não significa ausência de glicose IV.',
- 'Resolução laboratorial não é alta clínica automática.'
-];
+const LEIS=ATLAS.leis;
 $('#leis').innerHTML=LEIS.map(x=>`<li>${x}</li>`).join('');
-const PROJ=[
- ['Projeto 1 — Galeria de fenótipos (preencher e defender)','Dada a tabela esqueleto, preencha cada linha e, para cada fenótipo, escreva a "frase-armadilha" e o "primeiro movimento". <b>Critério de aceite por linha:</b> a frase-armadilha impede um erro real de plantão.'],
- ['Projeto 2 — Ler um filme','Receba uma série temporal crua (6 pontos) e produza: (1) o derivado de cada ponto (AGc, Δ/Δ, Winter), (2) a narrativa de uma linha por ponto, (3) o handoff final. É o que o painel de evolução já faz — aqui você faz à mão primeiro, depois confere. Aprender a fórmula construindo o gráfico.'],
- ['Projeto 3 — A lei operacional','Ao final, escreva as leis operacionais com suas palavras e defenda cada uma com um caso da galeria. As doze estão acima — reescrevê-las de memória é o teste.']
-];
+const PROJ=ATLAS.proj;
 $('#projetos').innerHTML=PROJ.map(x=>`<div class="panel" style="padding:12px 13px"><div style="font-weight:600;font-size:14px;margin-bottom:4px">${x[0]}</div><div style="font-size:13.5px;line-height:1.55">${x[1]}</div></div>`).join('');
 
 /* ================= REFERÊNCIA ================= */
