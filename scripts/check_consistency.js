@@ -29,6 +29,7 @@ eq("version", P.version, C.version);
 eq("K repor <", P.potassium.replaceBelowMmolL, C.potassium.replaceBelowMmolL);
 eq("K adiar insulina <", P.potassium.holdInsulinBelowMmolL, C.potassium.holdInsulinBelowMmolL);
 eq("diagnostico betaOHB", P.diagnosis.betaHydroxybutyrateMmolL, C.diagnosis.betaHydroxybutyrateMmolL);
+eq("diagnostico cetonuria (cruzes)", P.diagnosis.ketonuriaCruzesAtLeast, C.diagnosis.ketonuriaCruzesAtLeast);
 eq("diagnostico pH", P.diagnosis.ph, C.diagnosis.ph);
 eq("bicarbonato considerar pH<", P.bicarbonate.considerBelowPh, C.bicarbonate.considerBelowPh);
 eq("Na fator padrao", P.sodiumCorrection.factorDefault, C.sodiumCorrection.factorDefault);

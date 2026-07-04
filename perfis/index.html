@@ -36,6 +36,12 @@ a.calc:hover{background:rgba(55,198,224,.12)}
 .tut-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(105px,1fr));gap:8px}
 .tut-grid label{display:flex;flex-direction:column;font-size:11px;color:var(--mut);gap:3px}
 .tut-grid input{background:var(--bg);border:1px solid var(--line2);border-radius:7px;color:var(--tx);padding:6px 8px;font-size:14px;font-family:var(--mono);width:100%}
+.tut-secondary{margin-top:12px;padding-top:10px;border-top:1px dashed var(--line2)}
+.tut-secondary>label{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:12px;color:var(--mut)}
+.tut-secondary input{background:var(--bg);border:1px solid var(--line2);border-radius:7px;color:var(--tx);padding:5px 8px;font-size:13px;font-family:var(--mono);width:110px}
+.tut-sec-note{color:var(--mut);font-size:11px;font-weight:400}
+.tut-caveat{color:var(--amb);font-size:12px;margin:8px 0 0;line-height:1.5}
+.tut-caveat b{color:var(--amb)}
 .tut-flags{display:flex;flex-wrap:wrap;gap:16px;margin-top:10px;font-size:13px;color:var(--mut)}
 .tut-flags label{display:flex;align-items:center;gap:6px}
 .tut-out{margin-top:14px}
@@ -62,11 +68,15 @@ a.home{color:var(--teal);text-decoration:none}
   <label>Cl⁻ <input type="number" id="t_cl" step="0.1" placeholder="mEq/L"></label>
   <label>HCO₃ <input type="number" id="t_hco3" step="0.1" placeholder="mEq/L"></label>
   <label>Glicose <input type="number" id="t_glu" step="1" placeholder="mg/dL"></label>
-  <label>βHB <input type="number" id="t_bhb" step="0.1" placeholder="mmol/L"></label>
+  <label>Cetonúria (cruzes) <input type="number" id="t_cet" min="0" max="4" step="1" placeholder="1 a 4+"></label>
   <label>pH <input type="number" id="t_ph" step="0.01" placeholder="7,xx"></label>
   <label>Albumina <input type="number" id="t_alb" step="0.1" placeholder="4,0"></label>
   <label>K⁺ <input type="number" id="t_k" step="0.1" placeholder="opcional"></label>
   <label>Lactato <input type="number" id="t_lac" step="0.1" placeholder="opcional"></label>
+ </div>
+ <div class="tut-secondary">
+  <label>β-HB sérico <span class="tut-sec-note">(se disponível — não é padrão point-of-care no Brasil; substitui a cetonúria acima quando presente)</span> <input type="number" id="t_bhb" step="0.1" placeholder="mmol/L, opcional"></label>
+  <p class="tut-caveat">⚠️ Cetonúria mede <b>acetoacetato</b>, não β-HB. Durante o tratamento o β-HB se converte em acetoacetato — a cetonúria pode <b>piorar (mais cruzes)</b> enquanto o paciente melhora. Por isso ela serve para <b>diagnóstico</b>, mas não confirma <b>resolução</b> (isso exige β-HB sérico).</p>
  </div>
  <div class="tut-flags">
   <label><input type="checkbox" id="t_dm" checked> Diabetes conhecido</label>
@@ -609,14 +619,14 @@ a.home{color:var(--teal);text-decoration:none}
  /* Tutor: classifica um caso digitado e refere ao perfil, via window.CadCore
     (core/cad_core.js carregado como <script src>) — mesma logica, zero duplicacao. */
  const byId=Object.fromEntries(data.perfis.map(p=>[p.id,p]));
- const FIELD_LABEL={na:'Na',cl:'Cl',hco3:'HCO₃',glucoseMgDl:'Glicose',betaHydroxybutyrateMmolL:'βHB',ph:'pH'};
+ const FIELD_LABEL={na:'Na',cl:'Cl',hco3:'HCO₃',glucoseMgDl:'Glicose',ph:'pH','betaHydroxybutyrateMmolL|ketonuriaCruzes':'cetonúria (cruzes) ou β-HB'};
  function tutRender(){
   const out=$('#tut_out');
   if(!window.CadCore){out.innerHTML='<p class="tut-missing">core indisponível (falha ao carregar core/cad_core.js).</p>';return;}
   const g=id=>{const el=document.getElementById(id);const v=parseFloat(el.value);return isNaN(v)?null:v;};
   const input={
    na:g('t_na'),cl:g('t_cl'),hco3:g('t_hco3'),glucoseMgDl:g('t_glu'),
-   betaHydroxybutyrateMmolL:g('t_bhb'),ph:g('t_ph'),
+   ketonuriaCruzes:g('t_cet'),betaHydroxybutyrateMmolL:g('t_bhb'),ph:g('t_ph'),
    albumin:g('t_alb')??4.0,kMmolL:g('t_k'),lactateMmolL:g('t_lac'),
    knownDiabetes:$('#t_dm').checked,suspectedSepsis:$('#t_sepsis').checked,
   };
@@ -631,10 +641,12 @@ a.home{color:var(--teal);text-decoration:none}
    : '<p class="tut-empty">Nenhum perfil específico identificado com estes valores (critério de CAD não fechado). Isto NÃO exclui outras causas de acidose — avalie clinicamente.</p>';
   html+=notes.map(n=>`<p class="tut-empty">${n.reason}</p>`).join('');
   const c=r.computed;
-  html+=`<div class="tut-computed">AG ${c.ag} · AGc ${c.agc} · Δ/Δ ${c.deltaRatio??'—'}${c.deltaBand?' ('+c.deltaBand+')':''} · Osm efetiva ${c.effectiveOsmolality} · hasDka() ${c.hasDka} · isResolvedDka() ${c.isResolvedDka}</div>`;
+  const resolvedTxt=c.isResolvedDka===null?'incerto (sem β-HB sérico)':c.isResolvedDka;
+  const markerTxt=c.ketoneMarker==='cetonuriaCruzes'?'cetonúria':'β-HB';
+  html+=`<div class="tut-computed">AG ${c.ag} · AGc ${c.agc} · Δ/Δ ${c.deltaRatio??'—'}${c.deltaBand?' ('+c.deltaBand+')':''} · Osm efetiva ${c.effectiveOsmolality} · eixo cetônico: ${markerTxt} · hasDka() ${c.hasDka} · isResolvedDka() ${resolvedTxt}</div>`;
   out.innerHTML=html;
  }
- ['t_na','t_cl','t_hco3','t_glu','t_bhb','t_ph','t_alb','t_k','t_lac'].forEach(id=>$('#'+id).addEventListener('input',tutRender));
+ ['t_na','t_cl','t_hco3','t_glu','t_cet','t_bhb','t_ph','t_alb','t_k','t_lac'].forEach(id=>$('#'+id).addEventListener('input',tutRender));
  $('#t_dm').addEventListener('change',tutRender);
  $('#t_sepsis').addEventListener('change',tutRender);
  tutRender();

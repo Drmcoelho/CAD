@@ -5,10 +5,10 @@
   "diagnosis": {
     "glucoseMgDl": 200,
     "betaHydroxybutyrateMmolL": 3.0,
-    "ketonuriaAtLeast": "2+",
+    "ketonuriaCruzesAtLeast": 2,
     "ph": 7.30,
     "bicarbonateMmolL": 18,
-    "note": "Anion gap removido dos criterios formais em 2024."
+    "note": "Anion gap removido dos criterios formais em 2024. Cetonuria (cruzes) e alternativa ao beta-HB serico para DIAGNOSTICO (na pratica brasileira, cetonuria e o disponivel); nao serve para RESOLUCAO (acetoacetato pode subir durante o tratamento — ver resolution)."
   },
   "potassium": {
     "replaceBelowMmolL": 5.0,

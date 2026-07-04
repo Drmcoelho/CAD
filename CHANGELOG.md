@@ -62,3 +62,16 @@ Cobertura: `core/cad_core.test.js` (asserções do core) + `core/fixtures.json` 
 - **Tutor em `perfis/index.html`**: formulário no topo da página — digite os labs, o classificador aponta o(s) perfil(is) mais prováveis com o porquê e um link direto para a seção certa.
 - **Regressão do classificador**: `scripts/check_profiles.js` confirma que os 8 casos sintéticos já existentes se classificam de volta para o **próprio** perfil (top match); `core/cad_core.test.js` cobre entrada insuficiente, múltiplos matches e o caso "sem critério de CAD ativo" (matches vazio, sem forçar rótulo).
 - **CI**: `render_smoke.js` preenche o Tutor com o caso clássico e confirma a classificação ponta a ponta (com `window.CadCore` real, no navegador).
+
+## [2026-07-04] — cetonúria (cruzes) como eixo cetônico primário
+
+Correção de realidade clínica: β-HB sérico point-of-care **não é padrão no Brasil**; o que existe na prática é a fita de cetonúria em cruzes (1+ a 4+). O código tratava β-HB como obrigatório — a doutrina já registrava a alternativa ("βHB ≥3,0 **ou** cetonúria ≥2+"), mas não estava implementada.
+
+| Eixo | De | Para | Fonte · impacto |
+|---|---|---|---|
+| Diagnóstico (eixo cetônico) | β-HB obrigatório | **β-HB OU cetonúria ≥2+** (`POLICY.diagnosis.ketonuriaCruzesAtLeast = 2`) | `hasDka()` e `classifyDkaProfile()` aceitam qualquer um dos dois; cetonúria vira o campo primário do Tutor. |
+| Resolução | β-HB obrigatório | **inalterado, deliberadamente** — cetonúria não confirma resolução | Cetonúria mede acetoacetato; durante o tratamento o β-HB se converte em acetoacetato, então a cetonúria pode **piorar** enquanto o paciente melhora. `isResolvedDka()` continua exigindo β-HB sérico; sem ele, `classifyDkaProfile()` devolve `isResolvedDka: null` (incerto) e — no caso ambíguo entre "parcialmente tratada" e "hiperclorêmica" — mostra **ambos** os perfis com a ressalva, em vez de escolher um calado. |
+
+- **Achado extra corrigido**: `canon/policy.json` já tinha um campo `"ketonuriaAtLeast": "2+"` (string) sem equivalente no `core/cad_core.js` — divergência latente que o portão não pegava. Agora `ketonuriaCruzesAtLeast: 2` (número) existe nos dois lados, com checagem de igualdade em `check_consistency.js`.
+- **Tutor**: cetonúria (cruzes) é o campo primário; β-HB sérico vira secundário/opcional, com nota explícita de que substitui a cetonúria quando disponível, e um aviso amarelo nomeando a armadilha do acetoacetato.
+- Testado ponta a ponta (navegador real): classificação correta usando **só** cetonúria, sem β-HB, e o painel computado mostra qual eixo foi usado + "incerto (sem β-HB sérico)" quando aplicável.
