@@ -95,6 +95,16 @@ const perfis = read("perfis/index.html");
 // que executa o JS — este smoke é browserless e só lê o código-fonte).
 has("template do deep-link para a calculadora", perfis, 'class="calc"');
 has("deep-link usa os labs do caso (na/cl/hco3/alb)", perfis, "calcHref");
+
+// Tutor de classificacao: carrega core/cad_core.js sem duplicar formulas, e
+// tem os campos de entrada. A classificacao em si (executar JS) e do render_smoke.
+has("carrega core/cad_core.js (window.CadCore, sem duplicar formulas)", perfis, 'src="../core/cad_core.js"');
+["t_na", "t_cl", "t_hco3", "t_glu", "t_bhb", "t_ph"].forEach((id) => has(`Tutor: campo #${id}`, perfis, `id="${id}"`));
+has("Tutor: chama classifyDkaProfile", perfis, "classifyDkaProfile");
+
+// core/cad_core.js expoe window.CadCore para as paginas estaticas usarem
+has("core/cad_core.js expoe window.CadCore (UMD)", read("core/cad_core.js"), "window.CadCore");
+
 // as 16 pranchas (svg) estao indexadas
 {
   const svgLinks = (land.match(/pranchas\/lote[12]\/svg\/[^"]+\.svg/g) || []).length;

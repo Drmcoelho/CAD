@@ -12,6 +12,10 @@
  * o build quebra — a mesma filosofia de fonte única do resto do projeto,
  * aplicada à prosa clínica dos casos.
  *
+ * 3. classifyDkaProfile() (o "Tutor" de perfis/) classifica cada um dos 8
+ *    casos como o SEU PRÓPRIO perfil (top match) — regressão do classificador
+ *    contra os únicos 8 casos-gabarito que existem no projeto.
+ *
  *   node scripts/check_profiles.js
  */
 const fs = require("fs");
@@ -64,6 +68,17 @@ for (const perfil of profiles.perfis) {
       ? ok(`${perfil.id}: isResolvedDka() afirmado=${claimed} bate com o core`)
       : bad(`${perfil.id}: isResolvedDka() afirmado=${claimed} MAS core calcula ${actual}`);
   }
+
+  // classifyDkaProfile() deve apontar o proprio caso de volta para o seu perfil
+  const cls = core.classifyDkaProfile({
+    na: labs.na, cl: labs.cl, hco3: labs.hco3, glucoseMgDl: labs.glu,
+    betaHydroxybutyrateMmolL: labs.bhb, ph: labs.ph, albumin: labs.alb,
+    knownDiabetes: labs.knownDiabetes, lactateMmolL: labs.lactato ?? null,
+  });
+  const ids = cls.matches.filter((m) => m.id).map((m) => m.id);
+  ids[0] === perfil.id
+    ? ok(`${perfil.id}: classifyDkaProfile() aponta de volta para o próprio perfil (top match)`)
+    : bad(`${perfil.id}: classifyDkaProfile() top match = ${ids[0] || "nenhum"} (esperado ${perfil.id}); matches=${JSON.stringify(ids)}`);
 }
 
 console.log("");

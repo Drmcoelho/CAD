@@ -30,6 +30,22 @@ a.tc:hover{border-color:var(--teal)}
 .caso .leit{color:var(--mut);margin:0}
 a.calc{display:inline-block;margin-top:9px;background:var(--p2);border:1px solid var(--teal);color:var(--teal);border-radius:8px;padding:5px 11px;text-decoration:none;font-size:12.5px;font-weight:650}
 a.calc:hover{background:rgba(55,198,224,.12)}
+.tutor{background:var(--p);border:1px solid var(--teal);border-radius:16px;padding:18px 20px;margin-top:22px}
+.tutor h3{margin:0 0 4px;font-size:17px}
+.tut-cap{color:var(--mut);font-size:13px;margin:0 0 12px}
+.tut-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(105px,1fr));gap:8px}
+.tut-grid label{display:flex;flex-direction:column;font-size:11px;color:var(--mut);gap:3px}
+.tut-grid input{background:var(--bg);border:1px solid var(--line2);border-radius:7px;color:var(--tx);padding:6px 8px;font-size:14px;font-family:var(--mono);width:100%}
+.tut-flags{display:flex;flex-wrap:wrap;gap:16px;margin-top:10px;font-size:13px;color:var(--mut)}
+.tut-flags label{display:flex;align-items:center;gap:6px}
+.tut-out{margin-top:14px}
+a.tut-match{background:var(--p2);border:1px solid var(--line2);border-radius:10px;padding:9px 13px;margin-top:8px;display:block;text-decoration:none;color:var(--tx)}
+a.tut-match:hover{border-color:var(--teal)}
+.tut-match .nm{font-weight:700;color:var(--teal);font-size:14px}
+.tut-match .rs{color:var(--mut);font-size:12.5px;margin-top:2px}
+.tut-computed{font-family:var(--mono);font-size:12px;color:var(--mut);margin-top:10px;border-top:1px solid var(--line);padding-top:8px}
+.tut-empty,.tut-missing{font-size:13px;margin:4px 0}
+.tut-empty{color:var(--mut)}.tut-missing{color:var(--amb)}
 .foot{color:var(--mut);font-size:12.5px;margin-top:34px;border-top:1px solid var(--line);padding-top:14px;line-height:1.6}
 a.home{color:var(--teal);text-decoration:none}
 @media(max-width:520px){.tx{grid-template-columns:1fr}.tx .e{margin-top:6px}}
@@ -37,6 +53,28 @@ a.home{color:var(--teal);text-decoration:none}
 <h1>CAD 360 — Perfis de CAD</h1>
 <p class="sub">Fisiopatologia detalhada e tratamento por fenótipo. Os números clínicos derivam do canon (<code style="font-family:var(--mono);font-size:12px">core/cad_core.js</code>).</p>
 <span class="src" id="src"></span>
+
+<div class="tutor" id="tutor">
+ <h3>🩺 Tutor — classifique um caso</h3>
+ <p class="tut-cap">Digite os valores; o classificador (o mesmo <code style="font-family:var(--mono);font-size:11.5px">core/cad_core.js</code> do resto do projeto, sem lógica duplicada) aponta o(s) perfil(is) mais prováveis, o porquê, e link direto para o perfil. Não substitui julgamento clínico.</p>
+ <div class="tut-grid">
+  <label>Na⁺ <input type="number" id="t_na" step="0.1" placeholder="mEq/L"></label>
+  <label>Cl⁻ <input type="number" id="t_cl" step="0.1" placeholder="mEq/L"></label>
+  <label>HCO₃ <input type="number" id="t_hco3" step="0.1" placeholder="mEq/L"></label>
+  <label>Glicose <input type="number" id="t_glu" step="1" placeholder="mg/dL"></label>
+  <label>βHB <input type="number" id="t_bhb" step="0.1" placeholder="mmol/L"></label>
+  <label>pH <input type="number" id="t_ph" step="0.01" placeholder="7,xx"></label>
+  <label>Albumina <input type="number" id="t_alb" step="0.1" placeholder="4,0"></label>
+  <label>K⁺ <input type="number" id="t_k" step="0.1" placeholder="opcional"></label>
+  <label>Lactato <input type="number" id="t_lac" step="0.1" placeholder="opcional"></label>
+ </div>
+ <div class="tut-flags">
+  <label><input type="checkbox" id="t_dm" checked> Diabetes conhecido</label>
+  <label><input type="checkbox" id="t_sepsis"> Suspeita de sepse/choque</label>
+ </div>
+ <div id="tut_out" class="tut-out"></div>
+</div>
+
 <div class="toc" id="toc"></div>
 <div id="perfis"></div>
 <div class="foot" id="foot"></div>
@@ -470,7 +508,8 @@ a.home{color:var(--teal);text-decoration:none}
      "k": 4.5,
      "bhb": 4.0,
      "ph": 7.12,
-     "knownDiabetes": true
+     "knownDiabetes": true,
+     "lactato": 6.0
     }
    }
   },
@@ -534,6 +573,7 @@ a.home{color:var(--teal);text-decoration:none}
  ]
 }
 </script>
+<script src="../core/cad_core.js"></script>
 <script>
 (function(){
  const data=JSON.parse(document.getElementById('profiles-data').textContent);
@@ -565,6 +605,39 @@ a.home{color:var(--teal);text-decoration:none}
   </section>`;
  }).join('');
  $('#foot').innerHTML=data._meta.regime+' · Fonte: '+data._meta.fonte;
+
+ /* Tutor: classifica um caso digitado e refere ao perfil, via window.CadCore
+    (core/cad_core.js carregado como <script src>) — mesma logica, zero duplicacao. */
+ const byId=Object.fromEntries(data.perfis.map(p=>[p.id,p]));
+ const FIELD_LABEL={na:'Na',cl:'Cl',hco3:'HCO₃',glucoseMgDl:'Glicose',betaHydroxybutyrateMmolL:'βHB',ph:'pH'};
+ function tutRender(){
+  const out=$('#tut_out');
+  if(!window.CadCore){out.innerHTML='<p class="tut-missing">core indisponível (falha ao carregar core/cad_core.js).</p>';return;}
+  const g=id=>{const el=document.getElementById(id);const v=parseFloat(el.value);return isNaN(v)?null:v;};
+  const input={
+   na:g('t_na'),cl:g('t_cl'),hco3:g('t_hco3'),glucoseMgDl:g('t_glu'),
+   betaHydroxybutyrateMmolL:g('t_bhb'),ph:g('t_ph'),
+   albumin:g('t_alb')??4.0,kMmolL:g('t_k'),lactateMmolL:g('t_lac'),
+   knownDiabetes:$('#t_dm').checked,suspectedSepsis:$('#t_sepsis').checked,
+  };
+  const r=window.CadCore.classifyDkaProfile(input);
+  if(r.insufficient){
+   out.innerHTML='<p class="tut-missing">Preencha: '+r.missing.map(m=>FIELD_LABEL[m]||m).join(', ')+'.</p>';
+   return;
+  }
+  const matches=r.matches.filter(m=>m.id),notes=r.matches.filter(m=>!m.id);
+  let html=matches.length
+   ? matches.map(m=>`<a class="tut-match" href="#${slug(m.id)}"><div class="nm">→ ${byId[m.id]?byId[m.id].nome:m.id}</div><div class="rs">${m.reason}</div></a>`).join('')
+   : '<p class="tut-empty">Nenhum perfil específico identificado com estes valores (critério de CAD não fechado). Isto NÃO exclui outras causas de acidose — avalie clinicamente.</p>';
+  html+=notes.map(n=>`<p class="tut-empty">${n.reason}</p>`).join('');
+  const c=r.computed;
+  html+=`<div class="tut-computed">AG ${c.ag} · AGc ${c.agc} · Δ/Δ ${c.deltaRatio??'—'}${c.deltaBand?' ('+c.deltaBand+')':''} · Osm efetiva ${c.effectiveOsmolality} · hasDka() ${c.hasDka} · isResolvedDka() ${c.isResolvedDka}</div>`;
+  out.innerHTML=html;
+ }
+ ['t_na','t_cl','t_hco3','t_glu','t_bhb','t_ph','t_alb','t_k','t_lac'].forEach(id=>$('#'+id).addEventListener('input',tutRender));
+ $('#t_dm').addEventListener('change',tutRender);
+ $('#t_sepsis').addEventListener('change',tutRender);
+ tutRender();
 })();
 </script>
 </body></html>

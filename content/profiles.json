@@ -424,7 +424,8 @@
      "k": 4.5,
      "bhb": 4.0,
      "ph": 7.12,
-     "knownDiabetes": true
+     "knownDiabetes": true,
+     "lactato": 6.0
     }
    }
   },

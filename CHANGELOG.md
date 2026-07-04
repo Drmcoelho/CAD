@@ -54,3 +54,11 @@ Cobertura: `core/cad_core.test.js` (asserções do core) + `core/fixtures.json` 
 - **Deep-link app ↔ perfis**: cada caso tem um botão que abre a calculadora do `app/` já preenchida com os números do caso (`#calcular?na=..&cl=..&hco3=..&alb=..&glu=..`), verificado ponta a ponta (headless).
 - **Cross-link com o `tratado/`**: §1.6 (Variantes) e §5 (Manejo) agora apontam para `perfis/`, e `perfis/` aponta de volta para o tratado.
 - **CI**: `render_smoke.js` (Fase 4c) executa as saídas num Chromium e falha em erro de runtime; `check_profiles.js` no `npm run check`.
+
+## [2026-07-04] — Tutor de classificação de perfil
+
+- **`core/cad_core.js` ganha `classifyDkaProfile()`**: diferencial determinístico de perfil de CAD a partir de labs — devolve uma lista **ranqueada** de perfis plausíveis com o motivo de cada um (nunca uma caixa-preta de veredito único), mais os valores computados (AG, AGc, Δ/Δ, osm efetiva, `hasDka()`, `isResolvedDka()`). Entrada insuficiente devolve os campos que faltam, em vez de adivinhar.
+- **UMD mínimo no core**: `core/cad_core.js` passa a expor `window.CadCore` quando carregado via `<script src>` em página estática (sem bundler), preservando `module.exports` para Node/CI — mesmas fórmulas, zero duplicação entre `core/` e o HTML.
+- **Tutor em `perfis/index.html`**: formulário no topo da página — digite os labs, o classificador aponta o(s) perfil(is) mais prováveis com o porquê e um link direto para a seção certa.
+- **Regressão do classificador**: `scripts/check_profiles.js` confirma que os 8 casos sintéticos já existentes se classificam de volta para o **próprio** perfil (top match); `core/cad_core.test.js` cobre entrada insuficiente, múltiplos matches e o caso "sem critério de CAD ativo" (matches vazio, sem forçar rótulo).
+- **CI**: `render_smoke.js` preenche o Tutor com o caso clássico e confirma a classificação ponta a ponta (com `window.CadCore` real, no navegador).
