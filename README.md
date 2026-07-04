@@ -56,7 +56,9 @@ O CI (`.github/workflows/ci.yml`) roda `test` + `check` a cada push. **PR com di
 
 ## Publicar (GitHub Pages)
 
-`index.html` na raiz é a página de entrada; `app/`, `tratado/`, `painel/` e as pranchas são servidos como estáticos. Todos são single-file offline — funcionam também abrindo o arquivo direto no navegador/iOS.
+**Ao vivo:** https://drmcoelho.github.io/CAD/
+
+`index.html` na raiz é a página de entrada; `app/`, `tratado/`, `painel/` e as pranchas são servidos como estáticos. Todos são single-file offline — funcionam também abrindo o arquivo direto no navegador/iOS. O deploy é automático a cada push em `main` (workflow `.github/workflows/pages.yml`).
 
 ## Governança (regime não-SaMD)
 
