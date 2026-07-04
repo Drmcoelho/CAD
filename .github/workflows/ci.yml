@@ -16,3 +16,5 @@ jobs:
         run: node scripts/check_consistency.js
       - name: links locais
         run: node scripts/test_links.js
+      - name: smoke estrutural das saidas
+        run: node scripts/smoke_app.js

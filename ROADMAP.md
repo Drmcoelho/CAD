@@ -43,8 +43,8 @@ Divergência consciente do alvo dela: o `app/index.html` **fica single-file** (r
 - **Fase 1 — Hotfix clínico.** ✅ A1, operadores de K (≥), bicarbonato. Render revisado.
 - **Fase 2 — Testes.** ✅ 292 asserções do core + 12 fixtures (Δ/Δ 0,71/0,93/1,0/2,1, osm, K) + links.
 - **Fase 3 — Dados.** ⬜ Extrair casos/questões do HTML para `content/{cases,questions}.json`; o app e o DOCX passam a ler o mesmo banco. Critério: nenhum número clínico hardcoded em parágrafo solto ou pixel.
-- **Fase 4 — UI/render.** ⬜ (a) `build_html.py` injeta POLICY → CANON vira artefato; (b) fallback textual + tabela para os 2 canvas; (c) snapshot visual em CI.
-- **Fase 5 — Release.** ⬜ Changelog clínico (fonte/data/impacto); pacote ZIP versionado; checklist abaixo.
+- **Fase 4 — UI/render.** 🟡 (a) ⬜ `build_html.py` injeta POLICY → CANON vira artefato de build; (b) ✅ fallback textual + tabela para os 2 canvas (geradas do mesmo modelo, anti-drift); (c) 🟡 `scripts/smoke_app.js` — smoke **estrutural** browserless no CI (abas, bloco canon, tabelas, links); snapshot de **pixel** ainda aberto.
+- **Fase 5 — Release.** 🟡 ✅ Changelog clínico (`CHANGELOG.md`, fonte/data/impacto); ✅ pacote ZIP versionado (`npm run package` → `dist/cad360-<versão>.zip` via `git archive`); checklist abaixo mantido.
 
 ## 4. Checklist de release
 
