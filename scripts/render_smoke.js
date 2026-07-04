@@ -56,12 +56,42 @@ const bad = (m) => { console.error("  FAIL " + m); fails++; };
     await p.close();
   }
 
-  // perfis: renderiza os 8 perfis do bloco profiles-data
+  // perfis: renderiza os 8 perfis do bloco profiles-data, cada um com caso + deep-link
+  let calcHref = null;
   {
     const { p, errs } = await page("perfis/index.html");
     errs.length ? bad("perfis erros: " + errs.join(" | ")) : ok("perfis/index.html sem erro de runtime");
     const n = await p.evaluate(() => document.querySelectorAll(".prof").length);
     n === 8 ? ok("perfis: 8 perfis renderizados") : bad(`perfis: esperava 8, renderizou ${n}`);
+    const nCasos = await p.evaluate(() => document.querySelectorAll(".caso").length);
+    nCasos === 8 ? ok("perfis: 8 casos sintéticos renderizados") : bad(`perfis: esperava 8 casos, renderizou ${nCasos}`);
+    calcHref = await p.evaluate(() => document.querySelector("#p-classica a.calc")?.getAttribute("href") || null);
+    calcHref && calcHref.includes("na=") ? ok("perfis: deep-link para a calculadora presente") : bad("perfis: deep-link ausente/malformado");
+    await p.close();
+  }
+
+  // deep-link ponta a ponta: perfil clássico -> app/#calcular preenche e calcula
+  if (calcHref) {
+    const qs = calcHref.split("?")[1] || "";
+    const { p, errs } = await page("app/index.html#calcular?" + qs);
+    await p.waitForTimeout(200);
+    const state = await p.evaluate(() => ({
+      tab: document.querySelector("nav.tabs button.on")?.dataset.tab,
+      na2: document.getElementById("na2")?.value,
+      agcV: document.getElementById("agc_v")?.textContent,
+    }));
+    errs.length ? bad("deep-link erros: " + errs.join(" | ")) : ok("deep-link app sem erro de runtime");
+    state.tab === "calcular" ? ok("deep-link: abriu na aba Calcular") : bad(`deep-link: aba='${state.tab}' (esperava calcular)`);
+    state.na2 && state.agcV && state.agcV !== "—" ? ok(`deep-link: calculadora preenchida e calculada (AGc=${state.agcV})`) : bad("deep-link: calculadora não preencheu/calculou");
+    await p.close();
+  }
+
+  // tratado: página grande, mas deve carregar sem erro e ter os cross-links para perfis
+  {
+    const { p, errs } = await page("tratado/index.html");
+    errs.length ? bad("tratado erros: " + errs.join(" | ")) : ok("tratado/index.html sem erro de runtime");
+    const nLinks = await p.evaluate(() => document.querySelectorAll('a[href*="perfis"]').length);
+    nLinks >= 2 ? ok(`tratado: ${nLinks} cross-link(s) para perfis/`) : bad(`tratado: esperava >=2 links para perfis, achou ${nLinks}`);
     await p.close();
   }
 

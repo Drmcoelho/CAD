@@ -45,3 +45,12 @@ Cobertura: `core/cad_core.test.js` (asserções do core) + `core/fixtures.json` 
 ## [2026-07-03..04] — publicação
 
 - **GitHub Pages no ar**: `configure-pages` com `enablement: true` (deploy à prova de timing); site em https://drmcoelho.github.io/CAD/. Deploy automático a cada push em `main`.
+
+## [2026-07-04] — Fase 3 completa, perfis de CAD, deep-link
+
+- **Conteúdo pedagógico externalizado por completo**: `content/questions.json` (provão), `content/cases.json` (casos socráticos), `content/atlas.json` (banco de cálculo, escada, fenótipos, leis, projetos) — todos lidos pelo `app/` via blocos `<script type="application/json">` injetados por `build_app.js` (`--check` no CI barra edição à mão).
+- **`content/profiles.json` + `perfis/index.html`**: fisiopatologia detalhada e tratamento por eixo dos **8 fenótipos de CAD** (clássica, euglicêmica, pré-CAD, parcialmente tratada, CAD+HHS, hiperclorêmica tardia, +sepse/lactato, alcoólica/jejum), cada um com marcadores, armadilha nomeada e incerteza etiquetada.
+- **Caso sintético por perfil**: cada perfil ganha um caso com labs estruturados, calculado pelo mesmo `core/cad_core.js` (não transcrição). `scripts/check_profiles.js` recalcula AG/AGc/`hasDka()`/`isResolvedDka()` a partir dos labs e confere contra o texto — quebra o build se um número for editado sem recalcular o outro.
+- **Deep-link app ↔ perfis**: cada caso tem um botão que abre a calculadora do `app/` já preenchida com os números do caso (`#calcular?na=..&cl=..&hco3=..&alb=..&glu=..`), verificado ponta a ponta (headless).
+- **Cross-link com o `tratado/`**: §1.6 (Variantes) e §5 (Manejo) agora apontam para `perfis/`, e `perfis/` aponta de volta para o tratado.
+- **CI**: `render_smoke.js` (Fase 4c) executa as saídas num Chromium e falha em erro de runtime; `check_profiles.js` no `npm run check`.

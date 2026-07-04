@@ -19,11 +19,17 @@ a.tc:hover{border-color:var(--teal)}
 .mk .k{color:var(--mut)}.mk .v{color:var(--tx)}
 .tx{display:grid;grid-template-columns:120px 1fr;gap:5px 12px;font-size:14px}
 .tx .e{color:var(--grn);font-weight:650;font-size:13px}
-.trap,.unc{border-radius:10px;padding:10px 13px;margin-top:8px;font-size:13.5px}
+.trap,.unc,.caso{border-radius:10px;padding:10px 13px;margin-top:8px;font-size:13.5px}
 .trap{background:rgba(255,107,107,.08);border:1px solid rgba(255,107,107,.35)}
 .trap b{color:var(--red)}
 .unc{background:var(--p2);border:1px solid var(--line2);color:var(--mut)}
 .unc b{color:var(--amb)}
+.caso{background:rgba(55,198,224,.06);border:1px solid rgba(55,198,224,.3)}
+.caso b{color:var(--teal)}
+.caso .vin{margin:0 0 6px}
+.caso .leit{color:var(--mut);margin:0}
+a.calc{display:inline-block;margin-top:9px;background:var(--p2);border:1px solid var(--teal);color:var(--teal);border-radius:8px;padding:5px 11px;text-decoration:none;font-size:12.5px;font-weight:650}
+a.calc:hover{background:rgba(55,198,224,.12)}
 .foot{color:var(--mut);font-size:12.5px;margin-top:34px;border-top:1px solid var(--line);padding-top:14px;line-height:1.6}
 a.home{color:var(--teal);text-decoration:none}
 @media(max-width:520px){.tx{grid-template-columns:1fr}.tx .e{margin-top:6px}}
@@ -34,7 +40,7 @@ a.home{color:var(--teal);text-decoration:none}
 <div class="toc" id="toc"></div>
 <div id="perfis"></div>
 <div class="foot" id="foot"></div>
-<a class="home" href="../">← voltar ao índice</a>
+<a class="home" href="../">← voltar ao índice</a> · <a class="home" href="../tratado/">tratado completo →</a>
 </div>
 
 <script type="application/json" id="profiles-data">
@@ -50,150 +56,480 @@ a.home{color:var(--teal);text-decoration:none}
    "nome": "CAD clássica",
    "contexto": "DM1 (mais típico) ou DM2 sob estresse. Gatilhos: infecção, omissão/subdose de insulina, primo-descompensação, IAM/AVC, corticoide/simpaticomimético.",
    "fisiopatologia": [
-    {"passo": "Déficit de insulina + contrarregulação", "texto": "Insulina insuficiente e glucagon/catecolaminas/cortisol/GH elevados tiram o freio da lipólise. Ácidos graxos livres chegam ao fígado e a β-oxidação despeja cetoácidos (β-OHB, acetoacetato). A doença nasce da desinibição hormonal, não da glicose alta."},
-    {"passo": "Hiperglicemia franca", "texto": "Gliconeogênese e glicogenólise sem freio + queda da captação periférica levam a glicose tipicamente >250 (muitas vezes >400). É o marcador barulhento — visível, mas não é a doença."},
-    {"passo": "Diurese osmótica", "texto": "Glicose acima do limiar renal (~180) arrasta água, Na, K, Mg e fosfato. Resulta hipovolemia e queda da TFG — que retroalimenta a hiperglicemia."},
-    {"passo": "Acidose e potássio enganoso", "texto": "Os cetoácidos consomem bicarbonato → AGMA de gap alto. O K corporal está depletado (perdido na diurese), mas o K sérico lê normal/alto pelo shift transcelular (acidemia + falta de insulina). A insulina vai desmascarar esse déficit."}
+    {
+     "passo": "Déficit de insulina + contrarregulação",
+     "texto": "Insulina insuficiente e glucagon/catecolaminas/cortisol/GH elevados tiram o freio da lipólise. Ácidos graxos livres chegam ao fígado e a β-oxidação despeja cetoácidos (β-OHB, acetoacetato). A doença nasce da desinibição hormonal, não da glicose alta."
+    },
+    {
+     "passo": "Hiperglicemia franca",
+     "texto": "Gliconeogênese e glicogenólise sem freio + queda da captação periférica levam a glicose tipicamente >250 (muitas vezes >400). É o marcador barulhento — visível, mas não é a doença."
+    },
+    {
+     "passo": "Diurese osmótica",
+     "texto": "Glicose acima do limiar renal (~180) arrasta água, Na, K, Mg e fosfato. Resulta hipovolemia e queda da TFG — que retroalimenta a hiperglicemia."
+    },
+    {
+     "passo": "Acidose e potássio enganoso",
+     "texto": "Os cetoácidos consomem bicarbonato → AGMA de gap alto. O K corporal está depletado (perdido na diurese), mas o K sérico lê normal/alto pelo shift transcelular (acidemia + falta de insulina). A insulina vai desmascarar esse déficit."
+    }
    ],
-   "marcadores": {"glicose": "alta (tipicamente >250)", "cetona": "βHB ≥3,0 (ou cetonúria ≥2+)", "acidobase": "pH <7,30 e/ou HCO₃ <18", "gap": "AG alto (corrigir pela albumina)", "osm": "osm efetiva geralmente <320"},
+   "marcadores": {
+    "glicose": "alta (tipicamente >250)",
+    "cetona": "βHB ≥3,0 (ou cetonúria ≥2+)",
+    "acidobase": "pH <7,30 e/ou HCO₃ <18",
+    "gap": "AG alto (corrigir pela albumina)",
+    "osm": "osm efetiva geralmente <320"
+   },
    "tratamento": [
-    {"eixo": "Fluido", "texto": "Cristaloide para restaurar volume (ex.: ~1 L ou 15–20 mL/kg na 1ª hora, ajustado ao estado cardiovascular). Preferir balanceado em alto volume — reduz a cauda hiperclorêmica. Trocar para solução com glicose quando a glicemia cair a <250."},
-    {"eixo": "Insulina", "texto": "0,1 U/kg/h IV contínua. Reduzir para 0,05 U/kg/h quando a glicose <250, sempre com dextrose. Não interromper antes da resolução da cetose — a insulina é o único agente que desliga a cetogênese."},
-    {"eixo": "Potássio", "texto": "Dosar antes de iniciar insulina. K <3,5 → adiar insulina, repor K primeiro; 3,5–5,0 → iniciar insulina e repor para manter 4–5; ≥5,0 → insulina sem K inicial, reavaliar a cada 2 h. Reiniciar insulina quando K ≥3,5."},
-    {"eixo": "Dextrose", "texto": "Cinto de segurança: com glicose <250, associar glicose IV permite manter a insulina para fechar a cetose sem hipoglicemia."},
-    {"eixo": "Bicarbonato", "texto": "Não é rotina. Guiado pelo pH (consenso escreve <7,0; sem benefício demonstrado acima de 6,9; abaixo, nem RCT nem consenso) — decisão de terapia intensiva conforme gravidade/risco (hipocalemia, CO₂/SNC)."},
-    {"eixo": "Fosfato", "texto": "Repor apenas se <1,0 mmol/L e sintomático (fraqueza muscular/respiratória, disfunção cardíaca)."},
-    {"eixo": "Resolução", "texto": "βHB <0,6 E (pH ≥7,3 OU HCO₃ ≥18). Só então transição para insulina SC, com sobreposição de 1–2 h ao término da infusão. Glicemia normal não é resolução."}
+    {
+     "eixo": "Fluido",
+     "texto": "Cristaloide para restaurar volume (ex.: ~1 L ou 15–20 mL/kg na 1ª hora, ajustado ao estado cardiovascular). Preferir balanceado em alto volume — reduz a cauda hiperclorêmica. Trocar para solução com glicose quando a glicemia cair a <250."
+    },
+    {
+     "eixo": "Insulina",
+     "texto": "0,1 U/kg/h IV contínua. Reduzir para 0,05 U/kg/h quando a glicose <250, sempre com dextrose. Não interromper antes da resolução da cetose — a insulina é o único agente que desliga a cetogênese."
+    },
+    {
+     "eixo": "Potássio",
+     "texto": "Dosar antes de iniciar insulina. K <3,5 → adiar insulina, repor K primeiro; 3,5–5,0 → iniciar insulina e repor para manter 4–5; ≥5,0 → insulina sem K inicial, reavaliar a cada 2 h. Reiniciar insulina quando K ≥3,5."
+    },
+    {
+     "eixo": "Dextrose",
+     "texto": "Cinto de segurança: com glicose <250, associar glicose IV permite manter a insulina para fechar a cetose sem hipoglicemia."
+    },
+    {
+     "eixo": "Bicarbonato",
+     "texto": "Não é rotina. Guiado pelo pH (consenso escreve <7,0; sem benefício demonstrado acima de 6,9; abaixo, nem RCT nem consenso) — decisão de terapia intensiva conforme gravidade/risco (hipocalemia, CO₂/SNC)."
+    },
+    {
+     "eixo": "Fosfato",
+     "texto": "Repor apenas se <1,0 mmol/L e sintomático (fraqueza muscular/respiratória, disfunção cardíaca)."
+    },
+    {
+     "eixo": "Resolução",
+     "texto": "βHB <0,6 E (pH ≥7,3 OU HCO₃ ≥18). Só então transição para insulina SC, com sobreposição de 1–2 h ao término da infusão. Glicemia normal não é resolução."
+    }
    ],
    "armadilha": "Subestimar o déficit de volume e de potássio; desligar a insulina quando a glicose normaliza mas a cetose persiste — reabre o dente-de-serra.",
-   "incerteza": "O bolus inicial de insulina é opcional (evidência fraca; a infusão contínua basta). Bicarbonato abaixo de 6,9 não tem RCT que guie."
+   "incerteza": "O bolus inicial de insulina é opcional (evidência fraca; a infusão contínua basta). Bicarbonato abaixo de 6,9 não tem RCT que guie.",
+   "caso": {
+    "vinheta": "Homem, 24 anos, DM1, 3 dias sem aplicar insulina (\"acabou o cartão\"). Prostrado, taquipneico, hálito cetônico. Na 132 · Cl 92 · HCO₃ 8 · albumina 4,2 · glicose 480 · K 5,2 · βHB 6,5 · pH 7,15.",
+    "leitura": "AG = 132 − (92+8) = 32; AGc (alb 4,2) = 31,5. Δ/Δ = (31,5−12)/(24−8) = 19,5/16 = 1,22 → banda 1–2, AGMA de gap alto limpa (sem cauda hiperclorêmica somada). Winter esperado = 1,5·8+8 = 20 ± 2 (checar se o pCO₂ medido bate). Osm efetiva = 2·132 + 480/18 = 290,7 → não é HHS. hasDka() = verdadeiro (βHB 6,5 ≥3 + pH 7,15 <7,30). K 5,2 ≥5,0 → banda alta: iniciar insulina 0,1 U/kg/h SEM potássio inicial, reavaliar K a cada 2 h — o valor alto aqui é o shift transcelular, não déficit corporal ausente; a insulina vai revelar a queda.",
+    "labs": {
+     "na": 132,
+     "cl": 92,
+     "hco3": 8,
+     "alb": 4.2,
+     "glu": 480,
+     "k": 5.2,
+     "bhb": 6.5,
+     "ph": 7.15,
+     "knownDiabetes": true
+    }
+   }
   },
   {
    "id": "euglicemica",
    "nome": "CAD euglicêmica",
    "contexto": "Inibidor de SGLT2 (dapa/empa/cana), jejum prolongado, gestação, doença hepática/etilismo, baixa reserva de glicogênio. Até ~30% das CAD na gestação são euglicêmicas.",
    "fisiopatologia": [
-    {"passo": "Cetogênese sem hiperglicemia", "texto": "O déficit relativo de insulina com contrarregulação ainda dispara lipólise e cetogênese — mas a glicose sérica fica normal/modesta."},
-    {"passo": "Por que a glicose não sobe", "texto": "SGLT2i causa glicosúria contínua (escoa glicose pelo rim, reduz insulina endógena e eleva glucagon, favorecendo cetogênese e reabsorção de cetoânion). Jejum/gestação reduzem substrato e aumentam consumo. A cetose roda sem o freio da hiperglicemia visível."},
-    {"passo": "A glicose baixa mascara a doença", "texto": "O destro 'normal' engana; o diagnóstico é a cetose + acidose, não a glicemia. É o fenótipo do atraso diagnóstico."}
+    {
+     "passo": "Cetogênese sem hiperglicemia",
+     "texto": "O déficit relativo de insulina com contrarregulação ainda dispara lipólise e cetogênese — mas a glicose sérica fica normal/modesta."
+    },
+    {
+     "passo": "Por que a glicose não sobe",
+     "texto": "SGLT2i causa glicosúria contínua (escoa glicose pelo rim, reduz insulina endógena e eleva glucagon, favorecendo cetogênese e reabsorção de cetoânion). Jejum/gestação reduzem substrato e aumentam consumo. A cetose roda sem o freio da hiperglicemia visível."
+    },
+    {
+     "passo": "A glicose baixa mascara a doença",
+     "texto": "O destro 'normal' engana; o diagnóstico é a cetose + acidose, não a glicemia. É o fenótipo do atraso diagnóstico."
+    }
    ],
-   "marcadores": {"glicose": "normal ou modesta (<200–250)", "cetona": "βHB ≥3,0", "acidobase": "pH <7,30 e/ou HCO₃ <18", "gap": "AG alto (corrigir pela albumina — pode estar 'escondido')", "osm": "osm efetiva normal (não é HHS)"},
+   "marcadores": {
+    "glicose": "normal ou modesta (<200–250)",
+    "cetona": "βHB ≥3,0",
+    "acidobase": "pH <7,30 e/ou HCO₃ <18",
+    "gap": "AG alto (corrigir pela albumina — pode estar 'escondido')",
+    "osm": "osm efetiva normal (não é HHS)"
+   },
    "tratamento": [
-    {"eixo": "Diagnóstico", "texto": "Não descartar pelo destro. Dosar βHB + gasometria em todo diabético (ou usuário de SGLT2i) prostrado/acidótico, independentemente da glicose."},
-    {"eixo": "Insulina + dextrose", "texto": "Insulina 0,1 U/kg/h COM dextrose desde o início (a glicose já é baixa e vai cair). A insulina fecha a cetogênese; a dextrose mantém a insulina rodando. Manter glicose ~150–200 com D5–D10 até a cetose resolver."},
-    {"eixo": "Potássio", "texto": "Mesma regra do canon: repor se <5,0; adiar insulina se <3,5; reiniciar quando ≥3,5."},
-    {"eixo": "Fluido", "texto": "Cristaloide balanceado por volume — evita fabricar a cauda hiperclorêmica."},
-    {"eixo": "Suspender o gatilho", "texto": "Parar o SGLT2i imediatamente — é o motor que perpetua glicosúria e cetogênese. Não reintroduzir até resolução e reavaliação (suspensão peri-operatória alguns dias antes de cirurgia eletiva)."},
-    {"eixo": "Gestação", "texto": "Envolver obstetrícia; monitorização fetal; limiar de tratamento mais baixo e vigilância redobrada."},
-    {"eixo": "Resolução", "texto": "βHB <0,6 E (pH ≥7,3 OU HCO₃ ≥18). Glicemia normal não é resolução — aqui isso é literal, já que ela nunca esteve alta."}
+    {
+     "eixo": "Diagnóstico",
+     "texto": "Não descartar pelo destro. Dosar βHB + gasometria em todo diabético (ou usuário de SGLT2i) prostrado/acidótico, independentemente da glicose."
+    },
+    {
+     "eixo": "Insulina + dextrose",
+     "texto": "Insulina 0,1 U/kg/h COM dextrose desde o início (a glicose já é baixa e vai cair). A insulina fecha a cetogênese; a dextrose mantém a insulina rodando. Manter glicose ~150–200 com D5–D10 até a cetose resolver."
+    },
+    {
+     "eixo": "Potássio",
+     "texto": "Mesma regra do canon: repor se <5,0; adiar insulina se <3,5; reiniciar quando ≥3,5."
+    },
+    {
+     "eixo": "Fluido",
+     "texto": "Cristaloide balanceado por volume — evita fabricar a cauda hiperclorêmica."
+    },
+    {
+     "eixo": "Suspender o gatilho",
+     "texto": "Parar o SGLT2i imediatamente — é o motor que perpetua glicosúria e cetogênese. Não reintroduzir até resolução e reavaliação (suspensão peri-operatória alguns dias antes de cirurgia eletiva)."
+    },
+    {
+     "eixo": "Gestação",
+     "texto": "Envolver obstetrícia; monitorização fetal; limiar de tratamento mais baixo e vigilância redobrada."
+    },
+    {
+     "eixo": "Resolução",
+     "texto": "βHB <0,6 E (pH ≥7,3 OU HCO₃ ≥18). Glicemia normal não é resolução — aqui isso é literal, já que ela nunca esteve alta."
+    }
    ],
    "armadilha": "\"A glicose está boa\" → descartar CAD pelo destro. O destro é o mentiroso da sala; a cetona é a testemunha.",
-   "incerteza": "O limiar de glicose 'euglicêmico' varia entre fontes (<200 vs <250). O tempo de suspensão peri-operatória do SGLT2i é inferência de bula/consenso, não RCT."
+   "incerteza": "O limiar de glicose 'euglicêmico' varia entre fontes (<200 vs <250). O tempo de suspensão peri-operatória do SGLT2i é inferência de bula/consenso, não RCT.",
+   "caso": {
+    "vinheta": "Mulher, 55 anos, DM2 em empagliflozina, vômitos há 2 dias, baixa ingesta. Glicose 172 (\"normal, doutor\") — Na 139 · Cl 100 · HCO₃ 11 · albumina 4,0 · K 4,4 · βHB 5,9 · pH 7,19.",
+    "leitura": "AG = 139 − (100+11) = 28; AGc = 28 (albumina normal, sem correção). Δ/Δ = (28−12)/(24−11) = 16/13 = 1,23 → banda 1–2, AGMA limpa — a glicose baixa não é sinal de gap normal. hasDka() = verdadeiro: βHB 5,9 ≥3 + pH 7,19 <7,30 fecham o diagnóstico INDEPENDENTE da glicose (o eixo glicêmico do critério é satisfeito por knownDiabetes, não pelo valor 172). K 4,4 → banda 3,5–5,0: iniciar insulina 0,1→0,05 U/kg/h (glicose já <250) COM dextrose desde a primeira bolsa — aqui a dextrose não é resgate de hipoglicemia, é o que permite manter a insulina ligada. Suspender o SGLT2i.",
+    "labs": {
+     "na": 139,
+     "cl": 100,
+     "hco3": 11,
+     "alb": 4.0,
+     "glu": 172,
+     "k": 4.4,
+     "bhb": 5.9,
+     "ph": 7.19,
+     "knownDiabetes": true
+    }
+   }
   },
   {
    "id": "pre-cad",
    "nome": "Pré-CAD / cetose sem acidose",
    "contexto": "Fase inicial: cetose incipiente em diabético em jejum/doente ou usuário de SGLT2i, antes de a acidose franca se instalar. Janela de intervenção.",
    "fisiopatologia": [
-    {"passo": "Cetogênese iniciada", "texto": "O déficit relativo de insulina já ativou a lipólise/cetogênese; a cetona sobe."},
-    {"passo": "Tampão ainda compensa", "texto": "A capacidade tampão (bicarbonato, respiração) ainda segura o pH → HCO₃/pH normais ou limítrofes, com AG começando a subir. Ainda não há critério formal de CAD."}
+    {
+     "passo": "Cetogênese iniciada",
+     "texto": "O déficit relativo de insulina já ativou a lipólise/cetogênese; a cetona sobe."
+    },
+    {
+     "passo": "Tampão ainda compensa",
+     "texto": "A capacidade tampão (bicarbonato, respiração) ainda segura o pH → HCO₃/pH normais ou limítrofes, com AG começando a subir. Ainda não há critério formal de CAD."
+    }
    ],
-   "marcadores": {"glicose": "variável", "cetona": "alta / subindo", "acidobase": "pH e HCO₃ ainda normais ou limítrofes", "gap": "normal a alto (em ascensão)", "osm": "normal"},
+   "marcadores": {
+    "glicose": "variável",
+    "cetona": "alta / subindo",
+    "acidobase": "pH e HCO₃ ainda normais ou limítrofes",
+    "gap": "normal a alto (em ascensão)",
+    "osm": "normal"
+   },
    "tratamento": [
-    {"eixo": "Corrigir o gatilho", "texto": "Hidratar; oferecer carboidrato e/ou ajustar insulina conforme o contexto; suspender SGLT2i; tratar a doença de base (infecção, jejum)."},
-    {"eixo": "Monitorizar", "texto": "βHB seriado + gasometria. A pergunta é a tendência, não o rótulo: interceptar antes da acidose."},
-    {"eixo": "Insulina/basal", "texto": "Ajustar a insulina basal para frear a cetogênese; evitar jejum sem cobertura."}
+    {
+     "eixo": "Corrigir o gatilho",
+     "texto": "Hidratar; oferecer carboidrato e/ou ajustar insulina conforme o contexto; suspender SGLT2i; tratar a doença de base (infecção, jejum)."
+    },
+    {
+     "eixo": "Monitorizar",
+     "texto": "βHB seriado + gasometria. A pergunta é a tendência, não o rótulo: interceptar antes da acidose."
+    },
+    {
+     "eixo": "Insulina/basal",
+     "texto": "Ajustar a insulina basal para frear a cetogênese; evitar jejum sem cobertura."
+    }
    ],
    "armadilha": "Esperar a acidose aparecer para 'confirmar CAD' e só então agir. Trata-se a tendência da cetose, não o carimbo diagnóstico.",
-   "incerteza": "É um pré-estado sem critério formal; o limiar de intervenção é clínico e depende do contexto."
+   "incerteza": "É um pré-estado sem critério formal; o limiar de intervenção é clínico e depende do contexto.",
+   "caso": {
+    "vinheta": "Homem, 30 anos, DM1, gastroenterite há 1 dia, reduziu a insulina \"para não hipoglicemiar\". Glicose 210 · Na 138 · Cl 100 · HCO₃ 20 · albumina 4,0 · K 4,0 · βHB 3,4 · pH 7,32.",
+    "leitura": "AG = 138 − (100+20) = 18, discretamente elevado. hasDka() = FALSO: βHB 3,4 já cruza o limiar cetônico (≥3,0), mas o eixo ácido não fecha — pH 7,32 não é <7,30 E HCO₃ 20 não é <18. Formalmente ainda não é CAD; é a fase em que o tampão segura. A leitura certa não é 'não é CAD, relaxa' — é 'cetose subindo, agir agora': hidratar, ajustar a insulina basal (não reduzir mais), tratar a gastroenterite, e repetir βHB/gasometria em poucas horas para ver a tendência, não o carimbo.",
+    "labs": {
+     "na": 138,
+     "cl": 100,
+     "hco3": 20,
+     "alb": 4.0,
+     "glu": 210,
+     "k": 4.0,
+     "bhb": 3.4,
+     "ph": 7.32,
+     "knownDiabetes": true
+    }
+   }
   },
   {
    "id": "parcial",
    "nome": "CAD parcialmente tratada",
    "contexto": "Já em tratamento (gap caindo, pH melhorando) e ainda não resolvida; ou paciente que recebeu insulina antes de chegar.",
    "fisiopatologia": [
-    {"passo": "Cetose resolvendo", "texto": "O gap corrigido cai — a cetona está saindo do sangue com a insulina."},
-    {"passo": "HCO₃ recupera por último", "texto": "A regeneração renal de bicarbonato é lenta (amoniagênese, acidez titulável) e parte do 'bicarbonato potencial' foi perdida como cetoânion na urina. O pH pode melhorar antes de a doença fechar; o HCO₃ é o último a subir."}
+    {
+     "passo": "Cetose resolvendo",
+     "texto": "O gap corrigido cai — a cetona está saindo do sangue com a insulina."
+    },
+    {
+     "passo": "HCO₃ recupera por último",
+     "texto": "A regeneração renal de bicarbonato é lenta (amoniagênese, acidez titulável) e parte do 'bicarbonato potencial' foi perdida como cetoânion na urina. O pH pode melhorar antes de a doença fechar; o HCO₃ é o último a subir."
+    }
    ],
-   "marcadores": {"glicose": "menor", "cetona": "ainda presente, mas caindo", "acidobase": "pH melhorando", "gap": "corrigido em queda", "osm": "normalizando"},
+   "marcadores": {
+    "glicose": "menor",
+    "cetona": "ainda presente, mas caindo",
+    "acidobase": "pH melhorando",
+    "gap": "corrigido em queda",
+    "osm": "normalizando"
+   },
    "tratamento": [
-    {"eixo": "Manter insulina + dextrose", "texto": "Continuar a infusão com dextrose até a resolução real — não desligar porque a glicose normalizou."},
-    {"eixo": "Potássio", "texto": "Manter reposição/monitorização (a insulina continua empurrando K para dentro)."},
-    {"eixo": "Transição", "texto": "Só passar para insulina SC após resolução (βHB <0,6 E pH ≥7,3 OU HCO₃ ≥18), com sobreposição de 1–2 h."}
+    {
+     "eixo": "Manter insulina + dextrose",
+     "texto": "Continuar a infusão com dextrose até a resolução real — não desligar porque a glicose normalizou."
+    },
+    {
+     "eixo": "Potássio",
+     "texto": "Manter reposição/monitorização (a insulina continua empurrando K para dentro)."
+    },
+    {
+     "eixo": "Transição",
+     "texto": "Só passar para insulina SC após resolução (βHB <0,6 E pH ≥7,3 OU HCO₃ ≥18), com sobreposição de 1–2 h."
+    }
    ],
    "armadilha": "Desligar a insulina cedo (glicose normal) → recidiva da cetose; ou ler o HCO₃ baixo tardio como 'cetose persistente' e empilhar insulina.",
-   "incerteza": "—"
+   "incerteza": "—",
+   "caso": {
+    "vinheta": "18 h de tratamento de CAD. Glicose já 145, o time pergunta se pode reduzir a insulina. Na 136 · Cl 99 · HCO₃ 15 · albumina 4,0 · K 4,2 · βHB 1,0 · pH 7,29.",
+    "leitura": "AG = 136 − (99+15) = 22; AGc = 22. Δ/Δ = (22−12)/(24−15) = 10/9 = 1,11 → banda 1–2, ainda AGMA (gap fechando, não hiperclorêmica ainda). O ponto fino: hasDka() = FALSO (βHB 1,0 já caiu abaixo do limiar diagnóstico de 3,0 — o eixo cetônico 'desliga' mesmo com pH/HCO₃ ainda anormais) E isResolvedDka() = FALSO (βHB 1,0 não é <0,6; nem pH nem HCO₃ atingem a meta). Ou seja: não é mais 'CAD nova' pelo critério formal, mas também não está resolvida — é exatamente a zona de trânsito que este perfil descreve. Conduta: manter insulina + dextrose (glicose já baixa), não transicionar para SC ainda, repetir βHB/gasometria até fechar a resolução real.",
+    "labs": {
+     "na": 136,
+     "cl": 99,
+     "hco3": 15,
+     "alb": 4.0,
+     "glu": 145,
+     "k": 4.2,
+     "bhb": 1.0,
+     "ph": 7.29,
+     "knownDiabetes": true
+    }
+   }
   },
   {
    "id": "cad-hhs",
    "nome": "CAD + HHS (sobreposição)",
    "contexto": "Sobreposição de cetoacidose e estado hiperglicêmico hiperosmolar — tipicamente idoso/DM2 com desidratação intensa e glicose muito alta.",
    "fisiopatologia": [
-    {"passo": "Dois eixos somados", "texto": "Cetogênese (componente CAD) coexiste com hiperosmolaridade e desidratação extrema (componente HHS). A diurese osmótica maciça gera hipovolemia grave e déficit de água livre."},
-    {"passo": "Osmolaridade e neurologia", "texto": "A osm efetiva ultrapassa 320 e rebaixa a consciência. O Na corrigido (fator 1,6; 2,4 se glicose >400) sinaliza o tamanho do déficit de água livre — mas serve para o déficit, não para a fórmula de osm."}
+    {
+     "passo": "Dois eixos somados",
+     "texto": "Cetogênese (componente CAD) coexiste com hiperosmolaridade e desidratação extrema (componente HHS). A diurese osmótica maciça gera hipovolemia grave e déficit de água livre."
+    },
+    {
+     "passo": "Osmolaridade e neurologia",
+     "texto": "A osm efetiva ultrapassa 320 e rebaixa a consciência. O Na corrigido (fator 1,6; 2,4 se glicose >400) sinaliza o tamanho do déficit de água livre — mas serve para o déficit, não para a fórmula de osm."
+    }
    ],
-   "marcadores": {"glicose": "muito alta", "cetona": "alta (componente CAD)", "acidobase": "acidose presente", "gap": "alto", "osm": "osm efetiva >320 (= 2·Na MEDIDO + glicose/18; critério HHS)"},
+   "marcadores": {
+    "glicose": "muito alta",
+    "cetona": "alta (componente CAD)",
+    "acidobase": "acidose presente",
+    "gap": "alto",
+    "osm": "osm efetiva >320 (= 2·Na MEDIDO + glicose/18; critério HHS)"
+   },
    "tratamento": [
-    {"eixo": "Fluido (prioridade)", "texto": "O déficit de volume é maior que na CAD isolada — a reposição hídrica é o carro-chefe. Guiar por perfusão e estado cardiovascular."},
-    {"eixo": "Insulina", "texto": "0,1 U/kg/h — o componente cetótico exige insulina (diferente do HHS puro, onde o volume domina)."},
-    {"eixo": "Sódio / osmolaridade", "texto": "Corrigir Na e osm de forma gradual; queda rápida da osm arrisca edema cerebral. Metas graduais e monitorização neurológica."},
-    {"eixo": "Potássio / dextrose", "texto": "K conforme o canon; associar dextrose quando a glicose cair a <250–300, mantendo a insulina."}
+    {
+     "eixo": "Fluido (prioridade)",
+     "texto": "O déficit de volume é maior que na CAD isolada — a reposição hídrica é o carro-chefe. Guiar por perfusão e estado cardiovascular."
+    },
+    {
+     "eixo": "Insulina",
+     "texto": "0,1 U/kg/h — o componente cetótico exige insulina (diferente do HHS puro, onde o volume domina)."
+    },
+    {
+     "eixo": "Sódio / osmolaridade",
+     "texto": "Corrigir Na e osm de forma gradual; queda rápida da osm arrisca edema cerebral. Metas graduais e monitorização neurológica."
+    },
+    {
+     "eixo": "Potássio / dextrose",
+     "texto": "K conforme o canon; associar dextrose quando a glicose cair a <250–300, mantendo a insulina."
+    }
    ],
    "armadilha": "Usar o Na CORRIGIDO dentro da osm efetiva (dupla-conta a glicose). Ex.: Na 130 / glicose 600 → efetiva = 2·130 + 600/18 = 293,3 (medido), não 317,3. E corrigir a osm rápido demais.",
-   "incerteza": "As velocidades-alvo de correção de Na/osm são de consenso/segurança, não de RCT. O comentário de 2024 propõe osm efetiva >300 como alerta (status diferente do critério 320)."
+   "incerteza": "As velocidades-alvo de correção de Na/osm são de consenso/segurança, não de RCT. O comentário de 2024 propõe osm efetiva >300 como alerta (status diferente do critério 320).",
+   "caso": {
+    "vinheta": "Mulher, 71 anos, DM2, 5 dias prostrada em casa, baixa ingesta hídrica. Sonolenta, mucosas secas. Na 130 · Cl 88 · HCO₃ 14 · albumina 4,0 · glicose 600 · K 4,6 · βHB 4,2 · pH 7,21.",
+    "leitura": "AG = 130 − (88+14) = 28; AGc = 28. Δ/Δ = (28−12)/(24−14) = 16/10 = 1,60 → banda 1–2. Osm efetiva = 2·130 + 600/18 = 260 + 33,3 = 293,3 (Na MEDIDO) — ainda abaixo de 320, então não fecha HHS por esse critério isolado, mas já está no alerta do comentário 2024 (>300 está perto). hasDka() = verdadeiro (βHB 4,2 + pH 7,21). Na CORRIGIDO = 130 + 2,4·(600−100)/100 = 142,0 — esse número mede o déficit de água livre (relevante para reposição), mas usá-lo na fórmula de osm daria 2·142+33,3=317,3, dobrando a contagem da glicose. Conduta: fluido é prioridade (déficit maior que CAD isolada), insulina 0,1 U/kg/h (o componente cetótico exige), correção gradual de Na/osm com monitorização neurológica.",
+    "labs": {
+     "na": 130,
+     "cl": 88,
+     "hco3": 14,
+     "alb": 4.0,
+     "glu": 600,
+     "k": 4.6,
+     "bhb": 4.2,
+     "ph": 7.21,
+     "knownDiabetes": true
+    }
+   }
   },
   {
    "id": "hipercloremica",
    "nome": "CAD hiperclorêmica (tardia)",
    "contexto": "24–48 h de tratamento com SF 0,9% em volume. A cetose já resolveu, mas o pH segue preso.",
    "fisiopatologia": [
-    {"passo": "Troca de acidose", "texto": "A AGMA da cetose foi substituída por uma acidose hiperclorêmica de gap normal. A cadeira que era da cetona passou a ser do cloro."},
-    {"passo": "A ressuscitação fabricou a cauda", "texto": "SF 0,9% entrega Cl 154 mEq/L, muito acima do plasma; o rim leva 24–48 h para excretar essa carga. O Δ/Δ cai abaixo de 1, o Cl sobe e o HCO₃ fica preso."}
+    {
+     "passo": "Troca de acidose",
+     "texto": "A AGMA da cetose foi substituída por uma acidose hiperclorêmica de gap normal. A cadeira que era da cetona passou a ser do cloro."
+    },
+    {
+     "passo": "A ressuscitação fabricou a cauda",
+     "texto": "SF 0,9% entrega Cl 154 mEq/L, muito acima do plasma; o rim leva 24–48 h para excretar essa carga. O Δ/Δ cai abaixo de 1, o Cl sobe e o HCO₃ fica preso."
+    }
    ],
-   "marcadores": {"glicose": "controlada", "cetona": "baixa/ausente", "acidobase": "pH preso, HCO₃ baixo", "gap": "corrigido baixo (Δ/Δ <1)", "osm": "normal"},
+   "marcadores": {
+    "glicose": "controlada",
+    "cetona": "baixa/ausente",
+    "acidobase": "pH preso, HCO₃ baixo",
+    "gap": "corrigido baixo (Δ/Δ <1)",
+    "osm": "normal"
+   },
    "tratamento": [
-    {"eixo": "Parar de alimentar cloro", "texto": "Trocar SF por cristaloide balanceado. A causa é o cloro exógeno; a correção é não adicioná-lo mais."},
-    {"eixo": "Tempo ao rim", "texto": "Quem resolve o cloro é o rim, com tempo. A conduta é paciência informada, não intervenção."},
-    {"eixo": "Não empilhar insulina", "texto": "Insulina fecha cetogênese; não excreta cloro. Insistir aqui só arrisca hipoglicemia e hipocalemia sem tocar no pH."},
-    {"eixo": "Prevenção", "texto": "Usar balanceado desde o início em quem vai receber alto volume evita a cauda."}
+    {
+     "eixo": "Parar de alimentar cloro",
+     "texto": "Trocar SF por cristaloide balanceado. A causa é o cloro exógeno; a correção é não adicioná-lo mais."
+    },
+    {
+     "eixo": "Tempo ao rim",
+     "texto": "Quem resolve o cloro é o rim, com tempo. A conduta é paciência informada, não intervenção."
+    },
+    {
+     "eixo": "Não empilhar insulina",
+     "texto": "Insulina fecha cetogênese; não excreta cloro. Insistir aqui só arrisca hipoglicemia e hipocalemia sem tocar no pH."
+    },
+    {
+     "eixo": "Prevenção",
+     "texto": "Usar balanceado desde o início em quem vai receber alto volume evita a cauda."
+    }
    ],
    "armadilha": "Tratar o cloro com insulina / manter jejum / repetir bolus — dente-de-serra iatrogênico. E chamar Δ/Δ <1 de 'pura' sem olhar Cl/tendência.",
-   "incerteza": "—"
+   "incerteza": "—",
+   "caso": {
+    "vinheta": "36 h de tratamento com SF 0,9% em grande volume. Glicose já 130, mas pH 7,31 e HCO₃ 13 seguem \"não fechando\". Na 138 · Cl 110 · albumina 4,0 · K 4,0 · βHB 0,4.",
+    "leitura": "AG = 138 − (110+13) = 15, normal. Δ/Δ = (15−12)/(24−13) = 3/11 = 0,27 → banda <1, cauda hiperclorêmica franca (o gap não explica mais o HCO₃ baixo). O ponto que este caso prova em número: isResolvedDka() = VERDADEIRO — βHB 0,4 <0,6 E pH 7,31 ≥7,3 (a condição é 'OU'; HCO₃ 13 não precisa cumprir). A cetose está formalmente resolvida; o HCO₃ baixo é só o cloro que o rim ainda não excretou. Empilhar insulina ou manter jejum aqui não toca nesse número — a conduta é trocar SF por balanceado e dar tempo ao rim.",
+    "labs": {
+     "na": 138,
+     "cl": 110,
+     "hco3": 13,
+     "alb": 4.0,
+     "glu": 130,
+     "k": 4.0,
+     "bhb": 0.4,
+     "ph": 7.31,
+     "knownDiabetes": true
+    }
+   }
   },
   {
    "id": "sepse-lactato",
    "nome": "CAD + sepse / lactato (acidose mista)",
    "contexto": "CAD com infecção grave ou choque — acidose láctica somada à cetótica.",
    "fisiopatologia": [
-    {"passo": "Dois ácidos no mesmo gap", "texto": "O AG alto tem componente cetótico (β-OHB, acetoacetato) e componente láctico (hipoperfusão/sepse). A hipoperfusão agrava os dois."},
-    {"passo": "Medida enganosa", "texto": "O nitroprussiato mede acetoacetato e subestima o β-OHB; o lactato eleva o gap por outra via. O gap isolado não diz qual ácido domina — exige seriação de βHB e lactato."}
+    {
+     "passo": "Dois ácidos no mesmo gap",
+     "texto": "O AG alto tem componente cetótico (β-OHB, acetoacetato) e componente láctico (hipoperfusão/sepse). A hipoperfusão agrava os dois."
+    },
+    {
+     "passo": "Medida enganosa",
+     "texto": "O nitroprussiato mede acetoacetato e subestima o β-OHB; o lactato eleva o gap por outra via. O gap isolado não diz qual ácido domina — exige seriação de βHB e lactato."
+    }
    ],
-   "marcadores": {"glicose": "variável", "cetona": "alta", "acidobase": "acidose mista", "gap": "alto e multifatorial", "osm": "variável (buscar foco infeccioso)"},
+   "marcadores": {
+    "glicose": "variável",
+    "cetona": "alta",
+    "acidobase": "acidose mista",
+    "gap": "alto e multifatorial",
+    "osm": "variável (buscar foco infeccioso)"
+   },
    "tratamento": [
-    {"eixo": "Tratar as duas doenças", "texto": "CAD (insulina + fluido + K conforme canon) E sepse (controle de foco, antibiótico precoce, ressuscitação hemodinâmica guiada por perfusão)."},
-    {"eixo": "Seriar os dois ácidos", "texto": "Acompanhar βHB E lactato — não assumir que toda a acidose é cetose."},
-    {"eixo": "Volume", "texto": "Guiado por perfusão/hemodinâmica; o choque muda as metas de fluido em relação à CAD isolada."}
+    {
+     "eixo": "Tratar as duas doenças",
+     "texto": "CAD (insulina + fluido + K conforme canon) E sepse (controle de foco, antibiótico precoce, ressuscitação hemodinâmica guiada por perfusão)."
+    },
+    {
+     "eixo": "Seriar os dois ácidos",
+     "texto": "Acompanhar βHB E lactato — não assumir que toda a acidose é cetose."
+    },
+    {
+     "eixo": "Volume",
+     "texto": "Guiado por perfusão/hemodinâmica; o choque muda as metas de fluido em relação à CAD isolada."
+    }
    ],
    "armadilha": "Atribuir toda a acidose à cetose e perder a sepse/o lactato — o que mata é a infecção não tratada.",
-   "incerteza": "A contribuição relativa de cada acidose é dinâmica; a interpretação do gap depende de seriação, não de um ponto único."
+   "incerteza": "A contribuição relativa de cada acidose é dinâmica; a interpretação do gap depende de seriação, não de um ponto único.",
+   "caso": {
+    "vinheta": "Homem, 45 anos, DM2, pielonefrite + hipotensão. Glicose 350 · Na 133 · Cl 100 · HCO₃ 9 · albumina 3,0 · K 4,5 · βHB 4,0 · lactato 6,0 · pH 7,12.",
+    "leitura": "AG = 133 − (100+9) = 24; AGc (alb 3,0) = 24 + 2,5·(4,0−3,0) = 26,5 — a hipoalbuminemia escondia ~2,5 pontos de gap. Δ/Δ = (26,5−12)/(24−9) = 14,5/15 = 0,97 → banda <1, no limite — mas aqui o número é ambíguo por natureza: o AG tem cetona E lactato somados, e o Δ/Δ não separa os dois ácidos (é a limitação nomeada deste perfil). hasDka() = verdadeiro (βHB 4,0 + pH 7,12). Conduta dupla: CAD (insulina 0,1 U/kg/h, K conforme banda, fluido) E sepse (foco + antibiótico precoce + ressuscitação guiada por perfusão) — tratar só a CAD e perder a sepse é o erro que mata.",
+    "labs": {
+     "na": 133,
+     "cl": 100,
+     "hco3": 9,
+     "alb": 3.0,
+     "glu": 350,
+     "k": 4.5,
+     "bhb": 4.0,
+     "ph": 7.12,
+     "knownDiabetes": true
+    }
+   }
   },
   {
    "id": "alcoolica-jejum",
    "nome": "Cetose alcoólica / de jejum (não-diabética)",
    "contexto": "Etilista em jejum/vômitos, ou jejum prolongado. Glicose baixa/normal; não é CAD diabética.",
    "fisiopatologia": [
-    {"passo": "Cetogênese sem CAD diabética", "texto": "Depleção de glicogênio + álcool desviam o metabolismo para cetose: o excesso de NADH empurra a produção de β-OHB e suprime a gliconeogênese. A insulina está baixa, mas sem o déficit absoluto da CAD diabética."},
-    {"passo": "Distúrbio frequentemente misto", "texto": "Vômitos somam alcalose metabólica; o β-OHB predomina (nitroprussiato subestima). O quadro ácido-base pode parecer 'menos grave' do que é."}
+    {
+     "passo": "Cetogênese sem CAD diabética",
+     "texto": "Depleção de glicogênio + álcool desviam o metabolismo para cetose: o excesso de NADH empurra a produção de β-OHB e suprime a gliconeogênese. A insulina está baixa, mas sem o déficit absoluto da CAD diabética."
+    },
+    {
+     "passo": "Distúrbio frequentemente misto",
+     "texto": "Vômitos somam alcalose metabólica; o β-OHB predomina (nitroprussiato subestima). O quadro ácido-base pode parecer 'menos grave' do que é."
+    }
    ],
-   "marcadores": {"glicose": "baixa / normal", "cetona": "alta (β-OHB)", "acidobase": "acidose variável, às vezes mascarada por alcalose de vômito", "gap": "alto", "osm": "normal (checar osm-gap se suspeita de tóxico)"},
+   "marcadores": {
+    "glicose": "baixa / normal",
+    "cetona": "alta (β-OHB)",
+    "acidobase": "acidose variável, às vezes mascarada por alcalose de vômito",
+    "gap": "alto",
+    "osm": "normal (checar osm-gap se suspeita de tóxico)"
+   },
    "tratamento": [
-    {"eixo": "Dextrose (glicose IV)", "texto": "É o tratamento central: glicose restaura a insulina, suprime a lipólise e reverte a cetogênese."},
-    {"eixo": "Tiamina ANTES da glicose", "texto": "Administrar tiamina antes/junto da glicose para não precipitar encefalopatia de Wernicke no etilista depletado."},
-    {"eixo": "Eletrólitos e volume", "texto": "Repor volume, K, Mg e fosfato (frequentemente muito depletados); tratar a causa e os distúrbios mistos."},
-    {"eixo": "Insulina — em geral não", "texto": "Não é CAD diabética: insulina costuma ser desnecessária e arrisca hipoglicemia. A correção vem da glicose + tiamina + eletrólitos."}
+    {
+     "eixo": "Dextrose (glicose IV)",
+     "texto": "É o tratamento central: glicose restaura a insulina, suprime a lipólise e reverte a cetogênese."
+    },
+    {
+     "eixo": "Tiamina ANTES da glicose",
+     "texto": "Administrar tiamina antes/junto da glicose para não precipitar encefalopatia de Wernicke no etilista depletado."
+    },
+    {
+     "eixo": "Eletrólitos e volume",
+     "texto": "Repor volume, K, Mg e fosfato (frequentemente muito depletados); tratar a causa e os distúrbios mistos."
+    },
+    {
+     "eixo": "Insulina — em geral não",
+     "texto": "Não é CAD diabética: insulina costuma ser desnecessária e arrisca hipoglicemia. A correção vem da glicose + tiamina + eletrólitos."
+    }
    ],
    "armadilha": "Confundir com CAD diabética e dar insulina (hipoglicemia); ou dar glicose sem tiamina (Wernicke).",
-   "incerteza": "A distinção exige contexto; há sobreposição real com a CAD euglicêmica no diabético etilista."
+   "incerteza": "A distinção exige contexto; há sobreposição real com a CAD euglicêmica no diabético etilista.",
+   "caso": {
+    "vinheta": "Homem, 48 anos, etilista, 3 dias sem comer, vômitos. Não é diabético conhecido. Glicose 68 · Na 140 · Cl 104 · HCO₃ 16 · albumina 4,2 · K 3,8 · βHB 5,0 · pH 7,30.",
+    "leitura": "AG = 140 − (104+16) = 20; AGc = 20 + 2,5·(4,0−4,2) = 19,5. βHB 5,0 mostra cetose real e significativa. Mas hasDka() = FALSO — e não por acaso: com knownDiabetes ausente e glicose 68 (<200), o eixo glicêmico do critério formal de CAD não fecha. Isto não é uma falha do critério; é ele funcionando corretamente para dizer 'isto não é cetoacidose diabética' — é cetose alcoólica/de jejum, mecanismo redox diferente. Conduta: glicose IV é o tratamento central (não insulina), SEMPRE com tiamina antes/junto (evitar Wernicke no etilista depletado), repor K/Mg/fosfato.",
+    "labs": {
+     "na": 140,
+     "cl": 104,
+     "hco3": 16,
+     "alb": 4.2,
+     "glu": 68,
+     "k": 3.8,
+     "bhb": 5.0,
+     "ph": 7.3,
+     "knownDiabetes": false
+    }
+   }
   }
  ]
 }
@@ -210,6 +546,9 @@ a.home{color:var(--teal);text-decoration:none}
   const fis=p.fisiopatologia.map(s=>`<div class="step"><b>${s.passo}.</b> ${s.texto}</div>`).join('');
   const mk=Object.entries(p.marcadores).map(([k,v])=>`<div class="k">${({glicose:'Glicose',cetona:'Cetona',acidobase:'Ácido-base',gap:'Gap / Δ/Δ',osm:'Osmolaridade'})[k]||k}</div><div class="v">${v}</div>`).join('');
   const tx=p.tratamento.map(t=>`<div class="e">${t.eixo}</div><div>${t.texto}</div>`).join('');
+  const calcHref=(()=>{const L=p.caso.labs;const q=new URLSearchParams();
+   ['na','cl','hco3','alb','glu'].forEach(k=>{if(L[k]!=null)q.set(k,L[k]);});
+   return '../app/#calcular?'+q.toString();})();
   return `<section class="prof" id="${slug(p.id)}">
    <h2>${p.nome}</h2><p class="ctx">${p.contexto}</p>
    <div class="lab">Fisiopatologia</div>${fis}
@@ -217,6 +556,12 @@ a.home{color:var(--teal);text-decoration:none}
    <div class="lab">Tratamento</div><div class="tx">${tx}</div>
    <div class="trap"><b>Armadilha.</b> ${p.armadilha}</div>
    <div class="unc"><b>Incerteza.</b> ${p.incerteza}</div>
+   <div class="lab">Caso sintético</div>
+   <div class="caso">
+    <p class="vin">${p.caso.vinheta}</p>
+    <p class="leit">${p.caso.leitura}</p>
+    <a class="calc" href="${calcHref}">🧮 Abrir estes números na calculadora do app</a>
+   </div>
   </section>`;
  }).join('');
  $('#foot').innerHTML=data._meta.regime+' · Fonte: '+data._meta.fonte;
