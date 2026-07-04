@@ -33,8 +33,10 @@ Nada renderiza um limiar "na mão". Mudou uma diretriz? Edita-se **um** valor em
 |---|---|
 | `core/` | `cad_core.js` — motor determinístico (AG, AGc, Δ/Δ, Winter, Na corrigido, osm efetiva, planos de K e insulina) + `POLICY`. `cad_core.test.js` — 292 asserções. |
 | `canon/` | `policy.json` — a doutrina em JSON, incluindo a reconciliação do bicarbonato (7,0 consenso / 6,9 fronteira de evidência). |
+| `content/` | bancos pedagógicos versionados (`questions`, `cases`, `atlas`, `profiles`), injetados nas saídas pelo `build_app.js` — nenhum conteúdo clínico hardcoded em HTML. |
 | `app/` | `index.html` — o **núcleo interativo** (6 abas: Entender · Fisiologia · Calcular · Provão · Atlas · Referência). Calculadoras vivas, simuladores canvas, motor de questões. |
 | `tratado/` | `index.html` — tratado maximalista (bolso/plantão/profundo). |
+| `perfis/` | `index.html` — fisiopatologia detalhada + tratamento dos 8 fenótipos de CAD, renderizado de `content/profiles.json`. |
 | `painel/` | `index.html` — painel de evolução gasométrica (série temporal de-identificada). |
 | `pranchas/` | `lote1/` (M01–M06 + EX01–EX02) e `lote2/` (M07–M12 + EX03–EX04). Cada lote: `svg/` (vetorial, versionável), `png/`, `source/*.json` (o canon aplicado à imagem), `generate_*.py`. `revisao-m2-m4-m6.png` documenta a correção do K. |
 | `docs/` | Auditoria + reescrita + núcleo pedagógico (PDF/DOCX). `auditoria-erratum.md` reconcilia o corpo da auditoria com o canon atual (Δ/Δ, bicarbonato ≤6,9, compensação). |
