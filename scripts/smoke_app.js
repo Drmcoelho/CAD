@@ -80,9 +80,9 @@ const perfis = read("perfis/index.html");
   else {
     try {
       const j = JSON.parse(m[1]);
-      Array.isArray(j.perfis) && j.perfis.length === 8
+      Array.isArray(j.perfis) && j.perfis.length === 9
         ? ok(`bloco profiles-data: ${j.perfis.length} perfis`)
-        : bad(`profiles-data: esperava 8 perfis, achei ${j.perfis && j.perfis.length}`);
+        : bad(`profiles-data: esperava 9 perfis, achei ${j.perfis && j.perfis.length}`);
       const semCaso = j.perfis && j.perfis.filter((x) => !x.caso || !x.caso.labs).map((x) => x.id);
       semCaso && semCaso.length === 0
         ? ok("todos os perfis têm caso sintético com labs estruturados")
@@ -99,12 +99,34 @@ has("deep-link usa os labs do caso (na/cl/hco3/alb)", perfis, "calcHref");
 // Tutor de classificacao: carrega core/cad_core.js sem duplicar formulas, e
 // tem os campos de entrada. A classificacao em si (executar JS) e do render_smoke.
 has("carrega core/cad_core.js (window.CadCore, sem duplicar formulas)", perfis, 'src="../core/cad_core.js"');
-["t_na", "t_cl", "t_hco3", "t_glu", "t_cet", "t_bhb", "t_ph"].forEach((id) => has(`Tutor: campo #${id}`, perfis, `id="${id}"`));
+["t_na", "t_cl", "t_hco3", "t_glu", "t_cet", "t_bhb", "t_ph", "t_dial"].forEach((id) => has(`Tutor: campo #${id}`, perfis, `id="${id}"`));
 has("Tutor: cetonúria é o campo primário do eixo cetônico (βHB secundário)", perfis, "Cetonúria (cruzes)");
+has("Tutor: flag de DRC dialítica presente", perfis, "DRC dialítica");
 has("Tutor: chama classifyDkaProfile", perfis, "classifyDkaProfile");
 
 // core/cad_core.js expoe window.CadCore para as paginas estaticas usarem
 has("core/cad_core.js expoe window.CadCore (UMD)", read("core/cad_core.js"), "window.CadCore");
+
+// tratado/index.html — Marco/Tutor (mesmo classificador, sem duplicar formulas)
+console.log("\n[smoke] tratado/index.html — Marco/Tutor");
+const tratado = read("tratado/index.html");
+has("Marco: âncora #marco existe", tratado, 'id="marco"');
+has("Marco: carrega core/cad_core.js (window.CadCore, sem duplicar formulas)", tratado, 'src="../core/cad_core.js"');
+["tt_na", "tt_cl", "tt_hco3", "tt_glu", "tt_cet", "tt_bhb", "tt_ph", "tt_dial"].forEach((id) => has(`Marco: campo #${id}`, tratado, `id="${id}"`));
+has("Marco: chama classifyDkaProfile", tratado, "classifyDkaProfile");
+has("Marco: links de match apontam para ../perfis/#p-", tratado, "../perfis/#p-");
+{
+  const m = tratado.match(/<script[^>]*id="profile-names-data"[^>]*>([\s\S]*?)<\/script>/);
+  if (!m) bad("bloco <script id=profile-names-data> ausente");
+  else {
+    try {
+      const j = JSON.parse(m[1]);
+      Array.isArray(j) && j.length >= 8 && j.every((x) => x.id && x.nome)
+        ? ok(`bloco profile-names-data: ${j.length} perfis (id+nome)`)
+        : bad(`profile-names-data invalido: ${JSON.stringify(j).slice(0, 120)}`);
+    } catch (e) { bad("profile-names-data nao e JSON valido: " + e.message); }
+  }
+}
 
 // as 16 pranchas (svg) estao indexadas
 {

@@ -56,15 +56,15 @@ const bad = (m) => { console.error("  FAIL " + m); fails++; };
     await p.close();
   }
 
-  // perfis: renderiza os 8 perfis do bloco profiles-data, cada um com caso + deep-link
+  // perfis: renderiza os 9 perfis do bloco profiles-data, cada um com caso + deep-link
   let calcHref = null;
   {
     const { p, errs } = await page("perfis/index.html");
     errs.length ? bad("perfis erros: " + errs.join(" | ")) : ok("perfis/index.html sem erro de runtime");
     const n = await p.evaluate(() => document.querySelectorAll(".prof").length);
-    n === 8 ? ok("perfis: 8 perfis renderizados") : bad(`perfis: esperava 8, renderizou ${n}`);
+    n === 9 ? ok("perfis: 9 perfis renderizados") : bad(`perfis: esperava 9, renderizou ${n}`);
     const nCasos = await p.evaluate(() => document.querySelectorAll(".caso").length);
-    nCasos === 8 ? ok("perfis: 8 casos sintéticos renderizados") : bad(`perfis: esperava 8 casos, renderizou ${nCasos}`);
+    nCasos === 9 ? ok("perfis: 9 casos sintéticos renderizados") : bad(`perfis: esperava 9 casos, renderizou ${nCasos}`);
     calcHref = await p.evaluate(() => document.querySelector("#p-classica a.calc")?.getAttribute("href") || null);
     calcHref && calcHref.includes("na=") ? ok("perfis: deep-link para a calculadora presente") : bad("perfis: deep-link ausente/malformado");
 
@@ -100,6 +100,23 @@ const bad = (m) => { console.error("  FAIL " + m); fails++; };
     await p.close();
   }
 
+  // Tutor + DRC dialítica: glicose muito alta NÃO deve puxar para cad-hhs — o contexto
+  // renal prevalece sobre a heuristica usual de glicose/osm
+  {
+    const { p, errs } = await page("perfis/index.html");
+    await p.fill("#t_na", "138"); await p.fill("#t_cl", "94"); await p.fill("#t_hco3", "8");
+    await p.fill("#t_glu", "780"); await p.fill("#t_cet", "4"); await p.fill("#t_ph", "6.98"); await p.fill("#t_alb", "3.2");
+    await p.check("#t_dial");
+    await p.waitForTimeout(150);
+    const tut = await p.evaluate(() => ({
+      hrefs: [...document.querySelectorAll(".tut-match")].map((a) => a.getAttribute("href")),
+    }));
+    errs.length ? bad("Tutor (DRC dialítica) erros: " + errs.join(" | ")) : ok("Tutor (DRC dialítica) sem erro de runtime");
+    tut.hrefs[0] === "#p-dialitica" ? ok("Tutor: DRC dialítica classificada corretamente (-> #p-dialitica), mesmo com glicose 780") : bad(`Tutor (DRC dialítica): esperava #p-dialitica como top match, obteve ${JSON.stringify(tut.hrefs)}`);
+    tut.hrefs.includes("#p-cad-hhs") ? bad("Tutor: DRC dialítica não deveria também apontar para #p-cad-hhs") : ok("Tutor: DRC dialítica não confunde com #p-cad-hhs");
+    await p.close();
+  }
+
   // deep-link ponta a ponta: perfil clássico -> app/#calcular preenche e calcula
   if (calcHref) {
     const qs = calcHref.split("?")[1] || "";
@@ -119,9 +136,23 @@ const bad = (m) => { console.error("  FAIL " + m); fails++; };
   // tratado: página grande, mas deve carregar sem erro e ter os cross-links para perfis
   {
     const { p, errs } = await page("tratado/index.html");
-    errs.length ? bad("tratado erros: " + errs.join(" | ")) : ok("tratado/index.html sem erro de runtime");
     const nLinks = await p.evaluate(() => document.querySelectorAll('a[href*="perfis"]').length);
     nLinks >= 2 ? ok(`tratado: ${nLinks} cross-link(s) para perfis/`) : bad(`tratado: esperava >=2 links para perfis, achou ${nLinks}`);
+
+    // Marco/Tutor: mesmo caso clássica testado em perfis/, agora dentro do tratado
+    const hasCore = await p.evaluate(() => typeof window.CadCore?.classifyDkaProfile === "function");
+    hasCore ? ok("tratado: window.CadCore carregado (core/cad_core.js via script src)") : bad("tratado: window.CadCore ausente");
+    if (hasCore) {
+      await p.fill("#tt_na", "132"); await p.fill("#tt_cl", "92"); await p.fill("#tt_hco3", "8");
+      await p.fill("#tt_glu", "480"); await p.fill("#tt_bhb", "6.5"); await p.fill("#tt_ph", "7.15"); await p.fill("#tt_alb", "4.2");
+      await p.waitForTimeout(150);
+      const tut = await p.evaluate(() => ({
+        href: document.querySelector(".ttut-match")?.getAttribute("href") || null,
+        text: document.getElementById("ttut_out")?.innerText || "",
+      }));
+      tut.href === "../perfis/#p-classica" ? ok("tratado Tutor: caso clássica classificado corretamente (-> ../perfis/#p-classica)") : bad(`tratado Tutor: esperava ../perfis/#p-classica, obteve ${tut.href} (${tut.text.slice(0, 80)})`);
+    }
+    errs.length ? bad("tratado erros: " + errs.join(" | ")) : ok("tratado/index.html sem erro de runtime");
     await p.close();
   }
 

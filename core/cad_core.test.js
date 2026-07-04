@@ -197,6 +197,32 @@ function testClassifyDkaProfile() {
     assert.strictEqual(r.computed.hasDka, false);
     assert.deepStrictEqual(r.matches, []);
   }
+
+  // dialysisDependent: mesmo com glicose muito alta (que sozinha apontaria cad-hhs),
+  // o contexto de DRC dialitica prevalece -- a heuristica de glicose/osm nao serve
+  // para essa populacao (sem clearance renal de glicose).
+  {
+    const r = classifyDkaProfile({
+      na: 138, cl: 94, hco3: 8, glucoseMgDl: 780, ketonuriaCruzes: 4, ph: 6.98, albumin: 3.2,
+      knownDiabetes: true, dialysisDependent: true,
+    });
+    assert.strictEqual(r.computed.hasDka, true);
+    const ids = r.matches.filter((m) => m.id).map((m) => m.id);
+    assert.deepStrictEqual(ids, ["dialitica"]);
+    assert.ok(!ids.includes("cad-hhs"), "dialysisDependent nao deve cair na heuristica glicose/osm de cad-hhs");
+  }
+
+  // dialysisDependent + lactato elevado: sepse-lactato ainda soma ao diferencial
+  // (eixo ortogonal ao contexto renal)
+  {
+    const r = classifyDkaProfile({
+      na: 133, cl: 100, hco3: 9, glucoseMgDl: 350, ketonuriaCruzes: 3, ph: 7.12,
+      dialysisDependent: true, lactateMmolL: 6.0,
+    });
+    const ids = r.matches.filter((m) => m.id).map((m) => m.id);
+    assert.ok(ids.includes("dialitica"));
+    assert.ok(ids.includes("sepse-lactato"));
+  }
 }
 
 function testSourceAndCorePolicyDoNotDrift() {
