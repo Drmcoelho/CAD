@@ -99,7 +99,8 @@ has("deep-link usa os labs do caso (na/cl/hco3/alb)", perfis, "calcHref");
 // Tutor de classificacao: carrega core/cad_core.js sem duplicar formulas, e
 // tem os campos de entrada. A classificacao em si (executar JS) e do render_smoke.
 has("carrega core/cad_core.js (window.CadCore, sem duplicar formulas)", perfis, 'src="../core/cad_core.js"');
-["t_na", "t_cl", "t_hco3", "t_glu", "t_bhb", "t_ph"].forEach((id) => has(`Tutor: campo #${id}`, perfis, `id="${id}"`));
+["t_na", "t_cl", "t_hco3", "t_glu", "t_cet", "t_bhb", "t_ph"].forEach((id) => has(`Tutor: campo #${id}`, perfis, `id="${id}"`));
+has("Tutor: cetonúria é o campo primário do eixo cetônico (βHB secundário)", perfis, "Cetonúria (cruzes)");
 has("Tutor: chama classifyDkaProfile", perfis, "classifyDkaProfile");
 
 // core/cad_core.js expoe window.CadCore para as paginas estaticas usarem

@@ -150,7 +150,27 @@ function testClassifyDkaProfile() {
   // entrada insuficiente: nao adivinha, aponta o que falta
   const insuf = classifyDkaProfile({ na: 140, cl: 100 });
   assert.strictEqual(insuf.insufficient, true);
-  assert.deepStrictEqual(insuf.missing.sort(), ["betaHydroxybutyrateMmolL", "glucoseMgDl", "hco3", "ph"].sort());
+  assert.deepStrictEqual(insuf.missing.sort(), ["betaHydroxybutyrateMmolL|ketonuriaCruzes", "glucoseMgDl", "hco3", "ph"].sort());
+
+  // cetonuria (cruzes) sozinha, sem beta-HB serico -- o caso real no Brasil
+  {
+    const r = classifyDkaProfile({ na: 132, cl: 92, hco3: 8, glucoseMgDl: 480, ketonuriaCruzes: 3, ph: 7.15 });
+    assert.strictEqual(r.insufficient, false);
+    assert.strictEqual(r.computed.hasDka, true);
+    assert.strictEqual(r.computed.ketoneMarker, "cetonuriaCruzes");
+    assert.strictEqual(r.computed.isResolvedDka, null); // sem beta-HB, resolucao e incerta, nao falsa
+    assert.strictEqual(r.matches[0].id, "classica");
+  }
+
+  // sem beta-HB e com acidose residual mas cetose ja abaixo do limiar: nao escolhe
+  // um rotulo as cegas -- mostra as duas hipoteses (parcial e hipercloremica) com
+  // a ressalva de que cetonuria nao confirma resolucao.
+  {
+    const r = classifyDkaProfile({ na: 138, cl: 110, hco3: 13, glucoseMgDl: 130, ketonuriaCruzes: 1, ph: 7.31 });
+    assert.strictEqual(r.computed.isResolvedDka, null);
+    const ids = r.matches.filter((m) => m.id).map((m) => m.id).sort();
+    assert.deepStrictEqual(ids, ["hipercloremica", "parcial"]);
+  }
 
   // nao-diabetico + glicose baixa + cetose real -> alcoolica-jejum (eixo glicemico do hasDka falha por design)
   {

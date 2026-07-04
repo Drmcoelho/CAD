@@ -7,6 +7,12 @@ const POLICY = Object.freeze({
   diagnosis: Object.freeze({
     glucoseMgDl: 200,
     betaHydroxybutyrateMmolL: 3.0,
+    // eixo cetonico alternativo: na pratica clinica brasileira, beta-HB serico
+    // point-of-care e raro; a fita de cetonuria (cruzes) e o que existe de fato.
+    // Mede acetoacetato, nao beta-HB -- serve para DIAGNOSTICO (doutrina: "ou
+    // cetonuria >=2+"), mas NAO para RESOLUCAO (acetoacetato pode subir durante
+    // o tratamento enquanto o beta-HB cai -- ver resolution.* abaixo).
+    ketonuriaCruzesAtLeast: 2,
     ph: 7.30,
     bicarbonateMmolL: 18,
   }),
@@ -171,11 +177,21 @@ function insulinPlan({ kMmolL, glucoseMgDl }) {
   };
 }
 
-function hasDka({ knownDiabetes = false, glucoseMgDl, betaHydroxybutyrateMmolL, ph = null, hco3 = null }) {
+function hasDka({ knownDiabetes = false, glucoseMgDl, betaHydroxybutyrateMmolL = null, ketonuriaCruzes = null, ph = null, hco3 = null }) {
   const glucoseAxis = knownDiabetes || requiredNumber("glucoseMgDl", glucoseMgDl) >= POLICY.diagnosis.glucoseMgDl;
-  const ketoneAxis =
-    requiredNumber("betaHydroxybutyrateMmolL", betaHydroxybutyrateMmolL) >=
-    POLICY.diagnosis.betaHydroxybutyrateMmolL;
+  // Eixo cetonico e um OR: beta-HB serico >=3,0 OU cetonuria (cruzes) >=2+ (doutrina
+  // 2024). Na pratica brasileira, cetonuria e o que existe de fato; beta-HB e
+  // aceito quando disponivel. Exigir os dois rejeitaria o caso comum (so cruzes).
+  if (!isProvided(betaHydroxybutyrateMmolL) && !isProvided(ketonuriaCruzes)) {
+    throw new TypeError("hasDka requires at least one of betaHydroxybutyrateMmolL or ketonuriaCruzes");
+  }
+  let ketoneAxis = false;
+  if (isProvided(betaHydroxybutyrateMmolL)) {
+    ketoneAxis = ketoneAxis || requiredNumber("betaHydroxybutyrateMmolL", betaHydroxybutyrateMmolL) >= POLICY.diagnosis.betaHydroxybutyrateMmolL;
+  }
+  if (isProvided(ketonuriaCruzes)) {
+    ketoneAxis = ketoneAxis || requiredNumber("ketonuriaCruzes", ketonuriaCruzes) >= POLICY.diagnosis.ketonuriaCruzesAtLeast;
+  }
   // Eixo acido e um OR (pH <7,30 e/ou HCO3 <18): basta um dos dois estar disponivel;
   // exigir ambos rejeitaria uma VBG so com pH, ou uma bioquimica so com HCO3.
   if (!isProvided(ph) && !isProvided(hco3)) {
@@ -187,6 +203,12 @@ function hasDka({ knownDiabetes = false, glucoseMgDl, betaHydroxybutyrateMmolL, 
   return glucoseAxis && ketoneAxis && acidAxis;
 }
 
+// isResolvedDka EXIGE beta-HB serico -- decisao deliberada, nao esquecimento.
+// Cetonuria (cruzes) mede acetoacetato, e o acetoacetato pode SUBIR durante o
+// tratamento enquanto o beta-HB (o cetoacido predominante na CAD) cai -- usar
+// cetonuria para dizer "resolvido" seria ativamente enganoso. Sem beta-HB
+// serico nao ha como confirmar resolucao por este eixo; classifyDkaProfile()
+// trata esse caso como incerteza explicita, nao como falha silenciosa.
 function isResolvedDka({ betaHydroxybutyrateMmolL, ph = null, hco3 = null }) {
   const ketoneResolved =
     requiredNumber("betaHydroxybutyrateMmolL", betaHydroxybutyrateMmolL) <
@@ -215,11 +237,16 @@ function isResolvedDka({ betaHydroxybutyrateMmolL, ph = null, hco3 = null }) {
  * Se faltar algo essencial, devolve {insufficient:true, missing:[...]}.
  */
 function classifyDkaProfile(input) {
-  const req = ["na", "cl", "hco3", "glucoseMgDl", "betaHydroxybutyrateMmolL", "ph"];
+  const req = ["na", "cl", "hco3", "glucoseMgDl", "ph"];
   const missing = req.filter((k) => input[k] == null || Number.isNaN(input[k]));
+  const hasBhb = input.betaHydroxybutyrateMmolL != null && !Number.isNaN(input.betaHydroxybutyrateMmolL);
+  const hasCruzes = input.ketonuriaCruzes != null && !Number.isNaN(input.ketonuriaCruzes);
+  if (!hasBhb && !hasCruzes) missing.push("betaHydroxybutyrateMmolL|ketonuriaCruzes");
   if (missing.length) return { insufficient: true, missing };
 
-  const { na, cl, hco3, glucoseMgDl: glu, betaHydroxybutyrateMmolL: bhb, ph } = input;
+  const { na, cl, hco3, glucoseMgDl: glu, ph } = input;
+  const bhb = hasBhb ? input.betaHydroxybutyrateMmolL : null;
+  const cruzes = hasCruzes ? input.ketonuriaCruzes : null;
   const albumin = input.albumin ?? 4.0;
   const knownDiabetes = !!input.knownDiabetes;
   const lactate = input.lactateMmolL ?? null;
@@ -230,21 +257,33 @@ function classifyDkaProfile(input) {
   const dd = hco3 !== 24 ? deltaRatio(agc, hco3) : null;
   const ddBand = dd != null ? interpretDeltaRatio(dd) : null;
   const osmEff = effectiveOsmolality(na, glu);
-  const dka = hasDka({ knownDiabetes, glucoseMgDl: glu, betaHydroxybutyrateMmolL: bhb, ph, hco3 });
-  const resolved = isResolvedDka({ betaHydroxybutyrateMmolL: bhb, ph, hco3 });
-  const ketoneAxis = bhb >= POLICY.diagnosis.betaHydroxybutyrateMmolL;
+  const dka = hasDka({ knownDiabetes, glucoseMgDl: glu, betaHydroxybutyrateMmolL: bhb, ketonuriaCruzes: cruzes, ph, hco3 });
+  // resolucao exige beta-HB serico (cetonuria nao confirma resolucao — ver isResolvedDka);
+  // sem beta-HB, resolved fica null (incerto), nao false.
+  const resolved = hasBhb ? isResolvedDka({ betaHydroxybutyrateMmolL: bhb, ph, hco3 }) : null;
+  const ketoneAxis = (bhb != null && bhb >= POLICY.diagnosis.betaHydroxybutyrateMmolL) || (cruzes != null && cruzes >= POLICY.diagnosis.ketonuriaCruzesAtLeast);
   const acidAxis = ph < POLICY.diagnosis.ph || hco3 < POLICY.diagnosis.bicarbonateMmolL;
+  const ketoneNote = hasBhb ? `βHB ${bhb}` : `cetonúria ${cruzes}+`;
 
   const matches = [];
   const add = (id, reason) => matches.push({ id, reason });
 
   if (!knownDiabetes && glu < POLICY.diagnosis.glucoseMgDl && ketoneAxis) {
-    add("alcoolica-jejum", "cetose real (βHB ≥3), mas o eixo glicêmico do critério formal não fecha (não-diabético + glicose <200) — não é CAD diabética.");
+    add("alcoolica-jejum", `cetose real (${ketoneNote}), mas o eixo glicêmico do critério formal não fecha (não-diabético + glicose <200) — não é CAD diabética.`);
   } else if (!dka && ketoneAxis && !acidAxis) {
-    add("pre-cad", "βHB já cruza o limiar cetônico, mas pH e HCO₃ ainda dentro do critério — fase pré-acidose (tampão ainda segura).");
+    add("pre-cad", `${ketoneNote} já cruza o limiar cetônico, mas pH e HCO₃ ainda dentro do critério — fase pré-acidose (tampão ainda segura).`);
   } else if (!dka && !ketoneAxis && acidAxis) {
-    if (resolved) add("hipercloremica", "cetose já abaixo do limiar (βHB <3) e resolução formal atingida (pH ou HCO₃ na meta), mas HCO₃ ainda baixo — provável cauda hiperclorêmica, não CAD ativa.");
-    else add("parcial", "cetose abaixo do limiar diagnóstico mas resolução ainda não atingida — zona de trânsito (nem CAD nova, nem resolvida).");
+    if (resolved === true) {
+      add("hipercloremica", "cetose já abaixo do limiar e resolução formal atingida (pH ou HCO₃ na meta), mas HCO₃ ainda baixo — provável cauda hiperclorêmica, não CAD ativa.");
+    } else if (resolved === false) {
+      add("parcial", "cetose abaixo do limiar diagnóstico mas resolução ainda não atingida — zona de trânsito (nem CAD nova, nem resolvida).");
+    } else {
+      // sem beta-HB serico nao da para distinguir com seguranca; cetonuria NAO
+      // confirma resolucao (acetoacetato pode subir com o tratamento) — mostra
+      // as duas hipoteses com a ressalva, em vez de escolher uma calada.
+      add("parcial", "cetose (cruzes) abaixo do limiar diagnóstico, com acidose residual — pode ser cetose ainda em resolução...");
+      add("hipercloremica", "...OU cauda hiperclorêmica já instalada. A distinção exige β-HB sérico: cetonúria não confirma resolução (acetoacetato pode subir durante o tratamento mesmo com a cetose resolvendo).");
+    }
   } else if (dka) {
     if (glu < POLICY.insulin.reduceGlucoseBelowMgDl) add("euglicemica", `glicose ${glu} < ${POLICY.insulin.reduceGlucoseBelowMgDl} apesar de hasDka() verdadeiro — fenótipo euglicêmico (SGLT2i/jejum/gestação/etilismo).`);
     if (glu >= 500 || osmEff > 300) add("cad-hhs", `glicose muito alta${osmEff > 300 ? ` e osm efetiva ${round(osmEff, 1)} > 300` : ""} — considerar sobreposição com HHS.`);
@@ -258,7 +297,11 @@ function classifyDkaProfile(input) {
 
   return {
     insufficient: false,
-    computed: { ag: round(ag, 1), agc: round(agc, 1), deltaRatio: dd != null ? round(dd, 2) : null, deltaBand: ddBand ? ddBand.band : null, effectiveOsmolality: round(osmEff, 1), hasDka: dka, isResolvedDka: resolved },
+    computed: {
+      ag: round(ag, 1), agc: round(agc, 1), deltaRatio: dd != null ? round(dd, 2) : null, deltaBand: ddBand ? ddBand.band : null,
+      effectiveOsmolality: round(osmEff, 1), hasDka: dka, isResolvedDka: resolved,
+      ketoneMarker: hasBhb ? "betaHB" : "cetonuriaCruzes",
+    },
     matches,
   };
 }

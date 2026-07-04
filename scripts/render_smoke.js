@@ -84,6 +84,22 @@ const bad = (m) => { console.error("  FAIL " + m); fails++; };
     await p.close();
   }
 
+  // Tutor SEM βHB — só cetonúria em cruzes (a realidade prática no Brasil)
+  {
+    const { p, errs } = await page("perfis/index.html");
+    await p.fill("#t_na", "132"); await p.fill("#t_cl", "92"); await p.fill("#t_hco3", "8");
+    await p.fill("#t_glu", "480"); await p.fill("#t_cet", "4"); await p.fill("#t_ph", "7.15"); await p.fill("#t_alb", "4.2");
+    await p.waitForTimeout(150);
+    const tut = await p.evaluate(() => ({
+      href: document.querySelector(".tut-match")?.getAttribute("href") || null,
+      computed: document.querySelector(".tut-computed")?.innerText || "",
+    }));
+    errs.length ? bad("Tutor (cetonúria) erros: " + errs.join(" | ")) : ok("Tutor (cetonúria, sem βHB) sem erro de runtime");
+    tut.href === "#p-classica" ? ok("Tutor: cetonúria sozinha (sem βHB) classifica corretamente (-> #p-classica)") : bad(`Tutor (cetonúria): esperava #p-classica, obteve ${tut.href}`);
+    tut.computed.includes("cetonúria") ? ok("Tutor: painel computado indica eixo cetônico = cetonúria") : bad(`Tutor: painel computado não indica cetonúria (${tut.computed})`);
+    await p.close();
+  }
+
   // deep-link ponta a ponta: perfil clássico -> app/#calcular preenche e calcula
   if (calcHref) {
     const qs = calcHref.split("?")[1] || "";
