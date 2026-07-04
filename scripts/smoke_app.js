@@ -43,6 +43,7 @@ const app = read("app/index.html");
 [
   ["questions-data", (j) => Array.isArray(j) && j.length > 0, "array nao-vazio"],
   ["cases-data", (j) => j && j.A && j.B, "objeto com A e B"],
+  ["atlas-data", (j) => j && ["banco", "ladder", "feno", "leis", "proj"].every((k) => Array.isArray(j[k])), "banco/ladder/feno/leis/proj"],
 ].forEach(([id, valid, desc]) => {
   const m = app.match(new RegExp(`<script[^>]*id="${id}"[^>]*>([\\s\\S]*?)</script>`));
   if (!m) return bad(`bloco <script id=${id}> ausente`);

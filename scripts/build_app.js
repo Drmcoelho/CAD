@@ -7,6 +7,7 @@
  *   - canon          ← core.POLICY            (os NÚMEROS clínicos)
  *   - questions-data ← content/questions.json (banco do provão)
  *   - cases-data     ← content/cases.json     (casos socráticos)
+ *   - atlas-data     ← content/atlas.json     (banco de cálculo, escada, fenótipos, leis, projetos)
  *
  * O app lê esses blocos em runtime (JSON.parse), então a fonte de cada bloco é
  * única e versionada; editar o bloco à mão é sobrescrito pelo build.
@@ -34,6 +35,7 @@ const BLOCKS = [
   { id: "canon", text: JSON.stringify(POLICY, null, 2) },
   { id: "questions-data", text: jsonText("content/questions.json", readJson("content/questions.json")) },
   { id: "cases-data", text: jsonText("content/cases.json", readJson("content/cases.json")) },
+  { id: "atlas-data", text: jsonText("content/atlas.json", readJson("content/atlas.json")) },
 ];
 
 let html = fs.readFileSync(appPath, "utf8");
@@ -47,7 +49,7 @@ for (const { id, text } of BLOCKS) {
   if (next !== html) { changed++; stale.push(id); html = next; }
 }
 
-if (!changed) { console.log("build_app: blocos (canon, questions-data, cases-data) em sincronia com as fontes."); process.exit(0); }
+if (!changed) { console.log(`build_app: blocos (${BLOCKS.map((b) => b.id).join(", ")}) em sincronia com as fontes.`); process.exit(0); }
 
 if (check) {
   console.error(`build_app: bloco(s) FORA DE SINCRONIA: ${stale.join(", ")}. Rode \`npm run build\`.`);
