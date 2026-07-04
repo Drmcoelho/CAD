@@ -149,6 +149,7 @@ canvas{display:block;width:100%;background:#0c1218;border:1px solid var(--line);
    <div class="ctrl"><label>pCO₂ · respiratório/pulmão — <span id="dav_p">20</span> mmHg</label><input id="dav_ps" type="range" min="10" max="70" step="1" value="20"></div>
   </div>
   <div class="simout" id="dav_out"></div>
+  <details class="a11y"><summary>Tabela equivalente (acessível, sem depender do gráfico)</summary><div id="dav_tbl" class="tscroll"></div></details>
  </div>
 
  <div class="lab">O rim — o órgão central da CAD</div>
@@ -167,6 +168,7 @@ canvas{display:block;width:100%;background:#0c1218;border:1px solid var(--line);
   <canvas id="clo"></canvas>
   <div class="ctrls"><div class="ctrl"><label>Tempo de tratamento — <span id="clo_t">12</span> h</label><input id="clo_ts" type="range" min="0" max="48" step="1" value="12"></div></div>
   <div class="simout" id="clo_out"></div>
+  <details class="a11y"><summary>Tabela equivalente (acessível, sem depender do gráfico)</summary><div id="clo_tbl" class="tscroll"></div></details>
  </div>
 
  <div class="lab">Síntese — as fórmulas são janelas para os órgãos</div>
@@ -615,6 +617,25 @@ $('#clo_ts').addEventListener('input',e=>{cloSt.t=+e.target.value;$('#clo_t').te
 $('#clo_sf').onclick=()=>{cloSt.fluid='sf';$('#clo_sf').classList.add('on');$('#clo_ring').classList.remove('on');cloUpd();};
 $('#clo_ring').onclick=()=>{cloSt.fluid='ring';$('#clo_ring').classList.add('on');$('#clo_sf').classList.remove('on');cloUpd();};
 window.addEventListener('resize',()=>{if($('#fisio').classList.contains('on')){davDraw();cloDraw();}});
+/* tabelas equivalentes (acessibilidade dos 2 canvas) — geradas do MESMO modelo/fórmulas, nunca hardcoded */
+function buildA11yTables(){
+ const dav=$('#dav_tbl');
+ if(dav){
+  const iso=[6.9,7.1,7.2,7.3,7.4,7.5].map(ph=>`<tr><td>${ph.toFixed(1)}</td><td class="v">${(0.03*40*Math.pow(10,ph-6.1)).toFixed(1)}</td></tr>`).join('');
+  const win=[5,10,15,20,24].map(h=>`<tr><td>${h}</td><td class="v">${(1.5*h+8).toFixed(0)} ± 2</td></tr>`).join('');
+  dav.innerHTML=`<p style="font-size:12.5px;color:var(--mut);margin:0 0 6px">O gráfico traça as curvas iso-pH — pH = 6,1 + log₁₀(HCO₃ / (0,03·pCO₂)) — e a faixa de Winter (pCO₂ esp = 1,5·HCO₃ + 8 ± 2). O controle acima já dá pH e interpretação em texto ao vivo; as tabelas são o mesmo conteúdo em números.</p>
+  <table><thead><tr><th>Linha iso-pH (a pCO₂ 40 mmHg)</th><th>HCO₃ (mEq/L)</th></tr></thead><tbody>${iso}</tbody></table>
+  <table style="margin-top:8px"><thead><tr><th>HCO₃ (mEq/L)</th><th>pCO₂ esperada (Winter)</th></tr></thead><tbody>${win}</tbody></table>`;
+ }
+ const clo=$('#clo_tbl');
+ if(clo){
+  let rows='';
+  [['sf','SF 0,9%'],['ring','Ringer']].forEach(([k,nm])=>[0,6,12,24,48].forEach(t=>{const m=cloModel(t,k);rows+=`<tr><td>${t}</td><td>${nm}</td><td class="v">${m.AGc.toFixed(1)}</td><td class="v">${m.Cl.toFixed(0)}</td><td class="v">${m.HCO3.toFixed(1)}</td><td class="v">${m.dd.toFixed(2)}</td></tr>`;}));
+  clo.innerHTML=`<p style="font-size:12.5px;color:var(--mut);margin:0 0 6px">O gráfico mostra HCO₃ e Cl⁻ ao longo de 48 h para cada fluido (modelo didático). A tabela é a mesma série em números.</p>
+  <table><thead><tr><th>t (h)</th><th>Fluido</th><th>AGc</th><th>Cl⁻</th><th>HCO₃</th><th>Δ/Δ</th></tr></thead><tbody>${rows}</tbody></table>`;
+ }
+}
+buildA11yTables();
 davUpd();cloUpd();
 
 /* ================= PROVÃO (motor de questões) ================= */
