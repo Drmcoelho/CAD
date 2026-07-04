@@ -2,16 +2,26 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>CAD 360</title>
 <style>
-:root{--bg:#0e141b;--p:#161d26;--line:#243040;--line2:#2f3e52;--tx:#e6edf3;--mut:#8394a6;--teal:#37c6e0}
+:root{--bg:#0e141b;--p:#161d26;--p2:#1b2531;--line:#243040;--line2:#2f3e52;--tx:#e6edf3;--mut:#8394a6;--teal:#37c6e0;--amb:#ffb454}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.6 -apple-system,Segoe UI,Roboto,sans-serif}
 .wrap{max-width:760px;margin:0 auto;padding:34px 18px 80px}
 h1{font-size:30px;margin:0;letter-spacing:-.5px}.sub{color:var(--mut);margin:6px 0 2px}
 .src{color:var(--teal);font-size:12.5px;border:1px solid var(--line2);border-radius:20px;padding:3px 12px;display:inline-block;margin-top:10px}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;margin-top:26px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;margin-top:10px}
 a.card{display:block;background:var(--p);border:1px solid var(--line);border-radius:14px;padding:15px 16px;text-decoration:none;color:var(--tx);transition:border-color .15s}
 a.card:hover{border-color:var(--teal)}
 a.card .t{font-weight:700;font-size:16px}a.card .d{color:var(--mut);font-size:13px;margin-top:3px}
-.lab{color:var(--mut);font-size:11px;letter-spacing:.07em;text-transform:uppercase;margin:28px 0 4px}
+.lab{color:var(--mut);font-size:11px;letter-spacing:.07em;text-transform:uppercase;margin:28px 0 8px}
+.lab .n{color:var(--line2);text-transform:none;letter-spacing:0}
+.plist{display:grid;grid-template-columns:repeat(auto-fill,minmax(232px,1fr));gap:7px}
+a.p{display:flex;gap:9px;align-items:baseline;background:var(--p);border:1px solid var(--line);border-radius:9px;padding:8px 11px;text-decoration:none;color:var(--tx);font-size:13.5px;transition:border-color .15s}
+a.p:hover{border-color:var(--teal)}
+a.p .k{font-family:ui-monospace,Menlo,monospace;color:var(--teal);font-size:12px;min-width:38px;font-weight:700}
+a.p.ex .k{color:var(--amb)}
+a.p .l{color:var(--mut)}a.p:hover .l{color:var(--tx)}
+.docs{display:flex;flex-wrap:wrap;gap:8px}
+a.doc{background:var(--p2);border:1px solid var(--line2);border-radius:8px;padding:6px 12px;text-decoration:none;color:var(--tx);font-size:13px}
+a.doc:hover{border-color:var(--teal)}
 .foot{color:var(--mut);font-size:12.5px;margin-top:30px;border-top:1px solid var(--line);padding-top:14px;line-height:1.6}
 code{font-family:ui-monospace,Menlo,monospace;background:var(--p);border:1px solid var(--line2);border-radius:5px;padding:0 5px;font-size:13px}
 </style></head><body><div class="wrap">
@@ -26,10 +36,39 @@ code{font-family:ui-monospace,Menlo,monospace;background:var(--p);border:1px sol
  <a class="card" href="tratado/"><div class="t">📖 Tratado</div><div class="d">Bolso / plantão / profundo. §0–12, maximalista, com calculadoras.</div></a>
 </div>
 
-<div class="lab">Pranchas (atlas visual)</div>
-<div class="grid">
- <a class="card" href="pranchas/lote1/contact-sheet.png"><div class="t">🗺️ Lote 1</div><div class="d">M01–M06 + EX01–EX02. SVG vetorial + PNG + JSON-fonte.</div></a>
- <a class="card" href="pranchas/lote2/contact-sheet.png"><div class="t">🗺️ Lote 2</div><div class="d">M07–M12 + EX03–EX04. Mesma doutrina, mesma fonte.</div></a>
+<div class="lab">Pranchas — Lote 1 <span class="n">· M01–M06 + EX01–EX02 · <a href="pranchas/lote1/contact-sheet.png" style="color:var(--teal);text-decoration:none">contact-sheet</a></span></div>
+<div class="plist">
+ <a class="p" href="pranchas/lote1/svg/cad-lote1-01-m01-falha-de-sinal.svg"><span class="k">M01</span><span class="l">Falha de sinal</span></a>
+ <a class="p" href="pranchas/lote1/svg/cad-lote1-02-m02-fenotipos.svg"><span class="k">M02</span><span class="l">Fenótipos</span></a>
+ <a class="p" href="pranchas/lote1/svg/cad-lote1-03-m03-laboratorio-minimo.svg"><span class="k">M03</span><span class="l">Laboratório mínimo</span></a>
+ <a class="p" href="pranchas/lote1/svg/cad-lote1-04-m04-calculadoras-canonicas.svg"><span class="k">M04</span><span class="l">Calculadoras canônicas</span></a>
+ <a class="p" href="pranchas/lote1/svg/cad-lote1-05-m05-cloro-ph-residual.svg"><span class="k">M05</span><span class="l">Cloro e pH residual</span></a>
+ <a class="p" href="pranchas/lote1/svg/cad-lote1-06-m06-insulina-seguranca.svg"><span class="k">M06</span><span class="l">Insulina e segurança</span></a>
+ <a class="p ex" href="pranchas/lote1/svg/cad-lote1-07-ex01-delta-071-corrigido.svg"><span class="k">EX01</span><span class="l">Δ/Δ 0,71 corrigido</span></a>
+ <a class="p ex" href="pranchas/lote1/svg/cad-lote1-08-ex02-osm-efetiva-total.svg"><span class="k">EX02</span><span class="l">Osm efetiva × total</span></a>
+</div>
+
+<div class="lab">Pranchas — Lote 2 <span class="n">· M07–M12 + EX03–EX04 · <a href="pranchas/lote2/contact-sheet.png" style="color:var(--teal);text-decoration:none">contact-sheet</a></span></div>
+<div class="plist">
+ <a class="p" href="pranchas/lote2/svg/cad-lote2-01-m07-potassio.svg"><span class="k">M07</span><span class="l">Potássio</span></a>
+ <a class="p" href="pranchas/lote2/svg/cad-lote2-02-m08-bicarbonato.svg"><span class="k">M08</span><span class="l">Bicarbonato</span></a>
+ <a class="p" href="pranchas/lote2/svg/cad-lote2-03-m09-jejum-transicao.svg"><span class="k">M09</span><span class="l">Jejum e transição</span></a>
+ <a class="p" href="pranchas/lote2/svg/cad-lote2-04-m10-gasometria-filme.svg"><span class="k">M10</span><span class="l">Gasometria como filme</span></a>
+ <a class="p" href="pranchas/lote2/svg/cad-lote2-05-m11-compensacao-lenta.svg"><span class="k">M11</span><span class="l">Compensação lenta</span></a>
+ <a class="p" href="pranchas/lote2/svg/cad-lote2-06-m12-condutas-perfil.svg"><span class="k">M12</span><span class="l">Condutas por perfil</span></a>
+ <a class="p ex" href="pranchas/lote2/svg/cad-lote2-07-ex03-k-trava-insulina.svg"><span class="k">EX03</span><span class="l">K trava a insulina</span></a>
+ <a class="p ex" href="pranchas/lote2/svg/cad-lote2-08-ex04-cad-hhs.svg"><span class="k">EX04</span><span class="l">CAD + HHS</span></a>
+</div>
+
+<div class="lab">Documentação e doutrina</div>
+<div class="docs">
+ <a class="doc" href="README.md">README</a>
+ <a class="doc" href="ROADMAP.md">ROADMAP</a>
+ <a class="doc" href="STATUS.md">STATUS</a>
+ <a class="doc" href="CHANGELOG.md">CHANGELOG clínico</a>
+ <a class="doc" href="canon/policy.json">policy.json</a>
+ <a class="doc" href="docs/auditoria.pdf">Auditoria (PDF)</a>
+ <a class="doc" href="docs/auditoria-erratum.md">Errata</a>
 </div>
 
 <div class="foot">
