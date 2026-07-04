@@ -56,6 +56,15 @@ const bad = (m) => { console.error("  FAIL " + m); fails++; };
     await p.close();
   }
 
+  // perfis: renderiza os 8 perfis do bloco profiles-data
+  {
+    const { p, errs } = await page("perfis/index.html");
+    errs.length ? bad("perfis erros: " + errs.join(" | ")) : ok("perfis/index.html sem erro de runtime");
+    const n = await p.evaluate(() => document.querySelectorAll(".prof").length);
+    n === 8 ? ok("perfis: 8 perfis renderizados") : bad(`perfis: esperava 8, renderizou ${n}`);
+    await p.close();
+  }
+
   // app: executa, percorre as abas, valida render dinâmico
   {
     const { p, errs } = await page("app/index.html");

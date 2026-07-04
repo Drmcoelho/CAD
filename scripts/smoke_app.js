@@ -67,9 +67,25 @@ const app = read("app/index.html");
 console.log("\n[smoke] index.html — landing");
 const land = read("index.html");
 // os alvos de navegacao principais estao linkados
-["app/", "painel/", "tratado/", "CHANGELOG.md"].forEach((href) =>
+["app/", "painel/", "tratado/", "perfis/", "CHANGELOG.md"].forEach((href) =>
   has(`link ${href}`, land, `href="${href}"`)
 );
+
+// perfis/index.html — banco de perfis externalizado
+console.log("\n[smoke] perfis/index.html — perfis de CAD");
+const perfis = read("perfis/index.html");
+{
+  const m = perfis.match(/<script[^>]*id="profiles-data"[^>]*>([\s\S]*?)<\/script>/);
+  if (!m) bad("bloco <script id=profiles-data> ausente");
+  else {
+    try {
+      const j = JSON.parse(m[1]);
+      Array.isArray(j.perfis) && j.perfis.length === 8
+        ? ok(`bloco profiles-data: ${j.perfis.length} perfis`)
+        : bad(`profiles-data: esperava 8 perfis, achei ${j.perfis && j.perfis.length}`);
+    } catch (e) { bad("profiles-data nao e JSON valido: " + e.message); }
+  }
+}
 // as 16 pranchas (svg) estao indexadas
 {
   const svgLinks = (land.match(/pranchas\/lote[12]\/svg\/[^"]+\.svg/g) || []).length;
