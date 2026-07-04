@@ -67,6 +67,20 @@ const bad = (m) => { console.error("  FAIL " + m); fails++; };
     nCasos === 8 ? ok("perfis: 8 casos sintéticos renderizados") : bad(`perfis: esperava 8 casos, renderizou ${nCasos}`);
     calcHref = await p.evaluate(() => document.querySelector("#p-classica a.calc")?.getAttribute("href") || null);
     calcHref && calcHref.includes("na=") ? ok("perfis: deep-link para a calculadora presente") : bad("perfis: deep-link ausente/malformado");
+
+    // Tutor: preenche o caso "clássica" e confirma que classifica de volta para o próprio perfil
+    const hasCore = await p.evaluate(() => typeof window.CadCore?.classifyDkaProfile === "function");
+    hasCore ? ok("perfis: window.CadCore carregado (core/cad_core.js via script src)") : bad("perfis: window.CadCore ausente");
+    if (hasCore) {
+      await p.fill("#t_na", "132"); await p.fill("#t_cl", "92"); await p.fill("#t_hco3", "8");
+      await p.fill("#t_glu", "480"); await p.fill("#t_bhb", "6.5"); await p.fill("#t_ph", "7.15"); await p.fill("#t_alb", "4.2");
+      await p.waitForTimeout(150);
+      const tut = await p.evaluate(() => ({
+        text: document.getElementById("tut_out")?.innerText || "",
+        href: document.querySelector(".tut-match")?.getAttribute("href") || null,
+      }));
+      tut.href === "#p-classica" ? ok("Tutor: caso clássica classificado corretamente (top match -> #p-classica)") : bad(`Tutor: esperava #p-classica, obteve ${tut.href} (${tut.text.slice(0, 80)})`);
+    }
     await p.close();
   }
 

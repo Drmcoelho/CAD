@@ -19,6 +19,7 @@ const {
   insulinPlan,
   hasDka,
   isResolvedDka,
+  classifyDkaProfile,
 } = require("../core/cad_core");
 
 const SOURCE = JSON.parse(
@@ -145,6 +146,39 @@ function testDiagnosisAndResolution() {
   );
 }
 
+function testClassifyDkaProfile() {
+  // entrada insuficiente: nao adivinha, aponta o que falta
+  const insuf = classifyDkaProfile({ na: 140, cl: 100 });
+  assert.strictEqual(insuf.insufficient, true);
+  assert.deepStrictEqual(insuf.missing.sort(), ["betaHydroxybutyrateMmolL", "glucoseMgDl", "hco3", "ph"].sort());
+
+  // nao-diabetico + glicose baixa + cetose real -> alcoolica-jejum (eixo glicemico do hasDka falha por design)
+  {
+    const r = classifyDkaProfile({ na: 140, cl: 104, hco3: 16, glucoseMgDl: 68, betaHydroxybutyrateMmolL: 5.0, ph: 7.30, knownDiabetes: false });
+    assert.strictEqual(r.computed.hasDka, false);
+    assert.strictEqual(r.matches[0].id, "alcoolica-jejum");
+  }
+
+  // hasDka verdadeiro + glicose muito alta -> cad-hhs entra no diferencial
+  {
+    const r = classifyDkaProfile({ na: 130, cl: 88, hco3: 14, glucoseMgDl: 600, betaHydroxybutyrateMmolL: 4.2, ph: 7.21 });
+    assert.ok(r.matches.some((m) => m.id === "cad-hhs"));
+  }
+
+  // lactato elevado soma sepse-lactato ao diferencial, sem remover os demais
+  {
+    const r = classifyDkaProfile({ na: 133, cl: 100, hco3: 9, glucoseMgDl: 350, betaHydroxybutyrateMmolL: 4.0, ph: 7.12, lactateMmolL: 6.0 });
+    assert.ok(r.matches.some((m) => m.id === "sepse-lactato"));
+  }
+
+  // sem criterio de CAD ativo (bhb baixo, pH/HCO3 normais) -> nenhum match, sem forcar um rotulo
+  {
+    const r = classifyDkaProfile({ na: 140, cl: 104, hco3: 24, glucoseMgDl: 110, betaHydroxybutyrateMmolL: 0.2, ph: 7.40 });
+    assert.strictEqual(r.computed.hasDka, false);
+    assert.deepStrictEqual(r.matches, []);
+  }
+}
+
 function testSourceAndCorePolicyDoNotDrift() {
   assert.strictEqual(SOURCE.clinical_policy.potassium.replace_when_below, POLICY.potassium.replaceBelowMmolL);
   assert.strictEqual(SOURCE.clinical_policy.potassium.hold_insulin_below, POLICY.potassium.holdInsulinBelowMmolL);
@@ -169,6 +203,7 @@ function main() {
   testCorrectedSodium();
   testPotassiumPolicy();
   testDiagnosisAndResolution();
+  testClassifyDkaProfile();
   testSourceAndCorePolicyDoNotDrift();
   console.log("cad_core tests passed", round(effectiveOsmolality(136, 360), 1));
 }

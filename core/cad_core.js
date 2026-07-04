@@ -201,7 +201,69 @@ function isResolvedDka({ betaHydroxybutyrateMmolL, ph = null, hco3 = null }) {
   return ketoneResolved && acidResolved;
 }
 
-module.exports = {
+/*
+ * classifyDkaProfile — diferencial de perfil de CAD a partir de labs.
+ *
+ * NAO substitui julgamento clinico: devolve uma lista RANQUEADA de perfis
+ * plausiveis com o motivo de cada um (mesmo espirito do restante do core —
+ * numero clinico decide, nunca uma caixa-preta). Perfis correspondem aos ids
+ * de content/profiles.json; a UI resolve o id para o link/ancora.
+ *
+ * Entrada minima: na, cl, hco3, glucoseMgDl, betaHydroxybutyrateMmolL, ph.
+ * Opcionais: albumin (default 4.0), kMmolL, lactateMmolL, knownDiabetes,
+ * suspectedSepsis (flag de contexto quando o lactato nao foi medido).
+ * Se faltar algo essencial, devolve {insufficient:true, missing:[...]}.
+ */
+function classifyDkaProfile(input) {
+  const req = ["na", "cl", "hco3", "glucoseMgDl", "betaHydroxybutyrateMmolL", "ph"];
+  const missing = req.filter((k) => input[k] == null || Number.isNaN(input[k]));
+  if (missing.length) return { insufficient: true, missing };
+
+  const { na, cl, hco3, glucoseMgDl: glu, betaHydroxybutyrateMmolL: bhb, ph } = input;
+  const albumin = input.albumin ?? 4.0;
+  const knownDiabetes = !!input.knownDiabetes;
+  const lactate = input.lactateMmolL ?? null;
+  const suspectedSepsis = !!input.suspectedSepsis;
+
+  const ag = anionGap(na, cl, hco3);
+  const agc = correctedAnionGap(ag, albumin);
+  const dd = hco3 !== 24 ? deltaRatio(agc, hco3) : null;
+  const ddBand = dd != null ? interpretDeltaRatio(dd) : null;
+  const osmEff = effectiveOsmolality(na, glu);
+  const dka = hasDka({ knownDiabetes, glucoseMgDl: glu, betaHydroxybutyrateMmolL: bhb, ph, hco3 });
+  const resolved = isResolvedDka({ betaHydroxybutyrateMmolL: bhb, ph, hco3 });
+  const ketoneAxis = bhb >= POLICY.diagnosis.betaHydroxybutyrateMmolL;
+  const acidAxis = ph < POLICY.diagnosis.ph || hco3 < POLICY.diagnosis.bicarbonateMmolL;
+
+  const matches = [];
+  const add = (id, reason) => matches.push({ id, reason });
+
+  if (!knownDiabetes && glu < POLICY.diagnosis.glucoseMgDl && ketoneAxis) {
+    add("alcoolica-jejum", "cetose real (βHB ≥3), mas o eixo glicêmico do critério formal não fecha (não-diabético + glicose <200) — não é CAD diabética.");
+  } else if (!dka && ketoneAxis && !acidAxis) {
+    add("pre-cad", "βHB já cruza o limiar cetônico, mas pH e HCO₃ ainda dentro do critério — fase pré-acidose (tampão ainda segura).");
+  } else if (!dka && !ketoneAxis && acidAxis) {
+    if (resolved) add("hipercloremica", "cetose já abaixo do limiar (βHB <3) e resolução formal atingida (pH ou HCO₃ na meta), mas HCO₃ ainda baixo — provável cauda hiperclorêmica, não CAD ativa.");
+    else add("parcial", "cetose abaixo do limiar diagnóstico mas resolução ainda não atingida — zona de trânsito (nem CAD nova, nem resolvida).");
+  } else if (dka) {
+    if (glu < POLICY.insulin.reduceGlucoseBelowMgDl) add("euglicemica", `glicose ${glu} < ${POLICY.insulin.reduceGlucoseBelowMgDl} apesar de hasDka() verdadeiro — fenótipo euglicêmico (SGLT2i/jejum/gestação/etilismo).`);
+    if (glu >= 500 || osmEff > 300) add("cad-hhs", `glicose muito alta${osmEff > 300 ? ` e osm efetiva ${round(osmEff, 1)} > 300` : ""} — considerar sobreposição com HHS.`);
+    if ((lactate != null && lactate >= 4) || suspectedSepsis) add("sepse-lactato", "lactato elevado e/ou contexto séptico — acidose provavelmente mista (cetona + lactato).");
+    if (!matches.length) add("classica", "critério de CAD fechado (hasDka verdadeiro), sem sinal específico de outro fenótipo — apresentação clássica.");
+  }
+
+  if (ddBand && ddBand.band === "<1" && !matches.some((m) => m.id === "hipercloremica")) {
+    matches.push({ id: null, reason: `Δ/Δ ${round(dd, 2)} <1 — componente hiperclorêmico associado, independente do perfil principal.` });
+  }
+
+  return {
+    insufficient: false,
+    computed: { ag: round(ag, 1), agc: round(agc, 1), deltaRatio: dd != null ? round(dd, 2) : null, deltaBand: ddBand ? ddBand.band : null, effectiveOsmolality: round(osmEff, 1), hasDka: dka, isResolvedDka: resolved },
+    matches,
+  };
+}
+
+const CAD_CORE_EXPORTS = {
   POLICY,
   round,
   anionGap,
@@ -217,4 +279,15 @@ module.exports = {
   insulinPlan,
   hasDka,
   isResolvedDka,
+  classifyDkaProfile,
 };
+
+// UMD minimo: Node/CI usa module.exports (require); paginas estaticas sem
+// bundler (perfis/, futuras) carregam via <script src="../core/cad_core.js">
+// e usam window.CadCore.* — mesmas formulas, uma fonte, sem duplicar.
+if (typeof module !== "undefined" && module.exports) {
+  module.exports = CAD_CORE_EXPORTS;
+}
+if (typeof window !== "undefined") {
+  window.CadCore = CAD_CORE_EXPORTS;
+}
