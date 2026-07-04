@@ -83,9 +83,18 @@ const perfis = read("perfis/index.html");
       Array.isArray(j.perfis) && j.perfis.length === 8
         ? ok(`bloco profiles-data: ${j.perfis.length} perfis`)
         : bad(`profiles-data: esperava 8 perfis, achei ${j.perfis && j.perfis.length}`);
+      const semCaso = j.perfis && j.perfis.filter((x) => !x.caso || !x.caso.labs).map((x) => x.id);
+      semCaso && semCaso.length === 0
+        ? ok("todos os perfis têm caso sintético com labs estruturados")
+        : bad(`perfis sem caso.labs: ${semCaso && semCaso.join(", ")}`);
     } catch (e) { bad("profiles-data nao e JSON valido: " + e.message); }
   }
 }
+// deep-link para a calculadora: o template existe no código (a contagem real de
+// 8 instâncias renderizadas, uma por perfil, é responsabilidade do render_smoke.js,
+// que executa o JS — este smoke é browserless e só lê o código-fonte).
+has("template do deep-link para a calculadora", perfis, 'class="calc"');
+has("deep-link usa os labs do caso (na/cl/hco3/alb)", perfis, "calcHref");
 // as 16 pranchas (svg) estao indexadas
 {
   const svgLinks = (land.match(/pranchas\/lote[12]\/svg\/[^"]+\.svg/g) || []).length;

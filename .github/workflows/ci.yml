@@ -16,6 +16,8 @@ jobs:
         run: node scripts/build_app.js --check
       - name: portão de consistência (fonte única)
         run: node scripts/check_consistency.js
+      - name: casos sintéticos dos perfis batem com o core
+        run: node scripts/check_profiles.js
       - name: links locais
         run: node scripts/test_links.js
       - name: smoke estrutural das saidas

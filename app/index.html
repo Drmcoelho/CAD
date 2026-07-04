@@ -725,6 +725,18 @@ function renderCalc(c){
 }
 CALCS.forEach(renderCalc);
 
+/* deep-link: #calcular?na=..&cl=..&hco3=..&alb=..&glu=.. preenche as calculadoras
+   e abre a aba, para vir de fora (ex.: perfis/) já com o caso carregado. */
+(function deepLinkPrefill(){
+ const hash=location.hash.replace(/^#/,'');if(!hash)return;
+ const [tab,qs]=hash.split('?');
+ const map={na:['na','na2','naM','naO'],cl:['cl','cl2'],hco3:['hco3','hco32','hco33'],alb:['alb'],glu:['glu','gluO']};
+ if(qs){const params=new URLSearchParams(qs);
+  for(const [key,ids] of Object.entries(map)){const v=params.get(key);if(v==null)continue;
+   ids.forEach(id=>{const el=$('#'+id);if(el){el.value=v;el.dispatchEvent(new Event('input',{bubbles:true}));}});}}
+ if(tab)showTab(tab);
+})();
+
 /* compensação */
 function suggestPrimary(ph,h,c){if(ph==null||h==null||c==null)return null;
  const lowH=h<22,highH=h>26,highC=c>45,lowC=c<35;
