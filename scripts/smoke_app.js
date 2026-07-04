@@ -39,6 +39,19 @@ const app = read("app/index.html");
   }
 }
 
+// 2b. bancos externalizados (Fase 3): questions-data (provão) e cases-data (socráticos)
+[
+  ["questions-data", (j) => Array.isArray(j) && j.length > 0, "array nao-vazio"],
+  ["cases-data", (j) => j && j.A && j.B, "objeto com A e B"],
+].forEach(([id, valid, desc]) => {
+  const m = app.match(new RegExp(`<script[^>]*id="${id}"[^>]*>([\\s\\S]*?)</script>`));
+  if (!m) return bad(`bloco <script id=${id}> ausente`);
+  try {
+    const j = JSON.parse(m[1]);
+    valid(j) ? ok(`bloco ${id} parseia (${desc})`) : bad(`bloco ${id} invalido: esperado ${desc}`);
+  } catch (e) { bad(`bloco ${id} nao e JSON valido: ${e.message}`); }
+});
+
 // 3. acessibilidade dos 2 canvas — containers das tabelas equivalentes
 ["dav_tbl", "clo_tbl"].forEach((id) => has(`tabela equivalente #${id}`, app, `id="${id}"`));
 

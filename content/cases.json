@@ -1,0 +1,82 @@
+{
+ "A": {
+  "caso": "Mulher, 62 anos, DM2 em empagliflozina + metformina. Há 3 dias com infecção urinária e baixa ingesta. Chega prostrada, respiração um pouco profunda. Destro capilar: 164 mg/dL. A enfermeira comenta: \"a glicose tá boa\".",
+  "ladder": [
+   [
+    "Destro 164. Você descartou CAD?",
+    "Não. O destro diz a glicemia daquele instante. Não diz cetose, acidose, potássio corporal, tendência, nem se pode iniciar insulina."
+   ],
+   [
+    "Que exame abre ou fecha o diagnóstico?",
+    "β-hidroxibutirato + gasometria. A cetose é a doença; a glicose é barulho."
+   ],
+   [
+    "Gaso: pH 7,24 · HCO₃ 10 · βHB 5,8 · Na 137 · Cl 101 · K 4,1 · lactato 1,2. Há CAD?",
+    "Sim. βHB ≥ 3 + pH < 7,3 + DM = CAD. Glicose modesta (164) = fenótipo euglicêmico."
+   ],
+   [
+    "Por que a glicose está \"normal\" com cetogênese desenfreada?",
+    "SGLT2 → glicosúria contínua escoa glicose pelo rim; somado à baixa ingesta, a glicemia fica modesta enquanto a lipólise/cetogênese roda solta. A glicose baixa esconde a doença."
+   ],
+   [
+    "Posso deixar sem insulina porque a glicose é 164?",
+    "Não. A doença é cetogênese; sem insulina ela não fecha. Glicose normal não significa \"não dar insulina\" — significa \"dar insulina com glicose\"."
+   ],
+   [
+    "Como dou insulina sem causar hipoglicemia?",
+    "Dextrose IV junto desde o início. A glicose é o cinto de segurança que permite manter a insulina para fechar a cetogênese."
+   ],
+   [
+    "O que mais é obrigatório?",
+    "Suspender o SGLT2. Enquanto ele roda, perpetua a glicosúria e a cetogênese — é o motor do quadro."
+   ]
+  ],
+  "eq": "O diagnóstico fecha <b>sem a glicose</b>: βHB ≥ 3,0 mmol/L + pH < 7,30 e/ou HCO₃ < 18. Confirme que não é HHS pela osm efetiva: Osm = 2·137 + 164/18 = 274 + 9,1 = <b>283</b> → normal. É CAD, não HHS.",
+  "trap": "Confiar no destro e rotular \"não é CAD, a glicose está boa\". Na euglicêmica, esse é o erro que mata o diagnóstico — e o SGLT2 é o gatilho mais comum (e até ~30% das CAD na gestação são euglicêmicas).",
+  "pearl": "O destro é o mentiroso da sala; a cetona é a testemunha. A glicose é barulhenta, a cetona é a doença.",
+  "sim": "Botões: [manter SGLT2 / suspender] e [só volume / insulina + dextrose]. O aluno vê βHB e o gap corrigido. Só caem quando a insulina liga; com \"só volume\", diluem mas não fecham — e o cloro começa a subir. Com SGLT2 mantido, o βHB resiste.",
+  "ex": {
+   "stem": "<b>Exercício A1.</b> Diabética, glicose 138, pH 7,22, HCO₃ 9, Na 136, Cl 101, βHB 5,8, K 4,1, lactato 1,2; usa dapagliflozina. Há CAD? É euglicêmica? Posso deixar sem insulina? Qual o fluido inicial? Quando entra a glicose? Risco de tratar só com volume?",
+   "gab": "<b>Cálculo:</b> AG = 136 − (101 + 9) = 26. AGc (alb 4,0) = 26. Δ/Δ = 14/15 = 0,93 → limítrofe (logo abaixo de 1); não chamar de pura sem olhar tendência e Cl. Winter = 1,5·9 + 8 = 21,5 ± 2. <b>(a)</b> Sim — βHB 5,8 + pH 7,22 fecham CAD. <b>(b)</b> Sim — glicose 138 = euglicêmica. <b>(c)</b> Não — trata-se a cetogênese, não a glicose. <b>(d)</b> Cristaloide balanceado (Ringer) por volume — evita alimentar a futura cauda hiperclorêmica. <b>(e)</b> Dextrose IV desde já (glicose 138 e vai cair). Insulina 0,1 U/kg/h porque K 4,1 ≥ 3,5. <b>(f)</b> Só volume dilui mas não desliga a cetogênese; sem suspender a dapagliflozina, o motor continua ligado."
+  },
+  "atv": "Produza um cartão de fenótipo \"euglicêmica\" para o atlas: preencha a linha (glicose / cetona / pH-HCO₃ / gap / risco) e escreva a frase-armadilha de uma linha. <b>Critério de aceite:</b> a frase impede o erro do destro sem citar protocolo."
+ },
+ "B": {
+  "caso": "48 h de CAD em tratamento. O gap corrigido caiu de 21 para 16 — a cetose está saindo. Mas o pH segue 7,29 e o HCO₃ preso em ~12. O plantonista que assume pergunta: \"por que não melhora? aumento a insulina?\"",
+  "ladder": [
+   [
+    "O gap corrigido caiu. A cetose está resolvendo?",
+    "Sim. Gap caindo = cetona saindo do sangue."
+   ],
+   [
+    "Se a cetose sai, por que o HCO₃ não sobe e o pH não fecha?",
+    "Porque a acidose trocou de natureza: virou hiperclorêmica de gap normal. A cadeira que era da cetona agora é do cloro."
+   ],
+   [
+    "De onde veio o cloro?",
+    "Do SF 0,9% em grande volume — Cl 154 mmol/L, muito acima do plasma. A ressuscitação fabricou a acidose tardia."
+   ],
+   [
+    "Como provo isso no número?",
+    "O par diagnóstico: Δ/Δ caindo (de 0,88 para 0,40 = metade da acidemia agora é gap normal) enquanto o Cl sobe (99 → 106). Os dois juntos = cauda hiperclorêmica."
+   ],
+   [
+    "Insulina conserta esse pH?",
+    "Não. Insulina fecha cetogênese; não excreta cloro. Quem resolve o cloro é o rim, com tempo. Empilhar insulina aqui só reabre o dente-de-serra (hipoglicemia, hipocalemia)."
+   ],
+   [
+    "Então o que fazer?",
+    "Parar de alimentar cloro (trocar SF por balanceado), dar tempo ao rim, e NÃO interpretar o HCO₃ baixo tardio como cetose persistente."
+   ]
+  ],
+  "eq": "Δ/Δ = (AGc − 12) / (24 − HCO₃). Convenção de CAD 360: <b>&lt; 1</b> hiperclorêmica ganhando peso · <b>1–2</b> AGMA pura · <b>&gt; 2</b> alcalose associada. <span class=\"goto xlink\" data-go=\"calcular\">→ calcular Δ/Δ</span>",
+  "trap": "Ler o HCO₃ baixo tardio como \"ainda em CAD\" e responder com mais insulina / manter jejum / repetir bolus. Isso reabre o dente-de-serra iatrogênico e trata um problema (cloro) com a ferramenta errada (insulina).",
+  "pearl": "A cetose saiu; o cloro ficou sentado na cadeira dela. O pH pode melhorar antes da doença resolver; o HCO₃ pode continuar baixo depois dela ter resolvido.",
+  "sim": "Escolha do fluido no início: [SF 0,9% / Ringer]. Rode a série no tempo e veja a cauda hiperclorêmica crescer (SF) ou não (Ringer); observe Δ/Δ e Cl divergirem no SF. Ensina, em um clique, por que balanceado resolve mais rápido.",
+  "ex": {
+   "stem": "<b>Exercício B1 (série de-identificada).</b> Ponto tardio: Na 135,9 · Cl 105 · HCO₃ 13,6 · glicose 133 · albumina 4,5. Antes (12 h): Cl 99 · HCO₃ 13,4 · gap corrigido 21,3 · Δ/Δ 0,88. Calcule AG, AGc e Δ/Δ no ponto tardio. A acidose residual é cetose ou cloro? A conduta é mais insulina ou outra coisa?",
+   "gab": "<b>Cálculo:</b> AG = 135,9 − (105 + 13,6) = 17,3. AGc = 17,3 + 2,5·(4,0 − 4,5) = <b>16,1</b>. Δ/Δ = (16,1 − 12)/(24 − 13,6) = 4,1/10,4 = <b>0,39</b>. <b>(a)</b> AGc 16,1; Δ/Δ 0,39. <b>(b)</b> vs. 12 h (Δ/Δ 0,88, Cl 99): o Δ/Δ desabou e o Cl subiu 99 → 105. Metade da acidemia agora é cloro — cauda hiperclorêmica crescendo. <b>(c)</b> Não é mais insulina. É trocar SF por balanceado e dar tempo ao rim; a cetose já quase resolveu (gap 21 → 16). Insulina aqui não toca nesse pH e só arrisca hipoglicemia/hipocalemia."
+  },
+  "atv": "Pegue uma série temporal e produza a leitura do ponto de virada: identifique onde \"a doença trocou de mãos\" (cetose → cloro) plotando AGc, Cl e HCO₃ juntos, e escreva o handoff de uma linha que impede o próximo plantonista de empilhar insulina. <b>Critério:</b> a linha nomeia o cloro e desautoriza o reflexo da insulina, sem jargão."
+ }
+}
