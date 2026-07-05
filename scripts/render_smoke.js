@@ -156,14 +156,16 @@ const bad = (m) => { console.error("  FAIL " + m); fails++; };
     await p.close();
   }
 
-  // painel: série real (P1-P6) + banco de gasometrias sintético (20 casos, separado)
+  // painel: série real (P1-P6) + banco de gasometrias sintético (crescente, separado)
   {
     const { p, errs } = await page("painel/index.html");
     const hasCores = await p.evaluate(() => typeof window.CadCore?.anionGap === "function" && typeof window.AbgCore?.classifyPrimaryDisturbance === "function");
     hasCores ? ok("painel: CadCore + AbgCore carregados (core/*.js via script src)") : bad("painel: CadCore/AbgCore ausente");
 
-    const nCards = await p.evaluate(() => document.querySelectorAll("#gasoList .gcard").length);
-    nCards === 20 ? ok("painel: banco de gasometrias — 20 casos renderizados") : bad(`painel: esperava 20 casos no banco, achou ${nCards}`);
+    const counts = await p.evaluate(() => ({ cards: document.querySelectorAll("#gasoList .gcard").length, gaso: (typeof GASO !== "undefined" ? GASO : []).length }));
+    counts.cards > 0 && counts.cards === counts.gaso
+      ? ok(`painel: banco de gasometrias — ${counts.cards} casos renderizados (bate com content/gasometrias.json)`)
+      : bad(`painel: cards renderizados (${counts.cards}) != casos em GASO (${counts.gaso})`);
 
     // navega para um caso de AG mascarado, revela o gabarito, confere o cálculo ao vivo
     const revealed = await p.evaluate(() => {
