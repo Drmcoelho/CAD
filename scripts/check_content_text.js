@@ -36,7 +36,7 @@ const bad = (m) => { console.error("  FAIL " + m); fails++; };
 
 // operador errado no reinicio de insulina: "...reinic...> 3,5..." (a forma
 // correta usa "≥", caractere distinto de ">" — sem colisao com o certo).
-const K_RESTART_WRONG_OP = /(?:reinic\w*|insulina)[^.]{0,40}>\s*3,5(?!\d)/i;
+const K_RESTART_WRONG_OP = /(?:reinic\w*|insulina)[^.]{0,40}>\s*3[.,]5(?!\d)/i;
 
 function checkOperator(text, label) {
   if (K_RESTART_WRONG_OP.test(text)) {
@@ -47,9 +47,27 @@ function checkOperator(text, label) {
 // blobs = [{text, label}, ...] de TODO o corpus escaneado
 function checkOsmDoubleCounting(blobs) {
   const corrigidoValues = new Map(); // valor -> Set(labels onde apareceu como "Na corrigido")
+
+  // fonte 1 (robusta): o RESULTADO de uma derivacao que aplica a formula
+  // canonica de correcao (fator 1,6 ou 2,4, per POLICY.sodiumCorrection) —
+  // ancorado na matematica, nao numa palavra-rotulo. Pega prosa que usa
+  // abreviacoes ("NaC", "Na⁺c") sem nunca escrever "corrigido" por extenso
+  // (ex.: o proprio banco B-5 do atlas).
+  const naCorrFormula = /\d{2,3}(?:,\d+)?\s*\+\s*(?:1,6|2,4)\s*[·×*]\s*\([^)]*\)\s*\/\s*100\s*=\s*(?:<[^>]+>\s*)*(\d{2,3}(?:,\d+)?)/g;
+  blobs.forEach(({ text, label }) => {
+    for (const m of text.matchAll(naCorrFormula)) {
+      const v = m[1];
+      if (!corrigidoValues.has(v)) corrigidoValues.set(v, new Set());
+      corrigidoValues.get(v).add(label);
+    }
+  });
+
+  // fonte 2: mencao explicita da palavra "corrigido"/"corrigida" perto de um
+  // numero (prosa que se refere ao valor sem re-derivar a formula).
   blobs.forEach(({ text, label }) => {
     for (const m of text.matchAll(/corrigid[oa]/gi)) {
-      const window = text.slice(m.index, m.index + 120);
+      const start = Math.max(0, m.index - 40);
+      const window = text.slice(start, m.index + 120);
       // pega o ULTIMO numero do trecho (seja "= NUM" ou "(NUM)"), nao o
       // primeiro — uma derivacao "corrigido = A + B = ... = RESULTADO"
       // sempre termina no valor final; pegar o primeiro capturaria o Na
@@ -98,12 +116,12 @@ console.log("[check_content_text] varrendo content/*.json (prosa livre)\n");
 console.log("\n[check_content_text] CALCS (app/index.html) usa atlasEx(), nao duplica o texto do banco");
 {
   const app = read("app/index.html");
-  const literalEx = /ex:\{stem:'(?:[^'\\]|\\.)*',ans:'(?:[^'\\]|\\.)*'\}/g;
+  const literalEx = /ex\s*:\s*\{\s*['"]?stem['"]?\s*:\s*(['"`])(?:(?!\1)[^\\]|\\.)*?\1\s*,\s*['"]?ans['"]?\s*:\s*(['"`])(?:(?!\2)[^\\]|\\.)*?\2\s*\}/g;
   const literalMatches = [...app.matchAll(literalEx)];
   literalMatches.length === 0
     ? ok("nenhum exercicio de calculadora hardcoded (todos via atlasEx — fonte unica)")
     : bad(`${literalMatches.length} exercicio(s) de calculadora ainda hardcoded em CALCS (deveriam usar atlasEx('B-N') e vir de content/atlas.json)`);
-  const atlasExMatches = [...app.matchAll(/ex:atlasEx\('(B-\d)'\)/g)];
+  const atlasExMatches = [...app.matchAll(/ex\s*:\s*atlasEx\s*\(\s*(['"`])(B-\d)\1\s*\)/g)];
   atlasExMatches.length >= 5
     ? ok(`${atlasExMatches.length} exercicios de calculadora via atlasEx()`)
     : bad(`esperava >=5 exercicios via atlasEx(), achei ${atlasExMatches.length}`);

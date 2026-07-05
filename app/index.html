@@ -686,7 +686,7 @@ const ATLAS=JSON.parse(document.getElementById('atlas-data').textContent);
 /* os exercicios das calculadoras abaixo SAO os mesmos B-1..B-6 do banco do
    Atlas (content/atlas.json) — mesmo numero, mesma fonte, nunca duplicado a
    mao; atlasEx() busca pelo prefixo do titulo em vez de repetir o texto. */
-function atlasEx(prefixo){const b=ATLAS.banco.find(x=>x[0].startsWith(prefixo));return{stem:b[1],ans:b[2]};}
+function atlasEx(prefixo){const b=ATLAS.banco.find(x=>x[0].startsWith(prefixo));return b?{stem:b[1],ans:b[2]}:{stem:`[exercício ${prefixo} não encontrado no Atlas]`,ans:'—'};}
 
 /* ================= CALCULADORAS ================= */
 function agInterp(ag){const[a,b]=CANON.agNormal;return ag>b?['a',`> ${b} → há ácido não medido (cetona/lactato). Ponto de partida, não diagnóstico.`]:['g',`dentro do normal (${a}–${b}).`];}
