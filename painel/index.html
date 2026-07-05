@@ -79,6 +79,8 @@ td.l,th.l{text-align:left}
 </div>
 </div>
 
+<script src="../core/cad_core.js"></script>
+<script src="../core/abg_core.js"></script>
 <script>
 var ALB=4.5;
 // raw series (cronológica)
@@ -92,7 +94,7 @@ var S=[
 ];
 // compute derived
 S.forEach(function(p){
-  p.win=1.5*p.hco3+8;
+  p.win=AbgCore.expectedPco2MetabolicAcidosis(p.hco3).expected;
   p.winSt = p.tp==='ven' ? 'ven' : (Math.abs(p.pco2-p.win)<=2?'ok':(p.pco2>p.win+2?'hi':'lo'));
   if(!p.elBad && p.na!=null && p.cl!=null){
     p.ag=p.na-(p.cl+p.hco3); p.agc=p.ag+2.5*(4.0-ALB); p.dd=(p.agc-12)/(24-p.hco3);
