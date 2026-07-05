@@ -301,13 +301,13 @@ canvas{display:block;width:100%;background:#0c1218;border:1px solid var(--line);
    "Insulina e K juntos, na mesma velocidade"
   ],
   "correct": 1,
-  "exp": "Insulina empurra K para dentro da célula — com K < 3,5 pode precipitar arritmia. Repor primeiro; reiniciar a insulina acima de 3,5 (não 3,3)."
+  "exp": "Insulina empurra K para dentro da célula — com K < 3,5 pode precipitar arritmia. Repor primeiro; reiniciar a insulina ao atingir K ≥ 3,5 (não 3,3)."
  },
  {
   "type": "vf",
   "q": "A insulina pode ser reiniciada assim que o K atingir 3,3 mEq/L.",
   "correct": false,
-  "exp": "Falso. O canon 2024 usa > 3,5 como o número único de reinício. 3,3 é um piso antigo (2009)."
+  "exp": "Falso. O canon 2024 usa ≥ 3,5 como o número único de reinício. 3,3 é um piso antigo (2009)."
  },
  {
   "type": "mcq",
@@ -500,8 +500,8 @@ canvas{display:block;width:100%;background:#0c1218;border:1px solid var(--line);
   ],
   [
    "B-6 · Osmolaridade efetiva",
-   "Na 142, glicose 600. Calcule e interprete.",
-   "Osm = 2·142 + 600/18 = <b>317</b>. <i>Lição:</i> > 320 entra no eixo HHS/neurológico — a velocidade de queda osmolar passa a importar tanto quanto o gap."
+   "Na medido 130 (Na corrigido 142, do exercício anterior), glicose 600. Calcule a osm efetiva e interprete.",
+   "Osm efetiva = 2·130 (Na MEDIDO) + 600/18 = 260 + 33,3 = <b>293,3</b> — ainda não cruza o limiar HHS (>320). <i>Lição:</i> o Na corrigido (142) revela o déficit de água livre emergente, mas não entra na fórmula de osm efetiva — usá-lo dupla-conta a glicose."
   ]
  ],
  "ladder": [
@@ -598,7 +598,7 @@ canvas{display:block;width:100%;background:#0c1218;border:1px solid var(--line);
   "CAD é doença de cetona, não de glicose.",
   "Glicose baixa/modesta não exclui CAD.",
   "K normal/alto não exclui déficit corporal total.",
-  "Insulina fecha cetogênese, mas mata se o K estiver baixo (< 3,5 → adiar; reiniciar > 3,5).",
+  "Insulina fecha cetogênese, mas mata se o K estiver baixo (< 3,5 → adiar; reiniciar ≥ 3,5).",
   "Glicose IV é ferramenta para permitir insulina, não só \"tratar hipoglicemia\".",
   "Cloro alto mantém a acidose depois que a cetose resolveu.",
   "Bicarbonato é exceção guiada pelo <b>pH</b> (≤ 6,9 absoluto; consenso 2024 escreve &lt; 7,0) e independe do nível de HCO₃ — não é reflexo.",
@@ -708,7 +708,7 @@ const CALCS=[
  {id:'osm',t:'Osmolaridade efetiva',f:'Osm = 2 × Na + glicose/18 · (ureia NÃO entra)',in:[['naO','Na⁺',132],['gluO','Glicose',428]],
   calc:v=>{const o=2*v.naO+v.gluO/18;return{val:r(o,0),chip:o>CANON.osm.hhs_efetiva?'a':'g',txt:(o>CANON.osm.hhs_efetiva?`> ${CANON.osm.hhs_efetiva} → eixo HHS/neurológico.`:'abaixo do limiar de HHS.')+' Efetiva = tonicidade.'};},
   why:`Só <b>Na e glicose</b> geram gradiente na membrana (tonicidade); a <b>ureia atravessa livre</b> e não conta. A efetiva dita encolhimento/inchaço celular, o <b>risco de edema na correção</b> e o <b>eixo HHS</b>. A total (com ureia) só serve para o osm-gap (álcoois tóxicos).`,
-  ex:{stem:'Na 142, glicose 600 → osm efetiva?',ans:'Osm = 2×142 + 600/18 = 284 + 33,3 = <b>317</b> → beirando o eixo HHS (efetiva > 320; comentário 2024 propõe > 300).'},go:'entender'}
+  ex:{stem:'Na medido 130 (Na corrigido 142), glicose 600 → osm efetiva?',ans:'Osm efetiva = 2×130 (Na MEDIDO) + 600/18 = 260 + 33,3 = <b>293,3</b> → ainda não cruza o eixo HHS (>320). Usar o Na corrigido (142) aqui dobraria a contagem da glicose.'},go:'entender'}
 ];
 function renderCalc(c){
  const el=document.createElement('div');el.className='calc';

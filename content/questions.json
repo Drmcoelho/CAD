@@ -27,13 +27,13 @@
    "Insulina e K juntos, na mesma velocidade"
   ],
   "correct": 1,
-  "exp": "Insulina empurra K para dentro da célula — com K < 3,5 pode precipitar arritmia. Repor primeiro; reiniciar a insulina acima de 3,5 (não 3,3)."
+  "exp": "Insulina empurra K para dentro da célula — com K < 3,5 pode precipitar arritmia. Repor primeiro; reiniciar a insulina ao atingir K ≥ 3,5 (não 3,3)."
  },
  {
   "type": "vf",
   "q": "A insulina pode ser reiniciada assim que o K atingir 3,3 mEq/L.",
   "correct": false,
-  "exp": "Falso. O canon 2024 usa > 3,5 como o número único de reinício. 3,3 é um piso antigo (2009)."
+  "exp": "Falso. O canon 2024 usa ≥ 3,5 como o número único de reinício. 3,3 é um piso antigo (2009)."
  },
  {
   "type": "mcq",
