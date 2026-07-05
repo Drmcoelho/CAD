@@ -97,6 +97,9 @@
    * motivo(s) — nunca um veredito unico de caixa-preta.
    */
   function classifyPrimaryDisturbance(input) {
+    if (!input) {
+      throw new TypeError("input must be an object");
+    }
     const ph = requiredNumber("ph", input.ph);
     const pco2 = requiredNumber("pco2", input.pco2);
     const hco3 = requiredNumber("hco3", input.hco3);

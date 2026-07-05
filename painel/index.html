@@ -733,7 +733,7 @@ function renderGasoDetail(){
     var hasDka=(typeof c.hasDkaEsperado==='boolean')?c.hasDkaEsperado:null;
     html+='<div class="gab">'+
       '<h4>Calculado ao vivo (AbgCore/CadCore)</h4>'+
-      '<p>Distúrbio primário: <b>'+computedTypes+'</b>'+(res.compensationCheck?' · compensação: <b>'+res.compensationCheck.verdict+'</b>':'')+
+      '<p>Distúrbio primário: <b>'+computedTypes+'</b>'+(res.compensationCheck && res.compensationCheck.verdict?' · compensação: <b>'+res.compensationCheck.verdict+'</b>':'')+
       (ag!=null?' · AG = <b>'+r(ag,1)+'</b>':'')+(agc!=null?' · AGc = <b>'+r(agc,1)+'</b>':'')+
       (hasDka!=null?' · hasDka() = <b>'+(hasDka?'verdadeiro':'falso')+'</b>':'')+'</p>'+
       '<h4>Classificação</h4><p>'+c.gabarito.classificacao+'</p>'+

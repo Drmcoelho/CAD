@@ -82,6 +82,11 @@ function testRequiresPhPco2Hco3() {
   assert.throws(() => classifyPrimaryDisturbance({ ph: 7.4, pco2: 40 }), TypeError);
 }
 
+function testRequiresInputObject() {
+  assert.throws(() => classifyPrimaryDisturbance(undefined), TypeError);
+  assert.throws(() => classifyPrimaryDisturbance(null), TypeError);
+}
+
 // HCO3 baixo E pCO2 baixo AO MESMO TEMPO (direcoes opostas, nao "mesma
 // direcao") e' a assinatura de uma compensacao completa -- em QUALQUER
 // sentido. So' o pH decide qual e' o primario; a ordem dos branches no
@@ -142,6 +147,7 @@ function main() {
   testAllNormalNoDisturbance();
   testMaskedHighAnionGapWithNormalPh();
   testRequiresPhPco2Hco3();
+  testRequiresInputObject();
   testOppositeDirectionAlkalemicReadsRespiratoryAlkalosisAsPrimary();
   testOppositeDirectionAcidemicReadsMetabolicAcidosisAsPrimary();
   testOppositeDirectionNormalPhIsHonestlyAmbiguous();
