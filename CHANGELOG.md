@@ -85,3 +85,17 @@ Correção de realidade clínica: β-HB sérico point-of-care **não é padrão 
 - **9º perfil: CAD em DRC dialítica (hemodiálise)** (`content/profiles.json`, `perfis/index.html`): fisiopatologia própria (sem diurese osmótica → glicose sem teto; K sem via de excreção; HCO₃ crônico vs degrau agudo; diálise como via de correção definitiva), tratamento por eixo, armadilha, incerteza e caso sintético (glicose 780, K 6,3, pH 6,98 — recalculado pelo core: AG 36 · AGc 38 · Δ/Δ 1,63 · osm efetiva 319,3). Cruza com as seções novas do tratado (§5.1 Ringer/hipercalemia, §5.3 exceção K/insulina).
 - **`classifyDkaProfile()` ganha `dialysisDependent`** (contexto, não limiar numérico): quando verdadeiro, aponta direto para `"dialitica"` em vez de aplicar a heurística usual de glicose/osm para euglicêmica/CAD+HHS — que não vale nessa população (sem clearance renal de glicose). `sepse-lactato` continua compondo o diferencial normalmente (eixo ortogonal ao contexto renal). Regressão: `core/cad_core.test.js` (glicose 780 não força `cad-hhs`) e `scripts/check_profiles.js` (9º caso classifica de volta para `dialitica`).
 - **CI**: `render_smoke.js` cobre o Tutor do tratado e o caso de DRC dialítica (glicose alta não confunde com CAD+HHS); `smoke_app.js` e `check_profiles.js` atualizados de 8 para 9 perfis/casos.
+
+## [2026-07-05] — `docs/auditoria.docx`/`.pdf` de fato reconciliados (a errata anterior estava incompleta)
+
+Auditoria própria pós-PR#15: a alegação em `docs/auditoria-erratum.md` de que os pontos 1–2 (Δ/Δ 0,93, bicarbonato 6,9) "já estavam aplicados no `.docx`-fonte" era **falsa** — extração direta do XML do `.docx` mostrou "quase pura" e nenhuma menção a "6,9". Corrigido de fato, mais 2 achados que a errata original não cobria:
+
+| Achado | De | Para | Impacto |
+|---|---|---|---|
+| Δ/Δ 0,93 (worked case) | "AGMA quase pura" | "AGMA **limítrofe** (Δ/Δ < 1: já há componente hiperclorêmico...)" | Era alegado como corrigido; não estava. |
+| Bicarbonato (2 menções) | "somente pH < 7,0" | + "sem benefício demonstrado acima de 6,9 — abaixo disso, decisão de UTI" | Idem — alegado, não aplicado. |
+| Exercício B-6 (osm efetiva) | `2·142 (Na corrigido) + 600/18 = 317` | `2·130 (Na MEDIDO) + 600/18 = 293,3` | **Mesmo furo do EX04** (ROADMAP §1), sobrevivendo intacto neste exercício — dupla-contava a glicose. |
+| Apêndice A (potássio) | "ADIAR insulina até **> 3,5**" | "ADIAR insulina até **≥ 3,5**" | Reabria a zona cinzenta em K=3,5 que a Fase 1 eliminou em todo o resto do repo. |
+
+- **`docs/auditoria.pdf` regenerado** a partir do `.docx` corrigido. `soffice`/LibreOffice está instalado no ambiente desta sessão, mas sua conversão headless está **quebrada** (`soffice --headless --convert-to pdf` falha até para um `.txt` trivial — confirmado não ser problema do arquivo). Fallback usado: `pandoc` (`.docx`→HTML) + Chromium headless (HTML→PDF via `page.pdf()`), com CSS mínimo para paginação A4/tabelas/tipografia. Conteúdo conferido (extração de texto do PDF batendo com as 6 correções); diagramação **não é idêntica** à exportação nativa do Word/LibreOffice — documentado como provisório em `docs/auditoria-erratum.md`.
+- `docs/auditoria-erratum.md` atualizado: pontos 1–2 marcados `✅ aplicado`, pontos 4–5 (achados novos) adicionados, rodapé reescrito para descrever o pipeline real usado.
