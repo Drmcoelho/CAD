@@ -27,8 +27,8 @@
   ],
   [
    "B-6 · Osmolaridade efetiva",
-   "Na 142, glicose 600. Calcule e interprete.",
-   "Osm = 2·142 + 600/18 = <b>317</b>. <i>Lição:</i> > 320 entra no eixo HHS/neurológico — a velocidade de queda osmolar passa a importar tanto quanto o gap."
+   "Na medido 130 (Na corrigido 142, do exercício anterior), glicose 600. Calcule a osm efetiva e interprete.",
+   "Osm efetiva = 2·130 (Na MEDIDO) + 600/18 = 260 + 33,3 = <b>293,3</b> — ainda não cruza o limiar HHS (>320). <i>Lição:</i> o Na corrigido (142) revela o déficit de água livre emergente, mas não entra na fórmula de osm efetiva — usá-lo dupla-conta a glicose."
   ]
  ],
  "ladder": [
@@ -125,7 +125,7 @@
   "CAD é doença de cetona, não de glicose.",
   "Glicose baixa/modesta não exclui CAD.",
   "K normal/alto não exclui déficit corporal total.",
-  "Insulina fecha cetogênese, mas mata se o K estiver baixo (< 3,5 → adiar; reiniciar > 3,5).",
+  "Insulina fecha cetogênese, mas mata se o K estiver baixo (< 3,5 → adiar; reiniciar ≥ 3,5).",
   "Glicose IV é ferramenta para permitir insulina, não só \"tratar hipoglicemia\".",
   "Cloro alto mantém a acidose depois que a cetose resolveu.",
   "Bicarbonato é exceção guiada pelo <b>pH</b> (≤ 6,9 absoluto; consenso 2024 escreve &lt; 7,0) e independe do nível de HCO₃ — não é reflexo.",

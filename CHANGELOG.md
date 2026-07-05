@@ -99,3 +99,19 @@ Auditoria própria pós-PR#15: a alegação em `docs/auditoria-erratum.md` de qu
 
 - **`docs/auditoria.pdf` regenerado** a partir do `.docx` corrigido. `soffice`/LibreOffice está instalado no ambiente desta sessão, mas sua conversão headless está **quebrada** (`soffice --headless --convert-to pdf` falha até para um `.txt` trivial — confirmado não ser problema do arquivo). Fallback usado: `pandoc` (`.docx`→HTML) + Chromium headless (HTML→PDF via `page.pdf()`), com CSS mínimo para paginação A4/tabelas/tipografia. Conteúdo conferido (extração de texto do PDF batendo com as 6 correções); diagramação **não é idêntica** à exportação nativa do Word/LibreOffice — documentado como provisório em `docs/auditoria-erratum.md`.
 - `docs/auditoria-erratum.md` atualizado: pontos 1–2 marcados `✅ aplicado`, pontos 4–5 (achados novos) adicionados, rodapé reescrito para descrever o pipeline real usado.
+
+## [2026-07-05] — mesmo furo de osm efetiva e o mesmo furo de operador de K, achados no app AO VIVO
+
+Continuação da auditoria própria: os dois furos corrigidos em `docs/auditoria.docx` (osm efetiva dupla-contando a glicose; operador `>` em vez de `≥` no reinício de insulina) **também estavam no app publicado** (`drmcoelho.github.io/CAD/`), em quatro lugares — mais grave que o `.docx` (documento estático), porque é a ferramenta em uso. Todos corrigidos na fonte e regenerados via `build_app.js`:
+
+| Local | De | Para |
+|---|---|---|
+| `content/atlas.json` — banco B-6 (aba Atlas) | premissa "Na 142..." + gabarito `2·142+600/18=317` | premissa esclarece Na medido 130 (corrigido 142 é do exercício anterior) + gabarito `2·130+600/18=293,3` |
+| `content/atlas.json` — leis[3] (aba Atlas, "12 leis") | "reiniciar > 3,5" | "reiniciar ≥ 3,5" |
+| `content/questions.json` — Q2 exp (Provão) | "reiniciar a insulina acima de 3,5" (a MCQ já tinha a opção correta "≥3,5" — a explicação contradizia a própria resposta certa) | "reiniciar a insulina ao atingir K ≥ 3,5" |
+| `content/questions.json` — Q3 exp (Provão, item V/F) | "o canon 2024 usa > 3,5 como o número único de reinício" | "usa ≥ 3,5" |
+| `app/index.html` — calculadora "Osmolaridade efetiva" (aba Calcular), exercício inline | hardcoded no próprio `app/index.html` (fora de `content/*.json`, exceção não documentada à regra de fonte única): `2×142+600/18=317` | `2×130 (Na MEDIDO)+600/18=293,3`, com nota de que o Na corrigido dobraria a contagem |
+
+- **Achado estrutural**: a calculadora "Osmolaridade efetiva" da aba Calcular carrega seu exercício-exemplo como string literal dentro do `<script>` do `app/index.html` — não vem de `content/atlas.json`. É uma exceção não documentada à regra-mãe ("nenhum número clínico nasce hardcoded em HTML"); o conteúdo foi corrigido no lugar, mas a duplicação estrutural entre o exemplo desta calculadora e o banco B-6 do Atlas (mesmo conceito, duas fontes) permanece — candidato a unificação numa Fase futura.
+- Nenhum destes 4 pontos era coberto por `check_consistency.js`/`check_profiles.js` (que verificam `POLICY` deep-equal e os 9 casos sintéticos, não a prosa livre de `atlas.banco`/`atlas.leis`/`questions`) — por isso sobreviveram sem detecção automática. Ver ROADMAP para um possível portão futuro de regex sobre esse conteúdo.
+- Verificado: `npm run ci` verde, `build_app.js --check` sincronizado, `render_smoke.js` verde, e render manual confirmando os textos corrigidos nas abas Atlas/Provão/Calcular do app real.
