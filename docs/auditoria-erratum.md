@@ -89,8 +89,8 @@ sem instrução. Corrigido para:
 
 **Os cinco pontos acima estão aplicados nos dois binários**, `docs/auditoria.docx` (fonte
 editável, corrigida string a string) e `docs/auditoria.pdf` (regenerado a partir do `.docx`
-corrigido). Onde este errata e os binários coincidirem, é porque a reconciliação foi
-concluída — o errata fica como **registro datado**, não como pendência.
+corrigido). Onde esta errata e os binários coincidirem, é porque a reconciliação foi
+concluída — a errata fica como **registro datado**, não como pendência.
 
 **Nota sobre o pipeline de regeneração do PDF (2026-07-05):** o ambiente onde esta correção
 foi feita tem `soffice`/LibreOffice **instalado, mas com a conversão headless quebrada**
