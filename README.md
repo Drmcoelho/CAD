@@ -31,13 +31,13 @@ Nada renderiza um limiar "na mão". Mudou uma diretriz? Edita-se **um** valor em
 
 | Pasta | O que é |
 |---|---|
-| `core/` | `cad_core.js` — motor determinístico (AG, AGc, Δ/Δ, Winter, Na corrigido, osm efetiva, planos de K e insulina) + `POLICY`. `cad_core.test.js` — 292 asserções. |
+| `core/` | `cad_core.js` — motor determinístico (AG, AGc, Δ/Δ, Winter, Na corrigido, osm efetiva, planos de K e insulina) + `POLICY`. `cad_core.test.js` — 292 asserções. `abg_core.js` — motor geral de acid-base (não específico de CAD), reusa AG/AGc de `cad_core.js`; `abg_core.test.js` — 16 asserções. |
 | `canon/` | `policy.json` — a doutrina em JSON, incluindo a reconciliação do bicarbonato (7,0 consenso / 6,9 fronteira de evidência). |
-| `content/` | bancos pedagógicos versionados (`questions`, `cases`, `atlas`, `profiles`), injetados nas saídas pelo `build_app.js` — nenhum conteúdo clínico hardcoded em HTML. |
+| `content/` | bancos pedagógicos versionados (`questions`, `cases`, `atlas`, `profiles`, `gasometrias`), injetados nas saídas pelo `build_app.js` — nenhum conteúdo clínico hardcoded em HTML. |
 | `app/` | `index.html` — o **núcleo interativo** (6 abas: Entender · Fisiologia · Calcular · Provão · Atlas · Referência). Calculadoras vivas, simuladores canvas, motor de questões. |
 | `tratado/` | `index.html` — tratado maximalista (bolso/plantão/profundo). Tem o mesmo **Tutor** de classificação logo após o índice ("Marco"), para classificar o caso antes de ler e ir direto à seção que importa, sem duplicar `core/cad_core.js`. |
 | `perfis/` | `index.html` — fisiopatologia detalhada + tratamento dos 9 fenótipos de CAD (incluindo CAD em DRC dialítica), cada um com caso sintético calculado e link direto para abrir os números na calculadora do `app/`. Tem um **Tutor** no topo: digite os labs (cetonúria em cruzes como eixo cetônico primário — β-HB sérico é secundário/opcional, não é ponto-de-cuidado padrão no Brasil) e `core/cad_core.js` (carregado direto, `window.CadCore`) classifica o perfil e refere à seção certa. Renderizado de `content/profiles.json`; cruzado com o `tratado/` (§1.6 e §5). |
-| `painel/` | `index.html` — painel de evolução gasométrica (série temporal de-identificada). |
+| `painel/` | `index.html` — painel de evolução gasométrica (série temporal de-identificada) + banco de gasometrias sintético para treino de raciocínio ácido-base (lote 1: 20 casos rumo a 100+, incluindo quadros que não são CAD), claramente separado da série real. Motor: `core/abg_core.js` + `core/cad_core.js`. |
 | `pranchas/` | `lote1/` (M01–M06 + EX01–EX02) e `lote2/` (M07–M12 + EX03–EX04). Cada lote: `svg/` (vetorial, versionável), `png/`, `source/*.json` (o canon aplicado à imagem), `generate_*.py`. `revisao-m2-m4-m6.png` documenta a correção do K. |
 | `docs/` | Auditoria + reescrita + núcleo pedagógico (PDF/DOCX). `auditoria-erratum.md` reconcilia o corpo da auditoria com o canon atual (Δ/Δ, bicarbonato ≤6,9, compensação). |
 | `scripts/` | `check_consistency.js` — o portão de fonte única. |

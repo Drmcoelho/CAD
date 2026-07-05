@@ -5,6 +5,11 @@ Estado do canon por camada, na versão `CAD360-ApA-2026-07-01`. O que estiver �
 ## Motor e doutrina
 - ✅ `core/cad_core.js` — `POLICY` congelado, 292 asserções passando. K `<3,5 / 3,5–5,0 / ≥5,0`; bicarbonato pH-driven; Na 1,6/2,4; Δ/Δ `<1 / 1–2 / >2`; osm efetiva com Na medido.
 - ✅ `canon/policy.json` — espelho em JSON, batendo com o core (verificado no portão).
+- ✅ `core/abg_core.js` — motor geral de acid-base (não específico de CAD), 16 asserções passando. Reusa AG/AGc de `cad_core.js`; branch-order corrigido para direção de pH decidir o primário quando HCO₃/pCO₂ divergem em direções opostas (bug real, achado antes de escrever os casos de gasometria — ver CHANGELOG 2026-07-05).
+
+## Banco de gasometrias (`content/gasometrias.json`, `painel/index.html`)
+- ✅ Lote 1: 20 casos sintéticos, 20 diagnósticos diferentes, verificados por `scripts/check_gasometrias.js` (Henderson-Hasselbalch, distúrbio primário, AG/AGc, hasDka). UI em `painel/index.html`, separada da série real.
+- [ ] Lotes 2+ até 100+ casos.
 
 ## Pranchas — lote 1 (M01–M06 + EX01–EX02)
 - ✅ M04 calculadoras — bandas Δ/Δ corrigidas, osm separada (tonicidade × osm-gap), exemplo glicose 320 (evita o fator 2,4).
