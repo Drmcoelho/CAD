@@ -177,6 +177,12 @@ const bad = (m) => { console.error("  FAIL " + m); fails++; };
       out.leis = txt("leis");
       out.banco = txt("banco");
       out.modA = txt("modA");
+      if (typeof showTab === "function") showTab("calcular");
+      await new Promise((r) => setTimeout(r, 150));
+      // as calculadoras nao duplicam o exercicio a mao -- atlasEx() busca
+      // do mesmo banco.B-6 que a aba Atlas mostra (unificacao 2026-07-05)
+      out.osmExAtlas = (typeof ATLAS !== "undefined" ? ATLAS : null)?.banco?.find((x) => x[0].startsWith("B-6"));
+      out.osmExCalc = (typeof CALCS !== "undefined" ? CALCS : null)?.find((c) => c.id === "osm")?.ex;
       return out;
     });
     errs.length ? bad("app erros: " + errs.join(" | ")) : ok("app sem erro de runtime");
@@ -185,6 +191,9 @@ const bad = (m) => { console.error("  FAIL " + m); fails++; };
     [["quiz", r.quiz], ["leis", r.leis], ["banco", r.banco], ["modA", r.modA]].forEach(([k, n]) =>
       n > 20 ? ok(`app: #${k} populado (${n} chars)`) : bad(`app: #${k} vazio/curto (${n})`)
     );
+    (r.osmExAtlas && r.osmExCalc && r.osmExCalc.stem === r.osmExAtlas[1] && r.osmExCalc.ans === r.osmExAtlas[2])
+      ? ok("app: exercício da calculadora Osmolaridade efetiva == banco B-6 do Atlas (fonte única, via atlasEx)")
+      : bad(`app: exercício da calculadora Osmolaridade efetiva DIVERGE do banco B-6 (calc=${JSON.stringify(r.osmExCalc)}, atlas=${JSON.stringify(r.osmExAtlas)})`);
     await p.close();
   }
 
