@@ -851,6 +851,366 @@ td.l,th.l{text-align:left}
         "detalheChave": "Contraste direto e deliberado com G-04: mesmo pano de fundo ('sem diabetes prévia' + cetoacidose franca), mas aqui a glicose ALTA fecha o eixo (via valor absoluto) enquanto em G-04 a glicose BAIXA o fazia falhar — o mesmo raciocínio de eixo-por-OR aplicado nas duas direções possíveis.",
         "conteudoComplementar": "'Diabetes esteroide' induzido por corticoterapia em alta dose é comum em oncologia/reumatologia/transplante e pode ser transitório (revertendo com a suspensão do corticoide) ou revelar um diabetes tipo 2 subclínico preexistente que só se manifestou sob o estresse hiperglicemiante do fármaco — rastreamento glicêmico ativo é recomendado sempre que se inicia corticoterapia prolongada em alta dose."
       }
+    },
+    {
+      "id": "G-41",
+      "categoria": "Acidose metabólica AG alto (não-cetótica)",
+      "titulo": "Intoxicação por álcool isopropílico ('álcool de fricção') — cetose SEM acidose",
+      "mimicsCAD": false,
+      "confundeCom": ["G-08", "G-23"],
+      "vinheta": "50 anos, etilista, ingeriu álcool de fricção (isopropanol) por falta de bebida alcoólica convencional, sonolento mas hemodinamicamente estável, hálito 'adocicado' peculiar.",
+      "labs": { "ph": 7.39, "pco2": 39, "hco3": 23, "na": 140, "cl": 104, "albumin": 4.0 },
+      "pergunta": "Compare com G-08 (metanol/etilenoglicol) — mesma classe de álcool tóxico, mas a gasometria aqui está toda dentro da normalidade. Por quê?",
+      "gabarito": {
+        "classificacao": "HCO₃, pCO₂ e pH dentro da faixa de referência — sem componente ácido-base primário fechado por este eixo (o que NÃO exclui, por si só, um gap elevado mascarado; o AG deve sempre ser calculado à parte).",
+        "diagnostico": "Intoxicação por álcool isopropílico — ao contrário do metanol/etilenoglicol, o isopropanol é metabolizado pela álcool-desidrogenase a ACETONA, uma cetona, não um ácido orgânico — por isso não produz a acidose metabólica de AG alto característica dos outros álcoois tóxicos.",
+        "raciocinio": "AG = 140−104−23 = 13, normal. O isopropanol é o único álcool tóxico clássico cujo metabólito principal (acetona) NÃO é ácido — o paciente desenvolve cetose (nitroprussiato de sódio urinário/sérico positivo, como em cetoacidose) e gap OSMOLAR elevado (álcool-mãe ainda circulante, não metabolizado), mas SEM a acidemia e o gap ANIÔNICO elevados que caracterizam metanol/etilenoglicol — o depoimento gasométrico deste caso é, na verdade, a AUSÊNCIA do achado esperado, e essa ausência é o próprio diagnóstico diferencial.",
+        "armadilha": "Esperar acidose metabólica de AG alto em toda intoxicação por álcool tóxico — isopropanol quebra essa regra por completo; procurar cetonas positivas com AG normal e gap osmolar elevado, sem acidemia, é a assinatura específica dele.",
+        "detalheChave": "Contraste direto com G-08: mesma classe de ingestão (álcool tóxico, mesma via metabólica inicial pela álcool-desidrogenase), mas o metabólito final decide tudo — ácido fórmico/glicólico (acidificantes) em G-08 vs acetona (cetona, não ácida) aqui.",
+        "conteudoComplementar": "Isopropanol tem toxicidade sistêmica geralmente MENOR que metanol/etilenoglicol (não produz os metabólitos que causam cegueira ou insuficiência renal) — o manejo é primariamente suporte e observação, raramente exigindo fomepizol ou diálise, ao contrário dos outros dois."
+      }
+    },
+    {
+      "id": "G-42",
+      "categoria": "Acidose metabólica AG alto (não-cetótica)",
+      "titulo": "Intoxicação por monóxido de carbono",
+      "mimicsCAD": false,
+      "confundeCom": ["G-43", "G-37"],
+      "vinheta": "38 anos, encontrado em ambiente fechado com aquecedor a gás sem ventilação, cefaleia intensa e confusão, saturação de oxigênio no oxímetro de pulso relatada como '98%, normal' pela equipe de resgate.",
+      "labs": { "ph": 7.33, "pco2": 35, "hco3": 18, "na": 140, "cl": 104, "albumin": 4.0, "lactateMmolL": 4.5 },
+      "pergunta": "A saturação de O₂ relatada como normal (98%) tranquiliza a equipe. Isso deveria tranquilizar?",
+      "gabarito": {
+        "classificacao": "Acidose metabólica primária (HCO₃ 18 < 22), compensação respiratória adequada — pCO₂ 35 dentro de 35 ± 2 (33–37).",
+        "diagnostico": "Acidose lática por intoxicação por monóxido de carbono (CO) — hipóxia tecidual grave apesar de oximetria de pulso e PaO₂ medidos como 'normais'.",
+        "raciocinio": "AG = 140−104−18 = 18, elevado, explicado pelo lactato 4,5 mmol/L — CO se liga à hemoglobina com afinidade ~200 vezes maior que o oxigênio, formando carboxihemoglobina, que desloca a curva de dissociação da oxi-hemoglobina para a esquerda e prejudica a entrega de O₂ aos tecidos (hipóxia CELULAR real). O grande problema de medição: a oximetria de pulso convencional (2 comprimentos de onda) e a PaO₂ da gasometria de rotina NÃO distinguem carboxihemoglobina de oxi-hemoglobina — ambas são lidas como 'saturação normal', quando na verdade grande parte da hemoglobina está inutilizada. Só a CO-oximetria (multi-comprimento de onda) mede a carboxihemoglobina diretamente.",
+        "armadilha": "Aceitar SpO₂/PaO₂'normais' como prova contra hipóxia grave em suspeita de intoxicação por CO — é exatamente o cenário em que esses dois exames enganam sistematicamente; pedir CO-oximetria (ou gasometria com dosagem específica de carboxihemoglobina) é obrigatório na suspeita clínica.",
+        "detalheChave": "Mesmo tipo de 'medição que engana' de G-37 (hipotermia), mas aqui o ponto cego é da OXIMETRIA/PaO₂ em vez da temperatura — ambiente fechado + fonte de combustão sem ventilação + cefaleia/confusão em múltiplas pessoas do mesmo ambiente é o padrão clínico que deve disparar a suspeita, não a saturação.",
+        "conteudoComplementar": "Oxigênio 100% (ou hiperbárico em casos graves/gestantes/neurológicos) acelera a dissociação do CO da hemoglobina e é o tratamento definitivo — a meia-vida da carboxihemoglobina cai de ~4-5h em ar ambiente para ~60-90min com O₂ 100% normobárico, e ainda mais com oxigenoterapia hiperbárica."
+      }
+    },
+    {
+      "id": "G-43",
+      "categoria": "Acidose metabólica AG alto (não-cetótica)",
+      "titulo": "Intoxicação por cianeto",
+      "mimicsCAD": false,
+      "confundeCom": ["G-42", "G-06"],
+      "vinheta": "45 anos, resgatado de incêndio em ambiente industrial fechado com combustão de plásticos/materiais sintéticos, hipotensão desproporcional à extensão de queimaduras cutâneas, lactato desproporcionalmente alto.",
+      "labs": { "ph": 7.26, "pco2": 23, "hco3": 10, "na": 138, "cl": 100, "albumin": 4.0, "lactateMmolL": 12 },
+      "pergunta": "Compare com G-42 (monóxido de carbono) — mesmo contexto de incêndio/ambiente fechado, mas por que o lactato aqui é tão mais extremo?",
+      "gabarito": {
+        "classificacao": "Acidose metabólica primária grave (HCO₃ 10 < 22), compensação respiratória adequada — pCO₂ 23 dentro de 23 ± 2 (21–25).",
+        "diagnostico": "Acidose lática grave por intoxicação por cianeto — inalação de fumaça de combustão de materiais sintéticos (plásticos, poliuretano) é fonte comum em incêndios industriais/residenciais fechados.",
+        "raciocinio": "AG = 138−100−10 = 28, com lactato de 12 mmol/L — desproporcionalmente alto para o grau de queimadura cutânea/choque hipovolêmico isolado. O cianeto bloqueia diretamente a citocromo c oxidase mitocondrial (complexo IV da cadeia respiratória), impedindo a célula de USAR o oxigênio mesmo quando ele está sendo entregue normalmente — é hipóxia 'histotóxica' (a célula não consegue metabolizar o O₂ que recebe), o metabolismo vira inteiramente anaeróbio, e o lactato dispara a níveis extremos, desproporcionais ao choque hemodinâmico presente.",
+        "armadilha": "Atribuir todo o quadro de vítima de incêndio a queimadura/CO/hipóxia por fumaça sem considerar cianeto concomitante — os dois frequentemente coexistem na mesma vítima de incêndio em ambiente fechado (materiais sintéticos liberam ambos), e um lactato desproporcionalmente alto para o grau de choque é a pista que aponta para cianeto além do CO.",
+        "detalheChave": "Mesmo contexto de exposição (incêndio, ambiente fechado) de G-42, mas o mecanismo é o oposto na cadeia de oxigenação: CO impede o TRANSPORTE de O₂ (hemoglobina bloqueada); cianeto impede a UTILIZAÇÃO celular do O₂ (mitocôndria bloqueada) — o lactato extremo e desproporcional é o que aponta para o segundo.",
+        "conteudoComplementar": "Antídotos específicos (hidroxocobalamina, ou o kit clássico de nitrito/tiossulfato) devem ser considerados empiricamente em vítima de incêndio industrial com acidose lática grave e instabilidade desproporcional, sem esperar confirmação laboratorial de cianeto (que é lenta e pouco disponível na maioria dos serviços)."
+      }
+    },
+    {
+      "id": "G-44",
+      "categoria": "Distúrbio respiratório — alcalose",
+      "titulo": "Alcalose respiratória crônica da cirrose hepática avançada",
+      "mimicsCAD": false,
+      "confundeCom": ["G-16", "G-31", "G-45"],
+      "vinheta": "58 anos, cirrose hepática avançada por etilismo, ascite volumosa, sem sinal de encefalopatia aguda nem infecção, gasometria de rotina em consulta ambulatorial de hepatologia.",
+      "labs": { "ph": 7.46, "pco2": 29, "hco3": 20, "chronicityHint": "chronic" },
+      "pergunta": "Compare com G-16 (gestação) e G-31 (altitude) — mesmo tipo de distúrbio crônico, qual é o gatilho fisiológico específico da cirrose?",
+      "gabarito": {
+        "classificacao": "Alcalose respiratória crônica primária (pCO₂ 29 < 35), resposta renal crônica adequada — HCO₃ 20 dentro de 19,6 ± 3 (16,6–22,6).",
+        "diagnostico": "Alcalose respiratória crônica da hepatopatia avançada — hiperventilação sustentada por múltiplos estímulos ligados à insuficiência hepática crônica, não relacionada a encefalopatia aguda.",
+        "raciocinio": "Sem AG relevante para este eixo (o ponto é puramente respiratório). Cirróticos avançados hiperventilam cronicamente por um conjunto de estímulos: progesterona e outros hormônios normalmente depurados pelo fígado se acumulam e estimulam o centro respiratório (mecanismo hormonal, parecido ao de G-16); amônia elevada também estimula ventilação; e shunts pulmonares/hipoxemia leve da síndrome hepatopulmonar contribuem via quimiorreceptores periféricos (mecanismo hipóxico, parecido ao de G-31). É, na prática, uma combinação dos dois mecanismos já vistos, somada à doença hepática em si.",
+        "armadilha": "Interpretar alcalose respiratória crônica num cirrótico como sinal de encefalopatia hepática AGUDA ou de outra descompensação — é um achado BASAL, esperado, em hepatopatia crônica avançada estável, não necessariamente um sinal de piora aguda.",
+        "detalheChave": "Mesmo tipo de distúrbio (alcalose respiratória crônica) de G-16 e G-31, mas aqui o gatilho é a PRÓPRIA insuficiência hepática (acúmulo de hormônios/amônia + hipoxemia leve por shunt), não gestação nem altitude — o contexto (cirrose avançada conhecida, sem evento agudo) resolve.",
+        "conteudoComplementar": "Síndrome hepatopulmonar (dilatações vasculares intrapulmonares causando shunt e hipoxemia, tipicamente piorando em ortostase — platipneia) é uma complicação específica da cirrose avançada, distinta da hipertensão portopulmonar, e contribui para o componente hipóxico desta alcalose respiratória crônica."
+      }
+    },
+    {
+      "id": "G-45",
+      "categoria": "Distúrbio respiratório — alcalose",
+      "titulo": "Hiperventilação neurogênica central pós-traumatismo cranioencefálico",
+      "mimicsCAD": false,
+      "confundeCom": ["G-16", "G-31", "G-44", "G-39"],
+      "vinheta": "27 anos, traumatismo cranioencefálico grave por acidente motociclístico há 6h, taquipneia sustentada e profunda, sem obstrução de via aérea nem doença pulmonar, escala de coma de Glasgow baixa.",
+      "labs": { "ph": 7.51, "pco2": 27, "hco3": 21, "chronicityHint": "acute" },
+      "pergunta": "Classifique o distúrbio — por que ele é considerado um sinal neurológico de alarme, não apenas um achado laboratorial incidental?",
+      "gabarito": {
+        "classificacao": "Alcalose respiratória aguda primária (pCO₂ 27 < 35), resposta renal aguda adequada — HCO₃ 21 dentro de 21,4 ± 2 (19,4–23,4).",
+        "diagnostico": "Hiperventilação neurogênica central — lesão estrutural direta de centros do tronco encefálico/mesencéfalo que regulam a respiração, causando taquipneia sustentada e profunda desproporcional a qualquer causa metabólica ou pulmonar.",
+        "raciocinio": "Sem AG relevante — o eixo é puramente respiratório, de origem central estrutural. Diferente de G-44 (estímulo hormonal/hipóxico crônico da cirrose) e G-31 (estímulo hipóxico periférico da altitude), aqui a lesão física direta de estruturas do tronco encefálico desregula o padrão respiratório central, produzindo hiperventilação sustentada que não responde aos mecanismos habituais de retroalimentação por CO₂/O₂.",
+        "armadilha": "Tratar a taquipneia pós-TCE como 'só' um achado laboratorial de alcalose respiratória a ser corrigido — na verdade é um SINAL neurológico localizatório, refletindo lesão de tronco encefálico, e deve disparar reavaliação neurológica/de imagem urgente, não só correção do gás.",
+        "detalheChave": "Mesmo padrão numérico de alcalose respiratória aguda de G-39/G-17/G-18/G-19, mas o contexto (TCE grave, Glasgow baixo, taquipneia desproporcional e sustentada) aponta para uma causa estrutural central, com implicação prognóstica muito mais grave que ansiedade ou dor.",
+        "conteudoComplementar": "Padrões respiratórios específicos (Cheyne-Stokes, hiperventilação neurogênica central, apneustico, atáxico/de Biot) têm correlação clássica com o nível da lesão no eixo encefálico — reconhecê-los à beira do leito é parte do exame neurológico, não só da gasometria."
+      }
+    },
+    {
+      "id": "G-46",
+      "categoria": "Alcalose metabólica",
+      "titulo": "Síndrome de Bartter",
+      "mimicsCAD": false,
+      "confundeCom": ["G-47", "G-12", "G-13"],
+      "vinheta": "16 anos, baixa estatura, poliúria e polidipsia desde a infância, pressão arterial normal-baixa, sem uso de diurético, sem vômitos nem diarreia — hipocalemia grave achada em exame de rotina.",
+      "labs": { "ph": 7.47, "pco2": 44, "hco3": 31, "na": 138, "cl": 94, "k": 2.6, "albumin": 4.0 },
+      "pergunta": "Sem diurético, sem vômitos, sem diarreia — de onde vem esta alcalose metabólica hipoclorêmica hipocalêmica?",
+      "gabarito": {
+        "classificacao": "Alcalose metabólica primária (HCO₃ 31 > 26), compensação respiratória adequada — pCO₂ 44 dentro de 42,7 ± 2 (40,7–44,7).",
+        "diagnostico": "Síndrome de Bartter — tubulopatia genética que reproduz, de forma endógena e permanente, o mesmo defeito eletrolítico que um diurético de alça causaria (o gene afetado codifica proteínas do mesmo cotransportador Na-K-2Cl da alça de Henle, alvo farmacológico da furosemida).",
+        "raciocinio": "AG = 138−94−31 = 13, quase normal. O quadro laboratorial (alcalose metabólica + hipocalemia + hipocloremia) é indistinguível de um paciente usando furosemida cronicamente — mas aqui não há exposição a diurético nenhuma: é um defeito genético no PRÓPRIO transportador renal que o diurético de alça bloquearia farmacologicamente. Poliúria/polidipsia desde a infância e baixa estatura (perda crônica de sal prejudicando o crescimento) são as pistas de que o defeito é congênito, não adquirido.",
+        "armadilha": "Assumir uso oculto de diurético (ou vômitos/laxantes ocultos) diante desse padrão sem considerar uma tubulopatia genética — em jovens com apresentação desde a infância, sem história de uso de medicação e com normotensão, Bartter/Gitelman devem entrar no diferencial.",
+        "detalheChave": "Mesma classificação ácido-base de G-12/G-13 (vômitos/diuréticos), mas SEM NENHUMA causa externa identificável — a apresentação desde a infância e a ausência de qualquer exposição a fármaco/perda GI é o que aponta para uma causa genética tubular.",
+        "conteudoComplementar": "Dosar cloreto urinário e investigar uso oculto de diurético (triagem toxicológica urinária específica) é importante antes de firmar o diagnóstico genético — diuréticos tomados às escondidas (por transtorno alimentar, por exemplo) podem mimetizar Bartter/Gitelman perfeitamente e são muito mais comuns que a tubulopatia genética verdadeira."
+      }
+    },
+    {
+      "id": "G-47",
+      "categoria": "Alcalose metabólica",
+      "titulo": "Síndrome de Gitelman",
+      "mimicsCAD": false,
+      "confundeCom": ["G-46", "G-12"],
+      "vinheta": "24 anos, cãibras musculares recorrentes e fadiga, sem baixa estatura relevante, pressão arterial normal, hipomagnesemia e hipocalciúria (cálcio urinário baixo) achadas na investigação.",
+      "labs": { "ph": 7.47, "pco2": 41, "hco3": 29, "na": 140, "cl": 98, "k": 3.0, "albumin": 4.0 },
+      "pergunta": "Compare com G-46 (Bartter) — mesma classe de tubulopatia genética, qual achado laboratorial (fora da gasometria) diferencia os dois?",
+      "gabarito": {
+        "classificacao": "Alcalose metabólica primária (HCO₃ 29 > 26), compensação respiratória adequada — pCO₂ 41 dentro de 41,3 ± 2 (39,3–43,3).",
+        "diagnostico": "Síndrome de Gitelman — tubulopatia genética que afeta o cotransportador Na-Cl do túbulo contorcido DISTAL (o mesmo alvo dos diuréticos tiazídicos), mais branda e de apresentação mais tardia que a síndrome de Bartter (que afeta a alça de Henle, alvo dos diuréticos de alça).",
+        "raciocinio": "AG = 140−98−29 = 13, normal. O quadro (alcalose metabólica + hipocalemia) é mais brando que o de G-46 (K 3,0 vs 2,6; sem baixa estatura), consistente com um defeito num segmento tubular mais distal e com menor impacto no crescimento. A ASSINATURA LABORATORIAL que diferencia os dois, fora da gasometria, é: Gitelman cursa tipicamente com HIPOMAGNESEMIA e HIPOCALCIÚRIA (cálcio urinário baixo); Bartter tipicamente NÃO tem hipomagnesemia relevante e cursa com hipercalciúria (predispondo a nefrocalcinose, ausente em Gitelman).",
+        "armadilha": "Tratar 'Bartter e Gitelman' como sinônimos intercambiáveis de 'tubulopatia perdedora de sal' — são doenças distintas, com segmentos tubulares, gravidade e achados de cálcio/magnésio diferentes, com implicações práticas para o rastreio genético e o acompanhamento.",
+        "detalheChave": "Mesma classe de distúrbio ácido-base de G-46, praticamente as mesmas faixas numéricas — a diferenciação entre os dois se apoia inteiramente em achados adicionais (magnésio, cálcio urinário, gravidade da hipocalemia, idade de apresentação), não na gasometria isolada.",
+        "conteudoComplementar": "Reposição de magnésio é frequentemente necessária e às vezes negligenciada no manejo de Gitelman — a hipocalemia pode ser refratária à reposição de potássio isolada enquanto a hipomagnesemia concomitante não for corrigida (o magnésio é necessário para a retenção renal adequada de potássio)."
+      }
+    },
+    {
+      "id": "G-48",
+      "categoria": "Alcalose metabólica",
+      "titulo": "Hiperaldosteronismo primário (síndrome de Conn)",
+      "mimicsCAD": false,
+      "confundeCom": ["G-46", "G-47", "G-50"],
+      "vinheta": "45 anos, hipertensão arterial resistente a três classes de anti-hipertensivos, hipocalemia persistente mesmo com reposição oral, sem uso de diurético.",
+      "labs": { "ph": 7.47, "pco2": 45, "hco3": 32, "na": 144, "cl": 96, "k": 2.9, "albumin": 4.0 },
+      "pergunta": "Compare com G-46/G-47 (Bartter/Gitelman) — mesmo padrão de alcalose+hipocalemia, qual achado clínico simples já aponta para um diagnóstico diferente?",
+      "gabarito": {
+        "classificacao": "Alcalose metabólica primária (HCO₃ 32 > 26), compensação respiratória adequada — pCO₂ 45 dentro de 43,4 ± 2 (41,4–45,4).",
+        "diagnostico": "Hiperaldosteronismo primário (síndrome de Conn) — excesso autônomo de aldosterona (adenoma ou hiperplasia adrenal), causando retenção de sódio (hipertensão) e perda renal de potássio e hidrogênio (alcalose + hipocalemia).",
+        "raciocinio": "AG = 144−96−32 = 16, discretamente elevado (contração de volume leve, mesmo mecanismo de G-12/13). A diferença clínica mais simples e mais importante frente a Bartter/Gitelman é a PRESSÃO ARTERIAL: Conn cursa com HIPERTENSÃO (excesso de aldosterona retém sódio e expande volume), enquanto Bartter/Gitelman são tipicamente NORMOTENSOS ou hipotensos (o defeito tubular primário causa perda de sal, não retenção) — o eixo renina-aldosterona também se comporta de forma oposta (aldosterona alta com renina SUPRIMIDA em Conn; aldosterona e renina ambas ALTAS em Bartter/Gitelman, que são estados de perda de sal reagindo secundariamente).",
+        "armadilha": "Investigar hipertensão resistente com hipocalemia só por causas renais estruturais, sem dosar aldosterona/renina — a combinação hipertensão resistente + hipocalemia (mesmo sem uso de diurético) deveria disparar rastreio para hiperaldosteronismo primário, uma causa curável de hipertensão secundária.",
+        "detalheChave": "Mesmo padrão bioquímico geral de G-46/G-47, mas aqui HIPERTENSO em vez de normotenso — a pressão arterial, um dado obtido em segundos à beira do leito, já separa Conn (hipertenso) das tubulopatias perdedoras de sal (normo/hipotensas) antes de qualquer exame laboratorial adicional.",
+        "conteudoComplementar": "A razão aldosterona/renina plasmática é o teste de rastreio inicial; tomografia de adrenais e, quando necessário, cateterismo de veias adrenais (para lateralizar um adenoma unilateral candidato a cirurgia vs hiperplasia bilateral, tratada clinicamente) definem a conduta — hiperaldosteronismo primário é uma das causas mais comuns e mais subdiagnosticadas de hipertensão secundária."
+      }
+    },
+    {
+      "id": "G-49",
+      "categoria": "Alcalose metabólica",
+      "titulo": "Hiperplasia adrenal congênita por deficiência de 11-beta-hidroxilase",
+      "mimicsCAD": false,
+      "confundeCom": ["G-36", "G-48"],
+      "vinheta": "6 anos, sinais de virilização precoce (pelos pubianos, clitoromegalia em menina), hipertensão arterial para a idade, hipocalemia — investigação endócrina pediátrica em curso.",
+      "labs": { "ph": 7.47, "pco2": 43, "hco3": 30, "na": 142, "cl": 98, "k": 2.8, "albumin": 4.0 },
+      "pergunta": "Compare com G-36 (crise addisoniana) — mesmo eixo hormonal adrenal, mas o padrão ácido-base e de potássio é o OPOSTO. Por quê?",
+      "gabarito": {
+        "classificacao": "Alcalose metabólica primária (HCO₃ 30 > 26), compensação respiratória adequada — pCO₂ 43 dentro de 42 ± 2 (40–44).",
+        "diagnostico": "Hiperplasia adrenal congênita por deficiência de 11-beta-hidroxilase — um bloqueio enzimático na síntese de cortisol que desvia o substrato para a produção de precursores com efeito MINERALOCORTICOIDE POTENTE (11-desoxicorticosterona) e para andrógenos (causando virilização) — o espelho mecânico exato da crise addisoniana.",
+        "raciocinio": "AG = 142−98−30 = 14, discretamente elevado (contração leve de volume). Este é o inverso perfeito de G-36: lá, deficiência de aldosterona (hipoaldosteronismo) causava acidose + hipercalemia + hipotensão; aqui, EXCESSO funcional de atividade mineralocorticoide (por acúmulo do precursor 11-desoxicorticosterona, já que a via principal está bloqueada) causa alcalose + hipocalemia + HIPERTENSÃO — a mesma glândula, o mesmo eixo esteroide, defeitos opostos (deficiência enzimática 'a jusante' desviando substrato para excesso mineralocorticoide, em vez de simplesmente faltar hormônio).",
+        "armadilha": "Assumir que toda doença adrenal congênita/primária causa hipotensão e hipercalemia (como a forma mais comum e clássica de hiperplasia adrenal congênita, a deficiência de 21-hidroxilase, que É perdedora de sal) — a forma por deficiência de 11-beta-hidroxilase é uma exceção importante, hipertensiva, com fisiologia mineralocorticoide oposta.",
+        "detalheChave": "Contraste mecânico direto e deliberado com G-36: mesmo eixo (córtex adrenal), mesma classe de doença (disfunção enzimática esteroidogênica), mas o RESULTADO final é o espelho — hipoaldosteronismo funcional (G-36, acidose/hipercalemia/hipotensão) vs hipermineralocorticismo funcional (aqui, alcalose/hipocalemia/hipertensão).",
+        "conteudoComplementar": "Ao contrário da forma clássica perdedora de sal (deficiência de 21-hidroxilase, a mais comum e rastreada no teste do pezinho), a deficiência de 11-beta-hidroxilase tende a ser diagnosticada mais tarde justamente porque HIPERTENSÃO em criança é menos rotineiramente investigada que desidratação/perda de sal neonatal — vale suspeitar diante de virilização + hipertensão, mesmo sem crise perdedora de sal na história."
+      }
+    },
+    {
+      "id": "G-50",
+      "categoria": "Alcalose metabólica",
+      "titulo": "Pseudo-hiperaldosteronismo por ingestão de alcaçuz (glicirrizina)",
+      "mimicsCAD": false,
+      "confundeCom": ["G-48", "G-46", "G-47"],
+      "vinheta": "52 anos, consumo diário de grande quantidade de doce de alcaçuz importado há meses, hipertensão de início recente, hipocalemia, exames hormonais (aldosterona e renina) relatados como normais/suprimidos pelo laboratório.",
+      "labs": { "ph": 7.47, "pco2": 44, "hco3": 31, "na": 140, "cl": 96, "k": 3.1, "albumin": 4.0 },
+      "pergunta": "Aldosterona normal/suprimida, mas o quadro é idêntico ao de hiperaldosteronismo (G-48). Como isso é possível?",
+      "gabarito": {
+        "classificacao": "Alcalose metabólica primária (HCO₃ 31 > 26), compensação respiratória adequada — pCO₂ 44 dentro de 42,7 ± 2 (40,7–44,7).",
+        "diagnostico": "Pseudo-hiperaldosteronismo por glicirrizina (composto do alcaçuz/raiz de alcaçuz) — reproduz o quadro clínico de excesso mineralocorticoide SEM aldosterona elevada.",
+        "raciocinio": "AG = 140−96−31 = 13, discretamente elevado (contração de volume leve, mesmo mecanismo dos outros casos de alcalose deste lote). A glicirrizina inibe a enzima 11-beta-hidroxiesteroide desidrogenase tipo 2 (11β-HSD2), que normalmente 'protege' o receptor mineralocorticoide renal de ser ativado pelo cortisol (que circula em concentração muito maior que a aldosterona, mas normalmente não ativa esse receptor porque a 11β-HSD2 o converte em cortisona, inativa nesse receptor). Sem essa proteção enzimática, o CORTISOL (não a aldosterona) passa a ativar maciçamente o receptor mineralocorticoide — daí 'pseudo': o excesso de efeito mineralocorticoide existe, mas não vem da aldosterona, que por isso aparece normal ou até suprimida (pelo feedback negativo do volume expandido).",
+        "armadilha": "Descartar hiperaldosteronismo 'verdadeiro' com base numa aldosterona normal e parar a investigação — quando a apresentação clínica é tão sugestiva (hipertensão + hipocalemia + alcalose) e a aldosterona não bate, perguntar ativamente sobre consumo de alcaçuz/produtos com glicirrizina é o próximo passo, não abandonar a hipótese.",
+        "detalheChave": "Mesmo padrão numérico e clínico de G-48 (Conn) e mesma classe geral de G-46/G-47, mas o dado que resolve é hormonal: aldosterona normal/suprimida aqui, elevada com renina suprimida em Conn — e a história dietética (consumo de alcaçuz) é o detalhe propedêutico que a maioria dos médicos nem pergunta.",
+        "conteudoComplementar": "O mesmo mecanismo (inibição da 11β-HSD2) explica por que a síndrome de excesso aparente de mineralocorticoide (AME, uma forma genética rara da mesma enzima deficiente) produz um quadro idêntico desde a infância — glicirrizina é, na prática, uma fenocópia farmacológica/dietética adquirida dessa doença genética rara."
+      }
+    },
+    {
+      "id": "G-51",
+      "categoria": "Alcalose metabólica",
+      "titulo": "Estenose hipertrófica do piloro (lactente)",
+      "mimicsCAD": false,
+      "confundeCom": ["G-12"],
+      "vinheta": "5 semanas de vida, vômitos em jato pós-mamada progressivos há 2 semanas, perda de peso, oliva pilórica palpável ao exame abdominal.",
+      "labs": { "ph": 7.48, "pco2": 46, "hco3": 33, "na": 134, "cl": 88, "k": 2.9, "albumin": 4.0 },
+      "pergunta": "Compare com G-12 (vômitos no adulto) — mesmo mecanismo de perda de HCl, mas por que o quadro tende a ser mais extremo no lactente?",
+      "gabarito": {
+        "classificacao": "Alcalose metabólica primária (HCO₃ 33 > 26), compensação respiratória adequada — pCO₂ 46 dentro de 44,1 ± 2 (42,1–46,1).",
+        "diagnostico": "Alcalose metabólica hipoclorêmica hipocalêmica da estenose hipertrófica do piloro — a causa cirúrgica clássica de alcalose metabólica em lactentes, por obstrução mecânica ao esvaziamento gástrico e vômitos repetidos do conteúdo gástrico rico em HCl.",
+        "raciocinio": "AG = 134−88−33 = 13, discretamente elevado pelo mesmo mecanismo de contração de volume de G-12. O mecanismo é idêntico ao de G-12 (perda de HCl gástrico), mas em lactentes o quadro tende a evoluir mais rápido e mais extremo pela reserva fisiológica muito menor (menor volume circulante absoluto, maior taxa metabólica, incapacidade de compensar por via oral). Em casos graves e prolongados pode ocorrer 'aciduria paradoxal': o rim, tentando conservar sódio à custa de excretar H⁺ (via troca por potássio primeiro, depois por H⁺ quando o potássio se esgota), acaba EXCRETANDO ácido na urina apesar de o paciente estar sistemicamente alcalótico — um achado que parece contraditório à primeira vista, mas reflete a hipocalemia grave forçando essa troca.",
+        "armadilha": "Estranhar uma urina ácida num paciente com alcalose metabólica sistêmica e concluir que o diagnóstico está errado — a aciduria paradoxal é um achado ESPERADO e bem descrito nessa condição quando a hipocalemia é grave, não uma contradição.",
+        "detalheChave": "Mesmo mecanismo de G-12 (perda de HCl), mas a magnitude e a velocidade de instalação (semanas de vida, perda de peso rápida) refletem a menor reserva fisiológica do lactente frente ao mesmo processo.",
+        "conteudoComplementar": "Correção do distúrbio eletrolítico (volume, cloreto, potássio) ANTES da cirurgia (piloromiotomia) é mandatória — operar com a alcalose/hipocalemia não corrigidas aumenta o risco de complicações anestésicas e de apneia pós-operatória."
+      }
+    },
+    {
+      "id": "G-52",
+      "categoria": "Acidose metabólica AG alto (não-cetótica)",
+      "titulo": "Intoxicação por salicilato em criança pequena",
+      "mimicsCAD": false,
+      "confundeCom": ["G-07"],
+      "vinheta": "2 anos, ingestão acidental de comprimidos de AAS da avó há 4h, taquipneica, letárgica, sem o zumbido relatável (criança pequena não verbaliza sintomas subjetivos).",
+      "labs": { "ph": 7.28, "pco2": 22, "hco3": 10, "na": 138, "cl": 100, "albumin": 4.0 },
+      "pergunta": "Compare com G-07 (adulto) — mesma intoxicação, mas aqui a leitura é uma acidose metabólica limpa, não o quadro misto ambíguo do adulto. Por quê?",
+      "gabarito": {
+        "classificacao": "Acidose metabólica primária (HCO₃ 10 < 22), compensação respiratória adequada — pCO₂ 22 dentro de 23 ± 2 (21–25).",
+        "diagnostico": "Intoxicação salicílica pediátrica — mesmo agente e mecanismo de G-07 (adulto), mas com apresentação tipicamente dominada pela acidose metabólica, com um componente de alcalose respiratória menos proeminente.",
+        "raciocinio": "AG = 138−100−10 = 28, elevado (mesmo mecanismo de acúmulo de ácidos orgânicos por desacoplamento da fosforilação oxidativa de G-07). Crianças pequenas têm reserva ventilatória proporcionalmente menor e taxa metabólica mais alta que adultos, além de progredirem mais rapidamente para a fase de acidose metabólica dominante — a fase de alcalose respiratória inicial (mais proeminente e prolongada em adultos, como em G-07) tende a ser mais breve/menos evidente na criança pequena, resultando numa leitura gasométrica mais 'limpa' de acidose metabólica isolada com boa compensação respiratória, em vez do quadro misto clássico do adulto.",
+        "armadilha": "Aplicar o padrão clássico do adulto (quadro misto, pH quase normal) para descartar salicilato numa criança com acidose metabólica isolada — a apresentação pediátrica é sistematicamente diferente, e a ausência do padrão misto clássico não afasta o diagnóstico.",
+        "detalheChave": "Mesmo agente/mecanismo de G-07, mas a idade muda o FENÓTIPO gasométrico (acidose dominante e mais precoce vs quadro misto do adulto) — reforça que a mesma intoxicação pode se apresentar de formas gasometricamente diferentes conforme a fisiologia do hospedeiro.",
+        "conteudoComplementar": "Crianças pequenas com intoxicação salicílica tendem a deteriorar clinicamente mais rápido e têm maior risco de edema cerebral/pulmonar em intoxicação grave — o limiar para considerar hemodiálise costuma ser mais baixo (em termos de nível sérico) do que em adultos."
+      }
+    },
+    {
+      "id": "G-53",
+      "categoria": "Alcalose metabólica",
+      "titulo": "Alcalose metabólica hipocalêmica por penicilina em alta dose",
+      "mimicsCAD": false,
+      "confundeCom": ["G-46", "G-47", "G-13"],
+      "vinheta": "34 anos, endocardite infecciosa em tratamento com penicilina intravenosa em altíssima dose há 10 dias, nova hipocalemia e alcalose leve sem outra causa aparente.",
+      "labs": { "ph": 7.47, "pco2": 43, "hco3": 30, "na": 138, "cl": 94, "k": 2.7, "albumin": 4.0 },
+      "pergunta": "Sem diurético, sem vômitos, sem doença renal prévia — o próprio antibiótico pode causar isto?",
+      "gabarito": {
+        "classificacao": "Alcalose metabólica primária (HCO₃ 30 > 26), compensação respiratória adequada — pCO₂ 43 dentro de 42 ± 2 (40–44).",
+        "diagnostico": "Alcalose metabólica hipocalêmica induzida por penicilina (ou carbenicilina/outras penicilinas) em altíssima dose — o próprio antibiótico age como um 'ânion não reabsorvível' no túbulo distal.",
+        "raciocinio": "AG = 138−94−30 = 14, discretamente elevado. Penicilina em doses muito altas é administrada como sal sódico e se comporta, no túbulo distal, como um ânion que chega em grande quantidade e não pode ser reabsorvido junto ao sódio — para manter a eletroneutralidade, o néfron é forçado a secretar mais H⁺ e K⁺ em troca do sódio que acompanha o antibiótico, reproduzindo artificialmente o mesmo tipo de perda renal de potássio e íon hidrogênio vista nas tubulopatias genéticas (G-46/G-47), mas por um mecanismo puramente farmacológico e reversível com a suspensão/redução da dose.",
+        "armadilha": "Investigar exaustivamente causas renais/genéticas/endócrinas de alcalose hipocalêmica sem revisar a lista de medicamentos em uso — doses muito altas de penicilina (comuns em endocardite, osteomielite, abscesso cerebral) são uma causa farmacológica facilmente identificável e reversível, muitas vezes esquecida.",
+        "detalheChave": "Mesmo padrão bioquímico de G-46/G-47 (tubulopatia genética 'Bartter-like'), mas aqui adquirido e reversível, num paciente sem história prévia de perda de sal/poliúria — a lista de medicamentos (penicilina em altíssima dose) é o detalhe que resolve.",
+        "conteudoComplementar": "Outros 'ânions não reabsorvíveis' farmacológicos (certas cefalosporinas em altíssima dose, por exemplo) podem produzir o mesmo fenômeno — revisar sempre medicamentos em uso ao investigar uma alcalose hipocalêmica sem causa óbvia, antes de partir para investigação genética/endócrina extensa."
+      }
+    },
+    {
+      "id": "G-54",
+      "categoria": "Acidose metabólica AG normal (hiperclorêmica)",
+      "titulo": "Acidose hiperclorêmica por ureterossigmoidostomia",
+      "mimicsCAD": false,
+      "confundeCom": ["G-09", "G-10", "G-11"],
+      "vinheta": "62 anos, derivação urinária cirúrgica antiga (ureterossigmoidostomia) após cistectomia por câncer de bexiga, fadiga progressiva, sem sintomas gastrointestinais agudos.",
+      "labs": { "ph": 7.34, "pco2": 29, "hco3": 15, "na": 140, "cl": 112, "albumin": 4.0 },
+      "pergunta": "Sem diarreia, sem doença renal tubular — como uma cirurgia urológica antiga causa esta acidose hiperclorêmica anos depois?",
+      "gabarito": {
+        "classificacao": "Acidose metabólica primária (HCO₃ 15 < 22), compensação respiratória adequada — pCO₂ 29 dentro de 30,5 ± 2 (28,5–32,5).",
+        "diagnostico": "Acidose metabólica hiperclorêmica por ureterossigmoidostomia — a mucosa colônica, exposta cronicamente à urina desviada para o sigmoide, reabsorve ativamente cloreto da urina em troca de bicarbonato secretado (a mesma função de transporte que o cólon usa normalmente com o conteúdo fecal), gerando perda líquida crônica de bicarbonato.",
+        "raciocinio": "AG = 140−112−15 = 13, normal — mesmo padrão hiperclorêmico de G-09/G-10/G-11, mas por um mecanismo anatômico/cirúrgico específico: o epitélio colônico não foi desenhado para ficar em contato prolongado com urina, e seus transportadores de cloreto/bicarbonato (normalmente usados para absorver eletrólitos do conteúdo intestinal) passam a operar sobre a urina desviada, reabsorvendo cloreto urinário e perdendo bicarbonato de volta para a circulação em troca — um mecanismo lento e progressivo ao longo de anos após a cirurgia.",
+        "armadilha": "Não perguntar sobre cirurgias urológicas antigas ao investigar uma acidose hiperclorêmica inexplicada — derivações urinárias que usam segmento intestinal (ureterossigmoidostomia mais que outras técnicas modernas) são uma causa tardia e facilmente esquecida, anos após a cirurgia original.",
+        "detalheChave": "Mesmo padrão de AG normal de G-09/G-10/G-11, mas o mecanismo é anatômico (mucosa intestinal exposta à urina), não tubular renal nem de perda GI direta — a história cirúrgica prévia (câncer de bexiga, derivação urinária) é o detalhe que resolve.",
+        "conteudoComplementar": "Técnicas modernas de derivação urinária (conduto ileal com estoma externo, neobexiga ortotópica sem contato prolongado) reduziram muito a incidência dessa acidose comparadas à ureterossigmoidostomia clássica, hoje pouco utilizada justamente por essa e outras complicações metabólicas."
+      }
+    },
+    {
+      "id": "G-55",
+      "categoria": "Acidose metabólica AG normal (hiperclorêmica)",
+      "titulo": "Acidose hiperclorêmica por abuso oculto de laxantes",
+      "mimicsCAD": false,
+      "confundeCom": ["G-09", "G-25"],
+      "vinheta": "22 anos, transtorno alimentar conhecido, hipocalemia grave recorrente investigada por diversas equipes sem causa aparente, nega uso de qualquer medicação quando questionada diretamente.",
+      "labs": { "ph": 7.34, "pco2": 27, "hco3": 14, "na": 138, "cl": 110, "k": 2.4, "albumin": 4.0 },
+      "pergunta": "Compare com G-09 (diarreia) e G-25 (anorexia/jejum) — mesmo padrão de perda GI de bicarbonato, mas qual é o detalhe propedêutico que este caso exige perguntar de um jeito diferente?",
+      "gabarito": {
+        "classificacao": "Acidose metabólica primária (HCO₃ 14 < 22), compensação respiratória adequada — pCO₂ 27 dentro de 29 ± 2 (27–31).",
+        "diagnostico": "Acidose metabólica hiperclorêmica por abuso crônico e OCULTO de laxantes — mecanismo idêntico ao de G-09 (perda intestinal de bicarbonato), mas de causa factícia/comportamental, tipicamente negada pelo paciente.",
+        "raciocinio": "AG = 138−110−14 = 14, discretamente elevado (contração de volume associada). O mecanismo bioquímico é indistinguível de uma diarreia orgânica (G-09): perda de HCO₃ nas fezes, reposta por retenção renal de cloreto. A diferença inteira está em COMO se obtém a história: pacientes com uso oculto de laxantes (frequentemente ligado a transtornos alimentares) tipicamente NEGAM o uso quando perguntados diretamente — a hipocalemia grave RECORRENTE e inexplicada, em paciente jovem com transtorno alimentar conhecido, é o padrão clínico que deveria manter a suspeita mesmo diante da negativa, e pode exigir triagem toxicológica urinária específica para laxantes (fenolftaleína, bisacodil e correlatos) para confirmar.",
+        "armadilha": "Aceitar a negativa do paciente como encerramento da investigação — em transtornos alimentares com uso oculto de laxantes/diuréticos, a negativa é a REGRA, não a exceção, e a suspeita clínica bem fundamentada justifica investigação laboratorial dirigida mesmo contra a história referida.",
+        "detalheChave": "Mesmo mecanismo bioquímico de G-09 e mesmo contexto de transtorno alimentar de G-25, mas aqui a via é diferente de ambos (laxante oculto, não diarreia orgânica nem cetose de jejum) — o achado que aponta para cá é a hipocalemia desproporcionalmente grave e recorrente, com história alimentar de risco.",
+        "conteudoComplementar": "Abuso de laxantes, diuréticos e uso indevido de insulina/omissão insulínica (em diabéticos) são formas de purgação menos reconhecidas que vômitos autoinduzidos em transtornos alimentares — merecem rastreio ativo e específico, não só perguntas genéricas sobre 'indução de vômito'."
+      }
+    },
+    {
+      "id": "G-56",
+      "categoria": "Acidose metabólica AG alto (não-cetótica)",
+      "titulo": "Acidose lática por choque de queimadura (ressuscitação volêmica insuficiente)",
+      "mimicsCAD": false,
+      "confundeCom": ["G-06", "G-38"],
+      "vinheta": "38 anos, queimaduras de 2º/3º grau em 45% da superfície corporal há 8h, ressuscitação volêmica em curso, taquicárdico, débito urinário baixo apesar do volume infundido até o momento.",
+      "labs": { "ph": 7.32, "pco2": 26, "hco3": 13, "na": 142, "cl": 104, "albumin": 4.0, "lactateMmolL": 6.0 },
+      "pergunta": "Classifique o distúrbio — e diga por que o lactato, aqui, é mais útil que o débito urinário para guiar a ressuscitação nas próximas horas.",
+      "gabarito": {
+        "classificacao": "Acidose metabólica primária (HCO₃ 13 < 22), compensação respiratória adequada — pCO₂ 26 dentro de 27,5 ± 2 (25,5–29,5).",
+        "diagnostico": "Acidose lática por hipoperfusão tecidual em choque de queimadura — ressuscitação volêmica ainda insuficiente para a extensão da lesão e o tempo decorrido.",
+        "raciocinio": "AG = 142−104−13 = 25, explicado pelo lactato de 6,0 mmol/L — grandes queimados perdem volume plasmático maciço para o interstício (aumento de permeabilidade capilar generalizado, não só na área queimada) nas primeiras 24-48h, e a hipoperfusão tecidual resultante gera lactato por metabolismo anaeróbio, exatamente como em outros estados de choque (comparar com G-06, sepse, e G-38, pós-parada).",
+        "armadilha": "Guiar a velocidade de reposição volêmica só pelo débito urinário — em queimados, a resposta renal pode ficar 'atrasada' em relação à real necessidade de volume (por vasoconstrição renal compensatória e outros fatores), e um lactato em queda mais consistente é geralmente um indicador mais confiável e mais precoce de perfusão tecidual global adequada do que o débito urinário isolado.",
+        "detalheChave": "Mesmo mecanismo de hipoperfusão/lactato de G-06 (sepse) e G-38 (pós-PCR), mas o contexto (queimadura extensa recente, tempo desde a lesão) é o que localiza a causa — clearance seriado de lactato (não um valor isolado) é o parâmetro mais útil para acompanhar a resposta à ressuscitação nas horas seguintes.",
+        "conteudoComplementar": "Fórmulas de reposição volêmica em queimados (como Parkland) são estimativas INICIAIS baseadas na superfície corporal queimada — a titulação real deve ser guiada por parâmetros de perfusão (lactato seriado, débito urinário, exame clínico), ajustando o volume para cima ou para baixo conforme a resposta, não seguindo a fórmula de forma rígida."
+      }
+    },
+    {
+      "id": "G-57",
+      "categoria": "Alcalose metabólica",
+      "titulo": "Alcalose metabólica pós-circulação extracorpórea (cirurgia cardíaca)",
+      "mimicsCAD": false,
+      "confundeCom": ["G-27", "G-26"],
+      "vinheta": "68 anos, 1º dia pós-operatório de revascularização miocárdica com circulação extracorpórea prolongada, hipoalbuminemia leve de diluição, sem vômitos nem uso de diurético ainda.",
+      "labs": { "ph": 7.47, "pco2": 41, "hco3": 29, "na": 140, "cl": 98, "albumin": 3.0 },
+      "pergunta": "Calcule o AGc (não só o AG bruto) — por que a correção pela albumina importa aqui mesmo sem suspeita de acidose?",
+      "gabarito": {
+        "classificacao": "Alcalose metabólica primária (HCO₃ 29 > 26), compensação respiratória adequada — pCO₂ 41 dentro de 41,3 ± 2 (39,3–43,3).",
+        "diagnostico": "Alcalose metabólica pós-circulação extracorpórea (CEC) — múltiplos fatores somados: citrato/bicarbonato de soluções de prime e hemoderivados (mesmo mecanismo de G-27), diluição intraoperatória maciça, e resposta inflamatória pós-operatória.",
+        "raciocinio": "AG = 140−98−29 = 13 (parecendo normal), mas AGc = 13 + 2,5×(4,0−3,0) = 15,5 — a hipoalbuminemia de diluição pós-CEC (comum, pelo grande volume de soluções cristaloides/priming usado no circuito) faz o AG bruto subestimar um gap discretamente maior do que aparenta. Mesmo sem suspeita de acidose de gap alto, corrigir pela albumina é sempre a prática correta — aqui ela revela que o gap é um pouco maior do que os 13 brutos sugerem, embora ainda não a ponto de mudar a conduta neste caso específico.",
+        "armadilha": "Pular a correção do AG pela albumina só porque o quadro parece ser 'apenas' uma alcalose metabólica sem nada mais em jogo — o hábito de sempre corrigir é o que evita passar batido por um gap oculto em QUALQUER paciente hipoalbuminêmico, e pacientes de pós-operatório de CEC quase sempre estão.",
+        "detalheChave": "Mesmo mecanismo geral de alcalose de G-27 (citrato/transfusão), mas aqui reforçado pelo contexto específico de CEC (prime do circuito, diluição maciça, tempo de bomba) — a hipoalbuminemia de diluição pós-CEC é quase universal e vale a pena lembrar de corrigir o AG por rotina neste cenário.",
+        "conteudoComplementar": "A alcalose pós-CEC tende a se resolver espontaneamente em 24-48h com a diurese pós-operatória normal, sem necessidade de intervenção específica na maioria dos casos — mas deve ser diferenciada de uma alcalose mais persistente por outras causas (diuréticos de alça iniciados no pós-operatório, por exemplo, ver G-13) se não resolver no tempo esperado."
+      }
+    },
+    {
+      "id": "G-58",
+      "categoria": "Alcalose metabólica",
+      "titulo": "Alcalinização terapêutica com bicarbonato na intoxicação por antidepressivo tricíclico",
+      "mimicsCAD": false,
+      "confundeCom": ["G-07", "G-60"],
+      "vinheta": "31 anos, tentativa de autoextermínio com amitriptilina em grande quantidade há 3h, QRS alargado ao monitor cardíaco, recebendo infusão de bicarbonato de sódio conforme protocolo de toxicologia.",
+      "labs": { "ph": 7.52, "pco2": 33, "hco3": 26, "na": 142, "cl": 100, "albumin": 4.0, "chronicityHint": "acute" },
+      "pergunta": "O pH está alcalêmico (7,52) DE PROPÓSITO neste caso. Por que a equipe está deliberadamente buscando isso, em vez de tentar normalizar o pH?",
+      "gabarito": {
+        "classificacao": "Alcalose respiratória primária (pCO₂ 33 < 35) com resposta renal aguda INSUFICIENTE — HCO₃ medido 26 está acima do esperado 22,6 ± 2 (20,6–24,6), revelando uma alcalose metabólica adicional (a infusão terapêutica de bicarbonato) somada à hiperventilação.",
+        "diagnostico": "Alcalinização sérica terapêutica deliberada (alvo de pH ~7,50–7,55) como parte do tratamento antidotal da cardiotoxicidade por antidepressivo tricíclico — não é um distúrbio acidental a ser corrigido, é o objetivo terapêutico ATIVO da equipe.",
+        "raciocinio": "AG = 142−100−26 = 16, discretamente elevado (o AGc mascarado, já que HCO₃ não está baixo, é sinalizado pelo motor mesmo aqui — possível componente lático de convulsões/hipotensão associadas à intoxicação grave). Antidepressivos tricíclicos bloqueiam canais de sódio cardíacos, de forma dose-dependente e sensível ao pH: a ALCALEMIA (por hiperventilação induzida E por bicarbonato de sódio IV) desloca o fármaco para uma forma menos ativa nesses canais, revertendo parcialmente a cardiotoxicidade (estreitando o QRS alargado) — é uma das poucas situações em medicina onde induzir ativamente uma alcalose é o próprio tratamento, não um efeito colateral a ser corrigido.",
+        "armadilha": "Ver um pH de 7,52 com HCO₃ 26 e pCO₂ 33 e tentar 'corrigir' a alcalose reduzindo a ventilação ou suspendendo o bicarbonato — isso reverteria exatamente o efeito terapêutico buscado e pode piorar a cardiotoxicidade (QRS alargando de novo).",
+        "detalheChave": "Mesmo tipo de padrão misto de G-07/G-60 (dois processos alcalinizantes/relacionados se somando), mas aqui um dos processos é INTENCIONAL e terapêutico — o contexto (intoxicação tricíclica conhecida, QRS alargado, bicarbonato em infusão ativa) é o que resolve a leitura, já que os números por si só não distinguem 'alcalose acidental' de 'alcalose terapêutica'.",
+        "conteudoComplementar": "O alvo é tipicamente pH 7,50–7,55 (não mais que isso, pelos riscos da alcalemia extrema: arritmias por hipocalemia induzida, tetania, redução do fluxo sanguíneo cerebral) — a resposta ao QRS (estreitamento) guia a titulação da infusão de bicarbonato mais do que um alvo numérico rígido de pH isolado."
+      }
+    },
+    {
+      "id": "G-59",
+      "categoria": "Distúrbio respiratório — acidose",
+      "titulo": "Insuficiência respiratória aguda por crise miastênica",
+      "mimicsCAD": false,
+      "confundeCom": ["G-14", "G-29", "G-30"],
+      "vinheta": "45 anos, miastenia gravis conhecida, fraqueza progressiva há 2 dias após infecção respiratória viral leve, agora com voz fraca, dificuldade de deglutição e respiração superficial, sem sibilos nem estertores.",
+      "labs": { "ph": 7.27, "pco2": 56, "hco3": 25, "chronicityHint": "acute" },
+      "pergunta": "Compare com G-14 (asma com fadiga), G-29 (SHO) e G-30 (opioide) — quatro causas diferentes do MESMO tipo de falência da 'bomba' respiratória. Qual é a origem aqui?",
+      "gabarito": {
+        "classificacao": "Acidose respiratória aguda primária (pCO₂ 56 > 45), resposta renal aguda adequada para o tempo decorrido — HCO₃ 25 dentro de 25,6 ± 2 (23,6–27,6).",
+        "diagnostico": "Insuficiência respiratória aguda por crise miastênica — falência da JUNÇÃO NEUROMUSCULAR (bloqueio autoimune da transmissão na placa motora), precipitada por uma infecção intercorrente, mesmo leve.",
+        "raciocinio": "Sem AG relevante — eixo puramente ventilatório, mas por um QUARTO mecanismo diferente dos já vistos: G-14 é fadiga do MÚSCULO respiratório por exaustão mecânica (via aérea obstruída, o músculo está normal mas se esgota); G-29 é hipoventilação por restrição mecânica torácica (obesidade) somada a obstrução de via aérea superior; G-30 é supressão do COMANDO CENTRAL (opioide); aqui é falência da TRANSMISSÃO neuromuscular em si — o sinal (comando central) chega normalmente ao músculo, mas a mensagem não atravessa a junção neuromuscular por bloqueio de anticorpos contra receptores de acetilcolina, então o músculo (intrinsecamente normal) não contrai com força suficiente.",
+        "armadilha": "Procurar sibilos/estertores ou reduzir o nível de consciência como sinais esperados de insuficiência respiratória iminente — na crise miastênica o paciente pode estar plenamente alerta e sem ausculta pulmonar anormal, com a fraqueza dos músculos respiratórios sendo o único sinal, facilmente subestimada até a descompensação franca.",
+        "detalheChave": "Mesmo padrão gasométrico agudo de G-14/G-29/G-30, mas o mecanismo (falência da junção neuromuscular, não do músculo/via aérea/comando central) muda completamente a conduta — aqui o tratamento mira a doença autoimune (imunoglobulina/plasmaférese) e a via aérea, não broncodilatador nem antagonista opioide.",
+        "conteudoComplementar": "Testes de força respiratória à beira do leito (capacidade vital forçada, pressão inspiratória máxima) são mais sensíveis que a gasometria para detectar deterioração PRECOCE na crise miastênica — a hipercapnia franca costuma ser um achado tardio, já indicando necessidade iminente de suporte ventilatório."
+      }
+    },
+    {
+      "id": "G-60",
+      "categoria": "Acidose metabólica AG alto (não-cetótica)",
+      "titulo": "Intoxicação por teofilina",
+      "mimicsCAD": false,
+      "confundeCom": ["G-07", "G-58"],
+      "vinheta": "58 anos, DPOC em uso crônico de teofilina oral, tomou dose extra por engano além da habitual há 8h, tremores, taquicardia importante, agitação, sem histórico de ingestão de outra substância.",
+      "labs": { "ph": 7.43, "pco2": 22, "hco3": 14, "na": 140, "cl": 100, "albumin": 4.0 },
+      "pergunta": "Os números aqui empatam matematicamente entre duas leituras, como em G-07 — qual é o detalhe farmacológico (não numérico) que aponta para dois processos simultâneos, e não um só?",
+      "gabarito": {
+        "classificacao": "HCO₃ 14 (baixo) e pCO₂ 22 (baixo) simultaneamente, em direções opostas de efeito sobre o pH, com pH 7,43 dentro da faixa normal — matematicamente ambíguo entre (a) acidose metabólica com compensação respiratória completa (pCO₂ esperado 27–31, bem acima do medido) e (b) alcalose respiratória crônica com compensação renal completa (HCO₃ esperado 13,8–19,8, batendo com o medido).",
+        "diagnostico": "Intoxicação por teofilina — assim como o salicilato (G-07), a teofilina causa DOIS processos primários simultâneos: estimulação direta do centro respiratório (alcalose respiratória) e acidose metabólica de AG alto (por estímulo adrenérgico-like gerando lactato e outros ácidos), não uma compensação de um pelo outro.",
+        "raciocinio": "AG = 140−100−14 = 26, muito alto — mais do que a leitura (a) isolada (compensação respiratória completa) explicaria satisfatoriamente, considerando que a pCO₂ medida (22) está bem ABAIXO da janela esperada só para compensar essa acidose (27–31), sugerindo hiperventilação além do que a acidose por si só demandaria. Teofilina (inibidor da fosfodiesterase + antagonista de receptores de adenosina) tem efeito simpaticomimético-like, estimulando diretamente tanto o centro respiratório quanto a produção de lactato (via estímulo beta-adrenérgico ao metabolismo, similar a uma crise adrenérgica) — os dois processos nascem do MESMO mecanismo farmacológico, simultaneamente, não um compensando o outro.",
+        "armadilha": "Tratar este padrão só como 'compensação respiratória de uma acidose metabólica' sem reconhecer que a intoxicação por teofilina classicamente produz os DOIS processos como primários — outra droga (comparar com G-58, onde uma alcalose é induzida deliberadamente como tratamento) mostra que a MESMA assinatura gasométrica de 'dois processos simultâneos' pode ter origem tóxica acidental (aqui e em G-07) ou terapêutica intencional (G-58).",
+        "detalheChave": "Mesmo padrão ambíguo-por-números de G-07 (salicilato) — o detalhe que resolve não está na gasometria, está na farmacologia do agente: teofilina tem meia-vida longa e efeito simpaticomimético sustentado, e o contexto (DPOC, uso crônico do fármaco, dose extra por engano) aponta direto para ela em vez de salicilato.",
+        "conteudoComplementar": "Toxicidade por teofilina pode causar convulsões e arritmias graves mesmo com nível sérico apenas moderadamente elevado, especialmente em uso crônico (ao contrário da intoxicação aguda isolada) — hemoperfusão/hemodiálise é considerada em níveis muito altos ou toxicidade grave, e taquicardia importante desproporcional ao quadro deve levantar suspeita mesmo antes do nível sérico confirmar."
+      }
     }
   ]
 }
