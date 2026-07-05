@@ -8,7 +8,7 @@
   },
   "scripts": {
     "test": "node core/cad_core.test.js && node core/fixtures.test.js && node core/abg_core.test.js",
-    "check": "node scripts/build_app.js --check && node scripts/check_consistency.js && node scripts/check_profiles.js && node scripts/check_content_text.js && node scripts/test_links.js && node scripts/smoke_app.js",
+    "check": "node scripts/build_app.js --check && node scripts/check_consistency.js && node scripts/check_profiles.js && node scripts/check_content_text.js && node scripts/check_gasometrias.js && node scripts/test_links.js && node scripts/smoke_app.js",
     "ci": "npm test && npm run check",
     "build": "node scripts/build_app.js",
     "package": "node scripts/package.js",
