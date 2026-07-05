@@ -104,7 +104,7 @@ td.l,th.l{text-align:left}
 
 <hr class="gaso-sep">
 <h2 class="gaso-title">Banco de gasometrias — treino (sintético)</h2>
-<p class="deid">20 casos 100% sintéticos e de-identificados, SEM relação com a série real acima — banco de treino de raciocínio ácido-base/bioquímica, incluindo quadros que não são CAD (alguns imitam CAD de propósito, outros só treinam leitura de gasometria em geral). Motor: <code>core/abg_core.js</code> + <code>core/cad_core.js</code>, os mesmos módulos do resto do site — nenhum veredito aqui é um número solto.</p>
+<p class="deid"><span id="gasoCount">—</span> casos 100% sintéticos e de-identificados, SEM relação com a série real acima — banco de treino de raciocínio ácido-base/bioquímica, incluindo quadros que não são CAD (alguns imitam CAD de propósito, outros só treinam leitura de gasometria em geral). Motor: <code>core/abg_core.js</code> + <code>core/cad_core.js</code>, os mesmos módulos do resto do site — nenhum veredito aqui é um número solto.</p>
 
 <div class="panel">
   <div class="lab">Categoria</div>
@@ -489,6 +489,368 @@ td.l,th.l{text-align:left}
         "detalheChave": "Este é o mesmo cenário do teste automatizado de regressão do motor deste projeto (masked high anion gap) e o espelho de G-12: lá a alcalose de vômitos é o diagnóstico inteiro; aqui ela é só metade da história, escondendo uma CAD real por trás. Comparar os dois lado a lado é o exercício mais importante do lote.",
         "conteudoComplementar": "Gestação por si só já reduz levemente o limiar renal de bicarbonato e tende a uma leve alcalose respiratória crônica (ver G-16) — em uma gestante com DM1 e hiperêmese, há potencialmente TRÊS processos ácido-base se sobrepondo; o AG segue sendo a ferramenta que corta através de toda a complexidade e aponta a cetoacidose real por trás dela."
       }
+    },
+    {
+      "id": "G-21",
+      "categoria": "Acidose metabólica AG alto (não-cetótica)",
+      "titulo": "Acidose urêmica (DRC estágio 5 não dialítica)",
+      "mimicsCAD": false,
+      "confundeCom": ["G-06", "G-08"],
+      "vinheta": "67 anos, DRC estágio 5 (clearance <15) ainda sem diálise, acompanhamento ambulatorial de rotina, fadiga progressiva, sem queixa aguda.",
+      "labs": { "ph": 7.34, "pco2": 31, "hco3": 16, "na": 138, "cl": 100, "albumin": 4.0 },
+      "pergunta": "Compare o AG deste caso com o de G-09/G-10/G-11 — por que a acidose urêmica NÃO é hiperclorêmica como aquelas?",
+      "gabarito": {
+        "classificacao": "Acidose metabólica primária (HCO₃ 16 < 22), compensação respiratória adequada — pCO₂ 31 dentro de 32 ± 2 (30–34).",
+        "diagnostico": "Acidose urêmica de DRC avançada — AG elevado, ao contrário das acidoses tubulares renais (RTA), que são de AG normal.",
+        "raciocinio": "AG = 138−100−16 = 22, elevado. Nos estágios iniciais/moderados de DRC o rim ainda excreta ácido suficiente (acidose hiperclorêmica, AG normal, indistinguível de RTA); só quando o clearance cai o bastante (tipicamente <20–30 mL/min) os ânions orgânicos normalmente filtrados (sulfato, fosfato, urato e outros ânions não medidos) começam a se acumular, e o AG sobe — a mesma doença renal muda de padrão de AG conforme a função piora, não é uma contradição entre 'DRC = AG normal' e 'DRC = AG alto'.",
+        "armadilha": "Assumir que toda acidose de doença renal crônica é hiperclorêmica (como as RTA) — isso só vale para função renal preservada/moderadamente reduzida; DRC avançada é AG alto.",
+        "detalheChave": "Mesmo padrão gasométrico de G-06/G-08 (AG alto, acidemia moderada), mas aqui SEM lactato elevado, SEM ingestão tóxica — só a insuficiência renal crônica em si já explica o gap, pela retenção de ânions normalmente filtrados.",
+        "conteudoComplementar": "O AG por si só não diferencia a CAUSA do acúmulo de ânions em DRC avançada de outras causas de AG alto — sempre correlacionar com a função renal conhecida (creatinina/clearance) antes de investigar toxinas/lactato numa acidose de AG alto em paciente já sabidamente nefropata."
+      }
+    },
+    {
+      "id": "G-22",
+      "categoria": "Acidose metabólica AG alto (não-cetótica)",
+      "titulo": "Acidose D-lática (síndrome do intestino curto)",
+      "mimicsCAD": false,
+      "confundeCom": ["G-06", "G-21"],
+      "vinheta": "45 anos, ressecção intestinal extensa prévia (síndrome do intestino curto), episódios recorrentes de confusão mental e fala arrastada horas após refeição rica em carboidrato, lactato sérico relatado como 'normal' no pronto-socorro.",
+      "labs": { "ph": 7.34, "pco2": 29, "hco3": 15, "na": 140, "cl": 108, "albumin": 4.0, "lactateMmolL": 1.0 },
+      "pergunta": "O lactato sérico veio normal (1,0). Isso descarta acidose lática? Calcule o AG antes de responder.",
+      "gabarito": {
+        "classificacao": "Acidose metabólica primária (HCO₃ 15 < 22), compensação respiratória adequada — pCO₂ 29 dentro de 30,5 ± 2 (28,5–32,5).",
+        "diagnostico": "Acidose D-lática — carboidrato não absorvido chega ao cólon e é fermentado por bactérias produtoras de D-lactato, um enantiômero que o ensaio hospitalar padrão (específico para L-lactato) NÃO mede.",
+        "raciocinio": "AG = 140−108−15 = 17, elevado — mas o lactato medido (1,0 mmol/L) é normal, então o gap fica 'sem explicação' se a investigação parar no lactato de rotina. O ensaio padrão de lactato mede só o isômero L (o produzido pelo metabolismo humano); bactérias colônicas do intestino curto produzem o isômero D em excesso, que carrega a mesma carga negativa (contribuindo para o AG) mas não é detectado pelo teste comum — só um ensaio específico para D-lactato confirma.",
+        "armadilha": "Aceitar 'lactato normal' como prova de que não há acidose lática — o ensaio de rotina tem um ponto cego enantiomérico específico, e essa síndrome é o exemplo didático clássico dele.",
+        "detalheChave": "Mesmo padrão de AG alto de G-06 (sepse/lactato), mas ali o lactato medido EXPLICA o gap; aqui o lactato medido é normal e o gap fica 'órfão' até se lembrar do D-lactato — a confusão mental episódica ligada a refeições ricas em carboidrato é o detalhe propedêutico que aponta para o diagnóstico certo.",
+        "conteudoComplementar": "Tratamento inclui restrição de carboidratos simples/refinados, antibióticos para reduzir a flora colônica fermentadora e, em casos recorrentes, tiamina (cofator que pode estar relativamente deficiente nessa população cirúrgica)."
+      }
+    },
+    {
+      "id": "G-23",
+      "categoria": "Acidose metabólica AG alto (não-cetótica)",
+      "titulo": "Intoxicação por propilenoglicol (veículo de infusão prolongada)",
+      "mimicsCAD": false,
+      "confundeCom": ["G-08", "G-22"],
+      "vinheta": "58 anos, em UTI há 12 dias, sedação contínua com altas doses de lorazepam intravenoso para abstinência alcoólica grave, nova acidose de instalação insidiosa sem foco infeccioso óbvio.",
+      "labs": { "ph": 7.32, "pco2": 24, "hco3": 12, "na": 140, "cl": 104, "albumin": 4.0 },
+      "pergunta": "Que componente do próprio tratamento pode estar causando esta acidose?",
+      "gabarito": {
+        "classificacao": "Acidose metabólica primária (HCO₃ 12 < 22), compensação respiratória adequada — pCO₂ 24 dentro de 26 ± 2 (24–28).",
+        "diagnostico": "Acidose por acúmulo de propilenoglicol — o veículo/solvente usado para dissolver lorazepam (e diazepam) intravenoso em infusão prolongada e alta dose, metabolizado a ácido láctico e outros ácidos orgânicos.",
+        "raciocinio": "AG = 140−104−12 = 24, elevado, sem outra causa evidente (sem sepse, sem cetose, sem ingestão de tóxico externo relatada) — o gatilho é iatrogênico: propilenoglicol em infusões prolongadas de benzodiazepínico satura sua via de eliminação (álcool-desidrogenase, a mesma via do etanol/metanol) e se acumula, gerando acidose de AG alto com gap osmolar associado.",
+        "armadilha": "Procurar uma causa 'externa' de intoxicação quando a fonte é a própria terapia intravenosa em curso — a dose acumulada de solvente em infusões de dias, não uma ingestão única, é o gatilho.",
+        "detalheChave": "Mesmo padrão de AG alto de G-08 (álcool tóxico), inclusive pela mesma via metabólica de eliminação (álcool-desidrogenase) — mas aqui não há ingestão intencional, é acúmulo de excipiente farmacêutico numa infusão prolongada em UTI.",
+        "conteudoComplementar": "Suspeitar sempre que uma sedação prolongada em altas doses de lorazepam/diazepam IV (>48–72h) desenvolver acidose de AG alto + lesão renal aguda + hiperosmolaridade sem outra causa — a conduta é trocar o sedativo/reduzir a dose, não necessariamente hemodiálise, salvo acidose grave refratária."
+      }
+    },
+    {
+      "id": "G-24",
+      "categoria": "Acidose metabólica AG alto (não-cetótica)",
+      "titulo": "Rabdomiólise maciça com lesão renal aguda",
+      "mimicsCAD": false,
+      "confundeCom": ["G-21", "G-06"],
+      "vinheta": "33 anos, encontrado após tempo prolongado imobilizado no chão (queda + uso de substâncias), urina escura, dor muscular difusa intensa.",
+      "labs": { "ph": 7.34, "pco2": 27, "hco3": 14, "na": 136, "cl": 100, "k": 7.2, "albumin": 4.0 },
+      "pergunta": "Classifique o distúrbio e explique a origem dupla do AG elevado neste quadro.",
+      "gabarito": {
+        "classificacao": "Acidose metabólica primária (HCO₃ 14 < 22), compensação respiratória adequada — pCO₂ 27 dentro de 29 ± 2 (27–31).",
+        "diagnostico": "Acidose metabólica de AG alto por rabdomiólise com lesão renal aguda secundária — hipercalemia grave (K 7,2) é o achado que ameaça a vida mais imediatamente.",
+        "raciocinio": "AG = 136−100−14 = 22 — dupla origem: (1) o próprio músculo lesado libera ânions orgânicos e ácidos (incluindo os liberados pela lise celular maciça) e (2) a lesão renal aguda resultante (mioglobina obstruindo túbulos + hipoperfusão) reduz a excreção renal desses e de outros ânions, um ciclo que se retroalimenta.",
+        "armadilha": "Focar só no K 7,2 (a ameaça mais urgente à vida, por risco de arritmia) e não investigar/tratar a acidose e a causa renal em paralelo — hipercalemia grave + acidose se potencializam (acidemia desloca K para fora da célula, piorando a hipercalemia).",
+        "detalheChave": "Mesmo padrão de AG alto de G-21 (urêmico) e G-06 (séptico), mas aqui o contexto (trauma/imobilização prolongada, urina escura, CK sérica que seria maciçamente elevada) aponta direto para rabdomiólise como a causa primária, com a uremia sendo secundária e aguda, não crônica.",
+        "conteudoComplementar": "Hidratação agressiva precoce é a intervenção mais eficaz para prevenir/atenuar a lesão renal por rabdomiólise; a alcalinização urinária com bicarbonato é mais controversa e reservada a casos com CK muito elevada, sem benefício definitivo comprovado em ensaios recentes."
+      }
+    },
+    {
+      "id": "G-25",
+      "categoria": "Cetoacidose não-diabética",
+      "titulo": "Cetose de jejum extremo (anorexia nervosa grave)",
+      "mimicsCAD": true,
+      "confundeCom": ["G-05", "G-04"],
+      "vinheta": "24 anos, anorexia nervosa grave, IMC muito baixo, jejum quase completo há semanas, hipoalbuminemia marcante na bioquímica de admissão.",
+      "labs": { "ph": 7.36, "pco2": 35, "hco3": 19, "na": 138, "cl": 108, "albumin": 2.0 },
+      "pergunta": "O AG bruto parece quase normal (11). Isso significa que não há cetoacidose relevante? Calcule o AGc.",
+      "gabarito": {
+        "classificacao": "Acidose metabólica primária leve (HCO₃ 19 < 22), compensação respiratória adequada — pCO₂ 35 dentro de 36,5 ± 2 (34,5–38,5).",
+        "diagnostico": "Cetose de jejum extremo por desnutrição grave — mais intensa que a cetose de jejum simples (ver G-05) pela duração e pela desnutrição proteica associada, mas ainda não uma CAD verdadeira (sem diabetes, sem hiperglicemia).",
+        "raciocinio": "AG = 138−108−19 = 11, parecendo normal — mas a albumina está gravemente baixa (2,0 g/dL, desnutrição proteico-calórica extrema). AGc = 11 + 2,5×(4,0−2,0) = 16 — a correção por hipoalbuminemia REVELA uma elevação real que o AG bruto escondia. É o oposto do erro mais comum (esquecer de corrigir e superestimar risco): aqui, esquecer de corrigir faria o leitor SUBESTIMAR a gravidade da cetose.",
+        "armadilha": "Olhar o AG bruto (11, 'normal') e concluir que não há componente cetótico relevante — pacientes desnutridos crônicos quase sempre têm hipoalbuminemia significativa, e o AG bruto sistematicamente subestima o gap verdadeiro nessa população.",
+        "detalheChave": "Mesma via metabólica de G-04/G-05 (jejum → cetogênese), mas aqui a MAGNITUDE da desnutrição proteica (albumina 2,0, muito mais baixa que os outros casos do lote) é o que torna a correção do AG indispensável, não opcional.",
+        "conteudoComplementar": "Pacientes com desnutrição grave em realimentação estão em alto risco de síndrome de realimentação (ver G-26) — a correção da cetose e da acidose deve ser cautelosa e concomitante à reposição gradual de fósforo/potássio/magnésio, não só à oferta calórica."
+      }
+    },
+    {
+      "id": "G-26",
+      "categoria": "Alcalose metabólica",
+      "titulo": "Síndrome de realimentação (refeeding syndrome)",
+      "mimicsCAD": false,
+      "confundeCom": ["G-12", "G-13"],
+      "vinheta": "24 anos, mesmo contexto de desnutrição grave, agora no 3º dia de realimentação enteral após internação, fraqueza muscular progressiva e nova arritmia no monitor.",
+      "labs": { "ph": 7.46, "pco2": 42, "hco3": 29, "na": 138, "cl": 96, "k": 2.8, "albumin": 4.0 },
+      "pergunta": "Classifique o distúrbio ácido-base — e diga por que ele NÃO é o achado mais perigoso deste quadro.",
+      "gabarito": {
+        "classificacao": "Alcalose metabólica primária leve (HCO₃ 29 > 26), compensação respiratória adequada — pCO₂ 42 dentro de 41,3 ± 2 (39,3–43,3).",
+        "diagnostico": "Síndrome de realimentação — a alcalose metabólica leve é um achado secundário; o quadro é definido pelos DESVIOS ELETROLÍTICOS intracelulares graves (hipofosfatemia, hipocalemia, hipomagnesemia) desencadeados pelo influxo de insulina ao reintroduzir carboidrato num paciente cronicamente desnutrido.",
+        "raciocinio": "AG = 138−96−29 = 13, praticamente normal — o eixo ácido-base aqui é coadjuvante. O mecanismo central é outro: a realimentação dispara secreção de insulina, que empurra fósforo, potássio e magnésio para dentro das células (para sustentar a síntese proteica/glicólise retomadas), esgotando rapidamente reservas já depletadas pela desnutrição crônica — o K sérico de 2,8 aqui é MAIS perigoso clinicamente (risco de arritmia/parada cardiorrespiratória) do que a alcalose leve em si.",
+        "armadilha": "Concentrar a atenção só na leitura ácido-base (alcalose leve, pouco dramática) e não rastrear ativamente fósforo/magnésio — a síndrome de realimentação mata pelo desvio eletrolítico intracelular, não pelo pH.",
+        "detalheChave": "Mesma família de alcalose metabólica leve de G-12/G-13, mas SEM hipocloremia acentuada nem história de perda de HCl/diurético — o contexto (desnutrição grave + reintrodução recente de nutrição) é o que aponta para a síndrome de realimentação, e o K críticamente baixo é o alerta que não pode esperar.",
+        "conteudoComplementar": "Prevenção é a chave: reintroduzir calorias GRADUALMENTE em pacientes de alto risco (desnutrição grave, jejum prolongado, IMC muito baixo), com reposição profilática de fósforo/potássio/magnésio e tiamina ANTES/durante o início da realimentação, não depois que os desvios já apareceram."
+      }
+    },
+    {
+      "id": "G-27",
+      "categoria": "Alcalose metabólica",
+      "titulo": "Alcalose metabólica por transfusão maciça (metabolismo do citrato)",
+      "mimicsCAD": false,
+      "confundeCom": ["G-12", "G-13", "G-35"],
+      "vinheta": "40 anos, politrauma grave, recebeu mais de 10 unidades de concentrado de hemácias + plasma nas últimas 6 horas, agora estável hemodinamicamente.",
+      "labs": { "ph": 7.46, "pco2": 44, "hco3": 30, "na": 140, "cl": 98, "albumin": 4.0 },
+      "pergunta": "De onde vem o excesso de base aqui, se não houve perda de ácido nem administração de bicarbonato?",
+      "gabarito": {
+        "classificacao": "Alcalose metabólica primária leve (HCO₃ 30 > 26), compensação respiratória adequada — pCO₂ 44 dentro de 42 ± 2 (40–44).",
+        "diagnostico": "Alcalose metabólica pós-transfusional por metabolismo do citrato — o anticoagulante citratado usado para preservar o sangue nas bolsas é metabolizado pelo fígado a bicarbonato, uma vez infundido em grande volume.",
+        "raciocinio": "AG = 140−98−30 = 12, normal — não há processo de gap envolvido, é geração líquida de base. Cada bolsa de hemocomponente carrega citrato como anticoagulante; em transfusão maciça (múltiplas unidades em curto intervalo), a carga total de citrato supera a capacidade de metabolização imediata, mas o citrato acaba sendo convertido a bicarbonato pelo fígado (via ciclo de Krebs) horas depois — gerando alcalose tardia, já na fase 'estável' do paciente, não durante o sangramento ativo.",
+        "armadilha": "Esperar acidose (não alcalose) num paciente pós-transfusão maciça — a intuição comum associa transfusão maciça a acidose lática/dilucional durante o choque ativo; a alcalose por citrato aparece depois, na fase de estabilização, e é frequentemente esquecida.",
+        "detalheChave": "Mesma classe leve de alcalose metabólica de G-12/G-13, mas SEM hipocloremia importante nem mecanismo de perda/diurético — o contexto (transfusão maciça recente, fase pós-ressuscitação) e o AG normal (sem pista de acidose residual) apontam para o citrato como fonte da base.",
+        "conteudoComplementar": "O citrato também quela cálcio ionizado durante a infusão ativa (hipocalcemia transitória, arritmogênica) — o mesmo evento (transfusão maciça) produz primeiro um risco de hipocalcemia/arritmia na fase aguda e depois uma alcalose leve horas mais tarde; são dois problemas sequenciais do mesmo aditivo, não simultâneos."
+      }
+    },
+    {
+      "id": "G-28",
+      "categoria": "Alcalose metabólica",
+      "titulo": "Alcalose pós-hipercápnica ('overshoot') após correção ventilatória de DPOC",
+      "mimicsCAD": false,
+      "confundeCom": ["G-15", "G-29"],
+      "vinheta": "70 anos, mesmo perfil de DPOC crônico retentor de CO₂, intubado por insuficiência respiratória aguda e ventilado de forma a normalizar rapidamente a pCO₂ para ~38 — agora com fraqueza e arritmia leve no monitor.",
+      "labs": { "ph": 7.55, "pco2": 38, "hco3": 32, "na": 140, "cl": 94, "albumin": 4.0 },
+      "pergunta": "O HCO₃ continua alto (32) e a pCO₂ agora está 'normal' (38). Isso é uma alcalose metabólica nova ou a mesma acidose respiratória crônica de sempre?",
+      "gabarito": {
+        "classificacao": "Alcalose metabólica primária (HCO₃ 32 > 26), com compensação respiratória INSUFICIENTE — pCO₂ medido 38 está abaixo do esperado 43,4 ± 2 (41,4–45,4), revelando uma alcalose respiratória adicional (hiperventilação mecânica além do que o quadro metabólico por si só explicaria).",
+        "diagnostico": "Alcalose 'pós-hipercápnica' (overshoot) — iatrogênica, por correção ventilatória rápida demais da pCO₂ crônica em paciente cujo rim ainda não teve tempo de excretar o excesso de bicarbonato retido durante meses/anos de acidose respiratória crônica compensada.",
+        "raciocinio": "AG = 140−94−32 = 14, quase normal — não é um processo de gap. O paciente tinha HCO₃ cronicamente elevado (~32-34) como compensação renal de anos de retenção de CO₂ (ver G-15). Ao ventilar mecanicamente e normalizar a pCO₂ em horas, a compensação renal (que levaria dias para reverter e excretar o HCO₃ excedente) fica 'para trás' — o HCO₃ alto que antes era NECESSÁRIO para manter o pH perto do normal agora, com a pCO₂ já normal, empurra o pH para a alcalose franca.",
+        "armadilha": "Corrigir a pCO₂ de um retentor crônico rápido demais visando 'normalizar o gás' — a meta ventilatória em DPOC crônico retentor é retornar ao pCO₂ BASAL do paciente (geralmente elevado), não ao valor de referência populacional; normalizar rápido demais provoca esta alcalose iatrogênica.",
+        "detalheChave": "Mesmo paciente-tipo de G-15 (DPOC crônico), mesmo HCO₃ elevado de base — a diferença inteira é temporal: a intervenção (ventilação mecânica) mudou a pCO₂ mais rápido do que o rim consegue acompanhar, invertendo a leitura de 'acidose respiratória crônica compensada' para 'alcalose metabólica com compensação respiratória insuficiente' nos mesmos rins, a mesma doença de base.",
+        "conteudoComplementar": "A prevenção é estratégica, não reativa: ao ventilar mecanicamente um retentor crônico conhecido, programar a meta de pCO₂ para o valor basal do paciente (se conhecido) desde o início, evitando a hiperventilação inicial que cria este cenário."
+      }
+    },
+    {
+      "id": "G-29",
+      "categoria": "Distúrbio respiratório — acidose",
+      "titulo": "Síndrome de hipoventilação da obesidade (SHO) com AOS grave",
+      "mimicsCAD": false,
+      "confundeCom": ["G-15"],
+      "vinheta": "52 anos, obesidade grau III, roncos altos e pausas respiratórias presenciadas há anos, sonolência diurna importante, nunca fumou.",
+      "labs": { "ph": 7.36, "pco2": 58, "hco3": 32 },
+      "pergunta": "Compare esta gasometria com a de G-15 (DPOC) — os números batem? O que diferencia clinicamente os dois quadros?",
+      "gabarito": {
+        "classificacao": "HCO₃ 32 (alto) e pCO₂ 58 (alto) simultaneamente, direções opostas de efeito sobre o pH, com pH 7,36 dentro da faixa de referência — matematicamente ambíguo entre (a) alcalose metabólica com compensação respiratória completa e (b) acidose respiratória crônica com compensação renal completa, exatamente como em G-15.",
+        "diagnostico": "Síndrome de hipoventilação da obesidade (SHO) associada a apneia obstrutiva do sono (AOS) grave — a leitura (b), acidose respiratória crônica compensada, é a correta clinicamente, resolvida pelo contexto (obesidade grave, apneias presenciadas, ausência de tabagismo/DPOC), não pelos números isolados.",
+        "raciocinio": "O padrão numérico é essencialmente sobreponível ao de G-15 (mesmo HCO₃, pCO₂ muito próximo, mesmo pH) — a hipoventilação crônica aqui não vem de obstrução das vias aéreas inferiores (enfisema/bronquite) como no DPOC, mas de um somatório de hipoventilação relacionada ao excesso de peso (restrição da mecânica torácica, aumento do trabalho respiratório) com obstrução repetida de vias aéreas SUPERIORES durante o sono, levando a hipercapnia crônica diurna quando grave o suficiente.",
+        "armadilha": "Assumir DPOC sempre que houver este padrão gasométrico crônico — sem história de tabagismo/exposição ocupacional e com obesidade grave + apneias presenciadas, SHO/AOS é o diagnóstico mais provável, e o tratamento (ventilação não invasiva noturna, perda de peso) é completamente diferente do DPOC.",
+        "detalheChave": "Números quase idênticos aos de G-15 — a diferença inteira mora fora da gasometria: obesidade grave + apneias presenciadas + ausência de tabagismo aqui, versus tabagismo/enfisema em G-15. É o par mais próximo numericamente do lote inteiro.",
+        "conteudoComplementar": "SHO é frequentemente subdiagnosticada até um episódio de descompensação aguda (insuficiência respiratória franca) — rastrear ativamente com polissonografia/gasometria em obesidade grave com sonolência diurna, antes da descompensação, permite iniciar ventilação não invasiva noturna eletivamente."
+      }
+    },
+    {
+      "id": "G-30",
+      "categoria": "Distúrbio respiratório — acidose",
+      "titulo": "Depressão respiratória por intoxicação opioide",
+      "mimicsCAD": false,
+      "confundeCom": ["G-14"],
+      "vinheta": "29 anos, encontrado inconsciente, pupilas puntiformes, frequência respiratória de 6 irpm, sem história pulmonar conhecida.",
+      "labs": { "ph": 7.26, "pco2": 58, "hco3": 25, "chronicityHint": "acute" },
+      "pergunta": "Classifique o distúrbio — e explique por que a origem aqui é central, não pulmonar, apesar do padrão gasométrico ser parecido com o de G-14.",
+      "gabarito": {
+        "classificacao": "Acidose respiratória aguda primária (pCO₂ 58 > 45), resposta renal aguda adequada para o tempo decorrido — HCO₃ 25 dentro de 25,8 ± 2 (23,8–27,8).",
+        "diagnostico": "Depressão respiratória aguda por intoxicação opioide — hipoventilação por supressão direta do centro respiratório bulbar, não por fadiga muscular ou obstrução de via aérea.",
+        "raciocinio": "Sem componente de AG envolvido — o eixo aqui é puramente ventilatório central. Opioides suprimem diretamente a resposta do centro respiratório ao CO₂ (quimiorreceptores centrais ficam menos sensíveis à hipercapnia), reduzindo a frequência e o volume respiratório (bradipneia franca, 6 irpm) sem que haja doença pulmonar, via aérea obstruída ou fadiga muscular envolvida — o pulmão em si está normal, é o comando central que falhou.",
+        "armadilha": "Tratar toda acidose respiratória aguda grave como se fosse necessariamente pulmonar (asma/DPOC/pneumonia) — miose puntiforme + bradipneia extrema + contexto de uso de substâncias aponta para causa central/tóxica, com implicação terapêutica imediata e específica (antagonista opioide).",
+        "detalheChave": "Mesmo padrão gasométrico agudo de G-14 (asma com fadiga), mas o mecanismo é o oposto: em G-14 o pulmão/músculo respiratório está EXAUSTO tentando compensar uma via aérea obstruída; aqui o comando central está SUPRIMIDO e a mecânica pulmonar está intacta — pupilas puntiformes e ausência de sibilos são os achados que resolvem.",
+        "conteudoComplementar": "Naloxona reverte rapidamente a depressão respiratória opioide quando administrada a tempo — mas seu efeito é mais curto que o de muitos opioides, exigindo reavaliação e possível redose/infusão contínua, especialmente com opioides sintéticos de longa duração."
+      }
+    },
+    {
+      "id": "G-31",
+      "categoria": "Distúrbio respiratório — alcalose",
+      "titulo": "Alcalose respiratória crônica fisiológica da grande altitude",
+      "mimicsCAD": false,
+      "confundeCom": ["G-16", "G-17", "G-18", "G-19"],
+      "vinheta": "35 anos, alpinista, 3 semanas de aclimatação em acampamento a 5.000 m de altitude, assintomático, gasometria de rotina de um estudo de fisiologia de altitude.",
+      "labs": { "ph": 7.47, "pco2": 27, "hco3": 19, "chronicityHint": "chronic" },
+      "pergunta": "Compare com G-16 (gestação) — mesmo tipo de distúrbio, qual é o gatilho fisiológico diferente aqui?",
+      "gabarito": {
+        "classificacao": "Alcalose respiratória crônica primária (pCO₂ 27 < 35), resposta renal crônica adequada — HCO₃ 19 dentro de 18,8 ± 3 (15,8–21,8).",
+        "diagnostico": "Alcalose respiratória crônica fisiológica da aclimatação à grande altitude — hiperventilação sustentada em resposta à hipóxia hipobárica, com compensação renal já estabelecida após semanas de exposição.",
+        "raciocinio": "A hipóxia (baixa pressão parcial de O₂ no ar rarefeito) estimula os quimiorreceptores periféricos (corpos carotídeos) a aumentar a ventilação — ao contrário da gestação (estímulo hormonal direto da progesterona sobre o centro respiratório, ver G-16), aqui o estímulo é a PRÓPRIA hipoxemia. Após dias/semanas, o rim excreta bicarbonato para compensar a alcalose respiratória sustentada, chegando à janela crônica esperada (15,8–21,8), como visto aqui.",
+        "armadilha": "Assumir que todo padrão de 'HCO₃ baixo + pCO₂ baixo com pH quase normal' vem do mesmo mecanismo — a mesma assinatura gasométrica pode vir de estímulos centrais hormonais (gestação), hipóxicos periféricos (altitude) ou patológicos (embolia, ansiedade, sepse inicial); o contexto clínico é sempre necessário.",
+        "detalheChave": "Mesmo tipo de distúrbio de G-16, mas aqui o pH está claramente alcalêmico (7,47, fora da zona de ambiguidade que aparecia em G-16 a 7,44–7,45) — reforçando que a magnitude/cronicidade do estímulo (hipóxia contínua a 5.000 m) produz uma resposta mais robusta e menos limítrofe que a da gestação.",
+        "conteudoComplementar": "A ventilação segue aumentando por dias após a chegada à altitude (aclimatação ventilatória progressiva) mesmo sem novo estímulo hipóxico adicional — um fenômeno de sensibilização dos quimiorreceptores que se reverte, também gradualmente, ao retornar a altitudes menores."
+      }
+    },
+    {
+      "id": "G-32",
+      "categoria": "CAD e hiperglicemia",
+      "titulo": "CAD euglicêmica por jejum pré-operatório prolongado",
+      "mimicsCAD": true,
+      "confundeCom": ["G-02", "G-01"],
+      "vinheta": "26 anos, DM1 em uso de insulina basal-bolus (SEM iSGLT2), jejum de 18h para cirurgia eletiva adiada duas vezes, aplicou só a insulina basal por conta própria com medo de hipoglicemia.",
+      "labs": { "ph": 7.31, "pco2": 27, "hco3": 13, "na": 134, "cl": 100, "albumin": 4.0, "glucoseMgDl": 175, "betaHydroxybutyrateMmolL": 4.2, "ketonuriaCruzes": 3, "knownDiabetes": true },
+      "hasDkaEsperado": true,
+      "pergunta": "Sem iSGLT2 envolvido desta vez — como a glicemia ainda fica 'quase normal' (175) apesar de uma cetoacidose real?",
+      "gabarito": {
+        "classificacao": "Acidose metabólica primária (HCO₃ 13 < 22), compensação respiratória adequada — pCO₂ 27 dentro de 27,5 ± 2 (25,5–29,5).",
+        "diagnostico": "CAD euglicêmica por outro mecanismo (não iSGLT2): jejum prolongado + insulina basal isolada, sem a cobertura de bolus/carboidrato que normalmente mantém a glicemia mais alta.",
+        "raciocinio": "AG = 134−100−13 = 21. Fecha os três eixos: glicose 175 não bate os 200 sozinha, mas knownDiabetes=true cobre o eixo por OR; βHB 4,2 (≥3,0) e HCO₃ 13 (<18) fecham os outros dois. Mecanismo aqui é diferente de G-02 (SGLT2i causando glicosúria maciça): jejum prolongado reduz a ingesta de carboidrato enquanto a insulina basal (sem bolus) segue suprimindo parcialmente a glicemia — mas a insulina basal isolada, em jejum prolongado com estresse cirúrgico adiado, não é suficiente para suprimir a lipólise/cetogênese hepática, que segue avançando independente da glicemia estar controlada.",
+        "armadilha": "Achar que 'CAD euglicêmica' é sinônimo de uso de iSGLT2 — qualquer situação que desacople a supressão da cetogênese (que depende de insulina suficiente) da glicemia (que pode ser mantida baixa por outros motivos, aqui jejum prolongado) pode produzir o mesmo quadro.",
+        "detalheChave": "Mesmo fenômeno de G-02 (glicemia baixa mascarando CAD real), mecanismo de fundo diferente (jejum + insulina basal isolada, não SGLT2i) — o denominador comum pedagógico é que 'glicemia baixa/normal' NUNCA deve, sozinha, descartar CAD num diabético sintomático.",
+        "conteudoComplementar": "Diretrizes perioperatórias recomendam NUNCA suspender totalmente a insulina basal em DM1 durante jejum, mesmo pré-operatório — a insulina basal previne cetogênese independentemente da ingesta oral; o erro aqui foi reduzir/omitir cobertura adicional por medo de hipoglicemia, sem substituir por dextrose IV titulada."
+      }
+    },
+    {
+      "id": "G-33",
+      "categoria": "Acidose metabólica AG normal (hiperclorêmica)",
+      "titulo": "Acidose tubular renal induzida por toluenismo (inalação de solvente)",
+      "mimicsCAD": false,
+      "confundeCom": ["G-10", "G-11"],
+      "vinheta": "19 anos, uso recreativo crônico de solvente inalado ('cheirar cola'), fraqueza muscular grave e paralisia flácida aguda dos membros inferiores.",
+      "labs": { "ph": 7.32, "pco2": 26, "hco3": 13, "na": 138, "cl": 115, "k": 2.2, "albumin": 4.0 },
+      "pergunta": "Classifique o distúrbio e explique por que a hipocalemia aqui é tão mais grave que a de G-10 (RTA1 'clássica').",
+      "gabarito": {
+        "classificacao": "Acidose metabólica primária (HCO₃ 13 < 22), compensação respiratória adequada — pCO₂ 26 dentro de 27,5 ± 2 (25,5–29,5).",
+        "diagnostico": "Acidose tubular renal (padrão distal, tipo 1) tóxica, induzida por inalação crônica de tolueno — mecanismo e apresentação semelhantes à RTA1 idiopática de G-10, mas por lesão tubular direta do solvente, e tipicamente reversível com a suspensão da exposição.",
+        "raciocinio": "AG = 138−115−13 = 10, normal — mesmo padrão hiperclorêmico de G-09/G-10/G-11. O tolueno inalado lesa diretamente a capacidade do túbulo distal de secretar H⁺ (mecanismo tóxico direto, não autoimune/genético como na RTA1 idiopática), causando o mesmo defeito de acidificação urinária E a mesma perda urinária excessiva de potássio — aqui levada ao extremo (K 2,2, grave o suficiente para causar paralisia flácida, uma apresentação mais dramática que a RTA1 'espontânea' costuma ter).",
+        "armadilha": "Investigar causas genéticas/autoimunes de RTA1 num jovem sem perguntar ativamente sobre uso de inalantes — a história de exposição a solvente é o detalhe que muda tudo (a RTA por tolueno tende a reverter com a abstinência, ao contrário de causas autoimunes permanentes).",
+        "detalheChave": "Mesmo padrão de AG normal + hipocalemia de G-10, mas a MAGNITUDE da hipocalemia (2,2 vs 2,8) e a apresentação dramática (paralisia flácida) refletem uma lesão tubular tóxica aguda e intensa, não o desgaste mais insidioso de uma RTA1 idiopática de longa data.",
+        "conteudoComplementar": "A paralisia flácida hipocalêmica é uma emergência que exige reposição cuidadosa de potássio com monitorização cardíaca contínua — corrigir a acidose de forma isolada (bicarbonato) sem repor o K primeiro pode piorar agudamente a hipocalemia (K se desloca ainda mais para dentro da célula ao corrigir o pH)."
+      }
+    },
+    {
+      "id": "G-34",
+      "categoria": "Acidose metabólica AG normal (hiperclorêmica)",
+      "titulo": "Acidose hiperclorêmica por fístula pancreática externa",
+      "mimicsCAD": false,
+      "confundeCom": ["G-09", "G-10", "G-11"],
+      "vinheta": "56 anos, pancreatite necrotizante grave, drenagem cirúrgica externa com alto débito de secreção pancreática rica em bicarbonato pelo dreno há 2 semanas.",
+      "labs": { "ph": 7.34, "pco2": 29, "hco3": 15, "na": 136, "cl": 108, "albumin": 4.0 },
+      "pergunta": "Compare com G-09 (diarreia) — mesmo mecanismo de perda de bicarbonato, por qual via diferente aqui?",
+      "gabarito": {
+        "classificacao": "Acidose metabólica primária (HCO₃ 15 < 22), compensação respiratória adequada — pCO₂ 29 dentro de 30,5 ± 2 (28,5–32,5).",
+        "diagnostico": "Acidose metabólica hiperclorêmica por perda externa de secreção pancreática (fístula/dreno de alto débito) — a secreção pancreática exócrina é naturalmente rica em bicarbonato (para neutralizar o quimo ácido no duodeno).",
+        "raciocinio": "AG = 136−108−15 = 13, normal — mecanismo idêntico ao de G-09 (perda de HCO₃ reposta por retenção renal de Cl⁻), mas pela via de um DRENO CIRÚRGICO EXTERNO em vez do trato GI baixo (diarreia). O volume perdido pelo dreno de alto débito pode facilmente superar o de uma diarreia volumosa, e a reposição deve mirar tanto o volume quanto especificamente o bicarbonato perdido (não só solução salina, que agravaria a hipercloremia).",
+        "armadilha": "Repor apenas volume com solução salina isotônica numa fístula/dreno pancreático de alto débito — isso trata a depleção de volume mas PIORA a hipercloremia/acidose, já que não repõe o bicarbonato especificamente perdido pelo dreno.",
+        "detalheChave": "Mesmo mecanismo e mesmo padrão gasométrico de G-09, mas a VIA da perda é um dreno cirúrgico externo, não o intestino baixo — o contexto (pancreatite necrotizante, dreno de alto débito) é o que aponta para a fonte pancreática específica de bicarbonato, relevante para escolher a reposição certa.",
+        "conteudoComplementar": "Secreções digestivas têm composição eletrolítica características e distintas por segmento (gástrica: ácida, rica em H⁺/Cl⁻; pancreática/biliar: alcalina, rica em HCO₃⁻; diarreia: variável, geralmente rica em K⁺/HCO₃⁻) — conhecer a composição típica da secreção perdida orienta a reposição de forma mais precisa que 'só repor volume'."
+      }
+    },
+    {
+      "id": "G-35",
+      "categoria": "Alcalose metabólica",
+      "titulo": "Alcalose metabólica por ingestão maciça de bicarbonato de sódio",
+      "mimicsCAD": false,
+      "confundeCom": ["G-12", "G-13", "G-27"],
+      "vinheta": "62 anos, automedicação com grandes quantidades de bicarbonato de sódio em pó para 'azia', por semanas, sem vômitos, sem uso de diuréticos.",
+      "labs": { "ph": 7.50, "pco2": 45, "hco3": 34, "na": 142, "cl": 98, "albumin": 4.0 },
+      "pergunta": "Compare o AG deste caso com o de G-12/G-13 — por que ele NÃO vem discretamente elevado aqui?",
+      "gabarito": {
+        "classificacao": "Alcalose metabólica primária (HCO₃ 34 > 26), compensação respiratória adequada — pCO₂ 45 dentro de 44,8 ± 2 (42,8–46,8).",
+        "diagnostico": "Alcalose metabólica por ingestão exógena maciça de álcali (bicarbonato de sódio) — mecanismo de GANHO de base, não de perda de ácido/contração de volume como em G-12/G-13.",
+        "raciocinio": "AG = 142−98−34 = 10, normal — ao contrário de G-12/G-13 (onde a contração de volume/hemoconcentração elevava discretamente o AG mesmo sem acidose de gap concomitante), aqui não há contração de volume relevante (sem vômitos, sem diurético): o excesso de HCO₃ vem diretamente da ingestão, sem o componente de concentração que eleva o AG nos outros dois casos. Esse detalhe (AG normal, não discretamente elevado) é a pista laboratorial de que o mecanismo é diferente.",
+        "armadilha": "Assumir que toda alcalose metabólica hipoclorêmica leve vem de perda de HCl ou diurético — uma história de automedicação com antiácidos alcalinos em grande quantidade é uma causa subestimada e facilmente perguntável na anamnese.",
+        "detalheChave": "Mesma classificação ácido-base de G-12/G-13/G-27, mas o AG normal (sem a discreta elevação por contração de volume vista naqueles) e a ausência de fatores de perda de volume (sem vômitos/diurético/transfusão) apontam para ingestão exógena de álcali como a causa.",
+        "conteudoComplementar": "'Síndrome leite-álcali' é a forma clássica e mais grave dessa categoria (ingestão combinada de cálcio + álcali, como em antiácidos à base de carbonato de cálcio em excesso), cursando também com hipercalcemia e podendo evoluir para lesão renal — vale investigar cálcio sérico quando a história de automedicação envolver antiácidos cálcicos."
+      }
+    },
+    {
+      "id": "G-36",
+      "categoria": "Acidose metabólica AG alto (não-cetótica)",
+      "titulo": "Insuficiência suprarrenal aguda (crise addisoniana)",
+      "mimicsCAD": false,
+      "confundeCom": ["G-11"],
+      "vinheta": "48 anos, fadiga crônica e perda de peso há meses, agora com vômitos, hipotensão importante e confusão mental após um quadro infeccioso menor.",
+      "labs": { "ph": 7.34, "pco2": 29, "hco3": 15, "na": 128, "cl": 98, "k": 6.5, "albumin": 4.0 },
+      "pergunta": "Compare com G-11 (RTA4) — mesma tríade de acidose+hipercalemia por hipoaldosteronismo, mas o que MAIS neste caso não se explicaria por uma RTA4 isolada?",
+      "gabarito": {
+        "classificacao": "Acidose metabólica primária (HCO₃ 15 < 22), compensação respiratória adequada — pCO₂ 29 dentro de 30,5 ± 2 (28,5–32,5).",
+        "diagnostico": "Insuficiência suprarrenal aguda (crise addisoniana) — deficiência combinada de cortisol e aldosterona, precipitada por um estresse agudo (infecção) em cima de uma reserva suprarrenal já cronicamente comprometida.",
+        "raciocinio": "AG = 128−98−15 = 15, discretamente elevado (mais que a RTA4 típica de G-11, cujo AG era normal) — a deficiência de aldosterona prejudica a secreção distal de H⁺ e K⁺, exatamente como na RTA4, explicando a acidose leve e a hipercalemia (K 6,5). Mas a HIPONATREMIA marcante (Na 128) e a hipotensão desproporcional não se explicam pela RTA4 isolada — elas vêm da deficiência de ALDOSTERONA (perda renal de sódio/água) somada à deficiência de CORTISOL (que compromete a resposta vascular a catecolaminas, agravando a hipotensão), um quadro sistêmico muito mais amplo que um defeito tubular isolado.",
+        "armadilha": "Encaixar hipercalemia + acidose leve automaticamente como 'RTA4' sem notar a hiponatremia significativa e a hipotensão desproporcionais ao quadro renal isolado — a combinação das três (acidose leve, hipercalemia, hiponatremia) com hipotensão e um gatilho de estresse agudo deve levantar a crise addisoniana, uma emergência com tratamento específico (hidrocortisona) e potencialmente fatal se não reconhecida.",
+        "detalheChave": "Mesmo eixo hormonal (deficiência funcional de aldosterona) de G-11, mas aqui a causa é suprarrenal primária (não renal/diabética) e MUITO mais ampla — hiponatremia marcante + hipotensão + contexto de estresse agudo sobre reserva já baixa são os detalhes que apontam para a suprarrenal, não o rim, como origem.",
+        "conteudoComplementar": "Crise addisoniana é uma das poucas emergências endócrinas verdadeiras — tratamento (hidrocortisona IV) não deve esperar confirmação laboratorial completa (cortisol sérico, ACTH) quando a suspeita clínica é forte; atrasar por exames pode ser fatal."
+      }
+    },
+    {
+      "id": "G-37",
+      "categoria": "Distúrbio respiratório — alcalose",
+      "titulo": "Gasometria na hipotermia acidental grave (leitura vs. correção de temperatura)",
+      "mimicsCAD": false,
+      "confundeCom": ["G-17", "G-18", "G-31"],
+      "vinheta": "38 anos, encontrado após horas de exposição ao frio extremo, temperatura corporal central medida em 32°C. Gasometria processada, como sempre, a 37°C pelo aparelho.",
+      "labs": { "ph": 7.47, "pco2": 31, "hco3": 22, "chronicityHint": "acute", "temperaturaC": 32 },
+      "pergunta": "Este número deveria ser 'corrigido' para os 32°C reais do paciente antes de interpretar? Por que a prática atual, na maioria dos serviços, é NÃO corrigir?",
+      "gabarito": {
+        "classificacao": "Alcalose respiratória aguda leve (pCO₂ 31 < 35), resposta renal aguda adequada — HCO₃ 22 dentro de 22,2 ± 2 (20,2–24,2), interpretada pelo valor medido a 37°C (sem correção de temperatura).",
+        "diagnostico": "Este caso não é sobre identificar um NOVO distúrbio primário — é sobre COMO ler a gasometria em si num paciente hipotérmico. A prática predominante (estratégia 'alpha-stat') interpreta os valores exatamente como o aparelho reporta, medidos e padronizados a 37°C, SEM corrigi-los para a temperatura real do paciente.",
+        "raciocinio": "Existem duas escolas: 'pH-stat' (corrige matematicamente pH/pCO₂ para a temperatura real do paciente, mais fria, o que faria os valores parecerem ainda mais alcalóticos/com pCO₂ mais baixo) e 'alpha-stat' (usa os valores tal como medidos a 37°C, sem corrigir). A solubilidade de gases e o estado de ionização de proteínas mudam com a temperatura, mas o estado de ionização dos grupamentos histidina imidazol (que regulam a função de muitas enzimas) acompanha o pH da MESMA forma que a temperatura muda — então manter o pH 'não corrigido' preserva a neutralidade elétrica intracelular relativa, que é o que importa para a função enzimática, independente da temperatura absoluta. A maioria dos protocolos de reaquecimento atuais usa alpha-stat (não corrigir) por essa razão fisiológica, e por simplicidade prática.",
+        "armadilha": "Presumir que 'gasometria correta' sempre significa 'ajustada para a temperatura real do paciente' — em hipotermia, a prática predominante é o oposto: usar os números como vêm, a 37°C padrão, e tratar a hipoventilação relativa (menor produção de CO₂ pelo metabolismo mais lento na hipotermia) sem reajuste matemático adicional.",
+        "detalheChave": "O padrão numérico aqui (pCO₂ baixo, HCO₃ discretamente baixo, pH alto) é indistinguível, à primeira vista, de uma alcalose respiratória aguda comum (comparar com G-17/G-18) — mas o ponto pedagógico deste caso não é o diagnóstico diferencial da alcalose, é entender que a MEDIÇÃO em si (a que temperatura interpretar) é uma decisão clínica relevante, e a resposta é raramente ensinada.",
+        "conteudoComplementar": "Reaquecimento muito rápido de hipotermia grave carrega seus próprios riscos (arritmia por 'afterdrop', instabilidade hemodinâmica) — a gasometria seriada durante o reaquecimento deve ser interpretada considerando a temperatura mudando continuamente, mas ainda assim tipicamente sem correção matemática dos valores reportados."
+      }
+    },
+    {
+      "id": "G-38",
+      "categoria": "Acidose metabólica AG alto (não-cetótica)",
+      "titulo": "Acidose mista pós-parada cardiorrespiratória (retorno da circulação espontânea)",
+      "mimicsCAD": false,
+      "confundeCom": ["G-06", "G-08"],
+      "vinheta": "61 anos, parada cardiorrespiratória extra-hospitalar, ressuscitação por 22 minutos até retorno da circulação espontânea, agora intubado, gasometria imediatamente após a RCE.",
+      "labs": { "ph": 6.97, "pco2": 54, "hco3": 12, "na": 140, "cl": 100, "lactateMmolL": 8.5, "albumin": 4.0 },
+      "pergunta": "Classifique o distúrbio — por que ele NÃO deve ser lido como uma compensação de um processo pelo outro?",
+      "gabarito": {
+        "classificacao": "HCO₃ 12 (baixo) e pCO₂ 54 (alto) SIMULTANEAMENTE — ambos acidificantes na mesma direção, nunca compensação (compensação sempre move a outra variável na direção OPOSTA): acidose metabólica E acidose respiratória combinadas, dois processos independentes.",
+        "diagnostico": "Acidose mista grave pós-parada cardiorrespiratória — componente metabólico (hipoperfusão global durante a parada, gerando lactato) somado a componente respiratório agudo (apneia/ventilação ineficaz antes e durante a ressuscitação, retendo CO₂).",
+        "raciocinio": "AG = 140−100−12 = 28, alto, explicado pelo lactato de 8,5 mmol/L (hipoperfusão tecidual global durante os 22 minutos de parada, antes do retorno da circulação). Ao mesmo tempo, a pCO₂ de 54 reflete a ventilação ausente/ineficaz durante o mesmo período — os dois processos nascem do MESMO evento (parada cardiorrespiratória), mas por mecanismos diferentes e SIMULTÂNEOS, não um compensando o outro. O pH de 6,97 (extremamente baixo) reflete a soma dos dois efeitos acidificantes, sem nenhum “alívio” compensatório mútuo.",
+        "armadilha": "Tentar encaixar este quadro em 'acidose metabólica com compensação respiratória insuficiente' — não é isso: aqui NÃO existe processo compensatório em curso, são dois processos acidificantes primários simultâneos nascidos do mesmo evento, e tratar como se fosse 'só' uma acidose metabólica subestimaria a gravidade ventilatória associada.",
+        "detalheChave": "Contraste com G-06 (sepse): ali era acidose metabólica PURA por lactato, com compensação respiratória adequada (pCO₂ baixo). Aqui o mesmo lactato elevado coexiste com pCO₂ ALTO — a diferença entre os dois é exatamente a assinatura clássica de disturbio misto (mesma direção) vs disturbio único compensado (direção oposta).",
+        "conteudoComplementar": "Cuidados pós-PCR (cuidados direcionados de temperatura, otimização hemodinâmica, ventilação protetora) têm impacto direto no desfecho neurológico — a gasometria imediatamente pós-RCE tende a melhorar rapidamente nas primeiras horas com suporte adequado; sua persistência grave além disso é sinal de prognóstico reservado."
+      }
+    },
+    {
+      "id": "G-39",
+      "categoria": "Distúrbio respiratório — alcalose",
+      "titulo": "Hiperventilação por dor aguda pós-operatória não reconhecida",
+      "mimicsCAD": false,
+      "confundeCom": ["G-17", "G-18", "G-19", "G-31"],
+      "vinheta": "45 anos, 1º dia pós-operatório de cirurgia abdominal, taquipneica, analgesia prescrita mas não administrada há 6 horas por falha de comunicação da equipe, sem histórico de ansiedade nem fator de risco para TVP.",
+      "labs": { "ph": 7.48, "pco2": 29, "hco3": 21, "chronicityHint": "acute" },
+      "pergunta": "Mais um padrão de alcalose respiratória aguda quase idêntico a três outros casos do lote — qual pergunta simples, feita à beira do leito, resolve este aqui em segundos?",
+      "gabarito": {
+        "classificacao": "Alcalose respiratória aguda primária (pCO₂ 29 < 35), resposta renal aguda adequada — HCO₃ 21 dentro de 21,8 ± 2 (19,8–23,8).",
+        "diagnostico": "Hiperventilação reflexa por dor aguda mal controlada no pós-operatório — a dor não tratada estimula taquipneia por vias nociceptivas, produzindo o mesmo padrão gasométrico de outras causas de alcalose respiratória aguda.",
+        "raciocinio": "Nenhum cálculo adicional aqui — o padrão é simples e a compensação está adequada. O ponto pedagógico é que o mesmo padrão gasométrico simples (alcalose respiratória aguda) tem, neste lote, pelo menos QUATRO causas de fundo completamente diferentes (embolia pulmonar em G-17, ansiedade em G-18, asma inicial em G-19, altitude/gestação em G-31/G-16) — e aqui, uma quinta: dor não tratada. Perguntar objetivamente 'quanto está doendo, de 0 a 10?' e checar se a analgesia prescrita foi de fato administrada resolveria este caso em segundos à beira do leito, sem qualquer exame complementar.",
+        "armadilha": "Pedir angioTC/D-dímero por reflexo diante de taquipneia pós-operatória (temendo TEP) sem primeiro avaliar dor e conferir a administração da analgesia prescrita — a causa mais simples e mais facilmente corrigível de taquipneia pós-operatória é, com frequência, dor não tratada.",
+        "detalheChave": "Numericamente indistinguível de G-17/G-18/G-19 — a diferença resolve inteiramente fora da gasometria: contexto cirúrgico recente + analgesia prescrita não administrada + ausência de fator de risco para TVP ou de gatilho psicogênico agudo.",
+        "conteudoComplementar": "Dor não tratada no pós-operatório tem consequências além do desconforto: hiperventilação sustentada, taquicardia, hipertensão e maior risco de complicações pulmonares por respiração superficial voluntária (evitando a dor à inspiração profunda) — controlar a dor adequadamente é também profilaxia respiratória."
+      }
+    },
+    {
+      "id": "G-40",
+      "categoria": "CAD e hiperglicemia",
+      "titulo": "Cetoacidose diabética precipitada por corticoide em alta dose (diabetes esteroide)",
+      "mimicsCAD": true,
+      "confundeCom": ["G-04", "G-01"],
+      "vinheta": "70 anos, sem diagnóstico prévio de diabetes, em quimioterapia com dexametasona em altas doses como parte do protocolo oncológico, agora confuso e taquipneico.",
+      "labs": { "ph": 7.28, "pco2": 20, "hco3": 9, "na": 132, "cl": 94, "albumin": 4.0, "glucoseMgDl": 520, "betaHydroxybutyrateMmolL": 5.5, "ketonuriaCruzes": 4, "knownDiabetes": false },
+      "hasDkaEsperado": true,
+      "pergunta": "Sem diagnóstico prévio de diabetes — isso impede o diagnóstico de CAD aqui? Compare com G-04 (cetoacidose alcoólica), também sem diabetes prévio.",
+      "gabarito": {
+        "classificacao": "Acidose metabólica primária (HCO₃ 9 < 22), compensação respiratória adequada — pCO₂ 20 dentro de 21,5 ± 2 (19,5–23,5).",
+        "diagnostico": "CAD verdadeira de início agudo, precipitada por diabetes induzido por corticoide em alta dose — apesar de nenhum diagnóstico prévio de diabetes, o eixo glicêmico fecha pelo VALOR (glicose 520 ≥ 200), não pela história prévia.",
+        "raciocinio": "AG = 132−94−9 = 29, alto. hasDka(): eixo glicêmico fecha pela glicose 520 (≥200, sem precisar de diabetes conhecida); eixo cetônico fecha por βHB 5,5 e cetonúria 4+; eixo ácido fecha por pH 7,28 (<7,30). Corticoides em alta dose induzem resistência insulínica intensa e podem precipitar uma deficiência insulínica funcional aguda suficiente para desencadear cetoacidose verdadeira, mesmo em quem nunca teve diabetes — o contraste direto com G-04 (cetoacidose alcoólica, também sem diabetes prévio) é que ali a glicose ficava baixa/normal e o eixo glicêmico FALHAVA; aqui a glicose está francamente alta e o eixo FECHA, apesar de ambos os pacientes começarem sem diagnóstico prévio de diabetes.",
+        "armadilha": "Usar 'sem diabetes conhecida' como argumento contra CAD — o eixo glicêmico do consenso 2024 é satisfeito por QUALQUER um dos dois lados do OR (diabetes conhecida OU glicose ≥200); aqui é só o segundo lado que fecha, e isso já basta.",
+        "detalheChave": "Contraste direto e deliberado com G-04: mesmo pano de fundo ('sem diabetes prévia' + cetoacidose franca), mas aqui a glicose ALTA fecha o eixo (via valor absoluto) enquanto em G-04 a glicose BAIXA o fazia falhar — o mesmo raciocínio de eixo-por-OR aplicado nas duas direções possíveis.",
+        "conteudoComplementar": "'Diabetes esteroide' induzido por corticoterapia em alta dose é comum em oncologia/reumatologia/transplante e pode ser transitório (revertendo com a suspensão do corticoide) ou revelar um diabetes tipo 2 subclínico preexistente que só se manifestou sob o estresse hiperglicemiante do fármaco — rastreamento glicêmico ativo é recomendado sempre que se inicia corticoterapia prolongada em alta dose."
+      }
     }
   ]
 }
@@ -749,6 +1111,7 @@ function renderGasoDetail(){
   }
   document.getElementById('gasoDetail').innerHTML=html;
 }
+document.getElementById('gasoCount').textContent=GASO.length;
 renderGasoCats();renderGasoList();renderGasoDetail();
 </script>
 </body></html>
