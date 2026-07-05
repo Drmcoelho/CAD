@@ -53,6 +53,30 @@ td.l,th.l{text-align:left}
 .tscroll{overflow-x:auto}
 .legend{color:var(--mut);font-size:12px;margin-top:8px}
 .legend b{color:var(--tx)}
+/* banco de gasometrias (sintético) */
+.gaso-sep{border:none;border-top:2px dashed var(--line2);margin:34px 0 6px}
+.gaso-title{font-size:19px;margin:0 0 4px;letter-spacing:-.2px}
+.gcats{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.gcat{font-size:12px;padding:5px 11px;border-radius:20px;border:1px solid var(--line2);color:var(--mut);cursor:pointer;background:var(--p2)}
+.gcat:hover{border-color:var(--teal)}
+.gcat.on{border-color:var(--teal);color:var(--tx);background:#13202a}
+.glist{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:8px;margin-top:6px}
+.gcard{text-align:left;background:var(--p2);border:1px solid var(--line);border-left:4px solid var(--line2);border-radius:10px;padding:8px 10px;cursor:pointer;color:var(--tx)}
+.gcard:hover{border-color:var(--teal)}
+.gcard.on{border-color:var(--teal);border-left-color:var(--vio);background:#13202a}
+.gcard .gid{font-family:var(--mono);font-size:11px;color:var(--mut)}
+.gcard .gt{font-size:13.5px;margin-top:1px}
+.gcard .gm{display:inline-block;font-size:10px;margin-top:4px;padding:1px 6px;border-radius:20px;border:1px solid #5a4520;color:var(--amb)}
+.glabs{display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:6px 10px;font-family:var(--mono);font-size:13px;margin:10px 0}
+.glabs div span{display:block;color:var(--mut);font-size:10.5px;font-family:-apple-system,sans-serif}
+.gbtn{background:var(--p2);border:1px solid var(--teal);color:var(--teal);border-radius:9px;padding:8px 16px;cursor:pointer;font-size:14px;margin-top:8px}
+.gbtn:hover{background:#13202a}
+.gab{margin-top:14px;padding-top:12px;border-top:1px solid var(--line)}
+.gab h4{margin:12px 0 3px;font-size:12.5px;color:var(--teal);text-transform:uppercase;letter-spacing:.05em}
+.gab p{margin:2px 0 0;font-size:14px;line-height:1.6}
+.gconf{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.gconf button{font-size:11.5px;padding:3px 9px;border-radius:20px;border:1px solid var(--line2);background:var(--p2);color:var(--mut);cursor:pointer}
+.gconf button:hover{border-color:var(--vio);color:var(--tx)}
 </style></head><body>
 <div class="wrap">
 <h1>Evolução gasométrica — série cronológica</h1>
@@ -77,10 +101,398 @@ td.l,th.l{text-align:left}
   <div class="tscroll" id="tbl" style="margin-top:8px"></div>
   <div class="legend"><b>Win</b> pCO₂ esperada de Winter (1,5·HCO₃+8 ±2) · <b>AGc</b> gap corrigido p/ albumina · <b>Δ/Δ</b> (AGc−12)/(24−HCO₃) · <b>NaC</b> Na corrigido p/ glicose · <b>Osm</b> efetiva. Valores em branco = não medido/descartado.</div>
 </div>
+
+<hr class="gaso-sep">
+<h2 class="gaso-title">Banco de gasometrias — treino (sintético)</h2>
+<p class="deid">20 casos 100% sintéticos e de-identificados, SEM relação com a série real acima — banco de treino de raciocínio ácido-base/bioquímica, incluindo quadros que não são CAD (alguns imitam CAD de propósito, outros só treinam leitura de gasometria em geral). Motor: <code>core/abg_core.js</code> + <code>core/cad_core.js</code>, os mesmos módulos do resto do site — nenhum veredito aqui é um número solto.</p>
+
+<div class="panel">
+  <div class="lab">Categoria</div>
+  <div class="gcats" id="gasoCats"></div>
+  <div class="lab" style="margin-top:10px">Caso — escolha um</div>
+  <div class="glist" id="gasoList"></div>
+</div>
+
+<div class="panel" id="gasoDetail"></div>
 </div>
 
 <script src="../core/cad_core.js"></script>
 <script src="../core/abg_core.js"></script>
+<script type="application/json" id="gasometrias-data">
+{
+  "version": "GASO-2026-07-05",
+  "fonte": "Banco de gasometrias/bioquímica sintéticas para treino de raciocínio ácido-base — motor: core/abg_core.js (geral) + core/cad_core.js (eixo CAD, quando aplicável). Todo caso é de-identificado e sintético (nenhum dado de paciente real). Verificado mecanicamente por scripts/check_gasometrias.js: cada 'labs' é recomputado via os dois módulos e cruzado contra as afirmações do gabarito — nenhum número no texto nasce solto.",
+  "casos": [
+    {
+      "id": "G-01",
+      "categoria": "CAD e hiperglicemia",
+      "titulo": "CAD clássica",
+      "mimicsCAD": true,
+      "confundeCom": ["G-02", "G-03", "G-04", "G-05"],
+      "vinheta": "22 anos, DM1 conhecido, 3 dias sem aplicar insulina após queda da bomba. Taquipneico, hálito cetônico, dor abdominal difusa.",
+      "labs": { "ph": 7.28, "pco2": 20, "hco3": 9, "na": 132, "cl": 96, "albumin": 4.2, "glucoseMgDl": 480, "betaHydroxybutyrateMmolL": 5.8, "ketonuriaCruzes": 4, "knownDiabetes": true },
+      "hasDkaEsperado": true,
+      "pergunta": "Classifique o distúrbio ácido-base, calcule o AG/AGc e diga se fecha critério diagnóstico de CAD.",
+      "gabarito": {
+        "classificacao": "Acidose metabólica primária (HCO₃ 9 < 22), compensação respiratória adequada — pCO₂ medido 20 dentro da janela de Winter esperada (21,5 ± 2 → 19,5–23,5).",
+        "diagnostico": "CAD clássica — todos os três eixos fecham: glicose 480 (≥200), βHB 5,8 (≥3,0), pH 7,28 (<7,30).",
+        "raciocinio": "AG = 132−96−9 = 27; AGc (albumina 4,2, não precisa correção relevante) = 26,5 — gap alto explica sozinho a queda do HCO₃. A compensação respiratória por Winter está adequada: não há segundo processo respiratório escondido. Os três eixos do consenso 2024 fecham juntos, sem exceção nenhuma — o caso mais simples do lote, usado como referência para comparar os quatro seguintes.",
+        "armadilha": "Nenhuma armadilha aqui — é o ponto de comparação; a armadilha está nos casos G-02 a G-05, que têm AG/cetonemia parecidos mas falham em um dos três eixos.",
+        "detalheChave": "Serve de controle: qualquer leitor que erre este caso tem um problema de mecânica básica, não de sutileza diagnóstica.",
+        "conteudoComplementar": "Osm efetiva = 2×132(Na medido) + 480/18 = 290,7 mOsm/kg — não usa o Na corrigido (141,1, fator 2,4 por glicose >400) para não contar a glicose duas vezes (a mesma armadilha que já mordeu este repo em conteúdo publicado — ver scripts/check_content_text.js)."
+      }
+    },
+    {
+      "id": "G-02",
+      "categoria": "CAD e hiperglicemia",
+      "titulo": "CAD euglicêmica (iSGLT2)",
+      "mimicsCAD": true,
+      "confundeCom": ["G-01", "G-03"],
+      "vinheta": "58 anos, DM2 em uso de dapagliflozina, jejum de 14h para exame, vômitos e mal-estar. Glicemia capilar 'quase normal' tranquiliza a equipe.",
+      "labs": { "ph": 7.32, "pco2": 24, "hco3": 12, "na": 136, "cl": 104, "albumin": 4.0, "glucoseMgDl": 150, "betaHydroxybutyrateMmolL": 4.9, "ketonuriaCruzes": 3, "knownDiabetes": true },
+      "hasDkaEsperado": true,
+      "pergunta": "A glicemia de 150 afasta CAD? Classifique o distúrbio e aplique o critério diagnóstico completo.",
+      "gabarito": {
+        "classificacao": "Acidose metabólica primária (HCO₃ 12 < 22), compensação respiratória adequada — pCO₂ 24 dentro de 26 ± 2 (24–28).",
+        "diagnostico": "CAD euglicêmica — fecha critério mesmo com glicose 150, porque o eixo glicêmico do consenso 2024 é 'glicose ≥200 OU diabetes conhecido' (OR, não AND); paciente diabético conhecido cobre o eixo independente do valor numérico.",
+        "raciocinio": "AG = 136−104−12 = 20, βHB 4,9 (≥3,0) e HCO₃ 12 (<18) fecham os outros dois eixos sem ambiguidade. O inibidor de SGLT2 promove glicosúria maciça — a glicose plasmática fica baixa/normal exatamente enquanto a cetogênese hepática (jejum + estresse cirúrgico + inibição de SGLT2) segue a todo vapor. É a mesma fisiologia de G-01, só que a rota renal de escape da glicose desacopla a glicemia do grau de cetoacidose.",
+        "armadilha": "Confiar só na glicemia capilar para 'descartar CAD' — é exatamente o erro que a euglicêmica foi desenhada para expor. Sem medir cetonas/gasometria, este paciente sai de alta.",
+        "detalheChave": "Diferença de G-01: aqui a glicose (150) FALHARIA sozinha o critério de 'glicose ≥200'; só fecha porque knownDiabetes=true cobre o eixo por OR. É a diferença entre ler a fórmula e aplicá-la.",
+        "conteudoComplementar": "iSGLT2 (gliflozinas) é causa reconhecida de CAD euglicêmica — suspender antes de cirurgia/jejum prolongado é recomendação corrente; a 'glicemia tranquilizadora' é o próprio mecanismo do fármaco, não um sinal de segurança."
+      }
+    },
+    {
+      "id": "G-03",
+      "categoria": "CAD e hiperglicemia",
+      "titulo": "HHS (estado hiperosmolar hiperglicêmico)",
+      "mimicsCAD": true,
+      "confundeCom": ["G-01", "G-02"],
+      "vinheta": "76 anos, sem diagnóstico prévio de diabetes, ITU há 1 semana, confusão mental progressiva e pele muito seca. Glicemia extrema no plantão.",
+      "labs": { "ph": 7.37, "pco2": 36, "hco3": 20, "na": 145, "cl": 104, "albumin": 4.0, "glucoseMgDl": 900, "betaHydroxybutyrateMmolL": 0.3, "ketonuriaCruzes": 1, "knownDiabetes": false },
+      "hasDkaEsperado": false,
+      "pergunta": "Compare com G-01/G-02: por que este NÃO é lido como CAD apesar da glicemia mais alta do lote?",
+      "gabarito": {
+        "classificacao": "Acidose metabólica leve (HCO₃ 20 < 22), compensação respiratória adequada — pCO₂ 36 dentro de 38 ± 2 (36–40); pH permanece dentro da faixa de referência.",
+        "diagnostico": "HHS — eixo cetônico falha (βHB 0,3, bem abaixo de 3,0; cetonúria só traço), então hasDka() retorna falso mesmo com glicose 900 e knownDiabetes=false não bastando sozinho.",
+        "raciocinio": "AG = 145−104−20 = 21 — levemente alto, plausível por lesão renal aguda pré-renal e algum lactato de hipoperfusão, não por cetoácidos. Osm efetiva = 2×145+900/18 = 340 mOsm/kg, folgadamente acima do corte de 320 do consenso 2024 (o comentário de 2024 propõe 300 como alerta, status diferente de critério). O quadro é dominado pela desidratação hiperosmolar, não pela cetogênese.",
+        "armadilha": "Olhar só a glicemia (aqui a MAIOR do lote) e concluir 'CAD grave' — o eixo que decide é o cetônico, não o glicêmico; CAD e HHS podem coexistir, mas aqui não coexistem.",
+        "detalheChave": "Contraste direto com G-01/G-02: mesma hiperglicemia extrema, βHB oposto (5,8/4,9 vs 0,3). O detalhe propedêutico (idoso, sem DM1 prévio, infecção como gatilho, curso em dias não em horas) reforça a leitura antes mesmo do laboratório chegar.",
+        "conteudoComplementar": "HHS tem mortalidade maior que CAD por acometer idosos com comorbidades e se instalar de forma insidiosa (dias), atrasando o reconhecimento; reposição volêmica agressiva antes de insulina é prioridade, o oposto do reflexo de 'glicemia alta = bolus de insulina'."
+      }
+    },
+    {
+      "id": "G-04",
+      "categoria": "Cetoacidose não-diabética",
+      "titulo": "Cetoacidose alcoólica",
+      "mimicsCAD": true,
+      "confundeCom": ["G-01", "G-05"],
+      "vinheta": "44 anos, etilismo pesado, parou de comer e bebeu ainda mais há 3 dias após vômitos incoercíveis. Não é diabético. Glicemia normal-baixa surpreende a equipe.",
+      "labs": { "ph": 7.32, "pco2": 28, "hco3": 14, "na": 136, "cl": 92, "albumin": 3.2, "glucoseMgDl": 85, "betaHydroxybutyrateMmolL": 5.2, "ketonuriaCruzes": 4, "knownDiabetes": false },
+      "hasDkaEsperado": false,
+      "pergunta": "AG alto + cetonemia alta + acidemia: por que hasDka() ainda assim retorna falso?",
+      "gabarito": {
+        "classificacao": "Acidose metabólica primária (HCO₃ 14 < 22), compensação respiratória adequada — pCO₂ 28 dentro de 29 ± 2 (27–31).",
+        "diagnostico": "Cetoacidose alcoólica — NÃO é CAD: eixo glicêmico falha (glicose 85, sem diabetes conhecido; nenhum dos dois lados do OR se sustenta).",
+        "raciocinio": "AG = 136−92−14 = 30; AGc, com albumina baixa (3,2, desnutrição/etilismo), sobe para 32 — a correção por hipoalbuminemia revela um gap ainda maior do que o AG bruto sugere (regra geral: hipoalbuminemia sempre SUBESTIMA o AG verdadeiro se não corrigida). βHB 5,2 é tão alto quanto o de G-01. A diferença inteira do diagnóstico mora num único número: a glicose.",
+        "armadilha": "Ver 'AG altíssimo + cetonemia alta + acidemia' e escrever 'CAD' de reflexo — a tríade cetoacidótica não é exclusiva de diabetes; etanol interrompe a gliconeogênese e desvia o fígado para cetogênese sem hiperglicemia.",
+        "detalheChave": "Contraste com G-01 (mesmo padrão de AG/cetonemia, glicose 480 vs 85) e com G-05 (mesma etiologia por jejum, mas cetonemia muito mais branda). O detalhe propedêutico chave é a história de etilismo + jejum + vômitos, não o número isolado.",
+        "conteudoComplementar": "Tratamento não é insulina — é dextrose + tiamina (antes da dextrose, para não precipitar Wernicke) + reposição volêmica; dar insulina aqui não tem alvo metabólico e atrasa o tratamento correto."
+      }
+    },
+    {
+      "id": "G-05",
+      "categoria": "Cetoacidose não-diabética",
+      "titulo": "Cetose de jejum (starvation ketosis)",
+      "mimicsCAD": true,
+      "confundeCom": ["G-01", "G-04"],
+      "vinheta": "29 anos, saudável, 4º dia de dieta cetogênica restritiva associada a jejum intermitente prolongado. Hálito cetônico chama atenção no trabalho.",
+      "labs": { "ph": 7.37, "pco2": 38, "hco3": 21, "na": 140, "cl": 104, "albumin": 4.2, "glucoseMgDl": 68, "betaHydroxybutyrateMmolL": 1.8, "ketonuriaCruzes": 2, "knownDiabetes": false },
+      "hasDkaEsperado": false,
+      "pergunta": "Existe cetose real aqui? Por que ela não fecha CAD nem por eixo glicêmico nem por eixo cetônico?",
+      "gabarito": {
+        "classificacao": "Acidose metabólica leve (HCO₃ 21 < 22 por pouco), compensação respiratória adequada — pCO₂ 38 dentro de 39,5 ± 2 (37,5–41,5); pH ainda dentro da faixa de referência.",
+        "diagnostico": "Cetose de jejum fisiológica, leve — NÃO é CAD por dois eixos ao mesmo tempo: glicose 68 (sem diabetes) falha o eixo glicêmico, e βHB 1,8 fica abaixo do corte de 3,0 do eixo cetônico.",
+        "raciocinio": "AG = 140−104−21 = 15 (AGc, albumina 4,2, praticamente igual = 14,5), discretamente elevado — coerente com cetogênese leve, não com um processo tóxico/hipóxico maior. É o caso mais brando do trio cetótico (G-01/G-04/G-05): mesma via metabólica (lipólise → cetogênese), intensidade ordens de grandeza menor.",
+        "armadilha": "Supervalorizar hálito cetônico e cetonúria 2+ como se fossem sinônimo de emergência — a mesma via fisiológica que mata em G-01 aqui é uma resposta adaptativa benigna ao jejum.",
+        "detalheChave": "O que separa este caso de G-04 (mesmo gatilho, jejum) é a MAGNITUDE do βHB (1,8 vs 5,2) — jejum simples nunca chega ao patamar tóxico do etilismo crônico associado.",
+        "conteudoComplementar": "Cetose nutricional (incluindo dietas cetogênicas terapêuticas) tipicamente mantém βHB entre 0,5–3 mmol/L por desenho — acima disso, procurar outro processo (diabetes não reconhecido, etilismo, jejum extremo >72h)."
+      }
+    },
+    {
+      "id": "G-06",
+      "categoria": "Acidose metabólica AG alto (não-cetótica)",
+      "titulo": "Acidose lática por sepse",
+      "mimicsCAD": true,
+      "confundeCom": ["G-01", "G-07"],
+      "vinheta": "68 anos, pneumonia grave, hipotenso, taquicárdico, extremidades frias. Glicemia de estresse eleva a suspeita de descompensação diabética na triagem.",
+      "labs": { "ph": 7.23, "pco2": 22, "hco3": 9, "na": 138, "cl": 104, "albumin": 3.0, "lactateMmolL": 9.5, "glucoseMgDl": 210, "betaHydroxybutyrateMmolL": 0.4, "ketonuriaCruzes": 0, "knownDiabetes": false },
+      "hasDkaEsperado": false,
+      "pergunta": "Glicose 210 + AG alto + acidemia grave: por que ainda assim não é CAD?",
+      "gabarito": {
+        "classificacao": "Acidose metabólica primária (HCO₃ 9 < 22), compensação respiratória adequada — pCO₂ 22 dentro de 21,5 ± 2 (19,5–23,5).",
+        "diagnostico": "Acidose lática por choque séptico — eixo cetônico falha (βHB 0,4, cetonúria negativa); a glicose de estresse (210) sozinha não fecha CAD sem o eixo cetônico.",
+        "raciocinio": "AG = 138−104−9 = 25; AGc com albumina baixa (3,0, comum em sepse) sobe para 27,5. O lactato de 9,5 mmol/L explica sozinho o gap — hipoperfusão tecidual, não cetogênese. A glicemia de 210 é hiperglicemia de estresse (catecolaminas + cortisol), fenômeno comum em qualquer doença crítica, com ou sem diabetes.",
+        "armadilha": "Usar 'glicose ≥200 + AG alto + acidemia' como atalho mental para CAD sem checar cetonas — sepse é a causa mais comum de acidose lática em adulto grave e não tem nenhuma relação obrigatória com cetogênese.",
+        "detalheChave": "Contraste direto com G-01: AG parecido (25 vs 27), acidemia parecida, mas o eixo cetônico decide tudo — aqui negativo, lá positivo. Lactato medido é o dado que resolve, não a glicemia.",
+        "conteudoComplementar": "Sempre que o AG estiver elevado sem explicação óbvia por cetonas, medir lactato antes de assumir CAD/cetoacidose — a lista de causas de AG alto (MUDPILES/GOLD MARK) é mais ampla que 'cetoácidos'."
+      }
+    },
+    {
+      "id": "G-07",
+      "categoria": "Acidose metabólica AG alto (não-cetótica)",
+      "titulo": "Intoxicação por salicilato",
+      "mimicsCAD": true,
+      "confundeCom": ["G-06", "G-08"],
+      "vinheta": "19 anos, tentativa de autoextermínio com múltiplos comprimidos de AAS há 6h. Zumbido bilateral, hiperpneia acentuada, confusão leve. pH quase normal deixa a equipe insegura.",
+      "labs": { "ph": 7.45, "pco2": 18, "hco3": 12, "na": 140, "cl": 100, "albumin": 4.0 },
+      "pergunta": "Os números isoladamente empatam entre duas leituras — qual detalhe da vinheta resolve?",
+      "gabarito": {
+        "classificacao": "HCO₃ 12 (baixo) e pCO₂ 18 (baixo) simultaneamente, em direções opostas de efeito sobre o pH, com pH 7,45 na própria borda da faixa normal — matematicamente ambíguo: compatível tanto com acidose metabólica de compensação respiratória completa (pCO₂ esperado 24–28, medido bem abaixo) quanto com alcalose respiratória de compensação renal completa (HCO₃ esperado 12,2–18,2).",
+        "diagnostico": "Intoxicação salicílica — mas a leitura correta aqui NÃO é 'escolher uma das duas', é reconhecer que SÃO OS DOIS AO MESMO TEMPO, como processos primários independentes (estimulação direta do centro respiratório bulbar pelo salicilato causando alcalose respiratória + desacoplamento da fosforilação oxidativa gerando AG alto por acúmulo de ácidos orgânicos) — um autêntico distúrbio misto, não uma compensação.",
+        "raciocinio": "AG = 140−100−12 = 28, muito alto para ser explicado só pela hiperventilação; a pCO₂ de 18 é baixa demais até para compensar um HCO₃ de 12 (janela esperada de Winter seria 24–28, não 18) — o pulmão está fazendo MAIS do que compensaria uma acidose metabólica isolada, porque o próprio salicilato o está estimulando direto. É a assinatura clássica: alcalose respiratória desproporcionalmente intensa sobre uma acidose metabólica de AG alto.",
+        "armadilha": "Ver pH 'quase normal' e relaxar — é exatamente o cancelamento parcial de dois processos opostos, não ausência de gravidade; salicilato é a intoxicação didática clássica para esse ponto.",
+        "detalheChave": "Zumbido bilateral (ototoxicidade) + hiperpneia desproporcional ao grau de acidemia + história de ingestão é o que resolve a favor de 'dois processos primários' e não de uma leitura única — nenhum número isolado prova isso sozinho.",
+        "conteudoComplementar": "Em crianças pequenas o quadro tende a ser dominado pela acidose metabólica (menor reserva respiratória); em adultos, a fase respiratória alcalótica inicial é mais proeminente e pode mascarar a gravidade — tratamento é alcalinização urinária (favorece eliminação renal do salicilato ionizado) + suporte, nunca sedação que suprima a hiperventilação compensatória."
+      }
+    },
+    {
+      "id": "G-08",
+      "categoria": "Acidose metabólica AG alto (não-cetótica)",
+      "titulo": "Intoxicação por metanol/etilenoglicol",
+      "mimicsCAD": true,
+      "confundeCom": ["G-07"],
+      "vinheta": "51 anos, etilista, ingeriu 'álcool de farmácia' há 12h por engano/abuso. Visão turva progressiva, mal-estar, sem hálito cetônico.",
+      "labs": { "ph": 7.22, "pco2": 15, "hco3": 6, "na": 140, "cl": 100, "albumin": 4.0 },
+      "pergunta": "Classifique o distúrbio e diga qual exame de bancada, além da gasometria, fecha o diagnóstico etiológico.",
+      "gabarito": {
+        "classificacao": "Acidose metabólica primária grave (HCO₃ 6 < 22), compensação respiratória adequada — pCO₂ 15 dentro de 17 ± 2 (15–19).",
+        "diagnostico": "Intoxicação por álcool tóxico (metanol ou etilenoglicol) — AG extremamente alto sem cetonemia nem lactato relevante aponta para ácidos orgânicos exógenos (ácido fórmico no metanol; ácido glicólico/oxálico no etilenoglicol).",
+        "raciocinio": "AG = 140−100−6 = 34 — o mais alto do lote sem nenhum eixo cetônico ou lático envolvido. O metabolismo do álcool tóxico pela álcool-desidrogenase gera os metabólitos ácidos responsáveis pelo gap; o próprio álcool-mãe não é ácido, então nas primeiras horas pode haver gap osmolar (osm medida menos osm calculada) elevado ANTES do gap aniônico subir — a ordem temporal (gap osmolar primeiro, gap aniônico depois) é ela mesma um dado diagnóstico.",
+        "armadilha": "Esperar 'hálito de álcool' ou cetonemia para suspeitar de intoxicação alcoólica tóxica — metanol e etilenoglicol não têm cetogênese proeminente nem cheiro característico de etanol comum.",
+        "detalheChave": "Visão turva/escotomas apontam para metanol (retina); cristais de oxalato de cálcio na urina e insuficiência renal aguda apontam para etilenoglicol — o mesmo padrão gasométrico, dois venenos, resolvidos pelo exame físico e pela urina, não pelo AG.",
+        "conteudoComplementar": "Antídoto é fomepizol (ou etanol, se indisponível) — bloqueia a álcool-desidrogenase e impede a formação dos metabólitos tóxicos; hemodiálise remove tanto o álcool-mãe quanto os metabólitos em intoxicações graves."
+      }
+    },
+    {
+      "id": "G-09",
+      "categoria": "Acidose metabólica AG normal (hiperclorêmica)",
+      "titulo": "Acidose metabólica hiperclorêmica por diarreia",
+      "mimicsCAD": false,
+      "confundeCom": ["G-10", "G-11"],
+      "vinheta": "34 anos, diarreia aquosa volumosa há 4 dias, sem sangue, sem febre alta. Desidratado, sem hálito cetônico.",
+      "labs": { "ph": 7.32, "pco2": 28, "hco3": 14, "na": 138, "cl": 112, "albumin": 4.0 },
+      "pergunta": "Classifique o distúrbio e compare o AG com o de G-01 — o que essa diferença ensina sobre a fisiopatologia?",
+      "gabarito": {
+        "classificacao": "Acidose metabólica primária (HCO₃ 14 < 22), compensação respiratória adequada — pCO₂ 28 dentro de 29 ± 2 (27–31).",
+        "diagnostico": "Acidose metabólica hiperclorêmica (AG normal) por perda intestinal de bicarbonato — diarreia secretora.",
+        "raciocinio": "AG = 138−112−14 = 12 — normal. A perda de HCO₃ nas fezes é reposta por retenção renal de Cl⁻ (para manter a eletroneutralidade), daí a hipercloremia — o Cl⁻ substitui o HCO₃ perdido no lugar de um ânion não mensurado (que existe nas acidoses de AG alto). É o oposto mecânico de G-01: mesmo HCO₃ baixo, gap completamente diferente.",
+        "armadilha": "Tratar toda acidose metabólica como se fosse 'cetoacidose' ou 'gap alto' por hábito — a maior parte das acidoses hiperclorêmicas do dia a dia (diarreia, RTA, acidose dilucional por soro fisiológico em excesso) tem AG normal e mecanismo totalmente diferente.",
+        "detalheChave": "O AG é o que separa esta família (G-09/G-10/G-11) da família cetótica (G-01/G-04/G-05) — todas têm HCO₃ baixo com compensação respiratória adequada, irreconhecíveis sem calcular o AG.",
+        "conteudoComplementar": "O gap aniônico urinário (Na+K−Cl na urina) ajuda a diferenciar causa GI (gap urinário negativo, rim respondendo corretamente com NH4+ alto) de causa renal/RTA (gap urinário positivo, rim incapaz de acidificar a urina) quando a etiologia não está clara pela história."
+      }
+    },
+    {
+      "id": "G-10",
+      "categoria": "Acidose metabólica AG normal (hiperclorêmica)",
+      "titulo": "Acidose tubular renal tipo 1 (distal)",
+      "mimicsCAD": false,
+      "confundeCom": ["G-09", "G-11"],
+      "vinheta": "27 anos, episódios recorrentes de nefrolitíase e nefrocalcinose, fraqueza muscular progressiva. Urina persistentemente pouco ácida apesar da acidemia sistêmica.",
+      "labs": { "ph": 7.32, "pco2": 30, "hco3": 15, "na": 140, "cl": 113, "k": 2.8, "albumin": 4.0 },
+      "pergunta": "Compare o potássio deste caso com o de G-11 — por que essa diferença é o detalhe que separa os dois tipos de RTA?",
+      "gabarito": {
+        "classificacao": "Acidose metabólica primária (HCO₃ 15 < 22), compensação respiratória adequada — pCO₂ 30 dentro de 30,5 ± 2 (28,5–32,5).",
+        "diagnostico": "RTA tipo 1 (distal, hipocalêmica) — AG normal (12) + hipocalemia + incapacidade de acidificar a urina (pH urinário >5,5 apesar da acidemia) + nefrocalcinose/litíase recorrente.",
+        "raciocinio": "AG = 140−113−15 = 12. O defeito é na célula intercalada tipo A do túbulo coletor: incapacidade de secretar H⁺, então o rim não consegue baixar o pH urinário mesmo com acidemia sistêmica grave — o achado propedêutico mais específico do quadro. A hipocalemia (K 2,8) ocorre por perda urinária de potássio secundária ao próprio defeito de acidificação distal.",
+        "armadilha": "Confundir com RTA tipo 4, que também é AG normal, mas anda com HIPERcalemia, não hipocalemia — o potássio é o eixo que resolve entre os dois, não o pH nem o AG (idênticos nos dois).",
+        "detalheChave": "K 2,8 aqui vs K 6,2 em G-11 — mesmo HCO₃, mesmo AG, mesmo pH aproximado; a diferença inteira do diagnóstico mora no potássio e no contexto (nefrolitíase de cálcio recorrente aqui, nefropatia diabética/IECA em G-11).",
+        "conteudoComplementar": "RTA tipo 1 predispõe a nefrocalcinose e cálculos de fosfato de cálcio pela urina cronicamente alcalina e hipocitratúria — tratamento é reposição de bicarbonato/citrato, que corrige a acidose E reduz a litogênese ao mesmo tempo."
+      }
+    },
+    {
+      "id": "G-11",
+      "categoria": "Acidose metabólica AG normal (hiperclorêmica)",
+      "titulo": "Acidose tubular renal tipo 4 (hiporreninêmico-hipoaldosteronismo)",
+      "mimicsCAD": false,
+      "confundeCom": ["G-09", "G-10"],
+      "vinheta": "63 anos, DM2 de longa data com nefropatia diabética estabelecida, em uso de IECA, achado incidental de potássio alto em exame de rotina.",
+      "labs": { "ph": 7.34, "pco2": 31, "hco3": 16, "na": 138, "cl": 110, "k": 6.2, "albumin": 4.0 },
+      "pergunta": "O paciente é diabético — isso torna este caso uma variante de CAD? Justifique pelos três eixos do consenso.",
+      "gabarito": {
+        "classificacao": "Acidose metabólica primária (HCO₃ 16 < 22), compensação respiratória adequada — pCO₂ 31 dentro de 32 ± 2 (30–34).",
+        "diagnostico": "RTA tipo 4 — AG normal (12) + hipercalemia + nefropatia diabética + uso de IECA (reduz aldosterona/piora a hipercalemia). NÃO é CAD: sem cetonemia/cetonúria fornecida e sem hiperglicemia aguda, o eixo cetônico simplesmente não se aplica — diabetes sozinho não fecha nenhum critério.",
+        "raciocinio": "AG = 138−110−16 = 12. O hipoaldosteronismo (por nefropatia diabética + IECA, que reduz angiotensina II) prejudica a secreção distal de H⁺ E de K⁺ ao mesmo tempo — por isso RTA4 é a única acidose tubular renal com hipercalemia em vez de hipocalemia. É a mais comum das RTAs na prática de adulto, justamente por sua associação com nefropatia diabética.",
+        "armadilha": "Ver 'diabético + acidose metabólica' e pular direto para CAD sem checar cetonas — a maioria dos diabéticos com acidose metabólica crônica leve tem RTA4 relacionada à nefropatia, não cetoacidose aguda.",
+        "detalheChave": "Mesmo AG normal e HCO₃ baixo de G-09/G-10, mas K 6,2 (o mais alto do trio) aponta direto para o defeito de aldosterona — e o contexto (IECA, nefropatia diabética estabelecida, achado crônico/incidental, não agudo) reforça a leitura antes do laboratório.",
+        "conteudoComplementar": "IECA/BRA, espironolactona e AINEs são causas farmacológicas comuns de piora de RTA4/hipercalemia em nefropatas — revisar a lista de medicamentos é parte do diagnóstico, não só do tratamento."
+      }
+    },
+    {
+      "id": "G-12",
+      "categoria": "Alcalose metabólica",
+      "titulo": "Alcalose metabólica por vômitos (perda de HCl)",
+      "mimicsCAD": false,
+      "confundeCom": ["G-13", "G-20"],
+      "vinheta": "31 anos, vômitos incoercíveis há 1 semana por suspeita de estenose pilórica, hipovolêmica, cloro muito baixo chama atenção do laboratório.",
+      "labs": { "ph": 7.50, "pco2": 48, "hco3": 36, "na": 140, "cl": 82, "k": 2.9, "albumin": 4.0 },
+      "pergunta": "Calcule o AGc mesmo sem suspeita de acidose — o que ele revela, e por que isso importa apesar do HCO₃ estar alto?",
+      "gabarito": {
+        "classificacao": "Alcalose metabólica primária (HCO₃ 36 > 26), compensação respiratória adequada — pCO₂ 48 dentro de 46,2 ± 2 (44,2–48,2); a hipoventilação compensatória tem teto fisiológico (raramente pCO₂ >55, pelo risco de hipóxia), por isso a janela nunca é tão ampla quanto nas acidoses.",
+        "diagnostico": "Alcalose metabólica de contração por perda de HCl gástrico (vômitos/estenose pilórica) — hipocloremia acentuada (82) e hipocalemia (2,9) são a assinatura clássica.",
+        "raciocinio": "AG = 140−82−36 = 22, discretamente elevado apesar do HCO₃ estar ALTO, não baixo — é o alerta de 'gap mascarado': alcalose de contração e desidratação concentram todos os ânions, inclusive os não medidos, então algum grau de AG elevado pode aparecer sem que exista nenhuma acidose de gap alto concomitante. O reflexo automático de só calcular AG quando o HCO₃ está baixo perderia esse achado por completo.",
+        "armadilha": "Assumir que AG só importa em acidoses — aqui ele está elevado dentro de uma alcalose, e a causa é hemoconcentração/contração de volume, não um segundo processo acidótico escondido (compare com G-20, onde o AG elevado SIM esconde uma acidose real).",
+        "detalheChave": "Hipocloremia desproporcional (82) + hipocalemia (2,9) + vômitos é o tripé clássico; contraste com G-13 (diuréticos), que também é alcalose metabólica hipoclorêmica mas por outro mecanismo e outro contexto.",
+        "conteudoComplementar": "Alcalose 'cloro-sensível' (responde a NaCl/reposição volêmica) é a categoria de vômitos/diuréticos; a contrapartida 'cloro-resistente' (hiperaldosteronismo, Cushing) não melhora só com volume — a resposta ao cloreto urinário/reposição de NaCl é o teste que separa as duas famílias."
+      }
+    },
+    {
+      "id": "G-13",
+      "categoria": "Alcalose metabólica",
+      "titulo": "Alcalose metabólica por diuréticos (contração de volume)",
+      "mimicsCAD": false,
+      "confundeCom": ["G-12"],
+      "vinheta": "74 anos, ICC descompensada, escalada recente de furosemida em dose alta, sem histórico de vômitos ou diarreia.",
+      "labs": { "ph": 7.48, "pco2": 43, "hco3": 31, "na": 138, "cl": 90, "k": 3.0, "albumin": 4.0 },
+      "pergunta": "Mesma classificação ácido-base de G-12 — o que diferencia clinicamente os dois casos?",
+      "gabarito": {
+        "classificacao": "Alcalose metabólica primária (HCO₃ 31 > 26), compensação respiratória adequada — pCO₂ 43 dentro de 42,7 ± 2 (40,7–44,7).",
+        "diagnostico": "Alcalose metabólica de contração por diurético de alça — hipocloremia (90) e hipocalemia (3,0) mais brandas que em G-12, coerente com um processo mais crônico/titulado por dose de medicamento do que uma perda aguda maciça de HCl.",
+        "raciocinio": "AG = 138−90−31 = 17, discretamente elevado pelo mesmo mecanismo de concentração de G-12 (contração de volume), sem indicar segunda acidose. Furosemida inibe o cotransportador Na-K-2Cl na alça de Henle: perde-se Na⁺, K⁺ e Cl⁻ na urina, e a contração de volume resultante estimula reabsorção proximal de HCO₃ e a secreção distal de H⁺/K⁺ (via aldosterona secundária ao baixo volume circulante) — o rim, paradoxalmente, ajuda a manter a alcalose que ele mesmo poderia corrigir.",
+        "armadilha": "Achar que 'alcalose metabólica hipoclorêmica' é sinônimo de vômitos — diurético de alça/tiazídico é causa igualmente comum, e a distinção depende inteiramente da história medicamentosa, não da gasometria.",
+        "detalheChave": "O grau de hipocloremia/hipocalemia é mais brando que em G-12 e a vinheta não tem nenhum sintoma GI — o detalhe propedêutico (uso de diurético, ausência de vômitos/diarreia) é o que resolve, já que o padrão gasométrico dos dois casos é essencialmente sobreponível.",
+        "conteudoComplementar": "Medir cloreto urinário ajuda a confirmar a fase do processo: baixo (<20 mEq/L) na fase ativa de perda de volume, mas pode estar alto durante o próprio uso ativo do diurético (efeito farmacológico direto na natriurese/cloriurese) — interpretar sempre no contexto temporal da última dose."
+      }
+    },
+    {
+      "id": "G-14",
+      "categoria": "Distúrbio respiratório — acidose",
+      "titulo": "Acidose respiratória aguda (crise asmática com fadiga)",
+      "mimicsCAD": false,
+      "confundeCom": ["G-19", "G-15"],
+      "vinheta": "24 anos, asma conhecida, crise grave há 6h, agora com fala entrecortada, tórax silencioso e sonolência crescente — sinais de fadiga muscular respiratória iminente.",
+      "labs": { "ph": 7.22, "pco2": 65, "hco3": 26, "chronicityHint": "acute" },
+      "pergunta": "Compare com G-19 (mesma doença, fase inicial) — o que esta pCO₂ 'normalizando' na verdade sinaliza?",
+      "gabarito": {
+        "classificacao": "Acidose respiratória aguda primária (pCO₂ 65 > 45), resposta renal adequada para o tempo agudo — HCO₃ 26 dentro de 26,5 ± 2 (24,5–28,5).",
+        "diagnostico": "Insuficiência respiratória iminente por fadiga muscular em crise asmática grave — a compensação renal aguda (pequena, rápida, limitada) já é a máxima esperada em horas; o organismo não tem mais margem de resposta metabólica nesse prazo.",
+        "raciocinio": "Sem Na/Cl fornecidos porque o eixo aqui é puramente respiratório-metabólico, não de AG. O ponto pedagógico central: uma pCO₂ de 65 em quem antes hiperventilava (ver G-19, pCO₂ 30) NÃO é melhora — é o pulmão perdendo a capacidade de manter o trabalho respiratório aumentado. pCO₂ 'normalizando ou subindo' numa crise asmática grave é sinal de alarme para falência respiratória iminente, não de resolução.",
+        "armadilha": "Olhar pCO₂ 'menos anormal que antes' (ou até normal) numa asma grave e relaxar — é o clássico falso sinal de melhora que precede parada respiratória; a gasometria tem que ser lida junto com o esforço/fadiga clínica, nunca isolada.",
+        "detalheChave": "Mesma doença de G-19, fases opostas: hiperventilação compensada (alcalose respiratória, pCO₂ baixo) evoluindo para hipoventilação por fadiga (acidose respiratória, pCO₂ alto) é uma trajetória, não dois casos aleatórios — a chave é rastrear a tendência temporal, não o valor isolado.",
+        "conteudoComplementar": "Critério de intubação em asma grave é clínico (fadiga, rebaixamento, silêncio auscultatório), não gasométrico isolado — esperar 'pCO₂ alto o suficiente' para decidir intubar é esperar tarde demais."
+      }
+    },
+    {
+      "id": "G-15",
+      "categoria": "Distúrbio respiratório — acidose",
+      "titulo": "DPOC com acidose respiratória crônica compensada",
+      "mimicsCAD": false,
+      "confundeCom": ["G-14"],
+      "vinheta": "70 anos, DPOC grave conhecida, dispneia crônica estável, sem piora aguda, gasometria de rotina em consulta ambulatorial.",
+      "labs": { "ph": 7.36, "pco2": 62, "hco3": 34, "chronicityHint": "chronic" },
+      "pergunta": "HCO₃ alto E pCO₂ alto ao mesmo tempo, pH quase normal — os números sozinhos bastam para decidir o primário?",
+      "gabarito": {
+        "classificacao": "HCO₃ 34 (alto) e pCO₂ 62 (alto) simultaneamente, em direções opostas de efeito sobre o pH, com pH 7,36 dentro da faixa de referência — matematicamente ambíguo entre (a) alcalose metabólica com compensação respiratória completa (pCO₂ esperado 42,8–46,8, muito abaixo do medido) e (b) acidose respiratória crônica com compensação renal completa (HCO₃ esperado 28,7–34,7, batendo com o medido).",
+        "diagnostico": "Acidose respiratória crônica compensada por retenção renal de bicarbonato — a leitura (b) é a correta clinicamente, resolvida pela história (DPOC estabelecida, sem sintoma agudo), não pelos números isolados.",
+        "raciocinio": "A leitura (b) é a que 'fecha' melhor: HCO₃ 34 está dentro da janela crônica esperada (28,7–34,7) para uma pCO₂ de 62; a leitura (a) exigiria uma pCO₂ muito mais baixa (42,8–46,8) do que a medida, o que tornaria a resposta respiratória 'insuficiente' de forma implausível num quadro sem sintoma agudo. Ainda assim, o motor honesto mostra as duas leituras possíveis — é o histórico clínico, não a aritmética, que resolve a favor da doença pulmonar crônica.",
+        "armadilha": "Achar que 'HCO₃ alto = alcalose metabólica' de forma automática — aqui o HCO₃ alto é resposta renal a uma acidose respiratória, o oposto do que ele pareceria isoladamente.",
+        "detalheChave": "Contraste com G-14 (mesma classe de doença pulmonar, fase aguda descompensada, pH bem fora da faixa e sem ambiguidade nenhuma) — cronicidade é o que permite ao rim 'alcançar' a compensação e produzir esse pH quase normal.",
+        "conteudoComplementar": "Em retentores crônicos de CO₂, a meta de saturação de O₂ costuma ser mais conservadora (88–92%) por risco teórico de piora da hipoventilação com hiperóxia — mas a decisão de suplementar O₂ nunca deve ser negada a um paciente hipoxêmico grave por medo teórico de retenção."
+      }
+    },
+    {
+      "id": "G-16",
+      "categoria": "Distúrbio respiratório — alcalose",
+      "titulo": "Alcalose respiratória crônica fisiológica da gestação",
+      "mimicsCAD": false,
+      "confundeCom": ["G-17", "G-18"],
+      "vinheta": "29 anos, gestante de 32 semanas, assintomática, gasometria de rotina de pré-natal de alto risco por outra indicação. Sem queixa respiratória, sem fatores de risco para TEP.",
+      "labs": { "ph": 7.45, "pco2": 30, "hco3": 20 },
+      "pergunta": "HCO₃ baixo E pCO₂ baixo ao mesmo tempo — isso é uma acidose metabólica bem compensada ou uma alcalose respiratória bem compensada? O que decide?",
+      "gabarito": {
+        "classificacao": "HCO₃ 20 (baixo) e pCO₂ 30 (baixo) simultaneamente, em direções opostas de efeito sobre o pH, com pH 7,45 na própria borda superior da faixa normal — matematicamente ambíguo entre (a) acidose metabólica com compensação respiratória completa (pCO₂ esperado 36–40, muito acima do medido) e (b) alcalose respiratória crônica com compensação renal completa (HCO₃ esperado 17–23, batendo com o medido).",
+        "diagnostico": "Alcalose respiratória crônica fisiológica da gestação — a leitura (b) é a correta, resolvida pelo contexto (gestação avançada, assintomática, sem outra doença), não pela aritmética isolada.",
+        "raciocinio": "A progesterona estimula diretamente o centro respiratório bulbar desde o primeiro trimestre, produzindo hiperventilação crônica; o rim responde excretando bicarbonato ao longo de semanas até a janela crônica de compensação (17–23), exatamente onde o HCO₃ medido (20) cai. A leitura (a) exigiria uma pCO₂ muito mais alta (36–40) do que a medida — implausível numa gestante sem doença pulmonar/metabólica conhecida. Este é o caso de referência que expôs um bug real no motor de classificação deste projeto: a ordem de checagem dos ramos não pode decidir sozinha qual processo é primário quando HCO₃ e pCO₂ divergem em direções opostas — só o pH (e, quando ele empata, o contexto clínico) decide.",
+        "armadilha": "Ler 'HCO₃ baixo' como sinal automático de acidose metabólica primária necessitando investigação de AG/cetonas/lactato — numa gestante hígida, é a compensação renal de uma alcalose respiratória fisiológica, não uma doença.",
+        "detalheChave": "Mesmo padrão numérico de G-07 (salicilato) e semelhante ao de vários quadros patológicos de alcalose respiratória crônica — o que resolve aqui é o contexto (gestação avançada, ausência de sintoma agudo, ausência de fator de risco), não o laboratório isolado.",
+        "conteudoComplementar": "A hiperventilação gestacional também reduz discretamente a pCO₂ materna de forma a favorecer o gradiente de difusão de CO₂ do feto para a mãe através da placenta — é adaptação, não patologia, e reverte completamente no puerpério."
+      }
+    },
+    {
+      "id": "G-17",
+      "categoria": "Distúrbio respiratório — alcalose",
+      "titulo": "Embolia pulmonar (alcalose respiratória aguda)",
+      "mimicsCAD": false,
+      "confundeCom": ["G-18", "G-16"],
+      "vinheta": "45 anos, cirurgia ortopédica há 10 dias, dispneia súbita e dor torácica pleurítica, taquicárdica, sem histórico de ansiedade.",
+      "labs": { "ph": 7.52, "pco2": 28, "hco3": 22, "chronicityHint": "acute" },
+      "pergunta": "Classifique o distúrbio — que achado NÃO gasométrico é o que realmente separa este caso de G-18?",
+      "gabarito": {
+        "classificacao": "Alcalose respiratória aguda primária (pCO₂ 28 < 35), resposta renal aguda adequada — HCO₃ 22 dentro de 21,6 ± 2 (19,6–23,6).",
+        "diagnostico": "Tromboembolismo pulmonar — hiperventilação reflexa por hipoxemia/estímulo de receptores J pulmonares.",
+        "raciocinio": "O padrão gasométrico (alcalose respiratória aguda simples) é indistinguível, por si só, do de G-18 (ansiedade) e muito parecido com o de G-19 (asma inicial) — a gasometria isolada NUNCA fecha o diagnóstico etiológico de uma alcalose respiratória aguda; ela só confirma que existe hiperventilação e que a resposta renal aguda é a esperada para o tempo decorrido.",
+        "armadilha": "Tentar 'ler o diagnóstico etiológico' só na gasometria — em alcalose respiratória aguda, a etiologia mora na história e no exame físico, não no pCO₂/HCO₃.",
+        "detalheChave": "O que separa este caso de G-18 é fora da gasometria: dor pleurítica + fator de risco (cirurgia recente, imobilização) + ausência de parestesia/espasmo carpopedal apontam para causa orgânica (embolia), não psicogênica. A hipoxemia (não modelada aqui, mas esperada num TEP real) reforçaria ainda mais a diferenciação.",
+        "conteudoComplementar": "Escores de probabilidade clínica (Wells, Geneva) existem exatamente para formalizar essa diferenciação pré-teste antes de pedir D-dímero/angioTC — usar a gasometria isolada para 'descartar' TEP é um erro de categoria, ela não foi desenhada para isso."
+      }
+    },
+    {
+      "id": "G-18",
+      "categoria": "Distúrbio respiratório — alcalose",
+      "titulo": "Hiperventilação por crise de ansiedade/pânico",
+      "mimicsCAD": false,
+      "confundeCom": ["G-17", "G-19"],
+      "vinheta": "26 anos, sem comorbidades, crise de pânico após discussão familiar, parestesia perioral e espasmo das mãos, sem dor torácica pleurítica nem fator de risco para TVP.",
+      "labs": { "ph": 7.53, "pco2": 26, "hco3": 21, "chronicityHint": "acute" },
+      "pergunta": "Explique a parestesia/espasmo carpopedal a partir da gasometria — por que esse sintoma NÃO aparece em G-17?",
+      "gabarito": {
+        "classificacao": "HCO₃ 21 (baixo) e pCO₂ 26 (baixo) simultaneamente — mas aqui, ao contrário de G-16, o pH 7,53 é claramente alcalêmico, o que resolve sem ambiguidade a favor de alcalose respiratória primária (pCO₂ 26 < 35) com HCO₃ 21 como resposta renal aguda na direção oposta, dentro de 21,2 ± 2 (19,2–23,2) — não um segundo processo acidificante independente.",
+        "diagnostico": "Hiperventilação psicogênica (crise de ansiedade/pânico).",
+        "raciocinio": "A hipocapnia aguda reduz o cálcio ionizado sérico (a alcalose aumenta a ligação do cálcio à albumina, sem mudar o cálcio total) — daí a parestesia perioral e o espasmo carpopedal (sinais de Trousseau/Chvostek funcionais), típicos de hiperventilação aguda intensa e raramente vistos, com essa proeminência, numa alcalose mais insidiosa como a de uma embolia pulmonar inicial.",
+        "armadilha": "Assumir 'ansiedade' pela idade/contexto emocional sem excluir causa orgânica — parestesia também pode ocorrer, com menor destaque, em outras alcaloses respiratórias agudas; a ausência de dor pleurítica/fator de risco para TVP é o que reforça psicogênica, não a parestesia isolada.",
+        "detalheChave": "Mesmo padrão gasométrico de G-17 (ambos alcalose respiratória aguda simples), mas aqui SEM dor pleurítica, SEM fator de risco tromboembólico e COM sintoma neuromuscular de hipocalcemia funcional — o propedêutico decide, não o número.",
+        "conteudoComplementar": "Reinalação em saco de papel para 'reter CO₂' caiu em desuso como conduta padrão — risco de hipoxemia se houver uma causa orgânica não reconhecida por trás do quadro; tranquilização e reavaliação clínica são a conduta atual, reservando a reinalação a contextos muito selecionados."
+      }
+    },
+    {
+      "id": "G-19",
+      "categoria": "Distúrbio respiratório — alcalose",
+      "titulo": "Crise asmática inicial (alcalose respiratória, fase compensada)",
+      "mimicsCAD": false,
+      "confundeCom": ["G-14", "G-18"],
+      "vinheta": "24 anos, mesma paciente de G-14, agora na chegada ao pronto-socorro — sibilos difusos, taquipneica, ainda conversando em frases completas, sem sinais de fadiga.",
+      "labs": { "ph": 7.49, "pco2": 30, "hco3": 22, "chronicityHint": "acute" },
+      "pergunta": "Compare esta gasometria com a de G-14 — qual das duas é a mais preocupante clinicamente, apesar de ser 'menos anormal' pelos números crus?",
+      "gabarito": {
+        "classificacao": "Alcalose respiratória aguda primária (pCO₂ 30 < 35), resposta renal aguda adequada — HCO₃ 22 dentro de 22 ± 2 (20–24).",
+        "diagnostico": "Fase inicial de crise asmática — taquipneia reflexa por hipoxemia/estímulo de receptores de estiramento pulmonar, ainda sem fadiga muscular.",
+        "raciocinio": "Esta é a fase em que o esforço respiratório aumentado ainda consegue 'ganhar' e baixar a pCO₂. É clinicamente MENOS grave que G-14 (mesma paciente, 6h depois), mesmo essa gasometria parecendo 'menos extrema' em módulo — o que importa não é o desvio absoluto do pCO₂ em relação a 40, é a TRAJETÓRIA esperada da doença.",
+        "armadilha": "Comparar gravidade de duas gasometrias respiratórias só pelo tamanho do desvio numérico — pCO₂ 30 (aqui) é mais tranquilizador que pCO₂ 65 (G-14) exatamente PORQUE a doença de base evolui de hiperventilação compensada para hipoventilação por fadiga; noutro contexto (ex.: DPOC basal), a lógica de gravidade seria outra.",
+        "detalheChave": "Mesma paciente de G-14, disparando o mesmo tipo de alcalose respiratória de G-17/G-18 mas por asma, não por TEP nem ansiedade — o diagnóstico etiológico (asma conhecida, sibilância, ainda falando em frases completas) é dado pelo exame físico, igual nos outros dois casos de alcalose respiratória aguda do lote.",
+        "conteudoComplementar": "Vigilância seriada (gasometria + exame físico repetidos) é mais informativa que um único ponto no tempo em asma grave — a trajetória de G-19 para G-14 é o próprio motivo de reavaliar a cada intervenção, não confiar num gás normal isolado."
+      }
+    },
+    {
+      "id": "G-20",
+      "categoria": "AG mascarado / distúrbio misto",
+      "titulo": "Anion gap mascarado por alcalose de vômitos escondendo CAD incipiente",
+      "mimicsCAD": true,
+      "confundeCom": ["G-01", "G-12"],
+      "vinheta": "20 anos, DM1 conhecido, hiperêmese gravídica em gestação inicial, vômitos há 4 dias, cetonúria positiva relatada pela paciente mas gasometria 'normal' tranquiliza o plantão.",
+      "labs": { "ph": 7.39, "pco2": 38, "hco3": 22, "na": 134, "cl": 84, "albumin": 4.0, "glucoseMgDl": 350, "betaHydroxybutyrateMmolL": 3.4, "ketonuriaCruzes": 3, "knownDiabetes": true },
+      "hasDkaEsperado": false,
+      "pergunta": "pH, pCO₂ e HCO₃ estão todos 'dentro da normalidade'. Isso descarta CAD? Calcule o AG antes de responder.",
+      "gabarito": {
+        "classificacao": "pH 7,39, pCO₂ 38 e HCO₃ 22 estão todos dentro da faixa de referência isoladamente — mas isso NÃO exclui um gap elevado mascarado por um segundo processo que empurrou o HCO₃ de volta para dentro da faixa 'normal'.",
+        "diagnostico": "CAD real e clinicamente significativa, mascarada por alcalose metabólica concomitante de vômitos — a checagem formal dos três eixos do consenso 2024 (glicose≥200 OU DM; βHB≥3,0 OU cetonúria≥2+; pH<7,30 E/OU HCO₃<18) falha estritamente no eixo ácido (pH 7,39 não é <7,30; HCO₃ 22 não é <18), apesar de os outros dois eixos fecharem com folga (glicose 350/DM1 conhecido; βHB 3,4 e cetonúria 3+).",
+        "raciocinio": "AG = 134−84−22 = 28 — extremamente elevado apesar do HCO₃ estar 'normal'. A cetoacidose está consumindo HCO₃ normalmente, mas a alcalose metabólica concomitante (perda de HCl pelos vômitos, igual ao mecanismo de G-12) está simultaneamente REPONDO HCO₃ pelo mecanismo oposto — os dois processos se cancelam no HCO₃ final, mas NÃO se cancelam no AG, porque o ânion não medido dos cetoácidos continua acumulado independentemente do que acontece com o cloreto/HCO₃. É por isso que o AG deve ser calculado de forma SEMPRE independente do HCO₃ parecer normal, e por que o critério formal de pH/HCO₃ pode falhar estritamente numa CAD real quando há um segundo processo alcalinizante simultâneo.",
+        "armadilha": "Aplicar os critérios diagnósticos numéricos do consenso de forma mecânica sem calcular o AG — os três eixos formais (glicose/cetona/ácido) foram desenhados presumindo que nenhum segundo processo esteja mascarando o eixo ácido; quando existe (como aqui), a leitura estritamente literal do critério erra, e só o AG resgata o diagnóstico.",
+        "detalheChave": "Este é o mesmo cenário do teste automatizado de regressão do motor deste projeto (masked high anion gap) e o espelho de G-12: lá a alcalose de vômitos é o diagnóstico inteiro; aqui ela é só metade da história, escondendo uma CAD real por trás. Comparar os dois lado a lado é o exercício mais importante do lote.",
+        "conteudoComplementar": "Gestação por si só já reduz levemente o limiar renal de bicarbonato e tende a uma leve alcalose respiratória crônica (ver G-16) — em uma gestante com DM1 e hiperêmese, há potencialmente TRÊS processos ácido-base se sobrepondo; o AG segue sendo a ferramenta que corta através de toda a complexidade e aponta a cetoacidose real por trás dela."
+      }
+    }
+  ]
+}
+</script>
 <script>
 var ALB=4.5;
 // raw series (cronológica)
@@ -253,5 +665,90 @@ function table(){
 }
 window.__redraw=function(){drawAll();}; // for light capture
 stepper();detail(cur);drawAll();synth();table();
+
+// ---- banco de gasometrias (sintético, treino) ----
+var GASO=JSON.parse(document.getElementById('gasometrias-data').textContent).casos;
+var gasoCat=null, gasoCur=GASO[0].id, gasoRevealed=false;
+var TYPE_PT={metabolicAcidosis:'Acidose metabólica',metabolicAlkalosis:'Alcalose metabólica',respiratoryAcidosis:'Acidose respiratória',respiratoryAlkalosis:'Alcalose respiratória'};
+
+function gasoById(id){return GASO.filter(function(c){return c.id===id;})[0];}
+function gasoCategorias(){var s=[];GASO.forEach(function(c){if(s.indexOf(c.categoria)<0)s.push(c.categoria);});return s;}
+
+function renderGasoCats(){
+  var cats=gasoCategorias();
+  document.getElementById('gasoCats').innerHTML=
+    '<button class="gcat'+(gasoCat===null?' on':'')+'" onclick="selGasoCat(null)">todas ('+GASO.length+')</button>'+
+    cats.map(function(cat){
+      var n=GASO.filter(function(c){return c.categoria===cat;}).length;
+      return '<button class="gcat'+(gasoCat===cat?' on':'')+"\" onclick='selGasoCat("+JSON.stringify(cat)+")'>"+cat+' ('+n+')</button>';
+    }).join('');
+}
+function selGasoCat(cat){gasoCat=cat;renderGasoCats();renderGasoList();}
+
+function renderGasoList(){
+  var list=gasoCat===null?GASO:GASO.filter(function(c){return c.categoria===gasoCat;});
+  document.getElementById('gasoList').innerHTML=list.map(function(c){
+    return '<button class="gcard'+(c.id===gasoCur?' on':'')+"\" onclick='selGaso("+JSON.stringify(c.id)+")'>"+
+      '<div class="gid">'+c.id+'</div><div class="gt">'+c.titulo+'</div>'+
+      (c.mimicsCAD?'<span class="gm">imita CAD</span>':'')+'</button>';
+  }).join('');
+}
+function selGaso(id){gasoCur=id;gasoRevealed=false;renderGasoList();renderGasoDetail();}
+function toggleGasoReveal(){gasoRevealed=!gasoRevealed;renderGasoDetail();}
+
+function gasoLabRow(label,v,unit){
+  return v==null?'':'<div><span>'+label+'</span>'+v+(unit||'')+'</div>';
+}
+function renderGasoDetail(){
+  var c=gasoById(gasoCur);
+  var L=c.labs;
+  var labsHtml=
+    gasoLabRow('pH', r(L.ph,2))+
+    gasoLabRow('pCO₂', r(L.pco2,1),' mmHg')+
+    gasoLabRow('HCO₃', r(L.hco3,1))+
+    gasoLabRow('Na⁺', L.na)+
+    gasoLabRow('Cl⁻', L.cl)+
+    gasoLabRow('K⁺', L.k)+
+    gasoLabRow('Albumina', L.albumin)+
+    gasoLabRow('Lactato', L.lactateMmolL)+
+    gasoLabRow('Glicose', L.glucoseMgDl,' mg/dL')+
+    gasoLabRow('βHB', L.betaHydroxybutyrateMmolL,' mmol/L')+
+    gasoLabRow('Cetonúria', L.ketonuriaCruzes,'+')+
+    (L.knownDiabetes!=null?'<div><span>Diabetes conhecido</span>'+(L.knownDiabetes?'sim':'não')+'</div>':'');
+
+  var html=
+    '<div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px">'+
+    '<div><span class="lab">'+c.id+' · '+c.categoria+'</span><div style="font-size:19px;font-weight:700">'+c.titulo+
+    (c.mimicsCAD?' <span class="gm">imita CAD</span>':'')+'</div></div></div>'+
+    '<div class="nar"><b>Vinheta.</b> '+c.vinheta+'</div>'+
+    '<div class="glabs">'+labsHtml+'</div>'+
+    '<div class="nar"><b>Pergunta.</b> '+c.pergunta+'</div>'+
+    (gasoRevealed?'':'<button class="gbtn" onclick="toggleGasoReveal()">revelar gabarito ›</button>');
+
+  if(gasoRevealed){
+    var res=AbgCore.classifyPrimaryDisturbance(L);
+    var computedTypes=res.primary.map(function(p){return TYPE_PT[p.type];}).join(' + ')||'nenhum distúrbio isolado fechado (checar AG independentemente)';
+    var ag=(L.na!=null&&L.cl!=null)?CadCore.anionGap(L.na,L.cl,L.hco3):null;
+    var agc=(ag!=null&&L.albumin!=null)?CadCore.correctedAnionGap(ag,L.albumin):null;
+    var hasDka=(typeof c.hasDkaEsperado==='boolean')?c.hasDkaEsperado:null;
+    html+='<div class="gab">'+
+      '<h4>Calculado ao vivo (AbgCore/CadCore)</h4>'+
+      '<p>Distúrbio primário: <b>'+computedTypes+'</b>'+(res.compensationCheck?' · compensação: <b>'+res.compensationCheck.verdict+'</b>':'')+
+      (ag!=null?' · AG = <b>'+r(ag,1)+'</b>':'')+(agc!=null?' · AGc = <b>'+r(agc,1)+'</b>':'')+
+      (hasDka!=null?' · hasDka() = <b>'+(hasDka?'verdadeiro':'falso')+'</b>':'')+'</p>'+
+      '<h4>Classificação</h4><p>'+c.gabarito.classificacao+'</p>'+
+      '<h4>Diagnóstico</h4><p>'+c.gabarito.diagnostico+'</p>'+
+      '<h4>Raciocínio</h4><p>'+c.gabarito.raciocinio+'</p>'+
+      '<h4>Armadilha</h4><p>'+c.gabarito.armadilha+'</p>'+
+      '<h4>Detalhe-chave</h4><p>'+c.gabarito.detalheChave+'</p>'+
+      '<h4>Conteúdo complementar</h4><p>'+c.gabarito.conteudoComplementar+'</p>'+
+      (c.confundeCom&&c.confundeCom.length?'<h4>Casos que confundem com este</h4><div class="gconf">'+
+        c.confundeCom.map(function(id){var o=gasoById(id);return o?"<button onclick='selGaso("+JSON.stringify(id)+")'>"+id+' · '+o.titulo+'</button>':'';}).join('')+
+        '</div>':'')+
+      '</div>';
+  }
+  document.getElementById('gasoDetail').innerHTML=html;
+}
+renderGasoCats();renderGasoList();renderGasoDetail();
 </script>
 </body></html>

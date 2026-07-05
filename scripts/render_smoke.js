@@ -156,6 +156,45 @@ const bad = (m) => { console.error("  FAIL " + m); fails++; };
     await p.close();
   }
 
+  // painel: série real (P1-P6) + banco de gasometrias sintético (20 casos, separado)
+  {
+    const { p, errs } = await page("painel/index.html");
+    const hasCores = await p.evaluate(() => typeof window.CadCore?.anionGap === "function" && typeof window.AbgCore?.classifyPrimaryDisturbance === "function");
+    hasCores ? ok("painel: CadCore + AbgCore carregados (core/*.js via script src)") : bad("painel: CadCore/AbgCore ausente");
+
+    const nCards = await p.evaluate(() => document.querySelectorAll("#gasoList .gcard").length);
+    nCards === 20 ? ok("painel: banco de gasometrias — 20 casos renderizados") : bad(`painel: esperava 20 casos no banco, achou ${nCards}`);
+
+    // navega para um caso de AG mascarado, revela o gabarito, confere o cálculo ao vivo
+    const revealed = await p.evaluate(() => {
+      selGaso("G-20");
+      toggleGasoReveal();
+      return document.getElementById("gasoDetail").innerText;
+    });
+    /AG\s*=\s*.*28/.test(revealed) ? ok("painel: gabarito revelado mostra AG calculado ao vivo (G-20)") : bad(`painel: AG calculado ao vivo não apareceu no reveal (${revealed.slice(0, 150)})`);
+
+    // confundeCom navega para outro caso
+    const navOk = await p.evaluate(() => {
+      const btn = document.querySelector(".gconf button");
+      if (!btn) return false;
+      btn.click();
+      return gasoCur !== "G-20";
+    });
+    navOk ? ok("painel: clique em confundeCom navega para outro caso") : bad("painel: clique em confundeCom não navegou");
+
+    // filtro por categoria reduz a lista
+    const filteredOk = await p.evaluate(() => {
+      const chip = document.querySelectorAll("#gasoCats .gcat")[1];
+      if (!chip) return false;
+      chip.click();
+      return document.querySelectorAll("#gasoList .gcard").length < 20;
+    });
+    filteredOk ? ok("painel: filtro de categoria reduz a lista de casos") : bad("painel: filtro de categoria não reduziu a lista");
+
+    errs.length ? bad("painel erros: " + errs.join(" | ")) : ok("painel/index.html sem erro de runtime");
+    await p.close();
+  }
+
   // app: executa, percorre as abas, valida render dinâmico
   {
     const { p, errs } = await page("app/index.html");
