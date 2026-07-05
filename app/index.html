@@ -682,6 +682,12 @@ document.addEventListener('click',e=>{const t=e.target;
   t.textContent=el.classList.contains('show')?'ocultar':'ver resposta';}
  if(t.classList.contains('goto')&&t.dataset.go){e.preventDefault();showTab(t.dataset.go);}});
 
+const ATLAS=JSON.parse(document.getElementById('atlas-data').textContent);
+/* os exercicios das calculadoras abaixo SAO os mesmos B-1..B-6 do banco do
+   Atlas (content/atlas.json) — mesmo numero, mesma fonte, nunca duplicado a
+   mao; atlasEx() busca pelo prefixo do titulo em vez de repetir o texto. */
+function atlasEx(prefixo){const b=ATLAS.banco.find(x=>x[0].startsWith(prefixo));return b?{stem:b[1],ans:b[2]}:{stem:`[exercício ${prefixo} não encontrado no Atlas]`,ans:'—'};}
+
 /* ================= CALCULADORAS ================= */
 function agInterp(ag){const[a,b]=CANON.agNormal;return ag>b?['a',`> ${b} → há ácido não medido (cetona/lactato). Ponto de partida, não diagnóstico.`]:['g',`dentro do normal (${a}–${b}).`];}
 function ddInterp(dd){const[a,b]=CANON.deltaDelta.fronteiras;
@@ -692,23 +698,23 @@ const CALCS=[
  {id:'ag',t:'Ânion gap',f:'AG = Na − (Cl + HCO₃)',in:[['na','Na⁺',132],['cl','Cl⁻',96],['hco3','HCO₃',11]],
   calc:v=>{const ag=v.na-(v.cl+v.hco3);const[c,txt]=agInterp(ag);return{val:r(ag,1),chip:c,txt};},
   why:`O AG conta os <b>ânions que o laboratório não mede</b>. Na CAD, o "extra" é o cetoácido (β-OHB, acetoacetato) invisível — <b>o tamanho do gap ≈ o tamanho da cetose</b>. É o termômetro da cetoacidose quando não há β-OHB seriado; mas é proxy contaminado (albumina, lactato), por isso precisa de correção.`,
-  ex:{stem:'Na 140, Cl 104, HCO₃ 10 → AG?',ans:'AG = 140 − (104 + 10) = <b>26</b> → gap alto, ácido não medido presente.'},go:'entender'},
+  ex:atlasEx('B-1'),go:'entender'},
  {id:'agc',t:'AG corrigido',f:'AGc = AG + 2,5 × (4,0 − albumina)',in:[['na2','Na⁺',132],['cl2','Cl⁻',96],['hco32','HCO₃',11],['alb','Alb',2.8]],
   calc:v=>{const ag=v.na2-(v.cl2+v.hco32);const agc=ag+2.5*(CANON.albRef-v.alb);return{val:r(agc,1),chip:v.alb<CANON.albRef?'a':'g',txt:`AG ${r(ag,1)} → AGc ${r(agc,1)}. `+(v.alb<CANON.albRef?'A hipoalbuminemia escondia gap.':'Sem correção relevante.')};},
   why:`A albumina é o maior ânion "não medido" <b>normal</b> (~2,5 mEq/L por g/dL). Albumina baixa <b>rebaixa o gap basal</b> — uma acidose de gap alto real pode ler "normal". Corrigir <b>desmascara a cetose</b>.`,
-  ex:{stem:'AG 26, albumina 2,5 → AGc?',ans:'AGc = 26 + 2,5×(4,0 − 2,5) = <b>29,8</b> → a hipoalbuminemia escondia ~4 pontos de gap.'},go:'entender'},
+  ex:atlasEx('B-2'),go:'entender'},
  {id:'dd',t:'Δ/Δ (delta-delta)',f:'Δ/Δ = (AGc − 12) / (24 − HCO₃)',in:[['agcIn','AGc',28],['hco33','HCO₃',11]],
   calc:v=>{const dd=(v.agcIn-12)/(24-v.hco33);const[c,txt]=ddInterp(dd);return{val:r(dd,2),chip:c,txt};},
   why:`Compara <b>quanto o gap subiu</b> contra <b>quanto o bicarbonato caiu</b>. Cetoacidose pura: cada cetoácido consome ~1 bicarbonato → ~1. Caiu <b>mais</b> que o gap subiu (< 1) → <b>acidose hiperclorêmica</b> somada (SF, perda de cetoânion). Caiu <b>menos</b> (> 2) → <b>alcalose</b> somada. É o detector do distúrbio misto atrás de um pH único.`,
-  ex:{stem:'AGc 28, HCO₃ 8 → Δ/Δ?',ans:'Δ/Δ = (28−12)/(24−8) = 16/16 = <b>1,0</b> → faixa 1–2 = AGMA de gap elevado pura.'},go:'entender'},
+  ex:atlasEx('B-3'),go:'entender'},
  {id:'nac',t:'Na corrigido',f:'Na + fator × (glicose − 100)/100 · 2,4 se glicose > 400',in:[['naM','Na⁺',132],['glu','Glicose',428]],
   calc:v=>{const f=v.glu>CANON.naCorr.glicose_limiar?CANON.naCorr.fator_alto:CANON.naCorr.fator_padrao;const nc=v.naM+f*(v.glu-100)/100;return{val:r(nc,1),chip:'t',txt:`fator ${r(f,1)} (glicose ${v.glu>CANON.naCorr.glicose_limiar?'> ':'≤ '}${CANON.naCorr.glicose_limiar}). "${r(v.naM,0)}" → ${r(nc,1)}.`};},
   why:`A glicose puxa água pra dentro do vaso, <b>diluindo o sódio</b>. O Na medido está <b>falsamente baixo</b> (~1,6–2,4 mEq por 100 mg/dL acima de 100). Corrigir revela a <b>água livre real</b>: um Na "normal" com glicose 600 é hipernatremia mascarada — importa para HHS e tonicidade do fluido.`,
-  ex:{stem:'Na 130, glicose 600 → Na corrigido?',ans:'Glicose > 400 → fator 2,4. Na⁺c = 130 + 2,4×5 = <b>142</b> → o "130" era hipernatremia disfarçada.'},go:'entender'},
+  ex:atlasEx('B-5'),go:'entender'},
  {id:'osm',t:'Osmolaridade efetiva',f:'Osm = 2 × Na + glicose/18 · (ureia NÃO entra)',in:[['naO','Na⁺',132],['gluO','Glicose',428]],
   calc:v=>{const o=2*v.naO+v.gluO/18;return{val:r(o,0),chip:o>CANON.osm.hhs_efetiva?'a':'g',txt:(o>CANON.osm.hhs_efetiva?`> ${CANON.osm.hhs_efetiva} → eixo HHS/neurológico.`:'abaixo do limiar de HHS.')+' Efetiva = tonicidade.'};},
   why:`Só <b>Na e glicose</b> geram gradiente na membrana (tonicidade); a <b>ureia atravessa livre</b> e não conta. A efetiva dita encolhimento/inchaço celular, o <b>risco de edema na correção</b> e o <b>eixo HHS</b>. A total (com ureia) só serve para o osm-gap (álcoois tóxicos).`,
-  ex:{stem:'Na medido 130 (Na corrigido 142), glicose 600 → osm efetiva?',ans:'Osm efetiva = 2×130 (Na MEDIDO) + 600/18 = 260 + 33,3 = <b>293,3</b> → ainda não cruza o eixo HHS (>320). Usar o Na corrigido (142) aqui dobraria a contagem da glicose.'},go:'entender'}
+  ex:atlasEx('B-6'),go:'entender'}
 ];
 function renderCalc(c){
  const el=document.createElement('div');el.className='calc';
@@ -776,8 +782,7 @@ function renderComp(){
 }
 renderComp();
 
-/* banco B-1..B-6 */
-const ATLAS=JSON.parse(document.getElementById('atlas-data').textContent);
+/* banco B-1..B-6 (ATLAS ja parseado antes das calculadoras, mais acima) */
 const BANCO=ATLAS.banco;
 $('#banco').innerHTML=BANCO.map(x=>`<div class="panel" style="padding:12px 13px"><div style="font-weight:600;font-size:14px;margin-bottom:3px">${x[0]}</div>${mkReveal(x[1],x[2])}</div>`).join('');
 
