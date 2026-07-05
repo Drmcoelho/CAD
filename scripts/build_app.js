@@ -17,6 +17,8 @@
  *     - profile-names-data ← content/profiles.json, projetado a {id,nome} (o Tutor só
  *       precisa do nome pra rotular o match e link para ../perfis/#p-<id>; a prosa
  *       completa não é duplicada aqui)
+ *   painel/index.html:
+ *     - gasometrias-data ← content/gasometrias.json (banco de treino de gasometria)
  *
  *   node scripts/build_app.js          # reescreve os blocos a partir das fontes
  *   node scripts/build_app.js --check  # falha (exit 1) se algum bloco divergir
@@ -50,6 +52,9 @@ const FILES = {
   ],
   "tratado/index.html": [
     { id: "profile-names-data", text: JSON.stringify(profileNames()) },
+  ],
+  "painel/index.html": [
+    { id: "gasometrias-data", text: jsonText("content/gasometrias.json", readRaw("content/gasometrias.json")) },
   ],
 };
 
