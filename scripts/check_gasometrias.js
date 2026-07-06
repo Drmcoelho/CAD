@@ -61,7 +61,7 @@ for (const caso of data.casos) {
   const { id, titulo, labs, gabarito, confundeCom } = caso;
 
   // 1. estrutura
-  /^G-\d\d$/.test(id) ? ok(`${id}: id no formato G-NN`) : bad(`${id}: id fora do formato esperado G-NN`);
+  /^G-\d{2,3}$/.test(id) ? ok(`${id}: id no formato G-NN ou G-NNN`) : bad(`${id}: id fora do formato esperado G-NN ou G-NNN`);
   ids.has(id) ? bad(`${id}: id duplicado`) : ids.add(id);
   titulos.has(titulo) ? bad(`${id}: título duplicado ("${titulo}")`) : titulos.add(titulo);
   typeof caso.mimicsCAD === "boolean" ? ok(`${id}: mimicsCAD é booleano`) : bad(`${id}: mimicsCAD ausente/não-booleano`);
