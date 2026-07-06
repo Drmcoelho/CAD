@@ -1238,7 +1238,7 @@
     {
       "id": "G-69",
       "categoria": "Acidose metabólica AG alto (não-cetótica)",
-      "titulo": "Intoxicação grave por ferro (overdose pediátrico acidental)",
+      "titulo": "Intoxicação grave por ferro (overdose pediátrica acidental)",
       "mimicsCAD": false,
       "confundeCom": ["G-08", "G-43"],
       "vinheta": "3 anos, ingestão acidental de múltiplos comprimidos de sulfato ferroso da mãe (gestante) há 5h, vômitos com sangue, letargia progressiva, dor abdominal intensa.",
