@@ -1090,6 +1090,366 @@
         "detalheChave": "Mesmo padrão ambíguo-por-números de G-07 (salicilato) — o detalhe que resolve não está na gasometria, está na farmacologia do agente: teofilina tem meia-vida longa e efeito simpaticomimético sustentado, e o contexto (DPOC, uso crônico do fármaco, dose extra por engano) aponta direto para ela em vez de salicilato.",
         "conteudoComplementar": "Toxicidade por teofilina pode causar convulsões e arritmias graves mesmo com nível sérico apenas moderadamente elevado, especialmente em uso crônico (ao contrário da intoxicação aguda isolada) — hemoperfusão/hemodiálise é considerada em níveis muito altos ou toxicidade grave, e taquicardia importante desproporcional ao quadro deve levantar suspeita mesmo antes do nível sérico confirmar."
       }
+    },
+    {
+      "id": "G-61",
+      "categoria": "Acidose metabólica AG normal (hiperclorêmica)",
+      "titulo": "Acidose tubular renal tipo 2 (proximal) idiopática",
+      "mimicsCAD": false,
+      "confundeCom": ["G-62", "G-63", "G-10", "G-11"],
+      "vinheta": "8 anos, baixa estatura, raquitismo resistente à vitamina D comum, glicosúria com glicemia normal, aminoacidúria generalizada — investigação de síndrome de Fanconi em curso.",
+      "labs": { "ph": 7.34, "pco2": 27, "hco3": 14, "na": 140, "cl": 112, "k": 2.8, "albumin": 4.0 },
+      "pergunta": "Compare com G-10 (RTA tipo 1) e G-11 (RTA tipo 4) — qual é o segmento tubular afetado aqui, e por que isso explica o cortejo de outras perdas (glicose, aminoácidos, fosfato)?",
+      "gabarito": {
+        "classificacao": "Acidose metabólica primária (HCO₃ 14 < 22), compensação respiratória adequada — pCO₂ 27 dentro de 29 ± 2 (27–31).",
+        "diagnostico": "Acidose tubular renal tipo 2 (proximal) idiopática, dentro do espectro de síndrome de Fanconi — defeito generalizado de reabsorção no túbulo PROXIMAL, não no distal (RTA1) nem no eixo aldosterona (RTA4).",
+        "raciocinio": "AG = 140−112−14 = 14, normal — mesmo padrão hiperclorêmico de G-10/G-11, mas por um segmento tubular diferente. O túbulo proximal reabsorve normalmente a maior parte do HCO₃ filtrado, junto com glicose, aminoácidos e fosfato — quando esse segmento falha de forma generalizada (síndrome de Fanconi), TODAS essas substâncias são perdidas na urina simultaneamente, não só o bicarbonato. É por isso que RTA2 vem tipicamente acompanhada de glicosúria com glicemia normal, aminoacidúria e raquitismo/osteomalácia por perda de fosfato — um cortejo que não aparece em RTA1 (defeito isolado de secreção distal de H⁺) nem em RTA4 (defeito do eixo aldosterona).",
+        "armadilha": "Tratar toda acidose hiperclorêmica pediátrica com hipocalemia como se fosse RTA1 — a presença de glicosúria com glicemia normal, aminoacidúria e raquitismo aponta para um defeito proximal generalizado (RTA2/Fanconi), não distal.",
+        "detalheChave": "As três RTAs deste banco (G-10 tipo 1, G-11 tipo 4, G-61 tipo 2) têm o mesmo AG normal e podem ter K baixo ou alto conforme o tipo — o segmento tubular afetado (distal vs proximal) e o cortejo de perdas associadas (glicose/aminoácidos/fosfato só na tipo 2) é o que as diferencia clinicamente, não a gasometria isolada.",
+        "conteudoComplementar": "RTA2 costuma exigir doses MUITO maiores de álcali de reposição que RTA1, porque o túbulo proximal (ainda com alguma capacidade residual de reabsorção) continua 'vazando' parte do bicarbonato reposto de volta para a urina — ajustar a expectativa terapêutica e a dose é diferente entre os dois tipos."
+      }
+    },
+    {
+      "id": "G-62",
+      "categoria": "Acidose metabólica AG normal (hiperclorêmica)",
+      "titulo": "Acidose tubular renal tipo 2 induzida por ifosfamida",
+      "mimicsCAD": false,
+      "confundeCom": ["G-61", "G-63"],
+      "vinheta": "9 anos, tratamento quimioterápico com ifosfamida em altas doses por sarcoma, nova hipocalemia e acidose leve nos exames de rotina do ciclo, sem doença renal prévia.",
+      "labs": { "ph": 7.34, "pco2": 29, "hco3": 15, "na": 138, "cl": 110, "k": 2.9, "albumin": 4.0 },
+      "pergunta": "Compare com G-61 (RTA2 idiopática) — mesmo mecanismo tubular, mas aqui a causa é identificável e potencialmente reversível. Qual é ela?",
+      "gabarito": {
+        "classificacao": "Acidose metabólica primária (HCO₃ 15 < 22), compensação respiratória adequada — pCO₂ 29 dentro de 30,5 ± 2 (28,5–32,5).",
+        "diagnostico": "Acidose tubular renal tipo 2 (proximal) induzida por ifosfamida — nefrotoxicidade tubular proximal é um efeito adverso conhecido e dose-dependente desse quimioterápico.",
+        "raciocinio": "AG = 138−110−15 = 13, normal — mesmo mecanismo de G-61 (falência do túbulo proximal), mas aqui a causa é um agente identificável e não uma doença genética/idiopática. A ifosfamida (e seu metabólito cloroacetaldeído) é diretamente tóxica às células do túbulo proximal, reproduzindo o mesmo espectro de síndrome de Fanconi (glicosúria, aminoacidúria, fosfatúria) de forma adquirida — o grau de toxicidade se relaciona à dose cumulativa e é mais comum em crianças pequenas e com função renal basal já comprometida.",
+        "armadilha": "Investigar causas genéticas raras de síndrome de Fanconi num paciente em quimioterapia recente sem revisar o esquema terapêutico — a nefrotoxicidade por ifosfamida é uma causa comum, dose-dependente e o primeiro item a descartar nesse contexto.",
+        "detalheChave": "Mesmo mecanismo tubular de G-61, mas aqui adquirido e potencialmente reversível (ao menos parcialmente) com a suspensão/ajuste do quimioterápico — o contexto oncológico recente é o detalhe que resolve.",
+        "conteudoComplementar": "Mesna (usado rotineiramente para proteção da bexiga contra cistite hemorrágica pela ifosfamida) NÃO protege os túbulos renais — a nefrotoxicidade tubular proximal é um risco separado, que exige monitorização eletrolítica e de função renal independente da proteção vesical."
+      }
+    },
+    {
+      "id": "G-63",
+      "categoria": "Acidose metabólica AG normal (hiperclorêmica)",
+      "titulo": "Acidose tubular renal proximal induzida por acetazolamida",
+      "mimicsCAD": false,
+      "confundeCom": ["G-61", "G-62"],
+      "vinheta": "70 anos, em uso de acetazolamida para glaucoma de ângulo fechado há 3 semanas, fraqueza leve e novos exames laboratoriais de rotina.",
+      "labs": { "ph": 7.34, "pco2": 29, "hco3": 15, "na": 140, "cl": 112, "k": 3.2, "albumin": 4.0 },
+      "pergunta": "Terceiro caso do mesmo mecanismo tubular proximal — qual é o denominador farmacológico comum entre este fármaco e o defeito de G-61/G-62?",
+      "gabarito": {
+        "classificacao": "Acidose metabólica primária (HCO₃ 15 < 22), compensação respiratória adequada — pCO₂ 29 dentro de 30,5 ± 2 (28,5–32,5).",
+        "diagnostico": "Acidose tubular renal proximal farmacológica por acetazolamida — inibidor da anidrase carbônica, a mesma enzima cuja falta define o defeito funcional da RTA2.",
+        "raciocinio": "AG = 140−112−15 = 13, normal. A anidrase carbônica no túbulo proximal é essencial para a reabsorção de bicarbonato filtrado (converte H₂CO₃ em CO₂ e água para permitir a reabsorção eficiente) — a acetazolamida bloqueia diretamente essa enzima, reproduzindo farmacologicamente, de forma previsível e dose-dependente, o mesmo defeito que a RTA2 genética/idiopática (G-61) ou tóxica (G-62, ifosfamida) causam por vias diferentes. É por isso que acetazolamida é útil terapeuticamente na alcalose metabólica (força bicarbonatúria) mas causa acidose como efeito colateral esperado do próprio mecanismo de ação.",
+        "armadilha": "Estranhar uma acidose metabólica leve num paciente em uso de acetazolamida e procurar outra causa — é o efeito colateral farmacológico ESPERADO do mecanismo de ação do fármaco, não um achado incidental a ser investigado à parte.",
+        "detalheChave": "Terceiro caso do mesmo defeito de reabsorção proximal de bicarbonato (G-61 genético, G-62 tóxico-quimioterápico, G-63 farmacológico-intencional) — o denominador é sempre a função (genética, tóxica ou farmacológica) da anidrase carbônica/transportadores proximais, e a reversibilidade (parcial ou completa com a suspensão) diferencia o farmacológico dos outros dois.",
+        "conteudoComplementar": "Acetazolamida também é usada terapeuticamente para alcalinizar a urina (facilitando eliminação de alguns fármacos/toxinas) e para tratar alcalose metabólica pós-hipercápnica em pacientes ventilados (ver G-28) — o mesmo efeito colateral aqui é, em outro contexto, o próprio objetivo terapêutico."
+      }
+    },
+    {
+      "id": "G-64",
+      "categoria": "Alcalose metabólica",
+      "titulo": "Fibrose cística — alcalose metabólica hipoclorêmica ('pseudo-Bartter')",
+      "mimicsCAD": false,
+      "confundeCom": ["G-46", "G-47"],
+      "vinheta": "3 anos, fibrose cística conhecida, onda de calor recente, letargia e recusa alimentar, sem vômitos nem diarreia — hipocalemia e hipocloremia achadas em exame de rotina.",
+      "labs": { "ph": 7.47, "pco2": 45, "hco3": 32, "na": 134, "cl": 88, "k": 2.8, "albumin": 4.0 },
+      "pergunta": "Compare com G-46/G-47 (Bartter/Gitelman) — mesmo padrão bioquímico, mas por qual via COMPLETAMENTE diferente (nem renal, nem GI) a criança perde cloreto aqui?",
+      "gabarito": {
+        "classificacao": "Alcalose metabólica primária (HCO₃ 32 > 26), compensação respiratória adequada — pCO₂ 45 dentro de 43,4 ± 2 (41,4–45,4).",
+        "diagnostico": "Alcalose metabólica hipoclorêmica hipocalêmica 'pseudo-Bartter' da fibrose cística — perda de cloreto (e sódio) pelo SUOR, não pelo rim nem pelo trato gastrointestinal.",
+        "raciocinio": "AG = 134−88−32 = 14, discretamente elevado (contração de volume). O defeito da proteína CFTR na fibrose cística causa perda excessiva de cloreto (e secundariamente sódio) nas glândulas sudoríparas — em climas quentes ou febre (maior sudorese), essa perda se intensifica e pode reproduzir bioquimicamente o mesmo padrão de Bartter/Gitelman (perda renal) ou de vômitos (perda GI), mas por uma terceira via inteiramente diferente: a pele. É clinicamente indistinguível dos outros dois só pela bioquímica sérica — o diagnóstico de base (fibrose cística conhecida) e a ausência de causa renal/GI é que resolvem.",
+        "armadilha": "Investigar causas renais (Bartter/Gitelman) ou GI (vômitos ocultos) num paciente com fibrose cística conhecida apresentando este padrão — em climas quentes/febre, a perda de sal pelo suor por si só já explica o quadro, sem necessidade de investigação adicional extensa.",
+        "detalheChave": "Mesmo padrão bioquímico de G-46/G-47, mas a via de perda é a PELE (suor), não o rim nem o intestino — o diagnóstico de base conhecido (fibrose cística) e o gatilho ambiental (calor, febre) resolvem sem qualquer exame adicional.",
+        "conteudoComplementar": "O teste do suor (medição de cloreto no suor, elevado na fibrose cística) é tanto diagnóstico da doença de base quanto explicativo desse mecanismo eletrolítico — em climas quentes, reposição profilática de sal é recomendada para pacientes com fibrose cística conhecida, para prevenir exatamente esse quadro."
+      }
+    },
+    {
+      "id": "G-65",
+      "categoria": "Acidose metabólica AG alto (não-cetótica)",
+      "titulo": "Acidose lática associada à metformina (MALA)",
+      "mimicsCAD": false,
+      "confundeCom": ["G-06", "G-21"],
+      "vinheta": "72 anos, DM2 em uso crônico de metformina, lesão renal aguda recente por desidratação (episódio de gastroenterite), agora prostrado e hipotenso.",
+      "labs": { "ph": 7.25, "pco2": 19, "hco3": 8, "na": 136, "cl": 98, "albumin": 4.0, "lactateMmolL": 14 },
+      "pergunta": "Classifique o distúrbio — e explique por que a lesão renal aguda recente é o elo que transforma o uso CRÔNICO e antes seguro de metformina numa emergência.",
+      "gabarito": {
+        "classificacao": "Acidose metabólica primária grave (HCO₃ 8 < 22), compensação respiratória adequada — pCO₂ 19 dentro de 20 ± 2 (18–22).",
+        "diagnostico": "Acidose lática associada à metformina (MALA) — metformina se acumula quando a depuração renal cai, inibindo a gliconeogênese hepática e a captação mitocondrial de lactato, numa espiral que se autoalimenta com a própria hipoperfusão.",
+        "raciocinio": "AG = 136−98−8 = 30, explicado pelo lactato extremamente elevado (14 mmol/L). Metformina é eliminada quase exclusivamente pelo rim; ela normalmente NÃO causa acidose lática relevante com função renal preservada, mesmo em uso crônico — o gatilho aqui é a lesão renal aguda recente, que faz a metformina se acumular a níveis tóxicos, inibindo vias mitocondriais de utilização de lactato justamente quando a desidratação/hipoperfusão já estava gerando lactato em excesso — os dois fatores (acúmulo do fármaco + hipoperfusão) se potencializam.",
+        "armadilha": "Assumir que 'uso crônico e seguro de metformina há anos' descarta MALA — a segurança da metformina depende inteiramente da função renal se manter preservada; qualquer evento agudo que reduza a depuração renal (desidratação, contraste iodado, sepse) muda esse cálculo instantaneamente.",
+        "detalheChave": "Mesmo padrão de AG alto extremo de G-06 (sepse) — a diferença é o CONTEXTO farmacológico (metformina + lesão renal aguda recente) em vez de infecção; hemodiálise remove tanto o lactato quanto a própria metformina acumulada, tratando as duas metades do círculo vicioso ao mesmo tempo.",
+        "conteudoComplementar": "Suspender metformina temporariamente antes de procedimentos com contraste iodado ou em qualquer intercorrência aguda que ameace a função renal é a medida preventiva padrão — MALA é rara com a função renal preservada, mas tem mortalidade elevada quando ocorre, precisamente pela combinação de dois processos acidificantes simultâneos."
+      }
+    },
+    {
+      "id": "G-66",
+      "categoria": "Acidose metabólica AG alto (não-cetótica)",
+      "titulo": "Piroglutamicoacidose (5-oxoprolinúria) por uso crônico de paracetamol",
+      "mimicsCAD": false,
+      "confundeCom": ["G-08", "G-23"],
+      "vinheta": "56 anos, desnutrida, uso crônico de paracetamol em doses terapêuticas (não overdose) para dor crônica, acidose metabólica de AG alto inexplicada apesar de função renal e lactato normais na investigação inicial.",
+      "labs": { "ph": 7.32, "pco2": 26, "hco3": 13, "na": 138, "cl": 100, "albumin": 4.0 },
+      "pergunta": "Função renal normal, lactato normal, sem cetose, sem uso de álcool/tóxicos identificado — de onde vem este AG alto?",
+      "gabarito": {
+        "classificacao": "Acidose metabólica primária (HCO₃ 13 < 22), compensação respiratória adequada — pCO₂ 26 dentro de 27,5 ± 2 (25,5–29,5).",
+        "diagnostico": "Piroglutamicoacidose (acúmulo de ácido 5-oxoprolínico/piroglutâmico) por uso crônico de paracetamol em dose terapêutica — uma causa obscura e subdiagnosticada de acidose de AG alto, tipicamente em mulheres desnutridas/sépticas com uso concomitante de paracetamol.",
+        "raciocinio": "AG = 138−100−13 = 25, sem explicação pelas causas usuais já descartadas (lactato normal, função renal normal, sem cetose, sem álcool/tóxico). O paracetamol consome glutationa no seu metabolismo hepático normal; em pacientes desnutridas, sépticas ou com uso crônico, a depleção de glutationa desregula uma enzima do ciclo do glutamato (5-oxoprolinase), levando ao acúmulo de ácido piroglutâmico — um ácido orgânico que contribui diretamente ao AG e não é medido nos exames de rotina (só por cromatografia específica, pouco disponível).",
+        "armadilha": "Parar a investigação de uma acidose de AG alto depois de descartar só lactato, cetonas, função renal e álcool/tóxicos clássicos — piroglutamicoacidose é uma causa 'órfã' que sobra exatamente quando todas essas outras já foram descartadas, e o uso crônico de paracetamol em dose terapêutica é fácil de não valorizar por não ser overdose.",
+        "detalheChave": "Mesma categoria de AG alto de G-08/G-23, mas aqui SEM nenhuma das causas usuais (álcool tóxico, cetonas, lactato, uremia) — é o diagnóstico de exclusão que só aparece quando se pergunta especificamente sobre uso CRÔNICO (não overdose) de paracetamol em paciente desnutrida/frágil.",
+        "conteudoComplementar": "Suspender o paracetamol e repor N-acetilcisteína (que repõe a glutationa, o mesmo antídoto usado na intoxicação aguda por paracetamol) costuma resolver o quadro em dias — o reconhecimento depende de manter esse diagnóstico no diferencial de AG alto 'inexplicado' mesmo sem história de overdose."
+      }
+    },
+    {
+      "id": "G-67",
+      "categoria": "Acidose metabólica AG alto (não-cetótica)",
+      "titulo": "Malária grave — acidose lática",
+      "mimicsCAD": false,
+      "confundeCom": ["G-06", "G-43"],
+      "vinheta": "34 anos, retorno de viagem a área endêmica há 12 dias, febre alta cíclica, icterícia, confusão mental, esfregaço de sangue periférico positivo para Plasmodium falciparum com alta parasitemia.",
+      "labs": { "ph": 7.30, "pco2": 23, "hco3": 11, "na": 136, "cl": 98, "albumin": 4.0, "lactateMmolL": 9 },
+      "pergunta": "Classifique o distúrbio — por que a malária grave causa acidose lática por um mecanismo diferente da sepse bacteriana comum (G-06)?",
+      "gabarito": {
+        "classificacao": "Acidose metabólica primária (HCO₃ 11 < 22), compensação respiratória adequada — pCO₂ 23 dentro de 24,5 ± 2 (22,5–26,5).",
+        "diagnostico": "Malária grave (Plasmodium falciparum) com acidose lática — um dos critérios de gravidade da OMS para malária complicada, associado a mortalidade elevada.",
+        "raciocinio": "AG = 136−98−11 = 27, explicado pelo lactato de 9 mmol/L. O mecanismo é mecânico-microvascular, não circulatório sistêmico como na sepse: hemácias parasitadas ficam mais rígidas e citoaderentes, obstruindo a microcirculação (sequestro microvascular, especialmente em cérebro, rins e outros órgãos), criando hipóxia tecidual LOCAL e produção de lactato mesmo quando a hemodinâmica sistêmica (pressão arterial, débito cardíaco) ainda parece preservada — diferente do choque séptico de G-06, onde a hipoperfusão é predominantemente sistêmica e vasoplégica.",
+        "armadilha": "Usar parâmetros hemodinâmicos sistêmicos normais (pressão arterial preservada) para excluir hipoperfusão tecidual significativa na malária grave — o sequestro microvascular pode gerar lactato alto e disfunção de órgão mesmo com sinais vitais sistêmicos aparentemente estáveis.",
+        "detalheChave": "Mesmo achado de AG alto por lactato de G-06/G-43, mas o mecanismo é sequestro microvascular por parasitemia, não vasoplegia séptica nem bloqueio mitocondrial tóxico — a história epidemiológica (viagem a área endêmica, febre cíclica) e o esfregaço positivo resolvem o diagnóstico.",
+        "conteudoComplementar": "Lactato sérico é um dos parâmetros usados para classificar malária como grave (junto com parasitemia >5-10%, disfunção neurológica, renal, hepática) e para monitorizar a resposta ao tratamento antimalárico parenteral — sua trajetória de queda é um bom indicador prognóstico precoce."
+      }
+    },
+    {
+      "id": "G-68",
+      "categoria": "Acidose metabólica AG alto (não-cetótica)",
+      "titulo": "Acidose lática por deficiência de tiamina não relacionada a etilismo",
+      "mimicsCAD": false,
+      "confundeCom": ["G-04", "G-26"],
+      "vinheta": "38 anos, pós-operatório de cirurgia bariátrica há 8 meses, vômitos recorrentes e baixa adesão à reposição vitamínica prescrita, fadiga progressiva e taquicardia inexplicada.",
+      "labs": { "ph": 7.35, "pco2": 30, "hco3": 16, "na": 138, "cl": 104, "albumin": 4.0, "lactateMmolL": 3.2 },
+      "pergunta": "Sem etilismo — a deficiência de tiamina só causa acidose lática em alcoolistas? Os números aqui são discretamente ambíguos, como resolver?",
+      "gabarito": {
+        "classificacao": "HCO₃ 16 (baixo) e pCO₂ 30 (baixo) simultaneamente, com pH 7,35 na própria borda inferior da faixa normal — matematicamente ambíguo entre (a) acidose metabólica com compensação respiratória quase completa e (b) alcalose respiratória com compensação renal quase completa; a magnitude discreta (lactato só moderadamente elevado) é parte do que torna esse diagnóstico fácil de passar despercebido.",
+        "diagnostico": "Acidose lática por deficiência de tiamina não relacionada a etilismo — pós-cirurgia bariátrica é hoje uma das causas mais comuns de deficiência de tiamina em não-alcoolistas, por baixa ingesta, vômitos recorrentes e má absorção.",
+        "raciocinio": "AG = 138−104−16 = 18, elevado, explicado parcialmente pelo lactato de 3,2 mmol/L. A tiamina é cofator essencial da piruvato desidrogenase, a enzima que converte piruvato em acetil-CoA para entrar no ciclo de Krebs — sem tiamina suficiente, o piruvato se acumula e é desviado para lactato, mesmo sem hipóxia tecidual verdadeira (é uma acidose lática 'tipo B', por defeito metabólico, não por hipoperfusão). O quadro costuma ser mais SUTIL que a cetoacidose alcoólica (G-04) ou a acidose lática de choque — por isso é subdiagnosticado, especialmente em quem não é etilista.",
+        "armadilha": "Restringir a suspeita de deficiência de tiamina a pacientes etilistas — cirurgia bariátrica, hiperêmese gravídica, jejum prolongado e nutrição parenteral sem suplementação são causas cada vez mais reconhecidas em não-alcoolistas, e o quadro pode ser discreto o suficiente para passar despercebido.",
+        "detalheChave": "Mesma via metabólica (deficiência de tiamina) de G-04 (onde o etilismo é o pano de fundo clássico), mas aqui o contexto é cirúrgico/nutricional — a história de bariátrica recente + baixa adesão à reposição vitamínica é o que aponta para a causa, já que a magnitude laboratorial por si só é discreta e ambígua.",
+        "conteudoComplementar": "Reposição empírica de tiamina antes de qualquer administração de glicose é a prática seguida em qualquer paciente de risco (não só etilistas) com acidose lática inexplicada — administrar glicose sem tiamina prévia pode precipitar/piorar encefalopatia de Wernicke em quem já está deficiente."
+      }
+    },
+    {
+      "id": "G-69",
+      "categoria": "Acidose metabólica AG alto (não-cetótica)",
+      "titulo": "Intoxicação grave por ferro (overdose pediátrica acidental)",
+      "mimicsCAD": false,
+      "confundeCom": ["G-08", "G-43"],
+      "vinheta": "3 anos, ingestão acidental de múltiplos comprimidos de sulfato ferroso da mãe (gestante) há 5h, vômitos com sangue, letargia progressiva, dor abdominal intensa.",
+      "labs": { "ph": 7.25, "pco2": 21, "hco3": 9, "na": 138, "cl": 98, "albumin": 4.0 },
+      "pergunta": "Classifique o distúrbio — por que a intoxicação por ferro causa acidose de AG alto, mesmo sem ser um álcool tóxico nem gerar lactato por hipoperfusão isolada?",
+      "gabarito": {
+        "classificacao": "Acidose metabólica primária grave (HCO₃ 9 < 22), compensação respiratória adequada — pCO₂ 21 dentro de 21,5 ± 2 (19,5–23,5).",
+        "diagnostico": "Intoxicação grave por ferro — toxicidade mitocondrial direta somada a sangramento gastrointestinal (corrosão direta da mucosa) causando hipoperfusão, dois mecanismos acidificantes simultâneos no mesmo evento.",
+        "raciocinio": "AG = 138−98−9 = 31, muito alto — o ferro em excesso é diretamente tóxico à cadeia respiratória mitocondrial (desacopla a fosforilação oxidativa, de forma análoga a outros venenos mitocondriais), gerando ácidos orgânicos e lactato por disfunção celular direta; simultaneamente, o efeito corrosivo do ferro na mucosa gastrointestinal causa sangramento e perda de volume, adicionando um componente de hipoperfusão. É a combinação dos dois mecanismos (tóxico direto + hemorrágico) que explica a gravidade desproporcional desse tipo de intoxicação em crianças pequenas.",
+        "armadilha": "Subestimar a gravidade de uma ingestão de sulfato ferroso por não ser um medicamento 'perigoso' do ponto de vista popular — comprimidos de ferro para suplementação em gestantes são uma causa clássica e potencialmente fatal de intoxicação pediátrica acidental, com toxicidade dependente da quantidade de ferro elementar ingerida, não do número de comprimidos.",
+        "detalheChave": "Mesma classe de AG alto por toxicidade mitocondrial direta de G-08/G-43, mas aqui somada a um componente hemorrágico GI direto — a história (acesso a comprimidos de ferro de adulto, vômitos com sangue) é o que aponta para o ferro especificamente.",
+        "conteudoComplementar": "Nível sérico de ferro e uma radiografia abdominal (comprimidos de ferro são radiopacos) ajudam a confirmar e quantificar a ingestão; deferoxamina (quelante específico) é o antídoto nos casos graves, guiado pelo nível sérico e pela gravidade clínica, não só pela quantidade estimada ingerida."
+      }
+    },
+    {
+      "id": "G-70",
+      "categoria": "Acidose metabólica AG normal (hiperclorêmica)",
+      "titulo": "Acidose hiperclorêmica por nutrição parenteral total",
+      "mimicsCAD": false,
+      "confundeCom": ["G-09", "G-54"],
+      "vinheta": "60 anos, pós-operatório de ressecção intestinal extensa, em nutrição parenteral total exclusiva há 3 semanas, acidose leve persistente sem foco infeccioso nem perda GI ativa.",
+      "labs": { "ph": 7.34, "pco2": 29, "hco3": 15, "na": 140, "cl": 115, "albumin": 4.0 },
+      "pergunta": "Sem diarreia, sem fístula, sem infecção — a própria solução de nutrição parenteral pode causar isto?",
+      "gabarito": {
+        "classificacao": "Acidose metabólica primária (HCO₃ 15 < 22), compensação respiratória adequada — pCO₂ 29 dentro de 30,5 ± 2 (28,5–32,5).",
+        "diagnostico": "Acidose metabólica hiperclorêmica iatrogênica por nutrição parenteral total — soluções de aminoácidos cristalinos usadas na NPT são ricas em cloreto (frequentemente como sal de cloridrato dos aminoácidos catiônicos), fornecendo uma carga de cloreto desproporcional em relação ao acetato/bicarbonato da fórmula.",
+        "raciocinio": "AG = 140−115−15 = 10, normal — mecanismo puramente de composição da solução infundida, sem nenhuma perda GI, renal ou tubular envolvida. Fórmulas modernas de NPT tentam balancear cloreto com acetato (que é metabolizado a bicarbonato) exatamente para evitar esse efeito, mas formulações mais antigas ou desbalanceadas — ou uso prolongado sem ajuste — podem gerar esse quadro simplesmente pela carga eletrolítica da própria solução.",
+        "armadilha": "Investigar exaustivamente causas GI/renais de acidose hiperclorêmica num paciente em NPT exclusiva sem revisar a composição da própria fórmula — ajustar a proporção acetato/cloreto na prescrição de NPT é o primeiro passo, mais simples que uma investigação extensa.",
+        "detalheChave": "Mesmo padrão de AG normal de G-09/G-54, mas aqui a causa é a composição da PRÓPRIA solução terapêutica infundida, não uma perda do paciente — revisar a fórmula de NPT (proporção cloreto/acetato) resolve o mistério antes de qualquer exame adicional.",
+        "conteudoComplementar": "Farmacêuticos especializados em nutrição parenteral ajustam rotineiramente essa proporção conforme os eletrólitos séricos do paciente ao longo do tempo — acompanhamento eletrolítico seriado é parte padrão do manejo de NPT prolongada, exatamente para prevenir/corrigir esse tipo de desvio."
+      }
+    },
+    {
+      "id": "G-71",
+      "categoria": "Distúrbio respiratório — acidose",
+      "titulo": "Insuficiência respiratória aguda por síndrome de Guillain-Barré",
+      "mimicsCAD": false,
+      "confundeCom": ["G-59", "G-72", "G-73"],
+      "vinheta": "32 anos, fraqueza ascendente progressiva há 5 dias começando nos pés, após episódio de diarreia há 2 semanas, agora com dificuldade respiratória e reflexos tendíneos abolidos.",
+      "labs": { "ph": 7.29, "pco2": 52, "hco3": 24, "chronicityHint": "acute" },
+      "pergunta": "Compare com G-59 (miastenia) — mesmo tipo de falência neuromuscular respiratória, mas por qual nível diferente do sistema nervoso periférico?",
+      "gabarito": {
+        "classificacao": "Acidose respiratória aguda primária (pCO₂ 52 > 45), resposta renal aguda adequada para o tempo decorrido — HCO₃ 24 dentro de 25,2 ± 2 (23,2–27,2).",
+        "diagnostico": "Insuficiência respiratória aguda por síndrome de Guillain-Barré — polirradiculoneuropatia desmielinizante autoimune aguda, tipicamente pós-infecciosa (o episódio de diarreia 2 semanas antes é a pista clássica de gatilho, frequentemente por Campylobacter jejuni).",
+        "raciocinio": "Sem AG relevante — eixo puramente ventilatório. Diferente de G-59 (miastenia, falência na JUNÇÃO neuromuscular), aqui o defeito é mais proximal: desmielinização dos NERVOS periféricos (incluindo o nervo frênico, que inerva o diafragma) impede a condução do impulso nervoso do corno anterior da medula até o músculo — o padrão CLÁSSICO é ascendente (começa nos pés, sobe), com reflexos tendíneos ABOLIDOS (ao contrário da miastenia, onde os reflexos costumam estar preservados, já que o nervo em si está intacto).",
+        "armadilha": "Confundir com miastenia gravis pelo padrão comum de fraqueza + insuficiência respiratória — reflexos tendíneos abolidos (GBS) vs preservados (miastenia), padrão ascendente fixo (GBS) vs flutuante/fatigável ao longo do dia (miastenia), e história de gatilho infeccioso recente (GBS) são os detalhes que diferenciam.",
+        "detalheChave": "Mesmo tipo de falência da 'bomba' respiratória de G-59/G-72/G-73, mas o NÍVEL anatômico do defeito (nervo periférico desmielinizado, não a junção neuromuscular nem o corpo celular do neurônio motor) é o que muda — e os reflexos tendíneos abolidos são o achado de exame físico mais rápido para diferenciar de miastenia à beira do leito.",
+        "conteudoComplementar": "Capacidade vital forçada seriada (não só a gasometria) é o parâmetro mais usado para decidir o momento de suporte ventilatório em GBS — imunoglobulina IV ou plasmaférese são os tratamentos específicos, e a recuperação, ao contrário de miastenia (doença crônica recorrente), tende a ser um evento monofásico com resolução ao longo de semanas a meses."
+      }
+    },
+    {
+      "id": "G-72",
+      "categoria": "Distúrbio respiratório — acidose",
+      "titulo": "Insuficiência respiratória aguda por botulismo",
+      "mimicsCAD": false,
+      "confundeCom": ["G-59", "G-71", "G-73"],
+      "vinheta": "40 anos, ingestão de conserva caseira mal esterilizada há 18h, visão dupla e pálpebras caídas iniciando o quadro, agora com fraqueza DESCENDENTE progressiva e dificuldade respiratória, reflexos tendíneos preservados.",
+      "labs": { "ph": 7.29, "pco2": 54, "hco3": 25, "chronicityHint": "acute" },
+      "pergunta": "Compare com G-59 (miastenia) e G-71 (Guillain-Barré) — o padrão de progressão (descendente, começando pelos olhos) e a causa (toxina, não autoimune) apontam para qual terceiro mecanismo de falência da junção neuromuscular?",
+      "gabarito": {
+        "classificacao": "Acidose respiratória aguda primária (pCO₂ 54 > 45), resposta renal aguda adequada para o tempo decorrido — HCO₃ 25 dentro de 25,4 ± 2 (23,4–27,4).",
+        "diagnostico": "Botulismo — bloqueio pré-sináptico da liberação de acetilcolina na junção neuromuscular pela toxina botulínica, tipicamente por conserva caseira mal processada (Clostridium botulinum).",
+        "raciocinio": "Sem AG relevante — eixo puramente ventilatório, mesmo nível anatômico da miastenia (a junção neuromuscular), mas por um mecanismo oposto: miastenia (G-59) é um bloqueio PÓS-sináptico autoimune (anticorpos contra o receptor de acetilcolina); botulismo é um bloqueio PRÉ-sináptico tóxico (a toxina impede a LIBERAÇÃO de acetilcolina pelo neurônio). O padrão clínico clássico é DESCENDENTE (começa pelos pares cranianos — ptose, diplopia, disfagia — e desce), o oposto do padrão ascendente de Guillain-Barré (G-71), com reflexos tendíneos PRESERVADOS (diferente de GBS, onde são abolidos).",
+        "armadilha": "Tratar toda fraqueza neuromuscular aguda com insuficiência respiratória como GBS ou miastenia sem considerar botulismo — a combinação de padrão descendente + história alimentar sugestiva (conserva caseira, mel em lactente para a forma infantil) + reflexos preservados é a assinatura clínica específica.",
+        "detalheChave": "Terceiro mecanismo de falência da 'bomba' respiratória neuromuscular deste banco (G-59 pós-sináptico autoimune, G-71 nervo periférico desmielinizado, G-72 pré-sináptico tóxico) — os três podem ter gasometria quase idêntica; padrão de progressão (fatigável/ascendente/descendente) e reflexos tendíneos são os achados de exame físico que os diferenciam em segundos.",
+        "conteudoComplementar": "Antitoxina botulínica equina (ou imunoglobulina específica na forma infantil) deve ser administrada o quanto antes, idealmente antes da confirmação laboratorial (que é lenta) — ela neutraliza apenas a toxina circulante ainda não ligada, não reverte o bloqueio já estabelecido nas terminações nervosas, daí a urgência em administrá-la precocemente."
+      }
+    },
+    {
+      "id": "G-73",
+      "categoria": "Distúrbio respiratório — acidose",
+      "titulo": "Insuficiência respiratória crônica por esclerose lateral amiotrófica avançada",
+      "mimicsCAD": false,
+      "confundeCom": ["G-59", "G-71", "G-72", "G-74"],
+      "vinheta": "58 anos, esclerose lateral amiotrófica diagnosticada há 3 anos, fraqueza progressiva e lenta da musculatura respiratória ao longo de meses, sem evento agudo precipitante, gasometria de acompanhamento ambulatorial.",
+      "labs": { "ph": 7.34, "pco2": 58, "hco3": 30, "chronicityHint": "chronic" },
+      "pergunta": "Compare com G-71/G-72 (agudos) — mesma categoria de falência neuromuscular respiratória, mas por que a apresentação aqui é tão diferente (crônica, não uma crise súbita)?",
+      "gabarito": {
+        "classificacao": "Acidose respiratória crônica primária (pCO₂ 58 > 45), resposta renal crônica adequada — HCO₃ 30 dentro de 30,3 ± 3 (27,3–33,3).",
+        "diagnostico": "Insuficiência respiratória crônica por esclerose lateral amiotrófica (ELA) avançada — degeneração progressiva e lenta dos neurônios motores (incluindo os que controlam a musculatura respiratória), ao contrário do início súbito de GBS/botulismo.",
+        "raciocinio": "Sem AG relevante — eixo puramente ventilatório, mas aqui o defeito é a degeneração LENTA e progressiva do próprio corpo celular do neurônio motor (não um ataque agudo autoimune ou tóxico), dando tempo para o rim desenvolver a compensação crônica completa (HCO₃ 30, dentro da janela crônica esperada) — diferente de G-71/G-72, onde o processo agudo não permite tempo para essa compensação renal se desenvolver.",
+        "armadilha": "Esperar uma crise respiratória súbita e dramática em ELA, como nos quadros agudos (GBS, botulismo, miastenia em crise) — a deterioração respiratória na ELA costuma ser insidiosa e lenta, exigindo rastreamento proativo (espirometria seriada) muito antes que a gasometria mostre alterações evidentes, que já indicam doença avançada.",
+        "detalheChave": "Mesma categoria de falência neuromuscular respiratória de G-59/G-71/G-72, mas o CURSO TEMPORAL (crônico e progressivo, não uma crise aguda) é o que muda toda a fisiologia da compensação e a abordagem clínica — a mesma 'bomba quebrada' se apresenta de forma completamente diferente conforme a velocidade da doença de base.",
+        "conteudoComplementar": "Ventilação não invasiva noturna, iniciada PROATIVAMENTE com base em critérios de espirometria (antes da insuficiência respiratória franca), é o padrão de cuidado em ELA — esperar a gasometria alterar para decidir sobre suporte ventilatório é, nessa doença específica, tarde demais para o melhor benefício."
+      }
+    },
+    {
+      "id": "G-74",
+      "categoria": "Distúrbio respiratório — acidose",
+      "titulo": "Insuficiência respiratória crônica por cifoescoliose grave",
+      "mimicsCAD": false,
+      "confundeCom": ["G-15", "G-29", "G-73"],
+      "vinheta": "65 anos, cifoescoliose torácica grave não tratada desde a adolescência, dispneia crônica progressiva aos esforços, sem tabagismo, sem obesidade importante, gasometria de rotina.",
+      "labs": { "ph": 7.34, "pco2": 54, "hco3": 28, "chronicityHint": "chronic" },
+      "pergunta": "Compare com G-15 (DPOC) e G-29 (SHO) — mesmo padrão de acidose respiratória crônica compensada, mas por qual mecanismo puramente MECÂNICO (nem pulmonar nem neuromuscular) aqui?",
+      "gabarito": {
+        "classificacao": "Acidose respiratória crônica primária (pCO₂ 54 > 45), resposta renal crônica adequada — HCO₃ 28 dentro de 28,9 ± 3 (25,9–31,9).",
+        "diagnostico": "Insuficiência respiratória crônica por doença pulmonar restritiva de causa torácica — cifoescoliose grave deformando a caixa torácica o suficiente para restringir mecanicamente a expansão pulmonar.",
+        "raciocinio": "Sem AG relevante — eixo puramente mecânico-restritivo. Diferente de G-15 (doença do PARÊNQUIMA/vias aéreas pulmonares, DPOC) e de G-29 (combinação de restrição por obesidade + obstrução de via aérea superior durante o sono), aqui a caixa TORÁCICA em si está deformada o suficiente para impedir a expansão pulmonar normal, mesmo com pulmões e músculos respiratórios intrinsecamente saudáveis — um quarto mecanismo puramente estrutural/mecânico de hipoventilação crônica, ao lado do parenquimatoso (G-15), do combinado obesidade+via aérea (G-29) e dos neuromusculares (G-59/71/72/73).",
+        "armadilha": "Atribuir esse padrão gasométrico a DPOC por hábito, sem examinar a parede torácica — ausência de tabagismo e a deformidade torácica visível ao exame físico (e confirmada por radiografia) apontam para a causa mecânica, não pulmonar/parenquimatosa.",
+        "detalheChave": "Mesmo padrão numérico de acidose respiratória crônica compensada de G-15/G-29/G-73, mas o mecanismo aqui é puramente mecânico-estrutural (deformidade da caixa torácica) — nem doença pulmonar intrínseca, nem obesidade/via aérea superior, nem falência neuromuscular.",
+        "conteudoComplementar": "Correção cirúrgica precoce da escoliose grave na adolescência (antes que a deformidade torácica se estabeleça de forma irreversível) é a principal medida preventiva dessa complicação tardia — ventilação não invasiva noturna é o suporte padrão uma vez instalada a insuficiência respiratória crônica."
+      }
+    },
+    {
+      "id": "G-75",
+      "categoria": "Acidose metabólica AG alto (não-cetótica)",
+      "titulo": "Metemoglobinemia (benzocaína/dapsona) — mais uma 'medição que engana'",
+      "mimicsCAD": false,
+      "confundeCom": ["G-42", "G-76"],
+      "vinheta": "50 anos, submetido a endoscopia com anestesia tópica de orofaringe com benzocaína em spray, cianose de início súbito minutos após o procedimento, saturação de oxigênio no oxímetro de pulso estabilizada em torno de 85% e NÃO sobe apesar de oxigênio suplementar a 100%.",
+      "labs": { "ph": 7.40, "pco2": 40, "hco3": 24 },
+      "pergunta": "Compare com G-42 (monóxido de carbono) — a oximetria também engana aqui, mas na direção OPOSTA. Por quê?",
+      "gabarito": {
+        "classificacao": "HCO₃, pCO₂ e pH dentro da faixa de referência — sem componente ácido-base primário fechado por este eixo (o problema aqui não é ventilatório nem metabólico, é de transporte de oxigênio pela hemoglobina).",
+        "diagnostico": "Metemoglobinemia induzida por benzocaína (anestésico tópico) — o ferro da hemoglobina é oxidado de Fe²⁺ para Fe³⁺ (metemoglobina), que não consegue se ligar ao oxigênio nem liberá-lo adequadamente aos tecidos.",
+        "raciocinio": "A PaO₂ medida na gasometria costuma estar NORMAL (o oxigênio dissolvido no plasma não é afetado), mas a oximetria de pulso (que estima a saturação por absorção de luz em 2 comprimentos de onda) interpreta a metemoglobina de forma equivocada e tende a CONVERGIR para ~85%, um platô característico que NÃO sobe com oxigênio suplementar — o oposto do padrão de G-42 (CO), onde a oximetria de pulso convencional lê FALSAMENTE ALTO (perto de 100%) apesar de hipóxia real. Nos dois casos o problema é o MESMO instrumento (oximetria de 2 comprimentos de onda) sendo enganado pela mesma limitação técnica, mas em direções opostas conforme o tipo de hemoglobina anormal envolvida.",
+        "armadilha": "Assumir que uma SpO₂ que não sobe com O₂ suplementar significa só shunt pulmonar grave ou falha do equipamento — cianose desproporcional ao quadro clínico + platô característico de SpO₂ ~85% + gatilho farmacológico conhecido (benzocaína, dapsona, nitratos, alguns anestésicos locais) é a assinatura clássica de metemoglobinemia.",
+        "detalheChave": "Contraste direto com G-42: ambos são casos de 'a oximetria de pulso convencional mente', mas CO engana para CIMA (SpO₂ falsamente alta) e metemoglobinemia engana com um PLATÔ característico em torno de 85% que não sobe — só a CO-oximetria (multi-comprimento de onda) mede corretamente as duas condições, cada uma com sua própria fração medida diretamente (carboxi-hemoglobina vs metemoglobina).",
+        "conteudoComplementar": "Azul de metileno é o antídoto específico (reduz a metemoglobina de volta a hemoglobina funcional), mas é CONTRAINDICADO em deficiência de G6PD (pode precipitar hemólise grave) — perguntar sobre essa deficiência antes de administrar, quando a história permitir, é parte do manejo seguro."
+      }
+    },
+    {
+      "id": "G-76",
+      "categoria": "Acidose metabólica AG alto (não-cetótica)",
+      "titulo": "Hipóxia anêmica por hemorragia maciça aguda",
+      "mimicsCAD": false,
+      "confundeCom": ["G-42", "G-75"],
+      "vinheta": "29 anos, hemorragia pós-parto maciça, hipotensa e taquicárdica, saturação de oxigênio no oxímetro de pulso 99%, hemoglobina sérica de 4,8 g/dL.",
+      "labs": { "ph": 7.36, "pco2": 35, "hco3": 19, "na": 140, "cl": 104, "albumin": 4.0, "lactateMmolL": 3.0 },
+      "pergunta": "SpO₂ 99%, 'perfeita'. Isso significa que a oxigenação tecidual está adequada nesta paciente?",
+      "gabarito": {
+        "classificacao": "Acidose metabólica primária leve (HCO₃ 19 < 22), compensação respiratória adequada — pCO₂ 35 dentro de 36,5 ± 2 (34,5–38,5).",
+        "diagnostico": "Hipóxia anêmica por hemorragia maciça — a SpO₂ mede a FRAÇÃO de hemoglobina disponível que está saturada com oxigênio, não a QUANTIDADE total de oxigênio sendo entregue aos tecidos.",
+        "raciocinio": "AG = 140−104−19 = 17, discretamente elevado, explicado pelo lactato de 3,0 mmol/L (hipoperfusão tecidual pela perda sanguínea maciça). Com hemoglobina de 4,8 g/dL, mesmo que 99% da (pouca) hemoglobina restante esteja saturada com oxigênio, a QUANTIDADE absoluta de oxigênio transportada ao tecido (conteúdo arterial de O₂, que depende diretamente da concentração de hemoglobina) está drasticamente reduzida — SpO₂ 'normal' aqui é um exemplo clássico de como esse número mede apenas SATURAÇÃO, não CONTEÚDO de oxigênio, e não deve, sozinho, tranquilizar diante de anemia grave.",
+        "armadilha": "Usar SpO₂ isoladamente como parâmetro de oxigenação tecidual adequada sem considerar a hemoglobina — em anemia grave, mesmo SpO₂ 100% coexiste com entrega de oxigênio gravemente comprometida; o lactato/déficit de base são parâmetros mais informativos de perfusão tecidual real nesse cenário.",
+        "detalheChave": "Terceiro tipo de 'a oximetria não conta a história toda' deste banco (junto com G-42 CO e G-75 metemoglobinemia), mas aqui a SpO₂ está genuinamente CORRETA (a fração de Hb saturada realmente é alta) — o problema não é o instrumento, é que faltam hemácias/hemoglobina suficientes para carregar oxigênio, algo que a saturação percentual não captura.",
+        "conteudoComplementar": "Os quatro tipos clássicos de hipóxia tecidual (hipoxêmica — pouco O₂ no sangue; anêmica — pouca hemoglobina para carregá-lo; estagnante/circulatória — fluxo sanguíneo inadequado, como no choque; histotóxica — célula incapaz de usar o O₂ recebido, como no cianeto/G-43) todos podem coexistir com SpO₂ normal — a saturação de oxigênio é só uma peça de um quebra-cabeça maior de oferta e utilização tecidual de oxigênio."
+      }
+    },
+    {
+      "id": "G-77",
+      "categoria": "Distúrbio respiratório — alcalose",
+      "titulo": "Amostra venosa rotulada erroneamente como arterial",
+      "mimicsCAD": false,
+      "confundeCom": ["G-78", "G-79"],
+      "vinheta": "55 anos, coletada gasometria de rotina em enfermaria, paciente clinicamente confortável, respirando ar ambiente, oximetria de pulso 98%. O resultado 'arterial' retorna com pO₂ inesperadamente baixo (38 mmHg) para o quadro clínico.",
+      "labs": { "ph": 7.36, "pco2": 44, "hco3": 24 },
+      "pergunta": "pO₂ de 38 mmHg 'arterial' num paciente confortável com SpO₂ 98%. Isso é fisiologicamente plausível, ou é hora de suspeitar de um erro na coleta?",
+      "gabarito": {
+        "classificacao": "HCO₃ e pCO₂ dentro (ou muito próximos) da faixa de referência, pH levemente abaixo do centro da normalidade — valores compatíveis com uma amostra VENOSA (que tem, fisiologicamente, pH um pouco mais baixo e pCO₂ um pouco mais alto que o sangue arterial do mesmo paciente), não com uma amostra arterial verdadeira.",
+        "diagnostico": "Erro pré-analítico — amostra venosa colhida e rotulada por engano como arterial (punção acidental de veia em vez de artéria, comum em coletas 'às cegas' sem visualização direta do vaso).",
+        "raciocinio": "O dado que NÃO se encaixa é o pO₂: 38 mmHg seria uma hipoxemia arterial GRAVE, incompatível com um paciente clinicamente confortável e SpO₂ 98% medida simultaneamente por oximetria de pulso (que reflete a saturação arterial real). Sangue venoso tem, por definição, pO₂ muito mais baixo que o arterial (o oxigênio já foi extraído pelos tecidos) — um pO₂ ~35-40 mmHg é absolutamente NORMAL para uma amostra venosa, mas seria uma emergência se fosse realmente arterial. O pH/pCO₂/HCO₃, por si só, são discretamente compatíveis com qualquer um dos dois (a diferença arterial-venosa nesses três parâmetros é pequena), mas o pO₂ é o item que trai a origem verdadeira da amostra.",
+        "armadilha": "Reagir ao pO₂ baixo como se fosse uma hipoxemia arterial real e iniciar investigação/tratamento (suplementação agressiva de O₂, investigação de shunt) sem primeiro confrontar o resultado com o quadro clínico e a oximetria de pulso — sempre que um resultado de gasometria 'não bate' com o paciente à beira do leito, considerar erro de coleta antes de tratar o número.",
+        "detalheChave": "Este caso não tem um 'distúrbio' a diagnosticar no paciente — o achado a reconhecer é que a AMOSTRA em si está errada. O pO₂ discrepante com a clínica e com a oximetria de pulso simultânea é o item que, sozinho, deveria disparar a repetição da coleta antes de qualquer outra conduta.",
+        "conteudoComplementar": "Uma gasometria genuinamente arterial, colhida sob visualização/palpação direta do pulso (radial, braquial ou femoral) ou de um cateter arterial já instalado, praticamente nunca gera essa discrepância — em caso de dúvida, comparar o pO₂ relatado com a SpO₂ simultânea é o teste de sanidade mais rápido e mais barato disponível."
+      }
+    },
+    {
+      "id": "G-78",
+      "categoria": "Distúrbio respiratório — alcalose",
+      "titulo": "Artefato de bolha de ar na seringa de gasometria",
+      "mimicsCAD": false,
+      "confundeCom": ["G-77", "G-79"],
+      "vinheta": "48 anos, gasometria arterial colhida à beira do leito com bolhas de ar visíveis na seringa antes do processamento, paciente com frequência respiratória normal ao exame e sem queixa respiratória.",
+      "labs": { "ph": 7.52, "pco2": 28, "hco3": 22, "chronicityHint": "acute" },
+      "pergunta": "O resultado sugere alcalose respiratória aguda bem compensada. Mas o paciente não está hiperventilando ao exame. O que pode ter acontecido ANTES da amostra chegar ao analisador?",
+      "gabarito": {
+        "classificacao": "Alcalose respiratória aguda (pCO₂ 28 < 35), resposta renal aguda adequada — HCO₃ 22 dentro de 21,6 ± 2 (19,6–23,6). Estes números são internamente consistentes entre si (a matemática da fisiologia bate), mas isso NÃO garante que reflitam o estado real do paciente.",
+        "diagnostico": "Artefato de bolha de ar na amostra — o ar atmosférico dentro da bolha tem pCO₂ próximo de zero e pO₂ próximo de 160 mmHg; ao entrar em contato prolongado com o sangue na seringa antes do processamento, a amostra se equilibra parcialmente com esse ar, reduzindo artificialmente o pCO₂ medido (e elevando o pO₂, não mostrado aqui).",
+        "raciocinio": "O ponto pedagógico central: um par de valores pode ser matematicamente AUTOCONSISTENTE (a relação entre pH/pCO₂/HCO₃ obedece à equação de Henderson-Hasselbalch perfeitamente, como aqui) e ainda assim NÃO representar a fisiologia real do paciente — a consistência interna dos números prova que a MEDIÇÃO foi processada corretamente pelo aparelho, não que a AMOSTRA em si era válida. Bolhas de ar visíveis antes do processamento, tempo de transporte prolongado sem refrigeração, ou seringa mal vedada são causas clássicas desse artefato — sempre descritas nos protocolos de coleta como motivo para repetir a amostra.",
+        "armadilha": "Confiar cegamente na consistência interna de um resultado de gasometria (números que 'batem' entre si pela equação) como prova de validade — a equação sempre vai bater para QUALQUER par internamente coerente de valores, seja a amostra boa ou contaminada; só a correlação com o exame físico do paciente revela o problema.",
+        "detalheChave": "Junto com G-77, mostra que a gasometria pode 'mentir' de duas formas diferentes: uma amostra da fonte ERRADA (venosa em vez de arterial) ou uma amostra CONTAMINADA (ar atmosférico) — em ambos os casos, o exame físico do paciente (frequência respiratória, oximetria, conforto clínico) é o que expõe a discrepância, não outro cálculo laboratorial.",
+        "conteudoComplementar": "Protocolos de coleta de gasometria recomendam expelir qualquer bolha de ar imediatamente após a punção, vedar a seringa e processar a amostra o mais rápido possível (idealmente em minutos, refrigerada se houver atraso) — desvios nesse processo são causas reconhecidas e evitáveis de resultado não confiável."
+      }
+    },
+    {
+      "id": "G-79",
+      "categoria": "Distúrbio respiratório — alcalose",
+      "titulo": "Leucocitose extrema (crise blástica leucêmica) — 'leukocyte larceny'",
+      "mimicsCAD": false,
+      "confundeCom": ["G-77", "G-78"],
+      "vinheta": "45 anos, leucemia mieloide crônica em crise blástica, contagem de leucócitos acima de 300.000/mm³, clinicamente confortável e sem sinais de desconforto respiratório, gasometria arterial mostra pO₂ inesperadamente baixo.",
+      "labs": { "ph": 7.41, "pco2": 39, "hco3": 24 },
+      "pergunta": "Leucócitos extremamente elevados e um pO₂ baixo inexplicado no mesmo paciente — existe uma ligação entre os dois achados?",
+      "gabarito": {
+        "classificacao": "HCO₃, pCO₂ e pH dentro da faixa de referência — sem distúrbio ácido-base primário; o achado a explicar está fora deste eixo (no pO₂, não mostrado no trio ácido-base).",
+        "diagnostico": "'Leukocyte larceny' (pseudo-hipoxemia por consumo de oxigênio in vitro) — leucócitos em quantidade extrema continuam metabolicamente ativos DENTRO da seringa após a coleta, consumindo o oxigênio da amostra antes que ela seja processada.",
+        "raciocinio": "Com contagens de leucócitos muito acima do normal (tipicamente >100.000/mm³, como em crises blásticas leucêmicas), a massa celular total na amostra é grande o suficiente para consumir uma quantidade mensurável de oxigênio dissolvido no plasma da seringa, SE houver qualquer atraso entre a coleta e o processamento — o pO₂ medido cai progressivamente com o tempo de espera, sem que o paciente tenha, de fato, nenhuma hipoxemia real. É um fenômeno análogo à pseudo-hipoglicemia por consumo de glicose em amostras com leucocitose extrema não processadas a tempo.",
+        "armadilha": "Investigar uma causa pulmonar/cardíaca para um pO₂ baixo inexplicado num paciente clinicamente confortável, sem notar a leucocitose extrema concomitante — processar a amostra imediatamente (ou colocá-la em gelo se houver atraso inevitável) é a solução simples que evita o artefato, muito antes de investigar o pulmão.",
+        "detalheChave": "Terceiro caso de 'a gasometria não reflete o paciente' por um motivo puramente pré-analítico/temporal (G-77 amostra da fonte errada, G-78 contaminação por ar, G-79 consumo celular in vitro) — os três reforçam que qualquer resultado gasométrico deve ser interpretado à luz do quadro clínico, nunca isoladamente.",
+        "conteudoComplementar": "O mesmo fenômeno de consumo celular in vitro pode causar pseudo-hipoglicemia (consumo de glicose) e pseudo-hipercalemia (liberação de potássio intracelular por lise celular) em amostras com leucocitose ou trombocitose extremas não processadas rapidamente — vale lembrar desse conjunto de artefatos sempre que a contagem de células estiver muito alterada."
+      }
+    },
+    {
+      "id": "G-80",
+      "categoria": "Distúrbio respiratório — alcalose",
+      "titulo": "Tempestade tireoidiana",
+      "mimicsCAD": false,
+      "confundeCom": ["G-17", "G-18", "G-19", "G-31", "G-39", "G-44", "G-45"],
+      "vinheta": "38 anos, hipertireoidismo conhecido sem tratamento regular, febre alta, taquicardia extrema, agitação e tremores após suspender a medicação há 3 semanas.",
+      "labs": { "ph": 7.50, "pco2": 28, "hco3": 21, "chronicityHint": "acute" },
+      "pergunta": "Mais um padrão de alcalose respiratória aguda repetido no banco — qual é o mecanismo hipermetabólico específico aqui, diferente de dor, ansiedade ou embolia?",
+      "gabarito": {
+        "classificacao": "Alcalose respiratória aguda primária (pCO₂ 28 < 35), resposta renal aguda adequada — HCO₃ 21 dentro de 21,6 ± 2 (19,6–23,6).",
+        "diagnostico": "Tempestade tireoidiana — estado hipermetabólico extremo por excesso de hormônio tireoidiano, precipitado aqui pela suspensão abrupta do tratamento.",
+        "raciocinio": "Sem AG relevante — eixo puramente respiratório. O excesso de hormônio tireoidiano acelera o metabolismo celular em todo o corpo, aumentando drasticamente a produção de CO₂ e o consumo de oxigênio — o corpo responde hiperventilando para eliminar esse excesso de CO₂ produzido, um mecanismo hipermetabólico DIFERENTE de dor (G-39, nociceptivo), ansiedade (G-18, psicogênico), embolia (G-17, obstrutivo/hipóxico) ou lesão central (G-45, estrutural): aqui é a própria taxa metabólica celular que dispara a ventilação.",
+        "armadilha": "Tratar taquipneia + taquicardia + agitação só como crise de ansiedade num paciente conhecidamente hipertireoideo — a combinação com febre alta e história de suspensão da medicação antitireoidiana deve disparar a suspeita de tempestade tireoidiana, uma emergência com tratamento específico e mortalidade significativa se não reconhecida.",
+        "detalheChave": "Mais um (o sétimo) gatilho diferente do mesmo padrão numérico de alcalose respiratória aguda deste banco — reforça, pela repetição deliberada, que esse padrão gasométrico simples tem um leque muito amplo de causas, e a história clínica (aqui, hipertireoidismo conhecido + suspensão do tratamento + febre) é sempre o que resolve, nunca o número isolado.",
+        "conteudoComplementar": "Critérios de Burch-Wartofsky (escore clínico combinando temperatura, frequência cardíaca, disfunção de sistema nervoso central/gastrointestinal/cardiovascular) ajudam a quantificar a probabilidade de tempestade tireoidiana à beira do leito — o tratamento (betabloqueador, tionamida, iodo, corticoide) deve começar com base na suspeita clínica, sem esperar a confirmação laboratorial do hormônio tireoidiano, que demora."
+      }
     }
   ]
 }
