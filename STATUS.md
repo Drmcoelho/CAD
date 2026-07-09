@@ -10,6 +10,9 @@ Estado do canon por camada, na versão `CAD360-ApA-2026-07-01`. O que estiver �
 ## Banco de gasometrias (`content/gasometrias.json`, `painel/index.html`)
 - ✅ **Completo: 100/100 casos** (G-01..G-100), 100 diagnósticos diferentes, verificados por `scripts/check_gasometrias.js` (Henderson-Hasselbalch, distúrbio primário, AG/AGc, hasDka). UI em `painel/index.html`, separada da série real.
 
+## Banco de fisiopatologia/mecanismo (`content/fisiopatologia.json`, `app/index.html` aba Provão)
+- ✅ 16 questões (9 mcq/5 vf/2 diss) ancoradas a `cad_core.js`/`abg_core.js` via array `"computed"` — cada afirmação de mecanismo é recomputada de verdade, não só prosa. `scripts/check_fisiopatologia.js` (novo) recalcula essas 16 âncoras **e** as 8 âncoras de conduta (K/insulina) adicionadas a `content/questions.json` (mesmo campo `"computed"`), fechando o gap entre "conduta" (mais macia, guideline) e as duas funções que já a codificam deterministicamente (`potassiumPlan`/`insulinPlan`). UI em `app/index.html` (`#fisioQuiz`), reaproveitando 100% do render/placar já existente.
+
 ## Pranchas — lote 1 (M01–M06 + EX01–EX02)
 - ✅ M04 calculadoras — bandas Δ/Δ corrigidas, osm separada (tonicidade × osm-gap), exemplo glicose 320 (evita o fator 2,4).
 - ✅ EX01 Δ/Δ 0,71 — resolve o conflito entre pranchas ("rótulo antigo: pura" → "corrigido: hiperclorêmica").

@@ -106,7 +106,7 @@ function walkJsonStrings(node, label, cb) {
 const blobs = [];
 
 console.log("[check_content_text] varrendo content/*.json (prosa livre)\n");
-["content/atlas.json", "content/questions.json", "content/cases.json", "content/profiles.json"].forEach((rel) => {
+["content/atlas.json", "content/questions.json", "content/cases.json", "content/profiles.json", "content/fisiopatologia.json"].forEach((rel) => {
   const data = JSON.parse(read(rel));
   let checked = 0;
   walkJsonStrings(data, rel, (str, label) => { checkOperator(str, label); blobs.push({ text: str, label }); checked++; });

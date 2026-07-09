@@ -191,6 +191,9 @@ canvas{display:block;width:100%;background:#0c1218;border:1px solid var(--line);
  <div class="callout">Quatro formatos, uma fonte de verdade. <b>Múltipla escolha</b> e <b>V/F</b> corrigem na hora e contam placar; <b>dissertativas</b> revelam resposta-modelo; <b>casos clínicos</b> misturam os formatos. Tudo ancorado no CANON.</div>
  <div class="scorebar">Objetivas: <b id="score_r">0</b> / <b id="score_t">0</b> corretas</div>
  <div id="quiz"></div>
+ <div class="lab" style="margin:22px 0 6px">Fisiopatologia — o mecanismo por trás do número</div>
+ <div class="callout">O banco acima testa <b>conduta</b> (o que fazer). Este testa <b>mecanismo</b> (por que o corpo/o motor de cálculo faz o que faz) — cada resposta é ancorada numa função determinística de <code>core/cad_core.js</code>/<code>core/abg_core.js</code>, nunca uma afirmação solta.</div>
+ <div id="fisioQuiz"></div>
 </section>
 
 <!-- ATLAS -->
@@ -383,6 +386,235 @@ canvas{display:block;width:100%;background:#0c1218;border:1px solid var(--line);
     "model": "Cristaloide balanceado (Ringer) por volume — evita alimentar a futura cauda hiperclorêmica que o SF 0,9% fabricaria. Insulina 0,1 U/kg/h com dextrose (K 4,3 ≥ 3,5 permite iniciar)."
    }
   ]
+ },
+ {
+  "type": "mcq",
+  "q": "CAD à chegada, K 5,5 mEq/L. Conduta quanto à reposição inicial de potássio?",
+  "opts": [
+   "Repor potássio de imediato, junto com a insulina, para evitar queda abrupta",
+   "Não repor potássio de imediato — pedir ECG e reavaliar; a insulina já pode começar",
+   "Segurar a insulina até o K normalizar sozinho",
+   "Bicarbonato para corrigir o potássio"
+  ],
+  "correct": 1,
+  "exp": "Com K ≥5,0, o reflexo de 'sempre repor K na CAD' se inverte: repor de imediato arriscaria hipercalemia iatrogênica antes mesmo de a insulina começar a deslocar potássio para dentro da célula. A conduta é ECG + reavaliação, sem reposição inicial — a insulina já pode ser iniciada normalmente, e o próprio efeito dela tende a corrigir o K nas horas seguintes.",
+  "computed": [
+   { "module": "cad", "fn": "potassiumPlan", "args": [5.5], "path": "potassium", "expect": "no initial potassium; ECG/recheck" },
+   { "module": "cad", "fn": "potassiumPlan", "args": [5.5], "path": "insulin", "expect": "allowed" }
+  ]
+ },
+ {
+  "type": "vf",
+  "q": "Com K entre 3,5 e 5,0 mEq/L na CAD, a insulina pode ser iniciada normalmente, sempre com reposição concomitante de potássio para manter a faixa-alvo de 4–5.",
+  "correct": true,
+  "exp": "Verdadeiro. Nessa faixa a insulina está liberada (sem risco iminente de hipocalemia grave), mas a reposição concomitante de K continua ativa — a faixa-alvo de 4–5 mEq/L é mantida o tempo todo, não só quando o K está baixo ou alto.",
+  "computed": [
+   { "module": "cad", "fn": "potassiumPlan", "args": [4.0], "path": "band", "expect": "3.5-5.0" },
+   { "module": "cad", "fn": "potassiumPlan", "args": [4.0], "path": "insulin", "expect": "allowed" },
+   { "module": "cad", "fn": "potassiumPlan", "args": [4.0], "path": "potassium", "expect": "replace to maintain 4-5 mmol/L" }
+  ]
+ },
+ {
+  "type": "vf",
+  "q": "Com K ≥5,0 mEq/L na CAD, deve-se repor potássio de imediato para não deixar o valor cair enquanto a insulina age.",
+  "correct": false,
+  "exp": "Falso. Nessa faixa a conduta é NÃO repor de imediato (ECG + recheck), exatamente para não somar uma reposição desnecessária a um K já alto — a insulina em si já vai empurrar o potássio para dentro da célula, corrigindo o excesso sem ajuda extra.",
+  "computed": [
+   { "module": "cad", "fn": "potassiumPlan", "args": [5.5], "path": "potassium", "expect": "no initial potassium; ECG/recheck" }
+  ]
+ },
+ {
+  "type": "mcq",
+  "q": "CAD em tratamento: K 4,0 mEq/L, glicose já caiu para 220 mg/dL (ainda acima do limiar de 250? não — abaixo). O que muda na prescrição de insulina neste momento?",
+  "opts": [
+   "Nada muda — mantém a taxa inicial de 0,1 U/kg/h sem dextrose",
+   "Reduz a taxa para 0,05 U/kg/h e inicia dextrose concomitante, mantendo a insulina agindo sobre a cetose",
+   "Suspende a insulina até a próxima reavaliação",
+   "Troca insulina por bicarbonato, já que a glicemia está controlada"
+  ],
+  "correct": 1,
+  "exp": "Glicose abaixo de 250 mg/dL dispara a redução da taxa (0,1→0,05 U/kg/h) associada a dextrose IV — a insulina continua ativa sobre a causa real (a cetogênese), sem deixar a glicemia cair a níveis perigosos. Suspender a insulina reabriria a cetogênese; manter a taxa cheia sem dextrose arriscaria hipoglicemia.",
+  "computed": [
+   { "module": "cad", "fn": "insulinPlan", "args": [{ "kMmolL": 4.0, "glucoseMgDl": 220 }], "path": "rateUnitsKgHour", "expect": 0.05 },
+   { "module": "cad", "fn": "insulinPlan", "args": [{ "kMmolL": 4.0, "glucoseMgDl": 220 }], "path": "dextrose", "expect": true }
+  ]
+ },
+ {
+  "type": "diss",
+  "q": "Por que a decisão sobre a insulina na CAD é sempre subordinada primeiro à decisão sobre o potássio, nunca o contrário?",
+  "model": "A insulina desloca potássio para dentro da célula (via estímulo da Na-K-ATPase) — um efeito rápido e potencialmente perigoso se o K sérico já estiver baixo (risco de hipocalemia grave/arritmia) ou se, ao contrário, o K estiver muito alto e uma reposição concomitante desnecessária for somada ao efeito da própria insulina. Por isso o algoritmo sempre checa o K PRIMEIRO (potassiumPlan) e só depois decide o que fazer com a insulina (insulinPlan chama potassiumPlan internamente) — nunca o inverso. Decidir a insulina sem antes saber o K seria arriscar uma das duas piores complicações eletrolíticas do tratamento da CAD."
+ }
+]
+</script>
+<script type="application/json" id="fisio-questions-data">
+[
+ {
+  "type": "mcq",
+  "q": "Por que a insulina — e não o bicarbonato — é o tratamento central da acidose na CAD?",
+  "opts": [
+   "Bicarbonato age mais devagar que a insulina",
+   "Insulina desliga a produção de cetoácidos na origem (suprime a lipólise); bicarbonato só neutraliza o ácido que já foi formado",
+   "Bicarbonato tem mais efeitos colaterais que insulina",
+   "Insulina normaliza a glicemia mais rápido, o que já corrige o pH"
+  ],
+  "correct": 1,
+  "exp": "A doença é a cetogênese, não o pH em si. Insulina suprime a lipase hormônio-sensível no tecido adiposo, fechando a torneira de ácidos graxos livres que o fígado converteria em cetoácidos — trata a CAUSA. Bicarbonato apenas neutraliza o ácido já circulante, sem deter a produção; por isso não é tratamento central (e seu uso rotineiro nem é recomendado, ver POLICY.bicarbonate)."
+ },
+ {
+  "type": "vf",
+  "q": "Repor potássio antes de iniciar insulina numa CAD com K baixo serve para evitar hipercalemia.",
+  "correct": false,
+  "exp": "Falso — o motivo é o oposto. Insulina desloca potássio para DENTRO da célula (estimula a Na-K-ATPase), podendo precipitar HIPOcalemia grave/arritmia se o K sérico já estiver baixo. Repor primeiro cria uma reserva extracelular antes desse deslocamento — não é para prevenir excesso, é para não faltar.",
+  "computed": [{ "module": "cad", "fn": "potassiumPlan", "args": [3.2], "path": "insulin", "expect": "hold" }]
+ },
+ {
+  "type": "mcq",
+  "q": "Por que a fórmula de osmolaridade efetiva usa o Na MEDIDO, e nunca o Na corrigido pela glicemia?",
+  "opts": [
+   "Porque o Na corrigido é menos preciso analiticamente",
+   "Porque a fórmula já soma a glicose como o segundo soluto efetivo — usar o Na corrigido (que já embute o efeito da glicose sobre o Na) contaria a glicose duas vezes",
+   "Porque o laboratório só mede o Na bruto",
+   "Não há diferença relevante entre os dois na prática"
+  ],
+  "correct": 1,
+  "exp": "Osm efetiva = 2×Na + glicose/18 — a glicose já entra como termo próprio. O Na corrigido existe para outra pergunta (déficit de água livre), incorporando matematicamente o efeito osmótico da glicose sobre o sódio medido. Usá-lo aqui somaria o efeito da glicose duas vezes (uma no próprio Na corrigido, outra no termo glicose/18) — exatamente o furo que já se repetiu neste projeto (ver scripts/check_content_text.js).",
+  "computed": [
+   { "module": "cad", "fn": "effectiveOsmolality", "args": [130, 600], "expect": 293.33, "tol": 0.05 },
+   { "module": "cad", "fn": "correctedSodium", "args": [130, 600], "expect": 142, "tol": 0.05 }
+  ]
+ },
+ {
+  "type": "vf",
+  "q": "A ureia deveria ser somada à osmolaridade efetiva, já que contribui para a osmolaridade total do sangue.",
+  "correct": false,
+  "exp": "Falso. Ureia atravessa livremente a membrana celular — não cria gradiente osmótico entre os compartimentos (não é um soluto 'efetivo'/tônico). Ela entra na osmolaridade TOTAL calculada (útil para o osm-gap, ao comparar com a osmolaridade medida no laboratório), mas nunca na efetiva.",
+  "computed": [{ "module": "cad", "fn": "totalCalculatedOsmolality", "args": [{ "na": 130, "glucoseMgDl": 600, "bunMgDl": 40 }], "expect": 307.62, "tol": 0.05 }]
+ },
+ {
+  "type": "mcq",
+  "q": "O fator de correção do sódio pela glicemia sobe de 1,6 para 2,4 quando a glicose ultrapassa 400 mg/dL. Qual é a lógica por trás dessa mudança de fator?",
+  "opts": [
+   "É uma margem de segurança arbitrária para casos graves",
+   "Em hiperglicemias muito extremas, a relação entre glicose extracelular e o efluxo osmótico de água deixa de ser linear na faixa mais baixa — o fator maior compensa esse desvio empírico observado nessa faixa",
+   "O fator maior é só para facilitar o cálculo mental",
+   "A partir de 400 mg/dL o Na medido deixa de ser confiável"
+  ],
+  "correct": 1,
+  "exp": "O fator de correção é uma aproximação empírica da relação glicose-Na, e essa relação não é perfeitamente linear em toda a faixa de glicemia — em hiperglicemias muito extremas (>400), o efluxo de água já alterou o próprio volume de distribuição o suficiente para que o fator 1,6 subestime a diluição real do sódio; 2,4 é o ajuste empírico validado para essa faixa mais extrema.",
+  "computed": [
+   { "module": "cad", "fn": "sodiumCorrectionFactor", "args": [600], "expect": 2.4 },
+   { "module": "cad", "fn": "sodiumCorrectionFactor", "args": [300], "expect": 1.6 }
+  ]
+ },
+ {
+  "type": "vf",
+  "q": "Δ/Δ de 1,5 indica uma alcalose metabólica associada à cetoacidose.",
+  "correct": false,
+  "exp": "Falso — 1,5 está na faixa 1–2, a leitura de CAD 'limpa' (gap alto sem mistura relevante). Só ACIMA de 2 é que se interpreta um segundo processo alcalinizante (vômitos, diurético, HCO₃ prévio alto) mascarando parte da acidose.",
+  "computed": [{ "module": "cad", "fn": "interpretDeltaRatio", "args": [1.5], "path": "band", "expect": "1-2" }]
+ },
+ {
+  "type": "mcq",
+  "q": "Por que Δ/Δ < 1 aponta para um componente hiperclorêmico associado, e não simplesmente para 'cetose incompleta' ou 'cetose leve'?",
+  "opts": [
+   "Porque o AG sempre sobrestima a gravidade da cetose",
+   "Porque, estequiometricamente, cada H⁺ gerado pela cetogênese deveria consumir 1 HCO₃ e gerar 1 unidade de gap (Δ/Δ≈1) — um valor menor só se explica se ALGO MAIS consumiu HCO₃ sem gerar gap (perda de HCO₃ reposta por cloro)",
+   "Porque βHB estava sendo medido de forma incorreta",
+   "Δ/Δ < 1 não tem nenhum significado fisiológico estabelecido"
+  ],
+  "correct": 1,
+  "exp": "A lógica é estequiométrica: se toda a queda do HCO₃ viesse só da titulação por cetoácidos, cada unidade de HCO₃ perdida corresponderia a uma unidade de AG ganha (Δ/Δ=1). Um Δ/Δ abaixo de 1 significa que o HCO₃ caiu MAIS do que o gap sozinho explica — sobra apenas uma explicação: outro processo consumiu bicarbonato sem deixar rastro no AG (perda de HCO₃ reposta por retenção renal de cloreto, a cauda hiperclorêmica).",
+  "computed": [{ "module": "cad", "fn": "interpretDeltaRatio", "args": [0.93], "path": "band", "expect": "<1" }]
+ },
+ {
+  "type": "vf",
+  "q": "βHB sérico pode ser usado tanto para diagnosticar quanto para confirmar a resolução da CAD; cetonúria (cruzes) serve só para diagnosticar.",
+  "correct": true,
+  "exp": "Verdadeiro. Cetonúria mede acetoacetato, que pode SUBIR durante o próprio tratamento enquanto o βHB (o cetoácido predominante e o que realmente cai com a resolução) já está caindo — usar cetonúria para dizer 'resolvido' seria ativamente enganoso. Por isso isResolvedDka() exige βHB sérico e não aceita cetonúria como substituto — uma decisão deliberada do motor, não um esquecimento."
+ },
+ {
+  "type": "mcq",
+  "q": "hasDka() fecha o eixo glicêmico com 'diabetes conhecido OU glicose ≥200' (um OR, nunca um AND exigindo os dois). Por que essa é a escolha certa?",
+  "opts": [
+   "Porque exigir os dois deixaria o critério mais rigoroso e mais seguro",
+   "Porque exigir os dois rejeitaria exatamente o caso mais importante de capturar: CAD euglicêmica num diabético conhecido, onde a glicose pode estar normal",
+   "Porque a glicemia isolada nunca é confiável",
+   "Não há diferença prática entre OR e AND aqui"
+  ],
+  "correct": 1,
+  "exp": "Um AND exigiria diabetes conhecido E glicose ≥200 ao mesmo tempo — isso rejeitaria justamente o cenário mais traiçoeiro do banco de perfis/gasometrias: CAD euglicêmica (SGLT2i, jejum) num diabético já diagnosticado, onde a glicose pode estar baixa/normal. O OR garante que QUALQUER um dos dois lados (história OU número) já basta.",
+  "computed": [{ "module": "cad", "fn": "hasDka", "args": [{ "knownDiabetes": true, "glucoseMgDl": 150, "betaHydroxybutyrateMmolL": 4.9, "ketonuriaCruzes": 3, "ph": 7.32, "hco3": 12 }], "expect": true }]
+ },
+ {
+  "type": "vf",
+  "q": "O eixo cetônico de hasDka() exige que βHB sérico E cetonúria estejam presentes e positivos ao mesmo tempo.",
+  "correct": false,
+  "exp": "Falso — também é um OR: βHB≥3,0 OU cetonúria≥2+ já fecha o eixo. Na prática clínica brasileira, β-HB sérico point-of-care é raro; exigir os dois rejeitaria o caso mais comum (só cetonúria disponível)."
+ },
+ {
+  "type": "mcq",
+  "q": "Por que HCO₃ baixo E pCO₂ alto SIMULTANEAMENTE nunca pode ser lido como 'compensação', mesmo que os dois estejam so 'moderadamente' alterados?",
+  "opts": [
+   "Porque compensação só existe no eixo respiratório, nunca no metabólico",
+   "Porque compensação sempre desloca a OUTRA variável na direção OPOSTA (para atenuar o desvio do pH); se as duas se movem na MESMA direção, ambas empurram o pH para o mesmo lado — são dois processos que se somam, não um que anula o outro",
+   "Porque o aparelho de gasometria não consegue medir os dois corretamente ao mesmo tempo",
+   "Isso só é impossível fisiologicamente, nunca acontece na prática"
+  ],
+  "correct": 1,
+  "exp": "A lógica da compensação é sempre de sinal oposto: um processo acidificante (HCO₃ baixo) é atenuado por uma resposta alcalinizante (pCO₂ baixo), nunca por outra resposta acidificante. HCO₃ baixo + pCO₂ alto ao mesmo tempo são dois processos ACIDIFICANTES independentes se somando — um distúrbio misto, nunca uma compensação, por mais moderados que os dois números pareçam isoladamente.",
+  "computed": [
+   { "module": "abg", "fn": "classifyPrimaryDisturbance", "args": [{ "ph": 7.05, "pco2": 60, "hco3": 10 }], "path": "primary.length", "expect": 2 },
+   { "module": "abg", "fn": "classifyPrimaryDisturbance", "args": [{ "ph": 7.05, "pco2": 60, "hco3": 10 }], "path": "compensationCheck", "expect": null }
+  ]
+ },
+ {
+  "type": "vf",
+  "q": "Quando HCO₃ e pCO₂ estão anormais em direções OPOSTAS (por exemplo, ambos baixos), o número isolado sempre decide sozinho qual é o distúrbio primário.",
+  "correct": false,
+  "exp": "Falso — quando o pH está claramente fora da faixa normal, ele decide (acidemia favorece o lado metabólico/respiratório que ACIDIFICA; alcalemia favorece o que ALCALINIZA). Mas quando o pH está normal (compensação completa nos dois sentidos), os números sozinhos são matematicamente ambíguos — foi exatamente o bug real corrigido no motor deste projeto: a ORDEM dos branches no código não pode decidir por inércia; sem uma direção de pH clara, o motor mostra as duas leituras possíveis em vez de escolher uma calado.",
+  "computed": [{ "module": "abg", "fn": "classifyPrimaryDisturbance", "args": [{ "ph": 7.40, "pco2": 30, "hco3": 18 }], "path": "primary.length", "expect": 2 }]
+ },
+ {
+  "type": "mcq",
+  "q": "Sem informação sobre agudeza (chronicityHint), o motor de gasometria mostra as janelas esperada AGUDA e CRÔNICA de compensação lado a lado, em vez de escolher uma. Por quê essa é a escolha certa?",
+  "opts": [
+   "Porque as duas janelas são sempre idênticas na prática",
+   "Porque o tempo de instalação de um distúrbio respiratório não pode ser inferido só dos números — a janela renal esperada é bem mais ampla na crônica (rim teve tempo de compensar) que na aguda, e adivinhar seria inventar um dado que não está disponível",
+   "Porque calcular as duas é mais rápido computacionalmente",
+   "Porque a fórmula aguda está desatualizada"
+  ],
+  "correct": 1,
+  "exp": "A compensação renal de um distúrbio respiratório leva dias para se desenvolver — por isso a janela esperada de HCO₃ é muito mais ampla no cenário crônico que no agudo, para a MESMA pCO₂. Sem saber há quanto tempo o distúrbio está instalado, escolher uma das duas janelas seria adivinhar um dado clínico que os números sozinhos não contêm — o motor prefere ser honesto sobre a ambiguidade a fingir certeza.",
+  "computed": [
+   { "module": "abg", "fn": "expectedHco3RespAcidosisAcute", "args": [60], "path": "expected", "expect": 26 },
+   { "module": "abg", "fn": "expectedHco3RespAcidosisChronic", "args": [60], "path": "expected", "expect": 31 }
+  ]
+ },
+ {
+  "type": "mcq",
+  "q": "Por que insulinPlan() REDUZ a taxa de insulina (de 0,1 para 0,05 U/kg/h) quando a glicose cai abaixo de 250 mg/dL, em vez de simplesmente suspender a insulina?",
+  "opts": [
+   "Para evitar hipoglicemia grave sem interromper a supressão da cetogênese — a doença é a cetose, não a glicose; suspender a insulina deixaria a cetogênese recomeçar",
+   "Porque a insulina em dose alta some efeito depois de algumas horas",
+   "Para economizar insulina em caso de falta de estoque",
+   "Não há diferença clínica relevante entre reduzir e suspender"
+  ],
+  "correct": 0,
+  "exp": "Suspender a insulina removeria a supressão da lipólise/cetogênese — a cetoacidose voltaria a progredir mesmo com glicemia controlada. Reduzir a taxa (associada a dextrose IV) mantém a insulina agindo sobre a CAUSA (cetogênese) enquanto evita hipoglicemia — os dois problemas (glicemia e cetose) tratados ao mesmo tempo, sem sacrificar um pelo outro.",
+  "computed": [
+   { "module": "cad", "fn": "insulinPlan", "args": [{ "kMmolL": 4.2, "glucoseMgDl": 180 }], "path": "dextrose", "expect": true },
+   { "module": "cad", "fn": "insulinPlan", "args": [{ "kMmolL": 4.2, "glucoseMgDl": 180 }], "path": "rateUnitsKgHour", "expect": 0.05 }
+  ]
+ },
+ {
+  "type": "diss",
+  "q": "O banco de gasometrias deste projeto tem três casos (síndrome neuroléptica maligna, hipertermia maligna, síndrome serotoninérgica) com a MESMA tríade final — hipertermia, rigidez muscular, acidose lática. Explique por que essa convergência acontece fisiologicamente, e por que o RITMO de instalação (dias/minutos/horas) é o dado mais rápido para diferenciá-los à beira do leito, antes de qualquer exame laboratorial.",
+  "model": "A tríade converge porque, nos três, a via final comum é hipermetabolismo/contração muscular sustentada: seja por bloqueio dopaminérgico central (SNM), disfunção do receptor de rianodina liberando cálcio descontroladamente no músculo (hipertermia maligna) ou excesso serotoninérgico central (síndrome serotoninérgica), o resultado fisiológico é o mesmo — contração muscular involuntária sustentada gerando calor e consumindo oxigênio além da capacidade de entrega, produzindo lactato. Como a via final é idêntica, o laboratório (gasometria, lactato) não diferencia os três. O que diferencia é a CAUSA e, por consequência, o RITMO: bloqueio dopaminérgico farmacológico (SNM) se acumula ao longo de dias de exposição ao antipsicótico; disfunção genética do receptor de rianodina exposta a um gatilho anestésico (hipertermia maligna) é uma cascata de minutos; excesso serotoninérgico por interação medicamentosa (síndrome serotoninérgica) se instala em horas. O ritmo de instalação, junto com o achado de exame físico predominante (rigidez vs hiperreflexia/clonus), resolve o diagnóstico antes que qualquer exame de sangue volte."
+ },
+ {
+  "type": "diss",
+  "q": "classifyDkaProfile() devolve uma LISTA ranqueada de perfis plausíveis com o motivo de cada um, nunca um único veredito. Por que essa é a escolha de design certa para uma ferramenta de apoio à decisão, e o que ela evita?",
+  "model": "Um veredito único obrigaria o motor a resolver, silenciosamente, toda ambiguidade clínica genuína que os números por si só não resolvem — exatamente o tipo de decisão que deveria ficar com o clínico, não ser escondida dentro de uma caixa-preta. Ao devolver uma lista ranqueada com o motivo de cada perfil (e sinalizar explicitamente quando falta um dado essencial, em vez de adivinhar), a ferramenta preserva o humano-no-loop: o clínico vê os candidatos plausíveis e POR QUE cada um é plausível, e decide com o contexto que só ele tem (história, exame físico, evolução). Isso evita o pior modo de falha de uma ferramenta de apoio à decisão: parecer mais certa do que os dados realmente permitem."
  }
 ]
 </script>
@@ -953,11 +1185,14 @@ function objBlock(item){const w=document.createElement('div');const vf=item.type
 function dissBlock(item){const w=document.createElement('div');
  w.innerHTML=`<div class="qtype">Dissertativa</div><div class="qstem">${item.q}</div>`+mkReveal('<span style="color:var(--mut);font-size:12px">Pense e escreva sua resposta; depois compare.</span>','<b>Resposta-modelo.</b> '+item.model);return w;}
 const QUIZ=JSON.parse(document.getElementById('questions-data').textContent);
-(function renderQuiz(){const host=$('#quiz');QUIZ.forEach(item=>{const card=document.createElement('div');card.className='qcard';
+const FISIO_QUIZ=JSON.parse(document.getElementById('fisio-questions-data').textContent);
+function renderQuizInto(list,hostSel){const host=$(hostSel);list.forEach(item=>{const card=document.createElement('div');card.className='qcard';
  if(item.type==='case'){card.innerHTML=`<div class="qtype">Caso clínico · formatos mistos</div><div class="qstem">${item.stem}</div>`;
   item.subs.forEach(s=>{const sub=document.createElement('div');sub.className='subq';sub.appendChild(s.type==='diss'?dissBlock(s):objBlock(s));card.appendChild(sub);});}
  else if(item.type==='diss'){card.appendChild(dissBlock(item));}
  else{card.appendChild(objBlock(item));}
- host.appendChild(card);});})();
+ host.appendChild(card);});}
+renderQuizInto(QUIZ,'#quiz');
+renderQuizInto(FISIO_QUIZ,'#fisioQuiz');
 </script>
 </body></html>
