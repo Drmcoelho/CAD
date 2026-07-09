@@ -2137,7 +2137,7 @@ function renderGasoList(){
       (c.mimicsCAD?'<span class="gm">imita CAD</span>':'')+'</button>';
   }).join('');
 }
-function selGaso(id){gasoCur=id;gasoRevealed=false;renderGasoList();renderGasoDetail();}
+function selGaso(id){gasoCur=id;gasoRevealed=false;renderGasoList();renderGasoDetail();document.getElementById('gasoDetail').scrollIntoView({behavior:'smooth',block:'start'});}
 function toggleGasoReveal(){gasoRevealed=!gasoRevealed;renderGasoDetail();}
 
 function gasoLabRow(label,v,unit){
