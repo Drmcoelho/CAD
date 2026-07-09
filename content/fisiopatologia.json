@@ -46,7 +46,7 @@
   "q": "O fator de correção do sódio pela glicemia sobe de 1,6 para 2,4 quando a glicose ultrapassa 400 mg/dL. Qual é a lógica por trás dessa mudança de fator?",
   "opts": [
    "É uma margem de segurança arbitrária para casos graves",
-   "Em hiperglicemias muito extremas, a relação entre glicose extracelular e o efluxo osmótico de água deixa de ser linear na faixa mais baixa — o fator maior compensa esse desvio empírico observado nessa faixa",
+   "Em hiperglicemias muito extremas, a relação entre glicose extracelular e o efluxo osmótico de água deixa de ser linear, e o fator de 1,6 (adequado para faixas menos extremas) passa a subestimar a diluição real do sódio",
    "O fator maior é só para facilitar o cálculo mental",
    "A partir de 400 mg/dL o Na medido deixa de ser confiável"
   ],
@@ -104,7 +104,7 @@
  },
  {
   "type": "mcq",
-  "q": "Por que HCO₃ baixo E pCO₂ alto SIMULTANEAMENTE nunca pode ser lido como 'compensação', mesmo que os dois estejam so 'moderadamente' alterados?",
+  "q": "Por que HCO₃ baixo E pCO₂ alto SIMULTANEAMENTE nunca pode ser lido como 'compensação', mesmo que os dois estejam só 'moderadamente' alterados?",
   "opts": [
    "Porque compensação só existe no eixo respiratório, nunca no metabólico",
    "Porque compensação sempre desloca a OUTRA variável na direção OPOSTA (para atenuar o desvio do pH); se as duas se movem na MESMA direção, ambas empurram o pH para o mesmo lado — são dois processos que se somam, não um que anula o outro",
@@ -127,7 +127,7 @@
  },
  {
   "type": "mcq",
-  "q": "Sem informação sobre agudeza (chronicityHint), o motor de gasometria mostra as janelas esperada AGUDA e CRÔNICA de compensação lado a lado, em vez de escolher uma. Por quê essa é a escolha certa?",
+  "q": "Sem informação sobre agudeza (chronicityHint), o motor de gasometria mostra as janelas esperadas AGUDA e CRÔNICA de compensação lado a lado, em vez de escolher uma. Por que essa é a escolha certa?",
   "opts": [
    "Porque as duas janelas são sempre idênticas na prática",
    "Porque o tempo de instalação de um distúrbio respiratório não pode ser inferido só dos números — a janela renal esperada é bem mais ampla na crônica (rim teve tempo de compensar) que na aguda, e adivinhar seria inventar um dado que não está disponível",
@@ -146,7 +146,7 @@
   "q": "Por que insulinPlan() REDUZ a taxa de insulina (de 0,1 para 0,05 U/kg/h) quando a glicose cai abaixo de 250 mg/dL, em vez de simplesmente suspender a insulina?",
   "opts": [
    "Para evitar hipoglicemia grave sem interromper a supressão da cetogênese — a doença é a cetose, não a glicose; suspender a insulina deixaria a cetogênese recomeçar",
-   "Porque a insulina em dose alta some efeito depois de algumas horas",
+   "Porque a insulina em dose alta perde o efeito depois de algumas horas",
    "Para economizar insulina em caso de falta de estoque",
    "Não há diferença clínica relevante entre reduzir e suspender"
   ],

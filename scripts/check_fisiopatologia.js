@@ -44,7 +44,7 @@ function checkOne(label, spec) {
   if (typeof fn !== "function") return bad(`${label}: função "${spec.fn}" não existe em ${spec.module}_core.js`);
   let actual;
   try {
-    actual = fn(...spec.args);
+    actual = fn(...(spec.args || []));
   } catch (e) {
     return bad(`${label}: ${spec.module}.${spec.fn}(${JSON.stringify(spec.args)}) lançou erro: ${e.message}`);
   }
@@ -87,8 +87,11 @@ data.forEach((item, i) => {
   const label = `#${i + 1}`;
   typeof item.q === "string" && item.q.length > 5 ? null : bad(`${label}: campo "q" ausente/curto`);
   if (item.type === "mcq") {
-    Array.isArray(item.opts) && item.opts.length >= 2 ? null : bad(`${label}: mcq precisa de >=2 opts`);
-    Number.isInteger(item.correct) && item.correct >= 0 && item.correct < item.opts.length ? null : bad(`${label}: "correct" fora do range de opts`);
+    if (!Array.isArray(item.opts) || item.opts.length < 2) {
+      bad(`${label}: mcq precisa de >=2 opts`);
+    } else if (!Number.isInteger(item.correct) || item.correct < 0 || item.correct >= item.opts.length) {
+      bad(`${label}: "correct" fora do range de opts`);
+    }
     typeof item.exp === "string" && item.exp.length > 5 ? null : bad(`${label}: mcq precisa de "exp"`);
   } else if (item.type === "vf") {
     typeof item.correct === "boolean" ? null : bad(`${label}: vf precisa de "correct" booleano`);
