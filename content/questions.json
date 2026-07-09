@@ -109,5 +109,62 @@
     "model": "Cristaloide balanceado (Ringer) por volume — evita alimentar a futura cauda hiperclorêmica que o SF 0,9% fabricaria. Insulina 0,1 U/kg/h com dextrose (K 4,3 ≥ 3,5 permite iniciar)."
    }
   ]
+ },
+ {
+  "type": "mcq",
+  "q": "CAD à chegada, K 5,5 mEq/L. Conduta quanto à reposição inicial de potássio?",
+  "opts": [
+   "Repor potássio de imediato, junto com a insulina, para evitar queda abrupta",
+   "Não repor potássio de imediato — pedir ECG e reavaliar; a insulina já pode começar",
+   "Segurar a insulina até o K normalizar sozinho",
+   "Bicarbonato para corrigir o potássio"
+  ],
+  "correct": 1,
+  "exp": "Com K ≥5,0, o reflexo de 'sempre repor K na CAD' se inverte: repor de imediato arriscaria hipercalemia iatrogênica antes mesmo de a insulina começar a deslocar potássio para dentro da célula. A conduta é ECG + reavaliação, sem reposição inicial — a insulina já pode ser iniciada normalmente, e o próprio efeito dela tende a corrigir o K nas horas seguintes.",
+  "computed": [
+   { "module": "cad", "fn": "potassiumPlan", "args": [5.5], "path": "potassium", "expect": "no initial potassium; ECG/recheck" },
+   { "module": "cad", "fn": "potassiumPlan", "args": [5.5], "path": "insulin", "expect": "allowed" }
+  ]
+ },
+ {
+  "type": "vf",
+  "q": "Com K entre 3,5 e 5,0 mEq/L na CAD, a insulina pode ser iniciada normalmente, sempre com reposição concomitante de potássio para manter a faixa-alvo de 4–5.",
+  "correct": true,
+  "exp": "Verdadeiro. Nessa faixa a insulina está liberada (sem risco iminente de hipocalemia grave), mas a reposição concomitante de K continua ativa — a faixa-alvo de 4–5 mEq/L é mantida o tempo todo, não só quando o K está baixo ou alto.",
+  "computed": [
+   { "module": "cad", "fn": "potassiumPlan", "args": [4.0], "path": "band", "expect": "3.5-5.0" },
+   { "module": "cad", "fn": "potassiumPlan", "args": [4.0], "path": "insulin", "expect": "allowed" },
+   { "module": "cad", "fn": "potassiumPlan", "args": [4.0], "path": "potassium", "expect": "replace to maintain 4-5 mmol/L" }
+  ]
+ },
+ {
+  "type": "vf",
+  "q": "Com K ≥5,0 mEq/L na CAD, deve-se repor potássio de imediato para não deixar o valor cair enquanto a insulina age.",
+  "correct": false,
+  "exp": "Falso. Nessa faixa a conduta é NÃO repor de imediato (ECG + recheck), exatamente para não somar uma reposição desnecessária a um K já alto — a insulina em si já vai empurrar o potássio para dentro da célula, corrigindo o excesso sem ajuda extra.",
+  "computed": [
+   { "module": "cad", "fn": "potassiumPlan", "args": [5.5], "path": "potassium", "expect": "no initial potassium; ECG/recheck" }
+  ]
+ },
+ {
+  "type": "mcq",
+  "q": "CAD em tratamento: K 4,0 mEq/L, glicose já caiu para 220 mg/dL (ainda acima do limiar de 250? não — abaixo). O que muda na prescrição de insulina neste momento?",
+  "opts": [
+   "Nada muda — mantém a taxa inicial de 0,1 U/kg/h sem dextrose",
+   "Reduz a taxa para 0,05 U/kg/h e inicia dextrose concomitante, mantendo a insulina agindo sobre a cetose",
+   "Suspende a insulina até a próxima reavaliação",
+   "Troca insulina por bicarbonato, já que a glicemia está controlada"
+  ],
+  "correct": 1,
+  "exp": "Glicose abaixo de 250 mg/dL dispara a redução da taxa (0,1→0,05 U/kg/h) associada a dextrose IV — a insulina continua ativa sobre a causa real (a cetogênese), sem deixar a glicemia cair a níveis perigosos. Suspender a insulina reabriria a cetogênese; manter a taxa cheia sem dextrose arriscaria hipoglicemia.",
+  "computed": [
+   { "module": "cad", "fn": "insulinPlan", "args": [{ "kMmolL": 4.0, "glucoseMgDl": 220 }], "path": "rateUnitsKgHour", "expect": 0.05 },
+   { "module": "cad", "fn": "insulinPlan", "args": [{ "kMmolL": 4.0, "glucoseMgDl": 220 }], "path": "dextrose", "expect": true }
+  ]
+ },
+ {
+  "type": "diss",
+  "q": "Por que a decisão sobre a insulina na CAD é sempre subordinada primeiro à decisão sobre o potássio, nunca o contrário?",
+  "model": "A insulina desloca potássio para dentro da célula (via estímulo da Na-K-ATPase) — um efeito rápido e potencialmente perigoso se o K sérico já estiver baixo (risco de hipocalemia grave/arritmia) ou se, ao contrário, o K estiver muito alto e uma reposição concomitante desnecessária for somada ao efeito da própria insulina. Por isso o algoritmo sempre checa o K PRIMEIRO (potassiumPlan) e só depois decide o que fazer com a insulina (insulinPlan chama potassiumPlan internamente) — nunca o inverso. Decidir a insulina sem antes saber o K seria arriscar uma das duas piores complicações eletrolíticas do tratamento da CAD."
  }
 ]

@@ -213,6 +213,7 @@ const bad = (m) => { console.error("  FAIL " + m); fails++; };
       if (typeof showTab === "function") showTab("provao");
       await new Promise((r) => setTimeout(r, 150));
       out.quiz = txt("quiz");
+      out.fisioQuiz = txt("fisioQuiz");
       if (typeof showTab === "function") showTab("atlas");
       await new Promise((r) => setTimeout(r, 150));
       out.leis = txt("leis");
@@ -229,7 +230,7 @@ const bad = (m) => { console.error("  FAIL " + m); fails++; };
     errs.length ? bad("app erros: " + errs.join(" | ")) : ok("app sem erro de runtime");
     r.stamp > 0 ? ok("app: stamp do CANON renderizou") : bad("app: stamp vazio");
     r.canvas ? ok("app: canvas da Fisiologia com tamanho > 0") : bad("app: canvas com tamanho zero");
-    [["quiz", r.quiz], ["leis", r.leis], ["banco", r.banco], ["modA", r.modA]].forEach(([k, n]) =>
+    [["quiz", r.quiz], ["fisioQuiz", r.fisioQuiz], ["leis", r.leis], ["banco", r.banco], ["modA", r.modA]].forEach(([k, n]) =>
       n > 20 ? ok(`app: #${k} populado (${n} chars)`) : bad(`app: #${k} vazio/curto (${n})`)
     );
     (r.osmExAtlas && r.osmExCalc && r.osmExCalc.stem === r.osmExAtlas[1] && r.osmExCalc.ans === r.osmExAtlas[2])
