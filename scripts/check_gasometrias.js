@@ -131,16 +131,20 @@ for (const caso of data.casos) {
       mcq.opts[mcq.correct] === titulo
         ? ok(`${id}: quiz.mcq.opts[correct] bate com o título do caso ("${titulo}")`)
         : bad(`${id}: quiz.mcq.opts[correct]="${mcq.opts[mcq.correct]}" NÃO bate com o título do caso ("${titulo}")`);
-      (typeof mcq.q === "string" && mcq.q.length > 5 && typeof mcq.exp === "string" && mcq.exp.length > 5)
-        ? null : bad(`${id}: quiz.mcq.q/exp ausente ou curto demais`);
+      if (!(typeof mcq.q === "string" && mcq.q.length > 5 && typeof mcq.exp === "string" && mcq.exp.length > 5)) {
+        bad(`${id}: quiz.mcq.q/exp ausente ou curto demais`);
+      }
     }
 
     if (!Array.isArray(quiz.vf) || quiz.vf.length !== 3) {
       bad(`${id}: quiz.vf deveria ter exatamente 3 itens`);
     } else {
       quiz.vf.forEach((item, i) => {
-        (typeof item.q === "string" && item.q.length > 5 && typeof item.correct === "boolean" && typeof item.exp === "string" && item.exp.length > 5)
-          ? null : bad(`${id}: quiz.vf[${i}] malformado (precisa q/correct(bool)/exp)`);
+        const valid = item && typeof item === "object"
+          && typeof item.q === "string" && item.q.length > 5
+          && typeof item.correct === "boolean"
+          && typeof item.exp === "string" && item.exp.length > 5;
+        if (!valid) bad(`${id}: quiz.vf[${i}] malformado (precisa q/correct(bool)/exp)`);
       });
       ok(`${id}: quiz.vf tem 3 itens estruturalmente válidos`);
     }
@@ -155,7 +159,9 @@ for (const caso of data.casos) {
       asrt.correta === comboIdx
         ? ok(`${id}: quiz.assertivas.correta (${asrt.correta}) bate com o combo derivado de "verdades" (${JSON.stringify(asrt.verdades)})`)
         : bad(`${id}: quiz.assertivas.correta=${asrt.correta} NÃO bate com o combo derivado de "verdades"=${JSON.stringify(asrt.verdades)} (esperado ${comboIdx})`);
-      (typeof asrt.exp === "string" && asrt.exp.length > 5) ? null : bad(`${id}: quiz.assertivas.exp ausente ou curto demais`);
+      if (!(typeof asrt.exp === "string" && asrt.exp.length > 5)) {
+        bad(`${id}: quiz.assertivas.exp ausente ou curto demais`);
+      }
     }
   }
 
