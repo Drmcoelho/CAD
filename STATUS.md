@@ -9,6 +9,8 @@ Estado do canon por camada, na versão `CAD360-ApA-2026-07-01`. O que estiver �
 
 ## Banco de gasometrias (`content/gasometrias.json`, `painel/index.html`)
 - ✅ **Completo: 100/100 casos** (G-01..G-100), 100 diagnósticos diferentes, verificados por `scripts/check_gasometrias.js` (Henderson-Hasselbalch, distúrbio primário, AG/AGc, hasDka). UI em `painel/index.html`, separada da série real.
+- ✅ **Quiz por caso**: os 100 casos têm `quiz{mcq,vf,assertivas}` (múltipla escolha + 3 V/F + assertivas I/II/III), estrutura e índice de resposta correta verificados mecanicamente por `check_gasometrias.js` (índice das assertivas recomputado a partir de `verdades`, mcq cruzado contra o título do caso). Render interativo em `painel/index.html` no mesmo padrão do provão de `app/index.html`.
+- ✅ **100 cards clicáveis com feedback visível**: `selGaso()` rola o painel de detalhe para a viewport ao selecionar um card (antes, clicar num card do topo atualizava o detalhe fora da tela, sem feedback perceptível).
 
 ## Pranchas — lote 1 (M01–M06 + EX01–EX02)
 - ✅ M04 calculadoras — bandas Δ/Δ corrigidas, osm separada (tonicidade × osm-gap), exemplo glicose 320 (evita o fator 2,4).

@@ -36,7 +36,6 @@ const cad = require("../core/cad_core.js");
 
 const root = path.join(__dirname, "..");
 const data = JSON.parse(fs.readFileSync(path.join(root, "content/gasometrias.json"), "utf8"));
-const REQUIRE_QUIZ = false; // TODO(gasometria-quiz): true quando os 100 casos tiverem quiz preenchido
 
 let fails = 0;
 const ok = (m) => console.log("  ok   " + m);
@@ -118,12 +117,9 @@ for (const caso of data.casos) {
   }
 
   // 5b. quiz (mcq + vf + assertivas) — estrutura e autoconsistência do gabarito
-  // TODO(gasometria-quiz): REQUIRE_QUIZ está true só quando os 100 casos tiverem
-  // "quiz" preenchido (rollout em lotes, ver STATUS.md); até lá, campo ausente
-  // é tolerado em vez de FAIL para não travar o portão a meio do rollout.
   const quiz = caso.quiz;
   if (!quiz) {
-    REQUIRE_QUIZ ? bad(`${id}: campo "quiz" ausente`) : ok(`${id}: quiz ainda não preenchido (rollout em andamento)`);
+    bad(`${id}: campo "quiz" ausente`);
   } else {
     const mcq = quiz.mcq;
     if (!mcq || !Array.isArray(mcq.opts) || mcq.opts.length !== 4) {
