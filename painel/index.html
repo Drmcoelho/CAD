@@ -77,6 +77,20 @@ td.l,th.l{text-align:left}
 .gconf{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
 .gconf button{font-size:11.5px;padding:3px 9px;border-radius:20px;border:1px solid var(--line2);background:var(--p2);color:var(--mut);cursor:pointer}
 .gconf button:hover{border-color:var(--vio);color:var(--tx)}
+/* teste-se: quiz mcq/vf/assertivas por caso */
+.qcard{background:var(--p2);border:1px solid var(--line);border-radius:12px;padding:13px 14px;margin:10px 0}
+.qtype{display:inline-block;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--mut);border:1px solid var(--line2);border-radius:6px;padding:1px 7px;margin-bottom:7px}
+.qstem{font-size:14px;font-weight:600;margin-bottom:9px;line-height:1.45}
+.opt{display:block;width:100%;text-align:left;background:var(--p);border:1px solid var(--line2);color:var(--tx);border-radius:9px;padding:9px 11px;margin-bottom:7px;font:inherit;font-size:13.5px;cursor:pointer}
+.opt:hover:not(:disabled){border-color:var(--teal)}
+.opt.ok{border-color:#22503a;background:#10201a;color:var(--grn)}
+.opt.no{border-color:#5a2730;background:#1f1416;color:var(--red)}
+.opt:disabled{cursor:default;opacity:.92}
+.qexp{display:none;margin-top:8px;font-size:12.5px;line-height:1.55;color:var(--mut);border-top:1px dashed var(--line2);padding-top:8px}
+.qexp.show{display:block}
+.qexp b{color:var(--tx)}
+.vfrow{display:flex;gap:8px}
+.vfrow .opt{flex:1;text-align:center}
 </style></head><body>
 <div class="wrap">
 <h1>Evolução gasométrica — série cronológica</h1>
@@ -2189,9 +2203,46 @@ function renderGasoDetail(){
       (c.confundeCom&&c.confundeCom.length?'<h4>Casos que confundem com este</h4><div class="gconf">'+
         c.confundeCom.map(function(id){var o=gasoById(id);return o?"<button onclick='selGaso("+JSON.stringify(id)+")'>"+id+' · '+o.titulo+'</button>':'';}).join('')+
         '</div>':'')+
-      '</div>';
+      '</div>'+
+      renderGasoQuiz(c);
   }
   document.getElementById('gasoDetail').innerHTML=html;
+}
+
+// ---- quiz por caso: mcq + verdadeiro/falso + assertivas ----
+var gasoQuizState={};
+function gqs(id){return gasoQuizState[id]||(gasoQuizState[id]={mcq:null,vf:[null,null,null],assertivas:null});}
+function answerGasoMcq(id,i){gqs(id).mcq=i;renderGasoDetail();}
+function answerGasoVf(id,qi,val){gqs(id).vf[qi]=val;renderGasoDetail();}
+function answerGasoAssert(id,i){gqs(id).assertivas=i;renderGasoDetail();}
+function gasoOpt(label,chosen,isCorrect,answered,onclickExpr){
+  var cls='opt'+(answered?(isCorrect?' ok':(chosen?' no':'')):'');
+  return '<button class="'+cls+'"'+(answered?' disabled':' onclick="'+onclickExpr+'"')+'>'+label+'</button>';
+}
+function renderGasoQuiz(c){
+  var q=c.quiz; if(!q) return '';
+  var st=gqs(c.id);
+  var html='<div class="gab" style="border-top:2px dashed var(--line2)"><h4 style="font-size:14px;color:var(--tx);text-transform:none;letter-spacing:0">Teste-se</h4>';
+
+  var mcq=q.mcq;
+  html+='<div class="qcard"><div class="qtype">Múltipla escolha</div><div class="qstem">'+mcq.q+'</div>'+
+    mcq.opts.map(function(o,i){return gasoOpt(o,st.mcq===i,i===mcq.correct,st.mcq!=null,'answerGasoMcq('+JSON.stringify(c.id)+','+i+')');}).join('')+
+    (st.mcq!=null?'<div class="qexp show"><b>Gabarito.</b> '+mcq.exp+'</div>':'')+'</div>';
+
+  q.vf.forEach(function(item,qi){
+    var ans=st.vf[qi];
+    html+='<div class="qcard"><div class="qtype">Verdadeiro / Falso</div><div class="qstem">'+item.q+'</div><div class="vfrow">'+
+      [['Verdadeiro',true],['Falso',false]].map(function(p){return gasoOpt(p[0],ans===p[1],p[1]===item.correct,ans!=null,'answerGasoVf('+JSON.stringify(c.id)+','+qi+','+p[1]+')');}).join('')+
+      '</div>'+(ans!=null?'<div class="qexp show"><b>Gabarito.</b> '+item.exp+'</div>':'')+'</div>';
+  });
+
+  var asrt=q.assertivas;
+  html+='<div class="qcard"><div class="qtype">Assertivas — julgue I, II e III</div><div class="qstem">'+asrt.itens.join('<br>')+'</div>'+
+    asrt.opcoes.map(function(o,i){return gasoOpt(o,st.assertivas===i,i===asrt.correta,st.assertivas!=null,'answerGasoAssert('+JSON.stringify(c.id)+','+i+')');}).join('')+
+    (st.assertivas!=null?'<div class="qexp show"><b>Gabarito.</b> '+asrt.exp+'</div>':'')+'</div>';
+
+  html+='</div>';
+  return html;
 }
 document.getElementById('gasoCount').textContent=GASO.length;
 renderGasoCats();renderGasoList();renderGasoDetail();

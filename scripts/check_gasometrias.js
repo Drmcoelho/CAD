@@ -21,6 +21,11 @@
  *   5. quando o caso declara "hasDkaEsperado" (booleano estrutural, não prosa
  *      solta — CAD-família tem eixo glicêmico/cetônico que só cad_core.hasDka()
  *      resolve), cruza contra cad_core.hasDka(labs) de verdade.
+ *   6. quiz{mcq,vf,assertivas}: estrutura (mcq com 4 opções, vf com 3 itens,
+ *      assertivas com 3 itens/8 opções) e autoconsistência do gabarito — o
+ *      índice correto do mcq bate com o título do próprio caso, e o índice
+ *      correto das assertivas é recomputado a partir do array "verdades"
+ *      (nenhum índice de resposta é hand-typed sem derivação mecânica).
  *
  *   node scripts/check_gasometrias.js
  */
@@ -31,6 +36,7 @@ const cad = require("../core/cad_core.js");
 
 const root = path.join(__dirname, "..");
 const data = JSON.parse(fs.readFileSync(path.join(root, "content/gasometrias.json"), "utf8"));
+const REQUIRE_QUIZ = false; // TODO(gasometria-quiz): true quando os 100 casos tiverem quiz preenchido
 
 let fails = 0;
 const ok = (m) => console.log("  ok   " + m);
@@ -108,6 +114,52 @@ for (const caso of data.casos) {
     if (labs.albumin != null) {
       const agc = cad.correctedAnionGap(ag, labs.albumin);
       near(blob, agc) ? ok(`${id}: AGc calculado (${agc}) presente no gabarito`) : bad(`${id}: AGc calculado ${agc} NÃO aparece no gabarito`);
+    }
+  }
+
+  // 5b. quiz (mcq + vf + assertivas) — estrutura e autoconsistência do gabarito
+  // TODO(gasometria-quiz): REQUIRE_QUIZ está true só quando os 100 casos tiverem
+  // "quiz" preenchido (rollout em lotes, ver STATUS.md); até lá, campo ausente
+  // é tolerado em vez de FAIL para não travar o portão a meio do rollout.
+  const quiz = caso.quiz;
+  if (!quiz) {
+    REQUIRE_QUIZ ? bad(`${id}: campo "quiz" ausente`) : ok(`${id}: quiz ainda não preenchido (rollout em andamento)`);
+  } else {
+    const mcq = quiz.mcq;
+    if (!mcq || !Array.isArray(mcq.opts) || mcq.opts.length !== 4) {
+      bad(`${id}: quiz.mcq ausente ou sem exatamente 4 opções`);
+    } else {
+      Number.isInteger(mcq.correct) && mcq.correct >= 0 && mcq.correct <= 3
+        ? ok(`${id}: quiz.mcq.correct é índice válido (0-3)`)
+        : bad(`${id}: quiz.mcq.correct=${mcq.correct} fora do intervalo 0-3`);
+      mcq.opts[mcq.correct] === titulo
+        ? ok(`${id}: quiz.mcq.opts[correct] bate com o título do caso ("${titulo}")`)
+        : bad(`${id}: quiz.mcq.opts[correct]="${mcq.opts[mcq.correct]}" NÃO bate com o título do caso ("${titulo}")`);
+      (typeof mcq.q === "string" && mcq.q.length > 5 && typeof mcq.exp === "string" && mcq.exp.length > 5)
+        ? null : bad(`${id}: quiz.mcq.q/exp ausente ou curto demais`);
+    }
+
+    if (!Array.isArray(quiz.vf) || quiz.vf.length !== 3) {
+      bad(`${id}: quiz.vf deveria ter exatamente 3 itens`);
+    } else {
+      quiz.vf.forEach((item, i) => {
+        (typeof item.q === "string" && item.q.length > 5 && typeof item.correct === "boolean" && typeof item.exp === "string" && item.exp.length > 5)
+          ? null : bad(`${id}: quiz.vf[${i}] malformado (precisa q/correct(bool)/exp)`);
+      });
+      ok(`${id}: quiz.vf tem 3 itens estruturalmente válidos`);
+    }
+
+    const asrt = quiz.assertivas;
+    if (!asrt || !Array.isArray(asrt.itens) || asrt.itens.length !== 3 || !Array.isArray(asrt.verdades) || asrt.verdades.length !== 3 || !Array.isArray(asrt.opcoes) || asrt.opcoes.length !== 8) {
+      bad(`${id}: quiz.assertivas malformado (precisa itens[3]/verdades[3]/opcoes[8])`);
+    } else {
+      const [v1, v2, v3] = asrt.verdades;
+      const comboIdx = v1 && !v2 && !v3 ? 0 : !v1 && v2 && !v3 ? 1 : !v1 && !v2 && v3 ? 2
+        : v1 && v2 && !v3 ? 3 : v1 && !v2 && v3 ? 4 : !v1 && v2 && v3 ? 5 : v1 && v2 && v3 ? 6 : 7;
+      asrt.correta === comboIdx
+        ? ok(`${id}: quiz.assertivas.correta (${asrt.correta}) bate com o combo derivado de "verdades" (${JSON.stringify(asrt.verdades)})`)
+        : bad(`${id}: quiz.assertivas.correta=${asrt.correta} NÃO bate com o combo derivado de "verdades"=${JSON.stringify(asrt.verdades)} (esperado ${comboIdx})`);
+      (typeof asrt.exp === "string" && asrt.exp.length > 5) ? null : bad(`${id}: quiz.assertivas.exp ausente ou curto demais`);
     }
   }
 
