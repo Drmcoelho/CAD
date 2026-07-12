@@ -8636,9 +8636,10 @@ function renderGasoDetail(){
   var titleHtml=hideTitle
     ?'<span style="color:var(--mut);font-style:italic;font-weight:400">caso sorteado — título oculto até você revelar</span>'
     :c.titulo+(c.mimicsCAD?' <span class="gm">imita CAD</span>':'');
+  var labHtml=c.id+(hideTitle?'':' · '+c.categoria);
   var html=
     '<div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px">'+
-    '<div><span class="lab">'+c.id+' · '+c.categoria+'</span><div style="font-size:19px;font-weight:700">'+titleHtml+'</div></div></div>'+
+    '<div><span class="lab">'+labHtml+'</span><div style="font-size:19px;font-weight:700">'+titleHtml+'</div></div></div>'+
     '<div class="nar"><b>Vinheta.</b> '+c.vinheta+'</div>'+
     '<div class="glabs">'+labsHtml+'</div>'+
     '<div class="nar"><b>Pergunta.</b> '+c.pergunta+'</div>'+
