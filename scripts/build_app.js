@@ -11,6 +11,7 @@
  *     - questions-data ← content/questions.json (banco do provão)
  *     - cases-data     ← content/cases.json     (casos socráticos)
  *     - atlas-data     ← content/atlas.json     (cálculo, escada, fenótipos, leis, projetos)
+ *     - fisio-questions-data ← content/fisiopatologia.json (banco de mecanismo/fisiopatologia)
  *   perfis/index.html:
  *     - profiles-data  ← content/profiles.json  (fisiopatologia + tratamento por perfil)
  *   tratado/index.html:
@@ -46,6 +47,7 @@ const FILES = {
     { id: "questions-data", text: jsonText("content/questions.json", readRaw("content/questions.json")) },
     { id: "cases-data", text: jsonText("content/cases.json", readRaw("content/cases.json")) },
     { id: "atlas-data", text: jsonText("content/atlas.json", readRaw("content/atlas.json")) },
+    { id: "fisio-questions-data", text: jsonText("content/fisiopatologia.json", readRaw("content/fisiopatologia.json")) },
   ],
   "perfis/index.html": [
     { id: "profiles-data", text: jsonText("content/profiles.json", readRaw("content/profiles.json")) },
