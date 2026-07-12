@@ -615,6 +615,118 @@ canvas{display:block;width:100%;background:#0c1218;border:1px solid var(--line);
   "type": "diss",
   "q": "classifyDkaProfile() devolve uma LISTA ranqueada de perfis plausíveis com o motivo de cada um, nunca um único veredito. Por que essa é a escolha de design certa para uma ferramenta de apoio à decisão, e o que ela evita?",
   "model": "Um veredito único obrigaria o motor a resolver, silenciosamente, toda ambiguidade clínica genuína que os números por si só não resolvem — exatamente o tipo de decisão que deveria ficar com o clínico, não ser escondida dentro de uma caixa-preta. Ao devolver uma lista ranqueada com o motivo de cada perfil (e sinalizar explicitamente quando falta um dado essencial, em vez de adivinhar), a ferramenta preserva o humano-no-loop: o clínico vê os candidatos plausíveis e POR QUE cada um é plausível, e decide com o contexto que só ele tem (história, exame físico, evolução). Isso evita o pior modo de falha de uma ferramenta de apoio à decisão: parecer mais certa do que os dados realmente permitem."
+ },
+ {
+  "type": "mcq",
+  "q": "Na 140, Cl 100, HCO₃ 15 (AG bruto = 25) num paciente com albumina 2,0 g/dL (desnutrição/hepatopatia). O que o AG corrigido por albumina revela que o AG bruto já não esconde?",
+  "opts": [
+   "Nada — o AG bruto já é o valor definitivo, a correção por albumina é só um refinamento cosmético",
+   "O AG bruto de 25 já está tão alto que a correção não muda a leitura clínica",
+   "A correção soma 2,5 mmol/L para cada 1 g/dL de albumina abaixo de 4,0 — aqui, +5, elevando o AG corrigido para 30: a hipoalbuminemia por si só JÁ reduziria o AG bruto (albumina é um ânion não medido), então o bruto de 25 já está artificialmente contido mesmo antes de qualquer acidose adicional",
+   "A correção só é necessária quando a albumina está alta, nunca quando está baixa"
+  ],
+  "correct": 2,
+  "exp": "Albumina é o principal ânion não medido do plasma — cada g/dL abaixo de 4,0 'esconde' cerca de 2,5 mmol/L de gap. Com albumina 2,0 (2,0 abaixo do normal), o AG bruto de 25 já estava sendo contido em ~5 mmol/L pela própria hipoalbuminemia; corrigido, o AG real é 30 — uma acidose de gap alto mais grave do que o número bruto sozinho sugere. Ignorar a albumina em paciente desnutrido/hepatopata/queimado é subestimar sistematicamente a gravidade.",
+  "computed": [
+   { "module": "cad", "fn": "anionGap", "args": [140, 100, 15], "expect": 25 },
+   { "module": "cad", "fn": "correctedAnionGap", "args": [25, 2.0], "expect": 30 }
+  ]
+ },
+ {
+  "type": "vf",
+  "q": "Hipoalbuminemia faz o AG bruto SUBESTIMAR a gravidade real de uma acidose de gap alto — o AG corrigido por albumina é sempre maior ou igual ao bruto quando a albumina está abaixo de 4,0 g/dL.",
+  "correct": true,
+  "exp": "Verdadeiro. A fórmula soma 2,5 × (4,0 − albumina) ao AG bruto — com albumina abaixo de 4,0 esse termo é positivo, então o AG corrigido só pode subir (ou ficar igual, se albumina = 4,0), nunca cair. É por isso que pacientes desnutridos, hepatopatas ou queimados (todos tipicamente hipoalbuminêmicos) podem ter uma acidose de gap alto clinicamente relevante mascarada por um AG bruto enganosamente 'normal'.",
+  "computed": [
+   { "module": "cad", "fn": "correctedAnionGap", "args": [25, 2.0], "expect": 30 }
+  ]
+ },
+ {
+  "type": "mcq",
+  "q": "O canon deste projeto documenta DOIS números para o limiar de HHS: 320 (critério formal de osm efetiva) e 300 (o 'comentário 2024', mais sensível). No motor (classifyDkaProfile), qual desses dois números aparece de fato na lógica que sinaliza possível sobreposição CAD+HHS?",
+  "opts": [
+   "320 — o motor só sinaliza a sobreposição acima do critério formal, nunca antes",
+   "300 — o motor usa o limiar mais sensível (o 'alerta' do comentário 2024) para sinalizar a POSSIBILIDADE de sobreposição cedo, não o critério formal de HHS estabelecido",
+   "Nenhum dos dois — o motor decide a sobreposição só pela glicose, ignorando a osmolaridade",
+   "Os dois ao mesmo tempo, como uma média"
+  ],
+  "correct": 1,
+  "exp": "O motor usa >300 (o alerta mais sensível) para sugerir a possibilidade de sobreposição cad-hhs — deliberadamente mais cedo que o critério formal de 320, porque a função é um triador de hipóteses plausíveis, não um diagnosticador de HHS. 320 continua sendo o número que define o critério formal de HHS; 300 é o gatilho do motor para levantar a bandeira e pedir atenção antes que o quadro cruce o critério formal.",
+  "computed": [
+   { "module": "cad", "fn": "classifyDkaProfile", "args": [{ "na": 150, "cl": 110, "hco3": 10, "glucoseMgDl": 450, "ph": 7.15, "betaHydroxybutyrateMmolL": 5, "knownDiabetes": true }], "path": "computed.effectiveOsmolality", "expect": 325 },
+   { "module": "cad", "fn": "classifyDkaProfile", "args": [{ "na": 150, "cl": 110, "hco3": 10, "glucoseMgDl": 450, "ph": 7.15, "betaHydroxybutyrateMmolL": 5, "knownDiabetes": true }], "path": "matches.0.id", "expect": "cad-hhs" }
+  ]
+ },
+ {
+  "type": "vf",
+  "q": "No motor, o perfil 'cad-hhs' só é sinalizado quando a osmolaridade efetiva ultrapassa 300 — glicose isoladamente alta, mesmo sem cruzar esse limiar de osm, nunca dispara esse sinal.",
+  "correct": false,
+  "exp": "Falso. A condição no código é um OU: glicose ≥500 OU osm efetiva >300 — qualquer um dos dois já sinaliza a possibilidade. Um caso com glicose 550 mas osm efetiva ainda em 290,6 (Na relativamente baixo) já dispara 'cad-hhs' só pela via da glicose, sem que a osmolaridade tenha cruzado 300 — os dois caminhos são independentes, não um só.",
+  "computed": [
+   { "module": "cad", "fn": "classifyDkaProfile", "args": [{ "na": 130, "cl": 95, "hco3": 10, "glucoseMgDl": 550, "ph": 7.15, "betaHydroxybutyrateMmolL": 5, "knownDiabetes": true }], "path": "computed.effectiveOsmolality", "expect": 290.6 },
+   { "module": "cad", "fn": "classifyDkaProfile", "args": [{ "na": 130, "cl": 95, "hco3": 10, "glucoseMgDl": 550, "ph": 7.15, "betaHydroxybutyrateMmolL": 5, "knownDiabetes": true }], "path": "matches.0.id", "expect": "cad-hhs" }
+  ]
+ },
+ {
+  "type": "mcq",
+  "q": "isResolvedDka() exige βHB abaixo de 0,6 E (pH ≥7,3 OU HCO₃ ≥18). Um paciente com glicemia normalizada (120 mg/dL), mas βHB 0,4 e pH 7,2/HCO₃ 15 — está resolvido?",
+  "opts": [
+   "Sim — a glicemia normal já é o sinal mais confiável de resolução",
+   "Não — o eixo cetônico já resolveu (βHB <0,6), mas o eixo ácido não (pH <7,3 E HCO₃ <18); a função exige os DOIS eixos resolvidos, e glicemia nem entra na equação",
+   "Sim, porque βHB <0,6 sozinho já basta",
+   "Não é possível avaliar sem saber a glicemia"
+  ],
+  "correct": 1,
+  "exp": "A resolução na doutrina 2024 é sobre cetose + acidose, nunca sobre glicemia — 'glicemia normal não é resolução' é justamente a armadilha nomeada no CLAUDE.md deste projeto. Aqui o eixo cetônico já fechou (βHB 0,4 <0,6), mas nem pH nem HCO₃ atingiram a meta de resolução — a função retorna falso porque exige AMBOS os eixos, não um substituindo o outro.",
+  "computed": [
+   { "module": "cad", "fn": "isResolvedDka", "args": [{ "betaHydroxybutyrateMmolL": 0.4, "ph": 7.2, "hco3": 15 }], "expect": false }
+  ]
+ },
+ {
+  "type": "vf",
+  "q": "Glicemia normalizada é suficiente, por si só, para classificar uma CAD como resolvida.",
+  "correct": false,
+  "exp": "Falso — glicemia não é um dos dois eixos de isResolvedDka() (cetônico e ácido). Um paciente pode ter glicemia perfeitamente normal com cetose e acidose ainda ativas (é exatamente o fenótipo euglicêmico/SGLT2i) — tratar glicemia normal como sinônimo de resolução é a armadilha que este projeto nomeia explicitamente para não repetir.",
+  "computed": [
+   { "module": "cad", "fn": "isResolvedDka", "args": [{ "betaHydroxybutyrateMmolL": 0.4, "ph": 7.2, "hco3": 15 }], "expect": false }
+  ]
+ },
+ {
+  "type": "mcq",
+  "q": "Labs: βHB 3,5, pH 7,35, HCO₃ 20, glicose 280 (diabético conhecido). classifyDkaProfile() aponta qual perfil, e por quê ele NÃO é 'CAD clássica'?",
+  "opts": [
+   "'pré-cad' — o eixo cetônico já cruzou o limiar (βHB ≥3,0), mas pH e HCO₃ ainda estão dentro do critério formal (pH ≥7,30, HCO₃ ≥18) — hasDka() ainda é falso porque falta o eixo ácido",
+   "'CAD clássica' — qualquer βHB ≥3,0 já fecha o diagnóstico sozinho",
+   "'hiperclorêmica' — porque o HCO₃ está abaixo de 24",
+   "'euglicêmica' — porque a glicose não é extremamente alta"
+  ],
+  "correct": 0,
+  "exp": "hasDka() exige os três eixos (glicêmico, cetônico E ácido) simultaneamente. Aqui o cetônico já cruzou o limiar, mas o eixo ácido não (pH e HCO₃ ainda dentro da normalidade formal) — o 'tampão' ainda segura. O motor nomeia essa janela como 'pré-cad': cetose real, ainda sem a descompensação ácido-base que define a CAD formalmente.",
+  "computed": [
+   { "module": "cad", "fn": "classifyDkaProfile", "args": [{ "na": 138, "cl": 100, "hco3": 20, "glucoseMgDl": 280, "ph": 7.35, "betaHydroxybutyrateMmolL": 3.5, "knownDiabetes": true }], "path": "computed.hasDka", "expect": false },
+   { "module": "cad", "fn": "classifyDkaProfile", "args": [{ "na": 138, "cl": 100, "hco3": 20, "glucoseMgDl": 280, "ph": 7.35, "betaHydroxybutyrateMmolL": 3.5, "knownDiabetes": true }], "path": "matches.0.id", "expect": "pre-cad" }
+  ]
+ },
+ {
+  "type": "mcq",
+  "q": "Paciente NÃO-diabético, glicose 120 mg/dL, βHB 4,5 (cetose real), pH 7,25/HCO₃ 16 (acidose real). Por que classifyDkaProfile() aponta 'cetose alcoólica/de jejum' e não 'CAD clássica', se cetose E acidose estão ambas presentes?",
+  "opts": [
+   "Porque hasDka() é falso — mesmo com cetose e acidose reais, o eixo GLICÊMICO do critério formal não fecha: sem diabetes conhecido, glicose 120 fica abaixo dos 200 mg/dL exigidos; sem esse eixo, não é 'CAD' no sentido formal do termo",
+   "Porque a acidose é fraca demais para contar",
+   "Porque βHB 4,5 é baixo demais para ser cetose real",
+   "Porque só CAD diabética pode ter pH baixo"
+  ],
+  "correct": 0,
+  "exp": "hasDka() é um AND de três eixos, e o eixo glicêmico (diabetes conhecido OU glicose ≥200) simplesmente não fecha aqui — a fisiologia da cetose é idêntica (jejum prolongado/etilismo suprimindo insulina, liberando lipólise), mas por definição formal não é 'cetoacidose DIABÉTICA' sem o componente hiperglicêmico ou o diagnóstico prévio. O motor nomeia esse fenótipo à parte para não confundir o tratamento (aqui é reposição de tiamina/glicose, não o protocolo de insulina da CAD).",
+  "computed": [
+   { "module": "cad", "fn": "classifyDkaProfile", "args": [{ "na": 138, "cl": 102, "hco3": 16, "glucoseMgDl": 120, "ph": 7.25, "betaHydroxybutyrateMmolL": 4.5, "knownDiabetes": false }], "path": "computed.hasDka", "expect": false },
+   { "module": "cad", "fn": "classifyDkaProfile", "args": [{ "na": 138, "cl": 102, "hco3": 16, "glucoseMgDl": 120, "ph": 7.25, "betaHydroxybutyrateMmolL": 4.5, "knownDiabetes": false }], "path": "matches.0.id", "expect": "alcoolica-jejum" }
+  ]
+ },
+ {
+  "type": "diss",
+  "q": "'sepse-lactato' e 'dialitica' são os dois únicos perfis de classifyDkaProfile() acionados por uma FLAG de contexto clínico (lactato/suspeita de sepse; dependência dialítica), não por um limiar numérico calculado a partir dos labs de entrada. Por que essa diferença de design é deliberada, e não uma inconsistência do motor?",
+  "model": "Os demais perfis (pré-cad, hiperclorêmica, euglicêmica, cad-hhs, alcoólica-jejum) emergem de uma combinação de valores que os PRÓPRIOS labs de entrada já contêm — glicose, βHB/cetonúria, pH, HCO₃, osm efetiva são todos calculáveis a partir do mesmo painel bioquímico. Já a presença de sepse ou de dependência dialítica não é uma propriedade que a gasometria/bioquímica isoladas conseguem inferir com segurança: lactato pode estar elevado sem que haja sepse (hipoperfusão local, exercício, metformina), e a função dialítica não aparece em nenhum eletrólito isolado — é um dado de história clínica. Por isso o motor aceita esses dois como flags explícitas fornecidas por quem está inserindo os dados (o clínico), em vez de tentar adivinhá-las a partir de números que não as codificam de forma confiável. Isso é consistente com o resto do projeto: nunca inventar um dado que os números não contêm — aqui simplesmente o dado que falta é categórico (sim/não), não numérico."
  }
 ]
 </script>
