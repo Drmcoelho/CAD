@@ -8603,7 +8603,7 @@ function renderGasoList(){
   }).join('');
 }
 function selGaso(id,blind){gasoCur=id;gasoRevealed=false;gasoBlind=!!blind;renderGasoList();renderGasoDetail();document.getElementById('gasoDetail').scrollIntoView({behavior:'smooth',block:'start'});}
-function toggleGasoReveal(){gasoRevealed=!gasoRevealed;renderGasoDetail();}
+function toggleGasoReveal(){gasoRevealed=!gasoRevealed;renderGasoList();renderGasoDetail();}
 function sortearGaso(){
   var pool=gasoCat===null?GASO:GASO.filter(function(c){return c.categoria===gasoCat;});
   if(pool.length>1&&gasoLastDrawn){pool=pool.filter(function(c){return c.id!==gasoLastDrawn;});}
