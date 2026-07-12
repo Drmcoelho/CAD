@@ -618,7 +618,7 @@ canvas{display:block;width:100%;background:#0c1218;border:1px solid var(--line);
  },
  {
   "type": "mcq",
-  "q": "Na 140, Cl 100, HCO₃ 15 (AG bruto = 25) num paciente com albumina 2,0 g/dL (desnutrição/hepatopatia). O que o AG corrigido por albumina revela que o AG bruto já não esconde?",
+  "q": "Na 140, Cl 100, HCO₃ 15 (AG bruto = 25) num paciente com albumina 2,0 g/dL (desnutrição/hepatopatia). O que o AG corrigido por albumina revela que o AG bruto escondia?",
   "opts": [
    "Nada — o AG bruto já é o valor definitivo, a correção por albumina é só um refinamento cosmético",
    "O AG bruto de 25 já está tão alto que a correção não muda a leitura clínica",
@@ -634,9 +634,9 @@ canvas{display:block;width:100%;background:#0c1218;border:1px solid var(--line);
  },
  {
   "type": "vf",
-  "q": "Hipoalbuminemia faz o AG bruto SUBESTIMAR a gravidade real de uma acidose de gap alto — o AG corrigido por albumina é sempre maior ou igual ao bruto quando a albumina está abaixo de 4,0 g/dL.",
+  "q": "Hipoalbuminemia faz o AG bruto SUBESTIMAR a gravidade real de uma acidose de gap alto — o AG corrigido por albumina é sempre maior que o bruto quando a albumina está abaixo de 4,0 g/dL.",
   "correct": true,
-  "exp": "Verdadeiro. A fórmula soma 2,5 × (4,0 − albumina) ao AG bruto — com albumina abaixo de 4,0 esse termo é positivo, então o AG corrigido só pode subir (ou ficar igual, se albumina = 4,0), nunca cair. É por isso que pacientes desnutridos, hepatopatas ou queimados (todos tipicamente hipoalbuminêmicos) podem ter uma acidose de gap alto clinicamente relevante mascarada por um AG bruto enganosamente 'normal'.",
+  "exp": "Verdadeiro. A fórmula soma 2,5 × (4,0 − albumina) ao AG bruto — com albumina abaixo de 4,0 esse termo é estritamente positivo, então o AG corrigido é sempre maior que o bruto (só ficaria igual se a albumina fosse exatamente 4,0, fora da premissa aqui). É por isso que pacientes desnutridos, hepatopatas ou queimados (todos tipicamente hipoalbuminêmicos) podem ter uma acidose de gap alto clinicamente relevante mascarada por um AG bruto enganosamente 'normal'.",
   "computed": [
    { "module": "cad", "fn": "correctedAnionGap", "args": [25, 2.0], "expect": 30 }
   ]
@@ -653,8 +653,8 @@ canvas{display:block;width:100%;background:#0c1218;border:1px solid var(--line);
   "correct": 1,
   "exp": "O motor usa >300 (o alerta mais sensível) para sugerir a possibilidade de sobreposição cad-hhs — deliberadamente mais cedo que o critério formal de 320, porque a função é um triador de hipóteses plausíveis, não um diagnosticador de HHS. 320 continua sendo o número que define o critério formal de HHS; 300 é o gatilho do motor para levantar a bandeira e pedir atenção antes que o quadro cruce o critério formal.",
   "computed": [
-   { "module": "cad", "fn": "classifyDkaProfile", "args": [{ "na": 150, "cl": 110, "hco3": 10, "glucoseMgDl": 450, "ph": 7.15, "betaHydroxybutyrateMmolL": 5, "knownDiabetes": true }], "path": "computed.effectiveOsmolality", "expect": 325 },
-   { "module": "cad", "fn": "classifyDkaProfile", "args": [{ "na": 150, "cl": 110, "hco3": 10, "glucoseMgDl": 450, "ph": 7.15, "betaHydroxybutyrateMmolL": 5, "knownDiabetes": true }], "path": "matches.0.id", "expect": "cad-hhs" }
+   { "module": "cad", "fn": "classifyDkaProfile", "args": [{ "na": 145, "cl": 110, "hco3": 10, "glucoseMgDl": 450, "ph": 7.15, "betaHydroxybutyrateMmolL": 5, "knownDiabetes": true }], "path": "computed.effectiveOsmolality", "expect": 315 },
+   { "module": "cad", "fn": "classifyDkaProfile", "args": [{ "na": 145, "cl": 110, "hco3": 10, "glucoseMgDl": 450, "ph": 7.15, "betaHydroxybutyrateMmolL": 5, "knownDiabetes": true }], "path": "matches.0.id", "expect": "cad-hhs" }
   ]
  },
  {
