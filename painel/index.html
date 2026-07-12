@@ -123,7 +123,10 @@ td.l,th.l{text-align:left}
 <div class="panel">
   <div class="lab">Categoria</div>
   <div class="gcats" id="gasoCats"></div>
-  <div class="lab" style="margin-top:10px">Caso — escolha um</div>
+  <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;margin-top:10px">
+    <div class="lab">Caso — escolha um</div>
+    <button class="gbtn" style="margin:0;padding:6px 14px;font-size:12.5px" onclick="sortearGaso()">Sortear caso (sem spoiler) ›</button>
+  </div>
   <div class="glist" id="gasoList"></div>
 </div>
 
@@ -8573,7 +8576,7 @@ stepper();detail(cur);drawAll();synth();table();
 
 // ---- banco de gasometrias (sintético, treino) ----
 var GASO=JSON.parse(document.getElementById('gasometrias-data').textContent).casos;
-var gasoCat=null, gasoCur=GASO[0].id, gasoRevealed=false;
+var gasoCat=null, gasoCur=GASO[0].id, gasoRevealed=false, gasoBlind=false, gasoLastDrawn=null;
 var TYPE_PT={metabolicAcidosis:'Acidose metabólica',metabolicAlkalosis:'Alcalose metabólica',respiratoryAcidosis:'Acidose respiratória',respiratoryAlkalosis:'Alcalose respiratória'};
 
 function gasoById(id){return GASO.filter(function(c){return c.id===id;})[0];}
@@ -8593,13 +8596,21 @@ function selGasoCat(cat){gasoCat=cat;renderGasoCats();renderGasoList();}
 function renderGasoList(){
   var list=gasoCat===null?GASO:GASO.filter(function(c){return c.categoria===gasoCat;});
   document.getElementById('gasoList').innerHTML=list.map(function(c){
+    var blindThis=gasoBlind&&!gasoRevealed&&c.id===gasoCur;
     return '<button class="gcard'+(c.id===gasoCur?' on':'')+"\" onclick='selGaso("+JSON.stringify(c.id)+")'>"+
-      '<div class="gid">'+c.id+'</div><div class="gt">'+c.titulo+'</div>'+
-      (c.mimicsCAD?'<span class="gm">imita CAD</span>':'')+'</button>';
+      '<div class="gid">'+c.id+'</div><div class="gt">'+(blindThis?'<span style="color:var(--mut);font-style:italic">título oculto</span>':c.titulo)+'</div>'+
+      (c.mimicsCAD&&!blindThis?'<span class="gm">imita CAD</span>':'')+'</button>';
   }).join('');
 }
-function selGaso(id){gasoCur=id;gasoRevealed=false;renderGasoList();renderGasoDetail();document.getElementById('gasoDetail').scrollIntoView({behavior:'smooth',block:'start'});}
+function selGaso(id,blind){gasoCur=id;gasoRevealed=false;gasoBlind=!!blind;renderGasoList();renderGasoDetail();document.getElementById('gasoDetail').scrollIntoView({behavior:'smooth',block:'start'});}
 function toggleGasoReveal(){gasoRevealed=!gasoRevealed;renderGasoDetail();}
+function sortearGaso(){
+  var pool=gasoCat===null?GASO:GASO.filter(function(c){return c.categoria===gasoCat;});
+  if(pool.length>1&&gasoLastDrawn){pool=pool.filter(function(c){return c.id!==gasoLastDrawn;});}
+  var pick=pool[Math.floor(Math.random()*pool.length)];
+  gasoLastDrawn=pick.id;
+  selGaso(pick.id,true);
+}
 
 function gasoLabRow(label,v,unit){
   return v==null?'':'<div><span>'+label+'</span>'+v+(unit||'')+'</div>';
@@ -8621,10 +8632,13 @@ function renderGasoDetail(){
     gasoLabRow('Cetonúria', L.ketonuriaCruzes,'+')+
     (L.knownDiabetes!=null?'<div><span>Diabetes conhecido</span>'+(L.knownDiabetes?'sim':'não')+'</div>':'');
 
+  var hideTitle=gasoBlind&&!gasoRevealed;
+  var titleHtml=hideTitle
+    ?'<span style="color:var(--mut);font-style:italic;font-weight:400">caso sorteado — título oculto até você revelar</span>'
+    :c.titulo+(c.mimicsCAD?' <span class="gm">imita CAD</span>':'');
   var html=
     '<div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px">'+
-    '<div><span class="lab">'+c.id+' · '+c.categoria+'</span><div style="font-size:19px;font-weight:700">'+c.titulo+
-    (c.mimicsCAD?' <span class="gm">imita CAD</span>':'')+'</div></div></div>'+
+    '<div><span class="lab">'+c.id+' · '+c.categoria+'</span><div style="font-size:19px;font-weight:700">'+titleHtml+'</div></div></div>'+
     '<div class="nar"><b>Vinheta.</b> '+c.vinheta+'</div>'+
     '<div class="glabs">'+labsHtml+'</div>'+
     '<div class="nar"><b>Pergunta.</b> '+c.pergunta+'</div>'+
