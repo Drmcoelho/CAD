@@ -21,11 +21,18 @@
  *   5. quando o caso declara "hasDkaEsperado" (booleano estrutural, não prosa
  *      solta — CAD-família tem eixo glicêmico/cetônico que só cad_core.hasDka()
  *      resolve), cruza contra cad_core.hasDka(labs) de verdade.
- *   6. quiz{mcq,vf,assertivas}: estrutura (mcq com 4 opções, vf com 3 itens,
- *      assertivas com 3 itens/8 opções) e autoconsistência do gabarito — o
- *      índice correto do mcq bate com o título do próprio caso, e o índice
- *      correto das assertivas é recomputado a partir do array "verdades"
- *      (nenhum índice de resposta é hand-typed sem derivação mecânica).
+ *   6. quiz{mcq[],vf[],assertivas[]}: estrutura (cada mcq com 4 opções, vf
+ *      sempre 3 itens, cada assertivas com 3 itens/8 opções) e autoconsistência
+ *      do gabarito — o índice correto do mcq[0] bate com o título do próprio
+ *      caso, e o índice correto de cada assertivas é recomputado a partir do
+ *      array "verdades" (nenhum índice de resposta é hand-typed sem derivação
+ *      mecânica). Formato novo (rollout): quiz.mcq como array de 8 marca um
+ *      caso migrado — exige também quiz.assertivas com 3 blocos e "evolucao"
+ *      (pontos[1-3] com pH derivado por Henderson-Hasselbalch + escada de 8
+ *      passos socráticos + casosRelacionados), e barra vinheta/pergunta que
+ *      citem outro caso (G-NN) antes do reveal (spoiler). Formato antigo
+ *      (objeto único em mcq/assertivas, sem evolucao) ainda tolerado até o
+ *      lote inteiro (100 casos) ser convertido.
  *
  *   node scripts/check_gasometrias.js
  */
@@ -110,30 +117,64 @@ for (const caso of data.casos) {
   if (labs.na != null && labs.cl != null) {
     const ag = cad.anionGap(labs.na, labs.cl, labs.hco3);
     near(blob, ag) ? ok(`${id}: AG calculado (${ag}) presente no gabarito`) : bad(`${id}: AG calculado ${ag} NÃO aparece no gabarito`);
+    let agc = ag;
     if (labs.albumin != null) {
-      const agc = cad.correctedAnionGap(ag, labs.albumin);
+      agc = cad.correctedAnionGap(ag, labs.albumin);
       near(blob, agc) ? ok(`${id}: AGc calculado (${agc}) presente no gabarito`) : bad(`${id}: AGc calculado ${agc} NÃO aparece no gabarito`);
+    }
+
+    // 4b. Δ/Δ = (AGc-12)/(24-HCO3) — cruza a zona (<1 hiperclorêmica / 1-2 pura / >2 alcalose)
+    // contra as palavras-chave "pura"/"hiperclorêmica"/"alcalose" no texto, quando o gabarito
+    // faz essa afirmação (armadilha histórica do repo: "0,93 quase pura" — ver CLAUDE.md).
+    if (24 - labs.hco3 !== 0) {
+      const dd = (agc - 12) / (24 - labs.hco3);
+      const zone = dd < 1 ? "hiperclorêmica" : dd <= 2 ? "pura" : "alcalose";
+      const claimsPura = /agma pura|gap alto explica sozinho|sem cauda|não há cauda|explica sozinh/i.test(blob);
+      const claimsHypercl = /cauda hiperclor|componente hiperclor/i.test(blob);
+      const claimsAlcalose = /alcalose.{0,20}(somad|associad)/i.test(blob);
+      if (claimsPura && zone !== "pura") {
+        bad(`${id}: gabarito afirma AGMA "pura" mas Δ/Δ calculado = ${dd.toFixed(2)} (zona: ${zone}, não pura)`);
+      } else if (claimsHypercl && zone === "pura") {
+        bad(`${id}: gabarito afirma componente hiperclorêmico mas Δ/Δ calculado = ${dd.toFixed(2)} (zona: pura, sem cauda)`);
+      } else if (claimsAlcalose && zone !== "alcalose") {
+        bad(`${id}: gabarito afirma alcalose associada mas Δ/Δ calculado = ${dd.toFixed(2)} (zona: ${zone})`);
+      } else if (claimsPura || claimsHypercl || claimsAlcalose) {
+        ok(`${id}: Δ/Δ calculado (${dd.toFixed(2)}, zona ${zone}) consistente com a zona afirmada no gabarito`);
+      }
     }
   }
 
-  // 5b. quiz (mcq + vf + assertivas) — estrutura e autoconsistência do gabarito
+  // 5b. quiz (mcq[]/vf[]/assertivas[]) + evolucao (série temporal + escada de 8 passos)
+  // Rollout em andamento: quiz.mcq como array marca um caso já convertido pro formato
+  // novo (8 mcq / 3 assertivas / evolucao obrigatória); objeto único = formato antigo,
+  // ainda tolerado até o lote inteiro (100 casos) ser migrado.
   const quiz = caso.quiz;
   if (!quiz) {
     bad(`${id}: campo "quiz" ausente`);
   } else {
-    const mcq = quiz.mcq;
-    if (!mcq || !Array.isArray(mcq.opts) || mcq.opts.length !== 4) {
-      bad(`${id}: quiz.mcq ausente ou sem exatamente 4 opções`);
+    const upgraded = Array.isArray(quiz.mcq);
+    const mcqArr = upgraded ? quiz.mcq : quiz.mcq ? [quiz.mcq] : [];
+
+    if (mcqArr.length === 0) {
+      bad(`${id}: quiz.mcq ausente`);
     } else {
-      Number.isInteger(mcq.correct) && mcq.correct >= 0 && mcq.correct <= 3
-        ? ok(`${id}: quiz.mcq.correct é índice válido (0-3)`)
-        : bad(`${id}: quiz.mcq.correct=${mcq.correct} fora do intervalo 0-3`);
-      mcq.opts[mcq.correct] === titulo
-        ? ok(`${id}: quiz.mcq.opts[correct] bate com o título do caso ("${titulo}")`)
-        : bad(`${id}: quiz.mcq.opts[correct]="${mcq.opts[mcq.correct]}" NÃO bate com o título do caso ("${titulo}")`);
-      if (!(typeof mcq.q === "string" && mcq.q.length > 5 && typeof mcq.exp === "string" && mcq.exp.length > 5)) {
-        bad(`${id}: quiz.mcq.q/exp ausente ou curto demais`);
-      }
+      mcqArr.forEach((mcq, mi) => {
+        if (!mcq || !Array.isArray(mcq.opts) || mcq.opts.length !== 4) {
+          bad(`${id}: quiz.mcq[${mi}] ausente ou sem exatamente 4 opções`);
+          return;
+        }
+        if (!(Number.isInteger(mcq.correct) && mcq.correct >= 0 && mcq.correct <= 3)) {
+          bad(`${id}: quiz.mcq[${mi}].correct=${mcq.correct} fora do intervalo 0-3`);
+        }
+        if (mi === 0 && mcq.opts[mcq.correct] !== titulo) {
+          bad(`${id}: quiz.mcq[0].opts[correct]="${mcq.opts[mcq.correct]}" NÃO bate com o título do caso ("${titulo}")`);
+        }
+        if (!(typeof mcq.q === "string" && mcq.q.length > 5 && typeof mcq.exp === "string" && mcq.exp.length > 5)) {
+          bad(`${id}: quiz.mcq[${mi}].q/exp ausente ou curto demais`);
+        }
+      });
+      if (upgraded && mcqArr.length !== 8) bad(`${id}: quiz.mcq deveria ter 8 itens (formato novo), tem ${mcqArr.length}`);
+      ok(`${id}: quiz.mcq (${mcqArr.length} item(ns)) estruturalmente válido`);
     }
 
     if (!Array.isArray(quiz.vf) || quiz.vf.length !== 3) {
@@ -149,18 +190,66 @@ for (const caso of data.casos) {
       ok(`${id}: quiz.vf tem 3 itens estruturalmente válidos`);
     }
 
-    const asrt = quiz.assertivas;
-    if (!asrt || !Array.isArray(asrt.itens) || asrt.itens.length !== 3 || !Array.isArray(asrt.verdades) || asrt.verdades.length !== 3 || !Array.isArray(asrt.opcoes) || asrt.opcoes.length !== 8) {
-      bad(`${id}: quiz.assertivas malformado (precisa itens[3]/verdades[3]/opcoes[8])`);
+    const asrtArr = Array.isArray(quiz.assertivas) ? quiz.assertivas : quiz.assertivas ? [quiz.assertivas] : [];
+    if (asrtArr.length === 0) {
+      bad(`${id}: quiz.assertivas ausente`);
     } else {
-      const [v1, v2, v3] = asrt.verdades;
-      const comboIdx = v1 && !v2 && !v3 ? 0 : !v1 && v2 && !v3 ? 1 : !v1 && !v2 && v3 ? 2
-        : v1 && v2 && !v3 ? 3 : v1 && !v2 && v3 ? 4 : !v1 && v2 && v3 ? 5 : v1 && v2 && v3 ? 6 : 7;
-      asrt.correta === comboIdx
-        ? ok(`${id}: quiz.assertivas.correta (${asrt.correta}) bate com o combo derivado de "verdades" (${JSON.stringify(asrt.verdades)})`)
-        : bad(`${id}: quiz.assertivas.correta=${asrt.correta} NÃO bate com o combo derivado de "verdades"=${JSON.stringify(asrt.verdades)} (esperado ${comboIdx})`);
-      if (!(typeof asrt.exp === "string" && asrt.exp.length > 5)) {
-        bad(`${id}: quiz.assertivas.exp ausente ou curto demais`);
+      asrtArr.forEach((asrt, ai) => {
+        if (!asrt || !Array.isArray(asrt.itens) || asrt.itens.length !== 3 || !Array.isArray(asrt.verdades) || asrt.verdades.length !== 3 || !Array.isArray(asrt.opcoes) || asrt.opcoes.length !== 8) {
+          bad(`${id}: quiz.assertivas[${ai}] malformado (precisa itens[3]/verdades[3]/opcoes[8])`);
+          return;
+        }
+        const [v1, v2, v3] = asrt.verdades;
+        const comboIdx = v1 && !v2 && !v3 ? 0 : !v1 && v2 && !v3 ? 1 : !v1 && !v2 && v3 ? 2
+          : v1 && v2 && !v3 ? 3 : v1 && !v2 && v3 ? 4 : !v1 && v2 && v3 ? 5 : v1 && v2 && v3 ? 6 : 7;
+        if (asrt.correta !== comboIdx) {
+          bad(`${id}: quiz.assertivas[${ai}].correta=${asrt.correta} NÃO bate com o combo derivado de "verdades"=${JSON.stringify(asrt.verdades)} (esperado ${comboIdx})`);
+        }
+        if (!(typeof asrt.exp === "string" && asrt.exp.length > 5)) {
+          bad(`${id}: quiz.assertivas[${ai}].exp ausente ou curto demais`);
+        }
+      });
+      if (upgraded && asrtArr.length !== 3) bad(`${id}: quiz.assertivas deveria ter 3 blocos (formato novo), tem ${asrtArr.length}`);
+      ok(`${id}: quiz.assertivas (${asrtArr.length} bloco(s)) estruturalmente válido`);
+    }
+
+    // evolucao: obrigatória só para casos já migrados pro formato novo (upgraded)
+    if (upgraded) {
+      const ev = caso.evolucao;
+      if (!ev || !Array.isArray(ev.pontos) || ev.pontos.length < 1 || ev.pontos.length > 3
+        || !Array.isArray(ev.escada) || ev.escada.length !== 8
+        || typeof ev.casosRelacionados !== "string" || ev.casosRelacionados.length < 20) {
+        bad(`${id}: evolucao ausente ou malformada (precisa pontos[1-3]/escada[8]/casosRelacionados)`);
+      } else {
+        ev.pontos.forEach((p, pi) => {
+          if (!p.labs || p.labs.hco3 == null || p.labs.pco2 == null || p.labs.ph == null) {
+            bad(`${id}: evolucao.pontos[${pi}] sem ph/pco2/hco3`);
+            return;
+          }
+          const phDerivado = hh(p.labs.hco3, p.labs.pco2);
+          Math.abs(phDerivado - p.labs.ph) <= 0.02
+            ? ok(`${id}: evolucao.pontos[${pi}] pH consistente com Henderson-Hasselbalch`)
+            : bad(`${id}: evolucao.pontos[${pi}] pH ${p.labs.ph} NÃO bate com Henderson-Hasselbalch (derivado ${phDerivado.toFixed(3)})`);
+          if (typeof p.narrativa !== "string" || p.narrativa.length < 10) bad(`${id}: evolucao.pontos[${pi}].narrativa ausente/curta`);
+          if (typeof p.t !== "string" || !p.t.length) bad(`${id}: evolucao.pontos[${pi}].t ausente`);
+        });
+        ev.escada.forEach((step, si) => {
+          if (!step || typeof step.pergunta !== "string" || step.pergunta.length < 5 || typeof step.resposta !== "string" || step.resposta.length < 5) {
+            bad(`${id}: evolucao.escada[${si}] malformado (precisa pergunta/resposta)`);
+          }
+          if (step && step.pontoIdx != null && (!Number.isInteger(step.pontoIdx) || step.pontoIdx < 0 || step.pontoIdx >= ev.pontos.length)) {
+            bad(`${id}: evolucao.escada[${si}].pontoIdx=${step.pontoIdx} fora do intervalo de pontos`);
+          }
+        });
+        ok(`${id}: evolucao estruturalmente válida (${ev.pontos.length} ponto(s), 8 passos)`);
+      }
+
+      // spoiler: vinheta/pergunta não podem citar outro caso (G-NN) antes do reveal
+      const otherIdMention = (caso.vinheta + " " + caso.pergunta).match(/G-\d{2,3}/g);
+      if (otherIdMention) {
+        bad(`${id}: vinheta/pergunta cita outro caso (${otherIdMention.join(",")}) antes do reveal — spoiler`);
+      } else {
+        ok(`${id}: vinheta/pergunta sem citação prematura de outro caso`);
       }
     }
   }

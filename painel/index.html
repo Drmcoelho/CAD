@@ -169,23 +169,102 @@ td.l,th.l{text-align:left}
       "gabarito": {
         "classificacao": "Acidose metabólica primária (HCO₃ 9 < 22), compensação respiratória adequada — pCO₂ medido 20 dentro da janela de Winter esperada (21,5 ± 2 → 19,5–23,5).",
         "diagnostico": "CAD clássica — todos os três eixos fecham: glicose 480 (≥200), βHB 5,8 (≥3,0), pH 7,28 (<7,30).",
-        "raciocinio": "AG = 132−96−9 = 27; AGc (albumina 4,2, não precisa correção relevante) = 26,5 — gap alto explica sozinho a queda do HCO₃. A compensação respiratória por Winter está adequada: não há segundo processo respiratório escondido. Os três eixos do consenso 2024 fecham juntos, sem exceção nenhuma — o caso mais simples do lote, usado como referência para comparar os quatro seguintes.",
-        "armadilha": "Nenhuma armadilha aqui — é o ponto de comparação; a armadilha está nos casos G-02 a G-05, que têm AG/cetonemia parecidos mas falham em um dos três eixos.",
-        "detalheChave": "Serve de controle: qualquer leitor que erre este caso tem um problema de mecânica básica, não de sutileza diagnóstica.",
+        "raciocinio": "AG = 132−96−9 = 27; AGc (albumina 4,2, não precisa correção relevante) = 26,5. Δ/Δ = (26,5−12)/(24−9) = 0,97 — na fronteira de 1, tecnicamente já dentro da faixa <1 (leve componente hiperclorêmico associado ao gap alto, não um AGMA \"100% puro\"); a diferença é pequena porque o AG já é muito alto, mas mecanicamente não é zero. A compensação respiratória por Winter está adequada: não há segundo processo respiratório escondido. Os três eixos do consenso 2024 fecham juntos, sem exceção nenhuma — o caso mais simples do lote, usado como referência para comparar os quatro seguintes.",
+        "armadilha": "A armadilha AQUI, no caso mais \"óbvio\" do lote, é justamente presumir que AG alto = AGMA pura sem calcular o Δ/Δ — 0,97 é fronteira, não folga. A armadilha didática principal do bloco (G-02 a G-05 com AG/cetonemia parecidos mas falhando em um dos três eixos diagnósticos) continua nos casos seguintes.",
+        "detalheChave": "Serve de controle: qualquer leitor que erre o diagnóstico deste caso tem um problema de mecânica básica, não de sutileza diagnóstica — mas o Δ/Δ 0,97 mostra que \"óbvio\" não dispensa o cálculo.",
         "conteudoComplementar": "Osm efetiva = 2×132(Na medido) + 480/18 = 290,7 mOsm/kg — não usa o Na corrigido (141,1, fator 2,4 por glicose >400) para não contar a glicose duas vezes (a mesma armadilha que já mordeu este repo em conteúdo publicado — ver scripts/check_content_text.js)."
       },
       "quiz": {
-        "mcq": {
-          "q": "Com base na vinheta e nos labs acima, qual o diagnóstico mais provável deste caso?",
-          "opts": [
-            "CAD euglicêmica (iSGLT2)",
-            "Cetoacidose alcoólica",
-            "HHS (estado hiperosmolar hiperglicêmico)",
-            "CAD clássica"
-          ],
-          "correct": 3,
-          "exp": "CAD clássica — todos os três eixos fecham: glicose 480 (≥200), βHB 5,8 (≥3,0), pH 7,28 (<7,30)."
-        },
+        "mcq": [
+          {
+            "q": "Com base na vinheta e nos labs acima, qual o diagnóstico mais provável deste caso?",
+            "opts": [
+              "CAD euglicêmica (iSGLT2)",
+              "Cetoacidose alcoólica",
+              "HHS (estado hiperosmolar hiperglicêmico)",
+              "CAD clássica"
+            ],
+            "correct": 3,
+            "exp": "CAD clássica — todos os três eixos fecham: glicose 480 (≥200), βHB 5,8 (≥3,0), pH 7,28 (<7,30)."
+          },
+          {
+            "q": "O Δ/Δ deste caso em P1 [(AGc−12)/(24−HCO₃) = (26,5−12)/(24−9)] cai em qual zona?",
+            "opts": [
+              "Alcalose associada (>2)",
+              "AGMA pura (1–2)",
+              "Cauda hiperclorêmica (<1)",
+              "Não pode ser calculado sem albumina"
+            ],
+            "correct": 2,
+            "exp": "0,97 — tecnicamente abaixo de 1, zona de cauda hiperclorêmica, mesmo sendo o caso mais 'óbvio' do lote. AG alto não garante Δ/Δ puro."
+          },
+          {
+            "q": "A osmolaridade efetiva deste caso (2×Na medido + glicose/18) cruza o limiar formal de HHS (>320)?",
+            "opts": [
+              "Sim, 317,3 cruza",
+              "Não, 290,7 não cruza",
+              "Sim, 341,1 cruza",
+              "Não se aplica — HHS exige glicose >600"
+            ],
+            "correct": 1,
+            "exp": "Osm efetiva = 2×132(Na medido) + 480/18 = 290,7 mOsm/kg — não cruza 320. Usar o Na corrigido (141,1) na fórmula dobraria a conta da glicose (o erro clássico já documentado neste repo — ver scripts/check_content_text.js)."
+          },
+          {
+            "q": "Qual fator de correção do Na se aplica aqui, dado glicose 480 mg/dL?",
+            "opts": [
+              "1,6 (regra padrão, glicose <400)",
+              "2,4 (glicose >400)",
+              "Nenhum — Na corrigido só se aplica se Na medido <130",
+              "1,6 sempre, é fixo independente da glicose"
+            ],
+            "correct": 1,
+            "exp": "Glicose 480>400 → fator sobe para 2,4 (Na corrigido ≈141,1). Serve só para déficit de água livre — nunca entra na fórmula de osm efetiva, que usa Na medido."
+          },
+          {
+            "q": "Se a glicose deste paciente fosse 150 mg/dL (mas DM1 conhecido mantido), o eixo glicêmico do diagnóstico de CAD ainda fecharia?",
+            "opts": [
+              "Não, glicose sempre precisa ser ≥200",
+              "Sim — o critério é glicose ≥200 OU diabetes conhecido, e o segundo já fecha",
+              "Só se a glicose fosse ≥250",
+              "Não, o eixo glicêmico é sempre obrigatoriamente numérico"
+            ],
+            "correct": 1,
+            "exp": "O consenso 2024 usa 'glicose ≥200 OU diabetes conhecido' — é um OU, não um E. Diabetes conhecido já fecha esse eixo sozinho."
+          },
+          {
+            "q": "Insulina iniciada a 0,1 U/kg/h. Segundo o consenso 2024, quando a taxa cai para 0,05 U/kg/h?",
+            "opts": [
+              "Quando o pH normalizar",
+              "Quando a glicose cair abaixo de 250 mg/dL, associada a dextrose",
+              "Nunca — taxa fixa até resolução total",
+              "Quando o HCO₃ atingir 18"
+            ],
+            "correct": 1,
+            "exp": "0,1 → 0,05 U/kg/h quando glicose <250 + dextrose — a dextrose é o cinto de segurança que permite manter a insulina rodando para fechar a cetose sem hipoglicemia."
+          },
+          {
+            "q": "Em P3 (ver evolução), βHB 0,4 mmol/L, pH 7,42, HCO₃ 20. Pelo critério do consenso 2024, a CAD está resolvida?",
+            "opts": [
+              "Não, falta a glicose normalizar também",
+              "Sim — βHB<0,6 E (pH≥7,3 OU HCO₃≥18) fecham",
+              "Não, resolução exige AG normalizado abaixo de 10",
+              "Sim, mas só porque a glicose caiu"
+            ],
+            "correct": 1,
+            "exp": "Resolução = βHB<0,6 E (pH≥7,3 OU HCO₃≥18). Aqui os dois lados do OU fecham (pH 7,42 e HCO₃ 20); glicemia não entra no critério."
+          },
+          {
+            "q": "Em P3, o AG cai para 10 (abaixo do valor de referência ~12) e o Δ/Δ calculado dá negativo. O que isso indica?",
+            "opts": [
+              "Um segundo distúrbio metabólico grave surgiu",
+              "O Δ/Δ só é interpretável enquanto o AG está elevado — abaixo do basal, a métrica perde sentido clínico",
+              "Erro de laboratório, precisa repetir a gasometria",
+              "Que a cetoacidose recidivou"
+            ],
+            "correct": 1,
+            "exp": "Δ/Δ mede o 'excesso' de AG acima do basal (12) dividido pela queda de HCO₃. Sem AG elevado, não há excesso a medir — a fórmula não quebra, só deixa de ter significado clínico."
+          }
+        ],
         "vf": [
           {
             "q": "Os três eixos diagnósticos da CAD (glicemia, cetonemia e pH/HCO₃) fecham simultaneamente neste caso, sem exceção.",
@@ -193,9 +272,9 @@ td.l,th.l{text-align:left}
             "exp": "Sim — glicose 480 (≥200), βHB 5,8 (≥3,0) e pH 7,28 (<7,30) fecham juntos; é o caso de referência do lote, sem nenhum eixo capenga."
           },
           {
-            "q": "A queda do HCO₃ para 9 neste caso é maior do que o gap aniônico calculado explica, sugerindo componente hiperclorêmico associado.",
+            "q": "O Δ/Δ deste caso [(AGc−12)/(24−HCO₃)] está confortavelmente acima de 1, confirmando AGMA pura sem nenhum componente hiperclorêmico.",
             "correct": false,
-            "exp": "Falso — AG 27/AGc 26,5 explicam sozinhos a queda do HCO₃ (AGMA pura); não há cauda hiperclorêmica escondida aqui, ao contrário dos casos G-02 a G-05."
+            "exp": "Falso — Δ/Δ = (26,5−12)/(24−9) = 0,97, tecnicamente abaixo de 1 (fronteira). Mesmo no caso 'de controle' do lote, AG alto não garante pureza automática — o cálculo importa mais do que a impressão visual."
           },
           {
             "q": "O pCO₂ medido de 20 mmHg está fora da janela de compensação respiratória esperada pela regra de Winter para este HCO₃.",
@@ -203,30 +282,66 @@ td.l,th.l{text-align:left}
             "exp": "Falso — Winter prevê 1,5×9+8=21,5±2 (19,5–23,5); pCO₂ 20 está dentro da janela, compensação respiratória adequada, sem segundo distúrbio respiratório escondido."
           }
         ],
-        "assertivas": {
-          "itens": [
-            "I. O diagnóstico de CAD exige necessariamente glicose ≥250 mg/dL.",
-            "II. A cetonemia (βHB ≥3,0) é o eixo que define a doença; a glicose pode estar modesta em formas euglicêmicas.",
-            "III. Neste caso, a compensação respiratória (pCO₂ 20) está adequada para o HCO₃ de 9, não indicando um segundo distúrbio respiratório."
-          ],
-          "verdades": [
-            false,
-            true,
-            true
-          ],
-          "opcoes": [
-            "Apenas I",
-            "Apenas II",
-            "Apenas III",
-            "I e II",
-            "I e III",
-            "II e III",
-            "I, II e III",
-            "Nenhuma"
-          ],
-          "correta": 5,
-          "exp": "I é falsa — o consenso 2024 usa glicose ≥200, não ≥250; esse corte mais alto não é o critério vigente. II é verdadeira — é a lógica por trás da CAD euglicêmica (ver G-02), embora neste caso específico a glicose também esteja alta. III é verdadeira — Winter confirma compensação adequada (19,5–23,5 esperado, 20 medido)."
-        }
+        "assertivas": [
+          {
+            "itens": [
+              "I. O diagnóstico de CAD exige necessariamente glicose ≥250 mg/dL.",
+              "II. A cetonemia (βHB ≥3,0) é o eixo que define a doença; a glicose pode estar modesta em formas euglicêmicas.",
+              "III. Neste caso, a compensação respiratória (pCO₂ 20) está adequada para o HCO₃ de 9, não indicando um segundo distúrbio respiratório."
+            ],
+            "verdades": [false, true, true],
+            "opcoes": ["Apenas I", "Apenas II", "Apenas III", "I e II", "I e III", "II e III", "I, II e III", "Nenhuma"],
+            "correta": 5,
+            "exp": "I é falsa — o consenso 2024 usa glicose ≥200, não ≥250; esse corte mais alto não é o critério vigente. II é verdadeira — é a lógica por trás da CAD euglicêmica (compare com os casos relacionados ao final), embora neste caso específico a glicose também esteja alta. III é verdadeira — Winter confirma compensação adequada (19,5–23,5 esperado, 20 medido)."
+          },
+          {
+            "itens": [
+              "I. O Δ/Δ de P1 (0,97) já indica, desde a apresentação inicial, algum componente hiperclorêmico associado ao AGMA.",
+              "II. A osmolaridade efetiva de 290,7 mOsm/kg neste caso usa o Na corrigido (141,1), não o Na medido.",
+              "III. Glicose 480 mg/dL sozinha, sem o diagnóstico prévio de diabetes, já bastaria para fechar o eixo glicêmico da CAD (≥200)."
+            ],
+            "verdades": [true, false, true],
+            "opcoes": ["Apenas I", "Apenas II", "Apenas III", "I e II", "I e III", "II e III", "I, II e III", "Nenhuma"],
+            "correta": 4,
+            "exp": "I verdadeira — Δ/Δ 0,97<1, fronteira hiperclorêmica, mesmo neste caso 'simples'. II falsa — a osm efetiva usa Na MEDIDO (132), não o corrigido; usar o corrigido dobraria a conta da glicose. III verdadeira — 480≥200 fecha isoladamente, independente do diagnóstico prévio de diabetes."
+          },
+          {
+            "itens": [
+              "I. Em P2 (ver evolução), o AG cai para 16 e o Δ/Δ para 0,40 — essa queda simultânea é evidência de que o tratamento está piorando o quadro.",
+              "II. Em P3, com AG normalizado (10) e resolução confirmada pelos critérios formais, o Δ/Δ deixa de ser uma ferramenta interpretável.",
+              "III. A taxa de insulina cai de 0,1 para 0,05 U/kg/h quando a glicose passa abaixo de 250 mg/dL, sempre acompanhada de dextrose."
+            ],
+            "verdades": [false, true, true],
+            "opcoes": ["Apenas I", "Apenas II", "Apenas III", "I e II", "I e III", "II e III", "I, II e III", "Nenhuma"],
+            "correta": 5,
+            "exp": "I falsa — é o padrão ESPERADO de resposta ao tratamento (Cl sobe com soro fisiológico enquanto a cetose fecha), não piora; o pH subindo confirma melhora clínica. II verdadeira — sem AG elevado, a fórmula perde o numerador que faz sentido clínico. III verdadeira — consenso 2024: redução de taxa + dextrose como cinto de segurança."
+          }
+        ]
+      },
+      "evolucao": {
+        "pontos": [
+          {
+            "t": "P2 · +12h, sob insulina 0,1 U/kg/h + volume",
+            "labs": { "ph": 7.37, "pco2": 25, "hco3": 14, "na": 133, "cl": 103, "albumin": 4.0, "glucoseMgDl": 210, "betaHydroxybutyrateMmolL": 1.8, "ketonuriaCruzes": 2, "knownDiabetes": true },
+            "narrativa": "12h de insulina + soro fisiológico. Glicose caindo, cetose em resolução — mas o Cl subiu junto (103), reflexo esperado do próprio soro fisiológico usado na reposição volêmica."
+          },
+          {
+            "t": "P3 · +24h, taxa de insulina já reduzida",
+            "labs": { "ph": 7.42, "pco2": 32, "hco3": 20, "na": 136, "cl": 106, "albumin": 4.0, "glucoseMgDl": 140, "betaHydroxybutyrateMmolL": 0.4, "ketonuriaCruzes": 0, "knownDiabetes": true },
+            "narrativa": "24h. Glicose já abaixo de 250 há horas (taxa de insulina reduzida para 0,05 U/kg/h + dextrose desde então). βHB quase zerado, pH e HCO₃ normalizando."
+          }
+        ],
+        "escada": [
+          { "pergunta": "Calculado o Δ/Δ de P1 (0,97, fronteira hiperclorêmica), isso muda a conduta inicial imediata?", "resposta": "Não muda a conduta imediata — insulina + volume seguem indicados do mesmo jeito. Mas avisa que uma fração do HCO₃ baixo já não é só cetona; isso vai ficar mais visível conforme a cetose resolver e o gap fechar.", "pontoIdx": null },
+          { "pergunta": "12h depois (P2): o que mudou nos labs, e o que isso significa?", "resposta": "AG caiu de 27 para 16, Δ/Δ caiu de 0,97 para 0,40 (mais fundo na zona hiperclorêmica). É o padrão clássico da 'cauda de cloro': a cetose fecha mais rápido do que o Cl do soro fisiológico é excretado, revelando um componente hiperclorêmico que já estava lá desde P1, só mascarado pelo AG alto.", "pontoIdx": 0 },
+          { "pergunta": "O paciente está piorando, já que o Cl subiu e o Δ/Δ caiu?", "resposta": "Não — o pH subiu de 7,28 para 7,37, sinal inequívoco de melhora. Cl subindo com SF é esperado, não uma complicação nova; confundir 'Δ/Δ caindo' com 'piora' é o erro de quem olha um número isolado em vez da trajetória inteira.", "pontoIdx": null },
+          { "pergunta": "Glicose caiu para 210 mg/dL em P2. O que muda no plano de insulina?", "resposta": "Taxa cai de 0,1 para 0,05 U/kg/h, com dextrose associada — não se suspende a insulina, porque a cetose (βHB ainda 1,8) não fechou. A dextrose é o cinto de segurança que permite manter a insulina rodando sem hipoglicemia.", "pontoIdx": null },
+          { "pergunta": "24h depois (P3): AG caiu para 10, abaixo do valor de referência. O Δ/Δ agora dá negativo — é erro de cálculo?", "resposta": "Não é erro. O Δ/Δ mede o excesso de AG acima do basal (12) dividido pela queda de HCO₃; sem AG elevado, não sobra 'excesso' pra medir. A fórmula só é interpretável na janela em que o AG ainda está alto — depois disso, olhar HCO₃/Cl/pH direto é mais informativo.", "pontoIdx": 1 },
+          { "pergunta": "Os critérios formais de resolução da CAD (βHB<0,6 E (pH≥7,3 OU HCO₃≥18)) fecham em P3?", "resposta": "Sim — βHB 0,4<0,6, e os dois lados do OU fecham (pH 7,42≥7,3 e HCO₃ 20≥18). CAD resolvida pelos critérios formais.", "pontoIdx": null },
+          { "pergunta": "A glicose em P3 é 140 mg/dL, dentro da faixa normal. Isso sozinho já bastaria para dizer que a CAD resolveu?", "resposta": "Não — glicemia normal não é critério de resolução (armadilha clássica, já registrada no CLAUDE.md deste projeto). É o eixo cetônico + ácido-base que define resolução, nunca a glicose isolada.", "pontoIdx": null },
+          { "pergunta": "A trajetória do Δ/Δ deste caso foi 0,97 → 0,40 → (AG já abaixo do basal). Um paciente que recebesse soro fisiológico em excesso, rápido demais, teria o MESMO padrão ou um diferente?", "resposta": "O padrão geral é o mesmo (Cl sempre sobe com SF) — a diferença é velocidade e magnitude. Reposição excessiva acelera e amplia a queda do Δ/Δ, podendo produzir uma acidose hiperclorêmica iatrogênica somada, não só uma cauda discreta. Esse padrão exagerado tem paralelo direto em outros casos do banco — revele os casos relacionados abaixo.", "pontoIdx": null }
+        ],
+        "casosRelacionados": "G-02 a G-05 têm AG/cetonemia parecidos com este caso mas falham em um dos três eixos diagnósticos (CAD euglicêmica por iSGLT2, HHS, cetoacidose alcoólica, cetose de jejum) — a armadilha didática original do bloco, resolvida só por um detalhe propedêutico. G-09/G-10/G-11 (acidose hiperclorêmica por diarreia, RTA1, RTA4) mostram o Δ/Δ baixo como achado PRIMÁRIO desde a apresentação — não como consequência de uma cetose que já fechou, como aconteceu aqui em P2/P3. Compare os dois padrões: mesmo número (Δ/Δ<1), histórias completamente diferentes."
       }
     },
     {
@@ -8615,11 +8730,8 @@ function sortearGaso(){
 function gasoLabRow(label,v,unit){
   return v==null?'':'<div><span>'+label+'</span>'+v+(unit||'')+'</div>';
 }
-function renderGasoDetail(){
-  var c=gasoById(gasoCur);
-  var L=c.labs;
-  var labsHtml=
-    gasoLabRow('pH', r(L.ph,2))+
+function gasoLabsHtml(L){
+  return gasoLabRow('pH', r(L.ph,2))+
     gasoLabRow('pCO₂', r(L.pco2,1),' mmHg')+
     gasoLabRow('HCO₃', r(L.hco3,1))+
     gasoLabRow('Na⁺', L.na)+
@@ -8631,6 +8743,11 @@ function renderGasoDetail(){
     gasoLabRow('βHB', L.betaHydroxybutyrateMmolL,' mmol/L')+
     gasoLabRow('Cetonúria', L.ketonuriaCruzes,'+')+
     (L.knownDiabetes!=null?'<div><span>Diabetes conhecido</span>'+(L.knownDiabetes?'sim':'não')+'</div>':'');
+}
+function renderGasoDetail(){
+  var c=gasoById(gasoCur);
+  var L=c.labs;
+  var labsHtml=gasoLabsHtml(L);
 
   var hideTitle=gasoBlind&&!gasoRevealed;
   var titleHtml=hideTitle
@@ -8666,17 +8783,28 @@ function renderGasoDetail(){
         c.confundeCom.map(function(id){var o=gasoById(id);return o?"<button onclick='selGaso("+JSON.stringify(id)+")'>"+id+' · '+o.titulo+'</button>':'';}).join('')+
         '</div>':'')+
       '</div>'+
-      renderGasoQuiz(c);
+      renderGasoQuiz(c)+
+      renderGasoEvolucao(c);
   }
   document.getElementById('gasoDetail').innerHTML=html;
 }
 
-// ---- quiz por caso: mcq + verdadeiro/falso + assertivas ----
+// ---- quiz por caso: mcq[] + verdadeiro/falso[] + assertivas[] ----
 var gasoQuizState={};
-function gqs(id){return gasoQuizState[id]||(gasoQuizState[id]={mcq:null,vf:[null,null,null],assertivas:null});}
-function answerGasoMcq(id,i){gqs(id).mcq=i;renderGasoDetail();}
+function gqs(id){
+  if(!gasoQuizState[id]){
+    var c=gasoById(id),q=c&&c.quiz;
+    gasoQuizState[id]={
+      mcq:q?q.mcq.map(function(){return null;}):[],
+      vf:q?q.vf.map(function(){return null;}):[],
+      assertivas:q?q.assertivas.map(function(){return null;}):[]
+    };
+  }
+  return gasoQuizState[id];
+}
+function answerGasoMcq(id,mi,i){gqs(id).mcq[mi]=i;renderGasoDetail();}
 function answerGasoVf(id,qi,val){gqs(id).vf[qi]=val;renderGasoDetail();}
-function answerGasoAssert(id,i){gqs(id).assertivas=i;renderGasoDetail();}
+function answerGasoAssert(id,ai,i){gqs(id).assertivas[ai]=i;renderGasoDetail();}
 function gasoOpt(label,chosen,isCorrect,answered,onclickExpr){
   var cls='opt'+(answered?(isCorrect?' ok':(chosen?' no':'')):'');
   return '<button class="'+cls+'"'+(answered?' disabled':" onclick='"+onclickExpr+"'")+'>'+label+'</button>';
@@ -8686,10 +8814,12 @@ function renderGasoQuiz(c){
   var st=gqs(c.id);
   var html='<div class="gab" style="border-top:2px dashed var(--line2)"><h4 style="font-size:14px;color:var(--tx);text-transform:none;letter-spacing:0">Teste-se</h4>';
 
-  var mcq=q.mcq;
-  html+='<div class="qcard"><div class="qtype">Múltipla escolha</div><div class="qstem">'+mcq.q+'</div>'+
-    mcq.opts.map(function(o,i){return gasoOpt(o,st.mcq===i,i===mcq.correct,st.mcq!=null,'answerGasoMcq('+JSON.stringify(c.id)+','+i+')');}).join('')+
-    (st.mcq!=null?'<div class="qexp show"><b>Gabarito.</b> '+mcq.exp+'</div>':'')+'</div>';
+  q.mcq.forEach(function(mcq,mi){
+    var ans=st.mcq[mi];
+    html+='<div class="qcard"><div class="qtype">Múltipla escolha '+(mi+1)+'/'+q.mcq.length+'</div><div class="qstem">'+mcq.q+'</div>'+
+      mcq.opts.map(function(o,i){return gasoOpt(o,ans===i,i===mcq.correct,ans!=null,'answerGasoMcq('+JSON.stringify(c.id)+','+mi+','+i+')');}).join('')+
+      (ans!=null?'<div class="qexp show"><b>Gabarito.</b> '+mcq.exp+'</div>':'')+'</div>';
+  });
 
   q.vf.forEach(function(item,qi){
     var ans=st.vf[qi];
@@ -8698,11 +8828,46 @@ function renderGasoQuiz(c){
       '</div>'+(ans!=null?'<div class="qexp show"><b>Gabarito.</b> '+item.exp+'</div>':'')+'</div>';
   });
 
-  var asrt=q.assertivas;
-  html+='<div class="qcard"><div class="qtype">Assertivas — julgue I, II e III</div><div class="qstem">'+asrt.itens.join('<br>')+'</div>'+
-    asrt.opcoes.map(function(o,i){return gasoOpt(o,st.assertivas===i,i===asrt.correta,st.assertivas!=null,'answerGasoAssert('+JSON.stringify(c.id)+','+i+')');}).join('')+
-    (st.assertivas!=null?'<div class="qexp show"><b>Gabarito.</b> '+asrt.exp+'</div>':'')+'</div>';
+  q.assertivas.forEach(function(asrt,ai){
+    var ans=st.assertivas[ai];
+    html+='<div class="qcard"><div class="qtype">Assertivas '+(ai+1)+'/'+q.assertivas.length+' — julgue I, II e III</div><div class="qstem">'+asrt.itens.join('<br>')+'</div>'+
+      asrt.opcoes.map(function(o,i){return gasoOpt(o,ans===i,i===asrt.correta,ans!=null,'answerGasoAssert('+JSON.stringify(c.id)+','+ai+','+i+')');}).join('')+
+      (ans!=null?'<div class="qexp show"><b>Gabarito.</b> '+asrt.exp+'</div>':'')+'</div>';
+  });
 
+  html+='</div>';
+  return html;
+}
+
+// ---- evolução do caso: série temporal + escada socrática de 8 passos ----
+var gasoEvoState={};
+function ges(id){return gasoEvoState[id]||(gasoEvoState[id]={step:0,relacionados:false});}
+function advanceGasoEvo(id){var s=ges(id),c=gasoById(id);if(s.step<c.evolucao.escada.length)s.step++;renderGasoDetail();}
+function revealGasoRelacionados(id){ges(id).relacionados=true;renderGasoDetail();}
+function renderGasoEvolucao(c){
+  var ev=c.evolucao; if(!ev) return '';
+  var st=ges(c.id),total=ev.escada.length;
+  var html='<div class="gab" style="border-top:2px dashed var(--line2)"><h4 style="font-size:14px;color:var(--tx);text-transform:none;letter-spacing:0">Evolução do caso — passo '+st.step+'/'+total+'</h4>';
+  for(var i=0;i<st.step;i++){
+    var step=ev.escada[i];
+    html+='<div class="qcard">';
+    if(step.pontoIdx!=null&&ev.pontos[step.pontoIdx]){
+      var p=ev.pontos[step.pontoIdx];
+      html+='<div class="qtype">'+p.t+'</div><div class="glabs">'+gasoLabsHtml(p.labs)+'</div>'+
+        '<div class="nar" style="margin-top:8px">'+p.narrativa+'</div>';
+    }
+    html+='<div class="qstem" style="margin-top:'+(step.pontoIdx!=null?'12px':'0')+'">'+step.pergunta+'</div>'+
+      '<div class="nar"><b>Raciocínio.</b> '+step.resposta+'</div></div>';
+  }
+  if(st.step<total){
+    html+='<button class="gbtn" onclick="advanceGasoEvo('+JSON.stringify(c.id)+')">'+
+      (st.step===0?'iniciar evolução ('+total+' passos)':'próximo passo ('+(st.step+1)+'/'+total+')')+' ›</button>';
+  }else if(!st.relacionados){
+    html+='<button class="gbtn" onclick="revealGasoRelacionados('+JSON.stringify(c.id)+')">revelar casos relacionados ›</button>';
+  }else{
+    html+='<h4 style="margin:14px 0 3px;font-size:12.5px;color:var(--teal);text-transform:uppercase;letter-spacing:.05em">Casos relacionados</h4>'+
+      '<p style="font-size:14px;line-height:1.6;margin:2px 0 0">'+ev.casosRelacionados+'</p>';
+  }
   html+='</div>';
   return html;
 }
