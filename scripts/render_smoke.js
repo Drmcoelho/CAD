@@ -33,6 +33,18 @@ let fails = 0;
 const ok = (m) => console.log("  ok   " + m);
 const bad = (m) => { console.error("  FAIL " + m); fails++; };
 
+// crumbs: cada uma das 4 saídas (app/tratado/perfis/painel) precisa de nav.crumbs
+// com link para "../" (Início) + as outras 3 seções, e a própria marcada como atual
+async function checkCrumbs(p, label) {
+  const c = await p.evaluate(() => ({
+    hrefs: [...document.querySelectorAll(".crumbs a")].map((a) => a.getAttribute("href")),
+    cur: document.querySelectorAll(".crumbs span.cur").length,
+  }));
+  c.hrefs.includes("../") && c.hrefs.length === 4 && c.cur === 1
+    ? ok(`${label}: crumbs de navegação (Início + 3 seções + atual marcada)`)
+    : bad(`${label}: crumbs incompletas (hrefs=${JSON.stringify(c.hrefs)}, cur=${c.cur})`);
+}
+
 (async () => {
   const chromium = loadChromium();
   const browser = await chromium.launch(EXEC ? { executablePath: EXEC } : {});
@@ -61,6 +73,7 @@ const bad = (m) => { console.error("  FAIL " + m); fails++; };
   {
     const { p, errs } = await page("perfis/index.html");
     errs.length ? bad("perfis erros: " + errs.join(" | ")) : ok("perfis/index.html sem erro de runtime");
+    await checkCrumbs(p, "perfis");
     const n = await p.evaluate(() => document.querySelectorAll(".prof").length);
     n === 9 ? ok("perfis: 9 perfis renderizados") : bad(`perfis: esperava 9, renderizou ${n}`);
     const nCasos = await p.evaluate(() => document.querySelectorAll(".caso").length);
@@ -136,6 +149,7 @@ const bad = (m) => { console.error("  FAIL " + m); fails++; };
   // tratado: página grande, mas deve carregar sem erro e ter os cross-links para perfis
   {
     const { p, errs } = await page("tratado/index.html");
+    await checkCrumbs(p, "tratado");
     const nLinks = await p.evaluate(() => document.querySelectorAll('a[href*="perfis"]').length);
     nLinks >= 2 ? ok(`tratado: ${nLinks} cross-link(s) para perfis/`) : bad(`tratado: esperava >=2 links para perfis, achou ${nLinks}`);
 
@@ -159,6 +173,7 @@ const bad = (m) => { console.error("  FAIL " + m); fails++; };
   // painel: série real (P1-P6) + banco de gasometrias sintético (crescente, separado)
   {
     const { p, errs } = await page("painel/index.html");
+    await checkCrumbs(p, "painel");
     const hasCores = await p.evaluate(() => typeof window.CadCore?.anionGap === "function" && typeof window.AbgCore?.classifyPrimaryDisturbance === "function");
     hasCores ? ok("painel: CadCore + AbgCore carregados (core/*.js via script src)") : bad("painel: CadCore/AbgCore ausente");
 
@@ -200,6 +215,7 @@ const bad = (m) => { console.error("  FAIL " + m); fails++; };
   // app: executa, percorre as abas, valida render dinâmico
   {
     const { p, errs } = await page("app/index.html");
+    await checkCrumbs(p, "app");
     const r = await p.evaluate(async () => {
       const out = {};
       const txt = (id) => (document.getElementById(id)?.innerText || "").trim().length;
