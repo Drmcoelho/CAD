@@ -203,6 +203,14 @@ Continuação direta do lote 1, cobrindo mecanismos do core que ainda não tinha
 - **Fix pós-merge (review do `gemini-code-assist`, PR #27)**: `toggleGasoReveal()` só chamava `renderGasoDetail()`, deixando o card destacado em `#gasoList` preso em "título oculto" mesmo depois do reveal (painel de detalhe e lista dessincronizados) — agora chama `renderGasoList()` também.
 - **Fix de spoiler real, achado em uso**: a categoria do caso (ex.: `G-23 · Acidose metabólica AG alto (não-cetótica)`) continuava visível no cabeçalho durante o modo cego — para vários casos, a categoria sozinha já entrega metade do diagnóstico (descarta cetoacidose, define o eixo do distúrbio). O cabeçalho agora mostra só o id (`G-23`) enquanto oculto, e a categoria volta junto com o título ao revelar. Verificado: 8 sorteios seguidos via Playwright sem vazamento de categoria nem título em nenhum HTML renderizado; reveal e navegação normal continuam mostrando os dois.
 
+## [2026-07-13] — navegação entre seções (crumbs) em `app/`, `tratado/`, `perfis/`, `painel/`
+
+Gap real: a landing (`index.html`) linka para as 4 saídas, mas nenhuma delas linkava de volta — uma vez dentro de `app/`, `tratado/`, `painel/` ou `perfis/`, só dava pra sair pelo botão "voltar" do navegador; ir de uma seção pra outra exigia passar pela landing de novo (e só `perfis/` tinha sequer um link de volta, e mesmo esse não cobria as outras 3 seções).
+
+- **`nav.crumbs`** (novo, nas 4 páginas): barra fixa no topo de cada `.wrap`, com `🏠 Início` (→ `../`) + as outras 3 seções (`🧠 Núcleo`, `📖 Tratado`, `🧬 Perfis`, `📈 Painel`) — a seção atual aparece como texto marcado (`span.cur`, cor de destaque), não como link. Estilizada com as variáveis CSS já existentes em cada arquivo (`--teal`/`--accent`, `--mut`/`--tx3`) — zero paleta nova, zero dependência externa (mantém o single-file offline).
+- `scripts/render_smoke.js` ganha `checkCrumbs()`, chamada nas 4 páginas: confere que `.crumbs` tem exatamente 4 `<a>` (Início + 3 seções) e exatamente 1 `span.cur` (a atual) — evita que um lote futuro de UI quebre ou esqueça a navegação sem que o CI perceba.
+- Verificado: `npm run ci` verde, `npm run smoke:render` verde (`checkCrumbs` nas 4 páginas), screenshots desktop (1280px) e mobile (390px) das 4 páginas confirmando quebra de linha correta e nenhum overlap com o header/nav já existente de cada uma.
+
 ## [2026-07-14] — Evolução do caso (série temporal + escada de 8 passos) + quiz ampliado (8 mcq/3 assertivas) + spoiler eliminado da vinheta
 
 Achado em uso: mesmo com título/categoria ocultos no modo sorteio, a **vinheta/pergunta** de ~54 dos 100 casos citava outro caso por id antes da hora (ex.: G-89 dizia "mesmo fator de risco de TEP de G-17", entregando o diagnóstico de cara). Expansão pedida pelo usuário para resolver isso de vez e aprofundar o banco:

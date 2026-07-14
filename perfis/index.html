@@ -5,6 +5,10 @@
 :root{--bg:#0e141b;--p:#161d26;--p2:#1b2531;--line:#243040;--line2:#2f3e52;--tx:#e6edf3;--mut:#8394a6;--teal:#37c6e0;--amb:#ffb454;--red:#ff6b6b;--grn:#46d18a;--mono:ui-monospace,Menlo,Consolas,monospace}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.62 -apple-system,Segoe UI,Roboto,sans-serif}
 .wrap{max-width:820px;margin:0 auto;padding:32px 18px 90px}
+.crumbs{display:flex;flex-wrap:wrap;gap:5px 14px;font-size:12.5px;margin:0 0 8px}
+.crumbs a{color:var(--mut);text-decoration:none}
+.crumbs a:hover{color:var(--teal)}
+.crumbs span.cur{color:var(--teal);font-weight:600}
 h1{font-size:29px;margin:0;letter-spacing:-.5px}.sub{color:var(--mut);margin:6px 0 2px}
 .src{color:var(--teal);font-size:12.5px;border:1px solid var(--line2);border-radius:20px;padding:3px 12px;display:inline-block;margin-top:10px}
 .toc{display:flex;flex-wrap:wrap;gap:7px;margin:20px 0 6px}
@@ -56,6 +60,13 @@ a.tut-match:hover{border-color:var(--teal)}
 a.home{color:var(--teal);text-decoration:none}
 @media(max-width:520px){.tx{grid-template-columns:1fr}.tx .e{margin-top:6px}}
 </style></head><body><div class="wrap">
+<nav class="crumbs" aria-label="Navegação estrutural">
+ <a href="../">🏠 Início</a>
+ <a href="../app/">🧠 Núcleo</a>
+ <a href="../tratado/">📖 Tratado</a>
+ <span class="cur" aria-current="page">🧬 Perfis</span>
+ <a href="../painel/">📈 Painel</a>
+</nav>
 <h1>CAD 360 — Perfis de CAD</h1>
 <p class="sub">Fisiopatologia detalhada e tratamento por fenótipo. Os números clínicos derivam do canon (<code style="font-family:var(--mono);font-size:12px">core/cad_core.js</code>).</p>
 <span class="src" id="src"></span>
