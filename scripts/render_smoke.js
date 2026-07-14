@@ -35,14 +35,18 @@ const bad = (m) => { console.error("  FAIL " + m); fails++; };
 
 // crumbs: cada uma das 4 saídas (app/tratado/perfis/painel) precisa de nav.crumbs
 // com link para "../" (Início) + as outras 3 seções, e a própria marcada como atual
+// (nunca como link — se o próprio nome da pasta aparecer entre os hrefs, ou algum
+// href se repetir, é sinal de link duplicado/errado, não só de contagem batendo)
 async function checkCrumbs(p, label) {
   const c = await p.evaluate(() => ({
     hrefs: [...document.querySelectorAll(".crumbs a")].map((a) => a.getAttribute("href")),
-    cur: document.querySelectorAll(".crumbs span.cur").length,
+    cur: document.querySelectorAll(".crumbs span.cur[aria-current='page']").length,
   }));
-  c.hrefs.includes("../") && c.hrefs.length === 4 && c.cur === 1
-    ? ok(`${label}: crumbs de navegação (Início + 3 seções + atual marcada)`)
-    : bad(`${label}: crumbs incompletas (hrefs=${JSON.stringify(c.hrefs)}, cur=${c.cur})`);
+  const unique = new Set(c.hrefs).size === c.hrefs.length;
+  const hasSelfLink = c.hrefs.some((href) => href && href.includes(`/${label}/`));
+  c.hrefs.includes("../") && c.hrefs.length === 4 && unique && !hasSelfLink && c.cur === 1
+    ? ok(`${label}: crumbs de navegação (Início + 3 seções únicas + atual marcada com aria-current)`)
+    : bad(`${label}: crumbs incorretas/duplicadas (hrefs=${JSON.stringify(c.hrefs)}, unique=${unique}, hasSelfLink=${hasSelfLink}, cur=${c.cur})`);
 }
 
 (async () => {
