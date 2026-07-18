@@ -436,7 +436,7 @@ canvas{display:block;width:100%;background:#0c1218;border:1px solid var(--line);
  },
  {
   "type": "mcq",
-  "q": "CAD em tratamento: K 4,0 mEq/L, glicose já caiu para 220 mg/dL (ainda acima do limiar de 250? não — abaixo). O que muda na prescrição de insulina neste momento?",
+  "q": "CAD em tratamento: K 4,0 mEq/L, glicose já caiu para 220 mg/dL. O que muda na prescrição de insulina neste momento?",
   "opts": [
    "Nada muda — mantém a taxa inicial de 0,1 U/kg/h sem dextrose",
    "Reduz a taxa para 0,05 U/kg/h e inicia dextrose concomitante, mantendo a insulina agindo sobre a cetose",
@@ -453,7 +453,7 @@ canvas{display:block;width:100%;background:#0c1218;border:1px solid var(--line);
  {
   "type": "diss",
   "q": "Por que a decisão sobre a insulina na CAD é sempre subordinada primeiro à decisão sobre o potássio, nunca o contrário?",
-  "model": "A insulina desloca potássio para dentro da célula (via estímulo da Na-K-ATPase) — um efeito rápido e potencialmente perigoso se o K sérico já estiver baixo (risco de hipocalemia grave/arritmia) ou se, ao contrário, o K estiver muito alto e uma reposição concomitante desnecessária for somada ao efeito da própria insulina. Por isso o algoritmo sempre checa o K PRIMEIRO (potassiumPlan) e só depois decide o que fazer com a insulina (insulinPlan chama potassiumPlan internamente) — nunca o inverso. Decidir a insulina sem antes saber o K seria arriscar uma das duas piores complicações eletrolíticas do tratamento da CAD."
+  "model": "A insulina desloca potássio para dentro da célula (via estímulo da Na-K-ATPase) — um efeito rápido e potencialmente perigoso se o K sérico já estiver baixo (risco de hipocalemia grave/arritmia) ou se, ao contrário, o K estiver muito alto e uma reposição concomitante desnecessária for somada ao efeito da própria insulina. Por isso o algoritmo sempre checa o K primeiro e só depois decide o que fazer com a insulina — a própria decisão de insulina consulta o plano de potássio antes de se resolver, nunca o inverso. Decidir a insulina sem antes saber o K seria arriscar uma das duas piores complicações eletrolíticas do tratamento da CAD."
  }
 ]
 </script>
@@ -469,7 +469,7 @@ canvas{display:block;width:100%;background:#0c1218;border:1px solid var(--line);
    "Insulina normaliza a glicemia mais rápido, o que já corrige o pH"
   ],
   "correct": 1,
-  "exp": "A doença é a cetogênese, não o pH em si. Insulina suprime a lipase hormônio-sensível no tecido adiposo, fechando a torneira de ácidos graxos livres que o fígado converteria em cetoácidos — trata a CAUSA. Bicarbonato apenas neutraliza o ácido já circulante, sem deter a produção; por isso não é tratamento central (e seu uso rotineiro nem é recomendado, ver POLICY.bicarbonate)."
+  "exp": "A doença é a cetogênese, não o pH em si. Insulina suprime a lipase hormônio-sensível no tecido adiposo, fechando a torneira de ácidos graxos livres que o fígado converteria em cetoácidos — trata a causa. Bicarbonato apenas neutraliza o ácido já circulante, sem deter a produção; por isso não é tratamento central (e seu uso rotineiro nem é recomendado, ver a doutrina de bicarbonato deste projeto)."
  },
  {
   "type": "vf",
@@ -488,7 +488,7 @@ canvas{display:block;width:100%;background:#0c1218;border:1px solid var(--line);
    "Não há diferença relevante entre os dois na prática"
   ],
   "correct": 1,
-  "exp": "Osm efetiva = 2×Na + glicose/18 — a glicose já entra como termo próprio. O Na corrigido existe para outra pergunta (déficit de água livre), incorporando matematicamente o efeito osmótico da glicose sobre o sódio medido. Usá-lo aqui somaria o efeito da glicose duas vezes (uma no próprio Na corrigido, outra no termo glicose/18) — exatamente o furo que já se repetiu neste projeto (ver scripts/check_content_text.js).",
+  "exp": "Osm efetiva = 2×Na + glicose/18 — a glicose já entra como termo próprio. O Na corrigido existe para outra pergunta (déficit de água livre), incorporando matematicamente o efeito osmótico da glicose sobre o sódio medido. Usá-lo aqui somaria o efeito da glicose duas vezes (uma no próprio Na corrigido, outra no termo glicose/18) — exatamente o furo que já se repetiu neste projeto, hoje barrado por um portão automático de consistência.",
   "computed": [
    { "module": "cad", "fn": "effectiveOsmolality", "args": [130, 600], "expect": 293.33, "tol": 0.05 },
    { "module": "cad", "fn": "correctedSodium", "args": [130, 600], "expect": 142, "tol": 0.05 }
@@ -541,26 +541,26 @@ canvas{display:block;width:100%;background:#0c1218;border:1px solid var(--line);
   "type": "vf",
   "q": "βHB sérico pode ser usado tanto para diagnosticar quanto para confirmar a resolução da CAD; cetonúria (cruzes) serve só para diagnosticar.",
   "correct": true,
-  "exp": "Verdadeiro. Cetonúria mede acetoacetato, que pode SUBIR durante o próprio tratamento enquanto o βHB (o cetoácido predominante e o que realmente cai com a resolução) já está caindo — usar cetonúria para dizer 'resolvido' seria ativamente enganoso. Por isso isResolvedDka() exige βHB sérico e não aceita cetonúria como substituto — uma decisão deliberada do motor, não um esquecimento."
+  "exp": "Verdadeiro. Cetonúria mede acetoacetato, que pode subir durante o próprio tratamento enquanto o βHB (o cetoácido predominante e o que realmente cai com a resolução) já está caindo — usar cetonúria para dizer 'resolvido' seria ativamente enganoso. Por isso o critério de resolução do motor exige βHB sérico e não aceita cetonúria como substituto — uma decisão deliberada, não um esquecimento."
  },
  {
   "type": "mcq",
-  "q": "hasDka() fecha o eixo glicêmico com 'diabetes conhecido OU glicose ≥200' (um OR, nunca um AND exigindo os dois). Por que essa é a escolha certa?",
+  "q": "O critério glicêmico do motor fecha com 'diabetes conhecido OU glicose ≥200' — basta um dos dois lados, nunca exige os dois ao mesmo tempo. Por que essa é a escolha certa?",
   "opts": [
    "Porque exigir os dois deixaria o critério mais rigoroso e mais seguro",
    "Porque exigir os dois rejeitaria exatamente o caso mais importante de capturar: CAD euglicêmica num diabético conhecido, onde a glicose pode estar normal",
    "Porque a glicemia isolada nunca é confiável",
-   "Não há diferença prática entre OR e AND aqui"
+   "Não há diferença prática entre exigir um dos dois ou exigir os dois juntos"
   ],
   "correct": 1,
-  "exp": "Um AND exigiria diabetes conhecido E glicose ≥200 ao mesmo tempo — isso rejeitaria justamente o cenário mais traiçoeiro do banco de perfis/gasometrias: CAD euglicêmica (SGLT2i, jejum) num diabético já diagnosticado, onde a glicose pode estar baixa/normal. O OR garante que QUALQUER um dos dois lados (história OU número) já basta.",
+  "exp": "Exigir diabetes conhecido E glicose ≥200 ao mesmo tempo rejeitaria justamente o cenário mais traiçoeiro do banco de perfis/gasometrias: CAD euglicêmica (SGLT2i, jejum) num diabético já diagnosticado, onde a glicose pode estar baixa/normal. Bastar um dos dois lados (história ou número) garante que nenhum dos dois formatos de apresentação escapa do critério.",
   "computed": [{ "module": "cad", "fn": "hasDka", "args": [{ "knownDiabetes": true, "glucoseMgDl": 150, "betaHydroxybutyrateMmolL": 4.9, "ketonuriaCruzes": 3, "ph": 7.32, "hco3": 12 }], "expect": true }]
  },
  {
   "type": "vf",
-  "q": "O eixo cetônico de hasDka() exige que βHB sérico E cetonúria estejam presentes e positivos ao mesmo tempo.",
+  "q": "O critério cetônico do motor exige que βHB sérico E cetonúria estejam presentes e positivos ao mesmo tempo.",
   "correct": false,
-  "exp": "Falso — também é um OR: βHB≥3,0 OU cetonúria≥2+ já fecha o eixo. Na prática clínica brasileira, β-HB sérico point-of-care é raro; exigir os dois rejeitaria o caso mais comum (só cetonúria disponível)."
+  "exp": "Falso — também basta um dos dois: βHB≥3,0 ou cetonúria≥2+ já fecha o eixo. Na prática clínica brasileira, β-HB sérico point-of-care é raro; exigir os dois rejeitaria o caso mais comum (só cetonúria disponível)."
  },
  {
   "type": "mcq",
@@ -587,7 +587,7 @@ canvas{display:block;width:100%;background:#0c1218;border:1px solid var(--line);
  },
  {
   "type": "mcq",
-  "q": "Sem informação sobre agudeza (chronicityHint), o motor de gasometria mostra as janelas esperadas AGUDA e CRÔNICA de compensação lado a lado, em vez de escolher uma. Por que essa é a escolha certa?",
+  "q": "Sem informação sobre agudeza do quadro, o motor de gasometria mostra as janelas esperadas aguda e crônica de compensação lado a lado, em vez de escolher uma. Por que essa é a escolha certa?",
   "opts": [
    "Porque as duas janelas são sempre idênticas na prática",
    "Porque o tempo de instalação de um distúrbio respiratório não pode ser inferido só dos números — a janela renal esperada é bem mais ampla na crônica (rim teve tempo de compensar) que na aguda, e adivinhar seria inventar um dado que não está disponível",
@@ -595,7 +595,7 @@ canvas{display:block;width:100%;background:#0c1218;border:1px solid var(--line);
    "Porque a fórmula aguda está desatualizada"
   ],
   "correct": 1,
-  "exp": "A compensação renal de um distúrbio respiratório leva dias para se desenvolver — por isso a janela esperada de HCO₃ é muito mais ampla no cenário crônico que no agudo, para a MESMA pCO₂. Sem saber há quanto tempo o distúrbio está instalado, escolher uma das duas janelas seria adivinhar um dado clínico que os números sozinhos não contêm — o motor prefere ser honesto sobre a ambiguidade a fingir certeza.",
+  "exp": "A compensação renal de um distúrbio respiratório leva dias para se desenvolver — por isso a janela esperada de HCO₃ é muito mais ampla no cenário crônico que no agudo, para a mesma pCO₂. Sem saber há quanto tempo o distúrbio está instalado, escolher uma das duas janelas seria adivinhar um dado clínico que os números sozinhos não contêm — o motor prefere ser honesto sobre a ambiguidade a fingir certeza.",
   "computed": [
    { "module": "abg", "fn": "expectedHco3RespAcidosisAcute", "args": [60], "path": "expected", "expect": 26 },
    { "module": "abg", "fn": "expectedHco3RespAcidosisChronic", "args": [60], "path": "expected", "expect": 31 }
@@ -603,7 +603,7 @@ canvas{display:block;width:100%;background:#0c1218;border:1px solid var(--line);
  },
  {
   "type": "mcq",
-  "q": "Por que insulinPlan() REDUZ a taxa de insulina (de 0,1 para 0,05 U/kg/h) quando a glicose cai abaixo de 250 mg/dL, em vez de simplesmente suspender a insulina?",
+  "q": "Por que o plano de insulina do motor REDUZ a taxa (de 0,1 para 0,05 U/kg/h) quando a glicose cai abaixo de 250 mg/dL, em vez de simplesmente suspender a insulina?",
   "opts": [
    "Para evitar hipoglicemia grave sem interromper a supressão da cetogênese — a doença é a cetose, não a glicose; suspender a insulina deixaria a cetogênese recomeçar",
    "Porque a insulina em dose alta perde o efeito depois de algumas horas",
@@ -624,7 +624,7 @@ canvas{display:block;width:100%;background:#0c1218;border:1px solid var(--line);
  },
  {
   "type": "diss",
-  "q": "classifyDkaProfile() devolve uma LISTA ranqueada de perfis plausíveis com o motivo de cada um, nunca um único veredito. Por que essa é a escolha de design certa para uma ferramenta de apoio à decisão, e o que ela evita?",
+  "q": "O classificador de perfis do motor devolve uma lista ranqueada de perfis plausíveis com o motivo de cada um, nunca um único veredito. Por que essa é a escolha de design certa para uma ferramenta de apoio à decisão, e o que ela evita?",
   "model": "Um veredito único obrigaria o motor a resolver, silenciosamente, toda ambiguidade clínica genuína que os números por si só não resolvem — exatamente o tipo de decisão que deveria ficar com o clínico, não ser escondida dentro de uma caixa-preta. Ao devolver uma lista ranqueada com o motivo de cada perfil (e sinalizar explicitamente quando falta um dado essencial, em vez de adivinhar), a ferramenta preserva o humano-no-loop: o clínico vê os candidatos plausíveis e POR QUE cada um é plausível, e decide com o contexto que só ele tem (história, exame físico, evolução). Isso evita o pior modo de falha de uma ferramenta de apoio à decisão: parecer mais certa do que os dados realmente permitem."
  },
  {
@@ -654,15 +654,15 @@ canvas{display:block;width:100%;background:#0c1218;border:1px solid var(--line);
  },
  {
   "type": "mcq",
-  "q": "O canon deste projeto documenta DOIS números para o limiar de HHS: 320 (critério formal de osm efetiva) e 300 (o 'comentário 2024', mais sensível). No motor (classifyDkaProfile), qual desses dois números aparece de fato na lógica que sinaliza possível sobreposição CAD+HHS?",
+  "q": "O canon deste projeto documenta dois números para o limiar de HHS: 320 (critério formal de osm efetiva) e 300 (o 'comentário 2024', mais sensível). No classificador de perfis do motor, qual desses dois números aparece de fato na lógica que sinaliza possível sobreposição CAD+HHS?",
   "opts": [
    "320 — o motor só sinaliza a sobreposição acima do critério formal, nunca antes",
-   "300 — o motor usa o limiar mais sensível (o 'alerta' do comentário 2024) para sinalizar a POSSIBILIDADE de sobreposição cedo, não o critério formal de HHS estabelecido",
+   "300 — o motor usa o limiar mais sensível (o 'alerta' do comentário 2024) para sinalizar a possibilidade de sobreposição cedo, não o critério formal de HHS estabelecido",
    "Nenhum dos dois — o motor decide a sobreposição só pela glicose, ignorando a osmolaridade",
    "Os dois ao mesmo tempo, como uma média"
   ],
   "correct": 1,
-  "exp": "O motor usa >300 (o alerta mais sensível) para sugerir a possibilidade de sobreposição cad-hhs — deliberadamente mais cedo que o critério formal de 320, porque a função é um triador de hipóteses plausíveis, não um diagnosticador de HHS. 320 continua sendo o número que define o critério formal de HHS; 300 é o gatilho do motor para levantar a bandeira e pedir atenção antes que o quadro cruce o critério formal.",
+  "exp": "O motor usa >300 (o alerta mais sensível) para sugerir a possibilidade de sobreposição CAD+HHS — deliberadamente mais cedo que o critério formal de 320, porque o classificador é um triador de hipóteses plausíveis, não um diagnosticador de HHS. 320 continua sendo o número que define o critério formal de HHS; 300 é o gatilho do motor para levantar a bandeira e pedir atenção antes que o quadro cruze o critério formal.",
   "computed": [
    { "module": "cad", "fn": "classifyDkaProfile", "args": [{ "na": 145, "cl": 110, "hco3": 10, "glucoseMgDl": 450, "ph": 7.15, "betaHydroxybutyrateMmolL": 5, "knownDiabetes": true }], "path": "computed.effectiveOsmolality", "expect": 315 },
    { "module": "cad", "fn": "classifyDkaProfile", "args": [{ "na": 145, "cl": 110, "hco3": 10, "glucoseMgDl": 450, "ph": 7.15, "betaHydroxybutyrateMmolL": 5, "knownDiabetes": true }], "path": "matches.0.id", "expect": "cad-hhs" }
@@ -670,9 +670,9 @@ canvas{display:block;width:100%;background:#0c1218;border:1px solid var(--line);
  },
  {
   "type": "vf",
-  "q": "No motor, o perfil 'cad-hhs' só é sinalizado quando a osmolaridade efetiva ultrapassa 300 — glicose isoladamente alta, mesmo sem cruzar esse limiar de osm, nunca dispara esse sinal.",
+  "q": "No motor, a sobreposição CAD+HHS só é sinalizada quando a osmolaridade efetiva ultrapassa 300 — glicose isoladamente alta, mesmo sem cruzar esse limiar de osm, nunca dispara esse sinal.",
   "correct": false,
-  "exp": "Falso. A condição no código é um OU: glicose ≥500 OU osm efetiva >300 — qualquer um dos dois já sinaliza a possibilidade. Um caso com glicose 550 mas osm efetiva ainda em 290,6 (Na relativamente baixo) já dispara 'cad-hhs' só pela via da glicose, sem que a osmolaridade tenha cruzado 300 — os dois caminhos são independentes, não um só.",
+  "exp": "Falso. A condição é: glicose ≥500 ou osm efetiva >300 — qualquer um dos dois já sinaliza a possibilidade. Um caso com glicose 550 mas osm efetiva ainda em 290,6 (Na relativamente baixo) já dispara o sinal de sobreposição só pela via da glicose, sem que a osmolaridade tenha cruzado 300 — os dois caminhos são independentes, não um só.",
   "computed": [
    { "module": "cad", "fn": "classifyDkaProfile", "args": [{ "na": 130, "cl": 95, "hco3": 10, "glucoseMgDl": 550, "ph": 7.15, "betaHydroxybutyrateMmolL": 5, "knownDiabetes": true }], "path": "computed.effectiveOsmolality", "expect": 290.6 },
    { "module": "cad", "fn": "classifyDkaProfile", "args": [{ "na": 130, "cl": 95, "hco3": 10, "glucoseMgDl": 550, "ph": 7.15, "betaHydroxybutyrateMmolL": 5, "knownDiabetes": true }], "path": "matches.0.id", "expect": "cad-hhs" }
@@ -680,15 +680,15 @@ canvas{display:block;width:100%;background:#0c1218;border:1px solid var(--line);
  },
  {
   "type": "mcq",
-  "q": "isResolvedDka() exige βHB abaixo de 0,6 E (pH ≥7,3 OU HCO₃ ≥18). Um paciente com glicemia normalizada (120 mg/dL), mas βHB 0,4 e pH 7,2/HCO₃ 15 — está resolvido?",
+  "q": "O critério de resolução do motor exige βHB abaixo de 0,6 e (pH ≥7,3 ou HCO₃ ≥18). Um paciente com glicemia normalizada (120 mg/dL), mas βHB 0,4 e pH 7,2/HCO₃ 15 — está resolvido?",
   "opts": [
    "Sim — a glicemia normal já é o sinal mais confiável de resolução",
-   "Não — o eixo cetônico já resolveu (βHB <0,6), mas o eixo ácido não (pH <7,3 E HCO₃ <18); a função exige os DOIS eixos resolvidos, e glicemia nem entra na equação",
+   "Não — o eixo cetônico já resolveu (βHB <0,6), mas o eixo ácido não (pH <7,3 e HCO₃ <18); o critério exige os dois eixos resolvidos, e glicemia nem entra na equação",
    "Sim, porque βHB <0,6 sozinho já basta",
    "Não é possível avaliar sem saber a glicemia"
   ],
   "correct": 1,
-  "exp": "A resolução na doutrina 2024 é sobre cetose + acidose, nunca sobre glicemia — 'glicemia normal não é resolução' é justamente a armadilha nomeada no CLAUDE.md deste projeto. Aqui o eixo cetônico já fechou (βHB 0,4 <0,6), mas nem pH nem HCO₃ atingiram a meta de resolução — a função retorna falso porque exige AMBOS os eixos, não um substituindo o outro.",
+  "exp": "A resolução na doutrina 2024 é sobre cetose + acidose, nunca sobre glicemia — 'glicemia normal não é resolução' é justamente a armadilha nomeada no CLAUDE.md deste projeto. Aqui o eixo cetônico já fechou (βHB 0,4 <0,6), mas nem pH nem HCO₃ atingiram a meta de resolução — o critério exige ambos os eixos, não um substituindo o outro.",
   "computed": [
    { "module": "cad", "fn": "isResolvedDka", "args": [{ "betaHydroxybutyrateMmolL": 0.4, "ph": 7.2, "hco3": 15 }], "expect": false }
   ]
@@ -697,22 +697,22 @@ canvas{display:block;width:100%;background:#0c1218;border:1px solid var(--line);
   "type": "vf",
   "q": "Glicemia normalizada é suficiente, por si só, para classificar uma CAD como resolvida.",
   "correct": false,
-  "exp": "Falso — glicemia não é um dos dois eixos de isResolvedDka() (cetônico e ácido). Um paciente pode ter glicemia perfeitamente normal com cetose e acidose ainda ativas (é exatamente o fenótipo euglicêmico/SGLT2i) — tratar glicemia normal como sinônimo de resolução é a armadilha que este projeto nomeia explicitamente para não repetir.",
+  "exp": "Falso — glicemia não é um dos dois eixos do critério de resolução (cetônico e ácido). Um paciente pode ter glicemia perfeitamente normal com cetose e acidose ainda ativas (é exatamente o fenótipo euglicêmico/SGLT2i) — tratar glicemia normal como sinônimo de resolução é a armadilha que este projeto nomeia explicitamente para não repetir.",
   "computed": [
    { "module": "cad", "fn": "isResolvedDka", "args": [{ "betaHydroxybutyrateMmolL": 0.4, "ph": 7.2, "hco3": 15 }], "expect": false }
   ]
  },
  {
   "type": "mcq",
-  "q": "Labs: βHB 3,5, pH 7,35, HCO₃ 20, glicose 280 (diabético conhecido). classifyDkaProfile() aponta qual perfil, e por quê ele NÃO é 'CAD clássica'?",
+  "q": "Labs: βHB 3,5, pH 7,35, HCO₃ 20, glicose 280 (diabético conhecido). O classificador de perfis do motor aponta qual perfil, e por quê ele não é 'CAD clássica'?",
   "opts": [
-   "'pré-cad' — o eixo cetônico já cruzou o limiar (βHB ≥3,0), mas pH e HCO₃ ainda estão dentro do critério formal (pH ≥7,30, HCO₃ ≥18) — hasDka() ainda é falso porque falta o eixo ácido",
-   "'CAD clássica' — qualquer βHB ≥3,0 já fecha o diagnóstico sozinho",
-   "'hiperclorêmica' — porque o HCO₃ está abaixo de 24",
-   "'euglicêmica' — porque a glicose não é extremamente alta"
+   "Pré-CAD — o eixo cetônico já cruzou o limiar (βHB ≥3,0), mas pH e HCO₃ ainda estão dentro do critério formal (pH ≥7,30, HCO₃ ≥18) — o critério de CAD ainda é falso porque falta o eixo ácido",
+   "CAD clássica — qualquer βHB ≥3,0 já fecha o diagnóstico sozinho",
+   "Hiperclorêmica — porque o HCO₃ está abaixo de 24",
+   "Euglicêmica — porque a glicose não é extremamente alta"
   ],
   "correct": 0,
-  "exp": "hasDka() exige os três eixos (glicêmico, cetônico E ácido) simultaneamente. Aqui o cetônico já cruzou o limiar, mas o eixo ácido não (pH e HCO₃ ainda dentro da normalidade formal) — o 'tampão' ainda segura. O motor nomeia essa janela como 'pré-cad': cetose real, ainda sem a descompensação ácido-base que define a CAD formalmente.",
+  "exp": "O critério de CAD exige os três eixos (glicêmico, cetônico e ácido) simultaneamente. Aqui o cetônico já cruzou o limiar, mas o eixo ácido não (pH e HCO₃ ainda dentro da normalidade formal) — o 'tampão' ainda segura. O motor nomeia essa janela de pré-CAD: cetose real, ainda sem a descompensação ácido-base que define a CAD formalmente.",
   "computed": [
    { "module": "cad", "fn": "classifyDkaProfile", "args": [{ "na": 138, "cl": 100, "hco3": 20, "glucoseMgDl": 280, "ph": 7.35, "betaHydroxybutyrateMmolL": 3.5, "knownDiabetes": true }], "path": "computed.hasDka", "expect": false },
    { "module": "cad", "fn": "classifyDkaProfile", "args": [{ "na": 138, "cl": 100, "hco3": 20, "glucoseMgDl": 280, "ph": 7.35, "betaHydroxybutyrateMmolL": 3.5, "knownDiabetes": true }], "path": "matches.0.id", "expect": "pre-cad" }
@@ -720,15 +720,15 @@ canvas{display:block;width:100%;background:#0c1218;border:1px solid var(--line);
  },
  {
   "type": "mcq",
-  "q": "Paciente NÃO-diabético, glicose 120 mg/dL, βHB 4,5 (cetose real), pH 7,25/HCO₃ 16 (acidose real). Por que classifyDkaProfile() aponta 'cetose alcoólica/de jejum' e não 'CAD clássica', se cetose E acidose estão ambas presentes?",
+  "q": "Paciente não-diabético, glicose 120 mg/dL, βHB 4,5 (cetose real), pH 7,25/HCO₃ 16 (acidose real). Por que o classificador de perfis do motor aponta cetose alcoólica/de jejum e não CAD clássica, se cetose e acidose estão ambas presentes?",
   "opts": [
-   "Porque hasDka() é falso — mesmo com cetose e acidose reais, o eixo GLICÊMICO do critério formal não fecha: sem diabetes conhecido, glicose 120 fica abaixo dos 200 mg/dL exigidos; sem esse eixo, não é 'CAD' no sentido formal do termo",
+   "Porque o critério formal de CAD é falso — mesmo com cetose e acidose reais, o eixo glicêmico do critério não fecha: sem diabetes conhecido, glicose 120 fica abaixo dos 200 mg/dL exigidos; sem esse eixo, não é 'CAD' no sentido formal do termo",
    "Porque a acidose é fraca demais para contar",
    "Porque βHB 4,5 é baixo demais para ser cetose real",
    "Porque só CAD diabética pode ter pH baixo"
   ],
   "correct": 0,
-  "exp": "hasDka() é um AND de três eixos, e o eixo glicêmico (diabetes conhecido OU glicose ≥200) simplesmente não fecha aqui — a fisiologia da cetose é idêntica (jejum prolongado/etilismo suprimindo insulina, liberando lipólise), mas por definição formal não é 'cetoacidose DIABÉTICA' sem o componente hiperglicêmico ou o diagnóstico prévio. O motor nomeia esse fenótipo à parte para não confundir o tratamento (aqui é reposição de tiamina/glicose, não o protocolo de insulina da CAD).",
+  "exp": "O critério formal de CAD exige os três eixos ao mesmo tempo, e o eixo glicêmico (diabetes conhecido ou glicose ≥200) simplesmente não fecha aqui — a fisiologia da cetose é idêntica (jejum prolongado/etilismo suprimindo insulina, liberando lipólise), mas por definição formal não é 'cetoacidose diabética' sem o componente hiperglicêmico ou o diagnóstico prévio. O motor nomeia esse fenótipo à parte para não confundir o tratamento (aqui é reposição de tiamina/glicose, não o protocolo de insulina da CAD).",
   "computed": [
    { "module": "cad", "fn": "classifyDkaProfile", "args": [{ "na": 138, "cl": 102, "hco3": 16, "glucoseMgDl": 120, "ph": 7.25, "betaHydroxybutyrateMmolL": 4.5, "knownDiabetes": false }], "path": "computed.hasDka", "expect": false },
    { "module": "cad", "fn": "classifyDkaProfile", "args": [{ "na": 138, "cl": 102, "hco3": 16, "glucoseMgDl": 120, "ph": 7.25, "betaHydroxybutyrateMmolL": 4.5, "knownDiabetes": false }], "path": "matches.0.id", "expect": "alcoolica-jejum" }
@@ -736,8 +736,8 @@ canvas{display:block;width:100%;background:#0c1218;border:1px solid var(--line);
  },
  {
   "type": "diss",
-  "q": "'sepse-lactato' e 'dialitica' são os dois únicos perfis de classifyDkaProfile() acionados por uma FLAG de contexto clínico (lactato/suspeita de sepse; dependência dialítica), não por um limiar numérico calculado a partir dos labs de entrada. Por que essa diferença de design é deliberada, e não uma inconsistência do motor?",
-  "model": "Os demais perfis (pré-cad, hiperclorêmica, euglicêmica, cad-hhs, alcoólica-jejum) emergem de uma combinação de valores que os PRÓPRIOS labs de entrada já contêm — glicose, βHB/cetonúria, pH, HCO₃, osm efetiva são todos calculáveis a partir do mesmo painel bioquímico. Já a presença de sepse ou de dependência dialítica não é uma propriedade que a gasometria/bioquímica isoladas conseguem inferir com segurança: lactato pode estar elevado sem que haja sepse (hipoperfusão local, exercício, metformina), e a função dialítica não aparece em nenhum eletrólito isolado — é um dado de história clínica. Por isso o motor aceita esses dois como flags explícitas fornecidas por quem está inserindo os dados (o clínico), em vez de tentar adivinhá-las a partir de números que não as codificam de forma confiável. Isso é consistente com o resto do projeto: nunca inventar um dado que os números não contêm — aqui simplesmente o dado que falta é categórico (sim/não), não numérico."
+  "q": "Perfil de sepse/lactato e perfil de dependência dialítica são os dois únicos perfis do classificador do motor acionados por um sinalizador de contexto clínico (lactato/suspeita de sepse; dependência dialítica), não por um limiar numérico calculado a partir dos labs de entrada. Por que essa diferença de design é deliberada, e não uma inconsistência do motor?",
+  "model": "Os demais perfis (pré-CAD, hiperclorêmica, euglicêmica, sobreposição CAD+HHS, alcoólica/jejum) emergem de uma combinação de valores que os próprios labs de entrada já contêm — glicose, βHB/cetonúria, pH, HCO₃, osm efetiva são todos calculáveis a partir do mesmo painel bioquímico. Já a presença de sepse ou de dependência dialítica não é uma propriedade que a gasometria/bioquímica isoladas conseguem inferir com segurança: lactato pode estar elevado sem que haja sepse (hipoperfusão local, exercício, metformina), e a função dialítica não aparece em nenhum eletrólito isolado — é um dado de história clínica. Por isso o motor aceita esses dois como sinalizadores explícitos fornecidos por quem está inserindo os dados (o clínico), em vez de tentar adivinhá-los a partir de números que não os codificam de forma confiável. Isso é consistente com o resto do projeto: nunca inventar um dado que os números não contêm — aqui simplesmente o dado que falta é categórico (sim/não), não numérico."
  }
 ]
 </script>
@@ -966,15 +966,18 @@ canvas{display:block;width:100%;background:#0c1218;border:1px solid var(--line);
  "proj": [
   [
    "Projeto 1 — Galeria de fenótipos (preencher e defender)",
-   "Dada a tabela esqueleto, preencha cada linha e, para cada fenótipo, escreva a \"frase-armadilha\" e o \"primeiro movimento\". <b>Critério de aceite por linha:</b> a frase-armadilha impede um erro real de plantão."
+   "Dada a tabela esqueleto, preencha cada linha e, para cada fenótipo, escreva a \"frase-armadilha\" e o \"primeiro movimento\". <b>Critério de aceite por linha:</b> a frase-armadilha impede um erro real de plantão.",
+   "Exemplo resolvido para uma linha (não é gabarito das outras — é a régua de qualidade que a sua resposta deve seguir). Fenótipo: <b>Pré-CAD / cetose</b>. <br><b>Frase-armadilha:</b> \"cetose subindo sem acidose ainda não é 'não é nada' — é a janela em que agir evita a descompensação, não o momento de esperar o pH cair para confirmar\". <br><b>Primeiro movimento:</b> repetir βHB/cetonúria e gasometria em poucas horas, e já agir sobre a causa (ajustar insulina, hidratar, tratar o gatilho) em vez de esperar o critério formal de CAD fechar. <br>Repare no formato: a frase-armadilha nomeia o <i>erro de raciocínio</i> (não só o achado), e o primeiro movimento é uma ação concreta e verificável (um exame a pedir, uma conduta a iniciar) — não um lembrete genérico como \"ficar atento\"."
   ],
   [
    "Projeto 2 — Ler um filme",
-   "Receba uma série temporal crua (6 pontos) e produza: (1) o derivado de cada ponto (AGc, Δ/Δ, Winter), (2) a narrativa de uma linha por ponto, (3) o handoff final. É o que o painel de evolução já faz — aqui você faz à mão primeiro, depois confere. Aprender a fórmula construindo o gráfico."
+   "Receba uma série temporal crua (6 pontos) e produza: (1) o derivado de cada ponto (AGc, Δ/Δ, Winter), (2) a narrativa de uma linha por ponto, (3) o handoff final. É o que o painel de evolução já faz — aqui você faz à mão primeiro, depois confere. Aprender a fórmula construindo o gráfico.",
+   "Exemplo resolvido em miniatura (2 pontos sintéticos, não os 6 do seu exercício — mostra o padrão de raciocínio, não a resposta pronta). <br><b>Ponto 1:</b> Na 132, Cl 96, HCO₃ 11, albumina 2,8, pCO₂ 24 → pH calculado 7,28. AGc = 28. Δ/Δ = (28−12)/(24−11) = 1,23 → faixa 1–2, cetoacidose de gap alto sem mistura relevante. Winter esperado para HCO₃ 11 é ~24,5 (faixa 22,5–26,5); pCO₂ observado 24 está dentro — compensação respiratória adequada, sem segundo distúrbio. <i>Narrativa:</i> \"acidose de gap alto pura, bem compensada pelo pulmão — cetoacidose isolada neste ponto.\" <br><b>Ponto 2 (depois):</b> Na 136, Cl 104, HCO₃ 16, albumina 2,8, pCO₂ 31 → pH calculado 7,34. AGc = 19. Δ/Δ = (19−12)/(24−16) = 0,88 → abaixo de 1, cauda hiperclorêmica somada. Winter esperado ~32 (faixa 30–34); pCO₂ 31 ainda dentro — o pulmão segue compensando, mas o HCO₃ já caiu mais do que o gap sozinho explica. <i>Narrativa:</i> \"gap fechando, mas o HCO₃ não acompanha só pela queda da cetose — cloro entrando em cena.\" <br><b>Handoff final:</b> \"cetoacidose em resolução, mas com componente hiperclorêmico emergente (provável carga de cloro do soro fisiológico) — acompanhar Cl e HCO₃ nas próximas gasometrias antes de dar alta ao quadro ácido-base.\""
   ],
   [
    "Projeto 3 — A lei operacional",
-   "Ao final, escreva as leis operacionais com suas palavras e defenda cada uma com um caso da galeria. As doze estão acima — reescrevê-las de memória é o teste."
+   "Ao final, escreva as leis operacionais com suas palavras e defenda cada uma com um caso da galeria. As doze estão acima — reescrevê-las de memória é o teste.",
+   "Exemplo resolvido para uma lei (não é gabarito das outras onze). <b>Lei:</b> \"Insulina fecha cetogênese, mas mata se o K estiver baixo.\" <br><b>Defesa com o caso 'CAD clássica' da galeria:</b> a insulina desliga a lipólise/cetogênese hepática — trata a causa da acidose. Mas seu efeito mais imediato é empurrar potássio para dentro da célula; num paciente com K corporal total já depletado (o próprio risco principal listado para 'CAD clássica' é subestimar K e volume, já que o K sérico à chegada pode estar normal ou até alto apesar do déficit real), iniciar insulina sem checar o K primeiro pode precipitar hipocalemia grave/arritmia antes que a cetose tenha tido tempo de melhorar. Por isso o potássio é sempre resolvido primeiro: segurar a insulina se K < 3,5, repor, só então iniciar/reiniciar ao atingir K ≥ 3,5. A insulina é o tratamento certo — mas na ordem errada, ela mata pelo potássio, não pela cetose."
   ]
  ]
 }
@@ -1174,7 +1177,7 @@ $('#fenoTable').innerHTML='<tr><th>Fenótipo</th><th>Glicose</th><th>Cetona</th>
 const LEIS=ATLAS.leis;
 $('#leis').innerHTML=LEIS.map(x=>`<li>${x}</li>`).join('');
 const PROJ=ATLAS.proj;
-$('#projetos').innerHTML=PROJ.map(x=>`<div class="panel" style="padding:12px 13px"><div style="font-weight:600;font-size:14px;margin-bottom:4px">${x[0]}</div><div style="font-size:13.5px;line-height:1.55">${x[1]}</div></div>`).join('');
+$('#projetos').innerHTML=PROJ.map(x=>`<div class="panel" style="padding:12px 13px"><div style="font-weight:600;font-size:14px;margin-bottom:4px">${x[0]}</div><div style="font-size:13.5px;line-height:1.55">${x[1]}</div>${x[2]?mkReveal('<span style="color:var(--mut);font-size:12px">Construa a sua resposta antes; depois compare.</span>','<b>Referência (exemplo resolvido, não gabarito único).</b> '+x[2]):''}</div>`).join('');
 
 /* ================= REFERÊNCIA ================= */
 const D=CANON;
