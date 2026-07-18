@@ -28615,15 +28615,21 @@ function renderGasoDetail(){
     '<div class="nar"><b>Vinheta.</b> '+c.vinheta+'</div>'+
     '<div class="glabs">'+labsHtml+'</div>'+
     '<div class="nar"><b>Pergunta.</b> '+c.pergunta+'</div>'+
-    (gasoRevealed?'':'<button class="gbtn" onclick="toggleGasoReveal()">revelar gabarito ›</button>');
+    (gasoRevealed?'':'<button class="gbtn" onclick="toggleGasoReveal()">praticar este caso ›</button>');
 
   if(gasoRevealed){
+    // Ordem deliberada: Teste-se e Evolução vêm ANTES do gabarito narrativo completo —
+    // responder/raciocinar tem que acontecer antes de ler a explicação holística do caso,
+    // senão a MCQ "qual o diagnóstico" fica óbvia por já ter sido respondida em prosa acima.
+    html += renderGasoQuiz(c) + renderGasoEvolucao(c);
+
     var res=AbgCore.classifyPrimaryDisturbance(L);
     var computedTypes=res.primary.map(function(p){return TYPE_PT[p.type];}).join(' + ')||'nenhum distúrbio isolado fechado (checar AG independentemente)';
     var ag=(L.na!=null&&L.cl!=null)?CadCore.anionGap(L.na,L.cl,L.hco3):null;
     var agc=(ag!=null&&L.albumin!=null)?CadCore.correctedAnionGap(ag,L.albumin):null;
     var hasDka=(typeof c.hasDkaEsperado==='boolean')?c.hasDkaEsperado:null;
-    html+='<div class="gab">'+
+    html+='<div class="gab" style="border-top:2px dashed var(--line2)">'+
+      '<h4 style="font-size:14px;color:var(--tx);text-transform:none;letter-spacing:0">Gabarito completo</h4>'+
       '<h4>Calculado ao vivo (AbgCore/CadCore)</h4>'+
       '<p>Distúrbio primário: <b>'+computedTypes+'</b>'+(res.compensationCheck && res.compensationCheck.verdict?' · compensação: <b>'+res.compensationCheck.verdict+'</b>':'')+
       (ag!=null?' · AG = <b>'+r(ag,1)+'</b>':'')+(agc!=null?' · AGc = <b>'+r(agc,1)+'</b>':'')+
@@ -28634,12 +28640,10 @@ function renderGasoDetail(){
       '<h4>Armadilha</h4><p>'+c.gabarito.armadilha+'</p>'+
       '<h4>Detalhe-chave</h4><p>'+c.gabarito.detalheChave+'</p>'+
       '<h4>Conteúdo complementar</h4><p>'+c.gabarito.conteudoComplementar+'</p>'+
-      (c.confundeCom&&c.confundeCom.length?'<h4>Casos que confundem com este</h4><div class="gconf">'+
-        c.confundeCom.map(function(id){var o=gasoById(id);return o?"<button onclick='selGaso("+JSON.stringify(id)+")'>"+id+' · '+o.titulo+'</button>':'';}).join('')+
+      (c.confundeCom&&c.confundeCom.length?'<h4>Casos que confundem com este</h4><p style="font-size:12px;color:var(--mut);margin:2px 0 6px">Só o número — o título fica escondido pra não estragar quando esse caso aparecer sorteado depois.</p><div class="gconf">'+
+        c.confundeCom.map(function(id){var o=gasoById(id);return o?"<button onclick='selGaso("+JSON.stringify(id)+")'>"+id+'</button>':'';}).join('')+
         '</div>':'')+
-      '</div>'+
-      renderGasoQuiz(c)+
-      renderGasoEvolucao(c);
+      '</div>';
   }
   document.getElementById('gasoDetail').innerHTML=html;
 }
@@ -28697,15 +28701,30 @@ function renderGasoQuiz(c){
 // ---- evolução do caso: série temporal + escada socrática de 8 passos ----
 var gasoEvoState={};
 function ges(id){return gasoEvoState[id]||(gasoEvoState[id]={step:0,relacionados:false});}
-function advanceGasoEvo(id){var s=ges(id),c=gasoById(id);if(s.step<c.evolucao.escada.length)s.step++;renderGasoDetail();}
-function revealGasoRelacionados(id){ges(id).relacionados=true;renderGasoDetail();}
+function gasoEvoScrollTo(elId){
+  requestAnimationFrame(function(){
+    var el=document.getElementById(elId);
+    if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
+  });
+}
+function advanceGasoEvo(id){
+  var s=ges(id),c=gasoById(id);
+  if(s.step<c.evolucao.escada.length)s.step++;
+  renderGasoDetail();
+  gasoEvoScrollTo('evoStep-'+id+'-'+(s.step-1));
+}
+function revealGasoRelacionados(id){
+  ges(id).relacionados=true;
+  renderGasoDetail();
+  gasoEvoScrollTo('evoRelacionados-'+id);
+}
 function renderGasoEvolucao(c){
   var ev=c.evolucao; if(!ev) return '';
   var st=ges(c.id),total=ev.escada.length;
   var html='<div class="gab" style="border-top:2px dashed var(--line2)"><h4 style="font-size:14px;color:var(--tx);text-transform:none;letter-spacing:0">Evolução do caso — passo '+st.step+'/'+total+'</h4>';
   for(var i=0;i<st.step;i++){
     var step=ev.escada[i];
-    html+='<div class="qcard">';
+    html+='<div class="qcard" id="evoStep-'+c.id+'-'+i+'">';
     if(step.pontoIdx!=null&&ev.pontos[step.pontoIdx]){
       var p=ev.pontos[step.pontoIdx];
       html+='<div class="qtype">'+p.t+'</div><div class="glabs">'+gasoLabsHtml(p.labs)+'</div>'+
@@ -28715,13 +28734,13 @@ function renderGasoEvolucao(c){
       '<div class="nar"><b>Raciocínio.</b> '+step.resposta+'</div></div>';
   }
   if(st.step<total){
-    html+='<button class="gbtn" onclick="advanceGasoEvo('+JSON.stringify(c.id)+')">'+
+    html+="<button class=\"gbtn\" onclick='advanceGasoEvo("+JSON.stringify(c.id)+")'>"+
       (st.step===0?'iniciar evolução ('+total+' passos)':'próximo passo ('+(st.step+1)+'/'+total+')')+' ›</button>';
   }else if(!st.relacionados){
-    html+='<button class="gbtn" onclick="revealGasoRelacionados('+JSON.stringify(c.id)+')">revelar casos relacionados ›</button>';
+    html+="<button class=\"gbtn\" onclick='revealGasoRelacionados("+JSON.stringify(c.id)+")'>revelar casos relacionados ›</button>";
   }else{
-    html+='<h4 style="margin:14px 0 3px;font-size:12.5px;color:var(--teal);text-transform:uppercase;letter-spacing:.05em">Casos relacionados</h4>'+
-      '<p style="font-size:14px;line-height:1.6;margin:2px 0 0">'+ev.casosRelacionados+'</p>';
+    html+='<div id="evoRelacionados-'+c.id+'"><h4 style="margin:14px 0 3px;font-size:12.5px;color:var(--teal);text-transform:uppercase;letter-spacing:.05em">Casos relacionados</h4>'+
+      '<p style="font-size:14px;line-height:1.6;margin:2px 0 0">'+ev.casosRelacionados+'</p></div>';
   }
   html+='</div>';
   return html;
