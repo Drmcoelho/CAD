@@ -107,7 +107,7 @@ a.home{color:var(--teal);text-decoration:none}
 {
  "_meta": {
   "fonte": "Umpierrez et al. Hyperglycemic Crises in Adults With Diabetes: A Consensus Report. Diabetes Care 2024;47(8):1257-1275.",
-  "canon": "Números clínicos derivam de core/cad_core.js (POLICY): K repor <5,0 · adiar insulina <3,5 · reiniciar >=3,5; insulina 0,1->0,05 U/kg/h com glicose <250 + dextrose; Na corrigido fator 1,6 (2,4 se glicose >400); bicarbonato pH<7,0 (consenso) / sem benefício acima de 6,9; osm efetiva = 2·Na MEDIDO + glicose/18; HHS osm efetiva >320; resolução βHB <0,6 E (pH >=7,3 OU HCO3 >=18).",
+  "canon": "Números clínicos derivam de core/cad_core.js (POLICY): K repor <5,0 · adiar insulina <3,5 · reiniciar ≥3,5; insulina 0,1→0,05 U/kg/h com glicose <250 + dextrose; Na corrigido fator 1,6 (2,4 se glicose >400); bicarbonato pH<7,0 (consenso) / sem benefício acima de 6,9; osm efetiva = 2·Na MEDIDO + glicose/18; HHS osm efetiva >320; resolução βHB <0,6 e (pH ≥7,3 ou HCO3 ≥18).",
   "regime": "Uso pessoal, não-SaMD, humano-no-loop de toda decisão. Casos sintéticos/de-identificados. Autor: Dr. Matheus M. Coelho, CRM-SP 151.318."
  },
  "perfis": [
@@ -174,7 +174,7 @@ a.home{color:var(--teal);text-decoration:none}
    "incerteza": "O bolus inicial de insulina é opcional (evidência fraca; a infusão contínua basta). Bicarbonato abaixo de 6,9 não tem RCT que guie.",
    "caso": {
     "vinheta": "Homem, 24 anos, DM1, 3 dias sem aplicar insulina (\"acabou o cartão\"). Prostrado, taquipneico, hálito cetônico. Na 132 · Cl 92 · HCO₃ 8 · albumina 4,2 · glicose 480 · K 5,2 · βHB 6,5 · pH 7,15.",
-    "leitura": "AG = 132 − (92+8) = 32; AGc (alb 4,2) = 31,5. Δ/Δ = (31,5−12)/(24−8) = 19,5/16 = 1,22 → banda 1–2, AGMA de gap alto limpa (sem cauda hiperclorêmica somada). Winter esperado = 1,5·8+8 = 20 ± 2 (checar se o pCO₂ medido bate). Osm efetiva = 2·132 + 480/18 = 290,7 → não é HHS. hasDka() = verdadeiro (βHB 6,5 ≥3 + pH 7,15 <7,30). K 5,2 ≥5,0 → banda alta: iniciar insulina 0,1 U/kg/h SEM potássio inicial, reavaliar K a cada 2 h — o valor alto aqui é o shift transcelular, não déficit corporal ausente; a insulina vai revelar a queda.",
+    "leitura": "AG = 132 − (92+8) = 32; AGc (alb 4,2) = 31,5. Δ/Δ = (31,5−12)/(24−8) = 19,5/16 = 1,22 → banda 1–2, AGMA de gap alto limpa (sem cauda hiperclorêmica somada). Winter esperado = 1,5·8+8 = 20 ± 2 (checar se o pCO₂ medido bate). Osm efetiva = 2·132 + 480/18 = 290,7 → não é HHS. Critério de CAD fechado: βHB 6,5 ≥3 + pH 7,15 <7,30. K 5,2 ≥5,0 → banda alta: iniciar insulina 0,1 U/kg/h SEM potássio inicial, reavaliar K a cada 2 h — o valor alto aqui é o shift transcelular, não déficit corporal ausente; a insulina vai revelar a queda.",
     "labs": {
      "na": 132,
      "cl": 92,
@@ -247,7 +247,7 @@ a.home{color:var(--teal);text-decoration:none}
    "incerteza": "O limiar de glicose 'euglicêmico' varia entre fontes (<200 vs <250). O tempo de suspensão peri-operatória do SGLT2i é inferência de bula/consenso, não RCT.",
    "caso": {
     "vinheta": "Mulher, 55 anos, DM2 em empagliflozina, vômitos há 2 dias, baixa ingesta. Glicose 172 (\"normal, doutor\") — Na 139 · Cl 100 · HCO₃ 11 · albumina 4,0 · K 4,4 · βHB 5,9 · pH 7,19.",
-    "leitura": "AG = 139 − (100+11) = 28; AGc = 28 (albumina normal, sem correção). Δ/Δ = (28−12)/(24−11) = 16/13 = 1,23 → banda 1–2, AGMA limpa — a glicose baixa não é sinal de gap normal. hasDka() = verdadeiro: βHB 5,9 ≥3 + pH 7,19 <7,30 fecham o diagnóstico INDEPENDENTE da glicose (o eixo glicêmico do critério é satisfeito por knownDiabetes, não pelo valor 172). K 4,4 → banda 3,5–5,0: iniciar insulina 0,1→0,05 U/kg/h (glicose já <250) COM dextrose desde a primeira bolsa — aqui a dextrose não é resgate de hipoglicemia, é o que permite manter a insulina ligada. Suspender o SGLT2i.",
+    "leitura": "AG = 139 − (100+11) = 28; AGc = 28 (albumina normal, sem correção). Δ/Δ = (28−12)/(24−11) = 16/13 = 1,23 → banda 1–2, AGMA limpa — a glicose baixa não é sinal de gap normal. Critério de CAD fechado: βHB 5,9 ≥3 + pH 7,19 <7,30 fecham o diagnóstico independente da glicose (o eixo glicêmico do critério é satisfeito por knownDiabetes, não pelo valor 172). K 4,4 → banda 3,5–5,0: iniciar insulina 0,1→0,05 U/kg/h (glicose já <250) COM dextrose desde a primeira bolsa — aqui a dextrose não é resgate de hipoglicemia, é o que permite manter a insulina ligada. Suspender o SGLT2i.",
     "labs": {
      "na": 139,
      "cl": 100,
@@ -300,7 +300,7 @@ a.home{color:var(--teal);text-decoration:none}
    "incerteza": "É um pré-estado sem critério formal; o limiar de intervenção é clínico e depende do contexto.",
    "caso": {
     "vinheta": "Homem, 30 anos, DM1, gastroenterite há 1 dia, reduziu a insulina \"para não hipoglicemiar\". Glicose 210 · Na 138 · Cl 100 · HCO₃ 20 · albumina 4,0 · K 4,0 · βHB 3,4 · pH 7,32.",
-    "leitura": "AG = 138 − (100+20) = 18, discretamente elevado. hasDka() = FALSO: βHB 3,4 já cruza o limiar cetônico (≥3,0), mas o eixo ácido não fecha — pH 7,32 não é <7,30 E HCO₃ 20 não é <18. Formalmente ainda não é CAD; é a fase em que o tampão segura. A leitura certa não é 'não é CAD, relaxa' — é 'cetose subindo, agir agora': hidratar, ajustar a insulina basal (não reduzir mais), tratar a gastroenterite, e repetir βHB/gasometria em poucas horas para ver a tendência, não o carimbo.",
+    "leitura": "AG = 138 − (100+20) = 18, discretamente elevado. O critério de CAD ainda é falso: βHB 3,4 já cruza o limiar cetônico (≥3,0), mas o eixo ácido não fecha — pH 7,32 não é <7,30 e HCO₃ 20 não é <18. Formalmente ainda não é CAD; é a fase em que o tampão segura. A leitura certa não é 'não é CAD, relaxa' — é 'cetose subindo, agir agora': hidratar, ajustar a insulina basal (não reduzir mais), tratar a gastroenterite, e repetir βHB/gasometria em poucas horas para ver a tendência, não o carimbo.",
     "labs": {
      "na": 138,
      "cl": 100,
@@ -353,7 +353,7 @@ a.home{color:var(--teal);text-decoration:none}
    "incerteza": "—",
    "caso": {
     "vinheta": "18 h de tratamento de CAD. Glicose já 145, o time pergunta se pode reduzir a insulina. Na 136 · Cl 99 · HCO₃ 15 · albumina 4,0 · K 4,2 · βHB 1,0 · pH 7,29.",
-    "leitura": "AG = 136 − (99+15) = 22; AGc = 22. Δ/Δ = (22−12)/(24−15) = 10/9 = 1,11 → banda 1–2, ainda AGMA (gap fechando, não hiperclorêmica ainda). O ponto fino: hasDka() = FALSO (βHB 1,0 já caiu abaixo do limiar diagnóstico de 3,0 — o eixo cetônico 'desliga' mesmo com pH/HCO₃ ainda anormais) E isResolvedDka() = FALSO (βHB 1,0 não é <0,6; nem pH nem HCO₃ atingem a meta). Ou seja: não é mais 'CAD nova' pelo critério formal, mas também não está resolvida — é exatamente a zona de trânsito que este perfil descreve. Conduta: manter insulina + dextrose (glicose já baixa), não transicionar para SC ainda, repetir βHB/gasometria até fechar a resolução real.",
+    "leitura": "AG = 136 − (99+15) = 22; AGc = 22. Δ/Δ = (22−12)/(24−15) = 10/9 = 1,11 → banda 1–2, ainda AGMA (gap fechando, não hiperclorêmica ainda). O ponto fino: o critério de CAD já é falso (βHB 1,0 já caiu abaixo do limiar diagnóstico de 3,0 — o eixo cetônico 'desliga' mesmo com pH/HCO₃ ainda anormais) e o critério de resolução também é falso (βHB 1,0 não é <0,6; nem pH nem HCO₃ atingem a meta). Ou seja: não é mais 'CAD nova' pelo critério formal, mas também não está resolvida — é exatamente a zona de trânsito que este perfil descreve. Conduta: manter insulina + dextrose (glicose já baixa), não transicionar para SC ainda, repetir βHB/gasometria até fechar a resolução real.",
     "labs": {
      "na": 136,
      "cl": 99,
@@ -410,7 +410,7 @@ a.home{color:var(--teal);text-decoration:none}
    "incerteza": "As velocidades-alvo de correção de Na/osm são de consenso/segurança, não de RCT. O comentário de 2024 propõe osm efetiva >300 como alerta (status diferente do critério 320).",
    "caso": {
     "vinheta": "Mulher, 71 anos, DM2, 5 dias prostrada em casa, baixa ingesta hídrica. Sonolenta, mucosas secas. Na 130 · Cl 88 · HCO₃ 14 · albumina 4,0 · glicose 600 · K 4,6 · βHB 4,2 · pH 7,21.",
-    "leitura": "AG = 130 − (88+14) = 28; AGc = 28. Δ/Δ = (28−12)/(24−14) = 16/10 = 1,60 → banda 1–2. Osm efetiva = 2·130 + 600/18 = 260 + 33,3 = 293,3 (Na MEDIDO) — ainda abaixo de 320, então não fecha HHS por esse critério isolado, mas já está no alerta do comentário 2024 (>300 está perto). hasDka() = verdadeiro (βHB 4,2 + pH 7,21). Na CORRIGIDO = 130 + 2,4·(600−100)/100 = 142,0 — esse número mede o déficit de água livre (relevante para reposição), mas usá-lo na fórmula de osm daria 2·142+33,3=317,3, dobrando a contagem da glicose. Conduta: fluido é prioridade (déficit maior que CAD isolada), insulina 0,1 U/kg/h (o componente cetótico exige), correção gradual de Na/osm com monitorização neurológica.",
+    "leitura": "AG = 130 − (88+14) = 28; AGc = 28. Δ/Δ = (28−12)/(24−14) = 16/10 = 1,60 → banda 1–2. Osm efetiva = 2·130 + 600/18 = 260 + 33,3 = 293,3 (Na MEDIDO) — ainda abaixo de 320, então não fecha HHS por esse critério isolado, mas já está no alerta do comentário 2024 (>300 está perto). Critério de CAD fechado: βHB 4,2 + pH 7,21. Na CORRIGIDO = 130 + 2,4·(600−100)/100 = 142,0 — esse número mede o déficit de água livre (relevante para reposição), mas usá-lo na fórmula de osm daria 2·142+33,3=317,3, dobrando a contagem da glicose. Conduta: fluido é prioridade (déficit maior que CAD isolada), insulina 0,1 U/kg/h (o componente cetótico exige), correção gradual de Na/osm com monitorização neurológica.",
     "labs": {
      "na": 130,
      "cl": 88,
@@ -467,7 +467,7 @@ a.home{color:var(--teal);text-decoration:none}
    "incerteza": "—",
    "caso": {
     "vinheta": "36 h de tratamento com SF 0,9% em grande volume. Glicose já 130, mas pH 7,31 e HCO₃ 13 seguem \"não fechando\". Na 138 · Cl 110 · albumina 4,0 · K 4,0 · βHB 0,4.",
-    "leitura": "AG = 138 − (110+13) = 15, normal. Δ/Δ = (15−12)/(24−13) = 3/11 = 0,27 → banda <1, cauda hiperclorêmica franca (o gap não explica mais o HCO₃ baixo). O ponto que este caso prova em número: isResolvedDka() = VERDADEIRO — βHB 0,4 <0,6 E pH 7,31 ≥7,3 (a condição é 'OU'; HCO₃ 13 não precisa cumprir). A cetose está formalmente resolvida; o HCO₃ baixo é só o cloro que o rim ainda não excretou. Empilhar insulina ou manter jejum aqui não toca nesse número — a conduta é trocar SF por balanceado e dar tempo ao rim.",
+    "leitura": "AG = 138 − (110+13) = 15, normal. Δ/Δ = (15−12)/(24−13) = 3/11 = 0,27 → banda <1, cauda hiperclorêmica franca (o gap não explica mais o HCO₃ baixo). O ponto que este caso prova em número: o critério de resolução já é verdadeiro — βHB 0,4 <0,6 e pH 7,31 ≥7,3 (a condição é 'ou'; HCO₃ 13 não precisa cumprir). A cetose está formalmente resolvida; o HCO₃ baixo é só o cloro que o rim ainda não excretou. Empilhar insulina ou manter jejum aqui não toca nesse número — a conduta é trocar SF por balanceado e dar tempo ao rim.",
     "labs": {
      "na": 138,
      "cl": 110,
@@ -520,7 +520,7 @@ a.home{color:var(--teal);text-decoration:none}
    "incerteza": "A contribuição relativa de cada acidose é dinâmica; a interpretação do gap depende de seriação, não de um ponto único.",
    "caso": {
     "vinheta": "Homem, 45 anos, DM2, pielonefrite + hipotensão. Glicose 350 · Na 133 · Cl 100 · HCO₃ 9 · albumina 3,0 · K 4,5 · βHB 4,0 · lactato 6,0 · pH 7,12.",
-    "leitura": "AG = 133 − (100+9) = 24; AGc (alb 3,0) = 24 + 2,5·(4,0−3,0) = 26,5 — a hipoalbuminemia escondia ~2,5 pontos de gap. Δ/Δ = (26,5−12)/(24−9) = 14,5/15 = 0,97 → banda <1, no limite — mas aqui o número é ambíguo por natureza: o AG tem cetona E lactato somados, e o Δ/Δ não separa os dois ácidos (é a limitação nomeada deste perfil). hasDka() = verdadeiro (βHB 4,0 + pH 7,12). Conduta dupla: CAD (insulina 0,1 U/kg/h, K conforme banda, fluido) E sepse (foco + antibiótico precoce + ressuscitação guiada por perfusão) — tratar só a CAD e perder a sepse é o erro que mata.",
+    "leitura": "AG = 133 − (100+9) = 24; AGc (alb 3,0) = 24 + 2,5·(4,0−3,0) = 26,5 — a hipoalbuminemia escondia ~2,5 pontos de gap. Δ/Δ = (26,5−12)/(24−9) = 14,5/15 = 0,97 → banda <1, no limite — mas aqui o número é ambíguo por natureza: o AG tem cetona E lactato somados, e o Δ/Δ não separa os dois ácidos (é a limitação nomeada deste perfil). Critério de CAD fechado: βHB 4,0 + pH 7,12. Conduta dupla: CAD (insulina 0,1 U/kg/h, K conforme banda, fluido) E sepse (foco + antibiótico precoce + ressuscitação guiada por perfusão) — tratar só a CAD e perder a sepse é o erro que mata.",
     "labs": {
      "na": 133,
      "cl": 100,
@@ -578,7 +578,7 @@ a.home{color:var(--teal);text-decoration:none}
    "incerteza": "A distinção exige contexto; há sobreposição real com a CAD euglicêmica no diabético etilista.",
    "caso": {
     "vinheta": "Homem, 48 anos, etilista, 3 dias sem comer, vômitos. Não é diabético conhecido. Glicose 68 · Na 140 · Cl 104 · HCO₃ 16 · albumina 4,2 · K 3,8 · βHB 5,0 · pH 7,30.",
-    "leitura": "AG = 140 − (104+16) = 20; AGc = 20 + 2,5·(4,0−4,2) = 19,5. βHB 5,0 mostra cetose real e significativa. Mas hasDka() = FALSO — e não por acaso: com knownDiabetes ausente e glicose 68 (<200), o eixo glicêmico do critério formal de CAD não fecha. Isto não é uma falha do critério; é ele funcionando corretamente para dizer 'isto não é cetoacidose diabética' — é cetose alcoólica/de jejum, mecanismo redox diferente. Conduta: glicose IV é o tratamento central (não insulina), SEMPRE com tiamina antes/junto (evitar Wernicke no etilista depletado), repor K/Mg/fosfato.",
+    "leitura": "AG = 140 − (104+16) = 20; AGc = 20 + 2,5·(4,0−4,2) = 19,5. βHB 5,0 mostra cetose real e significativa. Mas o critério de CAD é falso — e não por acaso: com knownDiabetes ausente e glicose 68 (<200), o eixo glicêmico do critério formal não fecha. Isto não é uma falha do critério; é ele funcionando corretamente para dizer 'isto não é cetoacidose diabética' — é cetose alcoólica/de jejum, mecanismo redox diferente. Conduta: glicose IV é o tratamento central (não insulina), SEMPRE com tiamina antes/junto (evitar Wernicke no etilista depletado), repor K/Mg/fosfato.",
     "labs": {
      "na": 140,
      "cl": 104,
@@ -643,7 +643,7 @@ a.home{color:var(--teal);text-decoration:none}
    "incerteza": "Sem diurese para guiar volume, o status volêmico depende de exame clínico/USG à beira-leito, não de um número. O momento de diálise emergencial é decisão conjunta com nefrologia — não um limiar do core.",
    "caso": {
     "vinheta": "58 anos, DRC dialítica (hemodiálise 3x/semana, última sessão há 2 dias), anúrica, admitida com vômitos e sonolência. Na 138 · Cl 94 · HCO₃ 8 · albumina 3,2 · glicose 780 · K 6,3 · cetonúria 4+ · pH 6,98.",
-    "leitura": "AG = 138 − (94+8) = 36; corrigido para albumina 3,2 → AGc = 36 + 2,5·(4,0−3,2) = 38. Δ/Δ = (38−12)/(24−8) = 1,63 → banda 1–2, AGMA de gap alto limpa (mas compare com o HCO₃ basal do paciente em diálise, que pode já rodar baixo antes deste episódio). Osm efetiva = 2·138 + 780/18 = 319,3 — a um passo do critério de HHS (>320), não por sobreposição de fenótipo, mas porque a glicose não tem via renal de clearance: em qualquer paciente com rim funcionante, esse mesmo tempo de doença já teria perdido glicose na urina. hasDka() = verdadeiro (cetonúria 4+ fecha o eixo cetônico; pH e HCO₃ fecham o eixo ácido). isResolvedDka(): incerto — sem β-HB sérico disponível neste caso agudo. K 6,3 já preocupa por arritmia antes mesmo de qualquer reposição: aqui a insulina/dextrose já cumpre o papel duplo de tratar a cetose e deslocar K para dentro da célula, mas a decisão sobre diálise emergencial (hipercalemia refratária, sobrecarga de volume) é clínica, não deste cálculo.",
+    "leitura": "AG = 138 − (94+8) = 36; corrigido para albumina 3,2 → AGc = 36 + 2,5·(4,0−3,2) = 38. Δ/Δ = (38−12)/(24−8) = 1,63 → banda 1–2, AGMA de gap alto limpa (mas compare com o HCO₃ basal do paciente em diálise, que pode já rodar baixo antes deste episódio). Osm efetiva = 2·138 + 780/18 = 319,3 — a um passo do critério de HHS (>320), não por sobreposição de fenótipo, mas porque a glicose não tem via renal de clearance: em qualquer paciente com rim funcionante, esse mesmo tempo de doença já teria perdido glicose na urina. Critério de CAD fechado: cetonúria 4+ fecha o eixo cetônico; pH e HCO₃ fecham o eixo ácido. Resolução: incerta — sem β-HB sérico disponível neste caso agudo. K 6,3 já preocupa por arritmia antes mesmo de qualquer reposição: aqui a insulina/dextrose já cumpre o papel duplo de tratar a cetose e deslocar K para dentro da célula, mas a decisão sobre diálise emergencial (hipercalemia refratária, sobrecarga de volume) é clínica, não deste cálculo.",
     "labs": {
      "na": 138,
      "cl": 94,
@@ -720,9 +720,9 @@ a.home{color:var(--teal);text-decoration:none}
    : '<p class="tut-empty">Nenhum perfil específico identificado com estes valores (critério de CAD não fechado). Isto NÃO exclui outras causas de acidose — avalie clinicamente.</p>';
   html+=notes.map(n=>`<p class="tut-empty">${n.reason}</p>`).join('');
   const c=r.computed;
-  const resolvedTxt=c.isResolvedDka===null?'incerto (sem β-HB sérico)':c.isResolvedDka;
+  const resolvedTxt=c.isResolvedDka===null?'incerto (sem β-HB sérico)':(c.isResolvedDka?'sim':'não');
   const markerTxt=c.ketoneMarker==='cetonuriaCruzes'?'cetonúria':'β-HB';
-  html+=`<div class="tut-computed">AG ${c.ag} · AGc ${c.agc} · Δ/Δ ${c.deltaRatio??'—'}${c.deltaBand?' ('+c.deltaBand+')':''} · Osm efetiva ${c.effectiveOsmolality} · eixo cetônico: ${markerTxt} · hasDka() ${c.hasDka} · isResolvedDka() ${resolvedTxt}</div>`;
+  html+=`<div class="tut-computed">AG ${c.ag} · AGc ${c.agc} · Δ/Δ ${c.deltaRatio??'—'}${c.deltaBand?' ('+c.deltaBand+')':''} · Osm efetiva ${c.effectiveOsmolality} · eixo cetônico: ${markerTxt} · critério de CAD fechado: ${c.hasDka?'sim':'não'} · resolução: ${resolvedTxt}</div>`;
   out.innerHTML=html;
  }
  ['t_na','t_cl','t_hco3','t_glu','t_cet','t_bhb','t_ph','t_alb','t_k','t_lac'].forEach(id=>$('#'+id).addEventListener('input',tutRender));

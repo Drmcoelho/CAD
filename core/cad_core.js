@@ -285,8 +285,8 @@ function classifyDkaProfile(input) {
       // sem beta-HB serico nao da para distinguir com seguranca; cetonuria NAO
       // confirma resolucao (acetoacetato pode subir com o tratamento) — mostra
       // as duas hipoteses com a ressalva, em vez de escolher uma calada.
-      add("parcial", "cetose (cruzes) abaixo do limiar diagnóstico, com acidose residual — pode ser cetose ainda em resolução...");
-      add("hipercloremica", "...OU cauda hiperclorêmica já instalada. A distinção exige β-HB sérico: cetonúria não confirma resolução (acetoacetato pode subir durante o tratamento mesmo com a cetose resolvendo).");
+      add("parcial", "cetose (cruzes) abaixo do limiar diagnóstico, com acidose residual — pode ser cetose ainda em resolução. Sem β-HB sérico, cetonúria isolada não confirma qual das duas hipóteses é a certa (acetoacetato pode subir durante o próprio tratamento, mesmo com a cetose resolvendo).");
+      add("hipercloremica", "cetose (cruzes) abaixo do limiar diagnóstico, com acidose residual — pode ser cauda hiperclorêmica já instalada em vez de cetose ainda ativa. Sem β-HB sérico, cetonúria isolada não confirma qual das duas hipóteses é a certa.");
     }
   } else if (dka) {
     if (dialysisDependent) {
@@ -295,11 +295,11 @@ function classifyDkaProfile(input) {
         matches.push({ id: null, reason: `osm efetiva ${round(osmEff, 1)} > 300 — território hiperosmolar acentuado pela ausência de clearance renal de glicose, não necessariamente sobreposição do fenótipo CAD+HHS.` });
       }
     } else {
-      if (glu < POLICY.insulin.reduceGlucoseBelowMgDl) add("euglicemica", `glicose ${glu} < ${POLICY.insulin.reduceGlucoseBelowMgDl} apesar de hasDka() verdadeiro — fenótipo euglicêmico (SGLT2i/jejum/gestação/etilismo).`);
+      if (glu < POLICY.insulin.reduceGlucoseBelowMgDl) add("euglicemica", `glicose ${glu} < ${POLICY.insulin.reduceGlucoseBelowMgDl} apesar de o critério de CAD já estar fechado — fenótipo euglicêmico (SGLT2i/jejum/gestação/etilismo).`);
       if (glu >= 500 || osmEff > 300) add("cad-hhs", `glicose muito alta${osmEff > 300 ? ` e osm efetiva ${round(osmEff, 1)} > 300` : ""} — considerar sobreposição com HHS.`);
     }
     if ((lactate != null && lactate >= 4) || suspectedSepsis) add("sepse-lactato", "lactato elevado e/ou contexto séptico — acidose provavelmente mista (cetona + lactato).");
-    if (!matches.length) add("classica", "critério de CAD fechado (hasDka verdadeiro), sem sinal específico de outro fenótipo — apresentação clássica.");
+    if (!matches.length) add("classica", "critério de CAD fechado, sem sinal específico de outro fenótipo — apresentação clássica.");
   }
 
   if (ddBand && ddBand.band === "<1" && !matches.some((m) => m.id === "hipercloremica")) {
