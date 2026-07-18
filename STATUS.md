@@ -27,6 +27,9 @@ Estado do canon por camada, na versão `CAD360-ApA-2026-07-01`. O que estiver �
 - ✅ **`content/atlas.json` (banco B-1..B-6)**: 6 exercícios expandidos de "Lição" de 1-2 frases para explicação de mecanismo (300-800+ caracteres), sem número novo.
 - ✅ **20 lâminas do tratado (seção 13), 636 itens de MCQ/V-F reescritos**: achado real — a maioria era rasa ("Gabarito: A. Síntese da lâmina.", ~344 V/F sem nenhuma justificativa). Reescritos em 10 lotes paralelos (2 lâminas por lote), ancorados nos números canônicos já estabelecidos, sem inverter veredito. Merge por linha exata (`class="lam-nota"`). Verificado: zero vazamento de código, zero duplicata de texto, `npm run ci` verde, Playwright sem erro de console.
 
+## Autoverificação socrática intercalada (`tratado/index.html`, seções 1/3/7)
+- ✅ **16 checkpoints `<details class="q">` intercalados**: achado real — o tratado só tinha uma pergunta socrática por seção, ao final, apontando para o banco externo (§11) em vez de resolver ali. Adicionado um checkpoint após cada subseção (6 na §1 Fisiopatologia, 6 na §3 ácido-base, 4 na §7 loops de conduta), reveal ao clique no mesmo componente visual do banco de questões, resposta resolvida no próprio bloco. As 3 perguntas de síntese que já existiam também passaram a resolver inline em vez de só apontar pro §11.
+
 ## Navegação entre seções
 - ✅ **`nav.crumbs`** em `app/`, `tratado/`, `perfis/`, `painel/` — link para `../` (Início) + as outras 3 seções, seção atual marcada. Antes só `perfis/` tinha um link de volta (e só para `tratado/`, não para as 3). `render_smoke.js` confere a estrutura das 4 (Início + 3 seções + atual) em `checkCrumbs()`.
 

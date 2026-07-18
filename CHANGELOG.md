@@ -233,6 +233,15 @@ Achado em uso, relatado pelo usuário, em duas partes:
 - Adicionado `gasoEvoScrollTo()` (mesmo padrão de `selGaso`/`toggleGasoReveal`): rola o passo recém-revelado ou o bloco de casos relacionados para a viewport, já que inserir conteúdo acima do botão sem rolar reproduz a mesma classe de bug de "não parece clicável" do achado original dos 100 cards.
 - Verificado: `npm run ci` verde; Playwright com clique físico real (não `page.evaluate` direto) em G-01/G-02/G-50/G-100 — ordem Teste-se→Evolução→Gabarito confirmada, 8 passos da evolução avançando um a um com scroll para o passo novo, "casos relacionados" só no fim, confundeCom mostrando só ids, zero erro de console.
 
+## [2026-07-18] — autoverificação socrática intercalada no tratado (seções 1, 3, 7)
+
+Achado em uso, relatado pelo usuário: o tratado tem uma única "pergunta socrática" ao final de cada seção aprofundada, e ela só aponta para o banco de questões externo (§11) em vez de resolver ali mesmo — o aluno não tem como confirmar se entendeu o parágrafo que acabou de ler antes de avançar para o próximo, especialmente na camada aprofundada (onde a pedagogia do projeto exige verificação socrática progressiva, não só no bolso/plantão).
+
+- **16 checkpoints `<details class="q">` intercalados** (reaproveitando 100% o mesmo componente visual do banco de questões §11 — reveal ao clique, sem CSS novo): 6 na seção 1 (Fisiopatologia completa, um após cada subseção 1.1-1.6), 6 na seção 3 (A leitura ácido-base completa, um após cada Passo 1-2/3/3b/4/5/6), 4 na seção 7 (Os loops de conduta, um após cada 7.1-7.4). Cada checkpoint testa especificamente o mecanismo da subseção anterior (ex.: 1.2 pergunta por que a fita de urina pode subir enquanto o paciente melhora; Passo 5 pede para calcular um Δ/Δ novo e classificar; 7.1 pergunta por que desligar insulina no piso de K perpetua o dente-de-serra), com resposta resolvida no próprio bloco — nenhum aponta para fora.
+- **As 3 "perguntas socráticas" de síntese que já existiam ao final de cada seção** (que só diziam "resposta trabalhada no banco de questões, §11, Qn") passam a resolver a resposta completa inline, mantendo a pergunta original.
+- Nenhum número/mecanismo novo inventado — todo conteúdo ancorado no que já estava escrito na própria seção ou nos números canônicos do core (Δ/Δ 1/2, K, bicarbonato, Winter, osm efetiva Na medido).
+- Verificado: `npm run ci` verde; Playwright confirmando os 16 checkpoints presentes, reveal funcionando ao clique, zero erro de console; zero vazamento de código-em-prosa nos textos novos.
+
 ## [2026-07-18] — auditoria de robustez dos gabaritos (perfis/tratado), K wired ao Tutor/Marco, gabaritos das 20 lâminas reescritos
 
 Achado em uso, relatado pelo usuário: "em todos gabaritos falta robustez" — pedido de auditoria completa antes de qualquer implementação. Cobriu perfis/tratado (não auditados nas rodadas anteriores) e confirmou uma classe de defeito mais séria do que a suspeitada: o próprio código de renderização dos widgets interativos (não só conteúdo estático) vazava nome de função como rótulo de UI, e o campo de potássio do Tutor/Marco era capturado e nunca usado pelo classificador.
