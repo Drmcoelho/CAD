@@ -233,6 +233,15 @@ Achado em uso, relatado pelo usuário, em duas partes:
 - Adicionado `gasoEvoScrollTo()` (mesmo padrão de `selGaso`/`toggleGasoReveal`): rola o passo recém-revelado ou o bloco de casos relacionados para a viewport, já que inserir conteúdo acima do botão sem rolar reproduz a mesma classe de bug de "não parece clicável" do achado original dos 100 cards.
 - Verificado: `npm run ci` verde; Playwright com clique físico real (não `page.evaluate` direto) em G-01/G-02/G-50/G-100 — ordem Teste-se→Evolução→Gabarito confirmada, 8 passos da evolução avançando um a um com scroll para o passo novo, "casos relacionados" só no fim, confundeCom mostrando só ids, zero erro de console.
 
+## [2026-07-18] — aquecimento socrático antes do banco avaliativo do Provão
+
+Achado em uso, relatado pelo usuário: o Provão era puramente avaliativo desde o primeiro clique (MCQ/V-F com placar, dissertativas com resposta-modelo) — sem nenhuma camada "o aluno decide antes de revelar" que preparasse o raciocínio antes de entrar no banco que conta ponto, diferente da pedagogia do resto do projeto (calculadora viva, socrático em cada seção do tratado).
+
+- **`content/warmup.json`** (novo, 6 perguntas): aquecimento sem placar, cada uma revisitando uma armadilha ou mecanismo já central no projeto — por que insulina (não bicarbonato) é o eixo do tratamento; o paradoxo do potássio (K sérico normal não garante estoque normal); por que a osm efetiva usa Na medido, não corrigido (a armadilha de dupla-contagem já documentada no CLAUDE.md); por que glicemia normal não é resolução; a armadilha do Δ/Δ 0,93 "quase pura"; por que a decisão de insulina é sempre subordinada à de potássio. Nenhum número novo — tudo já estabelecido em `core/cad_core.js`/CLAUDE.md.
+- **`app/index.html`, aba Provão**: nova subseção "Aquecimento socrático — decida antes de revelar" (`#warmup`) antes do banco avaliativo, reaproveitando 100% o componente de reveal já existente (`mkReveal`) — sem placar, sem contagem, só pergunta e resposta ao clique.
+- **`scripts/build_app.js`** ganha o bloco `warmup-data` (mesmo padrão dos blocos já existentes); `scripts/render_smoke.js` confirma `#warmup` populado.
+- Verificado: `npm run ci` verde, `npm run smoke:render` verde (`#warmup` com 949 caracteres), Playwright confirmando os 6 cards renderizando, reveal funcionando ao clique e o banco avaliativo (`#quiz`, 16 cards) continuando a renderizar normalmente abaixo, zero erro de console.
+
 ## [2026-07-18] — autoverificação socrática intercalada no tratado (seções 1, 3, 7)
 
 Achado em uso, relatado pelo usuário: o tratado tem uma única "pergunta socrática" ao final de cada seção aprofundada, e ela só aponta para o banco de questões externo (§11) em vez de resolver ali mesmo — o aluno não tem como confirmar se entendeu o parágrafo que acabou de ler antes de avançar para o próximo, especialmente na camada aprofundada (onde a pedagogia do projeto exige verificação socrática progressiva, não só no bolso/plantão).

@@ -12,6 +12,7 @@
  *     - cases-data     ← content/cases.json     (casos socráticos)
  *     - atlas-data     ← content/atlas.json     (cálculo, escada, fenótipos, leis, projetos)
  *     - fisio-questions-data ← content/fisiopatologia.json (banco de mecanismo/fisiopatologia)
+ *     - warmup-data    ← content/warmup.json    (aquecimento socrático antes do provão)
  *   perfis/index.html:
  *     - profiles-data  ← content/profiles.json  (fisiopatologia + tratamento por perfil)
  *   tratado/index.html:
@@ -48,6 +49,7 @@ const FILES = {
     { id: "cases-data", text: jsonText("content/cases.json", readRaw("content/cases.json")) },
     { id: "atlas-data", text: jsonText("content/atlas.json", readRaw("content/atlas.json")) },
     { id: "fisio-questions-data", text: jsonText("content/fisiopatologia.json", readRaw("content/fisiopatologia.json")) },
+    { id: "warmup-data", text: jsonText("content/warmup.json", readRaw("content/warmup.json")) },
   ],
   "perfis/index.html": [
     { id: "profiles-data", text: jsonText("content/profiles.json", readRaw("content/profiles.json")) },

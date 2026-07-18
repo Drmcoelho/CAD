@@ -199,6 +199,10 @@ canvas{display:block;width:100%;background:#0c1218;border:1px solid var(--line);
 
 <!-- PROVÃO -->
 <section class="tab" id="provao">
+ <div class="lab">Aquecimento socrático — decida antes de revelar</div>
+ <div class="callout">Sem placar. Antes do banco avaliativo abaixo, responda mentalmente (ou em voz alta) cada pergunta e só então compare — o objetivo é reativar o raciocínio, não acertar de primeira.</div>
+ <div id="warmup"></div>
+ <div class="lab" style="margin-top:22px">Provão — banco avaliativo</div>
  <div class="callout">Quatro formatos, uma fonte de verdade. <b>Múltipla escolha</b> e <b>V/F</b> corrigem na hora e contam placar; <b>dissertativas</b> revelam resposta-modelo; <b>casos clínicos</b> misturam os formatos. Tudo ancorado no CANON.</div>
  <div class="scorebar">Objetivas: <b id="score_r">0</b> / <b id="score_t">0</b> corretas</div>
  <div id="quiz"></div>
@@ -738,6 +742,34 @@ canvas{display:block;width:100%;background:#0c1218;border:1px solid var(--line);
   "type": "diss",
   "q": "Perfil de sepse/lactato e perfil de dependência dialítica são os dois únicos perfis do classificador do motor acionados por um sinalizador de contexto clínico (lactato/suspeita de sepse; dependência dialítica), não por um limiar numérico calculado a partir dos labs de entrada. Por que essa diferença de design é deliberada, e não uma inconsistência do motor?",
   "model": "Os demais perfis (pré-CAD, hiperclorêmica, euglicêmica, sobreposição CAD+HHS, alcoólica/jejum) emergem de uma combinação de valores que os próprios labs de entrada já contêm — glicose, βHB/cetonúria, pH, HCO₃, osm efetiva são todos calculáveis a partir do mesmo painel bioquímico. Já a presença de sepse ou de dependência dialítica não é uma propriedade que a gasometria/bioquímica isoladas conseguem inferir com segurança: lactato pode estar elevado sem que haja sepse (hipoperfusão local, exercício, metformina), e a função dialítica não aparece em nenhum eletrólito isolado — é um dado de história clínica. Por isso o motor aceita esses dois como sinalizadores explícitos fornecidos por quem está inserindo os dados (o clínico), em vez de tentar adivinhá-los a partir de números que não os codificam de forma confiável. Isso é consistente com o resto do projeto: nunca inventar um dado que os números não contêm — aqui simplesmente o dado que falta é categórico (sim/não), não numérico."
+ }
+]
+</script>
+<script type="application/json" id="warmup-data">
+[
+ {
+  "q": "Por que insulina, e não bicarbonato, é o eixo central do tratamento da CAD?",
+  "a": "Insulina ataca a causa: repõe o sinal que faltava e desliga lipólise, cetogênese e gliconeogênese na origem. Bicarbonato só tamponaria o sintoma (o pH), sem tocar a produção de cetoácidos que continua gerando ácido — e carrega risco real (hipocalemia pela correção rápida, resposta paradoxal no sistema nervoso central). Por isso é exceção reservada a uma faixa estreita de pH, nunca rotina."
+ },
+ {
+  "q": "K sérico 4,8 na admissão de uma CAD — isso garante que o corpo tem potássio suficiente?",
+  "a": "Não. É o paradoxo do potássio: acidemia, falta de insulina e hipertonicidade empurram K para fora da célula, inflando o número sérico mesmo com déficit corporal total de 3-5 mEq/kg. Assim que o tratamento corrige esses três eixos, o K volta para dentro da célula e o sérico despenca — reponha antecipando essa queda, não reagindo a ela depois."
+ },
+ {
+  "q": "Por que a fórmula de osmolaridade efetiva usa o Na medido, e não o Na corrigido pela glicose?",
+  "a": "Porque o Na corrigido já embute uma estimativa do efeito de diluição da glicose sobre o sódio. Usá-lo dentro da fórmula de osm efetiva (2×Na + glicose/18) faz a glicose entrar duas vezes — uma via o Na já inflado, outra via o termo glicose/18 — inflando artificialmente o resultado. O Na corrigido serve só para avaliar déficit de água livre, nunca para a fórmula de osm."
+ },
+ {
+  "q": "A glicemia normalizou em poucas horas de tratamento. A CAD está resolvida?",
+  "a": "Não. A glicemia responde rápido porque depende só de diluição e de bloquear parte da produção hepática — a cetogênese, que é o motor da acidose, leva mais tempo para desligar. Resolução exige o eixo cetônico (β-hidroxibutirato <0,6) e o ácido-base (pH ≥7,3 ou HCO₃ ≥18) fechados, nunca só a glicemia normal."
+ },
+ {
+  "q": "Um Δ/Δ deu 0,93. Isso é uma cetoacidose \"quase pura\"?",
+  "a": "Não. 0,93 está abaixo de 1, então já é limítrofe, com um componente de acidose hiperclorêmica sobreposto — metade da acidemia residual, nesse caso, provavelmente não é cetona, é cloro. Chamar de \"quase pura\" ignora esse componente, que não responde a insulina e resolve sozinho pela regeneração renal do bicarbonato."
+ },
+ {
+  "q": "Por que a decisão sobre iniciar insulina é sempre subordinada à checagem do potássio, e nunca o contrário?",
+  "a": "Porque insulina desloca potássio para dentro da célula. Administrá-la sem saber o K corre o risco de precipitar hipocalemia grave e arritmia num paciente cujo déficit corporal já é grande e mascarado (ver o paradoxo do potássio). Por isso a sequência é sempre hidratar, checar K, e só então decidir a conduta de insulina — nunca o inverso."
  }
 ]
 </script>
@@ -1312,12 +1344,17 @@ function dissBlock(item){const w=document.createElement('div');
  w.innerHTML=`<div class="qtype">Dissertativa</div><div class="qstem">${item.q}</div>`+mkReveal('<span style="color:var(--mut);font-size:12px">Pense e escreva sua resposta; depois compare.</span>','<b>Resposta-modelo.</b> '+item.model);return w;}
 const QUIZ=JSON.parse(document.getElementById('questions-data').textContent);
 const FISIO_QUIZ=JSON.parse(document.getElementById('fisio-questions-data').textContent);
+const WARMUP=JSON.parse(document.getElementById('warmup-data').textContent);
 function renderQuizInto(list,hostSel){const host=$(hostSel);list.forEach(item=>{const card=document.createElement('div');card.className='qcard';
  if(item.type==='case'){card.innerHTML=`<div class="qtype">Caso clínico · formatos mistos</div><div class="qstem">${item.stem}</div>`;
   item.subs.forEach(s=>{const sub=document.createElement('div');sub.className='subq';sub.appendChild(s.type==='diss'?dissBlock(s):objBlock(s));card.appendChild(sub);});}
  else if(item.type==='diss'){card.appendChild(dissBlock(item));}
  else{card.appendChild(objBlock(item));}
  host.appendChild(card);});}
+function renderWarmupInto(list,hostSel){const host=$(hostSel);list.forEach(item=>{const card=document.createElement('div');card.className='qcard';
+ card.innerHTML=`<div class="qtype">Aquecimento · sem placar</div><div class="qstem">${item.q}</div>`+mkReveal('<span style="color:var(--mut);font-size:12px">Decida sua resposta antes de revelar.</span>','<b>Resposta.</b> '+item.a);
+ host.appendChild(card);});}
+renderWarmupInto(WARMUP,'#warmup');
 renderQuizInto(QUIZ,'#quiz');
 renderQuizInto(FISIO_QUIZ,'#fisioQuiz');
 </script>

@@ -1,0 +1,26 @@
+[
+ {
+  "q": "Por que insulina, e não bicarbonato, é o eixo central do tratamento da CAD?",
+  "a": "Insulina ataca a causa: repõe o sinal que faltava e desliga lipólise, cetogênese e gliconeogênese na origem. Bicarbonato só tamponaria o sintoma (o pH), sem tocar a produção de cetoácidos que continua gerando ácido — e carrega risco real (hipocalemia pela correção rápida, resposta paradoxal no sistema nervoso central). Por isso é exceção reservada a uma faixa estreita de pH, nunca rotina."
+ },
+ {
+  "q": "K sérico 4,8 na admissão de uma CAD — isso garante que o corpo tem potássio suficiente?",
+  "a": "Não. É o paradoxo do potássio: acidemia, falta de insulina e hipertonicidade empurram K para fora da célula, inflando o número sérico mesmo com déficit corporal total de 3-5 mEq/kg. Assim que o tratamento corrige esses três eixos, o K volta para dentro da célula e o sérico despenca — reponha antecipando essa queda, não reagindo a ela depois."
+ },
+ {
+  "q": "Por que a fórmula de osmolaridade efetiva usa o Na medido, e não o Na corrigido pela glicose?",
+  "a": "Porque o Na corrigido já embute uma estimativa do efeito de diluição da glicose sobre o sódio. Usá-lo dentro da fórmula de osm efetiva (2×Na + glicose/18) faz a glicose entrar duas vezes — uma via o Na já inflado, outra via o termo glicose/18 — inflando artificialmente o resultado. O Na corrigido serve só para avaliar déficit de água livre, nunca para a fórmula de osm."
+ },
+ {
+  "q": "A glicemia normalizou em poucas horas de tratamento. A CAD está resolvida?",
+  "a": "Não. A glicemia responde rápido porque depende só de diluição e de bloquear parte da produção hepática — a cetogênese, que é o motor da acidose, leva mais tempo para desligar. Resolução exige o eixo cetônico (β-hidroxibutirato <0,6) e o ácido-base (pH ≥7,3 ou HCO₃ ≥18) fechados, nunca só a glicemia normal."
+ },
+ {
+  "q": "Um Δ/Δ deu 0,93. Isso é uma cetoacidose \"quase pura\"?",
+  "a": "Não. 0,93 está abaixo de 1, então já é limítrofe, com um componente de acidose hiperclorêmica sobreposto — metade da acidemia residual, nesse caso, provavelmente não é cetona, é cloro. Chamar de \"quase pura\" ignora esse componente, que não responde a insulina e resolve sozinho pela regeneração renal do bicarbonato."
+ },
+ {
+  "q": "Por que a decisão sobre iniciar insulina é sempre subordinada à checagem do potássio, e nunca o contrário?",
+  "a": "Porque insulina desloca potássio para dentro da célula. Administrá-la sem saber o K corre o risco de precipitar hipocalemia grave e arritmia num paciente cujo déficit corporal já é grande e mascarado (ver o paradoxo do potássio). Por isso a sequência é sempre hidratar, checar K, e só então decidir a conduta de insulina — nunca o inverso."
+ }
+]
