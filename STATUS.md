@@ -58,6 +58,12 @@ Estado do canon por camada, na versão `CAD360-ApA-2026-07-01`. O que estiver �
 ## Reconciliações de doutrina
 - **Bicarbonato.** `core.js` usa `considerBelowPh: 7.0` (literal do consenso 2024). `canon/policy.json` e o `app/` acrescentam `noBenefitAbovePh: 6.9` (fronteira de evidência: sem benefício acima de 6,9; abaixo, nem dado nem consenso). Ambos convivem — 7,0 é o número que o consenso escreve; 6,9 é a fronteira de evidência. Se quiser um número único no core, adicionar o campo `noBenefitAbovePh` ao `POLICY`.
 
+## Limpeza final (auditoria de robustez, encerramento)
+- ✅ **Markdown cru na seção 14 do tratado**: `**negrito**`, pseudo-tabela em pipes e `---` renderizavam como texto literal (sem parser de Markdown carregado). Convertidos para `<strong>`, `<table>` real (mesmo CSS `.tbl` do resto do tratado), `<code>`, `<hr>` e `<ul><li>`.
+- ✅ **Duplicidade lâmina 3 × lâmina 13**: reauditado após a reescrita dos 636 itens — zero frase compartilhada entre as 31 notas de cada lâmina; tocam "osm efetiva" por ângulos diferentes (erro de fórmula vs. limiar de HHS), não é repetição.
+- ✅ **Autorreferência a CLAUDE.md**: reduzida a 1 menção, na seção 14 (planejamento do próprio roadmap do tratado) — contextualmente apropriada, não vaza para gabarito clínico.
+- ✅ **`content/profiles.json#_meta.canon`**: confirmado sem regressão (operadores `≥`/`→`/minúsculo, já corrigidos na Task de vazamento de código).
+
 ## Aberto / próximo
 - [x] ~~Regenerar EX04 (SVG/PNG)~~ — feito; template agora data-driven.
 - [x] ~~Sincronizar `docs/auditoria`~~ — reconciliado em `docs/auditoria-erratum.md` (Δ/Δ 0,93 = limítrofe, não "quase pura"; bicarbonato consenso pH<7,0 + fronteira ≤6,9; compensação dos 4 distúrbios). **2026-07-05**: a alegação anterior de que os pontos 1–2 "já estavam aplicados no `.docx`-fonte" era falsa (achado na auditoria própria pós-PR#15) — o `.docx` ainda tinha "quase pura" e não tinha "6,9". Corrigido de fato, mais 2 achados novos (osm efetiva do B-6 dupla-contando a glicose — mesmo furo do EX04; operador `> 3,5` em vez de `≥ 3,5` no Apêndice A). `docs/auditoria.pdf` regenerado — `soffice` está instalado neste ambiente mas sua conversão headless está quebrada (falha até em `.txt` trivial); fallback usado foi `pandoc` (docx→HTML) + Chromium headless (HTML→PDF), documentado em `docs/auditoria-erratum.md` como provisório até um LibreOffice funcional regenerar no padrão nativo.

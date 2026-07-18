@@ -233,6 +233,16 @@ Achado em uso, relatado pelo usuário, em duas partes:
 - Adicionado `gasoEvoScrollTo()` (mesmo padrão de `selGaso`/`toggleGasoReveal`): rola o passo recém-revelado ou o bloco de casos relacionados para a viewport, já que inserir conteúdo acima do botão sem rolar reproduz a mesma classe de bug de "não parece clicável" do achado original dos 100 cards.
 - Verificado: `npm run ci` verde; Playwright com clique físico real (não `page.evaluate` direto) em G-01/G-02/G-50/G-100 — ordem Teste-se→Evolução→Gabarito confirmada, 8 passos da evolução avançando um a um com scroll para o passo novo, "casos relacionados" só no fim, confundeCom mostrando só ids, zero erro de console.
 
+## [2026-07-18] — limpeza final: markdown cru na seção 14 do tratado + auditoria de duplicidade/autorreferência
+
+Fechamento do último item da sequência de robustez pedida pelo usuário.
+
+- **Markdown cru renderizando literalmente** (`tratado/index.html`, seção 14 "Índice canônico — conteúdo planejado"): a seção usa `<p>`/`<div>` puros sem nenhum parser de Markdown carregado, mas o texto-fonte tinha `**negrito**`, um pseudo-tabela em `| célula | célula |` (12 linhas em `<div class="idx-row">`) e `---` como separador — tudo renderizando como caracteres literais na tela. Corrigido: `**texto**` → `<strong>`, a pseudo-tabela "CORTES INTEIROS" virou uma `<table>` real (reaproveitando o `.tbl`/`table` CSS já usado no resto do tratado), `` `código` `` → `<code>`, `---` → `<hr>`, e 3 blocos de itens com `- ` na frente viraram `<ul><li>` de verdade.
+- **Duplicidade lâmina 3 × lâmina 13 (achado anterior, reauditado)**: as duas lâminas tocam em "osm efetiva", mas em ângulos diferentes — lâmina 3 é sobre o erro de usar Na corrigido na fórmula (dupla-contagem da glicose), lâmina 13 é sobre o limiar 320/300 de HHS. Comparação mecânica das 31 notas de cada lâmina (pós-reescrita da Task de robustecimento dos 636 itens) não encontrou nenhuma frase compartilhada — a preocupação original era sobre os gabaritos genéricos de antes da reescrita ("Gabarito: A. Síntese da lâmina."), já resolvida como efeito colateral do lote de 636 itens.
+- **Autorreferência a CLAUDE.md em texto clínico**: variedade de menções encontradas em rodadas anteriores já foram removidas (Tutor/Marco, lâminas). Resta 1 única menção, na própria seção 14 (planejamento do roadmap do tratado, citando o CLAUDE.md como fonte do escopo não-SaMD do projeto) — contextualmente apropriada, não é gabarito clínico voltado ao aluno.
+- **`content/profiles.json#_meta.canon`**: já corrigido na Task de vazamento de código (`>=`→`≥`, `->`→`→`, caixa-alta→minúscula); reconfirmado sem regressão.
+- Verificado: `npm run ci` verde; Playwright confirmando zero `**` e zero `|---|` remanescentes na seção 14, tabela renderizando com colunas corretas, zero erro de console.
+
 ## [2026-07-18] — aquecimento socrático antes do banco avaliativo do Provão
 
 Achado em uso, relatado pelo usuário: o Provão era puramente avaliativo desde o primeiro clique (MCQ/V-F com placar, dissertativas com resposta-modelo) — sem nenhuma camada "o aluno decide antes de revelar" que preparasse o raciocínio antes de entrar no banco que conta ponto, diferente da pedagogia do resto do projeto (calculadora viva, socrático em cada seção do tratado).
