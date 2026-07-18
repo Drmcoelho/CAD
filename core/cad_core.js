@@ -226,17 +226,23 @@ function isResolvedDka({ betaHydroxybutyrateMmolL, ph = null, hco3 = null }) {
 /*
  * classifyDkaProfile — diferencial de perfil de CAD a partir de labs.
  *
- * NAO substitui julgamento clinico: devolve uma lista RANQUEADA de perfis
- * plausiveis com o motivo de cada um (mesmo espirito do restante do core —
- * numero clinico decide, nunca uma caixa-preta). Perfis correspondem aos ids
- * de content/profiles.json; a UI resolve o id para o link/ancora.
+ * NAO substitui julgamento clinico: devolve uma lista de perfis plausiveis
+ * com o motivo de cada um (mesmo espirito do restante do core — numero
+ * clinico decide, nunca uma caixa-preta). Nao e um ranking com pontuacao —
+ * e uma cadeia de regras fixas avaliadas em ordem clinica (eixo glicemico/
+ * cetonico/acido primeiro, depois contexto de dialise/lactato/sepse); a
+ * ordem de retorno segue essa cadeia, nao um score de probabilidade.
+ * Perfis correspondem aos ids de content/profiles.json; a UI resolve o id
+ * para o link/ancora.
  *
  * Entrada minima: na, cl, hco3, glucoseMgDl, betaHydroxybutyrateMmolL, ph.
- * Opcionais: albumin (default 4.0), kMmolL, lactateMmolL, knownDiabetes,
- * suspectedSepsis (flag de contexto quando o lactato nao foi medido),
- * dialysisDependent (DRC dialitica — sem clearance renal de glicose/K, a
- * heuristica usual de glicose/osm para euglicemica/cad-hhs nao se aplica;
- * aponta direto para o perfil "dialitica" quando hasDka() fecha).
+ * Opcionais: albumin (default 4.0), kMmolL (alimenta potassiumPlan e vira
+ * uma nota de conduta quando a banda de K muda a decisao de insulina),
+ * lactateMmolL, knownDiabetes, suspectedSepsis (flag de contexto quando o
+ * lactato nao foi medido), dialysisDependent (DRC dialitica — sem
+ * clearance renal de glicose/K, a heuristica usual de glicose/osm para
+ * euglicemica/cad-hhs nao se aplica; aponta direto para o perfil
+ * "dialitica" quando o criterio de CAD ja fecha).
  * Se faltar algo essencial, devolve {insufficient:true, missing:[...]}.
  */
 function classifyDkaProfile(input) {
@@ -265,6 +271,10 @@ function classifyDkaProfile(input) {
   // resolucao exige beta-HB serico (cetonuria nao confirma resolucao — ver isResolvedDka);
   // sem beta-HB, resolved fica null (incerto), nao false.
   const resolved = hasBhb ? isResolvedDka({ betaHydroxybutyrateMmolL: bhb, ph, hco3 }) : null;
+  // kMmolL e opcional na entrada, mas quando fornecido precisa alimentar a
+  // mesma banda de conduta usada no resto do projeto (potassiumPlan) — antes
+  // o Tutor capturava o valor e nunca o usava, um campo decorativo.
+  const kPlan = input.kMmolL != null && !Number.isNaN(input.kMmolL) ? potassiumPlan(input.kMmolL) : null;
   const ketoneAxis = (bhb != null && bhb >= POLICY.diagnosis.betaHydroxybutyrateMmolL) || (cruzes != null && cruzes >= POLICY.diagnosis.ketonuriaCruzesAtLeast);
   const acidAxis = ph < POLICY.diagnosis.ph || hco3 < POLICY.diagnosis.bicarbonateMmolL;
   const ketoneNote = hasBhb ? `βHB ${bhb}` : `cetonúria ${cruzes}+`;
@@ -306,12 +316,19 @@ function classifyDkaProfile(input) {
     matches.push({ id: null, reason: `Δ/Δ ${round(dd, 2)} <1 — componente hiperclorêmico associado, independente do perfil principal.` });
   }
 
+  if (kPlan && kPlan.insulin === "hold") {
+    matches.push({ id: null, reason: `K ${input.kMmolL} <3,5 — adiar a insulina e repor potássio primeiro, independente do perfil principal.` });
+  } else if (kPlan && kPlan.band === ">=5.0") {
+    matches.push({ id: null, reason: `K ${input.kMmolL} ≥5,0 — insulina liberada sem reposição inicial de potássio; reavaliar com ECG, independente do perfil principal.` });
+  }
+
   return {
     insufficient: false,
     computed: {
       ag: round(ag, 1), agc: round(agc, 1), deltaRatio: dd != null ? round(dd, 2) : null, deltaBand: ddBand ? ddBand.band : null,
       effectiveOsmolality: round(osmEff, 1), hasDka: dka, isResolvedDka: resolved,
       ketoneMarker: hasBhb ? "betaHB" : "cetonuriaCruzes",
+      potassiumPlan: kPlan,
     },
     matches,
   };
