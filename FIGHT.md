@@ -103,3 +103,52 @@ Na prática, isso não quebra nada hoje porque os dois únicos chamadores reais 
 **#32 permanece a PR de referência.** O único ganho real da #33 (cobertura de CI remota) foi extraído e aplicado diretamente em `claude/gasometria-ordem-reveal` neste mesmo ciclo, sem depender de mergear a #33. A #33 não deve ser mergeada como está — carrega uma regressão de conteúdo (3 achados já corrigidos, revertidos) e uma regressão de contrato (NaN passa de gracioso para exceção não capturada, inconsistente com o resto da própria função) camufladas atrás de uma alegação de "endurecimento" que não resiste à execução direta.
 
 Nenhum merge foi realizado como parte desta arbitragem.
+
+---
+
+## Round 6 — PR #34: síntese canônica, fechando o Round 5 em aberto
+
+O Round 5 deixou uma lacuna anotada, não resolvida: o `core/cad_core.contract.test.js` da #33 é boa prática de cobertura (fronteiras 3,499/3,5/4,999/5,0 + tipos inválidos), mas estava soldado à mudança de guard rejeitada no Round 4. Esta PR (#34, branch `agent/pr34-canonical-synthesis`, base = ponta atual da #32 em `5a45aad`) fecha essa lacuna.
+
+**Reprodução independente do Round 4, antes de escrever qualquer linha de código**, comparando `core/cad_core.js` das duas branches lado a lado (não só lendo o FIGHT.md):
+
+```
+--- #32 (claude/gasometria-ordem-reveal @ 5a45aad) ---
+kMmolL=NaN: null                                    (gracioso)
+na=NaN:     {"insufficient":true,"missing":["na"]}   (gracioso)
+
+--- #33 (chatgpt/pr32-alternative-hardening @ b6bf00e) ---
+kMmolL=NaN THREW: TypeError - kMmolL must be a finite number   (não capturado)
+na=NaN:     {"insufficient":true,"missing":["na"]}              (gracioso, inalterado)
+```
+
+Confirma o Round 4 byte a byte: a inconsistência é real, e o guard da #32 (`input.kMmolL != null && !Number.isNaN(input.kMmolL) ? potassiumPlan(input.kMmolL) : null`) já é logicamente equivalente a `(kMmolL == null || Number.isNaN(kMmolL)) ? null : potassiumPlan(kMmolL)` — ou seja, **já trata `NaN` como "ausente" em qualquer campo, obrigatório ou opcional, de forma uniforme**. E já lança `TypeError` para string/objeto/array/±Infinity, porque tudo que não é filtrado pelo guard cai em `potassiumPlan()` → `requiredNumber()`, que rejeita qualquer coisa que não seja `number` finito. Não faltava dureza de contrato — faltava só o teste que provasse isso.
+
+**Decisão de design:** `core/cad_core.js` **não foi alterado nesta PR**. O comportamento já correto da #32 foi mantido byte a byte; only a cobertura de teste que faltava foi adicionada.
+
+**O que #34 faz, concretamente:**
+
+1. Herda a #32 inteira (`5a45aad` — os 12 commits, incluindo os 3 achados da autorrevisão e o CI já convergido para `npm run ci`). Nenhum arquivo de conteúdo/UX/spoiler/pedagogia tocado.
+2. Adiciona `core/cad_core.contract.test.js` (reescrito a partir do da #33, mesma disciplina de fronteira, comportamento esperado corrigido):
+   - fronteiras exatas 3,499 / 3,5 / 4,999 / 5,0 — idêntico à #33;
+   - `kMmolL` ausente → `potassiumPlan: null` — idêntico às duas;
+   - `kMmolL = NaN` → `potassiumPlan: null`, gracioso — **contrário ao teste da #33**, que esperava `throw`; aqui é travado como o contrato correto, com o comentário do arquivo explicando o porquê (ver Round 4);
+   - **teste novo, que nenhuma das duas PRs tinha**: simetria explícita — `na`/`cl`/`hco3`/`glucoseMgDl`/`ph` = `NaN` (campos obrigatórios) também degradam para `{insufficient:true, missing:[campo]}`. Antes esse invariante só existia por leitura de código; agora está travado por teste, então uma mudança futura que quebre a simetria (torne um campo NaN-gracioso e outro NaN-estrito) quebra o CI, não só a arbitragem manual.
+   - string/objeto/array/±Infinity → `TypeError` — idêntico à #33, porque já era o comportamento real do guard da #32, só não estava testado.
+3. `package.json`: `cad_core.contract.test.js` entra em `"test"`, então roda dentro de `npm test` e `npm run ci`, com o mesmo `ci.yml` (`npm run ci` direto) que a arbitragem já tinha trazido pra #32.
+4. Este Round 6, fechando o Round 5.
+
+**Verificação:** `npm run ci` local, verde, contract test incluso (`cad_core tests passed 292` + `cad_core.contract.test.js: contrato de kMmolL (NaN=ausente, tipo errado=TypeError) e fronteiras OK` + fixtures/abg_core/check_* todos ok). Nenhum limiar clínico mudou; `core/cad_core.js` tem zero diff nesta PR.
+
+## Placar atualizado
+
+| Rodada | Alegação | Veredito | Onde |
+|---|---|---|---|
+| CI remoto incompleto | procedente | ✅ incorporado | já em #32 (`5a45aad`) |
+| Reversão de 3 fixes da autorrevisão | regressão real | ❌ rejeitado | fixes mantidos em #32 |
+| Contrato "estrito" de `kMmolL` via `isProvided` | não se sustentou (inconsistência NaN) | ❌ rejeitado | guard original mantido, zero mudança de código |
+| Teste de contrato de fronteiras (3,499/3,5/4,999/5,0 + tipos inválidos) | boa prática, valor real | ✅ incorporado, com expectativa de `NaN` corrigida + simetria dos campos obrigatórios testada | `core/cad_core.contract.test.js` nesta PR (#34) |
+
+## Decisão final
+
+**#34 é a PR canônica.** Contém tudo que #32 e #33 acertaram, nada do que #33 errou. Recomendação: mergear #34 (quando os checks remotos saírem de `queued`); fechar #32 e #33 referenciando esta síntese em vez de mergear qualquer uma das duas diretamente — ambas ficariam com o histórico de arbitragem em `FIGHT.md`, mas só a #34 tem a cobertura de teste completa E o guard correto ao mesmo tempo.
