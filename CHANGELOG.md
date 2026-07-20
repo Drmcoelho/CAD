@@ -233,6 +233,16 @@ Achado em uso, relatado pelo usuário, em duas partes:
 - Adicionado `gasoEvoScrollTo()` (mesmo padrão de `selGaso`/`toggleGasoReveal`): rola o passo recém-revelado ou o bloco de casos relacionados para a viewport, já que inserir conteúdo acima do botão sem rolar reproduz a mesma classe de bug de "não parece clicável" do achado original dos 100 cards.
 - Verificado: `npm run ci` verde; Playwright com clique físico real (não `page.evaluate` direto) em G-01/G-02/G-50/G-100 — ordem Teste-se→Evolução→Gabarito confirmada, 8 passos da evolução avançando um a um com scroll para o passo novo, "casos relacionados" só no fim, confundeCom mostrando só ids, zero erro de console.
 
+## [2026-07-20] — autorrevisão do PR #32: 3 achados corrigidos
+
+Revisão técnica própria do PR #32 (8 ângulos de code-review — correção, comportamento removido, rastreamento cross-file, reuso, simplificação, eficiência, altitude, convenções do CLAUDE.md) encontrou 3 defeitos reais introduzidos pelo próprio PR, corrigidos aqui:
+
+- **Contradição reintroduzida**: `core/cad_core.js` teve seu doc-comment corrigido nesta mesma série de commits para deixar de afirmar que `classifyDkaProfile` devolve uma "lista ranqueada" (é uma pilha em ordem clínica fixa, não ranqueada por score) — mas a questão dissertativa correspondente em `content/fisiopatologia.json` (espelhada em `app/index.html` via build) continuava ensinando exatamente a framing errada. Reescrita para "pilha de perfis... empilhados em ordem clínica fixa", mencionando "lista ranqueada" só como contraste negado explicitamente, no mesmo padrão já usado no projeto para valores obsoletos (K<5,5 JBDS).
+- **Operador de fronteira inconsistente**: a lâmina 13 do tratado (reescrita nesta mesma série) tinha um gabarito dizendo "osmolalidade efetiva de 320 mOsm/kg **ou mais**" (≥320), enquanto o canon usa `>320` estrito e as outras 3 menções ao mesmo limiar na própria lâmina já diziam "acima de 320". Corrigido para "acima de 320 mOsm/kg", consistente com o resto da lâmina e com `core/cad_core.js`.
+- **Duplicação visual no Tutor/Marco**: para K &lt;3,5 ou K ≥5,0, o widget mostrava a mesma conduta duas vezes — uma vez como nota completa (vinda de `classifyDkaProfile`) e de novo, com fraseado diferente, na linha-resumo `.tut-computed`/`.ttut-computed`. A linha-resumo (`kTxt`) agora só mostra a banda numérica (`K banda <3,5`), sem repetir a frase de conduta que já aparece completa na nota acima — corrigido nos dois widgets (`perfis/index.html` e `tratado/index.html`).
+
+Verificado: `npm run ci` verde, `npm run build --check` sincronizado, Playwright confirmando os dois widgets sem repetição de texto (testado nas bandas `<3,5` e `≥5,0`) e a questão do Provão sem afirmar "lista ranqueada" como verdadeira, zero erro de console.
+
 ## [2026-07-18] — limpeza final: markdown cru na seção 14 do tratado + auditoria de duplicidade/autorreferência
 
 Fechamento do último item da sequência de robustez pedida pelo usuário.

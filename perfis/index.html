@@ -722,7 +722,7 @@ a.home{color:var(--teal);text-decoration:none}
   const c=r.computed;
   const resolvedTxt=c.isResolvedDka===null?'incerto (sem β-HB sérico)':(c.isResolvedDka?'sim':'não');
   const markerTxt=c.ketoneMarker==='cetonuriaCruzes'?'cetonúria':'β-HB';
-  const kTxt=c.potassiumPlan?` · K banda ${c.potassiumPlan.band.replace('>=','≥')} — insulina ${c.potassiumPlan.insulin==='hold'?'adiada até repor K':'liberada'}`:'';
+  const kTxt=c.potassiumPlan?` · K banda ${c.potassiumPlan.band.replace('>=','≥')}`:'';
   html+=`<div class="tut-computed">AG ${c.ag} · AGc ${c.agc} · Δ/Δ ${c.deltaRatio??'—'}${c.deltaBand?' ('+c.deltaBand+')':''} · Osm efetiva ${c.effectiveOsmolality} · eixo cetônico: ${markerTxt} · critério de CAD fechado: ${c.hasDka?'sim':'não'} · resolução: ${resolvedTxt}${kTxt}</div>`;
   out.innerHTML=html;
  }
