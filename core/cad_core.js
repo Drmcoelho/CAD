@@ -274,7 +274,7 @@ function classifyDkaProfile(input) {
   // kMmolL e opcional na entrada, mas quando fornecido precisa alimentar a
   // mesma banda de conduta usada no resto do projeto (potassiumPlan) — antes
   // o Tutor capturava o valor e nunca o usava, um campo decorativo.
-  const kPlan = input.kMmolL != null && !Number.isNaN(input.kMmolL) ? potassiumPlan(input.kMmolL) : null;
+  const kPlan = isProvided(input.kMmolL) ? potassiumPlan(input.kMmolL) : null;
   const ketoneAxis = (bhb != null && bhb >= POLICY.diagnosis.betaHydroxybutyrateMmolL) || (cruzes != null && cruzes >= POLICY.diagnosis.ketonuriaCruzesAtLeast);
   const acidAxis = ph < POLICY.diagnosis.ph || hco3 < POLICY.diagnosis.bicarbonateMmolL;
   const ketoneNote = hasBhb ? `βHB ${bhb}` : `cetonúria ${cruzes}+`;
