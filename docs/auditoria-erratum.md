@@ -110,3 +110,24 @@ com o `.docx` (conferido via extração de texto do PDF); a **diagramação não
 diferentes). Quando um ambiente com LibreOffice funcional estiver disponível, regenerar
 pelo comando acima é o passo correto para recuperar a fidelidade visual original — não
 há mudança de conteúdo a fazer, só de motor de renderização.
+
+### `.docx` aposentado — fonte renderizada (2026-07-21)
+
+O regime acima (binário `.docx` editado à mão + errata como registro do drift) foi
+**substituído**. O `.docx` era o único artefato do repo fora da diretriz-mãe: números
+digitados à mão, driftáveis — foi exatamente o que esta errata registrou 5×. A partir de
+agora:
+
+- **Fonte de verdade:** `docs/auditoria.src.html` — o texto da auditoria com cada número
+  clínico como token `{{…}}` ligado a `canon/policy.json` + `core/cad_core.js`. A semente
+  veio da extração fiel do `.docx` (338 parágrafos, headings/tabelas/listas preservados),
+  sem retranscrever à mão.
+- **Saídas renderizadas:** `docs/auditoria.html` (auto-contido, determinístico) e
+  `docs/auditoria.pdf` (Chromium/Playwright), geradas por `scripts/build_auditoria.js`
+  (`npm run build:auditoria`). Sem dependência de `pandoc`/`soffice`.
+- **Portão:** `build_auditoria.js --check` (em `npm run check`/`ci`) barra token não
+  resolvido, `.html` fora de sincronia com fonte+canon, número canônico ausente ou forma
+  obsoleta no render — o drift que esta errata registrava agora quebra o build.
+- O `docs/auditoria.docx` foi **removido** do repo (recuperável via histórico git). Os
+  cinco pontos desta errata seguem aplicados na fonte tokenizada; a errata permanece como
+  registro histórico da reconciliação.

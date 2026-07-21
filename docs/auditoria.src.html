@@ -1,0 +1,313 @@
+<!--
+  FONTE DE VERDADE da auditoria (substitui docs/auditoria.docx como fonte editável).
+  Fragmento <body> semantico; os numeros clinicos sao TOKENS {{...}} resolvidos de
+  canon/policy.json + core/cad_core.js por scripts/build_auditoria.js, que renderiza
+  docs/auditoria.html (auto-contido) e docs/auditoria.pdf (Chromium). Nao editar os
+  numeros aqui a mao — mude o canon; o token acompanha. `npm run build:auditoria`
+  regenera; `--check` (em `npm run check`/ci) barra token nao resolvido, forma
+  obsoleta e output fora de sincronia com esta fonte.
+-->
+<p><strong>CAD 360</strong></p>
+<p>Cetoacidose Diabética como Sistema Dinâmico</p>
+<p>Auditoria de projeto + reescrita executável + núcleo pedagógico</p>
+<p>Aprofundamento de projeto de tecnologia em saúde — uso pessoal (não-SaMD)</p>
+<p>Dr. Matheus M. Coelho · CRM-SP 151.318 · Limeira/SP</p>
+<p>Fonte de verdade clínica: consenso ADA/EASD/JBDS/AACE/DTS 2024 (Umpierrez et al., Diabetes Care 2024;47(8):1257–1275).</p>
+<h1><strong>Parte I — Auditoria (Fase 1)</strong></h1>
+<h2><strong>1. Veredito macro</strong></h2>
+<p>Isto não é teatro de planejamento — é o oposto. A fisiologia do plano está correta, é profunda e está ancorada em fonte real (Endotext 2025, JBDS), o avesso do padrão de falha "blog corporativo". O problema não é falta de substância. É que o documento é uma <strong>visão de design forte</strong>, não ainda um plano executável: não tem custo, cronograma, equipe, estratégia de conteúdo, critério de kill nem métrica de desfecho de aprendizagem. Tratar a visão como roadmap leva a compromissos com prazos que não vão bater. A reescrita (Parte II) supre esse andaime; o núcleo pedagógico (Parte III) entrega a profundidade prática pedida.</p>
+<h2><strong>2. Resolução SaMD pelo Eixo 0</strong></h2>
+<p>A skill foi atualizada para decidir o gate SaMD pela <strong>destinação de uso</strong>, não pela função isolada — alinhado à RDC 657/2022 (ANVISA) e ao enquadramento IMDRF, em que dispositivo médico é software colocado no mercado / distribuído a terceiros. CAD 360 é declarado de uso pessoal exclusivo, com o autor como humano-no-loop. Logo o gate regulatório não dispara e o motor de conduta sobrevive à Fase 2.</p>
+<table>
+  <tr><th><strong>NOTA DE USO PESSOAL + TRIPWIRE  </strong><br>A etiqueta "uso pessoal" muda o regime regulatório, não a física do erro. A Tela Conduta segue no projeto sob três condições não-negociáveis:<br>(1) validada contra a fonte de verdade versionada; (2) responsabilidade clínica integral do autor por qualquer saída usada em paciente real; (3) <strong>tripwire</strong> — no instante em que for compartilhada, cedida a outro clínico ou embarcada em fluxo institucional sobre paciente real, reclassifica como SaMD e exige o gate regulatório completo.</th></tr>
+</table>
+<h2><strong>3. Achados estruturais</strong></h2>
+<h3><strong>3.1 Reinvenção da base instalada</strong></h3>
+<p>O achado central: o plano reespecifica o que você já construiu. O motor fisiológico (anionGap, correctedAG, deltaRatio, winter, effectiveOsm, correctedNa) já está escrito no painel de evolução e nas calculadoras do tratado — com o fator condicional 2,4 para glicose &gt; 400 inclusive. O Módulo 10 ("gasometria como filme") ≈ painel de evolução + §3/§10 do tratado. Os Módulos 2 e 4–9 ≈ conteúdo dos §2–9, re-modularizado.</p>
+<p>O que é <strong>genuinamente novo e não-SaMD</strong> se reduz a três coisas: a largura de fenótipo (euglicêmica, HHS, cetose alcoólica/jejum, tóxico, gestante, DRC), o simulador vivo (paciente virtual manipulável), e o loop socrático. ~70% do motor existe; o novo é ~30% (fenótipos + simulação + pedagogia). Reframe correto: CAD 360 não é "construir um motor" — é "estender o motor de 1 fenótipo para N, embrulhado em simulador e casca socrática".</p>
+<h3><strong>3.2 Risco de consistência (específico, fonte-ancorado)</strong></h3>
+<p>O plano cita limiar de potássio como "repor quando K &lt; 5,5" (JBDS). O tratado foi <strong>corrigido esta semana para o consenso 2024</strong> (Umpierrez 2024), que usa K &lt; 5,0, alvo 4–5. Dois números contraditórios sobre a mesma decisão. Ambos existem na literatura — o ponto não é qual é "o certo", é que ferramenta de ensino exige uma fonte de verdade única e versionada, e ela tem que ser a mesma do tratado. Idem para as bandas de Δ/Δ (plano: 0,4/0,8/2,0; painel: referência em 1 e 2). A Parte II fixa a doutrina.</p>
+<h2><strong>4. Lacunas para virar plano</strong></h2>
+<ul>
+  <li><strong>Doutrina de fonte de verdade</strong> — um consenso, versionado, para nenhum módulo contradizer outro nem o tratado.</li>
+  <li><strong>Métrica de desfecho de aprendizagem</strong> — é ferramenta educacional sem definição de "funcionou" (pré/pós-teste de reconhecimento de fenótipo; tempo até classificação correta).</li>
+  <li><strong>Revisor clínico segundo + design instrucional</strong> — peer-review em escala de 12 módulos não fecha sozinho.</li>
+  <li><strong>Origem dos casos</strong> — sintéticos (limpo) vs. reais anonimizados (reabre LGPD + firewall). Recomendação: sintéticos para ensino.</li>
+  <li><strong>Critério de kill e banda real</strong> — quando abandonar; e o reconhecimento de que você é cuidador principal do seu pai, com carga assistencial e jurídica em paralelo.</li>
+</ul>
+<h2><strong>5. Caminho assumido (declarado)</strong></h2>
+<p>Você não escolheu 1/2/3 explicitamente, mas o pedido — "robustíssimo, repleto de prática, atividades, exercícios, raciocínio socrático, didática aplicada a projetos" — é sinal direto de <strong>escopo educacional completo sobre a base instalada</strong>. A skill manda assumir e declarar. Assumo o </p>
+<p><strong>Caminho 2 — Consolidação</strong>: CAD 360 como sistema educacional vivo construído sobre o tratado + painel de evolução, com a dimensão de fenótipo como expansão. Preserva a ambição pedagógica, reaproveita a base (movimento estrutural correto) e mantém tudo não-SaMD/uso pessoal. Se você quisesse o Caminho 1 (corte duro) ou 3 (tese quantitativa), redirecione — a Parte II inteira muda.</p>
+<h1><strong>Parte II — Reescrita executável (Fase 2)</strong></h1>
+<p>CAD 360, reescrito sob o Caminho 2, seguindo as 12 seções obrigatórias da estrutura de reescrita. Uso pessoal; fonte de verdade = consenso 2024.</p>
+<h2><strong>1. Tese central</strong></h2>
+<table>
+  <tr><th>Atlas-simulador interativo, offline e de uso pessoal, que ensina o autor a reconhecer o <strong>estado metabólico real</strong> por trás da CAD em múltiplos fenótipos (clássica, euglicêmica, pré-CAD, HHS-overlap, hiperclorêmica pós-tratamento, gestante, DRC, cetose alcoólica/jejum, tóxico), construído sobre o motor fisiológico já existente (tratado + painel de evolução), com loop socrático, calculadoras determinísticas interpretadas pelo autor, e séries temporais como casos — entregando reconhecimento de fenótipo e leitura de tendência, não recitação de protocolo.</th></tr>
+</table>
+<h2><strong>2. Gap real que resolve</strong></h2>
+<p><strong>Existe</strong> material farto de CAD (UpToDate, Endotext, JBDS, o próprio tratado §0–12) e simuladores comerciais (Body Interact, SimMan). <strong>Não basta</strong> porque (a) todo o material canônico é mono-fenótipo-profundo ou multi-fenótipo-raso, e quase nenhum trata CAD como sistema dinâmico no tempo; (b) os simuladores comerciais são caros, genéricos e não calibrados para UPA/SUS; (c) nenhum acopla a leitura de série temporal (filme, não foto) ao raciocínio socrático sobre fenótipo. <strong>Difere</strong> por ser a extensão multi-fenótipo do motor que o autor já validou, com a tendência temporal como eixo central e o cloro/Δ-Δ como variável ativa de ensino.</p>
+<h2><strong>3. Alavancagem de expertise e base instalada</strong></h2>
+<p>Reaproveita (não reconstrói):</p>
+<ul>
+  <li><strong>Motor fisiológico</strong> — AG, AGc, Δ/Δ, Winter, Na corrigido, osmolaridade já implementados no painel de evolução e nas 4 calculadoras do tratado. Vira o core compartilhado.</li>
+  <li><strong>Painel de evolução (12 gráficos + stepper + narrativa por ponto)</strong> — vira o "case-player" de série temporal, parametrizado por fenótipo.</li>
+  <li><strong>Tratado §0–12</strong> — teoria, mermaid, banco de questões: vira a camada de conteúdo dos módulos.</li>
+  <li><strong>Arquitetura modular do CVC Academy v17 / Heuristicina</strong> — componentes de quiz, navegação, filtro de camadas, persistência local.</li>
+</ul>
+<p>Diferencial do executor: experiência clínica direta em UPA/UTI calibra o realismo dos fenótipos e das séries — não substitui revisão por par, calibra o ponto de partida.</p>
+<h2><strong>4. Escopo MVP honesto</strong></h2>
+<h3><strong>Dentro do MVP</strong></h3>
+<ul>
+  <li>Core fisiológico compartilhado (extraído do painel/tratado, fonte de verdade única).</li>
+  <li>Galeria de fenótipos como atlas estático (a tabela do Módulo 2), 8 fenótipos.</li>
+  <li>Dois módulos socráticos completos e jogáveis: euglicêmica e cloro/pH-que-não-fecha.</li>
+  <li>Case-player de série temporal (reuso do painel) com 2 séries sintéticas + 1 anonimizada de ensino.</li>
+  <li>Banco de exercícios de cálculo com gabarito comentado.</li>
+  <li>Tela Conduta como camada didática (uso pessoal, com a Nota+tripwire embutida na interface).</li>
+</ul>
+<h3><strong>Fora do MVP (deliberadamente)</strong></h3>
+<ul>
+  <li>Os 12 módulos completos (V2, expandir a partir do template).</li>
+  <li>Simulação quantitativa que integra no tempo — RK4 (V3 / Caminho 3 se virar tese).</li>
+  <li>Qualquer distribuição a terceiros (nunca, por design — cruza o tripwire SaMD).</li>
+  <li>Integração com prontuário ou input de dado vivo de paciente (nunca, por design).</li>
+</ul>
+<h2><strong>5. Cronograma com marcos e critérios de saída</strong></h2>
+<table>
+  <tr><th><strong>MARCO 1 — Core + atlas estático  </strong><br>Saída: o motor fisiológico extraído como módulo único compartilhado; galeria de 8 fenótipos navegável; fonte de verdade fixada.<br>Critério de saída: as 6 calculadoras batem com o painel de evolução em 3 séries de teste; nenhum número contradiz o tratado.<br>Critério de kill: se extrair o core do painel exigir reescrever o motor do zero, o MVP vira "tratado + painel já bastam" e CAD 360 é arquivado.</th></tr>
+</table>
+<table>
+  <tr><th><strong>MARCO 2 — Dois módulos socráticos jogáveis  </strong><br>Saída: euglicêmica e cloro completos (escada socrática + exercícios + mini-sim + atividade).<br>Critério de saída: o autor (ou um par) joga end-to-end sem travar; os exercícios têm gabarito que fecha; a mini-sim move a fisiologia corretamente.<br>Critério de kill: se cada módulo novo exigir refatorar a arquitetura, o template está errado — repensar antes de seguir.</th></tr>
+</table>
+<table>
+  <tr><th><strong>MARCO 3 — Case-player + banco  </strong><br>Saída: série temporal jogável (reuso do painel) parametrizada por fenótipo; banco de cálculo com gabarito.<br>Critério de saída: trocar a série de entrada não quebra o player; exercícios novos entram em &lt; 1 dia cada.<br>Critério de kill: se adicionar fenótipo exige tocar no core a cada vez, a abstração falhou.</th></tr>
+</table>
+<p>Datas calendário só depois dos marcos — e calibradas pela banda real (ver §8).</p>
+<h2><strong>6. Estratégia de dados</strong></h2>
+<p>Não depende de dados clínicos reais para funcionar. Casos são <strong>sintéticos ou baseados em literatura pública</strong>; séries de ensino são preferencialmente sintéticas. Onde uma série real for usada (ex.: a série de 6 pontos já de-identificada do painel), a regra é: de-identificação verificada (sem nome, sem MRN, sem datas que reidentifiquem), uso restrito a ensino do próprio autor, e custódia local offline. Isso mantém o projeto fora de LGPD-como-controlador-de-dados e fora do firewall SaMD. Plano B se quiser zerar risco: gerar todas as séries sinteticamente a partir do motor.</p>
+<h2><strong>7. Equipe real</strong></h2>
+<table>
+  <tr><th><strong>Função</strong></th><th><strong>Quem</strong></th><th><strong>Risco se vago</strong></th></tr>
+  <tr><td>Líder técnico/clínico</td><td>Matheus</td><td>—</td></tr>
+  <tr><td>Implementação</td><td>Matheus</td><td>Acúmulo: a mesma pessoa que projeta valida — viés de criação</td></tr>
+  <tr><td>Validação clínica</td><td>Vago</td><td>Erros didáticos não percebidos. Mitigação: 1 colega revisa os 2 módulos antes do Marco 3; sem isso, não passa</td></tr>
+  <tr><td>Design instrucional</td><td>Vago (Matheus acumula)</td><td>Módulos podem virar "PDF bonito". Mitigação: o template socrático força a estrutura</td></tr>
+  <tr><td>Sustentação pós-MVP</td><td>Matheus</td><td>Projeto zumbi se a manutenção competir com carga assistencial — ver critério de kill</td></tr>
+</table>
+<h2><strong>8. Sustentação e financiamento</strong></h2>
+<p>Custo direto ≈ zero (offline, single-file, GitHub Pages). O custo é de oportunidade: <strong>banda do executor</strong>. Realidade declarada: cuidador principal do pai (pós-cistectomia, durvalumab), carga de UPA/UTI, frente jurídica ativa. Horas/semana realistas para CAD 360: baixas e intermitentes. Implicação honesta: o cronograma é por marco, não por calendário, e o projeto tem que sobreviver a semanas de banda zero sem morrer — o que o desenho single-file offline permite. Se exigir sprint contínuo, está mal dimensionado.</p>
+<h2><strong>9. Riscos específicos</strong></h2>
+<table>
+  <tr><th><strong>Risco</strong></th><th><strong>P / Impacto</strong></th><th><strong>Mitigação</strong></th></tr>
+  <tr><td>Inconsistência de limiares entre módulos e com o tratado (K, Δ/Δ)</td><td>Alta / Alto</td><td>Fonte de verdade única versionada no core; teste que compara saídas com o tratado</td></tr>
+  <tr><td>Escopo creep: voltar a querer os 12 módulos de uma vez</td><td>Alta / Médio</td><td>Lista "fora do MVP" como contrato; só expande via template após Marco 2</td></tr>
+  <tr><td>Viés de criação: autor não enxerga erro didático próprio</td><td>Média / Alto</td><td>Revisão por 1 par antes do Marco 3 (gate explícito)</td></tr>
+  <tr><td>Tela Conduta deslizar para uso em paciente real de terceiro</td><td>Baixa / Crítico</td><td>Tripwire na interface + Nota de uso pessoal visível; sem input de dado vivo por design</td></tr>
+  <tr><td>Projeto zumbi por banda intermitente</td><td>Média / Médio</td><td>Critério de kill temporal (ver §11); desenho que tolera pausas longas</td></tr>
+</table>
+<h2><strong>10. Métricas de validação</strong></h2>
+<h3><strong>Técnicas (verificáveis no MVP)</strong></h3>
+<ul>
+  <li>As 6 calculadoras batem com o painel de evolução em 3 séries de teste (erro 0).</li>
+  <li>Nenhuma saída contradiz a fonte de verdade do tratado.</li>
+  <li>Módulos rodam offline, sem dependência externa, em 3 sessões consecutivas.</li>
+</ul>
+<h3><strong>De desfecho de aprendizagem (o que faltava)</strong></h3>
+<ul>
+  <li><strong>Reconhecimento de fenótipo</strong>: pré/pós-teste com N casos cegos — % de classificação correta sobe (alvo definido contra o baseline do próprio autor, não número redondo).</li>
+  <li><strong>Leitura de tendência</strong>: dado um filme de série, identificar o ponto onde "a doença trocou de mãos" (cetose → cloro) — acerto e tempo.</li>
+  <li><strong>Decisão calibrada</strong>: em casos de euglicêmica, taxa de "deixaria sem insulina por causa do destro" cai para zero pós-módulo.</li>
+</ul>
+<h2><strong>11. Critério de kill</strong></h2>
+<table>
+  <tr><th>CAD 360 é abandonado (e dobra de volta como capítulo interativo do tratado) se qualquer um:<br>Ao final do Marco 2, o módulo socrático não ensina melhor que o tratado num teste pequeno com um par.<br>Extrair o core do painel exige reescrever o motor do zero (Marco 1 falha).<br>Seis meses de banda intermitente sem chegar ao Marco 2 — o projeto não cabe na vida real do executor agora.</th></tr>
+</table>
+<h2><strong>12. Próximos passos concretos (próximas 2 semanas)</strong></h2>
+<ul>
+  <li>Extrair o motor fisiológico do painel de evolução para um arquivo único core.js (6 funções), com um teste que roda as 3 séries e compara com o tratado.</li>
+  <li>Fixar a doutrina de fonte de verdade (Apêndice A) como comentário-cabeçalho do core.js — K&lt;{{k.replace}}, bicarbonato pH&lt;{{bicarb.consider}}, fosfato &lt;{{phos}} mmol/L sintomático, Δ/Δ em {{ddr.low}} e {{ddr.high}}, Na {{na.factor}}/{{na.factorSevere}}.</li>
+  <li>Escrever o Módulo "euglicêmica" inteiro (Parte III já traz o conteúdo) como HTML jogável, reusando o componente de quiz do CVC Academy.</li>
+  <li>Converter a série de 6 pontos já de-identificada no primeiro caso do case-player.</li>
+  <li>Agendar 30 min com 1 colega para revisar os dois módulos antes do Marco 3.</li>
+</ul>
+<h1><strong>Parte III — Núcleo pedagógico</strong></h1>
+<p>A profundidade prática pedida: o padrão de módulo, dois módulos inteiros trabalhados (escada socrática + fisiologia + equação + armadilha + pérola + mini-simulação + exercícios com gabarito + atividade por projeto), um banco de cálculo com gabarito, e o desenho da didática aplicada a projeto. Tudo sob a fonte de verdade do consenso 2024.</p>
+<h2><strong>Padrão de módulo (template dos 10 tempos)</strong></h2>
+<p>Cada módulo de CAD 360 segue a mesma sequência. O template é o contrato que impede o módulo de virar PDF bonito:</p>
+<ul>
+  <li>Caso de abertura — mini-história realista, sintética.</li>
+  <li>Pergunta socrática inicial — "o que você trataria primeiro e por quê?"</li>
+  <li>Escada socrática — perguntas que sobem em dificuldade, cada uma destravando a próxima.</li>
+  <li>Painel fisiológico — gráfico/mini-sim interativo (reuso do painel).</li>
+  <li>Equação central — uma fórmula por vez, com interpretação.</li>
+  <li>Armadilha — o erro comum, nomeado.</li>
+  <li>Pérola — a heurística que fica.</li>
+  <li>Mini-simulação — mexer uma variável e ver o sistema responder.</li>
+  <li>Exercícios de cálculo — com gabarito comentado, não resposta rasa.</li>
+  <li>Atividade por projeto — o aluno produz um artefato (cartão de fenótipo, leitura de série, handoff de uma linha).</li>
+</ul>
+<h2><strong>Módulo trabalhado A — CAD euglicêmica (o destro que mente)</strong></h2>
+<table>
+  <tr><th><strong>CASO  </strong><br>Mulher, 62 anos, DM2 em empagliflozina + metformina. Há 3 dias com infecção urinária e baixa ingesta. Chega prostrada, respiração um pouco profunda. <strong>Destro capilar: 164 mg/dL.</strong> A enfermeira comenta: "a glicose tá boa".</th></tr>
+</table>
+<h3><strong>Escada socrática</strong></h3>
+<p><strong>Q1.</strong> Destro 164. Você descartou CAD? — Não. O destro diz a glicemia daquele instante. Não diz cetose, acidose, potássio corporal, tendência, nem se pode iniciar insulina.</p>
+<p><strong>Q2.</strong> Que exame abre ou fecha o diagnóstico? — β-hidroxibutirato + gasometria. A cetose é a doença; a glicose é barulho.</p>
+<p><strong>Q3.</strong> Gaso: pH 7,24 · HCO₃ 10 · βHB 5,8 · Na 137 · Cl 101 · K 4,1 · lactato 1,2. Há CAD? — Sim. βHB ≥ 3 + pH &lt; 7,3 + DM = CAD. Glicose modesta (164) = fenótipo euglicêmico.</p>
+<p><strong>Q4.</strong> Por que a glicose está "normal" com cetogênese desenfreada? — SGLT2 → glicosúria contínua escoa glicose pelo rim; somado à baixa ingesta, a glicemia fica modesta enquanto a lipólise/cetogênese roda solta. A glicose baixa esconde a doença.</p>
+<p><strong>Q5.</strong> Posso deixar sem insulina porque a glicose é 164? — Não. A doença é cetogênese; sem insulina ela não fecha. Glicose normal não significa "não dar insulina" — significa "dar insulina com glicose".</p>
+<p><strong>Q6.</strong> Como dou insulina sem causar hipoglicemia? — Dextrose IV junto desde o início. A glicose é o cinto de segurança que permite manter a insulina para fechar a cetogênese.</p>
+<p><strong>Q7.</strong> O que mais é obrigatório? — Suspender o SGLT2. Enquanto ele roda, perpetua a glicosúria e a cetogênese — é o motor do quadro.</p>
+<h3><strong>Equação central</strong></h3>
+<p>O diagnóstico fecha sem a glicose: βHB ≥ {{dx.bhb}} mmol/L + pH &lt; {{dx.ph}} e/ou HCO₃ &lt; {{dx.hco3}}. Confirme que não é HHS pela osmolaridade efetiva: Osm = 2·Na + glicose/18 = 2·137 + 164/18 = 274 + 9,1 = 283 → normal. É CAD, não HHS.</p>
+<table>
+  <tr><th><strong>ARMADILHA  </strong><br>Confiar no destro e rotular "não é CAD, a glicose está boa". Na euglicêmica, esse é o erro que mata o diagnóstico — e o SGLT2 é o gatilho mais comum (e até ~30% das CAD na gestação são euglicêmicas).</th></tr>
+</table>
+<table>
+  <tr><th><strong>PÉROLA  </strong><br>Na euglicêmica, o destro é o mentiroso da sala; a cetona é a testemunha. A glicose é barulhenta, a cetona é a doença.</th></tr>
+</table>
+<h3><strong>Mini-simulação (especificação)</strong></h3>
+<p>Botões: [manter SGLT2 / suspender] e [só volume / insulina + dextrose]. O aluno vê βHB e o gap corrigido. Só caem quando a insulina liga; com "só volume", diluem mas não fecham — e o cloro começa a subir. Com SGLT2 mantido, o βHB resiste.</p>
+<h3><strong>Exercício com gabarito</strong></h3>
+<table>
+  <tr><th><strong>EXERCÍCIO A1</strong><br>Diabética, glicose 138 mg/dL, pH 7,22, HCO₃ 9, Na 136, Cl 101, βHB 5,8, K 4,1, lactato 1,2; usa dapagliflozina.<br>Há CAD?<br>É euglicêmica?<br>Posso deixar sem insulina porque a glicose é 138?<br>Qual o fluido inicial?<br>Quando entra a glicose?<br>Qual o risco de tratar só com volume?</th></tr>
+</table>
+<table>
+  <tr><th><strong>GABARITO COMENTADO  </strong><br>Cálculo: AG = 136 − (101 + 9) = 26. AGc (alb 4,0) = 26. Δ/Δ = (26 − 12)/(24 − 9) = 14/15 = 0,93 → AGMA limítrofe (Δ/Δ &lt; 1: já há componente hiperclorêmico; não chamar de pura sem olhar Cl⁻/tendência). Winter: 1,5·9 + 8 = 21,5 ± 2.<br>(a) Sim — βHB 5,8 + pH 7,22 fecham CAD. (b) Sim — glicose 138 = euglicêmica. (c) Não — trata-se a cetogênese, não a glicose. (d) Cristaloide balanceado (Ringer) por volume — evita alimentar a futura cauda hiperclorêmica. (e) Dextrose IV desde já: a glicose já é 138 e vai cair com a insulina; é o cinto de segurança. Insulina 0,1 U/kg/h porque K 4,1 ≥ 3,5. (f) Só volume dilui mas não desliga a cetogênese — o gap não fecha, e o SF em volume ainda fabrica acidose hiperclorêmica que mascara a evolução. E sem suspender a dapagliflozina, o motor continua ligado.</th></tr>
+</table>
+<h3><strong>Atividade por projeto</strong></h3>
+<p>Produza um <strong>cartão de fenótipo "euglicêmica"</strong> para o atlas: preencha a linha da tabela (glicose / cetona / pH-HCO₃ / gap / risco principal) e escreva a frase-armadilha de uma linha que um plantonista precisa ler. Critério de aceite: a frase tem que impedir o erro do destro sem citar protocolo.</p>
+<h2><strong>Módulo trabalhado B — O cloro e o "pH que não fecha"</strong></h2>
+<table>
+  <tr><th><strong>CASO  </strong><br>48 h de CAD em tratamento. O gap corrigido caiu de 21 para 16 — a cetose está saindo. Mas o pH segue 7,29 e o HCO₃ preso em ~12. O plantonista que assume pergunta: "por que não melhora? aumento a insulina?"</th></tr>
+</table>
+<h3><strong>Escada socrática</strong></h3>
+<p><strong>Q1.</strong> O gap corrigido caiu. A cetose está resolvendo? — Sim. Gap caindo = cetona saindo do sangue.</p>
+<p><strong>Q2.</strong> Se a cetose sai, por que o HCO₃ não sobe e o pH não fecha? — Porque a acidose trocou de natureza: virou hiperclorêmica de gap normal. A cadeira que era da cetona agora é do cloro.</p>
+<p><strong>Q3.</strong> De onde veio o cloro? — Do SF 0,9% em grande volume — Cl 154 mmol/L, muito acima do plasma. A ressuscitação fabricou a acidose tardia.</p>
+<p><strong>Q4.</strong> Como provo isso no número? — O par diagnóstico: Δ/Δ caindo (de 0,88 para 0,40 = metade da acidemia agora é gap normal) enquanto o Cl sobe (99 → 106). Os dois juntos = cauda hiperclorêmica.</p>
+<p><strong>Q5.</strong> Insulina conserta esse pH? — Não. Insulina fecha cetogênese; não excreta cloro. Quem resolve o cloro é o rim, com tempo. Empilhar insulina aqui só reabre o dente-de-serra (hipoglicemia, hipocalemia).</p>
+<p><strong>Q6.</strong> Então o que fazer? — Parar de alimentar cloro (trocar SF por balanceado), dar tempo ao rim, e NÃO interpretar o HCO₃ baixo tardio como cetose persistente.</p>
+<h3><strong>Equação central</strong></h3>
+<p>Δ/Δ = (AGc − 12) / (24 − HCO₃). Convenção de CAD 360 (fonte de verdade, consistente com o painel): </p>
+<table>
+  <tr><th><strong>Δ/Δ</strong></th><th><strong>Leitura</strong></th></tr>
+  <tr><td>&lt; 1</td><td>acidose hiperclorêmica / gap normal ganhando peso (cauda do tratamento ou perda de HCO₃)</td></tr>
+  <tr><td>1 – 2</td><td>AGMA de gap elevado "mais pura"</td></tr>
+  <tr><td>&gt; 2</td><td>alcalose metabólica associada ou HCO₃ previamente alto</td></tr>
+</table>
+<table>
+  <tr><th><strong>ARMADILHA  </strong><br>Ler o HCO₃ baixo tardio como "ainda em CAD" e responder com mais insulina / manter jejum / repetir bolus. Isso reabre o dente-de-serra iatrogênico e trata um problema (cloro) com a ferramenta errada (insulina).</th></tr>
+</table>
+<table>
+  <tr><th><strong>PÉROLA  </strong><br>A cetose saiu; o cloro ficou sentado na cadeira dela. pH pode melhorar antes da doença resolver; o HCO₃ pode continuar baixo depois dela ter resolvido.</th></tr>
+</table>
+<h3><strong>Mini-simulação (especificação)</strong></h3>
+<p>Escolha do fluido no início: [SF 0,9% / Ringer]. Rode a série no tempo e veja a cauda hiperclorêmica crescer (SF) ou não (Ringer); observe Δ/Δ e Cl divergirem no SF. Ensina, em um clique, por que balanceado resolve mais rápido.</p>
+<h3><strong>Exercício com gabarito (dataset de série real, de-identificada)</strong></h3>
+<table>
+  <tr><th><strong>EXERCÍCIO B1</strong><br>Ponto tardio de uma série real: Na 135,9 · Cl 105 · HCO₃ 13,6 · glicose 133 · albumina 4,5. Antes (12 h): Cl 99 · HCO₃ 13,4 · gap corrigido 21,3 · Δ/Δ 0,88.<br>Calcule AG, AGc e Δ/Δ no ponto tardio.<br>A acidose residual é cetose ou cloro?<br>A conduta é mais insulina ou outra coisa?</th></tr>
+</table>
+<table>
+  <tr><th><strong>GABARITO COMENTADO  </strong><br>Cálculo: AG = 135,9 − (105 + 13,6) = 17,3. AGc = 17,3 + 2,5·(4,0 − 4,5) = 16,05 ≈ 16,1. Δ/Δ = (16,1 − 12)/(24 − 13,6) = 4,1/10,4 = 0,39.<br>(a) AGc 16,1; Δ/Δ 0,39. (b) Comparando com o ponto de 12 h (Δ/Δ 0,88, Cl 99): o Δ/Δ desabou e o Cl subiu 99 → 105. Metade da acidemia agora é cloro, não cetona — cauda hiperclorêmica crescendo. (c) Não é mais insulina. É trocar SF por balanceado e dar tempo ao rim; a cetose já está quase resolvida (gap caiu de 21 para 16). Insulina aqui não toca nesse pH e só arrisca hipoglicemia/hipocalemia.</th></tr>
+</table>
+<h3><strong>Atividade por projeto</strong></h3>
+<p>Pegue uma série temporal e produza a <strong>leitura do ponto de virada</strong>: identifique o ponto onde "a doença trocou de mãos" (cetose → cloro) plotando AGc, Cl e HCO₃ juntos, e escreva o <strong>handoff de uma linha</strong> que impede o próximo plantonista de empilhar insulina. Critério de aceite: a linha nomeia o cloro e desautoriza o reflexo da insulina, sem jargão.</p>
+<h2><strong>Banco de exercícios de cálculo (com gabarito)</strong></h2>
+<p>Seis itens, cada um ensinando uma lição distinta. Faça antes de ler o gabarito.</p>
+<table>
+  <tr><th><strong>B-1 · AG simples</strong><br>Na 140, Cl 104, HCO₃ 10. Calcule o ânion-gap.</th></tr>
+</table>
+<table>
+  <tr><th><strong>GABARITO COMENTADO  </strong><br>AG = 140 − (104 + 10) = 26. Lição: gap alto = ácido não medido (cetona/lactato). Ponto de partida, não diagnóstico.</th></tr>
+</table>
+<table>
+  <tr><th><strong>B-2 · AG corrigido p/ albumina</strong><br>AG = 26, albumina 2,5 g/dL. Calcule o AGc.</th></tr>
+</table>
+<table>
+  <tr><th><strong>GABARITO COMENTADO  </strong><br>AGc = 26 + 2,5·(4,0 − 2,5) = 26 + 3,75 = 29,8. Lição: hipoalbuminemia ESCONDE gap — cada 1 g/dL abaixo de 4 mascara ~2,5 de gap. Sem corrigir, você subestima a cetose.</th></tr>
+</table>
+<table>
+  <tr><th><strong>B-3 · Δ/Δ</strong><br>AGc = 28, HCO₃ = 8. Calcule e interprete.</th></tr>
+</table>
+<table>
+  <tr><th><strong>GABARITO COMENTADO  </strong><br>Δ/Δ = (28 − 12)/(24 − 8) = 16/16 = 1,0 → AGMA de gap elevado "pura". Lição: 1 é a fronteira; abaixo entra componente hiperclorêmico.</th></tr>
+</table>
+<table>
+  <tr><th><strong>B-4 · Winter</strong><br>HCO₃ = 6, pCO₂ medido = 30. A compensação está adequada?</th></tr>
+</table>
+<table>
+  <tr><th><strong>GABARITO COMENTADO  </strong><br>Esperado = 1,5·6 + 8 = 17 ± 2 (15–19). Medido 30 &gt; 19 → o pulmão NÃO baixou o CO₂ o quanto deveria = acidose respiratória concomitante (pulmão cansando/depressão do drive). Lição: Winter detecta o distúrbio respiratório escondido.</th></tr>
+</table>
+<table>
+  <tr><th><strong>B-5 · Na corrigido</strong><br>Na medido 130, glicose 600. Calcule (escolha o fator).</th></tr>
+</table>
+<table>
+  <tr><th><strong>GABARITO COMENTADO  </strong><br>Glicose &gt; 400 → fator 2,4. NaC = 130 + 2,4·(600 − 100)/100 = 130 + 12 = 142. Lição: a hiperglicemia mascara hipernatremia; o "130" tranquilizador é, na verdade, 142 — território de déficit de água livre / HHS-overlap.</th></tr>
+</table>
+<table>
+  <tr><th><strong>B-6 · Osmolaridade efetiva</strong><br>Na medido 130 (Na corrigido 142, do exercício anterior), glicose 600. Calcule a osm efetiva e interprete.</th></tr>
+</table>
+<table>
+  <tr><th><strong>GABARITO COMENTADO  </strong><br>Osm efetiva = 2·130 (Na MEDIDO) + 600/18 = 260 + 33,3 = {{osm.b6}} — ainda não cruza o limiar HHS (&gt;{{hhs}}). O Na corrigido (142) revela o déficit de água livre emergente, mas não entra na fórmula de osm efetiva — usá-lo dupla-conta a glicose. Lição: velocidade de queda osmolar e o Na corrigido importam tanto quanto o gap, mesmo sem cruzar {{hhs}}.</th></tr>
+</table>
+<h2><strong>Didática aplicada a projeto — o aluno constrói o atlas</strong></h2>
+<p>O princípio: o aluno não "estuda os fenótipos" — ele <strong>produz</strong> o atlas, e produzir força o raciocínio. Cada fenótipo vira um entregável pequeno e verificável.</p>
+<h3><strong>Projeto 1 — Galeria de fenótipos (preencher e defender)</strong></h3>
+<p>Dada a tabela esqueleto, o aluno preenche cada linha e, para cada fenótipo, escreve a "frase-armadilha" e o "primeiro movimento". Critério de aceite por linha: a frase-armadilha impede um erro real de plantão.</p>
+<table>
+  <tr><th><strong>Fenótipo</strong></th><th><strong>Glicose</strong></th><th><strong>Cetona</strong></th><th><strong>pH/HCO₃</strong></th><th><strong>Risco principal</strong></th></tr>
+  <tr><td>CAD clássica</td><td>alta</td><td>alta</td><td>acidose</td><td>subestimar K e volume</td></tr>
+  <tr><td>CAD euglicêmica</td><td>normal/modesta</td><td>alta</td><td>acidose</td><td>perder o dx pelo destro</td></tr>
+  <tr><td>Pré-CAD / cetose</td><td>variável</td><td>alta/subindo</td><td>sem acidose ainda</td><td>esperar a acidose para agir</td></tr>
+  <tr><td>CAD parcialmente tratada</td><td>menor</td><td>ainda alta</td><td>pH melhorando</td><td>desligar insulina cedo</td></tr>
+  <tr><td>CAD + HHS</td><td>muito alta</td><td>alta</td><td>acidose</td><td>osmolaridade e Na corrigido</td></tr>
+  <tr><td>CAD hiperclorêmica (tardia)</td><td>controlada</td><td>baixa/ausente</td><td>pH preso</td><td>tratar cloro com insulina</td></tr>
+  <tr><td>CAD + sepse/lactato</td><td>variável</td><td>alta</td><td>mista</td><td>atribuir tudo à cetose</td></tr>
+  <tr><td>Cetose alcoólica/jejum</td><td>baixa/normal</td><td>alta</td><td>variável</td><td>confundir com CAD diabética</td></tr>
+</table>
+<h3><strong>Projeto 2 — Ler um filme</strong></h3>
+<p>O aluno recebe uma série temporal crua (6 pontos) e produz: (1) o derivado de cada ponto (AGc, Δ/Δ, Winter), (2) a narrativa de uma linha por ponto ("o que aconteceu"), (3) o handoff final. É exatamente o que o painel de evolução já faz — aqui o aluno faz à mão primeiro, depois confere com o painel. Aprender a fórmula construindo o gráfico.</p>
+<h3><strong>Projeto 3 — A lei operacional</strong></h3>
+<p>Ao final, o aluno escreve as "leis operacionais" com suas palavras e defende cada uma com um caso da galeria. As doze que CAD 360 ensina:</p>
+<ul>
+  <li>CAD é doença de cetona, não de glicose.</li>
+  <li>Glicose baixa/modesta não exclui CAD.</li>
+  <li>K normal/alto não exclui déficit corporal total.</li>
+  <li>Insulina fecha cetogênese, mas mata se o K estiver baixo (&lt; {{k.hold}} → adiar).</li>
+  <li>Glicose IV na CAD é ferramenta para permitir insulina, não só "tratar hipoglicemia".</li>
+  <li>Cloro alto mantém a acidose depois que a cetose resolveu.</li>
+  <li>Bicarbonato é exceção extrema (consenso: pH &lt; {{bicarb.consider}}; sem benefício acima de {{bicarb.noBenefit}}), não reflexo.</li>
+  <li>Urina cetônica atrasa e engana (βHB vs acetoacetato).</li>
+  <li>Gasometria isolada é foto; série temporal é filme.</li>
+  <li>Idoso/renal/cardíaco não recebe volume "automático".</li>
+  <li>Jejum não significa ausência de glicose IV.</li>
+  <li>Resolução laboratorial não é alta clínica automática.</li>
+</ul>
+<h1><strong>Apêndice</strong></h1>
+<h2><strong>A. Doutrina de fonte de verdade (consenso 2024)</strong></h2>
+<p>Umpierrez et al., Diabetes Care 2024;47(8):1257–1275 (ADA/EASD/JBDS/AACE/DTS). Um número, uma fonte — para todo módulo, calculadora e o tratado.</p>
+<table>
+  <tr><th><strong>Decisão</strong></th><th><strong>Valor canônico (2024)</strong></th></tr>
+  <tr><td>Diagnóstico</td><td>glicose ≥ {{dx.glucose}} (ou DM) + βHB ≥ {{dx.bhb}} mmol/L (ou cetonúria ≥ {{dx.ketonuria}}+) + pH &lt; {{dx.ph}} e/ou HCO₃ &lt; {{dx.hco3}}. AG removido dos critérios formais.</td></tr>
+  <tr><td>Potássio</td><td>repor quando &lt; {{k.replace}} (manter {{k.targetLow}}–{{k.targetHigh}}). K &lt; {{k.hold}} → repor 10 mmol/h e ADIAR insulina até ≥ {{k.hold}}.</td></tr>
+  <tr><td>Bicarbonato</td><td>somente pH &lt; {{bicarb.consider}} (consenso); sem benefício demonstrado acima de {{bicarb.noBenefit}} — abaixo disso, decisão de UTI, não rotina.</td></tr>
+  <tr><td>Fosfato</td><td>somente &lt; 1,0 mmol/L (~3,1 mg/dL) + sintomático.</td></tr>
+  <tr><td>Insulina</td><td>0,1 U/kg/h IV; reduzir a 0,05 quando glicose &lt; 250 e adicionar dextrose; manter até resolução.</td></tr>
+  <tr><td>Resolução</td><td>βHB &lt; {{res.bhb}} E (pH ≥ {{res.ph}} OU HCO₃ ≥ {{res.hco3}}); glicose &lt; {{res.glucoseAdjunct}} é adjunta, não critério primário.</td></tr>
+  <tr><td>Na corrigido</td><td>fator {{na.factor}} ({{na.factorSevere}} se glicose &gt; {{na.severeAbove}}).</td></tr>
+  <tr><td>Δ/Δ</td><td>referência em {{ddr.low}} e {{ddr.high}} (consistente com o painel).</td></tr>
+</table>
+<table>
+  <tr><th><strong>LEMBRETE DE CONSISTÊNCIA  </strong><br>O plano original citava K &lt; 5,5 (JBDS). CAD 360 usa K &lt; 5,0 (2024) para não contradizer o tratado já corrigido. Qualquer módulo que divergir disto está errado por definição.</th></tr>
+</table>
+<h2><strong>B. Critérios de reabertura do plano</strong></h2>
+<ul>
+  <li>Sai uma diretriz nova (pós-2024) que mude um limiar canônico → reabrir o Apêndice A e propagar.</li>
+  <li>A intenção muda de uso pessoal para distribuição → o tripwire dispara: reabrir a triagem SaMD pelo Eixo 0 → (b), análise regulatória dedicada antes de qualquer release.</li>
+  <li>Ao final do Marco 2 o módulo não supera o tratado num teste com par → executar o critério de kill (dobrar de volta como capítulo do tratado).</li>
+</ul>
+<h2><strong>C. Nota de uso pessoal (aplicada)</strong></h2>
+<table>
+  <tr><th>CAD 360 é ferramenta de uso pessoal do autor, que é o humano-no-loop de toda decisão. Não é dispositivo colocado no mercado e, nesse regime, fica fora de SaMD. Três condições permanecem válidas enquanto durar esse regime:<br>Validação contra a fonte de verdade do Apêndice A.<br>Responsabilidade clínica integral do autor por qualquer saída usada em paciente real.<br>Tripwire: compartilhar, ceder a outro clínico ou embarcar em fluxo institucional sobre paciente real reclassifica como SaMD e exige o gate regulatório completo.</th></tr>
+</table>
