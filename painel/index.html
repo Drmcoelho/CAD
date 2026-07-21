@@ -28392,7 +28392,7 @@ S.forEach(function(p){
   }
 });
 var cur=4; // start at P5 (a gaso do tratado)
-function r(x,n){return x==null?'—':(Math.round(x*Math.pow(10,n))/Math.pow(10,n)).toFixed(n);}
+function r(x,n){return x==null?'—':(Math.round(x*Math.pow(10,n))/Math.pow(10,n)).toFixed(n).replace('.',',');}
 
 // narratives per spot
 var NAR=[

@@ -278,5 +278,90 @@
   "type": "diss",
   "q": "Perfil de sepse/lactato e perfil de dependência dialítica são os dois únicos perfis do classificador do motor acionados por um sinalizador de contexto clínico (lactato/suspeita de sepse; dependência dialítica), não por um limiar numérico calculado a partir dos labs de entrada. Por que essa diferença de design é deliberada, e não uma inconsistência do motor?",
   "model": "Os demais perfis (pré-CAD, hiperclorêmica, euglicêmica, sobreposição CAD+HHS, alcoólica/jejum) emergem de uma combinação de valores que os próprios labs de entrada já contêm — glicose, βHB/cetonúria, pH, HCO₃, osm efetiva são todos calculáveis a partir do mesmo painel bioquímico. Já a presença de sepse ou de dependência dialítica não é uma propriedade que a gasometria/bioquímica isoladas conseguem inferir com segurança: lactato pode estar elevado sem que haja sepse (hipoperfusão local, exercício, metformina), e a função dialítica não aparece em nenhum eletrólito isolado — é um dado de história clínica. Por isso o motor aceita esses dois como sinalizadores explícitos fornecidos por quem está inserindo os dados (o clínico), em vez de tentar adivinhá-los a partir de números que não os codificam de forma confiável. Isso é consistente com o resto do projeto: nunca inventar um dado que os números não contêm — aqui simplesmente o dado que falta é categórico (sim/não), não numérico."
+ },
+ {
+  "type": "mcq",
+  "q": "Numa CAD com HCO₃ 8 mmol/L, para que serve calcular a pCO₂ esperada pela fórmula de Winter (1,5·HCO₃ + 8) e compará-la com a pCO₂ medida?",
+  "opts": [
+   "Confirmar que a acidose é metabólica e não respiratória",
+   "Detectar um SEGUNDO distúrbio primário respiratório sobreposto: se a pCO₂ medida cair fora da janela esperada, a compensação não é a apropriada — pCO₂ acima indica acidose respiratória somada; abaixo, alcalose respiratória somada",
+   "Estimar a gravidade da cetoacidose pelo grau de hiperventilação",
+   "Calcular a dose inicial de insulina a partir do grau de compensação"
+  ],
+  "correct": 1,
+  "exp": "A compensação respiratória de uma acidose metabólica é previsível: pCO₂ esperada = 1,5·HCO₃ + 8 (± 2). Para HCO₃ 8, dá 20 ± 2 mmHg. A compensação não é um segundo distúrbio — é a resposta fisiológica esperada, e uma pCO₂ dentro da janela significa distúrbio único. O número de Winter é a régua: pCO₂ acima de 22 significa que o pulmão não compensa o quanto devia (acidose respiratória somada); abaixo de 18, que hiperventila além do esperado (alcalose respiratória somada, como no salicilato/sepse). O esperado só ganha sentido como referência contra a qual o medido é lido.",
+  "computed": [
+   { "module": "cad", "fn": "winter", "args": [8], "path": "expected", "expect": 20 }
+  ]
+ },
+ {
+  "type": "vf",
+  "q": "Numa CAD com HCO₃ 8 mmol/L, uma pCO₂ medida de 20 mmHg indica uma acidose respiratória associada à acidose metabólica.",
+  "correct": false,
+  "exp": "Falso. A pCO₂ esperada de Winter para HCO₃ 8 é exatamente 1,5·8 + 8 = 20 mmHg (janela 18–22). Uma pCO₂ de 20 é a compensação respiratória apropriada — distúrbio metabólico único, com o pulmão respondendo como deveria. Acidose respiratória associada seria uma pCO₂ acima de 22 (pulmão hipoventilando em relação ao esperado). Chamar a compensação normal de segundo distúrbio é justamente o erro que a fórmula existe para evitar.",
+  "computed": [
+   { "module": "cad", "fn": "winter", "args": [8], "path": "expected", "expect": 20 }
+  ]
+ },
+ {
+  "type": "mcq",
+  "q": "A compensação respiratória de uma alcalose metabólica (HCO₃ 36) é hipoventilar para reter CO₂ (pCO₂ esperada = 0,7·HCO₃ + 21). Por que essa compensação é fisiologicamente limitada, raramente elevando a pCO₂ muito acima de ~55 mmHg?",
+  "opts": [
+   "Porque o rim impede a retenção adicional de CO₂",
+   "Porque hipoventilar reduz a PaO₂, e o estímulo hipóxico dos quimiorreceptores periféricos passa a forçar a ventilação, impondo um teto a quanto a pCO₂ pode subir",
+   "Porque a alcalose metabólica se corrige sozinha antes disso",
+   "Porque o CO₂ retido viraria bicarbonato e agravaria a alcalose"
+  ],
+  "correct": 1,
+  "exp": "pCO₂ esperada = 0,7·36 + 21 = 46,2 mmHg (± 2). É a única das quatro compensações que trabalha contra a oxigenação: hipoventilar retém CO₂ e corrige o pH, mas derruba a PaO₂. Quando a PaO₂ cai o suficiente, o estímulo hipóxico dos corpos carotídeos sobrepõe o estímulo alcalótico e reacende a ventilação — por isso a pCO₂ compensatória raramente passa de ~55 mmHg mesmo em alcaloses graves. O teto vem da competição entre dois drives ventilatórios, não da química ácido-base.",
+  "computed": [
+   { "module": "abg", "fn": "expectedPco2MetabolicAlkalosis", "args": [36], "path": "expected", "expect": 46.2, "tol": 0.05 }
+  ]
+ },
+ {
+  "type": "mcq",
+  "q": "Um paciente hiperventila cronicamente (grande altitude, gestação) com pCO₂ 20 mmHg. Por que o HCO₃ esperado na alcalose respiratória CRÔNICA (~16) é bem menor que na AGUDA (~20)?",
+  "opts": [
+   "Porque a forma crônica é intrinsecamente mais grave que a aguda",
+   "Porque a compensação aguda é só o tamponamento tecidual imediato (~0,2 mmol de HCO₃ por mmHg de queda da pCO₂); a crônica soma a resposta RENAL ao longo de dias (~0,4 por mmHg) — menos reabsorção de bicarbonato e menos amônio — puxando o HCO₃ mais para baixo",
+   "Porque o rim gera mais CO₂ na forma crônica",
+   "Porque a dosagem de HCO₃ é menos confiável na forma crônica"
+  ],
+  "correct": 1,
+  "exp": "A pCO₂ baixa faz o HCO₃ cair. Agudamente (minutos a horas) só há o tamponamento físico-químico: HCO₃ cai ~0,2 por mmHg → para pCO₂ 20 (queda de 20), HCO₃ ≈ 24 − 0,2·20 = 20. Cronicamente (dias), o rim entra: reduz a reabsorção de bicarbonato e a excreção de amônio, derrubando o HCO₃ até 24 − 0,4·20 = 16. A diferença entre 20 e 16 é exatamente o trabalho renal. Ler as duas pela mesma régua faria uma adaptação crônica normal (altitude/gestação) parecer uma acidose metabólica somada — a armadilha clássica.",
+  "computed": [
+   { "module": "abg", "fn": "expectedHco3RespAlkalosisChronic", "args": [20], "path": "expected", "expect": 16 },
+   { "module": "abg", "fn": "expectedHco3RespAlkalosisAcute", "args": [20], "path": "expected", "expect": 20 }
+  ]
+ },
+ {
+  "type": "vf",
+  "q": "Num AGMA com AG corrigido 25 e HCO₃ 15, o Δ/Δ = (25−12)/(24−15) ≈ 1,44 cai na banda 1–2 (AGMA de gap alto limpa, sem cauda hiperclorêmica nem alcalose somada).",
+  "correct": true,
+  "exp": "Verdadeiro. Δ/Δ = ΔAG/ΔHCO₃ = (25−12)/(24−15) = 13/9 ≈ 1,44. As fronteiras do canon são 1 e 2: abaixo de 1 há componente hiperclorêmico (NAGMA somado); entre 1 e 2 a queda do HCO₃ é explicada pelo acúmulo de ânions do gap — AGMA pura de gap alto; acima de 2 o HCO₃ caiu menos do que o gap subiu, sinalizando alcalose metabólica ou HCO₃ prévio alto. 1,44 é o meio da banda limpa.",
+  "computed": [
+   { "module": "cad", "fn": "deltaRatio", "args": [25, 15], "expect": 1.44, "tol": 0.01 },
+   { "module": "cad", "fn": "interpretDeltaRatio", "args": [1.44], "path": "band", "expect": "1-2" }
+  ]
+ },
+ {
+  "type": "mcq",
+  "q": "CAD com HCO₃ 15 e rebaixamento de consciência; a pCO₂ medida é 40 mmHg. A pCO₂ esperada por Winter é 1,5·15 + 8 = 30,5 (± 2). O que a pCO₂ medida de 40 revela?",
+  "opts": [
+   "Compensação respiratória adequada — nada a acrescentar",
+   "Uma acidose respiratória associada: o pulmão deveria ter derrubado a pCO₂ até ~30,5, mas está em 40 — hipoventilação relativa (rebaixamento/aspiração), um segundo distúrbio primário que a compensação sozinha não explica",
+   "Uma alcalose respiratória associada por hiperventilação",
+   "Que a acidose metabólica já se resolveu"
+  ],
+  "correct": 1,
+  "exp": "Winter para HCO₃ 15 prevê pCO₂ 30,5 ± 2 (janela 28,5–32,5). Uma pCO₂ medida de 40 está muito acima do teto esperado: o pulmão não baixou a pCO₂ o quanto a acidose metabólica exigia. Isso não é compensação insuficiente por acaso — é um segundo distúrbio primário (acidose respiratória) sobreposto, aqui pelo rebaixamento de consciência limitando a ventilação. Num CAD, esse é o sinal de alarme que muda a conduta (proteção de via aérea), e só aparece para quem compara o medido com o esperado — o pH e o HCO₃ isolados não o denunciam.",
+  "computed": [
+   { "module": "cad", "fn": "winter", "args": [15], "path": "expected", "expect": 30.5 }
+  ]
+ },
+ {
+  "type": "diss",
+  "q": "As quatro fórmulas de compensação (Winter para acidose metabólica; 0,7·HCO₃+21 para alcalose metabólica; e as retas agudo/crônico dos distúrbios respiratórios) descrevem uma resposta ESPERADA, não automática nem instantânea. Explique por que tratar a compensação como 'esperada' — e não como um segundo distúrbio — é o que permite detectar o distúrbio misto, e por que o eixo respiratório precisa de duas retas (agudo e crônico) enquanto o metabólico precisa de uma.",
+  "model": "Cada fórmula devolve a faixa em que o segundo parâmetro DEVE cair se houver um único distúrbio primário — é a resposta fisiológica previsível, não um distúrbio à parte. O ganho diagnóstico vem exatamente daí: o valor esperado é a régua, e só o DESVIO do medido em relação a ela denuncia um segundo processo (pCO₂ acima do esperado numa acidose metabólica = acidose respiratória somada; abaixo = alcalose respiratória somada). Sem a régua, um pH e um HCO₃ isolados não distinguem 'compensado' de 'misto'. O eixo respiratório precisa de duas retas porque a compensação de um distúrbio respiratório é RENAL e leva dias: agudamente só há o tamponamento tecidual imediato (coeficiente pequeno), e cronicamente soma-se a resposta renal (coeficiente maior) — a mesma pCO₂ gera dois HCO₃ esperados diferentes conforme o tempo de instalação. Já a compensação de um distúrbio metabólico é respiratória e quase imediata (minutos): não há um estado 'crônico' com coeficiente distinto a separar, então uma reta basta. A assimetria no número de fórmulas espelha a assimetria dos tempos — o pulmão responde em minutos, o rim em dias."
  }
 ]

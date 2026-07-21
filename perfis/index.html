@@ -723,7 +723,8 @@ a.home{color:var(--teal);text-decoration:none}
   const resolvedTxt=c.isResolvedDka===null?'incerto (sem β-HB sérico)':(c.isResolvedDka?'sim':'não');
   const markerTxt=c.ketoneMarker==='cetonuriaCruzes'?'cetonúria':'β-HB';
   const kTxt=c.potassiumPlan?` · K banda ${c.potassiumPlan.band.replace('>=','≥')}`:'';
-  html+=`<div class="tut-computed">AG ${c.ag} · AGc ${c.agc} · Δ/Δ ${c.deltaRatio??'—'}${c.deltaBand?' ('+c.deltaBand+')':''} · Osm efetiva ${c.effectiveOsmolality} · eixo cetônico: ${markerTxt} · critério de CAD fechado: ${c.hasDka?'sim':'não'} · resolução: ${resolvedTxt}${kTxt}</div>`;
+  const vc=x=>x==null?'—':(''+x).replace('.',',');
+  html+=`<div class="tut-computed">AG ${vc(c.ag)} · AGc ${vc(c.agc)} · Δ/Δ ${vc(c.deltaRatio)}${c.deltaBand?' ('+c.deltaBand+')':''} · Osm efetiva ${vc(c.effectiveOsmolality)} · eixo cetônico: ${markerTxt} · critério de CAD fechado: ${c.hasDka?'sim':'não'} · resolução: ${resolvedTxt}${kTxt}</div>`;
   out.innerHTML=html;
  }
  ['t_na','t_cl','t_hco3','t_glu','t_cet','t_bhb','t_ph','t_alb','t_k','t_lac'].forEach(id=>$('#'+id).addEventListener('input',tutRender));

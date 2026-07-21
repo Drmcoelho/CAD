@@ -68,7 +68,7 @@ CI (`.github/workflows/ci.yml`) roda tudo a cada push. **PR com divergência nã
 
 **De-identificação (LGPD + não-SaMD).** Nenhum dado de paciente real em qualquer artefato. Casos de ensino são **sintéticos**; se uma série real for usada (ex.: o painel), reduzir a fisiologia/números sem identidade. Isto é regra de segurança, não de estilo.
 
-**Render antes de entregar.** Nunca entregar documento sem olhar o render: HTML → screenshot desktop **e** iPhone; SVG/DOCX/PDF → converter e revisar as páginas em imagem. O `r()` do app renderiza número com **ponto** ("3.5") enquanto as pranchas usam vírgula — inconsistência de locale conhecida (backlog P2), não erro de valor.
+**Render antes de entregar.** Nunca entregar documento sem olhar o render: HTML → screenshot desktop **e** iPhone; SVG/DOCX/PDF → converter e revisar as páginas em imagem. Locale unificado (2026-07-21): `r()`/`fx()` em `app/` e o `r()` do `painel/`, mais os Tutores de `perfis/`/`tratado/`, renderizam decimal com **vírgula** (pt-BR), casando com as pranchas; entrada tolera vírgula ou ponto (`num()` normaliza), e o deep-link `#calcular?...` segue em ponto (parâmetro de URL, não display). Backlog P2 de locale fechado.
 
 **Código.** Modular, determinístico, auditável, produção-orientado, com logging explícito e degradação graciosa. Stack: Python, JS, Swift, shell (zsh). Apple-first quando aplicável (Shortcuts, Scriptable, terminal). HTML de entrega: **single-file offline** (roda direto no navegador/iOS WebKit) — decisão consciente que sobrepõe "modularizar".
 
