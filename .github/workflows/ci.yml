@@ -3,38 +3,28 @@ on: [push, pull_request]
 jobs:
   consistency:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      - name: testes do core
-        run: node core/cad_core.test.js
-      - name: fixtures clínicas
-        run: node core/fixtures.test.js
-      - name: CANON como artefato de build (app em sincronia com o core)
-        run: node scripts/build_app.js --check
-      - name: portão de consistência (fonte única)
-        run: node scripts/check_consistency.js
-      - name: casos sintéticos dos perfis batem com o core
-        run: node scripts/check_profiles.js
-      - name: links locais
-        run: node scripts/test_links.js
-      - name: smoke estrutural das saidas
-        run: node scripts/smoke_app.js
+      - name: suíte canônica completa (npm run ci)
+        run: npm run ci
 
   render:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      - name: instala dependencias (playwright)
+      - name: instala dependências do render
         run: npm install --no-audit --no-fund
         env:
           PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: "1"
       - name: instala Chromium do Playwright
         run: npx playwright install --with-deps chromium
-      - name: render-smoke (executa as saidas num navegador)
-        run: node scripts/render_smoke.js
+      - name: render-smoke com navegador real
+        run: npm run smoke:render

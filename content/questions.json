@@ -148,7 +148,7 @@
  },
  {
   "type": "mcq",
-  "q": "CAD em tratamento: K 4,0 mEq/L, glicose já caiu para 220 mg/dL (ainda acima do limiar de 250? não — abaixo). O que muda na prescrição de insulina neste momento?",
+  "q": "CAD em tratamento: K 4,0 mEq/L, glicose já caiu para 220 mg/dL. O que muda na prescrição de insulina neste momento?",
   "opts": [
    "Nada muda — mantém a taxa inicial de 0,1 U/kg/h sem dextrose",
    "Reduz a taxa para 0,05 U/kg/h e inicia dextrose concomitante, mantendo a insulina agindo sobre a cetose",
@@ -165,6 +165,6 @@
  {
   "type": "diss",
   "q": "Por que a decisão sobre a insulina na CAD é sempre subordinada primeiro à decisão sobre o potássio, nunca o contrário?",
-  "model": "A insulina desloca potássio para dentro da célula (via estímulo da Na-K-ATPase) — um efeito rápido e potencialmente perigoso se o K sérico já estiver baixo (risco de hipocalemia grave/arritmia) ou se, ao contrário, o K estiver muito alto e uma reposição concomitante desnecessária for somada ao efeito da própria insulina. Por isso o algoritmo sempre checa o K PRIMEIRO (potassiumPlan) e só depois decide o que fazer com a insulina (insulinPlan chama potassiumPlan internamente) — nunca o inverso. Decidir a insulina sem antes saber o K seria arriscar uma das duas piores complicações eletrolíticas do tratamento da CAD."
+  "model": "A insulina desloca potássio para dentro da célula (via estímulo da Na-K-ATPase) — um efeito rápido e potencialmente perigoso se o K sérico já estiver baixo (risco de hipocalemia grave/arritmia) ou se, ao contrário, o K estiver muito alto e uma reposição concomitante desnecessária for somada ao efeito da própria insulina. Por isso o algoritmo sempre checa o K primeiro e só depois decide o que fazer com a insulina — a própria decisão de insulina consulta o plano de potássio antes de se resolver, nunca o inverso. Decidir a insulina sem antes saber o K seria arriscar uma das duas piores complicações eletrolíticas do tratamento da CAD."
  }
 ]

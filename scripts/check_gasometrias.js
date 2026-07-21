@@ -252,14 +252,43 @@ for (const caso of data.casos) {
       if (evolucaoValida) ok(`${id}: evolucao estruturalmente válida (${ev.pontos.length} ponto(s), 8 passos)`);
     }
 
-    // spoiler: vinheta/pergunta/escada não podem citar outro caso (G-NN) antes do reveal
-    const spoilerBlob = caso.vinheta + " " + caso.pergunta + " "
-      + (ev && Array.isArray(ev.escada) ? ev.escada.map((s) => (s ? s.pergunta + " " + s.resposta : "")).join(" ") : "");
+    // spoiler: nenhum texto revelado ANTES ou JUNTO do gabarito/teste-se pode citar outro
+    // caso (G-NN) — só evolucao.casosRelacionados (liberado no fim da escada de 8 passos)
+    // e o próprio confundeCom[] (ids só, sem título) têm permissão de citar outro caso.
+    const gab = caso.gabarito || {};
+    const spoilerQuiz = caso.quiz || {};
+    const spoilerParts = [
+      caso.vinheta, caso.pergunta,
+      gab.classificacao, gab.diagnostico, gab.raciocinio, gab.armadilha, gab.detalheChave, gab.conteudoComplementar,
+      ev && Array.isArray(ev.pontos) ? ev.pontos.map((p) => (p ? p.narrativa : "")).join(" ") : "",
+      ev && Array.isArray(ev.escada) ? ev.escada.map((s) => (s ? s.pergunta + " " + s.resposta : "")).join(" ") : "",
+      Array.isArray(spoilerQuiz.mcq) ? spoilerQuiz.mcq.map((m) => (m ? [m.q, ...(m.opts || []), m.exp].join(" ") : "")).join(" ") : "",
+      Array.isArray(spoilerQuiz.vf) ? spoilerQuiz.vf.map((v) => (v ? v.q + " " + v.exp : "")).join(" ") : "",
+      Array.isArray(spoilerQuiz.assertivas) ? spoilerQuiz.assertivas.map((a) => (a ? [...(a.itens || []), a.exp].join(" ") : "")).join(" ") : "",
+    ];
+    const spoilerBlob = spoilerParts.filter((s) => typeof s === "string").join(" ");
     const otherIdMention = spoilerBlob.match(/G-\d{2,3}/g);
     if (otherIdMention) {
-      bad(`${id}: vinheta/pergunta/escada cita outro caso (${otherIdMention.join(",")}) antes do reveal — spoiler`);
+      bad(`${id}: gabarito/quiz/vinheta/pergunta/escada cita outro caso (${otherIdMention.join(",")}) antes do reveal de casosRelacionados — spoiler`);
     } else {
-      ok(`${id}: vinheta/pergunta/escada sem citação prematura de outro caso`);
+      ok(`${id}: gabarito/quiz/vinheta/pergunta/escada sem citação prematura de outro caso`);
+    }
+
+    // código misturado com linguagem natural: nomes de campo JSON (camelCase) vazando
+    // pra dentro da própria prosa, chamadas de função tipo hasDka(), e SEMPRE/E/OU em
+    // caixa-alta usados como pseudo-operador booleano em vez de conjunção em português.
+    const proseBlob = spoilerBlob + " " + (ev && ev.casosRelacionados ? ev.casosRelacionados : "");
+    const codeArtifacts = [];
+    const fieldNameLeak = proseBlob.match(/\b(detalheChave|conteudoComplementar|confundeCom|hasDkaEsperado|mimicsCAD)\b/g);
+    if (fieldNameLeak) codeArtifacts.push(`nome de campo JSON na prosa: ${[...new Set(fieldNameLeak)].join(",")}`);
+    const fnCallLeak = proseBlob.match(/\b[a-zA-Z_][a-zA-Z0-9_]*\(\)/g);
+    if (fnCallLeak) codeArtifacts.push(`chamada de função na prosa: ${[...new Set(fnCallLeak)].join(",")}`);
+    const kebabIdLeak = proseBlob.match(/'[a-z]+(-[a-z]+)+'/g);
+    if (kebabIdLeak) codeArtifacts.push(`id interno entre aspas na prosa: ${[...new Set(kebabIdLeak)].join(",")}`);
+    if (codeArtifacts.length) {
+      bad(`${id}: código misturado com linguagem natural — ${codeArtifacts.join(" | ")}`);
+    } else {
+      ok(`${id}: prosa sem código misturado (sem nomes de campo/função/id interno vazando)`);
     }
   }
 

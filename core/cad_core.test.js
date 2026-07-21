@@ -223,6 +223,38 @@ function testClassifyDkaProfile() {
     assert.ok(ids.includes("dialitica"));
     assert.ok(ids.includes("sepse-lactato"));
   }
+
+  // kMmolL e opcional -- sem ele, potassiumPlan fica null e nenhuma nota extra aparece
+  {
+    const r = classifyDkaProfile({ na: 132, cl: 92, hco3: 8, glucoseMgDl: 480, ketonuriaCruzes: 3, ph: 7.15 });
+    assert.strictEqual(r.computed.potassiumPlan, null);
+    assert.ok(!r.matches.some((m) => !m.id && /potássio|K </.test(m.reason)));
+  }
+
+  // kMmolL fornecido e baixo (<3,5): potassiumPlan.insulin="hold" tem que aparecer
+  // no computed E como nota de conduta, independente do perfil principal (antes
+  // desta correcao, o valor era capturado pela UI mas nunca chegava a este calculo).
+  {
+    const r = classifyDkaProfile({ na: 132, cl: 92, hco3: 8, glucoseMgDl: 480, ketonuriaCruzes: 3, ph: 7.15, kMmolL: 3.2 });
+    assert.strictEqual(r.computed.potassiumPlan.band, "<3.5");
+    assert.strictEqual(r.computed.potassiumPlan.insulin, "hold");
+    assert.ok(r.matches.some((m) => !m.id && m.reason.includes("adiar a insulina")));
+  }
+
+  // kMmolL alto (>=5,0): nota de ECG/sem reposicao inicial, insulina segue liberada
+  {
+    const r = classifyDkaProfile({ na: 132, cl: 92, hco3: 8, glucoseMgDl: 480, ketonuriaCruzes: 3, ph: 7.15, kMmolL: 5.5 });
+    assert.strictEqual(r.computed.potassiumPlan.band, ">=5.0");
+    assert.strictEqual(r.computed.potassiumPlan.insulin, "allowed");
+    assert.ok(r.matches.some((m) => !m.id && m.reason.includes("ECG")));
+  }
+
+  // kMmolL na faixa 3,5-5,0: potassiumPlan populado, mas sem nota extra (nao muda a conduta padrao)
+  {
+    const r = classifyDkaProfile({ na: 132, cl: 92, hco3: 8, glucoseMgDl: 480, ketonuriaCruzes: 3, ph: 7.15, kMmolL: 4.2 });
+    assert.strictEqual(r.computed.potassiumPlan.band, "3.5-5.0");
+    assert.ok(!r.matches.some((m) => !m.id && /potássio|K </.test(m.reason)));
+  }
 }
 
 function testSourceAndCorePolicyDoNotDrift() {
