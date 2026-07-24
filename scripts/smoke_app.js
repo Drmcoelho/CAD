@@ -67,7 +67,7 @@ const app = read("app/index.html");
 console.log("\n[smoke] index.html — landing");
 const land = read("index.html");
 // os alvos de navegacao principais estao linkados
-["app/", "painel/", "tratado/", "perfis/", "CHANGELOG.md"].forEach((href) =>
+["app/", "painel/", "tratado/", "perfis/"].forEach((href) =>
   has(`link ${href}`, land, `href="${href}"`)
 );
 

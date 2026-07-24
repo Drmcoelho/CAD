@@ -116,7 +116,7 @@ canvas{display:block;width:100%;background:#0c1218;border:1px solid var(--line);
  <a href="../painel/">📈 Painel</a>
 </nav>
 <header><h1>CAD 360 — Núcleo</h1>
-<p class="sub">Socrático (entender) + canônico (calcular) + atlas, uma coisa só. Todo número vem de um objeto <code>CANON</code> único.</p>
+<p class="sub">Socrático (entender) + canônico (calcular) + atlas, uma coisa só. Todo número clínico vem de uma fonte única — o consenso 2024.</p>
 <span class="stamp" id="stamp"></span></header>
 
 <nav class="tabs">
@@ -189,7 +189,7 @@ canvas{display:block;width:100%;background:#0c1218;border:1px solid var(--line);
 <!-- CALCULAR -->
 <section class="tab" id="calcular">
  <div class="callout">Cada calculadora: <b>a conta</b>, <b>o que significa / por que importa</b> (mecanismo) e um <b>exercício</b>. Pré-preenchidas com o exemplo do Módulo 4 para conferência.</div>
- <div class="lab">Calculadoras vivas — computam do CANON</div>
+ <div class="lab">Calculadoras vivas — todo resultado com interpretação clínica</div>
  <div class="grid" id="calcs"></div>
  <div class="lab">Compensação esperada — os 4 distúrbios primários</div>
  <div class="panel" id="compCard"></div>
@@ -203,11 +203,11 @@ canvas{display:block;width:100%;background:#0c1218;border:1px solid var(--line);
  <div class="callout">Sem placar. Antes do banco avaliativo abaixo, responda mentalmente (ou em voz alta) cada pergunta e só então compare — o objetivo é reativar o raciocínio, não acertar de primeira.</div>
  <div id="warmup"></div>
  <div class="lab" style="margin-top:22px">Provão — banco avaliativo</div>
- <div class="callout">Quatro formatos, uma fonte de verdade. <b>Múltipla escolha</b> e <b>V/F</b> corrigem na hora e contam placar; <b>dissertativas</b> revelam resposta-modelo; <b>casos clínicos</b> misturam os formatos. Tudo ancorado no CANON.</div>
+ <div class="callout">Quatro formatos, uma fonte de verdade. <b>Múltipla escolha</b> e <b>V/F</b> corrigem na hora e contam placar; <b>dissertativas</b> revelam resposta-modelo; <b>casos clínicos</b> misturam os formatos. Tudo ancorado na mesma fonte clínica.</div>
  <div class="scorebar">Objetivas: <b id="score_r">0</b> / <b id="score_t">0</b> corretas</div>
  <div id="quiz"></div>
  <div class="lab" style="margin:22px 0 6px">Fisiopatologia — o mecanismo por trás do número</div>
- <div class="callout">O banco acima testa <b>conduta</b> (o que fazer). Este testa <b>mecanismo</b> (por que o corpo/o motor de cálculo faz o que faz) — cada resposta é ancorada numa função determinística de <code>core/cad_core.js</code>/<code>core/abg_core.js</code>, nunca uma afirmação solta.</div>
+ <div class="callout">O banco acima testa <b>conduta</b> (o que fazer). Este testa <b>mecanismo</b> (por que o corpo faz o que faz) — cada resposta é ancorada num cálculo determinístico, nunca numa afirmação solta.</div>
  <div id="fisioQuiz"></div>
 </section>
 
@@ -224,7 +224,7 @@ canvas{display:block;width:100%;background:#0c1218;border:1px solid var(--line);
 
 <!-- REFERÊNCIA -->
 <section class="tab" id="ref">
- <div class="lab">Apêndice A — fonte de verdade (renderizada do CANON)</div>
+ <div class="lab">Apêndice A — fonte de verdade (consenso 2024)</div>
  <div class="panel tscroll"><table id="canonTable"></table></div>
  <div class="lab">Δ/Δ — interpretação canônica</div>
  <div class="panel" id="ddTable"></div><div class="foot" id="ddFoot"></div>
@@ -240,8 +240,8 @@ canvas{display:block;width:100%;background:#0c1218;border:1px solid var(--line);
  <div class="panel"><div class="rel">
    <a href="../tratado/index.html">📖 Tratado CAD (bolso/plantão/profundo)</a>
    <a href="../painel/index.html">📈 Painel de evolução gasométrica</a>
-   <a href="../docs/auditoria.pdf">📝 Auditoria + núcleo pedagógico (PDF)</a>
- </div><div class="foot">Links relativos: funcionam com os arquivos lado a lado (mesma pasta no GitHub Pages).</div></div>
+   <a href="../perfis/index.html">🧬 Perfis de CAD</a>
+ </div></div>
  <div class="foot" id="finalFoot"></div>
 </section>
 </div>
@@ -1058,7 +1058,7 @@ const CANON={
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const r=(x,n=1)=>x==null||isNaN(x)?'—':(Math.round(x*10**n)/10**n).toFixed(n);
 const num=id=>{const el=$('#'+id);if(!el)return null;const v=parseFloat(el.value);return isNaN(v)?null:v;};
-$('#stamp').textContent='CANON v'+CANON.versao+' · '+CANON.fonte;
+$('#stamp').textContent='Consenso '+CANON.versao+' · '+CANON.fonte;
 let _rv=0;
 function mkReveal(stem,ans){_rv++;const id='rv'+_rv;return `<div class="ex"><div class="stem">${stem}</div><button class="exbtn" data-target="${id}">ver resposta</button><div class="ans" id="${id}">${ans}</div></div>`;}
 
@@ -1246,7 +1246,7 @@ $('#gov').innerHTML=`<b>CAD 360 é ferramenta de uso pessoal do autor</b>, human
  • sair diretriz nova (pós-2024) que mude um limiar canônico → reabrir o Apêndice A e propagar;<br>
  • a intenção mudar de uso pessoal para distribuição → o tripwire dispara (triagem SaMD antes de qualquer release);<br>
  • um módulo não superar o tratado num teste com par → executar o kill (dobrar de volta como capítulo do tratado).</div>`;
-$('#finalFoot').innerHTML=`Tudo aqui é renderizado do objeto <kbd>CANON</kbd> no topo do arquivo — um número, um lugar. Mudou uma diretriz? Edite <u>um</u> valor e a referência, as calculadoras, as leis e as tabelas se atualizam juntas. Esta é a camada que as pranchas visuais devem obedecer.`;
+$('#finalFoot').innerHTML=`<b>Dr. Matheus M. Coelho</b> · CRM-SP 151.318 · Limeira/SP — autoria e responsabilidade clínica integral. Uso pessoal, humano-no-loop de toda decisão; casos sintéticos e de-identificados.`;
 
 /* ================= SIMULADORES (canvas) ================= */
 /* Diagrama ácido-base pCO2 x HCO3 */

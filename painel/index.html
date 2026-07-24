@@ -14,6 +14,7 @@ body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.55 -apple-system,
 h1{font-size:25px;margin:0 0 2px;letter-spacing:-.3px}
 .sub{color:var(--mut);font-size:14px;margin:0 0 4px}
 .deid{color:var(--amb);font-size:12.5px;margin:8px 0 0}
+.foot{color:var(--mut);font-size:12.5px;margin-top:30px;border-top:1px solid var(--line);padding-top:14px;line-height:1.6}
 .panel{background:var(--p);border:1px solid var(--line);border-radius:14px;padding:16px 16px;margin:16px 0}
 .lab{color:var(--mut);font-size:11px;letter-spacing:.06em;text-transform:uppercase}
 /* stepper */
@@ -129,7 +130,7 @@ td.l,th.l{text-align:left}
 
 <hr class="gaso-sep">
 <h2 class="gaso-title">Banco de gasometrias — treino (sintético)</h2>
-<p class="deid"><span id="gasoCount">—</span> casos 100% sintéticos e de-identificados, SEM relação com a série real acima — banco de treino de raciocínio ácido-base/bioquímica, incluindo quadros que não são CAD (alguns imitam CAD de propósito, outros só treinam leitura de gasometria em geral). Motor: <code>core/abg_core.js</code> + <code>core/cad_core.js</code>, os mesmos módulos do resto do site — nenhum veredito aqui é um número solto.</p>
+<p class="deid"><span id="gasoCount">—</span> casos 100% sintéticos e de-identificados, SEM relação com a série real acima — banco de treino de raciocínio ácido-base/bioquímica, incluindo quadros que não são CAD (alguns imitam CAD de propósito, outros só treinam leitura de gasometria em geral). Cada veredito é calculado, nunca um número solto.</p>
 
 <div class="panel">
   <div class="lab">Categoria</div>
@@ -142,6 +143,11 @@ td.l,th.l{text-align:left}
 </div>
 
 <div class="panel" id="gasoDetail"></div>
+
+<div class="foot">
+ <b>Dr. Matheus M. Coelho</b> · CRM-SP 151.318 · Limeira/SP — autoria e responsabilidade clínica integral.<br>
+ Material educacional de uso pessoal, humano-no-loop de toda decisão. Série real de-identificada; banco de treino 100% sintético.
+</div>
 </div>
 
 <script src="../core/cad_core.js"></script>
