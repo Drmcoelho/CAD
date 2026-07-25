@@ -155,7 +155,7 @@ td.l,th.l{text-align:left}
 <script type="application/json" id="gasometrias-data">
 {
   "version": "GASO-2026-07-05",
-  "fonte": "Banco de gasometrias/bioquímica sintéticas para treino de raciocínio ácido-base — motor: core/abg_core.js (geral) + core/cad_core.js (eixo CAD, quando aplicável). Todo caso é de-identificado e sintético (nenhum dado de paciente real). Verificado mecanicamente por scripts/check_gasometrias.js: cada 'labs' é recomputado via os dois módulos e cruzado contra as afirmações do gabarito — nenhum número no texto nasce solto.",
+  "fonte": "Banco de gasometrias/bioquímica sintéticas para treino de raciocínio ácido-base, ancorado no consenso clínico de 2024 para o eixo CAD. Todo caso é de-identificado e sintético (nenhum dado de paciente real). Cada conjunto de labs é recomputado e cruzado contra as afirmações do gabarito — nenhum número no texto nasce solto.",
   "casos": [
     {
       "id": "G-01",
@@ -189,7 +189,7 @@ td.l,th.l{text-align:left}
         "raciocinio": "AG = 132−96−9 = 27; AGc (albumina 4,2, não precisa correção relevante) = 26,5. Δ/Δ = (26,5−12)/(24−9) = 0,97 — na fronteira de 1, tecnicamente já dentro da faixa <1 (leve componente hiperclorêmico associado ao gap alto, não um AGMA \"100% puro\"); a diferença é pequena porque o AG já é muito alto, mas mecanicamente não é zero. A compensação respiratória por Winter está adequada: não há segundo processo respiratório escondido. Os três eixos do consenso 2024 fecham juntos, sem exceção nenhuma — o caso mais simples do lote, usado como referência para comparar os quatro seguintes.",
         "armadilha": "A armadilha AQUI, no caso mais \"óbvio\" do lote, é justamente presumir que AG alto = AGMA pura sem calcular o Δ/Δ — 0,97 é fronteira, não folga. A armadilha didática principal do bloco — casos com AG e cetonemia parecidos que falham em um dos três eixos diagnósticos — continua nos casos seguintes.",
         "detalheChave": "Serve de controle: qualquer leitor que erre o diagnóstico deste caso tem um problema de mecânica básica, não de sutileza diagnóstica — mas o Δ/Δ 0,97 mostra que \"óbvio\" não dispensa o cálculo.",
-        "conteudoComplementar": "Osm efetiva = 2×132(Na medido) + 480/18 = 290,7 mOsm/kg — não usa o Na corrigido (141,1, fator 2,4 por glicose >400) para não contar a glicose duas vezes (a mesma armadilha que já mordeu este repo em conteúdo publicado — ver scripts/check_content_text.js)."
+        "conteudoComplementar": "Osm efetiva = 2×132(Na medido) + 480/18 = 290,7 mOsm/kg — não usa o Na corrigido (141,1, fator 2,4 por glicose >400) para não contar a glicose duas vezes (a mesma armadilha que já apareceu em material publicado sobre CAD)."
       },
       "quiz": {
         "mcq": [
@@ -224,7 +224,7 @@ td.l,th.l{text-align:left}
               "Não se aplica — HHS exige glicose >600"
             ],
             "correct": 1,
-            "exp": "Osm efetiva = 2×132(Na medido) + 480/18 = 290,7 mOsm/kg — não cruza 320. Usar o Na corrigido (141,1) na fórmula dobraria a conta da glicose (o erro clássico já documentado neste repo — ver scripts/check_content_text.js)."
+            "exp": "Osm efetiva = 2×132(Na medido) + 480/18 = 290,7 mOsm/kg — não cruza 320. Usar o Na corrigido (141,1) na fórmula dobraria a conta da glicose (o erro clássico, documentado e recorrente na literatura de bolso)."
           },
           {
             "q": "Qual fator de correção do Na se aplica aqui, dado glicose 480 mg/dL?",
@@ -4209,7 +4209,7 @@ td.l,th.l{text-align:left}
       "gabarito": {
         "classificacao": "HCO₃ 34 (alto) e pCO₂ 62 (alto) simultaneamente, em direções opostas de efeito sobre o pH, com pH 7,36 dentro da faixa de referência — matematicamente ambíguo entre (a) alcalose metabólica com compensação respiratória completa (pCO₂ esperado 42,8–46,8, muito abaixo do medido) e (b) acidose respiratória crônica com compensação renal completa (HCO₃ esperado 28,7–34,7, batendo com o medido).",
         "diagnostico": "Acidose respiratória crônica compensada por retenção renal de bicarbonato — a leitura (b) é a correta clinicamente, resolvida pela história (DPOC estabelecida, sem sintoma agudo), não pelos números isolados.",
-        "raciocinio": "A leitura (b) é a que 'fecha' melhor: HCO₃ 34 está dentro da janela crônica esperada (28,7–34,7) para uma pCO₂ de 62; a leitura (a) exigiria uma pCO₂ muito mais baixa (42,8–46,8) do que a medida, o que tornaria a resposta respiratória 'insuficiente' de forma implausível num quadro sem sintoma agudo. Ainda assim, o motor honesto mostra as duas leituras possíveis — é o histórico clínico, não a aritmética, que resolve a favor da doença pulmonar crônica.",
+        "raciocinio": "A leitura (b) é a que 'fecha' melhor: HCO₃ 34 está dentro da janela crônica esperada (28,7–34,7) para uma pCO₂ de 62; a leitura (a) exigiria uma pCO₂ muito mais baixa (42,8–46,8) do que a medida, o que tornaria a resposta respiratória 'insuficiente' de forma implausível num quadro sem sintoma agudo. Ainda assim, a leitura honesta mantém as duas possibilidades na mesa — é o histórico clínico, não a aritmética, que resolve a favor da doença pulmonar crônica.",
         "armadilha": "Achar que 'HCO₃ alto = alcalose metabólica' de forma automática — aqui o HCO₃ alto é resposta renal a uma acidose respiratória, o oposto do que ele pareceria isoladamente.",
         "detalheChave": "Contraste com uma fase aguda descompensada da mesma classe de doença pulmonar (pH bem fora da faixa, sem ambiguidade nenhuma) — cronicidade é o que permite ao rim 'alcançar' a compensação e produzir esse pH quase normal (ver casos relacionados).",
         "conteudoComplementar": "Em retentores crônicos de CO₂, a meta de saturação de O₂ costuma ser mais conservadora (88–92%) por risco teórico de piora da hipoventilação com hiperóxia — mas a decisão de suplementar O₂ nunca deve ser negada a um paciente hipoxêmico grave por medo teórico de retenção."
@@ -4482,7 +4482,7 @@ td.l,th.l{text-align:left}
       "gabarito": {
         "classificacao": "HCO₃ 20 (baixo) e pCO₂ 30 (baixo) simultaneamente, em direções opostas de efeito sobre o pH, com pH 7,45 na própria borda superior da faixa normal — matematicamente ambíguo entre (a) acidose metabólica com compensação respiratória completa (pCO₂ esperado 36–40, muito acima do medido) e (b) alcalose respiratória crônica com compensação renal completa (HCO₃ esperado 17–23, batendo com o medido).",
         "diagnostico": "Alcalose respiratória crônica fisiológica da gestação — a leitura (b) é a correta, resolvida pelo contexto (gestação avançada, assintomática, sem outra doença), não pela aritmética isolada.",
-        "raciocinio": "A progesterona estimula diretamente o centro respiratório bulbar desde o primeiro trimestre, produzindo hiperventilação crônica; o rim responde excretando bicarbonato ao longo de semanas até a janela crônica de compensação (17–23), exatamente onde o HCO₃ medido (20) cai. A leitura (a) exigiria uma pCO₂ muito mais alta (36–40) do que a medida — implausível numa gestante sem doença pulmonar/metabólica conhecida. Este é o caso de referência que expôs um bug real no motor de classificação deste projeto: a ordem de checagem dos ramos não pode decidir sozinha qual processo é primário quando HCO₃ e pCO₂ divergem em direções opostas — só o pH (e, quando ele empata, o contexto clínico) decide.",
+        "raciocinio": "A progesterona estimula diretamente o centro respiratório bulbar desde o primeiro trimestre, produzindo hiperventilação crônica; o rim responde excretando bicarbonato ao longo de semanas até a janela crônica de compensação (17–23), exatamente onde o HCO₃ medido (20) cai. A leitura (a) exigiria uma pCO₂ muito mais alta (36–40) do que a medida — implausível numa gestante sem doença pulmonar/metabólica conhecida. Este é o caso de referência que expõe a armadilha de classificação mais comum: a ordem em que se checa cada distúrbio não pode decidir sozinha qual processo é primário quando HCO₃ e pCO₂ divergem em direções opostas — só o pH (e, quando ele empata, o contexto clínico) decide.",
         "armadilha": "Ler 'HCO₃ baixo' como sinal automático de acidose metabólica primária necessitando investigação de AG/cetonas/lactato — numa gestante hígida, é a compensação renal de uma alcalose respiratória fisiológica, não uma doença.",
         "detalheChave": "Mesmo padrão numérico de outros quadros patológicos (por exemplo, intoxicação por salicilato) e semelhante ao de vários quadros patológicos de alcalose respiratória crônica — o que resolve aqui é o contexto (gestação avançada, ausência de sintoma agudo, ausência de fator de risco), não o laboratório isolado.",
         "conteudoComplementar": "A hiperventilação gestacional também reduz discretamente a pCO₂ materna de forma a favorecer o gradiente de difusão de CO₂ do feto para a mãe através da placenta — é adaptação, não patologia, e reverte completamente no puerpério."
@@ -4558,13 +4558,13 @@ td.l,th.l{text-align:left}
           {
             "q": "Quando HCO₃ e pCO₂ divergem em direções opostas e o pH empata dentro da faixa normal, o que o gabarito deste caso afirma sobre como resolver qual processo é primário?",
             "opts": [
-              "A ordem de checagem dos ramos do motor decide sozinha, sem precisar de mais dados",
+              "A ordem em que se checa cada distúrbio decide sozinha, sem precisar de mais dados",
               "Só o pH decide, e quando ele empata, o contexto clínico é necessário — a ordem de checagem dos ramos não pode decidir sozinha",
               "O valor absoluto do HCO₃ sempre decide, independente do pCO₂",
               "É sempre indecidível, não há resolução possível"
             ],
             "correct": 1,
-            "exp": "O gabarito é explícito: só o pH (e, quando ele empata, o contexto clínico) decide — a ordem de checagem dos ramos de um motor de classificação não pode decidir sozinha quando HCO₃ e pCO₂ divergem em direções opostas."
+            "exp": "O gabarito é explícito: só o pH (e, quando ele empata, o contexto clínico) decide — a ordem em que se checa cada distúrbio não pode decidir sozinha quando HCO₃ e pCO₂ divergem em direções opostas."
           },
           {
             "q": "Por que a hiperventilação materna também favorece a troca de CO₂ entre feto e mãe?",
@@ -4592,7 +4592,7 @@ td.l,th.l{text-align:left}
           {
             "q": "Quando HCO₃ e pCO₂ divergem em direções opostas e o pH empata na faixa normal, o contexto clínico pode ser necessário para decidir qual processo é primário — a aritmética isolada nem sempre resolve.",
             "correct": true,
-            "exp": "Verdadeiro — é exatamente o ponto que o gabarito descreve como tendo exposto um bug real no motor de classificação: a ordem de checagem dos ramos não decide sozinha, só o pH (e o contexto, quando ele empata) decide."
+            "exp": "Verdadeiro — é exatamente o ponto que o gabarito descreve: a ordem em que se checa cada distúrbio não decide sozinha; só o pH (e o contexto, quando ele empata) decide."
           }
         ],
         "assertivas": [
@@ -16330,7 +16330,7 @@ td.l,th.l{text-align:left}
       "gabarito": {
         "classificacao": "Alcalose respiratória primária (pCO₂ 33 < 35) com resposta renal aguda INSUFICIENTE — HCO₃ medido 26 está acima do esperado 22,6 ± 2 (20,6–24,6), revelando uma alcalose metabólica adicional (a infusão terapêutica de bicarbonato) somada à hiperventilação.",
         "diagnostico": "Alcalinização sérica terapêutica deliberada (alvo de pH ~7,50–7,55) como parte do tratamento antidotal da cardiotoxicidade por antidepressivo tricíclico — não é um distúrbio acidental a ser corrigido, é o objetivo terapêutico ATIVO da equipe.",
-        "raciocinio": "AG = 142−100−26 = 16, discretamente elevado (o AGc mascarado, já que HCO₃ não está baixo, é sinalizado pelo motor mesmo aqui — possível componente lático de convulsões/hipotensão associadas à intoxicação grave). Antidepressivos tricíclicos bloqueiam canais de sódio cardíacos, de forma dose-dependente e sensível ao pH: a ALCALEMIA (por hiperventilação induzida E por bicarbonato de sódio IV) desloca o fármaco para uma forma menos ativa nesses canais, revertendo parcialmente a cardiotoxicidade (estreitando o QRS alargado) — é uma das poucas situações em medicina onde induzir ativamente uma alcalose é o próprio tratamento, não um efeito colateral a ser corrigido.",
+        "raciocinio": "AG = 142−100−26 = 16, discretamente elevado (o AGc mascarado, já que HCO₃ não está baixo, continua sendo sinalizado mesmo aqui — possível componente lático de convulsões/hipotensão associadas à intoxicação grave). Antidepressivos tricíclicos bloqueiam canais de sódio cardíacos, de forma dose-dependente e sensível ao pH: a ALCALEMIA (por hiperventilação induzida E por bicarbonato de sódio IV) desloca o fármaco para uma forma menos ativa nesses canais, revertendo parcialmente a cardiotoxicidade (estreitando o QRS alargado) — é uma das poucas situações em medicina onde induzir ativamente uma alcalose é o próprio tratamento, não um efeito colateral a ser corrigido.",
         "armadilha": "Ver um pH de 7,52 com HCO₃ 26 e pCO₂ 33 e tentar 'corrigir' a alcalose reduzindo a ventilação ou suspendendo o bicarbonato — isso reverteria exatamente o efeito terapêutico buscado e pode piorar a cardiotoxicidade (QRS alargando de novo).",
         "detalheChave": "Mesmo tipo de padrão misto de outras intoxicações que produzem dois processos alcalinizantes/relacionados se somando, mas aqui um dos processos é INTENCIONAL e terapêutico — o contexto (intoxicação tricíclica conhecida, QRS alargado, bicarbonato em infusão ativa) é o que resolve a leitura, já que os números por si só não distinguem 'alcalose acidental' de 'alcalose terapêutica'.",
         "conteudoComplementar": "O alvo é tipicamente pH 7,50–7,55 (não mais que isso, pelos riscos da alcalemia extrema: arritmias por hipocalemia induzida, tetania, redução do fluxo sanguíneo cerebral) — a resposta ao QRS (estreitamento) guia a titulação da infusão de bicarbonato mais do que um alvo numérico rígido de pH isolado."
@@ -28117,7 +28117,7 @@ td.l,th.l{text-align:left}
         "raciocinio": "AG = 140−104−24 = 12, exatamente no valor de referência — sem nenhuma elevação a investigar, sem nenhum gap mascarado (compare com outros casos do banco em que o pH/pCO₂/HCO₃ também estavam normais, mas o AG estava elevado e escondia um processo real). Aqui, calcular o AG de forma independente — a mesma disciplina cobrada em TODOS os 99 casos anteriores — simplesmente CONFIRMA que não há nada a encontrar. É tão importante saber reconhecer isso quanto saber destrinchar um caso complexo: nem toda gasometria esconde uma pegadinha, e a mesma disciplina metódica que desmascara os casos complicados também deve, honestamente, concluir 'normal' quando é isso que os números mostram.",
         "armadilha": "Depois de dezenas de casos elaborados para confundir, desenvolver o hábito de 'procurar demais' e inventar um achado onde não há nenhum — rigor metodológico significa aplicar o MESMO processo de verificação a todo caso e aceitar o resultado, seja ele complexo ou trivialmente normal.",
         "detalheChave": "Contraste deliberado com outros dois casos do banco que também têm o trio ácido-base normal, mas por razões diferentes: aqui é porque o paciente realmente está saudável; num deles é porque o metabólito envolvido não é ácido apesar de doença real; no outro é porque a amostra colhida está errada. Três motivos completamente diferentes para o mesmo achado superficial ('tudo normal'), resolvidos apenas pelo contexto clínico completo, nunca pelo número isolado. Veja os casos relacionados abaixo.",
-        "conteudoComplementar": "Este banco cresceu de 20 para 100 casos ao longo de 5 lotes, cobrindo CAD e seus mimics, toda a família de acidoses/alcaloses metabólicas e respiratórias, toxicologia, endocrinologia, neuromuscular, pré-analítico e — por fim — o controle negativo genuíno. O método por trás de cada um foi sempre o mesmo: derivar o pH por Henderson-Hasselbalch, computar cada distúrbio/AG/AGc pelo mesmo motor determinístico (`core/abg_core.js` + `core/cad_core.js`), e nunca aceitar um número que não fosse mecanicamente verificável — a mesma diretriz-mãe deste projeto inteiro, aplicada até o último caso."
+        "conteudoComplementar": "Este banco cresceu de 20 para 100 casos ao longo de 5 lotes, cobrindo CAD e seus mimics, toda a família de acidoses/alcaloses metabólicas e respiratórias, toxicologia, endocrinologia, neuromuscular, pré-analítico e — por fim — o controle negativo genuíno. O método por trás de cada um foi sempre o mesmo: derivar o pH por Henderson-Hasselbalch, computar cada distúrbio/AG/AGc pelas mesmas fórmulas determinísticas, e nunca aceitar um número que não fosse mecanicamente verificável — a mesma disciplina do consenso clínico aplicada até o último caso."
       },
       "quiz": {
         "mcq": [

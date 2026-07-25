@@ -33,7 +33,7 @@
   "type": "vf",
   "q": "A insulina pode ser reiniciada assim que o K atingir 3,3 mEq/L.",
   "correct": false,
-  "exp": "Falso. O canon 2024 usa ≥ 3,5 como o número único de reinício. 3,3 é um piso antigo (2009)."
+  "exp": "Falso. O consenso 2024 usa ≥ 3,5 como o número único de reinício. 3,3 é um piso antigo (2009)."
  },
  {
   "type": "mcq",
@@ -51,7 +51,7 @@
   "type": "vf",
   "q": "Δ/Δ na faixa 0,4–0,8 é a faixa \"pura\" da cetoacidose.",
   "correct": false,
-  "exp": "Falso. Na convenção do canon (fronteiras 1 e 2), a pura é 1–2; abaixo de 1 já há componente hiperclorêmico. Rotular 0,4–0,8 como \"pura\" foi o erro corrigido."
+  "exp": "Falso. Na convenção adotada aqui (fronteiras 1 e 2), a pura é 1–2; abaixo de 1 já há componente hiperclorêmico. Rotular 0,4–0,8 como \"pura\" foi o erro corrigido."
  },
  {
   "type": "mcq",
