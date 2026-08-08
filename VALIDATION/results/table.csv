@@ -1,0 +1,3 @@
+caso,braco,dados_disponiveis_pct,recomendacao_motor,conduta_relatada,classificacao,desfecho,observacoes
+PIPE-001_SYNTHETIC [SYNTHETIC],acuracia,67%,t0: classica; K <3.5→insulina hold; t14: resolvida,insulina adiada por K; insulina 0.1 U/kg/h; reduzida+dextrose; K reposto antes da insulina; sem bicarbonato,motor_degradou · PENDENTE_ADJUDICACAO,resolução em 14h,
+PIPE-001_SYNTHETIC [SYNTHETIC],executabilidade_UPA,56%,t0: classica; K <3.5→insulina hold; t14: resolução INDETERMINADA (sem βHB),insulina adiada por K; insulina 0.1 U/kg/h; reduzida+dextrose; K reposto antes da insulina; sem bicarbonato,motor_degradou · PENDENTE_ADJUDICACAO,resolução em 14h,"mascarados na UPA: betaHydroxybutyrateMmolL, lactateMmolL"
