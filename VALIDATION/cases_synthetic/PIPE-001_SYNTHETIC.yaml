@@ -1,0 +1,119 @@
+# Caso SINTÉTICO de teste de pipeline — sem qualquer origem clínica real.
+# Números escolhidos apenas para exercitar o caminho feliz do runner
+# (CAD clássica fechando critério, K <3,5 no t0, resolução no último ponto).
+# NÃO usar para validação; o runner estampa SYNTHETIC em toda saída.
+meta:
+  id: PIPE-001_SYNTHETIC
+  synthetic: true
+  fonte:
+    citacao: "Caso sintético de pipeline — sem origem clínica"
+    doi: null
+    pmid: null
+  ano: 2026
+  contexto: PS
+  populacao: adulto
+  variante: classica
+  variante_observacao: null
+
+pontos:
+  - t: 0
+    labs:
+      glucoseMgDl: 480
+      na: 132
+      cl: 92
+      hco3: 8
+      k: 3.2
+      ph: 7.15
+      pco2: 23
+      betaHydroxybutyrateMmolL: 5.1
+      ketonuriaCruzes: 3
+      albumin: null
+      lactateMmolL: 1.8
+      bunMgDl: null
+      ureaMgDl: null
+    contexto_clinico:
+      knownDiabetes: true
+      suspectedSepsis: false
+      dialysisDependent: false
+      chronicityHint: null
+      pesoKg: 70
+    disponibilidade:
+      betaHydroxybutyrateMmolL: ausente_no_cenario_UPA
+      lactateMmolL: ausente_no_cenario_UPA
+    observacoes: null
+  - t: 6
+    labs:
+      glucoseMgDl: 210
+      na: 136
+      cl: 104
+      hco3: 14
+      k: 4.1
+      ph: 7.29
+      pco2: null
+      betaHydroxybutyrateMmolL: 1.4
+      ketonuriaCruzes: 2
+      albumin: null
+      lactateMmolL: null
+      bunMgDl: null
+      ureaMgDl: null
+    contexto_clinico:
+      knownDiabetes: true
+      suspectedSepsis: false
+      dialysisDependent: false
+      chronicityHint: null
+      pesoKg: 70
+    disponibilidade:
+      betaHydroxybutyrateMmolL: ausente_no_cenario_UPA
+    observacoes: null
+  - t: 14
+    labs:
+      glucoseMgDl: 165
+      na: 138
+      cl: 106
+      hco3: 19
+      k: 4.4
+      ph: 7.34
+      pco2: null
+      betaHydroxybutyrateMmolL: 0.4
+      ketonuriaCruzes: 1
+      albumin: null
+      lactateMmolL: null
+      bunMgDl: null
+      ureaMgDl: null
+    contexto_clinico:
+      knownDiabetes: true
+      suspectedSepsis: false
+      dialysisDependent: false
+      chronicityHint: null
+      pesoKg: 70
+    disponibilidade:
+      betaHydroxybutyrateMmolL: ausente_no_cenario_UPA
+    observacoes: null
+
+conduta_relatada:
+  insulina:
+    iniciada: true
+    adiada_por_potassio: true
+    taxa_inicial_U_kg_h: 0.1
+    reduzida_com_dextrose: true
+    bolus_inicial: false
+  potassio:
+    reposto_antes_da_insulina: true
+    reposto: true
+  bicarbonato:
+    administrado: false
+    ph_no_momento: null
+  fluidos:
+    texto: "cristaloide balanceado (sintético)"
+  texto_livre: null
+
+desfecho:
+  resolucao: true
+  criterio_resolucao_do_relato: "sintético — βHB <0,6 e HCO₃ ≥18"
+  tempo_ate_resolucao_h: 14
+  complicacoes: []
+  obito: false
+
+adjudicacao:
+  classificacao: PENDENTE
+  notas: null

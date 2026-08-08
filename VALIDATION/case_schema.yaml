@@ -1,0 +1,164 @@
+# =============================================================================
+# case_schema.yaml — Fase 0 · Como um relato de caso publicado vira entrada
+# do motor CAD 360. Versão 0.1 (aguardando aprovação do dono — nada de
+# extração de caso real antes disso).
+#
+# Princípios invioláveis (herdados do protocolo da Fase 0):
+#   * Nenhum valor é inventado ou imputado: campo não relatado = null, sempre.
+#   * Dados vêm EXCLUSIVAMENTE do relato publicado citado em meta.fonte.
+#   * Casos sintéticos (teste de pipeline) vivem em cases_synthetic/, com
+#     sufixo _SYNTHETIC no id e synthetic: true — o runner estampa isso em
+#     toda saída.
+#   * Unidades são as do motor (declaradas abaixo); se o relato usa outra
+#     (ex.: glicose em mmol/L), converte-se na extração e registra-se a
+#     conversão em observacoes do ponto temporal.
+#   * Julgamento clínico (concordante/divergente) NÃO é preenchido por
+#     máquina nem por assistente: adjudicacao nasce PENDENTE e é do dono.
+#
+# Unidades canônicas do motor (core/cad_core.js + canon/policy.json):
+#   glicose mg/dL · Na/Cl/HCO3/K/βHB/lactato mmol/L · albumina g/dL ·
+#   pH adimensional · pCO2 mmHg · cetonúria em cruzes (inteiro 0-4) ·
+#   BUN mg/dL ou ureia mg/dL (osm total apenas)
+# =============================================================================
+
+schema_version: "0.1"
+
+# ---- Identificação e proveniência -------------------------------------------
+meta:
+  id: string            # ex.: CASO-001 (real) | PIPE-001_SYNTHETIC (sintético)
+  synthetic: boolean    # true APENAS para caso de pipeline; runner exibe em toda saída
+  fonte:
+    citacao: string     # citação completa (autores, título, periódico, ano;vol:páginas)
+    doi: string|null
+    pmid: string|null
+  ano: integer          # ano de publicação do relato
+  contexto: enum        # UTI | PS | enfermaria | misto | nao_relatado
+  populacao: enum       # adulto | pediatrico
+  variante: enum        # classica | euglicemica_sglt2 | euglicemica_outra |
+                        # cad_hhs_mista | alcoolica_jejum | dialitica |
+                        # sepse_lactato | outra
+  variante_observacao: string|null   # texto livre se variante = outra
+
+# ---- Série temporal ---------------------------------------------------------
+# t0 = admissão/primeira avaliação do relato. Pontos subsequentes na ordem
+# cronológica do relato. Cada ponto carrega TODOS os insumos que o motor
+# aceita; ausente no relato = null (nunca imputar, nem "normal presumido").
+pontos:
+  - t: number           # horas desde t0 (t0 tem t: 0); se o relato só dá ordem
+                        # ("no dia seguinte"), usar a melhor âncora e registrar
+                        # a incerteza em observacoes
+    labs:
+      glucoseMgDl: number|null
+      na: number|null              # Na MEDIDO (nunca corrigido — regra do canon)
+      cl: number|null
+      hco3: number|null
+      k: number|null               # kMmolL do motor
+      ph: number|null
+      pco2: number|null            # habilita o braço de gasometria (abg_engine)
+      betaHydroxybutyrateMmolL: number|null
+      ketonuriaCruzes: integer|null   # 0-4
+      albumin: number|null         # g/dL; null => motor usa default 4.0 (registrado no log)
+      lactateMmolL: number|null
+      bunMgDl: number|null         # osm total/osm-gap apenas
+      ureaMgDl: number|null        # alternativa ao BUN (nunca os dois)
+    contexto_clinico:
+      knownDiabetes: boolean|null      # null = relato não informa
+      suspectedSepsis: boolean|null
+      dialysisDependent: boolean|null
+      chronicityHint: enum|null        # acute | chronic | null (só p/ abg)
+      pesoKg: number|null              # p/ traduzir U/kg/h em U/h na comparação
+    # Disponibilidade POR CAMPO deste ponto (campos não listados: derivado do
+    # valor — presente => disponivel, null => ausente_no_relato):
+    #   disponivel            — está no relato E existiria numa UPA
+    #   ausente_no_relato     — o relato não informa (valor obrigatoriamente null)
+    #   ausente_no_cenario_UPA — está no relato, mas indisponível no laboratório
+    #                            típico de UPA; o braço de executabilidade
+    #                            re-executa o ponto mascarando estes campos
+    disponibilidade:
+      betaHydroxybutyrateMmolL: ausente_no_cenario_UPA   # exemplo típico
+      # <campo>: <enum> ...
+    observacoes: string|null    # conversões de unidade, âncora temporal incerta etc.
+
+# ---- O que o caso publicado relata que foi feito ----------------------------
+# Estruturado no vocabulário do motor quando possível; texto livre quando não.
+# NUNCA preencher por inferência do que "deveria" ter sido feito.
+conduta_relatada:
+  insulina:
+    iniciada: boolean|null
+    adiada_por_potassio: boolean|null    # vocabulário do motor: insulin "hold"
+    taxa_inicial_U_kg_h: number|null     # ex.: 0.1
+    reduzida_com_dextrose: boolean|null  # vocabulário do motor: dextrose true
+    bolus_inicial: boolean|null
+  potassio:
+    reposto_antes_da_insulina: boolean|null
+    reposto: boolean|null
+  bicarbonato:
+    administrado: boolean|null
+    ph_no_momento: number|null
+  fluidos:
+    texto: string|null                   # regime relatado, texto livre
+  texto_livre: string|null               # tudo que não couber acima, citando o relato
+
+# ---- Desfecho do relato -----------------------------------------------------
+desfecho:
+  resolucao: boolean|null            # segundo o critério do próprio relato
+  criterio_resolucao_do_relato: string|null
+  tempo_ate_resolucao_h: number|null
+  complicacoes: [string]|null        # ex.: [hipoglicemia, hipocalemia, edema cerebral]
+  obito: boolean|null
+
+# ---- Adjudicação (do dono; o runner só marca o que é mecânico) --------------
+adjudicacao:
+  classificacao: PENDENTE            # PENDENTE | concordante | divergente
+                                     # (motor_degradou/motor_travou são marcados
+                                     #  automaticamente pelo runner, nunca aqui)
+  notas: string|null
+
+# =============================================================================
+# EXEMPLO COMENTADO (sintético, pipeline) — o arquivo real de exemplo vive em
+# VALIDATION/cases_synthetic/PIPE-001_SYNTHETIC.yaml; este bloco é ilustrativo.
+# =============================================================================
+# meta:
+#   id: PIPE-001_SYNTHETIC
+#   synthetic: true
+#   fonte: {citacao: "Caso sintético de pipeline — sem origem clínica", doi: null, pmid: null}
+#   ano: 2026
+#   contexto: PS
+#   populacao: adulto
+#   variante: classica
+#   variante_observacao: null
+# pontos:
+#   - t: 0
+#     labs:
+#       glucoseMgDl: 480, na: 132, cl: 92, hco3: 8, k: 3.2, ph: 7.15, pco2: 23,
+#       betaHydroxybutyrateMmolL: 5.1, ketonuriaCruzes: 3, albumin: null,
+#       lactateMmolL: 1.8, bunMgDl: null, ureaMgDl: null
+#     contexto_clinico: {knownDiabetes: true, suspectedSepsis: false,
+#                        dialysisDependent: false, chronicityHint: null, pesoKg: 70}
+#     disponibilidade:
+#       betaHydroxybutyrateMmolL: ausente_no_cenario_UPA
+#       lactateMmolL: ausente_no_cenario_UPA
+#     observacoes: null
+#   - t: 6
+#     labs: {glucoseMgDl: 210, na: 136, cl: 104, hco3: 14, k: 4.1, ph: 7.29, pco2: null,
+#            betaHydroxybutyrateMmolL: 1.4, ketonuriaCruzes: 2, albumin: null,
+#            lactateMmolL: null, bunMgDl: null, ureaMgDl: null}
+#     contexto_clinico: {knownDiabetes: true, suspectedSepsis: false,
+#                        dialysisDependent: false, chronicityHint: null, pesoKg: 70}
+#     disponibilidade:
+#       betaHydroxybutyrateMmolL: ausente_no_cenario_UPA
+#     observacoes: null
+# conduta_relatada:
+#   insulina: {iniciada: true, adiada_por_potassio: true, taxa_inicial_U_kg_h: 0.1,
+#              reduzida_com_dextrose: true, bolus_inicial: false}
+#   potassio: {reposto_antes_da_insulina: true, reposto: true}
+#   bicarbonato: {administrado: false, ph_no_momento: null}
+#   fluidos: {texto: "cristaloide balanceado (sintético)"}
+#   texto_livre: null
+# desfecho:
+#   resolucao: true
+#   criterio_resolucao_do_relato: "sintético — βHB <0,6 e HCO₃ ≥18"
+#   tempo_ate_resolucao_h: 14
+#   complicacoes: []
+#   obito: false
+# adjudicacao: {classificacao: PENDENTE, notas: null}

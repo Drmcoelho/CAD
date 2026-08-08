@@ -1,0 +1,2845 @@
+{
+ "note": "Trace de paridade gerado por js_trace_harness.js a partir da suíte JS oficial. Arquivo GERADO — não editar à mão; regenerar com: node pyengine/tests/js_trace_harness.js",
+ "nodeVersion": "v22.22.2",
+ "substrateHashes": {
+  "core/cad_core.js": "c07c37d62df6521b14097ddfb8321f9003f89c2a4eea7717ab63c820c9320c79",
+  "core/abg_core.js": "c65966361f553496c8ecb6c9722f3eb55feed13a9f68c47e784d8add87edfb5a",
+  "canon/policy.json": "ee88734ae4ff3bd2badd4270bd6f15f6a86a6e75481443f3c85d12c72e6221e5"
+ },
+ "assertions": {
+  "perFile": {
+   "core/cad_core.test.js": 71,
+   "core/cad_core.contract.test.js": 27,
+   "core/fixtures.test.js": 12,
+   "core/abg_core.test.js": 45
+  },
+  "total": 155
+ },
+ "policy": {
+  "cad": {
+   "version": "CAD360-ApA-2026-07-01",
+   "source": "Umpierrez et al. Hyperglycemic Crises in Adults With Diabetes: A Consensus Report. Diabetes Care 2024;47(8):1257-1275.",
+   "diagnosis": {
+    "glucoseMgDl": 200,
+    "betaHydroxybutyrateMmolL": 3,
+    "ketonuriaCruzesAtLeast": 2,
+    "ph": 7.3,
+    "bicarbonateMmolL": 18
+   },
+   "potassium": {
+    "replaceBelowMmolL": 5,
+    "targetLowMmolL": 4,
+    "targetHighMmolL": 5,
+    "holdInsulinBelowMmolL": 3.5
+   },
+   "bicarbonate": {
+    "considerBelowPh": 7
+   },
+   "phosphate": {
+    "considerBelowMmolL": 1
+   },
+   "insulin": {
+    "initialUnitsKgHour": 0.1,
+    "reducedUnitsKgHour": 0.05,
+    "reduceGlucoseBelowMgDl": 250
+   },
+   "resolution": {
+    "betaHydroxybutyrateBelowMmolL": 0.6,
+    "phAtLeast": 7.3,
+    "bicarbonateAtLeastMmolL": 18
+   },
+   "sodiumCorrection": {
+    "factorDefault": 1.6,
+    "factorSevereHyperglycemia": 2.4,
+    "severeHyperglycemiaAboveMgDl": 400
+   }
+  },
+  "abg": {
+   "version": "ABG-2026-07-05",
+   "source": "Abordagem stepwise classica (Boston/Narins) para gasometria; formulas de compensacao consistentes com Winter (cad_core.js) para a acidose metabolica.",
+   "normal": {
+    "phLow": 7.35,
+    "phHigh": 7.45,
+    "pco2Low": 35,
+    "pco2High": 45,
+    "hco3Low": 22,
+    "hco3High": 26
+   },
+   "compensation": {
+    "metabolicAcidosis": {
+     "nome": "Acidose metabólica",
+     "eixo": "pco2",
+     "formula": "pCO₂ esp = 1,5·HCO₃ + 8",
+     "tolerance": 2
+    },
+    "metabolicAlkalosis": {
+     "nome": "Alcalose metabólica",
+     "eixo": "pco2",
+     "formula": "pCO₂ esp = 0,7·HCO₃ + 21",
+     "tolerance": 2
+    },
+    "respiratoryAcidosisAcute": {
+     "nome": "Acidose respiratória aguda",
+     "eixo": "hco3",
+     "formula": "HCO₃ esp = 24 + 0,1·(pCO₂−40)",
+     "tolerance": 2
+    },
+    "respiratoryAcidosisChronic": {
+     "nome": "Acidose respiratória crônica",
+     "eixo": "hco3",
+     "formula": "HCO₃ esp = 24 + 0,35·(pCO₂−40)",
+     "tolerance": 3
+    },
+    "respiratoryAlkalosisAcute": {
+     "nome": "Alcalose respiratória aguda",
+     "eixo": "hco3",
+     "formula": "HCO₃ esp = 24 − 0,2·(40−pCO₂)",
+     "tolerance": 2
+    },
+    "respiratoryAlkalosisChronic": {
+     "nome": "Alcalose respiratória crônica",
+     "eixo": "hco3",
+     "formula": "HCO₃ esp = 24 − 0,4·(40−pCO₂)",
+     "tolerance": 3
+    }
+   }
+  }
+ },
+ "calls": [
+  {
+   "engine": "cad",
+   "fn": "anionGap",
+   "args": [
+    135,
+    99,
+    11
+   ],
+   "result": 25
+  },
+  {
+   "engine": "cad",
+   "fn": "correctedAnionGap",
+   "args": [
+    25,
+    2.8
+   ],
+   "result": 28
+  },
+  {
+   "engine": "cad",
+   "fn": "deltaRatio",
+   "args": [
+    28,
+    11
+   ],
+   "result": 1.2307692307692308
+  },
+  {
+   "engine": "cad",
+   "fn": "interpretDeltaRatio",
+   "args": [
+    1.2307692307692308
+   ],
+   "result": {
+    "band": "1-2",
+    "label": "AGMA de gap alto mais limpa",
+    "decision": "padrao esperado de cetoacidose sem mistura metabolica dominante"
+   }
+  },
+  {
+   "engine": "cad",
+   "fn": "winter",
+   "args": [
+    11
+   ],
+   "result": {
+    "expected": 24.5,
+    "low": 22.5,
+    "high": 26.5
+   }
+  },
+  {
+   "engine": "cad",
+   "fn": "effectiveOsmolality",
+   "args": [
+    135,
+    320
+   ],
+   "result": 287.77777777777777
+  },
+  {
+   "engine": "cad",
+   "fn": "deltaRatio",
+   "args": [
+    22,
+    10
+   ],
+   "result": 0.7142857142857143
+  },
+  {
+   "engine": "cad",
+   "fn": "interpretDeltaRatio",
+   "args": [
+    0.7142857142857143
+   ],
+   "result": {
+    "band": "<1",
+    "label": "AGMA + cauda hipercloremica/NAGMA",
+    "decision": "nao chamar de pura; procurar cloro/perda de HCO3 e tendencia temporal"
+   }
+  },
+  {
+   "engine": "cad",
+   "fn": "effectiveOsmolality",
+   "args": [
+    136,
+    360
+   ],
+   "result": 292
+  },
+  {
+   "engine": "cad",
+   "fn": "totalCalculatedOsmolality",
+   "args": [
+    {
+     "na": 136,
+     "glucoseMgDl": 360,
+     "bunMgDl": 42
+    }
+   ],
+   "result": 307
+  },
+  {
+   "engine": "cad",
+   "fn": "sodiumCorrectionFactor",
+   "args": [
+    360
+   ],
+   "result": 1.6
+  },
+  {
+   "engine": "cad",
+   "fn": "sodiumCorrectionFactor",
+   "args": [
+    600
+   ],
+   "result": 2.4
+  },
+  {
+   "engine": "cad",
+   "fn": "correctedSodium",
+   "args": [
+    130,
+    600
+   ],
+   "result": 142
+  },
+  {
+   "engine": "cad",
+   "fn": "potassiumPlan",
+   "args": [
+    3.2
+   ],
+   "result": {
+    "band": "<3.5",
+    "insulin": "hold",
+    "potassium": "replace before insulin; monitor closely",
+    "target": "4-5 mmol/L"
+   }
+  },
+  {
+   "engine": "cad",
+   "fn": "potassiumPlan",
+   "args": [
+    4.1
+   ],
+   "result": {
+    "band": "3.5-5.0",
+    "insulin": "allowed",
+    "potassium": "replace to maintain 4-5 mmol/L",
+    "target": "4-5 mmol/L"
+   }
+  },
+  {
+   "engine": "cad",
+   "fn": "potassiumPlan",
+   "args": [
+    5.2
+   ],
+   "result": {
+    "band": ">=5.0",
+    "insulin": "allowed",
+    "potassium": "no initial potassium; ECG/recheck",
+    "target": "4-5 mmol/L"
+   }
+  },
+  {
+   "engine": "cad",
+   "fn": "insulinPlan",
+   "args": [
+    {
+     "kMmolL": 3.2,
+     "glucoseMgDl": 300
+    }
+   ],
+   "result": {
+    "rateUnitsKgHour": 0,
+    "action": "hold insulin until K >= 3.5",
+    "dextrose": false,
+    "potassium": {
+     "band": "<3.5",
+     "insulin": "hold",
+     "potassium": "replace before insulin; monitor closely",
+     "target": "4-5 mmol/L"
+    }
+   }
+  },
+  {
+   "engine": "cad",
+   "fn": "insulinPlan",
+   "args": [
+    {
+     "kMmolL": 4.1,
+     "glucoseMgDl": 300
+    }
+   ],
+   "result": {
+    "rateUnitsKgHour": 0.1,
+    "action": "start fixed-rate insulin",
+    "dextrose": false,
+    "potassium": {
+     "band": "3.5-5.0",
+     "insulin": "allowed",
+     "potassium": "replace to maintain 4-5 mmol/L",
+     "target": "4-5 mmol/L"
+    }
+   }
+  },
+  {
+   "engine": "cad",
+   "fn": "insulinPlan",
+   "args": [
+    {
+     "kMmolL": 4.1,
+     "glucoseMgDl": 138
+    }
+   ],
+   "result": {
+    "rateUnitsKgHour": 0.05,
+    "action": "continue insulin with dextrose",
+    "dextrose": true,
+    "potassium": {
+     "band": "3.5-5.0",
+     "insulin": "allowed",
+     "potassium": "replace to maintain 4-5 mmol/L",
+     "target": "4-5 mmol/L"
+    }
+   }
+  },
+  {
+   "engine": "cad",
+   "fn": "insulinPlan",
+   "args": [
+    {
+     "kMmolL": 4.1,
+     "glucoseMgDl": 138
+    }
+   ],
+   "result": {
+    "rateUnitsKgHour": 0.05,
+    "action": "continue insulin with dextrose",
+    "dextrose": true,
+    "potassium": {
+     "band": "3.5-5.0",
+     "insulin": "allowed",
+     "potassium": "replace to maintain 4-5 mmol/L",
+     "target": "4-5 mmol/L"
+    }
+   }
+  },
+  {
+   "engine": "cad",
+   "fn": "hasDka",
+   "args": [
+    {
+     "knownDiabetes": true,
+     "glucoseMgDl": 138,
+     "betaHydroxybutyrateMmolL": 5.8,
+     "ph": 7.22,
+     "hco3": 9
+    }
+   ],
+   "result": true
+  },
+  {
+   "engine": "cad",
+   "fn": "isResolvedDka",
+   "args": [
+    {
+     "betaHydroxybutyrateMmolL": 0.5,
+     "ph": 7.31,
+     "hco3": 16
+    }
+   ],
+   "result": true
+  },
+  {
+   "engine": "cad",
+   "fn": "isResolvedDka",
+   "args": [
+    {
+     "betaHydroxybutyrateMmolL": 1.2,
+     "ph": 7.31,
+     "hco3": 18
+    }
+   ],
+   "result": false
+  },
+  {
+   "engine": "cad",
+   "fn": "hasDka",
+   "args": [
+    {
+     "knownDiabetes": true,
+     "glucoseMgDl": 138,
+     "betaHydroxybutyrateMmolL": 5.8,
+     "ph": 7.22
+    }
+   ],
+   "result": true
+  },
+  {
+   "engine": "cad",
+   "fn": "hasDka",
+   "args": [
+    {
+     "knownDiabetes": true,
+     "glucoseMgDl": 138,
+     "betaHydroxybutyrateMmolL": 5.8,
+     "hco3": 9
+    }
+   ],
+   "result": true
+  },
+  {
+   "engine": "cad",
+   "fn": "hasDka",
+   "args": [
+    {
+     "knownDiabetes": true,
+     "glucoseMgDl": 138,
+     "betaHydroxybutyrateMmolL": 5.8,
+     "hco3": 20
+    }
+   ],
+   "result": false
+  },
+  {
+   "engine": "cad",
+   "fn": "isResolvedDka",
+   "args": [
+    {
+     "betaHydroxybutyrateMmolL": 0.5,
+     "hco3": 18
+    }
+   ],
+   "result": true
+  },
+  {
+   "engine": "cad",
+   "fn": "isResolvedDka",
+   "args": [
+    {
+     "betaHydroxybutyrateMmolL": 0.5,
+     "ph": 7.31
+    }
+   ],
+   "result": true
+  },
+  {
+   "engine": "cad",
+   "fn": "hasDka",
+   "args": [
+    {
+     "knownDiabetes": true,
+     "glucoseMgDl": 138,
+     "betaHydroxybutyrateMmolL": 5.8
+    }
+   ],
+   "error": {
+    "name": "TypeError",
+    "message": "hasDka requires at least one of ph or hco3"
+   }
+  },
+  {
+   "engine": "cad",
+   "fn": "isResolvedDka",
+   "args": [
+    {
+     "betaHydroxybutyrateMmolL": 0.5
+    }
+   ],
+   "error": {
+    "name": "TypeError",
+    "message": "isResolvedDka requires at least one of ph or hco3"
+   }
+  },
+  {
+   "engine": "cad",
+   "fn": "classifyDkaProfile",
+   "args": [
+    {
+     "na": 140,
+     "cl": 100
+    }
+   ],
+   "result": {
+    "insufficient": true,
+    "missing": [
+     "hco3",
+     "glucoseMgDl",
+     "ph",
+     "betaHydroxybutyrateMmolL|ketonuriaCruzes"
+    ]
+   }
+  },
+  {
+   "engine": "cad",
+   "fn": "classifyDkaProfile",
+   "args": [
+    {
+     "na": 132,
+     "cl": 92,
+     "hco3": 8,
+     "glucoseMgDl": 480,
+     "ketonuriaCruzes": 3,
+     "ph": 7.15
+    }
+   ],
+   "result": {
+    "insufficient": false,
+    "computed": {
+     "ag": 32,
+     "agc": 32,
+     "deltaRatio": 1.25,
+     "deltaBand": "1-2",
+     "effectiveOsmolality": 290.7,
+     "hasDka": true,
+     "isResolvedDka": null,
+     "ketoneMarker": "cetonuriaCruzes",
+     "potassiumPlan": null
+    },
+    "matches": [
+     {
+      "id": "classica",
+      "reason": "critério de CAD fechado, sem sinal específico de outro fenótipo — apresentação clássica."
+     }
+    ]
+   }
+  },
+  {
+   "engine": "cad",
+   "fn": "classifyDkaProfile",
+   "args": [
+    {
+     "na": 138,
+     "cl": 110,
+     "hco3": 13,
+     "glucoseMgDl": 130,
+     "ketonuriaCruzes": 1,
+     "ph": 7.31
+    }
+   ],
+   "result": {
+    "insufficient": false,
+    "computed": {
+     "ag": 15,
+     "agc": 15,
+     "deltaRatio": 0.27,
+     "deltaBand": "<1",
+     "effectiveOsmolality": 283.2,
+     "hasDka": false,
+     "isResolvedDka": null,
+     "ketoneMarker": "cetonuriaCruzes",
+     "potassiumPlan": null
+    },
+    "matches": [
+     {
+      "id": "parcial",
+      "reason": "cetose (cruzes) abaixo do limiar diagnóstico, com acidose residual — pode ser cetose ainda em resolução. Sem β-HB sérico, cetonúria isolada não confirma qual das duas hipóteses é a certa (acetoacetato pode subir durante o próprio tratamento, mesmo com a cetose resolvendo)."
+     },
+     {
+      "id": "hipercloremica",
+      "reason": "cetose (cruzes) abaixo do limiar diagnóstico, com acidose residual — pode ser cauda hiperclorêmica já instalada em vez de cetose ainda ativa. Sem β-HB sérico, cetonúria isolada não confirma qual das duas hipóteses é a certa."
+     }
+    ]
+   }
+  },
+  {
+   "engine": "cad",
+   "fn": "classifyDkaProfile",
+   "args": [
+    {
+     "na": 140,
+     "cl": 104,
+     "hco3": 16,
+     "glucoseMgDl": 68,
+     "betaHydroxybutyrateMmolL": 5,
+     "ph": 7.3,
+     "knownDiabetes": false
+    }
+   ],
+   "result": {
+    "insufficient": false,
+    "computed": {
+     "ag": 20,
+     "agc": 20,
+     "deltaRatio": 1,
+     "deltaBand": "1-2",
+     "effectiveOsmolality": 283.8,
+     "hasDka": false,
+     "isResolvedDka": false,
+     "ketoneMarker": "betaHB",
+     "potassiumPlan": null
+    },
+    "matches": [
+     {
+      "id": "alcoolica-jejum",
+      "reason": "cetose real (βHB 5), mas o eixo glicêmico do critério formal não fecha (não-diabético + glicose <200) — não é CAD diabética."
+     }
+    ]
+   }
+  },
+  {
+   "engine": "cad",
+   "fn": "classifyDkaProfile",
+   "args": [
+    {
+     "na": 130,
+     "cl": 88,
+     "hco3": 14,
+     "glucoseMgDl": 600,
+     "betaHydroxybutyrateMmolL": 4.2,
+     "ph": 7.21
+    }
+   ],
+   "result": {
+    "insufficient": false,
+    "computed": {
+     "ag": 28,
+     "agc": 28,
+     "deltaRatio": 1.6,
+     "deltaBand": "1-2",
+     "effectiveOsmolality": 293.3,
+     "hasDka": true,
+     "isResolvedDka": false,
+     "ketoneMarker": "betaHB",
+     "potassiumPlan": null
+    },
+    "matches": [
+     {
+      "id": "cad-hhs",
+      "reason": "glicose muito alta — considerar sobreposição com HHS."
+     }
+    ]
+   }
+  },
+  {
+   "engine": "cad",
+   "fn": "classifyDkaProfile",
+   "args": [
+    {
+     "na": 133,
+     "cl": 100,
+     "hco3": 9,
+     "glucoseMgDl": 350,
+     "betaHydroxybutyrateMmolL": 4,
+     "ph": 7.12,
+     "lactateMmolL": 6
+    }
+   ],
+   "result": {
+    "insufficient": false,
+    "computed": {
+     "ag": 24,
+     "agc": 24,
+     "deltaRatio": 0.8,
+     "deltaBand": "<1",
+     "effectiveOsmolality": 285.4,
+     "hasDka": true,
+     "isResolvedDka": false,
+     "ketoneMarker": "betaHB",
+     "potassiumPlan": null
+    },
+    "matches": [
+     {
+      "id": "sepse-lactato",
+      "reason": "lactato elevado e/ou contexto séptico — acidose provavelmente mista (cetona + lactato)."
+     },
+     {
+      "id": null,
+      "reason": "Δ/Δ 0.8 <1 — componente hiperclorêmico associado, independente do perfil principal."
+     }
+    ]
+   }
+  },
+  {
+   "engine": "cad",
+   "fn": "classifyDkaProfile",
+   "args": [
+    {
+     "na": 140,
+     "cl": 104,
+     "hco3": 24,
+     "glucoseMgDl": 110,
+     "betaHydroxybutyrateMmolL": 0.2,
+     "ph": 7.4
+    }
+   ],
+   "result": {
+    "insufficient": false,
+    "computed": {
+     "ag": 12,
+     "agc": 12,
+     "deltaRatio": null,
+     "deltaBand": null,
+     "effectiveOsmolality": 286.1,
+     "hasDka": false,
+     "isResolvedDka": true,
+     "ketoneMarker": "betaHB",
+     "potassiumPlan": null
+    },
+    "matches": []
+   }
+  },
+  {
+   "engine": "cad",
+   "fn": "classifyDkaProfile",
+   "args": [
+    {
+     "na": 138,
+     "cl": 94,
+     "hco3": 8,
+     "glucoseMgDl": 780,
+     "ketonuriaCruzes": 4,
+     "ph": 6.98,
+     "albumin": 3.2,
+     "knownDiabetes": true,
+     "dialysisDependent": true
+    }
+   ],
+   "result": {
+    "insufficient": false,
+    "computed": {
+     "ag": 36,
+     "agc": 38,
+     "deltaRatio": 1.63,
+     "deltaBand": "1-2",
+     "effectiveOsmolality": 319.3,
+     "hasDka": true,
+     "isResolvedDka": null,
+     "ketoneMarker": "cetonuriaCruzes",
+     "potassiumPlan": null
+    },
+    "matches": [
+     {
+      "id": "dialitica",
+      "reason": "DRC dialítica — sem clearance renal, a glicose não tem via de escape (diurese osmótica) e o K carece de via de excreção; volume/K/ácido-base seguem lógica distinta da CAD com função renal preservada."
+     },
+     {
+      "id": null,
+      "reason": "osm efetiva 319.3 > 300 — território hiperosmolar acentuado pela ausência de clearance renal de glicose, não necessariamente sobreposição do fenótipo CAD+HHS."
+     }
+    ]
+   }
+  },
+  {
+   "engine": "cad",
+   "fn": "classifyDkaProfile",
+   "args": [
+    {
+     "na": 133,
+     "cl": 100,
+     "hco3": 9,
+     "glucoseMgDl": 350,
+     "ketonuriaCruzes": 3,
+     "ph": 7.12,
+     "dialysisDependent": true,
+     "lactateMmolL": 6
+    }
+   ],
+   "result": {
+    "insufficient": false,
+    "computed": {
+     "ag": 24,
+     "agc": 24,
+     "deltaRatio": 0.8,
+     "deltaBand": "<1",
+     "effectiveOsmolality": 285.4,
+     "hasDka": true,
+     "isResolvedDka": null,
+     "ketoneMarker": "cetonuriaCruzes",
+     "potassiumPlan": null
+    },
+    "matches": [
+     {
+      "id": "dialitica",
+      "reason": "DRC dialítica — sem clearance renal, a glicose não tem via de escape (diurese osmótica) e o K carece de via de excreção; volume/K/ácido-base seguem lógica distinta da CAD com função renal preservada."
+     },
+     {
+      "id": "sepse-lactato",
+      "reason": "lactato elevado e/ou contexto séptico — acidose provavelmente mista (cetona + lactato)."
+     },
+     {
+      "id": null,
+      "reason": "Δ/Δ 0.8 <1 — componente hiperclorêmico associado, independente do perfil principal."
+     }
+    ]
+   }
+  },
+  {
+   "engine": "cad",
+   "fn": "classifyDkaProfile",
+   "args": [
+    {
+     "na": 132,
+     "cl": 92,
+     "hco3": 8,
+     "glucoseMgDl": 480,
+     "ketonuriaCruzes": 3,
+     "ph": 7.15
+    }
+   ],
+   "result": {
+    "insufficient": false,
+    "computed": {
+     "ag": 32,
+     "agc": 32,
+     "deltaRatio": 1.25,
+     "deltaBand": "1-2",
+     "effectiveOsmolality": 290.7,
+     "hasDka": true,
+     "isResolvedDka": null,
+     "ketoneMarker": "cetonuriaCruzes",
+     "potassiumPlan": null
+    },
+    "matches": [
+     {
+      "id": "classica",
+      "reason": "critério de CAD fechado, sem sinal específico de outro fenótipo — apresentação clássica."
+     }
+    ]
+   }
+  },
+  {
+   "engine": "cad",
+   "fn": "classifyDkaProfile",
+   "args": [
+    {
+     "na": 132,
+     "cl": 92,
+     "hco3": 8,
+     "glucoseMgDl": 480,
+     "ketonuriaCruzes": 3,
+     "ph": 7.15,
+     "kMmolL": 3.2
+    }
+   ],
+   "result": {
+    "insufficient": false,
+    "computed": {
+     "ag": 32,
+     "agc": 32,
+     "deltaRatio": 1.25,
+     "deltaBand": "1-2",
+     "effectiveOsmolality": 290.7,
+     "hasDka": true,
+     "isResolvedDka": null,
+     "ketoneMarker": "cetonuriaCruzes",
+     "potassiumPlan": {
+      "band": "<3.5",
+      "insulin": "hold",
+      "potassium": "replace before insulin; monitor closely",
+      "target": "4-5 mmol/L"
+     }
+    },
+    "matches": [
+     {
+      "id": "classica",
+      "reason": "critério de CAD fechado, sem sinal específico de outro fenótipo — apresentação clássica."
+     },
+     {
+      "id": null,
+      "reason": "K 3.2 <3,5 — adiar a insulina e repor potássio primeiro, independente do perfil principal."
+     }
+    ]
+   }
+  },
+  {
+   "engine": "cad",
+   "fn": "classifyDkaProfile",
+   "args": [
+    {
+     "na": 132,
+     "cl": 92,
+     "hco3": 8,
+     "glucoseMgDl": 480,
+     "ketonuriaCruzes": 3,
+     "ph": 7.15,
+     "kMmolL": 5.5
+    }
+   ],
+   "result": {
+    "insufficient": false,
+    "computed": {
+     "ag": 32,
+     "agc": 32,
+     "deltaRatio": 1.25,
+     "deltaBand": "1-2",
+     "effectiveOsmolality": 290.7,
+     "hasDka": true,
+     "isResolvedDka": null,
+     "ketoneMarker": "cetonuriaCruzes",
+     "potassiumPlan": {
+      "band": ">=5.0",
+      "insulin": "allowed",
+      "potassium": "no initial potassium; ECG/recheck",
+      "target": "4-5 mmol/L"
+     }
+    },
+    "matches": [
+     {
+      "id": "classica",
+      "reason": "critério de CAD fechado, sem sinal específico de outro fenótipo — apresentação clássica."
+     },
+     {
+      "id": null,
+      "reason": "K 5.5 ≥5,0 — insulina liberada sem reposição inicial de potássio; reavaliar com ECG, independente do perfil principal."
+     }
+    ]
+   }
+  },
+  {
+   "engine": "cad",
+   "fn": "classifyDkaProfile",
+   "args": [
+    {
+     "na": 132,
+     "cl": 92,
+     "hco3": 8,
+     "glucoseMgDl": 480,
+     "ketonuriaCruzes": 3,
+     "ph": 7.15,
+     "kMmolL": 4.2
+    }
+   ],
+   "result": {
+    "insufficient": false,
+    "computed": {
+     "ag": 32,
+     "agc": 32,
+     "deltaRatio": 1.25,
+     "deltaBand": "1-2",
+     "effectiveOsmolality": 290.7,
+     "hasDka": true,
+     "isResolvedDka": null,
+     "ketoneMarker": "cetonuriaCruzes",
+     "potassiumPlan": {
+      "band": "3.5-5.0",
+      "insulin": "allowed",
+      "potassium": "replace to maintain 4-5 mmol/L",
+      "target": "4-5 mmol/L"
+     }
+    },
+    "matches": [
+     {
+      "id": "classica",
+      "reason": "critério de CAD fechado, sem sinal específico de outro fenótipo — apresentação clássica."
+     }
+    ]
+   }
+  },
+  {
+   "engine": "cad",
+   "fn": "effectiveOsmolality",
+   "args": [
+    136,
+    360
+   ],
+   "result": 292
+  },
+  {
+   "engine": "cad",
+   "fn": "round",
+   "args": [
+    292,
+    1
+   ],
+   "result": 292
+  },
+  {
+   "engine": "cad",
+   "fn": "classifyDkaProfile",
+   "args": [
+    {
+     "na": 132,
+     "cl": 92,
+     "hco3": 8,
+     "glucoseMgDl": 480,
+     "ketonuriaCruzes": 3,
+     "ph": 7.15
+    }
+   ],
+   "result": {
+    "insufficient": false,
+    "computed": {
+     "ag": 32,
+     "agc": 32,
+     "deltaRatio": 1.25,
+     "deltaBand": "1-2",
+     "effectiveOsmolality": 290.7,
+     "hasDka": true,
+     "isResolvedDka": null,
+     "ketoneMarker": "cetonuriaCruzes",
+     "potassiumPlan": null
+    },
+    "matches": [
+     {
+      "id": "classica",
+      "reason": "critério de CAD fechado, sem sinal específico de outro fenótipo — apresentação clássica."
+     }
+    ]
+   }
+  },
+  {
+   "engine": "cad",
+   "fn": "classifyDkaProfile",
+   "args": [
+    {
+     "na": 132,
+     "cl": 92,
+     "hco3": 8,
+     "glucoseMgDl": 480,
+     "ketonuriaCruzes": 3,
+     "ph": 7.15,
+     "kMmolL": {
+      "__nan__": true
+     }
+    }
+   ],
+   "result": {
+    "insufficient": false,
+    "computed": {
+     "ag": 32,
+     "agc": 32,
+     "deltaRatio": 1.25,
+     "deltaBand": "1-2",
+     "effectiveOsmolality": 290.7,
+     "hasDka": true,
+     "isResolvedDka": null,
+     "ketoneMarker": "cetonuriaCruzes",
+     "potassiumPlan": null
+    },
+    "matches": [
+     {
+      "id": "classica",
+      "reason": "critério de CAD fechado, sem sinal específico de outro fenótipo — apresentação clássica."
+     }
+    ]
+   }
+  },
+  {
+   "engine": "cad",
+   "fn": "classifyDkaProfile",
+   "args": [
+    {
+     "na": {
+      "__nan__": true
+     },
+     "cl": 92,
+     "hco3": 8,
+     "glucoseMgDl": 480,
+     "ketonuriaCruzes": 3,
+     "ph": 7.15
+    }
+   ],
+   "result": {
+    "insufficient": true,
+    "missing": [
+     "na"
+    ]
+   }
+  },
+  {
+   "engine": "cad",
+   "fn": "classifyDkaProfile",
+   "args": [
+    {
+     "na": 132,
+     "cl": {
+      "__nan__": true
+     },
+     "hco3": 8,
+     "glucoseMgDl": 480,
+     "ketonuriaCruzes": 3,
+     "ph": 7.15
+    }
+   ],
+   "result": {
+    "insufficient": true,
+    "missing": [
+     "cl"
+    ]
+   }
+  },
+  {
+   "engine": "cad",
+   "fn": "classifyDkaProfile",
+   "args": [
+    {
+     "na": 132,
+     "cl": 92,
+     "hco3": {
+      "__nan__": true
+     },
+     "glucoseMgDl": 480,
+     "ketonuriaCruzes": 3,
+     "ph": 7.15
+    }
+   ],
+   "result": {
+    "insufficient": true,
+    "missing": [
+     "hco3"
+    ]
+   }
+  },
+  {
+   "engine": "cad",
+   "fn": "classifyDkaProfile",
+   "args": [
+    {
+     "na": 132,
+     "cl": 92,
+     "hco3": 8,
+     "glucoseMgDl": {
+      "__nan__": true
+     },
+     "ketonuriaCruzes": 3,
+     "ph": 7.15
+    }
+   ],
+   "result": {
+    "insufficient": true,
+    "missing": [
+     "glucoseMgDl"
+    ]
+   }
+  },
+  {
+   "engine": "cad",
+   "fn": "classifyDkaProfile",
+   "args": [
+    {
+     "na": 132,
+     "cl": 92,
+     "hco3": 8,
+     "glucoseMgDl": 480,
+     "ketonuriaCruzes": 3,
+     "ph": {
+      "__nan__": true
+     }
+    }
+   ],
+   "result": {
+    "insufficient": true,
+    "missing": [
+     "ph"
+    ]
+   }
+  },
+  {
+   "engine": "cad",
+   "fn": "classifyDkaProfile",
+   "args": [
+    {
+     "na": 132,
+     "cl": 92,
+     "hco3": 8,
+     "glucoseMgDl": 480,
+     "ketonuriaCruzes": 3,
+     "ph": 7.15,
+     "kMmolL": 3.499
+    }
+   ],
+   "result": {
+    "insufficient": false,
+    "computed": {
+     "ag": 32,
+     "agc": 32,
+     "deltaRatio": 1.25,
+     "deltaBand": "1-2",
+     "effectiveOsmolality": 290.7,
+     "hasDka": true,
+     "isResolvedDka": null,
+     "ketoneMarker": "cetonuriaCruzes",
+     "potassiumPlan": {
+      "band": "<3.5",
+      "insulin": "hold",
+      "potassium": "replace before insulin; monitor closely",
+      "target": "4-5 mmol/L"
+     }
+    },
+    "matches": [
+     {
+      "id": "classica",
+      "reason": "critério de CAD fechado, sem sinal específico de outro fenótipo — apresentação clássica."
+     },
+     {
+      "id": null,
+      "reason": "K 3.499 <3,5 — adiar a insulina e repor potássio primeiro, independente do perfil principal."
+     }
+    ]
+   }
+  },
+  {
+   "engine": "cad",
+   "fn": "classifyDkaProfile",
+   "args": [
+    {
+     "na": 132,
+     "cl": 92,
+     "hco3": 8,
+     "glucoseMgDl": 480,
+     "ketonuriaCruzes": 3,
+     "ph": 7.15,
+     "kMmolL": 3.5
+    }
+   ],
+   "result": {
+    "insufficient": false,
+    "computed": {
+     "ag": 32,
+     "agc": 32,
+     "deltaRatio": 1.25,
+     "deltaBand": "1-2",
+     "effectiveOsmolality": 290.7,
+     "hasDka": true,
+     "isResolvedDka": null,
+     "ketoneMarker": "cetonuriaCruzes",
+     "potassiumPlan": {
+      "band": "3.5-5.0",
+      "insulin": "allowed",
+      "potassium": "replace to maintain 4-5 mmol/L",
+      "target": "4-5 mmol/L"
+     }
+    },
+    "matches": [
+     {
+      "id": "classica",
+      "reason": "critério de CAD fechado, sem sinal específico de outro fenótipo — apresentação clássica."
+     }
+    ]
+   }
+  },
+  {
+   "engine": "cad",
+   "fn": "classifyDkaProfile",
+   "args": [
+    {
+     "na": 132,
+     "cl": 92,
+     "hco3": 8,
+     "glucoseMgDl": 480,
+     "ketonuriaCruzes": 3,
+     "ph": 7.15,
+     "kMmolL": 4.999
+    }
+   ],
+   "result": {
+    "insufficient": false,
+    "computed": {
+     "ag": 32,
+     "agc": 32,
+     "deltaRatio": 1.25,
+     "deltaBand": "1-2",
+     "effectiveOsmolality": 290.7,
+     "hasDka": true,
+     "isResolvedDka": null,
+     "ketoneMarker": "cetonuriaCruzes",
+     "potassiumPlan": {
+      "band": "3.5-5.0",
+      "insulin": "allowed",
+      "potassium": "replace to maintain 4-5 mmol/L",
+      "target": "4-5 mmol/L"
+     }
+    },
+    "matches": [
+     {
+      "id": "classica",
+      "reason": "critério de CAD fechado, sem sinal específico de outro fenótipo — apresentação clássica."
+     }
+    ]
+   }
+  },
+  {
+   "engine": "cad",
+   "fn": "classifyDkaProfile",
+   "args": [
+    {
+     "na": 132,
+     "cl": 92,
+     "hco3": 8,
+     "glucoseMgDl": 480,
+     "ketonuriaCruzes": 3,
+     "ph": 7.15,
+     "kMmolL": 5
+    }
+   ],
+   "result": {
+    "insufficient": false,
+    "computed": {
+     "ag": 32,
+     "agc": 32,
+     "deltaRatio": 1.25,
+     "deltaBand": "1-2",
+     "effectiveOsmolality": 290.7,
+     "hasDka": true,
+     "isResolvedDka": null,
+     "ketoneMarker": "cetonuriaCruzes",
+     "potassiumPlan": {
+      "band": ">=5.0",
+      "insulin": "allowed",
+      "potassium": "no initial potassium; ECG/recheck",
+      "target": "4-5 mmol/L"
+     }
+    },
+    "matches": [
+     {
+      "id": "classica",
+      "reason": "critério de CAD fechado, sem sinal específico de outro fenótipo — apresentação clássica."
+     },
+     {
+      "id": null,
+      "reason": "K 5 ≥5,0 — insulina liberada sem reposição inicial de potássio; reavaliar com ECG, independente do perfil principal."
+     }
+    ]
+   }
+  },
+  {
+   "engine": "cad",
+   "fn": "classifyDkaProfile",
+   "args": [
+    {
+     "na": 132,
+     "cl": 92,
+     "hco3": 8,
+     "glucoseMgDl": 480,
+     "ketonuriaCruzes": 3,
+     "ph": 7.15,
+     "kMmolL": "4.2"
+    }
+   ],
+   "error": {
+    "name": "TypeError",
+    "message": "kMmolL must be a finite number"
+   }
+  },
+  {
+   "engine": "cad",
+   "fn": "classifyDkaProfile",
+   "args": [
+    {
+     "na": 132,
+     "cl": 92,
+     "hco3": 8,
+     "glucoseMgDl": 480,
+     "ketonuriaCruzes": 3,
+     "ph": 7.15,
+     "kMmolL": {
+      "__inf__": 1
+     }
+    }
+   ],
+   "error": {
+    "name": "TypeError",
+    "message": "kMmolL must be a finite number"
+   }
+  },
+  {
+   "engine": "cad",
+   "fn": "classifyDkaProfile",
+   "args": [
+    {
+     "na": 132,
+     "cl": 92,
+     "hco3": 8,
+     "glucoseMgDl": 480,
+     "ketonuriaCruzes": 3,
+     "ph": 7.15,
+     "kMmolL": {
+      "__inf__": -1
+     }
+    }
+   ],
+   "error": {
+    "name": "TypeError",
+    "message": "kMmolL must be a finite number"
+   }
+  },
+  {
+   "engine": "cad",
+   "fn": "classifyDkaProfile",
+   "args": [
+    {
+     "na": 132,
+     "cl": 92,
+     "hco3": 8,
+     "glucoseMgDl": 480,
+     "ketonuriaCruzes": 3,
+     "ph": 7.15,
+     "kMmolL": {}
+    }
+   ],
+   "error": {
+    "name": "TypeError",
+    "message": "kMmolL must be a finite number"
+   }
+  },
+  {
+   "engine": "cad",
+   "fn": "classifyDkaProfile",
+   "args": [
+    {
+     "na": 132,
+     "cl": 92,
+     "hco3": 8,
+     "glucoseMgDl": 480,
+     "ketonuriaCruzes": 3,
+     "ph": 7.15,
+     "kMmolL": []
+    }
+   ],
+   "error": {
+    "name": "TypeError",
+    "message": "kMmolL must be a finite number"
+   }
+  },
+  {
+   "engine": "cad",
+   "fn": "anionGap",
+   "args": [
+    140,
+    108,
+    10
+   ],
+   "result": 22
+  },
+  {
+   "engine": "cad",
+   "fn": "correctedAnionGap",
+   "args": [
+    22,
+    4
+   ],
+   "result": 22
+  },
+  {
+   "engine": "cad",
+   "fn": "deltaRatio",
+   "args": [
+    22,
+    10
+   ],
+   "result": 0.7142857142857143
+  },
+  {
+   "engine": "cad",
+   "fn": "interpretDeltaRatio",
+   "args": [
+    0.7142857142857143
+   ],
+   "result": {
+    "band": "<1",
+    "label": "AGMA + cauda hipercloremica/NAGMA",
+    "decision": "nao chamar de pura; procurar cloro/perda de HCO3 e tendencia temporal"
+   }
+  },
+  {
+   "engine": "cad",
+   "fn": "anionGap",
+   "args": [
+    140,
+    105,
+    9
+   ],
+   "result": 26
+  },
+  {
+   "engine": "cad",
+   "fn": "correctedAnionGap",
+   "args": [
+    26,
+    4
+   ],
+   "result": 26
+  },
+  {
+   "engine": "cad",
+   "fn": "deltaRatio",
+   "args": [
+    26,
+    9
+   ],
+   "result": 0.9333333333333333
+  },
+  {
+   "engine": "cad",
+   "fn": "interpretDeltaRatio",
+   "args": [
+    0.9333333333333333
+   ],
+   "result": {
+    "band": "<1",
+    "label": "AGMA + cauda hipercloremica/NAGMA",
+    "decision": "nao chamar de pura; procurar cloro/perda de HCO3 e tendencia temporal"
+   }
+  },
+  {
+   "engine": "cad",
+   "fn": "anionGap",
+   "args": [
+    140,
+    104,
+    12
+   ],
+   "result": 24
+  },
+  {
+   "engine": "cad",
+   "fn": "correctedAnionGap",
+   "args": [
+    24,
+    4
+   ],
+   "result": 24
+  },
+  {
+   "engine": "cad",
+   "fn": "deltaRatio",
+   "args": [
+    24,
+    12
+   ],
+   "result": 1
+  },
+  {
+   "engine": "cad",
+   "fn": "interpretDeltaRatio",
+   "args": [
+    1
+   ],
+   "result": {
+    "band": "1-2",
+    "label": "AGMA de gap alto mais limpa",
+    "decision": "padrao esperado de cetoacidose sem mistura metabolica dominante"
+   }
+  },
+  {
+   "engine": "cad",
+   "fn": "anionGap",
+   "args": [
+    145,
+    98,
+    14
+   ],
+   "result": 33
+  },
+  {
+   "engine": "cad",
+   "fn": "correctedAnionGap",
+   "args": [
+    33,
+    4
+   ],
+   "result": 33
+  },
+  {
+   "engine": "cad",
+   "fn": "deltaRatio",
+   "args": [
+    33,
+    14
+   ],
+   "result": 2.1
+  },
+  {
+   "engine": "cad",
+   "fn": "interpretDeltaRatio",
+   "args": [
+    2.1
+   ],
+   "result": {
+    "band": ">2",
+    "label": "alcalose metabolica associada ou HCO3 previo alto",
+    "decision": "procurar vomitos, diuretico, contracao ou bicarbonato previo"
+   }
+  },
+  {
+   "engine": "cad",
+   "fn": "effectiveOsmolality",
+   "args": [
+    140,
+    140
+   ],
+   "result": 287.77777777777777
+  },
+  {
+   "engine": "cad",
+   "fn": "effectiveOsmolality",
+   "args": [
+    130,
+    600
+   ],
+   "result": 293.3333333333333
+  },
+  {
+   "engine": "cad",
+   "fn": "potassiumPlan",
+   "args": [
+    3.2
+   ],
+   "result": {
+    "band": "<3.5",
+    "insulin": "hold",
+    "potassium": "replace before insulin; monitor closely",
+    "target": "4-5 mmol/L"
+   }
+  },
+  {
+   "engine": "cad",
+   "fn": "potassiumPlan",
+   "args": [
+    5
+   ],
+   "result": {
+    "band": ">=5.0",
+    "insulin": "allowed",
+    "potassium": "no initial potassium; ECG/recheck",
+    "target": "4-5 mmol/L"
+   }
+  },
+  {
+   "engine": "cad",
+   "fn": "round",
+   "args": [
+    23,
+    1
+   ],
+   "result": 23
+  },
+  {
+   "engine": "cad",
+   "fn": "round",
+   "args": [
+    21,
+    1
+   ],
+   "result": 21
+  },
+  {
+   "engine": "cad",
+   "fn": "round",
+   "args": [
+    25,
+    1
+   ],
+   "result": 25
+  },
+  {
+   "engine": "abg",
+   "fn": "classifyPrimaryDisturbance",
+   "args": [
+    {
+     "ph": 7.25,
+     "pco2": 22,
+     "hco3": 10
+    }
+   ],
+   "result": {
+    "ph": 7.25,
+    "pco2": 22,
+    "hco3": 10,
+    "acidemia": true,
+    "alkalemia": false,
+    "phNormal": false,
+    "components": {
+     "metabolicAcidosis": true,
+     "metabolicAlkalosis": false,
+     "respiratoryAcidosis": false,
+     "respiratoryAlkalosis": true
+    },
+    "primary": [
+     {
+      "type": "metabolicAcidosis",
+      "reason": "pH 7.25 acidêmico com HCO₃ 10 < 22 — componente metabólico acidificante primário; pCO₂ 22 baixo é a resposta respiratória compensatória (Winter)."
+     }
+    ],
+    "compensationCheck": {
+     "for": "metabolicAcidosis",
+     "measured": 22,
+     "expected": 23,
+     "low": 21,
+     "high": 25,
+     "verdict": "adequado"
+    },
+    "ag": null,
+    "agc": null,
+    "notes": []
+   }
+  },
+  {
+   "engine": "cad",
+   "fn": "round",
+   "args": [
+    23,
+    1
+   ],
+   "result": 23
+  },
+  {
+   "engine": "cad",
+   "fn": "round",
+   "args": [
+    21,
+    1
+   ],
+   "result": 21
+  },
+  {
+   "engine": "cad",
+   "fn": "round",
+   "args": [
+    25,
+    1
+   ],
+   "result": 25
+  },
+  {
+   "engine": "abg",
+   "fn": "classifyPrimaryDisturbance",
+   "args": [
+    {
+     "ph": 7.15,
+     "pco2": 40,
+     "hco3": 10
+    }
+   ],
+   "result": {
+    "ph": 7.15,
+    "pco2": 40,
+    "hco3": 10,
+    "acidemia": true,
+    "alkalemia": false,
+    "phNormal": false,
+    "components": {
+     "metabolicAcidosis": true,
+     "metabolicAlkalosis": false,
+     "respiratoryAcidosis": false,
+     "respiratoryAlkalosis": false
+    },
+    "primary": [
+     {
+      "type": "metabolicAcidosis",
+      "reason": "HCO₃ 10 < 22 fecha o componente metabólico acidificante."
+     },
+     {
+      "type": "respiratoryAcidosis",
+      "reason": "pCO₂ 40 > 25 (limite superior esperado) — o pulmão não baixou o CO₂ o quanto deveria; componente respiratório acidificante adicional (mesmo que pCO₂ pareça \"normal\" isoladamente)."
+     }
+    ],
+    "compensationCheck": {
+     "for": "metabolicAcidosis",
+     "measured": 40,
+     "expected": 23,
+     "low": 21,
+     "high": 25,
+     "verdict": "insuficiente"
+    },
+    "ag": null,
+    "agc": null,
+    "notes": []
+   }
+  },
+  {
+   "engine": "cad",
+   "fn": "round",
+   "args": [
+    23,
+    1
+   ],
+   "result": 23
+  },
+  {
+   "engine": "cad",
+   "fn": "round",
+   "args": [
+    21,
+    1
+   ],
+   "result": 21
+  },
+  {
+   "engine": "cad",
+   "fn": "round",
+   "args": [
+    25,
+    1
+   ],
+   "result": 25
+  },
+  {
+   "engine": "abg",
+   "fn": "expectedPco2MetabolicAcidosis",
+   "args": [
+    10
+   ],
+   "result": {
+    "expected": 23,
+    "low": 21,
+    "high": 25
+   }
+  },
+  {
+   "engine": "cad",
+   "fn": "round",
+   "args": [
+    23,
+    1
+   ],
+   "result": 23
+  },
+  {
+   "engine": "cad",
+   "fn": "round",
+   "args": [
+    21,
+    1
+   ],
+   "result": 21
+  },
+  {
+   "engine": "cad",
+   "fn": "round",
+   "args": [
+    25,
+    1
+   ],
+   "result": 25
+  },
+  {
+   "engine": "abg",
+   "fn": "classifyPrimaryDisturbance",
+   "args": [
+    {
+     "ph": 7.3,
+     "pco2": 18,
+     "hco3": 10
+    }
+   ],
+   "result": {
+    "ph": 7.3,
+    "pco2": 18,
+    "hco3": 10,
+    "acidemia": true,
+    "alkalemia": false,
+    "phNormal": false,
+    "components": {
+     "metabolicAcidosis": true,
+     "metabolicAlkalosis": false,
+     "respiratoryAcidosis": false,
+     "respiratoryAlkalosis": true
+    },
+    "primary": [
+     {
+      "type": "metabolicAcidosis",
+      "reason": "pH 7.3 acidêmico com HCO₃ 10 < 22 — componente metabólico acidificante primário; pCO₂ 18 baixo é a resposta respiratória compensatória (Winter)."
+     },
+     {
+      "type": "respiratoryAlkalosis",
+      "reason": "pCO₂ 18 < 21 (limite inferior esperado) — hiperventilação além da compensação prevista; componente respiratório alcalinizante adicional."
+     }
+    ],
+    "compensationCheck": {
+     "for": "metabolicAcidosis",
+     "measured": 18,
+     "expected": 23,
+     "low": 21,
+     "high": 25,
+     "verdict": "excessivo"
+    },
+    "ag": null,
+    "agc": null,
+    "notes": []
+   }
+  },
+  {
+   "engine": "abg",
+   "fn": "classifyPrimaryDisturbance",
+   "args": [
+    {
+     "ph": 7.05,
+     "pco2": 60,
+     "hco3": 10
+    }
+   ],
+   "result": {
+    "ph": 7.05,
+    "pco2": 60,
+    "hco3": 10,
+    "acidemia": true,
+    "alkalemia": false,
+    "phNormal": false,
+    "components": {
+     "metabolicAcidosis": true,
+     "metabolicAlkalosis": false,
+     "respiratoryAcidosis": true,
+     "respiratoryAlkalosis": false
+    },
+    "primary": [
+     {
+      "type": "metabolicAcidosis",
+      "reason": "HCO₃ 10 baixo E pCO₂ 60 alto ao mesmo tempo — nunca é compensação (compensação move a outra variável na direção oposta); são dois processos acidificantes independentes."
+     },
+     {
+      "type": "respiratoryAcidosis",
+      "reason": "mesmo raciocínio do item acima — acidose respiratória combinada, não compensação de uma pela outra."
+     }
+    ],
+    "compensationCheck": null,
+    "ag": null,
+    "agc": null,
+    "notes": []
+   }
+  },
+  {
+   "engine": "abg",
+   "fn": "classifyPrimaryDisturbance",
+   "args": [
+    {
+     "ph": 7.55,
+     "pco2": 25,
+     "hco3": 32
+    }
+   ],
+   "result": {
+    "ph": 7.55,
+    "pco2": 25,
+    "hco3": 32,
+    "acidemia": false,
+    "alkalemia": true,
+    "phNormal": false,
+    "components": {
+     "metabolicAcidosis": false,
+     "metabolicAlkalosis": true,
+     "respiratoryAcidosis": false,
+     "respiratoryAlkalosis": true
+    },
+    "primary": [
+     {
+      "type": "metabolicAlkalosis",
+      "reason": "HCO₃ 32 alto E pCO₂ 25 baixo ao mesmo tempo — dois processos alcalinizantes independentes, não compensação."
+     },
+     {
+      "type": "respiratoryAlkalosis",
+      "reason": "mesmo raciocínio do item acima — alcalose respiratória combinada."
+     }
+    ],
+    "compensationCheck": null,
+    "ag": null,
+    "agc": null,
+    "notes": []
+   }
+  },
+  {
+   "engine": "cad",
+   "fn": "round",
+   "args": [
+    26,
+    1
+   ],
+   "result": 26
+  },
+  {
+   "engine": "cad",
+   "fn": "round",
+   "args": [
+    24,
+    1
+   ],
+   "result": 24
+  },
+  {
+   "engine": "cad",
+   "fn": "round",
+   "args": [
+    28,
+    1
+   ],
+   "result": 28
+  },
+  {
+   "engine": "cad",
+   "fn": "round",
+   "args": [
+    31,
+    1
+   ],
+   "result": 31
+  },
+  {
+   "engine": "cad",
+   "fn": "round",
+   "args": [
+    28,
+    1
+   ],
+   "result": 28
+  },
+  {
+   "engine": "cad",
+   "fn": "round",
+   "args": [
+    34,
+    1
+   ],
+   "result": 34
+  },
+  {
+   "engine": "abg",
+   "fn": "classifyPrimaryDisturbance",
+   "args": [
+    {
+     "ph": 7.32,
+     "pco2": 60,
+     "hco3": 25
+    }
+   ],
+   "result": {
+    "ph": 7.32,
+    "pco2": 60,
+    "hco3": 25,
+    "acidemia": true,
+    "alkalemia": false,
+    "phNormal": false,
+    "components": {
+     "metabolicAcidosis": false,
+     "metabolicAlkalosis": false,
+     "respiratoryAcidosis": true,
+     "respiratoryAlkalosis": false
+    },
+    "primary": [
+     {
+      "type": "respiratoryAcidosis",
+      "reason": "pCO₂ 60 > 45 fecha o componente respiratório acidificante."
+     }
+    ],
+    "compensationCheck": {
+     "for": "respiratoryAcidosis",
+     "measured": 25,
+     "acute": {
+      "expected": 26,
+      "low": 24,
+      "high": 28
+     },
+     "chronic": {
+      "expected": 31,
+      "low": 28,
+      "high": 34
+     }
+    },
+    "ag": null,
+    "agc": null,
+    "notes": [
+     "agudeza não informada — janelas esperadas de HCO₃ calculadas para os dois cenários: agudo 24–28, crônico 28–34. HCO₃ medido 25. Sem contexto clínico (tempo de instalação), não adivinhar qual se aplica."
+    ]
+   }
+  },
+  {
+   "engine": "cad",
+   "fn": "round",
+   "args": [
+    26,
+    1
+   ],
+   "result": 26
+  },
+  {
+   "engine": "cad",
+   "fn": "round",
+   "args": [
+    24,
+    1
+   ],
+   "result": 24
+  },
+  {
+   "engine": "cad",
+   "fn": "round",
+   "args": [
+    28,
+    1
+   ],
+   "result": 28
+  },
+  {
+   "engine": "cad",
+   "fn": "round",
+   "args": [
+    31,
+    1
+   ],
+   "result": 31
+  },
+  {
+   "engine": "cad",
+   "fn": "round",
+   "args": [
+    28,
+    1
+   ],
+   "result": 28
+  },
+  {
+   "engine": "cad",
+   "fn": "round",
+   "args": [
+    34,
+    1
+   ],
+   "result": 34
+  },
+  {
+   "engine": "abg",
+   "fn": "classifyPrimaryDisturbance",
+   "args": [
+    {
+     "ph": 7.32,
+     "pco2": 60,
+     "hco3": 25,
+     "chronicityHint": "acute"
+    }
+   ],
+   "result": {
+    "ph": 7.32,
+    "pco2": 60,
+    "hco3": 25,
+    "acidemia": true,
+    "alkalemia": false,
+    "phNormal": false,
+    "components": {
+     "metabolicAcidosis": false,
+     "metabolicAlkalosis": false,
+     "respiratoryAcidosis": true,
+     "respiratoryAlkalosis": false
+    },
+    "primary": [
+     {
+      "type": "respiratoryAcidosis",
+      "reason": "pCO₂ 60 > 45 fecha o componente respiratório acidificante."
+     }
+    ],
+    "compensationCheck": {
+     "for": "respiratoryAcidosisAcute",
+     "measured": 25,
+     "expected": 26,
+     "low": 24,
+     "high": 28,
+     "verdict": "adequado"
+    },
+    "ag": null,
+    "agc": null,
+    "notes": []
+   }
+  },
+  {
+   "engine": "cad",
+   "fn": "round",
+   "args": [
+    21,
+    1
+   ],
+   "result": 21
+  },
+  {
+   "engine": "cad",
+   "fn": "round",
+   "args": [
+    19,
+    1
+   ],
+   "result": 19
+  },
+  {
+   "engine": "cad",
+   "fn": "round",
+   "args": [
+    23,
+    1
+   ],
+   "result": 23
+  },
+  {
+   "engine": "cad",
+   "fn": "round",
+   "args": [
+    18,
+    1
+   ],
+   "result": 18
+  },
+  {
+   "engine": "cad",
+   "fn": "round",
+   "args": [
+    15,
+    1
+   ],
+   "result": 15
+  },
+  {
+   "engine": "cad",
+   "fn": "round",
+   "args": [
+    21,
+    1
+   ],
+   "result": 21
+  },
+  {
+   "engine": "abg",
+   "fn": "classifyPrimaryDisturbance",
+   "args": [
+    {
+     "ph": 7.5,
+     "pco2": 25,
+     "hco3": 24,
+     "chronicityHint": "acute"
+    }
+   ],
+   "result": {
+    "ph": 7.5,
+    "pco2": 25,
+    "hco3": 24,
+    "acidemia": false,
+    "alkalemia": true,
+    "phNormal": false,
+    "components": {
+     "metabolicAcidosis": false,
+     "metabolicAlkalosis": false,
+     "respiratoryAcidosis": false,
+     "respiratoryAlkalosis": true
+    },
+    "primary": [
+     {
+      "type": "respiratoryAlkalosis",
+      "reason": "pCO₂ 25 < 35 fecha o componente respiratório alcalinizante."
+     },
+     {
+      "type": "metabolicAlkalosis",
+      "reason": "HCO₃ 24 > 23 (esperado para agudo) — componente metabólico alcalinizante adicional."
+     }
+    ],
+    "compensationCheck": {
+     "for": "respiratoryAlkalosisAcute",
+     "measured": 24,
+     "expected": 21,
+     "low": 19,
+     "high": 23,
+     "verdict": "insuficiente"
+    },
+    "ag": null,
+    "agc": null,
+    "notes": []
+   }
+  },
+  {
+   "engine": "abg",
+   "fn": "classifyPrimaryDisturbance",
+   "args": [
+    {
+     "ph": 7.4,
+     "pco2": 40,
+     "hco3": 24
+    }
+   ],
+   "result": {
+    "ph": 7.4,
+    "pco2": 40,
+    "hco3": 24,
+    "acidemia": false,
+    "alkalemia": false,
+    "phNormal": true,
+    "components": {
+     "metabolicAcidosis": false,
+     "metabolicAlkalosis": false,
+     "respiratoryAcidosis": false,
+     "respiratoryAlkalosis": false
+    },
+    "primary": [],
+    "compensationCheck": null,
+    "ag": null,
+    "agc": null,
+    "notes": [
+     "HCO₃, pCO₂ e pH dentro da faixa normal por este eixo — isto NÃO exclui um gap elevado mascarado por uma alcalose concomitante; sempre calcular o AG de forma independente."
+    ]
+   }
+  },
+  {
+   "engine": "cad",
+   "fn": "anionGap",
+   "args": [
+    140,
+    96,
+    24
+   ],
+   "result": 20
+  },
+  {
+   "engine": "cad",
+   "fn": "round",
+   "args": [
+    20,
+    1
+   ],
+   "result": 20
+  },
+  {
+   "engine": "cad",
+   "fn": "correctedAnionGap",
+   "args": [
+    20,
+    4
+   ],
+   "result": 20
+  },
+  {
+   "engine": "cad",
+   "fn": "round",
+   "args": [
+    20,
+    1
+   ],
+   "result": 20
+  },
+  {
+   "engine": "abg",
+   "fn": "classifyPrimaryDisturbance",
+   "args": [
+    {
+     "ph": 7.38,
+     "pco2": 40,
+     "hco3": 24,
+     "na": 140,
+     "cl": 96
+    }
+   ],
+   "result": {
+    "ph": 7.38,
+    "pco2": 40,
+    "hco3": 24,
+    "acidemia": false,
+    "alkalemia": false,
+    "phNormal": true,
+    "components": {
+     "metabolicAcidosis": false,
+     "metabolicAlkalosis": false,
+     "respiratoryAcidosis": false,
+     "respiratoryAlkalosis": false
+    },
+    "primary": [],
+    "compensationCheck": null,
+    "ag": 20,
+    "agc": 20,
+    "notes": [
+     "HCO₃, pCO₂ e pH dentro da faixa normal por este eixo — isto NÃO exclui um gap elevado mascarado por uma alcalose concomitante; sempre calcular o AG de forma independente.",
+     "AGc 20 elevado apesar de HCO₃ 24 não estar baixo — gap alto mascarado (provável alcalose ou disturbio misto escondendo a acidose de gap alto; nunca dispense o cálculo do AG só porque o HCO₃ \"fechou normal\")."
+    ]
+   }
+  },
+  {
+   "engine": "abg",
+   "fn": "classifyPrimaryDisturbance",
+   "args": [
+    {
+     "ph": 7.4,
+     "pco2": 40
+    }
+   ],
+   "error": {
+    "name": "TypeError",
+    "message": "hco3 must be a finite number"
+   }
+  },
+  {
+   "engine": "abg",
+   "fn": "classifyPrimaryDisturbance",
+   "args": [
+    {
+     "__undefined__": true
+    }
+   ],
+   "error": {
+    "name": "TypeError",
+    "message": "input must be an object"
+   }
+  },
+  {
+   "engine": "abg",
+   "fn": "classifyPrimaryDisturbance",
+   "args": [
+    null
+   ],
+   "error": {
+    "name": "TypeError",
+    "message": "input must be an object"
+   }
+  },
+  {
+   "engine": "cad",
+   "fn": "round",
+   "args": [
+    22,
+    1
+   ],
+   "result": 22
+  },
+  {
+   "engine": "cad",
+   "fn": "round",
+   "args": [
+    20,
+    1
+   ],
+   "result": 20
+  },
+  {
+   "engine": "cad",
+   "fn": "round",
+   "args": [
+    24,
+    1
+   ],
+   "result": 24
+  },
+  {
+   "engine": "cad",
+   "fn": "round",
+   "args": [
+    20,
+    1
+   ],
+   "result": 20
+  },
+  {
+   "engine": "cad",
+   "fn": "round",
+   "args": [
+    17,
+    1
+   ],
+   "result": 17
+  },
+  {
+   "engine": "cad",
+   "fn": "round",
+   "args": [
+    23,
+    1
+   ],
+   "result": 23
+  },
+  {
+   "engine": "abg",
+   "fn": "classifyPrimaryDisturbance",
+   "args": [
+    {
+     "ph": 7.46,
+     "pco2": 30,
+     "hco3": 20,
+     "chronicityHint": "chronic"
+    }
+   ],
+   "result": {
+    "ph": 7.46,
+    "pco2": 30,
+    "hco3": 20,
+    "acidemia": false,
+    "alkalemia": true,
+    "phNormal": false,
+    "components": {
+     "metabolicAcidosis": true,
+     "metabolicAlkalosis": false,
+     "respiratoryAcidosis": false,
+     "respiratoryAlkalosis": true
+    },
+    "primary": [
+     {
+      "type": "respiratoryAlkalosis",
+      "reason": "pH 7.46 alcalêmico com pCO₂ 30 < 35 — componente respiratório alcalinizante primário; HCO₃ 20 baixo é a resposta renal compensatória na direção oposta, não um segundo processo acidificante."
+     }
+    ],
+    "compensationCheck": {
+     "for": "respiratoryAlkalosisChronic",
+     "measured": 20,
+     "expected": 20,
+     "low": 17,
+     "high": 23,
+     "verdict": "adequado"
+    },
+    "ag": null,
+    "agc": null,
+    "notes": []
+   }
+  },
+  {
+   "engine": "cad",
+   "fn": "round",
+   "args": [
+    38,
+    1
+   ],
+   "result": 38
+  },
+  {
+   "engine": "cad",
+   "fn": "round",
+   "args": [
+    36,
+    1
+   ],
+   "result": 36
+  },
+  {
+   "engine": "cad",
+   "fn": "round",
+   "args": [
+    40,
+    1
+   ],
+   "result": 40
+  },
+  {
+   "engine": "abg",
+   "fn": "classifyPrimaryDisturbance",
+   "args": [
+    {
+     "ph": 7.3,
+     "pco2": 30,
+     "hco3": 20
+    }
+   ],
+   "result": {
+    "ph": 7.3,
+    "pco2": 30,
+    "hco3": 20,
+    "acidemia": true,
+    "alkalemia": false,
+    "phNormal": false,
+    "components": {
+     "metabolicAcidosis": true,
+     "metabolicAlkalosis": false,
+     "respiratoryAcidosis": false,
+     "respiratoryAlkalosis": true
+    },
+    "primary": [
+     {
+      "type": "metabolicAcidosis",
+      "reason": "pH 7.3 acidêmico com HCO₃ 20 < 22 — componente metabólico acidificante primário; pCO₂ 30 baixo é a resposta respiratória compensatória (Winter)."
+     },
+     {
+      "type": "respiratoryAlkalosis",
+      "reason": "pCO₂ 30 < 36 (limite inferior esperado) — hiperventilação além da compensação prevista; componente respiratório alcalinizante adicional."
+     }
+    ],
+    "compensationCheck": {
+     "for": "metabolicAcidosis",
+     "measured": 30,
+     "expected": 38,
+     "low": 36,
+     "high": 40,
+     "verdict": "excessivo"
+    },
+    "ag": null,
+    "agc": null,
+    "notes": []
+   }
+  },
+  {
+   "engine": "cad",
+   "fn": "round",
+   "args": [
+    38,
+    1
+   ],
+   "result": 38
+  },
+  {
+   "engine": "cad",
+   "fn": "round",
+   "args": [
+    36,
+    1
+   ],
+   "result": 36
+  },
+  {
+   "engine": "cad",
+   "fn": "round",
+   "args": [
+    40,
+    1
+   ],
+   "result": 40
+  },
+  {
+   "engine": "cad",
+   "fn": "round",
+   "args": [
+    20,
+    1
+   ],
+   "result": 20
+  },
+  {
+   "engine": "cad",
+   "fn": "round",
+   "args": [
+    17,
+    1
+   ],
+   "result": 17
+  },
+  {
+   "engine": "cad",
+   "fn": "round",
+   "args": [
+    23,
+    1
+   ],
+   "result": 23
+  },
+  {
+   "engine": "abg",
+   "fn": "classifyPrimaryDisturbance",
+   "args": [
+    {
+     "ph": 7.45,
+     "pco2": 30,
+     "hco3": 20
+    }
+   ],
+   "result": {
+    "ph": 7.45,
+    "pco2": 30,
+    "hco3": 20,
+    "acidemia": false,
+    "alkalemia": false,
+    "phNormal": true,
+    "components": {
+     "metabolicAcidosis": true,
+     "metabolicAlkalosis": false,
+     "respiratoryAcidosis": false,
+     "respiratoryAlkalosis": true
+    },
+    "primary": [
+     {
+      "type": "metabolicAcidosis",
+      "reason": "leitura possível 1: componente metabólico acidificante primário, compensação respiratória completa."
+     },
+     {
+      "type": "respiratoryAlkalosis",
+      "reason": "leitura possível 2: componente respiratório alcalinizante primário, compensação renal completa."
+     }
+    ],
+    "compensationCheck": null,
+    "ag": null,
+    "agc": null,
+    "notes": [
+     "pH 7.45 normal com HCO₃ 20 baixo E pCO₂ 30 baixo simultaneamente — ambíguo a partir só dos números: compatível com (a) acidose metabólica com compensação respiratória completa (pCO₂ esperado 36–40) OU (b) alcalose respiratória crônica com compensação renal completa (HCO₃ esperado 17–23). Contexto clínico decide qual é o primário, não o número isolado.",
+     "pH 7.45 está dentro da faixa de referência apesar do(s) componente(s) identificado(s) — clássico de disturbio misto com cancelamento parcial; pH normal não significa ausência de doença."
+    ]
+   }
+  },
+  {
+   "engine": "cad",
+   "fn": "round",
+   "args": [
+    26,
+    1
+   ],
+   "result": 26
+  },
+  {
+   "engine": "cad",
+   "fn": "round",
+   "args": [
+    24,
+    1
+   ],
+   "result": 24
+  },
+  {
+   "engine": "cad",
+   "fn": "round",
+   "args": [
+    28,
+    1
+   ],
+   "result": 28
+  },
+  {
+   "engine": "cad",
+   "fn": "round",
+   "args": [
+    31,
+    1
+   ],
+   "result": 31
+  },
+  {
+   "engine": "cad",
+   "fn": "round",
+   "args": [
+    28,
+    1
+   ],
+   "result": 28
+  },
+  {
+   "engine": "cad",
+   "fn": "round",
+   "args": [
+    34,
+    1
+   ],
+   "result": 34
+  },
+  {
+   "engine": "abg",
+   "fn": "classifyPrimaryDisturbance",
+   "args": [
+    {
+     "ph": 7.34,
+     "pco2": 60,
+     "hco3": 32,
+     "chronicityHint": "chronic"
+    }
+   ],
+   "result": {
+    "ph": 7.34,
+    "pco2": 60,
+    "hco3": 32,
+    "acidemia": true,
+    "alkalemia": false,
+    "phNormal": false,
+    "components": {
+     "metabolicAcidosis": false,
+     "metabolicAlkalosis": true,
+     "respiratoryAcidosis": true,
+     "respiratoryAlkalosis": false
+    },
+    "primary": [
+     {
+      "type": "respiratoryAcidosis",
+      "reason": "pH 7.34 acidêmico com pCO₂ 60 > 45 — componente respiratório acidificante primário; HCO₃ 32 alto é a resposta renal compensatória na direção oposta, não um segundo processo alcalinizante."
+     }
+    ],
+    "compensationCheck": {
+     "for": "respiratoryAcidosisChronic",
+     "measured": 32,
+     "expected": 31,
+     "low": 28,
+     "high": 34,
+     "verdict": "adequado"
+    },
+    "ag": null,
+    "agc": null,
+    "notes": []
+   }
+  },
+  {
+   "engine": "cad",
+   "fn": "round",
+   "args": [
+    45.5,
+    1
+   ],
+   "result": 45.5
+  },
+  {
+   "engine": "cad",
+   "fn": "round",
+   "args": [
+    43.5,
+    1
+   ],
+   "result": 43.5
+  },
+  {
+   "engine": "cad",
+   "fn": "round",
+   "args": [
+    47.5,
+    1
+   ],
+   "result": 47.5
+  },
+  {
+   "engine": "abg",
+   "fn": "classifyPrimaryDisturbance",
+   "args": [
+    {
+     "ph": 7.46,
+     "pco2": 50,
+     "hco3": 35
+    }
+   ],
+   "result": {
+    "ph": 7.46,
+    "pco2": 50,
+    "hco3": 35,
+    "acidemia": false,
+    "alkalemia": true,
+    "phNormal": false,
+    "components": {
+     "metabolicAcidosis": false,
+     "metabolicAlkalosis": true,
+     "respiratoryAcidosis": true,
+     "respiratoryAlkalosis": false
+    },
+    "primary": [
+     {
+      "type": "metabolicAlkalosis",
+      "reason": "pH 7.46 alcalêmico com HCO₃ 35 > 26 — componente metabólico alcalinizante primário; pCO₂ 50 alto é a resposta respiratória compensatória."
+     },
+     {
+      "type": "respiratoryAcidosis",
+      "reason": "pCO₂ 50 > 47.5 — retenção de CO₂ além da compensação prevista; componente respiratório acidificante adicional."
+     }
+    ],
+    "compensationCheck": {
+     "for": "metabolicAlkalosis",
+     "measured": 50,
+     "expected": 45.5,
+     "low": 43.5,
+     "high": 47.5,
+     "verdict": "excessivo"
+    },
+    "ag": null,
+    "agc": null,
+    "notes": []
+   }
+  }
+ ]
+}
