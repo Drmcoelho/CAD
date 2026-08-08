@@ -15,8 +15,9 @@ POLICY, motor JS ou doutrina. Adjudicação clínica é do dono.
   Proposta levada ao dono: consumir `canon/policy.json` como fonte de POLICY
   (arquivo real de doutrina, sem criar cópia), com paridade validada contra o
   comportamento do motor JS.
-- **Status:** PERGUNTADO ao dono no checkpoint da Etapa 0. → Resposta: aprovado
-  consumir `canon/policy.json` (ver decisão registrada no commit da Etapa 1).
+- **Status:** RESOLVIDO 2026-08-08 — dono aprovou: o porte Python consome
+  `canon/policy.json` como fonte única de POLICY, com paridade comportamental
+  validada contra o motor JS.
 
 ## F-002 · As "292 asserções" não existem; a suíte real tem 155
 
@@ -32,5 +33,17 @@ POLICY, motor JS ou doutrina. Adjudicação clínica é do dono.
   Critério honesto: N/N sobre a contagem real, com N documentado e reproduzível.
   Não é bug clínico — é discrepância documental (CLAUDE.md/prompt); a correção do
   CLAUDE.md fica fora do escopo desta sessão (arquivo fora da lista de entregáveis).
-- **Status:** PERGUNTADO ao dono no checkpoint da Etapa 0 (paridade sobre 155
-  completa ou 110 só-cad_core).
+- **Status:** RESOLVIDO 2026-08-08 — dono aprovou: gate de paridade sobre a
+  suíte completa, **155/155**, incluindo o porte de `core/abg_core.js`.
+
+## F-003 · POLICY do abg_core não tem espelho JSON
+
+- **O que foi verificado:** a POLICY da gasometria (`ABG-2026-07-05`) vive
+  apenas inline em `core/abg_core.js:35-56`; não há entrada correspondente em
+  `canon/policy.json` (que cobre só a doutrina de CAD).
+- **Implicação:** o porte Python de abg não tem arquivo-fonte para "consumir sem
+  cópia"; `pyengine/abg_engine.py` carrega um espelho literal da POLICY JS,
+  validado por deep-equal bidirecional no gate de paridade (não é fonte nova de
+  doutrina — é porte). Criar o espelho JSON no canon seria mudança fora do
+  escopo desta fase; fica registrado para o dono decidir depois.
+- **Status:** registrado; sem ação nesta fase.
