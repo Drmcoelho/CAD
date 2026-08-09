@@ -28,8 +28,8 @@ nenhuma execução.
 | Schema de caso | `case_schema.yaml` v0.1 — **aprovado pelo dono** em 2026-08-08 |
 | Runner + braços acurácia/UPA | `runner.py` — funciona ponta a ponta, determinístico |
 | Caso sintético de pipeline | `cases_synthetic/PIPE-001_SYNTHETIC.yaml` — roda nos 2 braços |
-| **Casos reais** | **FALTA — 0/5 do piloto (meta 30); dono fornecerá os relatos publicados** |
-| Adjudicação | toda linha nasce `PENDENTE_ADJUDICACAO` — campo do dono |
+| **Casos reais** | **5/5 do piloto extraídos de relatos publicados** (PMC texto completo, citação+DOI+PMID em cada YAML; meta 30) |
+| Adjudicação | toda linha nasce `PENDENTE_ADJUDICACAO` — campo do dono; **10 linhas aguardando** |
 
 Atenção a dois desvios do protocolo original, ambos verificados e decididos
 pelo dono (detalhe em `findings.md`): o substrato é `canon/policy.json` (não
@@ -46,7 +46,7 @@ VALIDATION/
 ├── parity_report.md       ← Etapa 2: relatório do gate de paridade
 ├── case_schema.yaml       ← Etapa 3: schema aprovado (v0.1), com exemplo comentado
 ├── runner.py              ← Etapa 4: executa casos, emite tabela + logs
-├── cases/                 ← casos REAIS (YAML; vazio até o dono fornecer os relatos)
+├── cases/                 ← casos REAIS extraídos de relatos publicados (CASO-001..005)
 ├── cases_synthetic/       ← casos sintéticos de pipeline (sufixo _SYNTHETIC obrigatório)
 └── results/
     ├── table.md / table.csv   ← uma linha por caso × braço
@@ -60,7 +60,21 @@ pyengine/
     └── test_parity.py         ← o gate (python3 puro; compatível com pytest)
 ```
 
-## Fluxo para adicionar um caso real (quando os relatos chegarem)
+## Piloto (5 casos, extraídos 2026-08-08)
+
+| Caso | Fenótipo | Fonte (DOI) | Resultado mecânico |
+|---|---|---|---|
+| CASO-001 | euglicêmica/SGLT2 (empagliflozina) | 10.1016/j.amsu.2022.104879 | executou: perfil `euglicemica`, K ≥5,0→ECG; resolução indeterminada (sem βHB) |
+| CASO-002 | dialítica (DRC em HD + ITU) | 10.7759/cureus.42700 | travou: Cl não relatado + cetonúria sem cruzes |
+| CASO-003 | euglicêmica jejum/pancreatite alcoólica | 10.1007/s11606-022-07993-5 | travou: Cl não relatado (AG 28 publicado — F-004) |
+| CASO-004 | CAD+HHS mista pediátrica | 10.7759/cureus.28983 | travou: Cl não relatado (AG 31 publicado — F-004) |
+| CASO-005 | cetoalcalose (CAD mascarada por vômitos) | 10.1002/ccr3.8250 | executou: `pre-cad` + hold por K 2,5; abg pega o gap mascarado; Δ/Δ −0,42 (F-006) |
+
+Achados novos da extração: F-004 (3/5 relatos omitem Cl — decisão sobre
+derivação aritmética pendente), F-005 (perfil exige pH em ponto de seguimento),
+F-006 (Δ/Δ com denominador negativo em alcalose). Detalhe em `findings.md`.
+
+## Fluxo para adicionar um caso real
 
 1. Extrair o relato para `VALIDATION/cases/CASO-NNN.yaml` seguindo
    `case_schema.yaml`: valores exclusivamente do relato, ausente = `null`

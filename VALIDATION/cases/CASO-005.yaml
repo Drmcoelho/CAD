@@ -1,0 +1,104 @@
+# Extraído de relato publicado (texto completo lido via PubMed Central).
+# Todos os valores vêm do texto; ausente no relato = null (nunca imputado).
+meta:
+  id: CASO-005
+  synthetic: false
+  fonte:
+    citacao: "Wuttiputhanun T, Townamchai N, Eiam-Ong S, Takkavatakarn K. Metabolic alkalosis masked presentation of diabetic ketoacidosis: A case report. Clin Case Rep. 2023;11(12):e8250."
+    doi: "10.1002/ccr3.8250"
+    pmid: "38033688"
+  ano: 2023
+  contexto: nao_relatado
+  populacao: adulto
+  variante: outra
+  variante_observacao: "cetoalcalose diabética: CAD (βHB 3,4, AG 19) mascarada por alcalose metabólica de vômitos incoercíveis; DM1 com omissão de insulina + uso de metanfetamina"
+
+pontos:
+  - t: 0
+    labs:
+      glucoseMgDl: 312
+      na: 125
+      cl: 69
+      hco3: 37
+      k: 2.5
+      ph: 7.502
+      pco2: 47.7
+      betaHydroxybutyrateMmolL: 3.4
+      ketonuriaCruzes: 2
+      albumin: 4.6
+      lactateMmolL: null
+      bunMgDl: 16
+      ureaMgDl: null
+    contexto_clinico:
+      knownDiabetes: true
+      suspectedSepsis: false
+      dialysisDependent: false
+      chronicityHint: null
+      pesoKg: null
+    disponibilidade:
+      betaHydroxybutyrateMmolL: ausente_no_cenario_UPA
+    observacoes: >-
+      Painel sérico completo (tabela 1): Na 125, K 2,5, Cl 69, HCO3 37,
+      AG 19, albumina 4,6, glicose 312 (texto corrido diz 313 — extração
+      usa a tabela), βHB 3,4. Gasometria venosa: pH 7,502, pCO2 47,7,
+      HCO3 37,6 (extração usa HCO3 sérico 37, base do AG do relato).
+      Cetonúria 2+, glicosúria 2+. Urina: Na 32, K 30, Cl <20 (fora dos
+      insumos do motor). Relato calcula Na corrigido 128,4.
+  - t: 18
+    labs:
+      glucoseMgDl: 131
+      na: 137
+      cl: 102
+      hco3: 28
+      k: 3.4
+      ph: null
+      pco2: null
+      betaHydroxybutyrateMmolL: 0.7
+      ketonuriaCruzes: null
+      albumin: null
+      lactateMmolL: null
+      bunMgDl: null
+      ureaMgDl: null
+    contexto_clinico:
+      knownDiabetes: true
+      suspectedSepsis: false
+      dialysisDependent: false
+      chronicityHint: null
+      pesoKg: null
+    disponibilidade:
+      betaHydroxybutyrateMmolL: ausente_no_cenario_UPA
+    observacoes: >-
+      "After 18 h": glicose 131, Na 137, K 3,4, Cl 102, HCO3 28, AG 7,
+      βHB 0,7. Gasometria não repetida (pH/pCO2 null).
+
+conduta_relatada:
+  insulina:
+    iniciada: true
+    adiada_por_potassio: true
+    taxa_inicial_U_kg_h: null
+    reduzida_com_dextrose: true
+    bolus_inicial: null
+  potassio:
+    reposto_antes_da_insulina: true
+    reposto: true
+  bicarbonato:
+    administrado: null
+    ph_no_momento: null
+  fluidos:
+    texto: "SF 0,9% 2500 mL nas primeiras 2h; total 4 L em 18h (SF + D5 salina)"
+  texto_livre: >-
+    Insulina IV só iniciada após elevar K de 2,5 para 3,8 mmol/L com
+    reposição IV (80 mmol em 4h) — insulina adiada por hipocalemia. Drip
+    de 1,5 U/h (taxa absoluta; peso não relatado). Transição para insulina
+    SC; suspensão de IV 1h depois; alta no dia 3 com insulina pré-mistura.
+
+desfecho:
+  resolucao: true
+  criterio_resolucao_do_relato: "às 18h: sintomas resolvidos, glicose 131, AG 7, βHB 0,7; alta no dia 3"
+  tempo_ate_resolucao_h: 18
+  complicacoes: ["hipocalemia 2,5 mmol/L exigindo reposição antes da insulina"]
+  obito: false
+
+adjudicacao:
+  classificacao: PENDENTE
+  notas: null

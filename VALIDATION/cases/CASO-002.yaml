@@ -1,0 +1,107 @@
+# Extraído de relato publicado (texto completo lido via PubMed Central).
+# Todos os valores vêm do texto; ausente no relato = null (nunca imputado).
+meta:
+  id: CASO-002
+  synthetic: false
+  fonte:
+    citacao: "Regmi M, Karki A, Bhandari S, Shrestha M, Kafle P. Management of Diabetic Ketoacidosis in a Patient With Chronic Kidney Disease Under Maintenance Hemodialysis: A Case Report. Cureus. 2023;15(7):e42700."
+    doi: "10.7759/cureus.42700"
+    pmid: "37654917"
+  ano: 2023
+  contexto: misto
+  populacao: adulto
+  variante: dialitica
+  variante_observacao: "DRC por glomerulonefrite crônica, hemodiálise de manutenção 2x/semana há 4 anos; CAD precipitada por ITU"
+
+pontos:
+  - t: 0
+    labs:
+      glucoseMgDl: 487.8
+      na: 128
+      cl: null
+      hco3: 6.0
+      k: 3.5
+      ph: 7.2
+      pco2: 15.2
+      betaHydroxybutyrateMmolL: null
+      ketonuriaCruzes: null
+      albumin: null
+      lactateMmolL: 9.2
+      bunMgDl: null
+      ureaMgDl: 210
+    contexto_clinico:
+      knownDiabetes: true
+      suspectedSepsis: true
+      dialysisDependent: true
+      chronicityHint: null
+      pesoKg: null
+    disponibilidade: {}
+    observacoes: >-
+      Glicose convertida 27,1 mmol/L -> 487,8 mg/dL (x18, fator do canon).
+      Ureia convertida 35 mmol/L -> 210 mg/dL (x6). Cloro NÃO relatado
+      (motor requer Cl para o perfil; AG não calculável a partir do texto).
+      Cetonúria relatada como "positiva para acetona" SEM quantificação em
+      cruzes -> null (eixo cetônico do motor fica sem insumo).
+      suspectedSepsis=true: piúria abundante + lactato 9,2 + antibiótico
+      empírico para provável sepse (piperacilina-tazobactam), urocultura
+      positiva (ITU). Creatinina 718 umol/L (fora dos insumos do motor).
+  - t: 48
+    labs:
+      glucoseMgDl: null
+      na: 135
+      cl: null
+      hco3: 18.9
+      k: 3.5
+      ph: 7.46
+      pco2: 26.2
+      betaHydroxybutyrateMmolL: null
+      ketonuriaCruzes: null
+      albumin: null
+      lactateMmolL: null
+      bunMgDl: null
+      ureaMgDl: 96
+    contexto_clinico:
+      knownDiabetes: true
+      suspectedSepsis: true
+      dialysisDependent: true
+      chronicityHint: null
+      pesoKg: null
+    disponibilidade: {}
+    observacoes: >-
+      "Two days after admission" (tabela 1) -> t=48h. Ureia 16 mmol/L ->
+      96 mg/dL. Cetonúria ("urine acetone") ainda positiva na tabela, sem
+      cruzes -> null. Glicose do dia 2 não tabelada.
+
+conduta_relatada:
+  insulina:
+    iniciada: true
+    adiada_por_potassio: false
+    taxa_inicial_U_kg_h: 0.1
+    reduzida_com_dextrose: true
+    bolus_inicial: null
+  potassio:
+    reposto_antes_da_insulina: null
+    reposto: true
+  bicarbonato:
+    administrado: true
+    ph_no_momento: 7.2
+  fluidos:
+    texto: "SF 0,9% 2x500 mL com 20 mEq KCl cada, a 100 mL/h, titulado pela diurese"
+  texto_livre: >-
+    Insulina regular 0,1 U/kg/h em bomba, titulada por K e glicemia;
+    suspensa por 4h quando K <3,0 mmol/L; dextrose 50% 50 mL quando
+    glicemia <150 (unidade grafada como mmol/L no texto, provável erro
+    tipográfico); reduzida para 0,05 U/kg/h após diálise. NaHCO3 100 mEq
+    IV. Hemodiálise de resgate por oligúria + K em ascensão; depois
+    diálise em dias alternados. Antibiótico para ITU.
+
+desfecho:
+  resolucao: true
+  criterio_resolucao_do_relato: "acidose tratada (dia 2: pH 7,46, HCO3 18,9), transferida da UTI e alta"
+  tempo_ate_resolucao_h: null
+  complicacoes: ["hipocalemia <3,0 mmol/L durante insulinoterapia", "hipoglicemia 2,3 mmol/L pós-hemodiálise", "oligúria com necessidade de HD de resgate"]
+  obito: false
+
+adjudicacao:
+  classificacao: PENDENTE
+  notas: null

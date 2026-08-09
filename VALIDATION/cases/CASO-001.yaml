@@ -1,0 +1,80 @@
+# Extraído de relato publicado (texto completo lido via PubMed Central).
+# Todos os valores vêm do texto; ausente no relato = null (nunca imputado).
+meta:
+  id: CASO-001
+  synthetic: false
+  fonte:
+    citacao: "Altowayan WM. Empagliflozin induced euglycemic diabetic ketoacidosis. A case reports. Ann Med Surg (Lond). 2022;84:104879."
+    doi: "10.1016/j.amsu.2022.104879"
+    pmid: "36582864"
+  ano: 2022
+  contexto: UTI
+  populacao: adulto
+  variante: euglicemica_sglt2
+  variante_observacao: null
+
+pontos:
+  - t: 0
+    labs:
+      glucoseMgDl: 190
+      na: 139
+      cl: 102
+      hco3: 12
+      k: 5.0
+      ph: 7.12
+      pco2: 38
+      betaHydroxybutyrateMmolL: null
+      ketonuriaCruzes: 3
+      albumin: 4.35
+      lactateMmolL: 2.4
+      bunMgDl: null
+      ureaMgDl: null
+    contexto_clinico:
+      knownDiabetes: true
+      suspectedSepsis: false
+      dialysisDependent: false
+      chronicityHint: null
+      pesoKg: null
+    disponibilidade: {}
+    observacoes: >-
+      Duas fontes no relato: gasometria venosa (pH 7,12, pCO2 38, HCO3 12,
+      Na 149, K 3,6, glicose 185, lactato 2,4) e bioquímica sérica (Na 139,
+      K 5,0, Cl 102, albumina 43,5 g/L, glicose 190). Extração usa a
+      bioquímica para Na/Cl/K/albumina/glicose (é a base do AG=25 que o
+      próprio relato calcula: 139-102-12) e a gasometria para pH/pCO2/HCO3.
+      Albumina convertida 43,5 g/L -> 4,35 g/dL. suspectedSepsis=false:
+      relato afirma septic workup negativo. Relato ainda informa: Na
+      corrigido 140, osm sérica 288, cetonúria 3+.
+
+conduta_relatada:
+  insulina:
+    iniciada: true
+    adiada_por_potassio: null
+    taxa_inicial_U_kg_h: null
+    reduzida_com_dextrose: null
+    bolus_inicial: null
+  potassio:
+    reposto_antes_da_insulina: null
+    reposto: null
+  bicarbonato:
+    administrado: null
+    ph_no_momento: null
+  fluidos:
+    texto: "reidratação intravenosa"
+  texto_livre: >-
+    Admitida em UTI; infusão intravenosa de insulina + hidratação IV;
+    empagliflozina implicada como causa (suspensa); gasometrias seriadas
+    mostraram resolução gradual da cetoacidose com normalização do anion
+    gap (valores seriados não publicados). Alta com metformina XR 1 g/dia
+    e insulina 70/30 20 U 2x/dia.
+
+desfecho:
+  resolucao: true
+  criterio_resolucao_do_relato: "resolução gradual da cetoacidose com anion gap normalizado e eliminação de cetonas séricas"
+  tempo_ate_resolucao_h: null
+  complicacoes: null
+  obito: false
+
+adjudicacao:
+  classificacao: PENDENTE
+  notas: null

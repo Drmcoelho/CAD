@@ -1,0 +1,107 @@
+# Extraído de relato publicado (texto completo lido via PubMed Central).
+# Todos os valores vêm do texto; ausente no relato = null (nunca imputado).
+meta:
+  id: CASO-004
+  synthetic: false
+  fonte:
+    citacao: "Parra Villasmil MG, Patel S, Tansey M, Badheka A, Chegondi M. A Rare Presentation of New-Onset Type 1 Diabetes Mellitus in a Developmentally Delayed Child With an Overlap of Diabetic Ketoacidosis and Hyperglycemic Hyperosmolar State. Cureus. 2022;14(9):e28983."
+    doi: "10.7759/cureus.28983"
+    pmid: "36237743"
+  ano: 2022
+  contexto: UTI
+  populacao: pediatrico
+  variante: cad_hhs_mista
+  variante_observacao: "DM1 de início recente (anti-GAD e anti-insulina positivos) em adolescente com atraso do desenvolvimento; desidratação hipernatrêmica grave com choque descompensado"
+
+pontos:
+  - t: 0
+    labs:
+      glucoseMgDl: 1188
+      na: 160
+      cl: null
+      hco3: 12
+      k: 6.1
+      ph: 7.09
+      pco2: 51
+      betaHydroxybutyrateMmolL: 2.7
+      ketonuriaCruzes: 1
+      albumin: null
+      lactateMmolL: null
+      bunMgDl: 49
+      ureaMgDl: null
+    contexto_clinico:
+      knownDiabetes: false
+      suspectedSepsis: null
+      dialysisDependent: false
+      chronicityHint: null
+      pesoKg: 22
+    disponibilidade:
+      betaHydroxybutyrateMmolL: ausente_no_cenario_UPA
+    observacoes: >-
+      Cloro NÃO relatado; relato dá AG=31 (permitiria derivar Cl=117 —
+      derivação não aplicada; F-004). Gasometria venosa (pH 7,09, pCO2 51,
+      BE -15). betaHB relatado como 2,7 mEq/L na tabela 2 (sem timestamp
+      explícito; equivalência mEq/L=mmol/L para ânion monovalente).
+      Cetonúria 1+ na urinálise de admissão. Relato calcula: Na corrigido
+      177, osm sérica 428 (medida), HbA1c 13,7%, creatinina 1,7.
+      knownDiabetes=false (diagnóstico novo na admissão). Peso admissional
+      22 kg.
+  - t: 24
+    labs:
+      glucoseMgDl: 328
+      na: 167
+      cl: null
+      hco3: 24
+      k: 3.7
+      ph: 7.41
+      pco2: 37
+      betaHydroxybutyrateMmolL: null
+      ketonuriaCruzes: null
+      albumin: null
+      lactateMmolL: null
+      bunMgDl: 30
+      ureaMgDl: null
+    contexto_clinico:
+      knownDiabetes: true
+      suspectedSepsis: null
+      dialysisDependent: false
+      chronicityHint: null
+      pesoKg: 22
+    disponibilidade: {}
+    observacoes: >-
+      Tabela "24 hours post hospitalization". Osm sérica relatada 365.
+      knownDiabetes=true neste ponto (diagnóstico já estabelecido).
+      Na SUBIU para 167 (hipernatremia agravada) — HHS só resolveu às 96h
+      segundo o relato; sem labs numéricos publicados além de t24.
+
+conduta_relatada:
+  insulina:
+    iniciada: true
+    adiada_por_potassio: false
+    taxa_inicial_U_kg_h: 0.1
+    reduzida_com_dextrose: true
+    bolus_inicial: false
+  potassio:
+    reposto_antes_da_insulina: false
+    reposto: true
+  bicarbonato:
+    administrado: null
+    ph_no_momento: null
+  fluidos:
+    texto: "bolus SF 20 mL/kg x2; 100 mL/kg em 36h (SF + Ringer lactato); manutenção com NaCl 0,45% a 2x basal; sistema de 2 bolsas com dextrose 10% titulada para glicemia 100-200"
+  texto_livre: >-
+    Protocolo de CAD pediátrico (ISPAD): insulina IV contínua 0,1 U/kg/h,
+    reduzida em ~6h pela correção da acidose e queda da glicemia; KCl +
+    KPhos nas bolsas de manutenção; epinefrina em infusão por choque
+    descompensado nas primeiras 48h; transição para SC no dia 3.
+
+desfecho:
+  resolucao: true
+  criterio_resolucao_do_relato: "CAD resolvida em 24h; estado hiperosmolar corrigido em ~96h; sensório normalizou gradualmente"
+  tempo_ate_resolucao_h: 24
+  complicacoes: ["choque descompensado com necessidade de epinefrina", "lesão renal aguda (resolvida com fluidos)", "hipernatremia prolongada"]
+  obito: false
+
+adjudicacao:
+  classificacao: PENDENTE
+  notas: null

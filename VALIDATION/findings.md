@@ -47,3 +47,44 @@ POLICY, motor JS ou doutrina. Adjudicação clínica é do dono.
   doutrina — é porte). Criar o espelho JSON no canon seria mudança fora do
   escopo desta fase; fica registrado para o dono decidir depois.
 - **Status:** registrado; sem ação nesta fase.
+
+## F-004 · Relatos publicados frequentemente omitem o cloro → motor trava
+
+- **O que foi verificado:** no piloto de 5 casos extraídos de relatos
+  publicados (2026-08-08), **3/5 não relatam o Cl sérico** (CASO-002, -003,
+  -004), embora dois deles publiquem o próprio anion gap (CASO-003: AG 28;
+  CASO-004: AG 31). `classifyDkaProfile` exige `cl` → `insufficient` →
+  `motor_travou_por_dado_ausente` nesses casos, nos dois braços.
+- **Questão metodológica PENDENTE com o dono:** quando o relato dá Na, HCO₃ e
+  AG, o Cl é derivável por aritmética (Cl = Na − HCO₃ − AG; ex.: CASO-003 →
+  100; CASO-004 → 117). A extração desta fase NÃO derivou (regra "nunca
+  imputar" lida na forma estrita); os valores deriváveis estão anotados nas
+  `observacoes` de cada caso. Se o dono autorizar a derivação determinística
+  como classe distinta (`derivado_aritmetico`, nem medido nem imputado), os 3
+  casos destravan e o schema ganha essa marcação em v0.2.
+- **Status:** registrado; aguardando decisão do dono.
+
+## F-005 · `classifyDkaProfile` exige pH mesmo quando HCO₃ bastaria
+
+- **O que foi verificado:** CASO-005 t=18h tem HCO₃ 28 + βHB 0,7 + painel
+  completo, mas pH não repetido → o perfil trava (`missing: [ph]`), embora
+  `hasDka`/`isResolvedDka` aceitem o eixo ácido por pH **OU** HCO₃. É contrato
+  do motor (`req = [na, cl, hco3, glucoseMgDl, ph]`), não bug de porte — o
+  Python reproduz o JS exatamente (paridade 158/158).
+- **Implicação:** pontos de seguimento sem gasometria repetida (comuns em
+  relato e em UPA) travam o perfil mesmo com resolução avaliável. Decisão de
+  afrouxar o contrato é clínica/arquitetural → do dono, fora desta fase.
+- **Status:** registrado; sem ação nesta fase.
+
+## F-006 · Δ/Δ com HCO₃ >24 produz banda "<1" enganosa (denominador negativo)
+
+- **O que foi verificado:** CASO-005 t0 (cetoalcalose: HCO₃ 37) → deltaRatio
+  = (AGc−12)/(24−37) = **−0,42** → `interpretDeltaRatio` devolve banda "<1 —
+  componente hiperclorêmico associado". Em alcalose com gap mascarado a
+  leitura correta é o oposto (o abg_core, aliás, acerta: "AGc 17.5 elevado
+  apesar de HCO₃ 37 não estar baixo — gap alto mascarado"). A fórmula Δ/Δ
+  pressupõe HCO₃ <24; o core não guarda essa pré-condição (só o caso HCO₃=24).
+- **Implicação:** nota de Δ/Δ do `classifyDkaProfile` pode contradizer o
+  próprio abg_core no mesmo paciente. Registrado como achado de fronteira de
+  validade — **não corrigido** (POLICY/lógica imutáveis nesta fase).
+- **Status:** registrado; aguardando adjudicação do dono.
