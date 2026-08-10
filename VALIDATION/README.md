@@ -30,7 +30,7 @@ nenhuma execução.
 | Caso sintético de pipeline | `cases_synthetic/PIPE-001_SYNTHETIC.yaml` — roda nos 2 braços |
 | **Casos reais** | **30/30 — META ATINGIDA** (relatos publicados, PMC texto completo, citação+DOI+PMID em cada YAML) |
 | Schema | **v0.2** — classe `derivado_aritmetico` (F-004 decidido pelo dono 2026-08-10); v0.3 (`convertido_de_escala`, F-008) aguarda decisão |
-| Adjudicação | toda linha nasce `PENDENTE_ADJUDICACAO` — campo do dono; **60 linhas aguardando** (`adjudication.md` é o dossiê; artefato de decisão única em preparação) |
+| Adjudicação | toda linha nasce `PENDENTE_ADJUDICACAO` — campo do dono; **60 linhas aguardando** (`adjudication.md` é o dossiê; formulário em `decisao/`) |
 
 Atenção a dois desvios do protocolo original, ambos verificados e decididos
 pelo dono (detalhe em `findings.md`): o substrato é `canon/policy.json` (não
@@ -47,6 +47,8 @@ VALIDATION/
 ├── parity_report.md       ← Etapa 2: relatório do gate de paridade
 ├── case_schema.yaml       ← Etapa 3: schema aprovado (v0.1), com exemplo comentado
 ├── runner.py              ← Etapa 4: executa casos, emite tabela + logs
+├── adjudication.md        ← dossiê de confronto motor × relato, caso a caso
+├── decisao/               ← formulário de decisão única (HTML offline) + como aplicar
 ├── cases/                 ← casos REAIS extraídos de relatos publicados (CASO-001..005)
 ├── cases_synthetic/       ← casos sintéticos de pipeline (sufixo _SYNTHETIC obrigatório)
 └── results/
