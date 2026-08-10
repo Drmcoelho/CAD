@@ -1,0 +1,117 @@
+{
+ "AVISO_SINTETICO": null,
+ "caso": "CASO-016",
+ "synthetic": false,
+ "arquivo_fonte": "VALIDATION/cases/CASO-016.yaml",
+ "braco": "acuracia",
+ "substrato": {
+  "canon/policy.json": "ee88734ae4ff3bd2badd4270bd6f15f6a86a6e75481443f3c85d12c72e6221e5",
+  "core/cad_core.js": "c07c37d62df6521b14097ddfb8321f9003f89c2a4eea7717ab63c820c9320c79",
+  "pyengine/cad_engine.py": "d068e0f22b4975962c4cab32dcbe489ceb253b12ba618334954f559ee7c92bcb",
+  "pyengine/abg_engine.py": "04d5f7db62a6cd29ae31c9a732a14c9eae5ec374b8092e2c546111edbd8f65ca"
+ },
+ "policy_version": "CAD360-ApA-2026-07-01",
+ "adjudicacao": {
+  "classificacao": "PENDENTE",
+  "notas": null
+ },
+ "pontos": [
+  {
+   "t": 0,
+   "braco": "acuracia",
+   "campos_mascarados_UPA": [],
+   "input_motor": {
+    "na": 129,
+    "cl": 91,
+    "hco3": 7.7,
+    "glucoseMgDl": 184,
+    "ph": 7.247,
+    "betaHydroxybutyrateMmolL": 3.512,
+    "ketonuriaCruzes": null,
+    "kMmolL": null,
+    "lactateMmolL": 0.9,
+    "knownDiabetes": true,
+    "suspectedSepsis": true,
+    "dialysisDependent": false
+   },
+   "labs_pos_mascara": {
+    "glucoseMgDl": 184,
+    "na": 129,
+    "cl": 91,
+    "hco3": 7.7,
+    "k": null,
+    "ph": 7.247,
+    "pco2": 18.3,
+    "betaHydroxybutyrateMmolL": 3.512,
+    "ketonuriaCruzes": null,
+    "albumin": null,
+    "lactateMmolL": 0.9,
+    "bunMgDl": null,
+    "ureaMgDl": null
+   },
+   "resultado_cad": {
+    "insufficient": false,
+    "computed": {
+     "ag": 30.3,
+     "agc": 30.3,
+     "deltaRatio": 1.12,
+     "deltaBand": "1-2",
+     "effectiveOsmolality": 268.2,
+     "hasDka": true,
+     "isResolvedDka": false,
+     "ketoneMarker": "betaHB",
+     "potassiumPlan": null
+    },
+    "matches": [
+     {
+      "id": "euglicemica",
+      "reason": "glicose 184 < 250 apesar de o critério de CAD já estar fechado — fenótipo euglicêmico (SGLT2i/jejum/gestação/etilismo)."
+     },
+     {
+      "id": "sepse-lactato",
+      "reason": "lactato elevado e/ou contexto séptico — acidose provavelmente mista (cetona + lactato)."
+     }
+    ]
+   },
+   "resultado_insulina": null,
+   "resultado_abg": {
+    "ph": 7.247,
+    "pco2": 18.3,
+    "hco3": 7.7,
+    "acidemia": true,
+    "alkalemia": false,
+    "phNormal": false,
+    "components": {
+     "metabolicAcidosis": true,
+     "metabolicAlkalosis": false,
+     "respiratoryAcidosis": false,
+     "respiratoryAlkalosis": true
+    },
+    "primary": [
+     {
+      "type": "metabolicAcidosis",
+      "reason": "pH 7.247 acidêmico com HCO₃ 7.7 < 22 — componente metabólico acidificante primário; pCO₂ 18.3 baixo é a resposta respiratória compensatória (Winter)."
+     }
+    ],
+    "compensationCheck": {
+     "for": "metabolicAcidosis",
+     "measured": 18.3,
+     "expected": 19.6,
+     "low": 17.6,
+     "high": 21.6,
+     "verdict": "adequado"
+    },
+    "ag": 30.3,
+    "agc": 30.3,
+    "notes": []
+   },
+   "flags_mecanicas": [
+    "albumin_default_4.0",
+    "sem_K_sem_plano_potassio"
+   ],
+   "labs_disponiveis": 8,
+   "labs_total": 13
+  }
+ ],
+ "classificacao_mecanica": "motor_degradou · PENDENTE_ADJUDICACAO"
+}

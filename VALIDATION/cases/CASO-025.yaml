@@ -1,0 +1,79 @@
+# Extraído de relato publicado (texto completo lido via PubMed Central).
+meta:
+  id: CASO-025
+  synthetic: false
+  fonte:
+    citacao: "Tseng YS, Tilford B, Sethuraman U, Cashen K. Combined Hyperglycemic Hyperosmolar Syndrome and Diabetic Ketoacidosis Associated with COVID-19 in a Pediatric Patient. Case Rep Crit Care. 2021;2021:6429710."
+    doi: "10.1155/2021/6429710"
+    pmid: "38442727"
+  ano: 2021
+  contexto: UTI
+  populacao: pediatrico
+  variante: cad_hhs_mista
+  variante_observacao: "HHS+CAD mista gravíssima (glicose 1858, osm calculada 430, pH 6,9) em adolescente de 14 anos com MIS-C por COVID-19; DM2 novo (autoanticorpos negativos)"
+
+pontos:
+  - t: 0
+    labs:
+      glucoseMgDl: 1858
+      na: 121
+      cl: null
+      hco3: 6
+      k: null
+      ph: 6.9
+      pco2: 20
+      betaHydroxybutyrateMmolL: 4.42
+      ketonuriaCruzes: null
+      albumin: null
+      lactateMmolL: null
+      bunMgDl: 47
+      ureaMgDl: null
+    contexto_clinico:
+      knownDiabetes: false
+      suspectedSepsis: true
+      dialysisDependent: false
+      chronicityHint: null
+      pesoKg: 78
+    disponibilidade:
+      betaHydroxybutyrateMmolL: ausente_no_cenario_UPA
+    observacoes: >-
+      βHB publicado 46 mg/dL -> 4,42 mmol/L (conversão massa molar
+      104,1 g/mol — identidade de unidade; analito e unidade nomeados).
+      Cl e K NÃO publicados; AG não publicado -> Cl não derivável ->
+      perfil trava. Na 121 (corrigido 149 pelo relato); osm calculada
+      430. Gasometria arterial pH 6,9, pCO2 20, HCO3 6. Creatinina 4,5
+      (LRA). suspectedSepsis=true: MIS-C + choque vasodilatador +
+      antibióticos de amplo espectro. Peso 78 kg (IMC 30,5).
+
+conduta_relatada:
+  insulina:
+    iniciada: true
+    adiada_por_potassio: false
+    taxa_inicial_U_kg_h: 0.05
+    reduzida_com_dextrose: null
+    bolus_inicial: false
+  potassio:
+    reposto_antes_da_insulina: null
+    reposto: null
+  bicarbonato:
+    administrado: null
+    ph_no_momento: null
+  fluidos:
+    texto: "3 L de bolus isotônico; déficit inicialmente 5% em 24h, elevado para 12% em 24h + manutenção pela desidratação de HHS"
+  texto_livre: >-
+    Protocolo institucional com insulina 0,05 U/kg/h (metade da taxa
+    padrão de CAD — abordagem híbrida CAD/HHS). Choque vasodilatador com
+    epinefrina + vasopressina + norepinefrina; IOT/VM por SDRA; MIS-C
+    tratada com remdesivir + IVIG + metilprednisolona. Rabdomiólise (CPK
+    11.872). Extubada no dia 8; PICU 2 semanas; reabilitação 2 semanas.
+
+desfecho:
+  resolucao: true
+  criterio_resolucao_do_relato: "HHS resolvida gradualmente com melhora do sensório; recuperação ao basal pré-doença"
+  tempo_ate_resolucao_h: null
+  complicacoes: ["MIS-C com falência multiorgânica", "SDRA com VM", "choque com 3 vasopressores", "rabdomiólise", "LRA (creatinina 4,5)", "perda volumétrica cerebelar residual em RM"]
+  obito: false
+
+adjudicacao:
+  classificacao: PENDENTE
+  notas: null

@@ -1,0 +1,77 @@
+# Extraído de relato publicado (texto completo lido via PubMed Central).
+meta:
+  id: CASO-019
+  synthetic: false
+  fonte:
+    citacao: "Huang A, Lu J, Pancotto N, et al. Unmasking Euglycemic Diabetic Ketoacidosis: The Interplay of Pregnancy, Sepsis, and Glucagon-Like Peptide 1 Analog. Cureus. 2025;17(1):e78193."
+    doi: "10.7759/cureus.78193"
+    pmid: "40026933"
+  ano: 2025
+  contexto: UTI
+  populacao: adulto
+  variante: euglicemica_outra
+  variante_observacao: "EDKA em gestante DM2 com artrite séptica de ombro (S. aureus) + dulaglutida (GLP-1), não aderente a insulina"
+
+pontos:
+  - t: 0
+    labs:
+      glucoseMgDl: 250
+      na: null
+      cl: null
+      hco3: 11.8
+      k: null
+      ph: 7.30
+      pco2: 24
+      betaHydroxybutyrateMmolL: null
+      ketonuriaCruzes: null
+      albumin: null
+      lactateMmolL: null
+      bunMgDl: null
+      ureaMgDl: null
+    contexto_clinico:
+      knownDiabetes: true
+      suspectedSepsis: true
+      dialysisDependent: false
+      chronicityHint: null
+      pesoKg: null
+    disponibilidade: {}
+    observacoes: >-
+      Relato esparso: gasometria arterial "pH 7.30, O2 24 mmHg, HCO3
+      11,8" — o "O=24" do texto é interpretado como pCO2 pela ordem
+      padrão de gasometria (pO2 24 seria hipoxemia crítica não comentada);
+      registrado com essa ressalva. Na/Cl/K não publicados; cetonúria
+      "positiva" sem cruzes -> null. Glicose 250 no limiar. pH 7,30 NÃO
+      fecha o eixo ácido por pH (critério é <7,30); HCO3 11,8 fecha pelo
+      OR — mas o perfil trava antes (Na/Cl/eixo cetônico).
+
+conduta_relatada:
+  insulina:
+    iniciada: true
+    adiada_por_potassio: false
+    taxa_inicial_U_kg_h: null
+    reduzida_com_dextrose: null
+    bolus_inicial: null
+  potassio:
+    reposto_antes_da_insulina: null
+    reposto: null
+  bicarbonato:
+    administrado: null
+    ph_no_momento: null
+  fluidos:
+    texto: "fluidos IV com monitorização estrita até fechar o anion gap"
+  texto_livre: >-
+    Insulin drip na UTI até fechamento do AG; transição para glargina +
+    lispro. Artrite séptica tratada com artroscopia (irrigação +
+    desbridamento + descompressão subacromial) e vancomicina+ceftriaxona,
+    depois cefazolina. Educação sobre adesão insulínica.
+
+desfecho:
+  resolucao: true
+  criterio_resolucao_do_relato: "anion gap fechado; estabilização com controle glicêmico; alta com seguimento multidisciplinar"
+  tempo_ate_resolucao_h: null
+  complicacoes: ["artrite séptica de ombro com desbridamento cirúrgico"]
+  obito: false
+
+adjudicacao:
+  classificacao: PENDENTE
+  notas: null

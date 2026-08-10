@@ -1,0 +1,107 @@
+# Extraído de relato publicado (texto completo lido via PubMed Central).
+meta:
+  id: CASO-023
+  synthetic: false
+  fonte:
+    citacao: "Waizel-Haiat S, Guerrero-Paz JA, Sanchez-Hurtado L, Calleja-Alarcon S, Romero-Gutierrez L. A Case of Fatal Rhino-Orbital Mucormycosis Associated With New Onset Diabetic Ketoacidosis and COVID-19. Cureus. 2021;13(2):e13163."
+    doi: "10.7759/cureus.13163"
+    pmid: "33575155"
+  ano: 2021
+  contexto: UTI
+  populacao: adulto
+  variante: classica
+  variante_observacao: "CAD grave (pH 6,9) de DM novo em mulher de 24 anos com mucormicose rino-orbitária + COVID-19 — primeiro ÓBITO do corpus (falência multiorgânica por choque séptico refratário)"
+
+pontos:
+  - t: 0
+    labs:
+      glucoseMgDl: 509
+      na: 127
+      cl: 102.0
+      hco3: 4.7
+      k: 4.50
+      ph: 6.9
+      pco2: 23.3
+      betaHydroxybutyrateMmolL: null
+      ketonuriaCruzes: null
+      albumin: 4.9
+      lactateMmolL: null
+      bunMgDl: null
+      ureaMgDl: 25.7
+    contexto_clinico:
+      knownDiabetes: false
+      suspectedSepsis: true
+      dialysisDependent: false
+      chronicityHint: null
+      pesoKg: null
+    disponibilidade:
+      cl: derivado_aritmetico
+    observacoes: >-
+      Cloro NÃO publicado; DERIVADO (v0.2, F-004): Cl = Na - HCO3 - AG
+      relatado = 127 - 4,7 - 20,3 = 102,0. Cetonúria publicada como
+      "150 mg/dL" SEM escala em cruzes -> null (F-008); βHB não medido —
+      eixo cetônico do motor sem insumo apesar do quadro clássico.
+      Gasometria arterial: pH 6,9, pCO2 23,3, HCO3 4,7. suspectedSepsis
+      =true: rinossinusite fúngica invasiva + pneumonia por SARS-CoV-2 +
+      culturas traqueais polimicrobianas; PCT 23,66 no dia 2. Ureia
+      25,7 mg/dL. Glicosúria 1000 mg/dL.
+  - t: 48
+    labs:
+      glucoseMgDl: 331
+      na: 151
+      cl: null
+      hco3: null
+      k: 7.80
+      ph: null
+      pco2: null
+      betaHydroxybutyrateMmolL: null
+      ketonuriaCruzes: null
+      albumin: null
+      lactateMmolL: null
+      bunMgDl: null
+      ureaMgDl: 107.0
+    contexto_clinico:
+      knownDiabetes: true
+      suspectedSepsis: true
+      dialysisDependent: false
+      chronicityHint: null
+      pesoKg: null
+    disponibilidade: {}
+    observacoes: >-
+      "Day 3" da tabela -> t=48h: glicose 331, Na 151, K 7,80 (!),
+      ureia 107, creatinina 2,95, plaquetas 64 mil, TP 26,4 s, dímero-D
+      15,88 (CIVD + LRA). Sem gasometria publicada no ponto ("acidose
+      metabólica refratária" narrada). Albumina caiu de 4,9 para 2,9 no
+      dia 2.
+
+conduta_relatada:
+  insulina:
+    iniciada: true
+    adiada_por_potassio: false
+    taxa_inicial_U_kg_h: null
+    reduzida_com_dextrose: null
+    bolus_inicial: null
+  potassio:
+    reposto_antes_da_insulina: null
+    reposto: null
+  bicarbonato:
+    administrado: null
+    ph_no_momento: null
+  fluidos:
+    texto: "manejo estabelecido de CAD grave (protocolo não detalhado)"
+  texto_livre: >-
+    VM + manejo de CAD grave; imipenem + linezolida + anfotericina B
+    empíricos; desbridamento cirúrgico da mucormicose IMPEDIDO pela
+    instabilidade (CIVD + LRA + acidose refratária). Óbito por falência
+    multiorgânica em choque séptico irresponsivo.
+
+desfecho:
+  resolucao: false
+  criterio_resolucao_do_relato: "acidose metabólica refratária; sem resolução"
+  tempo_ate_resolucao_h: null
+  complicacoes: ["mucormicose rino-orbitária invasiva (Lichtheimia spp)", "pneumonia por SARS-CoV-2", "CIVD", "LRA", "hipercalemia 7,8 terminal", "choque séptico refratário"]
+  obito: true
+
+adjudicacao:
+  classificacao: PENDENTE
+  notas: null

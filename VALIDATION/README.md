@@ -28,9 +28,9 @@ nenhuma execução.
 | Schema de caso | `case_schema.yaml` v0.1 — **aprovado pelo dono** em 2026-08-08 |
 | Runner + braços acurácia/UPA | `runner.py` — funciona ponta a ponta, determinístico |
 | Caso sintético de pipeline | `cases_synthetic/PIPE-001_SYNTHETIC.yaml` — roda nos 2 braços |
-| **Casos reais** | **15/30 extraídos de relatos publicados** (PMC texto completo, citação+DOI+PMID em cada YAML) |
+| **Casos reais** | **30/30 — META ATINGIDA** (relatos publicados, PMC texto completo, citação+DOI+PMID em cada YAML) |
 | Schema | **v0.2** — classe `derivado_aritmetico` (F-004 decidido pelo dono 2026-08-10); v0.3 (`convertido_de_escala`, F-008) aguarda decisão |
-| Adjudicação | toda linha nasce `PENDENTE_ADJUDICACAO` — campo do dono; **30 linhas aguardando** (`adjudication.md` é o dossiê) |
+| Adjudicação | toda linha nasce `PENDENTE_ADJUDICACAO` — campo do dono; **60 linhas aguardando** (`adjudication.md` é o dossiê; artefato de decisão única em preparação) |
 
 Atenção a dois desvios do protocolo original, ambos verificados e decididos
 pelo dono (detalhe em `findings.md`): o substrato é `canon/policy.json` (não
@@ -141,3 +141,17 @@ dono, nunca do runner nem de assistente.
 - Re-execuções produzem bytes idênticos (verificado por sha256sum na Etapa 4).
 - O trace de paridade guarda os hashes do substrato; `test_parity.py` falha se
   o repo mudou desde a geração (regenerar com node é o caminho normal).
+
+## Fechamento da meta (lote 5, 2026-08-10 — CASO-016..030)
+
+Corpus final: **30 casos reais** (+1 sintético de pipeline), 13 executando no
+t0 do braço de acurácia — perfis exercitados: euglicemica, cad-hhs,
+sepse-lactato, alcoolica-jejum, pre-cad, parcial, classica, dialitica (contexto),
+hold/ECG de potássio, banda 1-2 e <1 de Δ/Δ, eixo ácido por OR. Destaques:
+CASO-020 (AKA hipoglicêmica glicose 25 → alcoolica-jejum), CASO-021 (HHS por
+leuprolida → matches VAZIO com osm 331,3, F-007 puro), CASO-023 (primeiro
+óbito), CASO-024 (hold por K 2,0), CASO-025 (glicose 1858), série UTI
+016-018 e série COVID 026-029. Fontes: 10.7759/cureus.83920,
+10.7759/cureus.78193, 10.1097/MD.0000000000031996, 10.7759/cureus.26993,
+10.1186/s12879-023-08371-0, 10.7759/cureus.13163, 10.7759/cureus.26267,
+10.1155/2021/6429710, 10.55729/2000-9666.1163, 10.1186/s13256-022-03594-2.

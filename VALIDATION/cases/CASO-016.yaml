@@ -1,0 +1,81 @@
+# Extraído de relato publicado (texto completo lido via PubMed Central).
+# Série de casos: paciente "Case 1" de Yomogida et al. (3 pacientes com tabela individual).
+meta:
+  id: CASO-016
+  synthetic: false
+  fonte:
+    citacao: "Yomogida D, Hasegawa S, Mizuta S, Horikawa S, Koshida Y. Euglycemic Diabetic Ketoacidosis With Sepsis and Acute Kidney Injury in Critically Ill Patients: A Case Series [Case 1]. Cureus. 2025;17(5):e83920."
+    doi: "10.7759/cureus.83920"
+    pmid: "40502910"
+  ano: 2025
+  contexto: UTI
+  populacao: adulto
+  variante: sepse_lactato
+  variante_observacao: "EDKA + sepse urinária + LRA grave (creatinina 10,45) em DM2 insulinizado, 66 anos; retenção urinária"
+
+pontos:
+  - t: 0
+    labs:
+      glucoseMgDl: 184
+      na: 129
+      cl: 91
+      hco3: 7.7
+      k: null
+      ph: 7.247
+      pco2: 18.3
+      betaHydroxybutyrateMmolL: 3.512
+      ketonuriaCruzes: null
+      albumin: null
+      lactateMmolL: 0.9
+      bunMgDl: null
+      ureaMgDl: null
+    contexto_clinico:
+      knownDiabetes: true
+      suspectedSepsis: true
+      dialysisDependent: false
+      chronicityHint: null
+      pesoKg: null
+    disponibilidade:
+      betaHydroxybutyrateMmolL: ausente_no_cenario_UPA
+      lactateMmolL: ausente_no_cenario_UPA
+    observacoes: >-
+      3-OHBA publicado 3512 umol/L -> 3,512 mmol/L (conversão de unidade
+      /1000, identidade). AcAc 1526 umol/L e corpos cetônicos totais 5038
+      (fora dos insumos). Gasometria arterial. K não publicado. AG
+      ajustado 33,6 relatado. Creatinina 10,45; CHDF (hemofiltração) por
+      oligúria. Lactato NORMAL (0,9) apesar de sepse — bandeira via
+      suspectedSepsis (ITU + leucocitose 25,5 mil + PCR 27,95).
+      dialysisDependent=false: LRA aguda com CHDF transitória, não DRC
+      dialítica de manutenção.
+
+conduta_relatada:
+  insulina:
+    iniciada: null
+    adiada_por_potassio: null
+    taxa_inicial_U_kg_h: null
+    reduzida_com_dextrose: null
+    bolus_inicial: null
+  potassio:
+    reposto_antes_da_insulina: null
+    reposto: null
+  bicarbonato:
+    administrado: null
+    ph_no_momento: null
+  fluidos:
+    texto: null
+  texto_livre: >-
+    Sondagem vesical de demora (retenção); CHDF do dia 1 ao 3 por
+    oligúria e acidose em piora; a série discute que o tratamento de EDKA
+    deve preceder a TRS, e que a CHDF pode ter acelerado a resolução da
+    acidose. Detalhes de insulina/fluidos não publicados por paciente.
+
+desfecho:
+  resolucao: true
+  criterio_resolucao_do_relato: "diurese recuperada, acidose resolvida, CHDF suspensa no dia 3; alta da UTI no dia 6"
+  tempo_ate_resolucao_h: null
+  complicacoes: ["LRA grave com CHDF", "sepse urinária"]
+  obito: false
+
+adjudicacao:
+  classificacao: PENDENTE
+  notas: null

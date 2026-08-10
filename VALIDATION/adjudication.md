@@ -166,6 +166,46 @@ cerebral; desfecho: edema cerebral + CPM + HSD, recuperação quase completa.
 Terceiro vértice do triângulo do bicarbonato no corpus: CASO-002 deu acima do
 gatilho, CASO-010 reteve abaixo, CASO-015 deu dentro — e é o caso pediátrico.
 
+## Lote 5 — fechamento da meta (CASO-016..030, extraídos 2026-08-10)
+
+Confrontos-chave (braço de acurácia; detalhes nos YAMLs e logs):
+
+- **CASO-016/017/018** (série UTI, DOI 10.7759/cureus.83920): 016 roda →
+  `euglicemica+sepse-lactato` (lactato normal, sepse por contexto); 017 roda →
+  `euglicemica+sepse-lactato`, e testa o eixo ácido pelo OR (pH 7,345 não fecha,
+  HCO₃ 12,8 fecha); 018 trava (cetonúria "positive" sem cruzes). Nos três, a
+  conduta relatada priorizou tratar EDKA antes de TRS — doutrina que a própria
+  série defende.
+- **CASO-019** (gestante + sepse + GLP-1, 10.7759/cureus.78193): trava
+  (Na/Cl/eixo cetônico ausentes; pH 7,30 exatamente no limiar — não fecha).
+- **CASO-020** (AKA hipoglicêmica, glicose 25, 10.1097/MD.0000000000031996):
+  roda → **`alcoolica-jejum`** (primeira ativação do perfil) + Δ/Δ 0,57.
+  Conduta: SEM insulina (glicose+tiamina) — contraste doutrinário com CAD que
+  o motor não sinaliza (a nota de lactato 6,29 não dispara fora de dka=true —
+  observação de desenho anexa ao F-007).
+- **CASO-021** (HHS por leuprolida, 10.7759/cureus.26993): roda e devolve
+  **`matches: []` com osm efetiva 331,3** — o F-007 em forma pura: HHS florido
+  com painel completo e o motor sem rótulo algum.
+- **CASO-022** (pediátrica + pancreatite, 10.1186/s12879-023-08371-0): roda →
+  `cad-hhs`+`sepse-lactato` (glicose 588,6); série de resolução em 96h
+  (βHB 0,32 + pH 7,45) trava por Na/Cl ausentes no seguimento.
+- **CASO-023** (mucormicose + CAD + COVID, 10.7759/cureus.13163): **primeiro
+  óbito do corpus**; trava no eixo cetônico (cetonúria "150 mg/dL" — F-008)
+  apesar de Cl derivado 102; pH 6,9 sem menção a bicarbonato.
+- **CASO-024** (EDKA empagliflozina, K 2,0, 10.7759/cureus.26267): roda →
+  `euglicemica` + **hold por K 2,0**; relato não explicita a ordem
+  insulina×potássio — adjudicação direta da doutrina de K do canon.
+- **CASO-025** (mista pediátrica glicose 1858 + MIS-C, 10.1155/2021/6429710):
+  trava (Cl/K não publicados); βHB convertido 46 mg/dL → 4,42 mmol/L.
+- **CASO-026..029** (série COVID, 10.55729/2000-9666.1163): 026 trava com
+  painel completo de eletrólitos (cetona "moderate" — F-008 qualitativa);
+  027 trava (Na/Cl ausentes; βHB ">46" com unidade via referência — piso
+  registrado, plausibilidade em cheque); 028 trava (Na 170, osm efetiva
+  calculável 368,9 — F-007); 029 trava (dialítico HHS, extração de pisos).
+- **CASO-030** (mucormicose rinocerebral pediátrica, 10.1186/s13256-022-03594-2):
+  trava múltipla (só pH 6,92 + glicose 668 publicados); a NÃO-resposta ao
+  protocolo foi o gatilho diagnóstico do relato — 104 dias, sobreviveu.
+
 ## Resumo para assinatura
 
 | Caso | Confronto dominante | Rótulo sugerido pelo confronto mecânico* |
@@ -185,6 +225,21 @@ gatilho, CASO-010 reteve abaixo, CASO-015 deu dentro — e é o caso pediátrico
 | CASO-013 | travou (cetonúria em mg/dL sem cruzes — F-008) | — |
 | CASO-014 | roda: euglicemica+sepse-lactato; taxa 0,05 (motor) × 0,1 (relato) | — |
 | CASO-015 | travou (βHB sem unidade — F-008); bicarbonato DENTRO do gatilho, pediátrico ✖/◐ | — |
+| CASO-016 | roda: euglicemica+sepse-lactato; EDKA antes de TRS ✔ | — |
+| CASO-017 | roda: eixo ácido fechou pelo OR (HCO₃, não pH) ✔ | — |
+| CASO-018 | travou (cetonúria "positive" sem cruzes) | — |
+| CASO-019 | travou (Na/Cl/cetona; pH 7,30 no limiar exato) | — |
+| CASO-020 | roda: alcoolica-jejum ✔; sem insulina no relato ✔; lactato 6,29 sem nota (desenho) | — |
+| CASO-021 | roda: matches VAZIO com osm 331 (F-007 puro) ✖ | — |
+| CASO-022 | roda: cad-hhs+sepse-lactato ✔; resolução trava no seguimento | — |
+| CASO-023 | travou (F-008); ÓBITO; pH 6,9 sem bicarbonato relatado ◐ | — |
+| CASO-024 | roda: hold por K 2,0 ✔?; ordem insulina×K não relatada ◐ | — |
+| CASO-025 | travou (Cl/K); glicose 1858, MIS-C | — |
+| CASO-026 | travou (cetona "moderate" — F-008 qualitativa) | — |
+| CASO-027 | travou (Na/Cl); βHB ">46" plausibilidade em cheque | — |
+| CASO-028 | travou; Na 170 com osm efetiva 368,9 (F-007) | — |
+| CASO-029 | travou (dialítico HHS, pisos publicados) | — |
+| CASO-030 | travou múltiplo; não-resposta ao protocolo como gatilho diagnóstico | — |
 
 \* Coluna deliberadamente vazia: o rótulo é seu. Os símbolos acima são
 descrição mecânica do confronto, não julgamento clínico.

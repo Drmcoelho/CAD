@@ -1,0 +1,78 @@
+# Extraído de relato publicado (texto completo lido via PubMed Central).
+meta:
+  id: CASO-020
+  synthetic: false
+  fonte:
+    citacao: "Okauchi S, Tatsumi F, Takahashi K, et al. Case report of severe hypoglycemic alcoholic ketoacidosis: A possible pitfall in diagnosis of ketoacidosis. Medicine (Baltimore). 2022;101(50):e31996."
+    doi: "10.1097/MD.0000000000031996"
+    pmid: "36550800"
+  ano: 2022
+  contexto: PS
+  populacao: adulto
+  variante: alcoolica_jejum
+  variante_observacao: "cetoacidose alcoólica HIPOGLICÊMICA (glicose 25!) em não-diabética de 76 anos, etilismo pesado crônico (200 g/dia) com jejum prolongado"
+
+pontos:
+  - t: 0
+    labs:
+      glucoseMgDl: 25
+      na: 139
+      cl: 109
+      hco3: 9.5
+      k: 4.1
+      ph: 7.141
+      pco2: 28.6
+      betaHydroxybutyrateMmolL: 4.078
+      ketonuriaCruzes: 2
+      albumin: 4.1
+      lactateMmolL: 6.29
+      bunMgDl: 27
+      ureaMgDl: null
+    contexto_clinico:
+      knownDiabetes: false
+      suspectedSepsis: false
+      dialysisDependent: false
+      chronicityHint: null
+      pesoKg: 48.6
+    disponibilidade:
+      betaHydroxybutyrateMmolL: ausente_no_cenario_UPA
+    observacoes: >-
+      Painel COMPLETO. 3-hidroxibutirato 4077,8 umol/L -> 4,078 mmol/L
+      (identidade /1000); AcAc 1087,6; corpos cetônicos totais 5165,4.
+      Cetonúria 2+ publicada. HbA1c 4,8%, insulina <0,1, C-peptídeo 0,1
+      (hipoinsulinemia de jejum, não DM). Lactato 6,29 (texto cita 6,27 e
+      6,29 — tabela usa 6,29). knownDiabetes=false: sem DM (HbA1c normal,
+      sem hipoglicemiante). Cortisol 40,6 (estresse). BNP 548;
+      extrassístoles ventriculares frequentes na admissão.
+
+conduta_relatada:
+  insulina:
+    iniciada: false
+    adiada_por_potassio: false
+    taxa_inicial_U_kg_h: null
+    reduzida_com_dextrose: null
+    bolus_inicial: false
+  potassio:
+    reposto_antes_da_insulina: null
+    reposto: null
+  bicarbonato:
+    administrado: null
+    ph_no_momento: null
+  fluidos:
+    texto: "glicose intravenosa + suplementação de vitaminas B (prevenção de Wernicke-Korsakoff)"
+  texto_livre: >-
+    SEM insulina (correto para AKA hipoglicêmica — contraste doutrinário
+    central com CAD): tratamento foi glicose IV + tiamina. Diazepam 20 mg
+    em desmame para prevenção de abstinência. Glicemia, cetonas e pH
+    normalizaram em poucos dias.
+
+desfecho:
+  resolucao: true
+  criterio_resolucao_do_relato: "glicose, corpos cetônicos e pH normalizados em poucos dias; arritmia desapareceu; sem sintomas de abstinência"
+  tempo_ate_resolucao_h: null
+  complicacoes: ["hipoglicemia grave 25 mg/dL", "extrassistolia ventricular frequente (resolvida)", "disfunção hepática e renal leves"]
+  obito: false
+
+adjudicacao:
+  classificacao: PENDENTE
+  notas: null

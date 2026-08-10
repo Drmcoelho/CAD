@@ -1,0 +1,82 @@
+# Extraído de relato publicado (texto completo lido via PubMed Central).
+meta:
+  id: CASO-021
+  synthetic: false
+  fonte:
+    citacao: "Saad E, Babkir A, Awadelkarim AM, Qureshi F. Leuprolide-Induced Hyperosmolar Hyperglycemic State in an Elderly Patient: A Case Report and Literature Review. Cureus. 2022;14(7):e26993."
+    doi: "10.7759/cureus.26993"
+    pmid: "35865181"
+  ano: 2022
+  contexto: UTI
+  populacao: adulto
+  variante: outra
+  variante_observacao: "HHS puro geriátrico (75 anos) induzido por leuprolida (agonista GnRH) em câncer de próstata metastático, sem DM prévio — teste-padrão do F-007 com painel COMPLETO"
+
+pontos:
+  - t: 0
+    labs:
+      glucoseMgDl: 996
+      na: 138
+      cl: 99
+      hco3: 24
+      k: 4.6
+      ph: 7.30
+      pco2: null
+      betaHydroxybutyrateMmolL: 0.6
+      ketonuriaCruzes: null
+      albumin: 3.8
+      lactateMmolL: 2.1
+      bunMgDl: null
+      ureaMgDl: null
+    contexto_clinico:
+      knownDiabetes: false
+      suspectedSepsis: false
+      dialysisDependent: false
+      chronicityHint: null
+      pesoKg: null
+    disponibilidade:
+      betaHydroxybutyrateMmolL: ausente_no_cenario_UPA
+      lactateMmolL: ausente_no_cenario_UPA
+    observacoes: >-
+      Painel completo com Cl publicado. "Serum ketones 0.6 mmol/L" (ref
+      <0,6) sem nomear o ensaio — extraído como βHB pela convenção
+      sérica em mmol/L, revisável (F-008). pH VENOSO 7,30 — não fecha o
+      eixo ácido (<7,30); HCO3 24 normal; cetose ausente -> critério de
+      CAD integralmente NEGATIVO com osm medida 330 e osm efetiva
+      calculável 331,3 (>320, critério HHS do canon): é o caso-padrão do
+      F-007 — o motor roda e não tem rótulo para dar. AG 10.
+      Creatinina 2,30 (LRA). HbA1c 13,5%. PA 77/55 (choque
+      hipovolêmico). Procalcitonina 0,41 normal; sem foco infeccioso ->
+      suspectedSepsis false.
+
+conduta_relatada:
+  insulina:
+    iniciada: true
+    adiada_por_potassio: false
+    taxa_inicial_U_kg_h: null
+    reduzida_com_dextrose: null
+    bolus_inicial: null
+  potassio:
+    reposto_antes_da_insulina: null
+    reposto: null
+  bicarbonato:
+    administrado: null
+    ph_no_momento: null
+  fluidos:
+    texto: "ressuscitação volêmica agressiva por protocolo institucional de HHS"
+  texto_livre: >-
+    UTI: fluidos agressivos + insulina IV contínua + correção
+    eletrolítica. Glicemia normalizou em 12h de infusão; sensório
+    retornou ao basal no dia seguinte. Transição para lispro + levemir
+    com educação em diabetes.
+
+desfecho:
+  resolucao: true
+  criterio_resolucao_do_relato: "glicemia normalizada em 12h; sensório basal no dia seguinte; alta com insulina SC"
+  tempo_ate_resolucao_h: 12
+  complicacoes: ["choque hipovolêmico na admissão (PA 77/55)", "lesão renal aguda (creatinina 2,30)"]
+  obito: false
+
+adjudicacao:
+  classificacao: PENDENTE
+  notas: null
