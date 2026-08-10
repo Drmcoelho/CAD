@@ -1,0 +1,77 @@
+# Extraído de relato publicado (texto completo lido via PubMed Central).
+# Todos os valores vêm do texto; ausente no relato = null (nunca imputado).
+meta:
+  id: CASO-012
+  synthetic: false
+  fonte:
+    citacao: "Alhemeiri M, Alseddeeqi E. Euglycemic Diabetic Ketoacidosis after Discontinuing SGLT2 Inhibitor. Case Rep Endocrinol. 2022;2022:4101975."
+    doi: "10.1155/2022/4101975"
+    pmid: "35282610"
+  ano: 2022
+  contexto: enfermaria
+  populacao: adulto
+  variante: euglicemica_sglt2
+  variante_observacao: "EDKA após dieta cetogênica (30 g carboidrato/dia por 3 dias) com empagliflozina suspensa 2 dias antes — efeito residual do SGLT2i"
+
+pontos:
+  - t: 0
+    labs:
+      glucoseMgDl: 135
+      na: 132
+      cl: 97
+      hco3: 6
+      k: null
+      ph: null
+      pco2: null
+      betaHydroxybutyrateMmolL: null
+      ketonuriaCruzes: 3
+      albumin: null
+      lactateMmolL: null
+      bunMgDl: null
+      ureaMgDl: null
+    contexto_clinico:
+      knownDiabetes: true
+      suspectedSepsis: false
+      dialysisDependent: false
+      chronicityHint: null
+      pesoKg: 115
+    disponibilidade: {}
+    observacoes: >-
+      pH NÃO publicado em lugar algum do relato (só bicarbonato venoso 6)
+      — o perfil trava por exigir pH (F-005, terceiro exemplar). K NÃO
+      publicado. AG 29 relatado, consistente com o painel (132-97-6=29).
+      Cetonúria publicada quantificada: "15 (3+) mmol/l" -> cruzes 3.
+      Durante a internação (sem timestamp -> fora do t0): lactato 0,8 e
+      βHB 4,21. HbA1c 9,7%. Peso 115 kg (IMC 36,3).
+
+conduta_relatada:
+  insulina:
+    iniciada: true
+    adiada_por_potassio: false
+    taxa_inicial_U_kg_h: null
+    reduzida_com_dextrose: true
+    bolus_inicial: null
+  potassio:
+    reposto_antes_da_insulina: null
+    reposto: null
+  bicarbonato:
+    administrado: null
+    ph_no_momento: null
+  fluidos:
+    texto: "protocolo institucional de CAD"
+  texto_livre: >-
+    Drips de insulina E dextrose desde o início (protocolo de EDKA).
+    Internado em enfermaria (não UTI). Alta em 4 dias com metformina +
+    pioglitazona; canagliflozina reintroduzida 2 semanas depois sem
+    recorrência.
+
+desfecho:
+  resolucao: true
+  criterio_resolucao_do_relato: "alta após 4 dias de internação"
+  tempo_ate_resolucao_h: null
+  complicacoes: null
+  obito: false
+
+adjudicacao:
+  classificacao: PENDENTE
+  notas: null

@@ -1,0 +1,70 @@
+{
+ "AVISO_SINTETICO": null,
+ "caso": "CASO-012",
+ "synthetic": false,
+ "arquivo_fonte": "VALIDATION/cases/CASO-012.yaml",
+ "braco": "acuracia",
+ "substrato": {
+  "canon/policy.json": "ee88734ae4ff3bd2badd4270bd6f15f6a86a6e75481443f3c85d12c72e6221e5",
+  "core/cad_core.js": "c07c37d62df6521b14097ddfb8321f9003f89c2a4eea7717ab63c820c9320c79",
+  "pyengine/cad_engine.py": "d068e0f22b4975962c4cab32dcbe489ceb253b12ba618334954f559ee7c92bcb",
+  "pyengine/abg_engine.py": "04d5f7db62a6cd29ae31c9a732a14c9eae5ec374b8092e2c546111edbd8f65ca"
+ },
+ "policy_version": "CAD360-ApA-2026-07-01",
+ "adjudicacao": {
+  "classificacao": "PENDENTE",
+  "notas": null
+ },
+ "pontos": [
+  {
+   "t": 0,
+   "braco": "acuracia",
+   "campos_mascarados_UPA": [],
+   "input_motor": {
+    "na": 132,
+    "cl": 97,
+    "hco3": 6,
+    "glucoseMgDl": 135,
+    "ph": null,
+    "betaHydroxybutyrateMmolL": null,
+    "ketonuriaCruzes": 3,
+    "kMmolL": null,
+    "lactateMmolL": null,
+    "knownDiabetes": true,
+    "suspectedSepsis": false,
+    "dialysisDependent": false
+   },
+   "labs_pos_mascara": {
+    "glucoseMgDl": 135,
+    "na": 132,
+    "cl": 97,
+    "hco3": 6,
+    "k": null,
+    "ph": null,
+    "pco2": null,
+    "betaHydroxybutyrateMmolL": null,
+    "ketonuriaCruzes": 3,
+    "albumin": null,
+    "lactateMmolL": null,
+    "bunMgDl": null,
+    "ureaMgDl": null
+   },
+   "resultado_cad": {
+    "insufficient": true,
+    "missing": [
+     "ph"
+    ]
+   },
+   "resultado_insulina": null,
+   "resultado_abg": null,
+   "flags_mecanicas": [
+    "insuficiente:ph",
+    "sem_K_sem_plano_potassio",
+    "sem_pCO2_gasometria_nao_executada"
+   ],
+   "labs_disponiveis": 5,
+   "labs_total": 13
+  }
+ ],
+ "classificacao_mecanica": "motor_travou_por_dado_ausente"
+}

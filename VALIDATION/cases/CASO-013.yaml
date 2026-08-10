@@ -1,0 +1,79 @@
+# Extraído de relato publicado (texto completo lido via PubMed Central).
+# Todos os valores vêm do texto; ausente no relato = null (nunca imputado).
+meta:
+  id: CASO-013
+  synthetic: false
+  fonte:
+    citacao: "Rao SJ, Kumar K, Saleh N. A Case of SGLT2 Inhibitor-Induced Euglycemic Diabetic Ketoacidosis. Cureus. 2022;14(10):e30106."
+    doi: "10.7759/cureus.30106"
+    pmid: "36381906"
+  ano: 2022
+  contexto: UTI
+  populacao: adulto
+  variante: euglicemica_sglt2
+  variante_observacao: "EDKA por empagliflozina 2 anos após início da terapia; gatilho: vômitos + baixa ingesta por 1 semana"
+
+pontos:
+  - t: 0
+    labs:
+      glucoseMgDl: 187
+      na: 133
+      cl: 102
+      hco3: 12
+      k: 4.9
+      ph: 7.21
+      pco2: 23.0
+      betaHydroxybutyrateMmolL: null
+      ketonuriaCruzes: null
+      albumin: null
+      lactateMmolL: 1.6
+      bunMgDl: 22
+      ureaMgDl: null
+    contexto_clinico:
+      knownDiabetes: true
+      suspectedSepsis: null
+      dialysisDependent: false
+      chronicityHint: null
+      pesoKg: null
+    disponibilidade:
+      lactateMmolL: ausente_no_cenario_UPA
+    observacoes: >-
+      Painel completo COM gasometria arterial (pH 7,21, pCO2 23,0, HCO3
+      9,2; extração usa HCO3 sérico 12, base do AG 19 relatado:
+      133-102-12=19). Cetonúria publicada como ">80 mg/dL" SEM escala em
+      cruzes — mapeamento mg/dL->cruzes depende do kit (não é identidade
+      aritmética) -> ketonuriaCruzes null; o perfil trava pelo eixo
+      cetônico apesar do painel rico (F-008; decisão de mapeamento de
+      escala pendente com o dono). Toxicologia negativa (etanol,
+      salicilato, acetaminofeno). Creatinina 1,80.
+
+conduta_relatada:
+  insulina:
+    iniciada: true
+    adiada_por_potassio: false
+    taxa_inicial_U_kg_h: null
+    reduzida_com_dextrose: true
+    bolus_inicial: null
+  potassio:
+    reposto_antes_da_insulina: null
+    reposto: null
+  bicarbonato:
+    administrado: null
+    ph_no_momento: null
+  fluidos:
+    texto: "SF 0,9% 2 L no PS; depois D5 em Ringer lactato contínuo"
+  texto_livre: >-
+    UTI: infusão contínua de insulina regular + D5 em Ringer lactato até
+    fechar o anion gap; ponte para insulina SC basal-bolus; empagliflozina
+    suspensa definitivamente na alta.
+
+desfecho:
+  resolucao: true
+  criterio_resolucao_do_relato: "anion gap normalizado em infusão de insulina; melhora clínica; alta com basal-bolus"
+  tempo_ate_resolucao_h: null
+  complicacoes: null
+  obito: false
+
+adjudicacao:
+  classificacao: PENDENTE
+  notas: null

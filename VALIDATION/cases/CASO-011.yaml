@@ -1,0 +1,80 @@
+# Extraído de relato publicado (texto completo lido via PubMed Central).
+# Todos os valores vêm do texto; ausente no relato = null (nunca imputado).
+meta:
+  id: CASO-011
+  synthetic: false
+  fonte:
+    citacao: "Rizo IM, Apovian CM. Diabetic Ketoacidosis Post Bariatric Surgery. Front Endocrinol (Lausanne). 2019;9:812."
+    doi: "10.3389/fendo.2018.00812"
+    pmid: "30697192"
+  ano: 2019
+  contexto: PS
+  populacao: adulto
+  variante: classica
+  variante_observacao: "CAD hiperglicêmica provocada (suspensão de insulina + infecção viral suspeita) em diabetes propensa à cetose (KPDM A-β+), 4 meses pós-bypass gástrico"
+
+pontos:
+  - t: 0
+    labs:
+      glucoseMgDl: 504
+      na: 128
+      cl: 99
+      hco3: 7.0
+      k: 4.8
+      ph: 7.09
+      pco2: 24
+      betaHydroxybutyrateMmolL: null
+      ketonuriaCruzes: 2
+      albumin: 4.6
+      lactateMmolL: 1.8
+      bunMgDl: null
+      ureaMgDl: null
+    contexto_clinico:
+      knownDiabetes: true
+      suspectedSepsis: null
+      dialysisDependent: false
+      chronicityHint: null
+      pesoKg: 78
+    disponibilidade:
+      lactateMmolL: ausente_no_cenario_UPA
+    observacoes: >-
+      Gasometria venosa: pH 7,09, pCO2 24, HCO3 7,0 (tabela); o texto
+      corrido cita "bicarbonate of 6 mmol/L" e AG 23 (consistente com
+      HCO3 6: 128-99-6=23) — extração usa a tabela (7,0), discrepância
+      interna do relato registrada. Cetonúria 2+ publicada. Peso
+      admissional 78 kg. Creatinina 1,4, TFG 44 (fora dos insumos).
+      HbA1c 9,2%. Urocultura e painel respiratório negativos; leucocitose
+      26,5 mil (infecção viral suspeita, não confirmada) ->
+      suspectedSepsis null.
+
+conduta_relatada:
+  insulina:
+    iniciada: true
+    adiada_por_potassio: false
+    taxa_inicial_U_kg_h: null
+    reduzida_com_dextrose: null
+    bolus_inicial: null
+  potassio:
+    reposto_antes_da_insulina: null
+    reposto: null
+  bicarbonato:
+    administrado: null
+    ph_no_momento: null
+  fluidos:
+    texto: "hidratação IV conforme protocolo institucional de CAD"
+  texto_livre: >-
+    Infusão contínua de insulina pelo protocolo de CAD (taxa não
+    publicada); transição para esquema basal-bolus após 24h; alta com
+    glargina 20 U/dia + lispro 6 U às refeições. Anticorpos negativos
+    com C-peptídeo 1,36 pós-alta (KPDM A-β+).
+
+desfecho:
+  resolucao: true
+  criterio_resolucao_do_relato: "transição do drip para basal-bolus após 24h; alta hospitalar"
+  tempo_ate_resolucao_h: null
+  complicacoes: null
+  obito: false
+
+adjudicacao:
+  classificacao: PENDENTE
+  notas: null

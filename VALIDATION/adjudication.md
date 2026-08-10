@@ -127,6 +127,27 @@ relato RETEVE bicarbonato pela estabilidade circulatória — PCR em AESP 5h dep
 revertida com bicarbonato. O caso-espelho do CASO-002 (que deu bicarbonato ACIMA
 do gatilho): os dois lados do desvio doutrinário no mesmo piloto.
 
+## Lote 3 (CASO-011..013, extraídos 2026-08-10)
+
+**CASO-011** · CAD clássica (KPDM pós-bariátrica, glicose 504) · DOI 10.3389/fendo.2018.00812
+**Motor RODA** — o primeiro caso francamente hiperglicêmico do conjunto que
+executa: perfil `cad-hhs` (glicose ≥500 dispara a bandeira de sobreposição;
+osm efetiva 284 <320 — o gatilho foi a glicose isolada), K 4,8 → insulina
+liberada 0,1 U/kg/h, Δ/Δ 0,5 → nota de componente hiperclorêmico. Relato trata
+como CAD simples de diabetes propensa à cetose. Confronto: a bandeira cad-hhs
+do motor com osm normal-alta é útil ou ruído? Adjudicação sua.
+
+**CASO-012** · EDKA dieta cetogênica + SGLT2i suspenso · DOI 10.1155/2022/4101975
+Motor trava: **nenhum pH publicado no relato inteiro** (só HCO₃ venoso 6) —
+terceiro exemplar do F-005. Cetonúria 3+ publicada; AG 29 consistente.
+Conduta convergente (insulina + dextrose desde o início). Internação em
+enfermaria, não UTI.
+
+**CASO-013** · EDKA empagliflozina, painel completo + gasometria arterial · DOI 10.7759/cureus.30106
+Motor trava pelo eixo cetônico apesar do painel rico: cetonúria ">80 mg/dL"
+sem escala em cruzes (F-008 — mapeamento de kit não é identidade aritmética).
+Se o dono autorizar `convertido_de_escala` (v0.3), o caso destrava.
+
 ## Resumo para assinatura
 
 | Caso | Confronto dominante | Rótulo sugerido pelo confronto mecânico* |
@@ -141,6 +162,9 @@ do gatilho): os dois lados do desvio doutrinário no mesmo piloto.
 | CASO-008 | travou; osm efetiva do relato não reproduz pela fórmula ✖ | — |
 | CASO-009 | travou (pH de admissão não publicado — F-005) | — |
 | CASO-010 | perfil ✖ (AKA×CAD) / bicarbonato retido com pH <7,0 ✖ | — |
+| CASO-011 | roda: cad-hhs por glicose ≥500 × "CAD simples" do relato ✖/◐ | — |
+| CASO-012 | travou (nenhum pH publicado — F-005) | — |
+| CASO-013 | travou (cetonúria em mg/dL sem cruzes — F-008) | — |
 
 \* Coluna deliberadamente vazia: o rótulo é seu. Os símbolos acima são
 descrição mecânica do confronto, não julgamento clínico.
