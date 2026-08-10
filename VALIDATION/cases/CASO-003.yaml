@@ -1,0 +1,81 @@
+# Extraído de relato publicado (texto completo lido via PubMed Central).
+# Todos os valores vêm do texto; ausente no relato = null (nunca imputado).
+meta:
+  id: CASO-003
+  synthetic: false
+  fonte:
+    citacao: "Han HJ, Cole AE, Verma A. Euglycemic Diabetic Ketoacidosis Caused by Alcoholic Pancreatitis and Starvation Ketosis. J Gen Intern Med. 2023;38(5):1299-1301."
+    doi: "10.1007/s11606-022-07993-5"
+    pmid: "36689144"
+  ano: 2023
+  contexto: UTI
+  populacao: adulto
+  variante: euglicemica_outra
+  variante_observacao: "euglicêmica por jejum/cetose de inanição + pancreatite alcoólica; DM2 conhecido, sem SGLT2i"
+
+pontos:
+  - t: 0
+    labs:
+      glucoseMgDl: 214
+      na: 134
+      cl: null
+      hco3: 6
+      k: 3.8
+      ph: 6.99
+      pco2: null
+      betaHydroxybutyrateMmolL: 12.92
+      ketonuriaCruzes: null
+      albumin: 2.2
+      lactateMmolL: 2.3
+      bunMgDl: 13
+      ureaMgDl: null
+    contexto_clinico:
+      knownDiabetes: true
+      suspectedSepsis: null
+      dialysisDependent: false
+      chronicityHint: null
+      pesoKg: null
+    disponibilidade:
+      betaHydroxybutyrateMmolL: ausente_no_cenario_UPA
+    observacoes: >-
+      Cloro NÃO relatado; o relato dá AG=28, que permitiria derivar
+      Cl=134-6-28=100 — derivação NÃO aplicada (decisão metodológica
+      pendente com o dono; ver findings F-004). pH 6,99 em gasometria
+      venosa, pCO2 não relatado. Discrepâncias internas do relato:
+      discussão cita glicose 212 (labs: 214) e HCO3 9 (labs: 6) —
+      extração usa o parágrafo de labs. Etanolemia negativa; TC com
+      edema peripancreático + lipase 968 (pancreatite); WBC 19,8 mil;
+      possível pneumonia multifocal na TC (suspectedSepsis mantido null:
+      relato não firma sepse).
+
+conduta_relatada:
+  insulina:
+    iniciada: true
+    adiada_por_potassio: false
+    taxa_inicial_U_kg_h: null
+    reduzida_com_dextrose: true
+    bolus_inicial: null
+  potassio:
+    reposto_antes_da_insulina: null
+    reposto: true
+  bicarbonato:
+    administrado: true
+    ph_no_momento: 6.99
+  fluidos:
+    texto: "bolus de SF 0,9%; depois D5 + NaCl 0,9% com KCl 20 mEq; trocado para D5 + NaCl 0,45%"
+  texto_livre: >-
+    Insulina em infusão iniciada a 3 U/h no PS (taxa absoluta; peso não
+    relatado), depois protocolo de CAD na UTI com dextrose 5% associada.
+    NaHCO3 50 mEq em injeção. Transição para glargina + lispro após
+    normalização de glicemia e eletrólitos.
+
+desfecho:
+  resolucao: true
+  criterio_resolucao_do_relato: "resolução da acidose e do bicarbonato; anion gap e beta-hidroxibutirato clarearam rapidamente com o protocolo"
+  tempo_ate_resolucao_h: null
+  complicacoes: null
+  obito: false
+
+adjudicacao:
+  classificacao: PENDENTE
+  notas: null

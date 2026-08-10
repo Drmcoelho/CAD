@@ -1,0 +1,183 @@
+{
+ "AVISO_SINTETICO": null,
+ "caso": "CASO-004",
+ "synthetic": false,
+ "arquivo_fonte": "VALIDATION/cases/CASO-004.yaml",
+ "braco": "executabilidade_UPA",
+ "substrato": {
+  "canon/policy.json": "ee88734ae4ff3bd2badd4270bd6f15f6a86a6e75481443f3c85d12c72e6221e5",
+  "core/cad_core.js": "c07c37d62df6521b14097ddfb8321f9003f89c2a4eea7717ab63c820c9320c79",
+  "pyengine/cad_engine.py": "d068e0f22b4975962c4cab32dcbe489ceb253b12ba618334954f559ee7c92bcb",
+  "pyengine/abg_engine.py": "04d5f7db62a6cd29ae31c9a732a14c9eae5ec374b8092e2c546111edbd8f65ca"
+ },
+ "policy_version": "CAD360-ApA-2026-07-01",
+ "adjudicacao": {
+  "classificacao": "PENDENTE",
+  "notas": null
+ },
+ "pontos": [
+  {
+   "t": 0,
+   "braco": "executabilidade_UPA",
+   "campos_mascarados_UPA": [
+    "betaHydroxybutyrateMmolL"
+   ],
+   "input_motor": {
+    "na": 160,
+    "cl": null,
+    "hco3": 12,
+    "glucoseMgDl": 1188,
+    "ph": 7.09,
+    "betaHydroxybutyrateMmolL": null,
+    "ketonuriaCruzes": 1,
+    "kMmolL": 6.1,
+    "lactateMmolL": null,
+    "knownDiabetes": false,
+    "dialysisDependent": false
+   },
+   "labs_pos_mascara": {
+    "glucoseMgDl": 1188,
+    "na": 160,
+    "cl": null,
+    "hco3": 12,
+    "k": 6.1,
+    "ph": 7.09,
+    "pco2": 51,
+    "betaHydroxybutyrateMmolL": null,
+    "ketonuriaCruzes": 1,
+    "albumin": null,
+    "lactateMmolL": null,
+    "bunMgDl": 49,
+    "ureaMgDl": null
+   },
+   "resultado_cad": {
+    "insufficient": true,
+    "missing": [
+     "cl"
+    ]
+   },
+   "resultado_insulina": {
+    "rateUnitsKgHour": 0.1,
+    "action": "start fixed-rate insulin",
+    "dextrose": false,
+    "potassium": {
+     "band": ">=5.0",
+     "insulin": "allowed",
+     "potassium": "no initial potassium; ECG/recheck",
+     "target": "4-5 mmol/L"
+    }
+   },
+   "resultado_abg": {
+    "ph": 7.09,
+    "pco2": 51,
+    "hco3": 12,
+    "acidemia": true,
+    "alkalemia": false,
+    "phNormal": false,
+    "components": {
+     "metabolicAcidosis": true,
+     "metabolicAlkalosis": false,
+     "respiratoryAcidosis": true,
+     "respiratoryAlkalosis": false
+    },
+    "primary": [
+     {
+      "type": "metabolicAcidosis",
+      "reason": "HCO₃ 12 baixo E pCO₂ 51 alto ao mesmo tempo — nunca é compensação (compensação move a outra variável na direção oposta); são dois processos acidificantes independentes."
+     },
+     {
+      "type": "respiratoryAcidosis",
+      "reason": "mesmo raciocínio do item acima — acidose respiratória combinada, não compensação de uma pela outra."
+     }
+    ],
+    "compensationCheck": null,
+    "ag": null,
+    "agc": null,
+    "notes": []
+   },
+   "flags_mecanicas": [
+    "insuficiente:cl"
+   ],
+   "labs_disponiveis": 8,
+   "labs_total": 13
+  },
+  {
+   "t": 24,
+   "braco": "executabilidade_UPA",
+   "campos_mascarados_UPA": [],
+   "input_motor": {
+    "na": 167,
+    "cl": null,
+    "hco3": 24,
+    "glucoseMgDl": 328,
+    "ph": 7.41,
+    "betaHydroxybutyrateMmolL": null,
+    "ketonuriaCruzes": null,
+    "kMmolL": 3.7,
+    "lactateMmolL": null,
+    "knownDiabetes": true,
+    "dialysisDependent": false
+   },
+   "labs_pos_mascara": {
+    "glucoseMgDl": 328,
+    "na": 167,
+    "cl": null,
+    "hco3": 24,
+    "k": 3.7,
+    "ph": 7.41,
+    "pco2": 37,
+    "betaHydroxybutyrateMmolL": null,
+    "ketonuriaCruzes": null,
+    "albumin": null,
+    "lactateMmolL": null,
+    "bunMgDl": 30,
+    "ureaMgDl": null
+   },
+   "resultado_cad": {
+    "insufficient": true,
+    "missing": [
+     "cl",
+     "betaHydroxybutyrateMmolL|ketonuriaCruzes"
+    ]
+   },
+   "resultado_insulina": {
+    "rateUnitsKgHour": 0.1,
+    "action": "start fixed-rate insulin",
+    "dextrose": false,
+    "potassium": {
+     "band": "3.5-5.0",
+     "insulin": "allowed",
+     "potassium": "replace to maintain 4-5 mmol/L",
+     "target": "4-5 mmol/L"
+    }
+   },
+   "resultado_abg": {
+    "ph": 7.41,
+    "pco2": 37,
+    "hco3": 24,
+    "acidemia": false,
+    "alkalemia": false,
+    "phNormal": true,
+    "components": {
+     "metabolicAcidosis": false,
+     "metabolicAlkalosis": false,
+     "respiratoryAcidosis": false,
+     "respiratoryAlkalosis": false
+    },
+    "primary": [],
+    "compensationCheck": null,
+    "ag": null,
+    "agc": null,
+    "notes": [
+     "HCO₃, pCO₂ e pH dentro da faixa normal por este eixo — isto NÃO exclui um gap elevado mascarado por uma alcalose concomitante; sempre calcular o AG de forma independente."
+    ]
+   },
+   "flags_mecanicas": [
+    "insuficiente:cl,betaHydroxybutyrateMmolL|ketonuriaCruzes"
+   ],
+   "labs_disponiveis": 7,
+   "labs_total": 13
+  }
+ ],
+ "classificacao_mecanica": "motor_travou_por_dado_ausente"
+}
