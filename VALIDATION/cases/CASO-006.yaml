@@ -1,0 +1,105 @@
+# Extraído de relato publicado (texto completo lido via PubMed Central).
+# Todos os valores vêm do texto; ausente no relato = null (nunca imputado).
+meta:
+  id: CASO-006
+  synthetic: false
+  fonte:
+    citacao: "Mumtaz H, Shafiq MA, Batool H, Naz T, Ambreen S. Diabetic Ketoacidosis in an Euglycemic Patient. Cureus. 2020;12(8):e10065."
+    doi: "10.7759/cureus.10065"
+    pmid: "33005499"
+  ano: 2020
+  contexto: PS
+  populacao: adulto
+  variante: euglicemica_outra
+  variante_observacao: "euglicêmica (glicose 84!) em DM de longa data com má adesão a glimepirida; gatilho provável: ITU"
+
+pontos:
+  - t: 0
+    labs:
+      glucoseMgDl: 84
+      na: 141
+      cl: 107
+      hco3: 6.4
+      k: 3.8
+      ph: 7.14
+      pco2: 19.4
+      betaHydroxybutyrateMmolL: null
+      ketonuriaCruzes: null
+      albumin: null
+      lactateMmolL: null
+      bunMgDl: null
+      ureaMgDl: 23
+    contexto_clinico:
+      knownDiabetes: true
+      suspectedSepsis: null
+      dialysisDependent: false
+      chronicityHint: null
+      pesoKg: null
+    disponibilidade: {}
+    observacoes: >-
+      Cetonemia relatada como "positive ketonemia, i.e. 1.39" SEM unidade
+      declarada em nenhum lugar do texto -> betaHydroxybutyrateMmolL null
+      (valor com unidade desconhecida não entra; mesmo padrão do caso
+      alpelisibe descartado). Sem cetonúria quantificada -> eixo cetônico
+      do motor fica sem insumo. Ureia "23" sem unidade explícita, assumida
+      mg/dL pelo padrão do laboratório paquistanês em mg/dL (glicose em
+      mg/dL no mesmo painel); registrado aqui em ureaMgDl. Gasometria
+      ARTERIAL (pO2 115). BE -21,3.
+  - t: 8
+    labs:
+      glucoseMgDl: 172
+      na: null
+      cl: null
+      hco3: 4.9
+      k: null
+      ph: 7.16
+      pco2: 15.3
+      betaHydroxybutyrateMmolL: null
+      ketonuriaCruzes: null
+      albumin: null
+      lactateMmolL: null
+      bunMgDl: null
+      ureaMgDl: null
+    contexto_clinico:
+      knownDiabetes: true
+      suspectedSepsis: null
+      dialysisDependent: false
+      chronicityHint: null
+      pesoKg: null
+    disponibilidade: {}
+    observacoes: >-
+      "Lab monitoring every eight hours" — primeiro controle: pH 7,16,
+      HCO3 4,9 (PIOROU de 6,4), pCO2 15,3, glicose 172. Na alta (sem
+      timestamp publicado; não incluída como ponto): pH 7,39, HCO3 25,
+      pCO2 36, glicose 172.
+
+conduta_relatada:
+  insulina:
+    iniciada: true
+    adiada_por_potassio: false
+    taxa_inicial_U_kg_h: 0.14
+    reduzida_com_dextrose: null
+    bolus_inicial: null
+  potassio:
+    reposto_antes_da_insulina: null
+    reposto: null
+  bicarbonato:
+    administrado: null
+    ph_no_momento: null
+  fluidos:
+    texto: "cristaloides parenterais 250 mL/h por 24h, intercalando SF isotônico e soluções polieletrolíticas; balanço +4250 mL/24h"
+  texto_livre: >-
+    Protocolo ADA 2009. Taxa de insulina relatada como "0.14/kg/h" —
+    acima do 0,1 U/kg/h padrão (possível erro tipográfico do relato;
+    transcrito como publicado).
+
+desfecho:
+  resolucao: true
+  criterio_resolucao_do_relato: "declarado fora de CAD por gasometrias e cetonas seriadas; alta (gasometria de alta: pH 7,39, HCO3 25)"
+  tempo_ate_resolucao_h: null
+  complicacoes: null
+  obito: false
+
+adjudicacao:
+  classificacao: PENDENTE
+  notas: null

@@ -21,7 +21,16 @@
 #   BUN mg/dL ou ureia mg/dL (osm total apenas)
 # =============================================================================
 
-schema_version: "0.1"
+schema_version: "0.2"
+# v0.2 (2026-08-10, autorizado pelo dono — resolução do F-004): nova classe de
+# disponibilidade `derivado_aritmetico` para valor NÃO publicado diretamente
+# mas derivável por aritmética determinística de valores publicados no MESMO
+# ponto temporal (caso canônico: Cl = Na − HCO₃ − AG, quando o relato publica
+# o próprio anion gap). Regras duras: (a) só aritmética de identidade — nunca
+# estimativa, faixa "normal" ou inferência clínica; (b) a fórmula e os valores
+# de origem ficam registrados em `observacoes`; (c) o runner estampa o campo
+# derivado em toda saída (não é valor medido); (d) sem os insumos publicados
+# no mesmo ponto, o campo permanece null.
 
 # ---- Identificação e proveniência -------------------------------------------
 meta:
@@ -74,6 +83,9 @@ pontos:
     #   ausente_no_cenario_UPA — está no relato, mas indisponível no laboratório
     #                            típico de UPA; o braço de executabilidade
     #                            re-executa o ponto mascarando estes campos
+    #   derivado_aritmetico   — não publicado diretamente; derivado por
+    #                            identidade aritmética de valores publicados no
+    #                            mesmo ponto (fórmula em observacoes); v0.2
     disponibilidade:
       betaHydroxybutyrateMmolL: ausente_no_cenario_UPA   # exemplo típico
       # <campo>: <enum> ...

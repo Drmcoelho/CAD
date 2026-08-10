@@ -1,8 +1,8 @@
 {
  "AVISO_SINTETICO": null,
- "caso": "CASO-003",
+ "caso": "CASO-008",
  "synthetic": false,
- "arquivo_fonte": "VALIDATION/cases/CASO-003.yaml",
+ "arquivo_fonte": "VALIDATION/cases/CASO-008.yaml",
  "braco": "executabilidade_UPA",
  "substrato": {
   "canon/policy.json": "ee88734ae4ff3bd2badd4270bd6f15f6a86a6e75481443f3c85d12c72e6221e5",
@@ -19,62 +19,49 @@
   {
    "t": 0,
    "braco": "executabilidade_UPA",
-   "campos_mascarados_UPA": [
-    "betaHydroxybutyrateMmolL"
-   ],
+   "campos_mascarados_UPA": [],
    "input_motor": {
-    "na": 134,
-    "cl": 100,
-    "hco3": 6,
-    "glucoseMgDl": 214,
-    "ph": 6.99,
+    "na": 143,
+    "cl": null,
+    "hco3": 16.4,
+    "glucoseMgDl": 1456,
+    "ph": 7.327,
     "betaHydroxybutyrateMmolL": null,
-    "ketonuriaCruzes": null,
-    "kMmolL": 3.8,
-    "lactateMmolL": 2.3,
-    "albumin": 2.2,
-    "knownDiabetes": true,
+    "ketonuriaCruzes": 1,
+    "kMmolL": null,
+    "lactateMmolL": null,
+    "knownDiabetes": false,
     "dialysisDependent": false
    },
    "labs_pos_mascara": {
-    "glucoseMgDl": 214,
-    "na": 134,
-    "cl": 100,
-    "hco3": 6,
-    "k": 3.8,
-    "ph": 6.99,
+    "glucoseMgDl": 1456,
+    "na": 143,
+    "cl": null,
+    "hco3": 16.4,
+    "k": null,
+    "ph": 7.327,
     "pco2": null,
     "betaHydroxybutyrateMmolL": null,
-    "ketonuriaCruzes": null,
-    "albumin": 2.2,
-    "lactateMmolL": 2.3,
-    "bunMgDl": 13,
+    "ketonuriaCruzes": 1,
+    "albumin": null,
+    "lactateMmolL": null,
+    "bunMgDl": 67.9,
     "ureaMgDl": null
    },
    "resultado_cad": {
     "insufficient": true,
     "missing": [
-     "betaHydroxybutyrateMmolL|ketonuriaCruzes"
+     "cl"
     ]
    },
-   "resultado_insulina": {
-    "rateUnitsKgHour": 0.05,
-    "action": "continue insulin with dextrose",
-    "dextrose": true,
-    "potassium": {
-     "band": "3.5-5.0",
-     "insulin": "allowed",
-     "potassium": "replace to maintain 4-5 mmol/L",
-     "target": "4-5 mmol/L"
-    }
-   },
+   "resultado_insulina": null,
    "resultado_abg": null,
    "flags_mecanicas": [
-    "insuficiente:betaHydroxybutyrateMmolL|ketonuriaCruzes",
-    "sem_pCO2_gasometria_nao_executada",
-    "derivado_aritmetico:cl"
+    "insuficiente:cl",
+    "sem_K_sem_plano_potassio",
+    "sem_pCO2_gasometria_nao_executada"
    ],
-   "labs_disponiveis": 9,
+   "labs_disponiveis": 6,
    "labs_total": 13
   }
  ],

@@ -110,13 +110,20 @@ def _validate_case(case: Dict[str, Any], path: Path) -> None:
     for p in case["pontos"]:
         disp = p.get("disponibilidade") or {}
         for field, status in disp.items():
-            if status not in ("disponivel", "ausente_no_relato", "ausente_no_cenario_UPA"):
+            if status not in ("disponivel", "ausente_no_relato", "ausente_no_cenario_UPA", "derivado_aritmetico"):
                 raise ValueError(f"{path}: disponibilidade[{field}]={status!r} inválida")
             value = (p.get("labs") or {}).get(field)
             if status == "ausente_no_relato" and value is not None:
                 raise ValueError(f"{path}: t={p.get('t')} {field} marcado ausente_no_relato mas tem valor")
             if status == "ausente_no_cenario_UPA" and value is None:
                 raise ValueError(f"{path}: t={p.get('t')} {field} marcado ausente_no_cenario_UPA mas é null no relato")
+            if status == "derivado_aritmetico":
+                # v0.2 (F-004): valor derivado exige valor preenchido e a fórmula
+                # registrada nas observacoes do ponto — sem isso, o caso é inválido
+                if value is None:
+                    raise ValueError(f"{path}: t={p.get('t')} {field} marcado derivado_aritmetico mas é null")
+                if not (p.get("observacoes") or ""):
+                    raise ValueError(f"{path}: t={p.get('t')} {field} derivado_aritmetico sem fórmula em observacoes")
 
 
 def masked_labs(ponto: Dict[str, Any], arm: str) -> (Dict[str, Any], List[str]):
@@ -180,6 +187,9 @@ def run_point(ponto: Dict[str, Any], arm: str) -> Dict[str, Any]:
         flags.append("sem_K_sem_plano_potassio")
     if labs.get("pco2") is None:
         flags.append("sem_pCO2_gasometria_nao_executada")
+    for field, status in (ponto.get("disponibilidade") or {}).items():
+        if status == "derivado_aritmetico":
+            flags.append(f"derivado_aritmetico:{field}")
 
     n_disponiveis = sum(1 for f in LAB_FIELDS if labs.get(f) is not None)
     return {
@@ -278,6 +288,25 @@ def classify_mechanical(points: List[Dict[str, Any]], adjudicacao: str) -> str:
     return f"{base} · PENDENTE_ADJUDICACAO"
 
 
+def _row_observacoes(case: Dict[str, Any], points: List[Dict[str, Any]], arm: str) -> str:
+    parts: List[str] = []
+    derived = sorted(
+        {
+            f
+            for p in case["pontos"]
+            for f, status in (p.get("disponibilidade") or {}).items()
+            if status == "derivado_aritmetico"
+        }
+    )
+    if derived:
+        parts.append(f"derivado aritmético (não medido): {', '.join(derived)}")
+    if arm == "executabilidade_UPA":
+        masked = sorted({f for p in points for f in p["campos_mascarados_UPA"]})
+        if masked:
+            parts.append(f"mascarados na UPA: {', '.join(masked)}")
+    return "; ".join(parts)
+
+
 def run_case(case: Dict[str, Any], fingerprint: Dict[str, str]) -> List[Dict[str, Any]]:
     rows: List[Dict[str, Any]] = []
     meta = case["meta"]
@@ -296,10 +325,7 @@ def run_case(case: Dict[str, Any], fingerprint: Dict[str, str]) -> List[Dict[str
             "conduta_relatada": summarize_conduct(case),
             "classificacao": classify_mechanical(points, adjudicacao),
             "desfecho": summarize_outcome(case),
-            "observacoes": "; ".join(
-                sorted({f for p in points for f in p["campos_mascarados_UPA"]} and
-                       [f"mascarados na UPA: {', '.join(sorted({f for p in points for f in p['campos_mascarados_UPA']}))}"])
-            ) if arm == "executabilidade_UPA" and any(p["campos_mascarados_UPA"] for p in points) else "",
+            "observacoes": _row_observacoes(case, points, arm),
         }
         rows.append(row)
 

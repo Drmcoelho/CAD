@@ -18,7 +18,7 @@ pontos:
     labs:
       glucoseMgDl: 1188
       na: 160
-      cl: null
+      cl: 117
       hco3: 12
       k: 6.1
       ph: 7.09
@@ -37,9 +37,13 @@ pontos:
       pesoKg: 22
     disponibilidade:
       betaHydroxybutyrateMmolL: ausente_no_cenario_UPA
+      cl: derivado_aritmetico
     observacoes: >-
-      Cloro NÃO relatado; relato dá AG=31 (permitiria derivar Cl=117 —
-      derivação não aplicada; F-004). Gasometria venosa (pH 7,09, pCO2 51,
+      Cloro NÃO publicado diretamente; DERIVADO por identidade aritmética
+      (schema v0.2, F-004, autorizado pelo dono 2026-08-10): Cl = Na - HCO3
+      - AG relatado = 160 - 12 - 31 = 117. No ponto t=24 o relato não
+      publica AG, então o Cl de t24 permanece null (regra v0.2: derivação
+      só com insumos do mesmo ponto). Gasometria venosa (pH 7,09, pCO2 51,
       BE -15). betaHB relatado como 2,7 mEq/L na tabela 2 (sem timestamp
       explícito; equivalência mEq/L=mmol/L para ânion monovalente).
       Cetonúria 1+ na urinálise de admissão. Relato calcula: Na corrigido

@@ -62,7 +62,11 @@ POLICY, motor JS ou doutrina. Adjudicação clínica é do dono.
   `observacoes` de cada caso. Se o dono autorizar a derivação determinística
   como classe distinta (`derivado_aritmetico`, nem medido nem imputado), os 3
   casos destravan e o schema ganha essa marcação em v0.2.
-- **Status:** registrado; aguardando decisão do dono.
+- **Status:** DECIDIDO 2026-08-10 — dono autorizou ("Quero tudo"). Schema
+  v0.2 implementa `derivado_aritmetico` (só identidade aritmética, fórmula
+  registrada, estampado em toda saída). Aplicado: CASO-003 (Cl=100) e
+  CASO-004 t0 (Cl=117). CASO-002 segue travado (AG não publicado) e
+  CASO-004 t24 segue null (AG não publicado no ponto — regra do mesmo ponto).
 
 ## F-005 · `classifyDkaProfile` exige pH mesmo quando HCO₃ bastaria
 
@@ -87,4 +91,29 @@ POLICY, motor JS ou doutrina. Adjudicação clínica é do dono.
 - **Implicação:** nota de Δ/Δ do `classifyDkaProfile` pode contradizer o
   próprio abg_core no mesmo paciente. Registrado como achado de fronteira de
   validade — **não corrigido** (POLICY/lógica imutáveis nesta fase).
-- **Status:** registrado; aguardando adjudicação do dono.
+- **Status:** dono sinalizou intenção de tratar (2026-08-10). O core segue
+  intocado nesta fase (congelamento da Fase 0). **Proposta especificada para
+  fase futura** (a implementar com o gate regulatório interno de mudança de
+  doutrina): `deltaRatio(agc, hco3)` ganhar guarda de pré-condição para
+  HCO₃ ≥24 — devolvendo indicador explícito de "fora do domínio da fórmula"
+  em vez de razão com denominador negativo — e `classifyDkaProfile` suprimir
+  a nota de Δ/Δ nesse domínio, deferindo ao abg_core (que já lê o cenário
+  corretamente como gap alto mascarado). Muda comportamento de saída → exige
+  novo ciclo de testes + consistência + adjudicação clínica do dono.
+
+## F-007 · Cadeia de perfis não tem rota para HHS dominante sem critério de CAD
+
+- **O que foi verificado:** CASO-004 t0 (glicose 1188, Na 160, osm efetiva
+  calculada 386 — muito acima do limiar HHS 320 do canon) sai do
+  `classifyDkaProfile` como **"parcial — zona de trânsito"**. Mecanismo: o
+  eixo cetônico do critério 2024 não fecha (βHB 2,7 <3,0; cetonúria 1+ <2+),
+  logo `hasDka=false`; o ramo `cad-hhs` só existe DENTRO de `dka==true`; o
+  ramo `!dka && !ketoneAxis && acidAxis` cai em "parcial/hipercloremica",
+  pensado para cauda de tratamento — não para HHS de apresentação.
+- **Implicação:** o motor é fiel ao critério formal de CAD, mas não tem
+  vocabulário para "HHS puro/dominante" — num caso em que a osm efetiva que
+  ele próprio calcula (386) grita HHS. Rotular apresentação hiperosmolar
+  catastrófica de "zona de trânsito" é o tipo de saída que o dono precisa
+  adjudicar como divergência de desenho, não de cálculo.
+- **Status:** registrado 2026-08-10; sem correção nesta fase (congelamento).
+  Candidata natural à mesma fase futura do F-006.

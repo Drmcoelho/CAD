@@ -24,7 +24,7 @@
    ],
    "input_motor": {
     "na": 160,
-    "cl": null,
+    "cl": 117,
     "hco3": 12,
     "glucoseMgDl": 1188,
     "ph": 7.09,
@@ -38,7 +38,7 @@
    "labs_pos_mascara": {
     "glucoseMgDl": 1188,
     "na": 160,
-    "cl": null,
+    "cl": 117,
     "hco3": 12,
     "k": 6.1,
     "ph": 7.09,
@@ -51,9 +51,36 @@
     "ureaMgDl": null
    },
    "resultado_cad": {
-    "insufficient": true,
-    "missing": [
-     "cl"
+    "insufficient": false,
+    "computed": {
+     "ag": 31.0,
+     "agc": 31.0,
+     "deltaRatio": 1.58,
+     "deltaBand": "1-2",
+     "effectiveOsmolality": 386.0,
+     "hasDka": false,
+     "isResolvedDka": null,
+     "ketoneMarker": "cetonuriaCruzes",
+     "potassiumPlan": {
+      "band": ">=5.0",
+      "insulin": "allowed",
+      "potassium": "no initial potassium; ECG/recheck",
+      "target": "4-5 mmol/L"
+     }
+    },
+    "matches": [
+     {
+      "id": "parcial",
+      "reason": "cetose (cruzes) abaixo do limiar diagnóstico, com acidose residual — pode ser cetose ainda em resolução. Sem β-HB sérico, cetonúria isolada não confirma qual das duas hipóteses é a certa (acetoacetato pode subir durante o próprio tratamento, mesmo com a cetose resolvendo)."
+     },
+     {
+      "id": "hipercloremica",
+      "reason": "cetose (cruzes) abaixo do limiar diagnóstico, com acidose residual — pode ser cauda hiperclorêmica já instalada em vez de cetose ainda ativa. Sem β-HB sérico, cetonúria isolada não confirma qual das duas hipóteses é a certa."
+     },
+     {
+      "id": null,
+      "reason": "K 6.1 ≥5,0 — insulina liberada sem reposição inicial de potássio; reavaliar com ECG, independente do perfil principal."
+     }
     ]
    },
    "resultado_insulina": {
@@ -91,14 +118,16 @@
      }
     ],
     "compensationCheck": null,
-    "ag": null,
-    "agc": null,
+    "ag": 31.0,
+    "agc": 31.0,
     "notes": []
    },
    "flags_mecanicas": [
-    "insuficiente:cl"
+    "sem_betaHB_resolucao_indeterminada",
+    "albumin_default_4.0",
+    "derivado_aritmetico:cl"
    ],
-   "labs_disponiveis": 8,
+   "labs_disponiveis": 9,
    "labs_total": 13
   },
   {
