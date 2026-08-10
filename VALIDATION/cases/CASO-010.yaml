@@ -1,0 +1,112 @@
+# Extraído de relato publicado (texto completo lido via PubMed Central).
+# Todos os valores vêm do texto; ausente no relato = null (nunca imputado).
+meta:
+  id: CASO-010
+  synthetic: false
+  fonte:
+    citacao: "Sato H, Kyan R, Kamada C, et al. Transient total blindness associated with alcoholic ketoacidosis. Acute Med Surg. 2021;8(1):e660."
+    doi: "10.1002/ams2.660"
+    pmid: "34012551"
+  ano: 2021
+  contexto: PS
+  populacao: adulto
+  variante: outra
+  variante_observacao: "rotulado cetoacidose ALCOÓLICA pelo relato, mas em portador de DM1 com glicose 307 — fronteira AKA×CAD é o próprio material de adjudicação; cegueira total transitória por acidemia extrema"
+
+pontos:
+  - t: 0
+    labs:
+      glucoseMgDl: 307
+      na: 139
+      cl: 90
+      hco3: 3.4
+      k: 5.8
+      ph: 6.724
+      pco2: 27.2
+      betaHydroxybutyrateMmolL: 7.281
+      ketonuriaCruzes: null
+      albumin: null
+      lactateMmolL: 23
+      bunMgDl: 30.7
+      ureaMgDl: null
+    contexto_clinico:
+      knownDiabetes: true
+      suspectedSepsis: null
+      dialysisDependent: false
+      chronicityHint: null
+      pesoKg: null
+    disponibilidade:
+      betaHydroxybutyrateMmolL: ausente_no_cenario_UPA
+      lactateMmolL: ausente_no_cenario_UPA
+    observacoes: >-
+      Gasometria ARTERIAL: pH 6,724, PaCO2 27,2, HCO3 3,4, BE -28,2,
+      lactato 23. 3-OHBA convertido 7281 umol/L -> 7,281 mmol/L;
+      acetoacetato 976 umol/L (0,976 mmol/L; fora dos insumos do motor —
+      razão βHB/AcAc 7,5:1 é o argumento do relato para AKA). AG relatado
+      48,4 (inclui lactato). Etanolemia 65,2 mg/dL. Creatinina 2,05.
+      knownDiabetes=true: relato declara DM tipo 1 na história. Albumina
+      não relatada -> default 4,0 do motor (registrado no log). Lactato
+      mantido disponível no braço UPA? NÃO — mascarado: 23 mmol/L veio de
+      gasometria arterial completa com painel estendido; em UPA a
+      gasometria com lactato existe, mas seguimos a máscara conservadora
+      de βHB+lactato usada no piloto para consistência (dono pode rever).
+  - t: 4
+    labs:
+      glucoseMgDl: null
+      na: null
+      cl: null
+      hco3: null
+      k: null
+      ph: 6.974
+      pco2: null
+      betaHydroxybutyrateMmolL: null
+      ketonuriaCruzes: null
+      albumin: null
+      lactateMmolL: null
+      bunMgDl: null
+      ureaMgDl: null
+    contexto_clinico:
+      knownDiabetes: true
+      suspectedSepsis: null
+      dialysisDependent: false
+      chronicityHint: null
+      pesoKg: null
+    disponibilidade: {}
+    observacoes: >-
+      "At 4 h after admission, the pH increased to 6.974" — único valor
+      publicado do ponto; acuidade visual melhorou junto (conta dedos a
+      30 cm). Às 5h: PCR em AESP, revertida com adrenalina + bicarbonato
+      + IOT. pH normalizado às 17h (valor não publicado).
+
+conduta_relatada:
+  insulina:
+    iniciada: true
+    adiada_por_potassio: false
+    taxa_inicial_U_kg_h: null
+    reduzida_com_dextrose: true
+    bolus_inicial: null
+  potassio:
+    reposto_antes_da_insulina: null
+    reposto: null
+  bicarbonato:
+    administrado: true
+    ph_no_momento: null
+  fluidos:
+    texto: "infusão de fluidos + glicose + tiamina (vitamina B1)"
+  texto_livre: >-
+    Bicarbonato DELIBERADAMENTE retido na admissão (pH 6,724!) por
+    estabilidade circulatória — administrado só na PCR às 5h, junto com
+    adrenalina e IOT. Insulina + glicose + B1 desde a admissão. Contraste
+    doutrinário direto com o gatilho pH <7,0 do canon: material de
+    adjudicação central deste caso.
+
+desfecho:
+  resolucao: true
+  criterio_resolucao_do_relato: "pH normalizado às 17h; extubado; acuidade visual 20/20 no dia 5; alta no dia 44 sem sequela"
+  tempo_ate_resolucao_h: 17
+  complicacoes: ["cegueira total transitória por acidemia", "PCR em AESP às 5h (revertida)", "convulsão sintomática aguda", "lesão renal aguda"]
+  obito: false
+
+adjudicacao:
+  classificacao: PENDENTE
+  notas: null

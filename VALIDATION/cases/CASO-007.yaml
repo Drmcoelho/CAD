@@ -1,0 +1,102 @@
+# Extraído de relato publicado (texto completo lido via PubMed Central).
+# Todos os valores vêm do texto; ausente no relato = null (nunca imputado).
+meta:
+  id: CASO-007
+  synthetic: false
+  fonte:
+    citacao: "de Alencar JCG, da Silva GW, Ribeiro SCC, Marchini JFM, Neto RAB, de Souza HP. Euglycemic Diabetic Ketoacidosis in Pregnancy. Clin Pract Cases Emerg Med. 2019;4(1):26-28."
+    doi: "10.5811/cpcem.2019.9.43624"
+    pmid: "32064418"
+  ano: 2019
+  contexto: PS
+  populacao: adulto
+  variante: euglicemica_outra
+  variante_observacao: "euglicêmica gestacional (34 semanas, DM1, má adesão insulínica, 7 dias sem insulina); PS da USP — cenário brasileiro"
+
+pontos:
+  - t: 0
+    labs:
+      glucoseMgDl: 80
+      na: null
+      cl: null
+      hco3: 10
+      k: null
+      ph: 7.25
+      pco2: null
+      betaHydroxybutyrateMmolL: null
+      ketonuriaCruzes: null
+      albumin: null
+      lactateMmolL: null
+      bunMgDl: null
+      ureaMgDl: null
+    contexto_clinico:
+      knownDiabetes: true
+      suspectedSepsis: false
+      dialysisDependent: false
+      chronicityHint: null
+      pesoKg: null
+    disponibilidade: {}
+    observacoes: >-
+      Glicose laboratorial 80 (capilar 82). BE -14,9. Cetonúria "strongly
+      positive" SEM quantificação em cruzes -> null (eixo cetônico sem
+      insumo aproveitável pelo motor; o relato usa critério JBDS "urine
+      ketone >2+" mas não publica o valor da paciente). Na/Cl/K NÃO
+      publicados. suspectedSepsis=false: "no signs of infectious
+      processes".
+  - t: 24
+    labs:
+      glucoseMgDl: null
+      na: null
+      cl: null
+      hco3: 21
+      k: null
+      ph: 7.44
+      pco2: null
+      betaHydroxybutyrateMmolL: null
+      ketonuriaCruzes: null
+      albumin: null
+      lactateMmolL: null
+      bunMgDl: null
+      ureaMgDl: null
+    contexto_clinico:
+      knownDiabetes: true
+      suspectedSepsis: false
+      dialysisDependent: false
+      chronicityHint: null
+      pesoKg: null
+    disponibilidade: {}
+    observacoes: >-
+      "After 24 hours": pH 7,44, HCO3 21, glicemia "na faixa normal" (sem
+      número -> null).
+
+conduta_relatada:
+  insulina:
+    iniciada: true
+    adiada_por_potassio: false
+    taxa_inicial_U_kg_h: null
+    reduzida_com_dextrose: true
+    bolus_inicial: false
+  potassio:
+    reposto_antes_da_insulina: false
+    reposto: true
+  bicarbonato:
+    administrado: false
+    ph_no_momento: null
+  fluidos:
+    texto: "D5 + SF 0,9%: 500 mL/h na 1a hora, 250 mL/h por 4h, depois 125 e 75 mL/h até resolução; alvo diurese 0,5 mL/kg/h"
+  texto_livre: >-
+    Insulina regular IV contínua a 7 U/h (taxa absoluta; peso não
+    relatado). K 20 mmol/L/h até a 4a hora. Relato afirma explicitamente
+    que bicarbonato NÃO é recomendado em CAD gestacional (não
+    administrado). Dextrose desde o início por euglicemia.
+
+desfecho:
+  resolucao: true
+  criterio_resolucao_do_relato: "às 24h: pH 7,44, HCO3 21, glicemia normal"
+  tempo_ate_resolucao_h: 24
+  complicacoes: ["bradicardia fetal sustentada às 22h -> cesárea de emergência (sem intercorrências); neonato alta em 14 dias"]
+  obito: false
+
+adjudicacao:
+  classificacao: PENDENTE
+  notas: null

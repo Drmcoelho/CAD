@@ -28,8 +28,9 @@ nenhuma execução.
 | Schema de caso | `case_schema.yaml` v0.1 — **aprovado pelo dono** em 2026-08-08 |
 | Runner + braços acurácia/UPA | `runner.py` — funciona ponta a ponta, determinístico |
 | Caso sintético de pipeline | `cases_synthetic/PIPE-001_SYNTHETIC.yaml` — roda nos 2 braços |
-| **Casos reais** | **5/5 do piloto extraídos de relatos publicados** (PMC texto completo, citação+DOI+PMID em cada YAML; meta 30) |
-| Adjudicação | toda linha nasce `PENDENTE_ADJUDICACAO` — campo do dono; **10 linhas aguardando** |
+| **Casos reais** | **10/30 extraídos de relatos publicados** (PMC texto completo, citação+DOI+PMID em cada YAML) |
+| Schema | **v0.2** — classe `derivado_aritmetico` (F-004 decidido pelo dono 2026-08-10) |
+| Adjudicação | toda linha nasce `PENDENTE_ADJUDICACAO` — campo do dono; **20 linhas aguardando** (`adjudication.md` é o dossiê) |
 
 Atenção a dois desvios do protocolo original, ambos verificados e decididos
 pelo dono (detalhe em `findings.md`): o substrato é `canon/policy.json` (não
@@ -70,9 +71,20 @@ pyengine/
 | CASO-004 | CAD+HHS mista pediátrica | 10.7759/cureus.28983 | travou: Cl não relatado (AG 31 publicado — F-004) |
 | CASO-005 | cetoalcalose (CAD mascarada por vômitos) | 10.1002/ccr3.8250 | executou: `pre-cad` + hold por K 2,5; abg pega o gap mascarado; Δ/Δ −0,42 (F-006) |
 
-Achados novos da extração: F-004 (3/5 relatos omitem Cl — decisão sobre
-derivação aritmética pendente), F-005 (perfil exige pH em ponto de seguimento),
-F-006 (Δ/Δ com denominador negativo em alcalose). Detalhe em `findings.md`.
+Expansão 2026-08-10 (schema v0.2, Cl derivado onde o AG foi publicado):
+
+| Caso | Fenótipo | Fonte (DOI) | Resultado mecânico |
+|---|---|---|---|
+| CASO-006 | euglicêmica glicose 84 (ITU) | 10.7759/cureus.10065 | travou: cetonemia sem unidade declarada |
+| CASO-007 | euglicêmica gestacional (USP) | 10.5811/cpcem.2019.9.43624 | travou: Na/Cl/K não publicados (19% de dados) |
+| CASO-008 | HHS puro, estreia de DM1, 17a | 10.6065/apem.2142002.001 | travou: Cl/K não publicados; osm do relato não reproduz |
+| CASO-009 | cetose 8,5 sem acidose + hiperosmolar | 10.7759/cureus.14125 | travou: pH de admissão não publicado (F-005) |
+| CASO-010 | AKA×CAD, pH 6,72, lactato 23 | 10.1002/ams2.660 | executou: `sepse-lactato`; bicarbonato retido <7,0 (✖ canon) |
+
+Achados da extração: F-004 (**decidido**: derivação aritmética autorizada, schema
+v0.2 — destravou CASO-003/004), F-005 (perfil exige pH; agora com 2 exemplares
+reais), F-006 (Δ/Δ denominador negativo — guarda especificada para fase futura),
+F-007 (sem rota para HHS dominante — CASO-004/008/009). Detalhe em `findings.md`.
 
 ## Fluxo para adicionar um caso real
 

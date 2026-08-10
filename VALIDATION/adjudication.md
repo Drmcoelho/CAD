@@ -90,6 +90,43 @@ convergem perfeitamente. O abg_core acerta onde a nota de Δ/Δ do perfil erra
 
 ---
 
+## Expansão (CASO-006..010, extraídos 2026-08-10)
+
+**CASO-006** · euglicêmica glicose 84 (DM má-adesão + ITU) · DOI 10.7759/cureus.10065
+Motor trava: cetonemia publicada como "1.39" **sem unidade** → eixo cetônico sem
+insumo (mesma regra que excluiu o caso do alpelisibe). Conduta: insulina "0.14/kg/h"
+(acima do 0,1 doutrinário — possível typo do relato, transcrito como publicado);
+acidose PIOROU no controle de 8h (HCO₃ 6,4→4,9). Painel t0 completo com Cl 107 —
+se o dono aceitar a cetonemia como mmol/L, o caso destrava (decisão sua).
+
+**CASO-007** · euglicêmica gestacional 34 sem (USP, cenário brasileiro) · DOI 10.5811/cpcem.2019.9.43624
+Motor trava: Na/Cl/K não publicados + cetonúria "strongly positive" sem cruzes.
+Apenas 19% dos insumos disponíveis — o relato mais esparso do conjunto. Conduta
+convergente com o canon: dextrose desde o início, sem bicarbonato, K antes de
+titular insulina. Desfecho com cesárea de emergência às 22h.
+
+**CASO-008** · HHS puro como estreia de DM1, 17a (F-007 direto) · DOI 10.6065/apem.2142002.001
+Motor trava (Cl/K não publicados; AG não publicado → não derivável). Se rodasse:
+glicose 1456 + cetonúria 1+ → mesmo padrão F-007 do CASO-004 (sem rota p/ HHS).
+Bônus de adjudicação: a "osm efetiva 323" publicada NÃO reproduz pela fórmula do
+canon (2·143 + 1456/18 = 366,9) — aritmética do próprio relato em cheque.
+Conduta: insulina 0,1→0,025 U/kg/h (doutrina pediátrica de HHS).
+
+**CASO-009** · "HHS" com βHB 8,5 e HCO₃ 24 (pós-vacina, DM2 novo) · DOI 10.7759/cureus.14125
+Motor trava no t0: **pH da admissão não publicado** (a gasometria da tabela é
+"during hospitalization", sem timestamp) — F-005 em estado puro. Painel tinha Cl
+95 direto. Cetose franca (βHB 8,5, AG 25) SEM acidose (HCO₃ 24): com pH, o motor
+diria pré-CAD/HHS — rótulo do relato é HHS. Osm medida 371.
+
+**CASO-010** · AKA×CAD: pH 6,724, lactato 23, DM1, cegueira transitória · DOI 10.1002/ams2.660
+**Motor RODA**: perfil `sepse-lactato` (lactato ≥4 domina), K 5,8 → insulina
+liberada 0,1 U/kg/h; Δ/Δ 1,63 (banda 1–2). Relato rotula cetoacidose ALCOÓLICA
+(razão βHB/AcAc 7,5:1) apesar de DM1 + glicose 307 — a fronteira AKA×CAD é sua.
+Confronto de bicarbonato: pH 6,724 (**abaixo do gatilho <7,0 do canon**) e o
+relato RETEVE bicarbonato pela estabilidade circulatória — PCR em AESP 5h depois,
+revertida com bicarbonato. O caso-espelho do CASO-002 (que deu bicarbonato ACIMA
+do gatilho): os dois lados do desvio doutrinário no mesmo piloto.
+
 ## Resumo para assinatura
 
 | Caso | Confronto dominante | Rótulo sugerido pelo confronto mecânico* |
@@ -99,6 +136,11 @@ convergem perfeitamente. O abg_core acerta onde a nota de Δ/Δ do perfil erra
 | CASO-003 | perfil ✔, bicarbonato dentro do gatilho ✔ | — |
 | CASO-004 | perfil ✖ (F-007), condutas ✔ | — |
 | CASO-005 | rótulo ✖ / conduta crítica ✔ (F-006 no meio) | — |
+| CASO-006 | travou (cetonemia sem unidade); decisão de unidade é sua | — |
+| CASO-007 | travou (19% de dados); condutas convergem com canon ✔ | — |
+| CASO-008 | travou; osm efetiva do relato não reproduz pela fórmula ✖ | — |
+| CASO-009 | travou (pH de admissão não publicado — F-005) | — |
+| CASO-010 | perfil ✖ (AKA×CAD) / bicarbonato retido com pH <7,0 ✖ | — |
 
 \* Coluna deliberadamente vazia: o rótulo é seu. Os símbolos acima são
 descrição mecânica do confronto, não julgamento clínico.

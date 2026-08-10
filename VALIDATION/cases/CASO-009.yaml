@@ -1,0 +1,104 @@
+# Extraído de relato publicado (texto completo lido via PubMed Central).
+# Todos os valores vêm do texto; ausente no relato = null (nunca imputado).
+meta:
+  id: CASO-009
+  synthetic: false
+  fonte:
+    citacao: "Abu-Rumaileh MA, Gharaibeh AM, Gharaibeh NE. COVID-19 Vaccine and Hyperosmolar Hyperglycemic State. Cureus. 2021;13(3):e14125."
+    doi: "10.7759/cureus.14125"
+    pmid: "33927933"
+  ano: 2021
+  contexto: UTI
+  populacao: adulto
+  variante: outra
+  variante_observacao: "rotulado HHS pelo relato (DM2 novo pós-vacina), mas com βHB 8,5 e AG 25 SEM acidose (HCO3 24) — híbrido cetose marcada + hiperosmolar; material de F-007"
+
+pontos:
+  - t: 0
+    labs:
+      glucoseMgDl: 1253
+      na: 144
+      cl: 95
+      hco3: 24
+      k: 5.4
+      ph: null
+      pco2: null
+      betaHydroxybutyrateMmolL: 8.5
+      ketonuriaCruzes: null
+      albumin: null
+      lactateMmolL: null
+      bunMgDl: 60
+      ureaMgDl: null
+    contexto_clinico:
+      knownDiabetes: false
+      suspectedSepsis: false
+      dialysisDependent: false
+      chronicityHint: null
+      pesoKg: null
+    disponibilidade:
+      betaHydroxybutyrateMmolL: ausente_no_cenario_UPA
+    observacoes: >-
+      pH da ADMISSÃO não publicado: a gasometria venosa da tabela 2 (pH
+      7,35, pCO2 47, HCO3 26) é rotulada "During hospitalization", sem
+      timestamp -> não atribuível ao t0 (F-005 na prática). AG 25
+      relatado; Cl 95 publicado diretamente. Osm medida 371. Creatinina
+      1,95. HbA1c 13%. knownDiabetes=false (DM não diagnosticado antes;
+      glicemias normais nos 3 anos anteriores). PCR COVID negativo;
+      urocultura negativa -> suspectedSepsis false.
+  - t: 120
+    labs:
+      glucoseMgDl: 117
+      na: 140
+      cl: 105
+      hco3: 25
+      k: 3.2
+      ph: null
+      pco2: null
+      betaHydroxybutyrateMmolL: null
+      ketonuriaCruzes: null
+      albumin: null
+      lactateMmolL: null
+      bunMgDl: 19
+      ureaMgDl: null
+    contexto_clinico:
+      knownDiabetes: true
+      suspectedSepsis: false
+      dialysisDependent: false
+      chronicityHint: null
+      pesoKg: null
+    disponibilidade: {}
+    observacoes: >-
+      Painel de 19/01 (admissão 14/01 -> t=120h). AG 10 relatado.
+      knownDiabetes=true neste ponto (diagnóstico estabelecido).
+
+conduta_relatada:
+  insulina:
+    iniciada: true
+    adiada_por_potassio: false
+    taxa_inicial_U_kg_h: null
+    reduzida_com_dextrose: null
+    bolus_inicial: null
+  potassio:
+    reposto_antes_da_insulina: null
+    reposto: null
+  bicarbonato:
+    administrado: null
+    ph_no_momento: null
+  fluidos:
+    texto: "fluidos IV + insulina em infusão (drip) na UTI"
+  texto_livre: >-
+    UTI com fluidos IV e insulin drip; transição para múltiplas doses SC
+    no dia seguinte; controle com glargina 50 U/dia + pré-refeição. Quatro
+    semanas depois, insulina desmamada e suspensa — mantido apenas
+    metformina (C-peptídeo 3,65).
+
+desfecho:
+  resolucao: true
+  criterio_resolucao_do_relato: "dia 5: glicose 117, AG 10, eletrólitos normalizados; alta; insulina suspensa em 4 semanas"
+  tempo_ate_resolucao_h: null
+  complicacoes: ["lesão renal aguda na admissão (creatinina 1,95, TFG 36)", "hipocalemia 3,2 no dia 5", "trombocitopenia 54 mil no dia 5"]
+  obito: false
+
+adjudicacao:
+  classificacao: PENDENTE
+  notas: null

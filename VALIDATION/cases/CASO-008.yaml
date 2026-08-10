@@ -1,0 +1,79 @@
+# Extraído de relato publicado (texto completo lido via PubMed Central).
+# Todos os valores vêm do texto; ausente no relato = null (nunca imputado).
+meta:
+  id: CASO-008
+  synthetic: false
+  fonte:
+    citacao: "Chun SH, Lee HS, Hwang JS. Hyperosmolar hyperglycemic state as the first manifestation of type 1 diabetes mellitus in an adolescent male: a case report. Ann Pediatr Endocrinol Metab. 2022;27(1):69-72."
+    doi: "10.6065/apem.2142002.001"
+    pmid: "34670070"
+  ano: 2021
+  contexto: UTI
+  populacao: pediatrico
+  variante: outra
+  variante_observacao: "HHS puro como primeira manifestação de DM1 em adolescente de 17 anos (anti-GAD positivo, C-peptídeo 0,11) — teste direto do F-007 (motor sem rota para HHS isolado)"
+
+pontos:
+  - t: 0
+    labs:
+      glucoseMgDl: 1456
+      na: 143
+      cl: null
+      hco3: 16.4
+      k: null
+      ph: 7.327
+      pco2: null
+      betaHydroxybutyrateMmolL: null
+      ketonuriaCruzes: 1
+      albumin: null
+      lactateMmolL: null
+      bunMgDl: 67.9
+      ureaMgDl: null
+    contexto_clinico:
+      knownDiabetes: false
+      suspectedSepsis: null
+      dialysisDependent: false
+      chronicityHint: null
+      pesoKg: 43.6
+    disponibilidade: {}
+    observacoes: >-
+      Cl e K NÃO publicados; AG não publicado -> Cl não derivável (regra
+      v0.2). Gasometria venosa: pH 7,327, BE -7,65. Relato calcula: osm
+      sérica 359, "osm efetiva 323", Na corrigido 156,6. ATENÇÃO: a osm
+      efetiva pela fórmula do canon (2*Na medido + glicose/18 =
+      2*143 + 1456/18 = 366,9) NÃO reproduz o 323 publicado — discrepância
+      aritmética do próprio relato, registrada para adjudicação.
+      Creatinina 2,93 (fora dos insumos). HbA1c 10,2%.
+
+conduta_relatada:
+  insulina:
+    iniciada: true
+    adiada_por_potassio: false
+    taxa_inicial_U_kg_h: 0.1
+    reduzida_com_dextrose: false
+    bolus_inicial: false
+  potassio:
+    reposto_antes_da_insulina: null
+    reposto: null
+  bicarbonato:
+    administrado: null
+    ph_no_momento: null
+  fluidos:
+    texto: "reposição cautelosa de déficit estimado de 20% em 72h; bolus SF 0,9% 500 mL em 1h"
+  texto_livre: >-
+    Insulina IV 0,1 U/kg/h REDUZIDA para 0,025 U/kg/h em 4h após
+    confirmação de HHS (doutrina pediátrica de HHS: 0,025-0,05 U/kg/h,
+    metade do padrão de CAD). Manitol IV profilático por sintomas
+    neurológicos (possibilidade de edema cerebral). Sensório normalizou
+    às 34h.
+
+desfecho:
+  resolucao: true
+  criterio_resolucao_do_relato: "sensório alerta às 34h; glicose e Na corrigido em melhora gradual; alta no dia 6 sem complicação neurológica"
+  tempo_ate_resolucao_h: null
+  complicacoes: ["lesão renal aguda na admissão (creatinina 2,93)"]
+  obito: false
+
+adjudicacao:
+  classificacao: PENDENTE
+  notas: null
