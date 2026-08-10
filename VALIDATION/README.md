@@ -1,9 +1,9 @@
 # VALIDATION — Fase 0 · Validação retrospectiva do CAD 360
 
 Aparato para validar o motor determinístico do CAD 360 contra relatos de caso
-publicados. **Esta fase construiu o aparato; a validação em si ainda não
-começou** — depende dos relatos reais que o dono fornecerá (5 no piloto, meta
-30). Governança: regime não-SaMD, humano-no-loop; todo julgamento clínico é do
+publicados. **O aparato está pronto e o corpus fechado em 30/30**; falta a
+adjudicação clínica — 60 linhas aguardando o dono no formulário de decisão
+única (`decisao/`). Governança: regime não-SaMD, humano-no-loop; todo julgamento clínico é do
 dono (Dr. Matheus M. Coelho).
 
 ## Rodar tudo em três comandos
@@ -18,7 +18,7 @@ Pré-requisitos: Node ≥20, Python ≥3.11, PyYAML (única dependência fora da
 stdlib; `pytest` é opcional — o gate roda com `python3` puro). Sem rede em
 nenhuma execução.
 
-## Estado atual (2026-08-08)
+## Estado atual (2026-08-10)
 
 | Item | Estado |
 |---|---|
@@ -30,7 +30,7 @@ nenhuma execução.
 | Caso sintético de pipeline | `cases_synthetic/PIPE-001_SYNTHETIC.yaml` — roda nos 2 braços |
 | **Casos reais** | **30/30 — META ATINGIDA** (relatos publicados, PMC texto completo, citação+DOI+PMID em cada YAML) |
 | Schema | **v0.2** — classe `derivado_aritmetico` (F-004 decidido pelo dono 2026-08-10); v0.3 (`convertido_de_escala`, F-008) aguarda decisão |
-| Adjudicação | toda linha nasce `PENDENTE_ADJUDICACAO` — campo do dono; **60 linhas aguardando** (`adjudication.md` é o dossiê; artefato de decisão única em preparação) |
+| Adjudicação | toda linha nasce `PENDENTE_ADJUDICACAO` — campo do dono; **60 linhas aguardando** (`adjudication.md` é o dossiê; formulário em `decisao/`) |
 
 Atenção a dois desvios do protocolo original, ambos verificados e decididos
 pelo dono (detalhe em `findings.md`): o substrato é `canon/policy.json` (não
@@ -47,7 +47,9 @@ VALIDATION/
 ├── parity_report.md       ← Etapa 2: relatório do gate de paridade
 ├── case_schema.yaml       ← Etapa 3: schema aprovado (v0.1), com exemplo comentado
 ├── runner.py              ← Etapa 4: executa casos, emite tabela + logs
-├── cases/                 ← casos REAIS extraídos de relatos publicados (CASO-001..005)
+├── adjudication.md        ← dossiê de confronto motor × relato, caso a caso
+├── decisao/               ← formulário de decisão única (HTML offline) + como aplicar
+├── cases/                 ← casos REAIS de relatos publicados (CASO-001..030)
 ├── cases_synthetic/       ← casos sintéticos de pipeline (sufixo _SYNTHETIC obrigatório)
 └── results/
     ├── table.md / table.csv   ← uma linha por caso × braço

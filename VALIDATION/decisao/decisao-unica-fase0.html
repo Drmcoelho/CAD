@@ -1,0 +1,235 @@
+<title>CAD 360 · Fase 0 — Decisão Única</title>
+<style>
+:root{
+  --paper:#F7F8F7; --card:#FFFFFF; --ink:#1C2530; --ink-2:#5A6672; --line:#D9DEDD;
+  --accent:#0E6E74; --accent-ink:#FFFFFF; --wash:#EAF1F0;
+  --ok:#2E7D46; --ok-wash:#E4F0E7; --div:#C43D2E; --div-wash:#F7E7E3; --pend:#B07C10; --pend-wash:#F6EEDC;
+  --mono:ui-monospace,"SF Mono","Cascadia Mono",Menlo,Consolas,monospace;
+  --serif:"Iowan Old Style",Palatino,"Palatino Linotype","Book Antiqua",Georgia,serif;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#141A1E; --card:#1C242A; --ink:#E7EBEA; --ink-2:#96A2A8; --line:#333E44;
+    --accent:#53B7BD; --accent-ink:#0E2224; --wash:#1E3336;
+    --ok:#6CC48A; --ok-wash:#1E3226; --div:#E07A6B; --div-wash:#3A211C; --pend:#D8A845; --pend-wash:#38301A;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#141A1E; --card:#1C242A; --ink:#E7EBEA; --ink-2:#96A2A8; --line:#333E44;
+  --accent:#53B7BD; --accent-ink:#0E2224; --wash:#1E3336;
+  --ok:#6CC48A; --ok-wash:#1E3226; --div:#E07A6B; --div-wash:#3A211C; --pend:#D8A845; --pend-wash:#38301A;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.55 var(--sans)}
+.ph-strip{height:5px;background:linear-gradient(90deg,#C43D2E 0%,#D8892B 22%,#C9B23A 40%,#7BA648 58%,#3E8C7E 78%,#0E6E74 100%)}
+main{max-width:880px;margin:0 auto;padding:28px 20px 80px}
+h1{font-family:var(--serif);font-weight:600;font-size:30px;line-height:1.15;margin:10px 0 4px;text-wrap:balance}
+.sub{color:var(--ink-2);max-width:62ch;margin:0 0 6px}
+.kicker{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:700}
+h2{font-family:var(--serif);font-weight:600;font-size:21px;margin:38px 0 4px}
+h2 .n{color:var(--accent)}
+.h2sub{color:var(--ink-2);font-size:13.5px;margin:0 0 14px;max-width:70ch}
+#bar{position:sticky;top:0;z-index:9;background:var(--paper);border-bottom:1px solid var(--line);padding:9px 20px;display:flex;gap:14px;align-items:center}
+#bar .t{font-size:12.5px;color:var(--ink-2);white-space:nowrap}
+#bar .t b{color:var(--ink);font-variant-numeric:tabular-nums}
+#track{flex:1;height:6px;border-radius:3px;background:var(--line);overflow:hidden}
+#fill{height:100%;width:0%;background:var(--accent);transition:width .25s}
+.card{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:16px 18px;margin:0 0 12px}
+.card.answered{border-color:var(--accent)}
+.qhead{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;margin-bottom:4px}
+.qid{font-family:var(--mono);font-size:12px;color:var(--accent);font-weight:700}
+.qt{font-weight:650}
+.qd{color:var(--ink-2);font-size:13.5px;margin:2px 0 10px;max-width:72ch}
+.qd b{color:var(--ink)}
+.seg{display:flex;flex-wrap:wrap;gap:8px}
+.seg button{font:600 13px/1 var(--sans);padding:8px 13px;border-radius:6px;border:1.5px solid var(--line);background:transparent;color:var(--ink-2);cursor:pointer}
+.seg button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.seg button.sel-ok{background:var(--ok-wash);border-color:var(--ok);color:var(--ok)}
+.seg button.sel-div{background:var(--div-wash);border-color:var(--div);color:var(--div)}
+.seg button.sel-na{background:var(--pend-wash);border-color:var(--pend);color:var(--pend)}
+.seg button.sel-ac{background:var(--wash);border-color:var(--accent);color:var(--accent)}
+textarea{width:100%;margin-top:10px;background:var(--paper);color:var(--ink);border:1px solid var(--line);border-radius:6px;padding:8px 10px;font:13px/1.5 var(--sans);resize:vertical;min-height:34px}
+textarea:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.tag{display:inline-block;font:700 10.5px/1 var(--sans);letter-spacing:.08em;text-transform:uppercase;padding:4px 7px;border-radius:4px}
+.tag.roda{background:var(--ok-wash);color:var(--ok)}
+.tag.trava{background:var(--pend-wash);color:var(--pend)}
+.tag.obito{background:var(--div-wash);color:var(--div)}
+.meta{font-size:12px;color:var(--ink-2)}
+.meta a{color:var(--accent)}
+#gen{background:var(--accent);color:var(--accent-ink);border:none;border-radius:8px;font:700 15px/1 var(--sans);padding:14px 22px;cursor:pointer}
+#gen:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.rowbtns{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:14px 0}
+.ghost{background:transparent;border:1.5px solid var(--line);color:var(--ink-2);border-radius:8px;font:600 13px/1 var(--sans);padding:12px 16px;cursor:pointer}
+#out{display:none;background:var(--card);border:1px solid var(--accent);border-radius:8px;padding:14px;margin-top:14px}
+#out pre{margin:0;font:12px/1.5 var(--mono);white-space:pre;overflow-x:auto;max-height:420px;overflow-y:auto}
+#warn{display:none;color:var(--pend);font-size:13px;font-weight:600;margin-top:10px}
+.foot{margin-top:44px;border-top:1px solid var(--line);padding-top:12px;font-size:12px;color:var(--ink-2);max-width:72ch}
+@media (prefers-reduced-motion: reduce){#fill{transition:none}}
+</style>
+<div class="ph-strip"></div>
+<div id="bar"><span class="t">Respondidas <b id="done">0</b> / <b id="total">0</b></span><div id="track"><div id="fill"></div></div><span class="t" id="pct">0%</span></div>
+<main>
+<span class="kicker">CAD 360 · Fase 0 · Validação retrospectiva</span>
+<h1>Decisão única do adjudicador</h1>
+<p class="sub">Todas as suas decisões pendentes, num lugar só: 4 decisões estruturais e 30 adjudicações de caso. Ao final, o botão gera <b>uma resposta única em YAML</b> — cole-a de volta na sessão e eu aplico tudo (campos <code>adjudicacao</code>, schema v0.3, roadmap de fase futura). As respostas ficam salvas neste navegador enquanto você preenche.</p>
+<p class="sub meta">Corpus: 30 relatos publicados (DOI/PMID em cada YAML) · 13 executam no t0 · motor congelado (nenhuma linha alterada) · dossiê completo em <code>VALIDATION/adjudication.md</code>.</p>
+
+<h2><span class="n">A.</span> Decisões estruturais</h2>
+<p class="h2sub">Mudam schema, roadmap ou leitura do corpus inteiro. Nenhuma altera o motor nesta fase.</p>
+<div id="structural"></div>
+
+<h2><span class="n">B.</span> Ratificações de extração</h2>
+<p class="h2sub">Pontos onde a extração tomou uma decisão de formato marcada como revisável. "Vetar" reverte o campo para <code>null</code> e o caso re-roda.</p>
+<div id="ratify"></div>
+
+<h2><span class="n">C.</span> Adjudicação dos 30 casos</h2>
+<p class="h2sub">O rótulo é seu: <b>concordante</b> (motor e relato apontam a mesma leitura/conduta no que importa), <b>divergente</b> (apontam coisas diferentes — inclui divergência de desenho, ex.: F-007), <b>não avaliável</b> (motor travou por dado ausente; vale como dado de executabilidade). A nota é opcional e vai para <code>adjudicacao.notas</code>.</p>
+<div id="cases"></div>
+
+<h2><span class="n">D.</span> Resposta única</h2>
+<div class="rowbtns">
+  <button id="gen">Gerar resposta única (YAML)</button>
+  <button class="ghost" id="copy">Copiar</button>
+  <button class="ghost" id="dl">Baixar .yaml</button>
+  <button class="ghost" id="clear">Limpar tudo</button>
+</div>
+<p id="warn"></p>
+<div id="out"><pre id="yaml"></pre></div>
+<p class="foot">Gerado pelo aparato da Fase 0 do CAD 360 (uso pessoal, não-SaMD, humano-no-loop). Este formulário não decide nada sozinho: apenas coleta o seu julgamento clínico e o devolve em formato aplicável. Fonte doutrinária: Umpierrez et al., <i>Diabetes Care</i> 2024;47(8):1257–1275.</p>
+</main>
+<script>
+const STRUCT = [
+ {id:"F006", t:"Guarda do Δ/Δ fora do domínio (HCO₃ ≥24)", d:"Com HCO₃ >24 o denominador fica negativo e o core rotula \"<1 · componente hiperclorêmico\" — enganoso em alcalose (CASO-005: Δ/Δ −0,42) e contradito pelo abg_core no mesmo paciente. Proposta: em fase futura, deltaRatio ganha indicador de \"fora do domínio\" e a nota é suprimida, deferindo ao abg.", opts:[["aprovar_fase_futura","Aprovar p/ fase futura"],["rejeitar","Rejeitar"],["adiar","Decidir depois"]]},
+ {id:"F007", t:"Rota para HHS dominante no classificador", d:"A cadeia de perfis só considera cad-hhs DENTRO de dka=true. Resultado real no corpus: CASO-021 (osm efetiva 331) devolve diferencial VAZIO; CASO-004 (osm 386) sai como \"parcial\"; CASO-008/028 idem em potencial. Proposta: em fase futura, ramo de HHS por osm efetiva >320 independente do critério de CAD.", opts:[["aprovar_fase_futura","Aprovar p/ fase futura"],["rejeitar","Rejeitar"],["adiar","Decidir depois"]]},
+ {id:"F008", t:"Classe convertido_de_escala no schema (v0.3)", d:"Relatos publicam o eixo cetônico em formatos que o schema atual não aceita: sem unidade (CASO-006, 015), mg/dL sem cruzes (CASO-013, 023), qualitativo (CASO-018, 026). Proposta: classe com tabela de mapeamento declarada por kit (ex.: ≥80 mg/dL → 3+), nos moldes do derivado_aritmetico. Destravaria até 6 casos.", opts:[["autorizar_v03","Autorizar v0.3"],["rejeitar","Rejeitar (manter null)"],["adiar","Decidir depois"]]},
+ {id:"UPA", t:"Máscara UPA conservadora (βHB + lactato)", d:"O braço de executabilidade mascara βHB sérico (doutrina: raro na prática brasileira) e, por consistência, o lactato de painéis estendidos. Gasometria de UPA costuma reportar lactato — manter a máscara superestima o custo decisório. Manter ou liberar o lactato no cenário UPA?", opts:[["manter","Manter como está"],["liberar_lactato","Liberar lactato na UPA"],["adiar","Decidir depois"]]}
+];
+const RAT = [
+ {id:"R1", caso:"CASO-014", t:"“ketone levels 4.5 mmol/L” extraído como βHB", d:"Ensaio não nomeado; mmol/L sérico é a convenção de βHB. Ratificar mantém o caso rodando (euglicemica+sepse-lactato)."},
+ {id:"R2", caso:"CASO-021", t:"“serum ketones 0.6 mmol/L” extraído como βHB", d:"Mesma convenção. O caso roda e é o F-007 puro (matches vazio com osm 331)."},
+ {id:"R3", caso:"CASO-027", t:"βHB “above 46” registrado como piso 46 (unidade via faixa de referência)", d:"46 mmol/L excede o fisiológico usual — possível teto de ensaio ou unidade diversa. O caso trava por Na/Cl de qualquer forma; a ratificação afeta só o registro."},
+ {id:"R4", caso:"CASO-029", t:"Pisos de valores publicados como “>600” (glicose) e similares", d:"Extração de piso é decisão-equivalente para os limiares do motor (200/250/500). Ratificar valida o método para casos futuros."}
+];
+const CASES = [
+ ["CASO-001","euglicêmica/SGLT2 (empagliflozina)","10.1016/j.amsu.2022.104879","roda","Motor: euglicemica, K 5,0→banda ≥5,0 c/ ECG, 0,05+dextrose. Relato: EDKA tratada com insulina IV (taxa não relatada). Perfil ✔; resolução indeterminada sem βHB."],
+ ["CASO-002","dialítica (DRC em HD + ITU)","10.7759/cureus.42700","trava","Trava (Cl e cruzes ausentes). Confronto vivo: NaHCO₃ 100 mEq com pH 7,2 — ACIMA do gatilho <7,0 do canon; relato justifica pela DRC. Plano de K/insulina isolado convergiu (0,1 U/kg/h)."],
+ ["CASO-003","euglicêmica jejum/pancreatite alcoólica","10.1007/s11606-022-07993-5","roda","Cl derivado 100 (v0.2). Motor: euglicemica ✔. Bicarbonato dado com pH 6,99 — DENTRO do gatilho ✔. AGc 32,5 com albumina 2,2 (correção que o relato não fez)."],
+ ["CASO-004","CAD+HHS mista pediátrica (glicose 1188)","10.7759/cureus.28983","roda","Cl derivado 117. Motor: “parcial” (F-007 — eixo cetônico não fecha: βHB 2,7/cetonúria 1+) vs “mixed DKA-HHS” do relato ✖. Osm efetiva 386 ✔. Insulina 0,1 ✔. abg pegou acidose respiratória sobreposta (pCO₂ 51)."],
+ ["CASO-005","cetoalcalose (CAD mascarada por vômitos)","10.1002/ccr3.8250","roda","Motor: pre-cad ✖ vs CAD mascarada; MAS hold por K 2,5 ✔ (relato adiou insulina até K 3,8) e abg detectou o gap mascarado ✔ (AGc 17,5 com HCO₃ 37). Δ/Δ −0,42 (F-006)."],
+ ["CASO-006","euglicêmica glicose 84 (ITU)","10.7759/cureus.10065","trava","Trava: cetonemia “1.39” sem unidade (F-008). Painel completo com Cl 107; acidose PIOROU no controle de 8h. Insulina relatada “0.14/kg/h” (acima do padrão — possível typo)."],
+ ["CASO-007","euglicêmica gestacional (USP, 34 sem)","10.5811/cpcem.2019.9.43624","trava","Trava: Na/Cl/K não publicados (19% de dados). Conduta convergente com o canon: dextrose desde o início, SEM bicarbonato, K antes de titular. Cesárea de emergência às 22h."],
+ ["CASO-008","HHS puro, estreia de DM1, 17a (glicose 1456)","10.6065/apem.2142002.001","trava","Trava (Cl/K ausentes). “Osm efetiva 323” publicada NÃO reproduz pela fórmula do canon (2·143+1456/18=366,9). Insulina 0,1→0,025 (doutrina pediátrica de HHS). F-007 em potencial."],
+ ["CASO-009","cetose 8,5 sem acidose + hiperosmolar","10.7759/cureus.14125","trava","Trava: pH da admissão não publicado (F-005). Cl 95 direto; βHB 8,5 com HCO₃ 24 — cetose franca sem acidose; osm medida 371. Rotulado HHS pelo relato."],
+ ["CASO-010","AKA×CAD, pH 6,724, lactato 23 (DM1)","10.1002/ams2.660","roda","Motor: sepse-lactato (lactato 23 domina) vs AKA do relato (razão βHB/AcAc 7,5) ✖. K 5,8→insulina liberada ✔. Bicarbonato RETIDO abaixo do gatilho <7,0 ✖ canon — PCR em AESP 5h depois. Cegueira transitória por acidemia."],
+ ["CASO-011","CAD clássica (KPDM pós-bariátrica, glicose 504)","10.3389/fendo.2018.00812","roda","Motor: cad-hhs (bandeira por glicose ≥500, osm 284) vs CAD simples do relato ✖/◐. K 4,8→0,1 ✔. Δ/Δ 0,5 → nota hiperclorêmica. A bandeira é útil ou ruído?"],
+ ["CASO-012","EDKA dieta cetogênica + SGLT2i suspenso","10.1155/2022/4101975","trava","Trava: NENHUM pH no relato inteiro (F-005). Cetonúria 3+ publicada; AG 29 consistente. Insulina+dextrose desde o início ✔; enfermaria, não UTI."],
+ ["CASO-013","EDKA empagliflozina, painel completo","10.7759/cureus.30106","trava","Trava só pelo formato: cetonúria “>80 mg/dL” sem cruzes (F-008). Painel completo + gasometria arterial. Se F-008 aprovado, destrava."],
+ ["CASO-014","EDKA + sepse MRSA (SGLT2i)","10.7759/cureus.87029","roda","Cl derivado 98. Motor: euglicemica+sepse-lactato (bandeira via contexto; lactato normal 1,7) ✔. Taxa: motor 0,05+dextrose × relato 0,1 ✖. Ratificação R1 pendente."],
+ ["CASO-015","CAD pediátrica pH 6,75 + mielinólise pontina","10.1155/2018/4273971","trava","Trava: βHB “11.41” sem unidade (F-008), Cl derivável 109. Confronto central: NaHCO₃ com pH 6,75 — DENTRO do gatilho adulto, população pediátrica; desfecho: edema cerebral + CPM + HSD."],
+ ["CASO-016","EDKA + sepse urinária + LRA (série UTI 1/3)","10.7759/cureus.83920","roda","Motor: euglicemica+sepse-lactato ✔ (lactato 0,9 normal; sepse por contexto). βHB 3,512 (µmol→mmol). Série prioriza tratar EDKA antes de TRS ✔ doutrina da própria série."],
+ ["CASO-017","EDKA dapagliflozina + pneumonia aspirativa (série 2/3)","10.7759/cureus.83920","roda","Motor: euglicemica+sepse-lactato. Teste real do eixo ácido por OR: pH 7,345 NÃO fecha, HCO₃ 12,8 fecha ✔. βHB 7,248."],
+ ["CASO-018","EDKA em choque séptico pós-colectomia (série 3/3)","10.7759/cureus.83920","trava","Trava: cetonúria “Positive” sem cruzes (F-008 qualitativa). Único da série em choque franco; cetonúria pré-UTI foi o que levantou a suspeita no relato."],
+ ["CASO-019","EDKA gestante + artrite séptica + GLP-1","10.7759/cureus.78193","trava","Trava: Na/Cl/eixo cetônico ausentes; pH 7,30 exatamente no limiar (não fecha; HCO₃ 11,8 fecharia). Insulin drip até fechar AG ✔."],
+ ["CASO-020","AKA hipoglicêmica (glicose 25!, não-diabética)","10.1097/MD.0000000000031996","roda","Motor: alcoolica-jejum ✔ (primeira ativação do perfil) + Δ/Δ 0,57. Conduta: SEM insulina (glicose+tiamina) — correto p/ AKA e fora do vocabulário de conduta do motor ◐. Lactato 6,29 sem nota (fora de dka=true — anexo ao F-007)."],
+ ["CASO-021","HHS por leuprolida (75a, glicose 996)","10.7759/cureus.26993","roda","Motor: matches VAZIO com osm efetiva 331,3 — F-007 na forma pura ✖. Painel completo; pH venoso 7,30 no limiar; cetose ausente (0,6). Ratificação R2 pendente."],
+ ["CASO-022","CAD pediátrica + pancreatite + COVID (glicose 589)","10.1186/s12879-023-08371-0","roda","Motor: cad-hhs+sepse-lactato (glicose ≥500; SIRS) ✔/◐. Série de resolução: 96h com βHB 0,32 + pH 7,45 (trava no seguimento por Na/Cl). Insulina 0,05-0,1 ✔; CVVHDF por SIRS."],
+ ["CASO-023","mucormicose + CAD nova + COVID — ÓBITO","10.7759/cureus.13163","obito","Trava eixo cetônico (cetonúria “150 mg/dL” — F-008) com Cl derivado 102. pH 6,9 SEM menção a bicarbonato ◐. Primeiro óbito: falência multiorgânica, K terminal 7,8. Adjudicar também o silêncio do relato sobre conduta de acidose."],
+ ["CASO-024","EDKA empagliflozina com K 2,0","10.7759/cureus.26267","roda","Motor: euglicemica + HOLD por K 2,0 ✔?. Relato: “fluids, insulin, and potassium replacement” SEM explicitar a ordem — o confronto é a própria doutrina de K do canon. Cetonúria 3+; AG 36."],
+ ["CASO-025","HHS+CAD mista pediátrica (glicose 1858, MIS-C)","10.1155/2021/6429710","trava","Trava: Cl/K não publicados. βHB 46 mg/dL→4,42 mmol/L (identidade). Osm calculada 430; pH 6,9. Insulina 0,05 (híbrido CAD/HHS) ◐; sobreviveu a falência multiorgânica."],
+ ["CASO-026","CAD inaugural + COVID (série A, HbA1c 16,2%)","10.55729/2000-9666.1163","trava","Trava: cetona sérica “moderate” sem número (F-008 qualitativa) — apesar de eletrólitos completos + gasometria. Dexametasona SUSPENSA por causa da CAD ◐."],
+ ["CASO-027","CAD em DM1 com bomba + COVID (série B)","10.55729/2000-9666.1163","trava","Trava: Na/Cl não publicados. βHB “>46” (unidade via referência; plausibilidade em cheque — R3). Retorno à bomba após fechar AG."],
+ ["CASO-028","CAD×HHS com Na 170 (série C, demência)","10.55729/2000-9666.1163","trava","Trava: Cl/HCO₃/cetona ausentes. Na 170 (corrigido 183); osm efetiva calculável 368,9 — F-007 em potencial. pH venoso 7,33 não fecharia."],
+ ["CASO-029","HHS em DRC dialítica + HIV (série D)","10.55729/2000-9666.1163","trava","Trava: extração de pisos (glicose >600; AG >20 atribuído à uremia). Segundo dialítico do corpus; acetona negativa afirmada (cruzes 0). Dexametasona mantida ◐. Ratificação R4 pendente."],
+ ["CASO-030","mucormicose rinocerebral pediátrica + CAD","10.1186/s13256-022-03594-2","trava","Trava múltipla (só pH 6,92 + pCO₂ <5 + glicose 668 publicados). A NÃO-resposta ao protocolo de CAD foi o gatilho diagnóstico do relato; 104 dias, sobreviveu. Executabilidade extrema."]
+];
+const LS="cad360_fase0_decisao";
+let A={};try{A=JSON.parse(localStorage.getItem(LS)||"{}")}catch(e){A={}}
+function save(){localStorage.setItem(LS,JSON.stringify(A));refresh()}
+function segBtn(group,val,label,cls){
+  const b=document.createElement("button");b.type="button";b.textContent=label;b.dataset.g=group;b.dataset.v=val;b.dataset.c=cls;
+  b.addEventListener("click",()=>{A[group]=A[group]||{};A[group].v=(A[group].v===val?null:val);save()});
+  return b;
+}
+function noteBox(group,ph){
+  const t=document.createElement("textarea");t.placeholder=ph;t.value=(A[group]&&A[group].n)||"";
+  t.addEventListener("input",()=>{A[group]=A[group]||{};A[group].n=t.value;localStorage.setItem(LS,JSON.stringify(A))});
+  return t;
+}
+function build(){
+  const s=document.getElementById("structural");
+  STRUCT.forEach(q=>{
+    const c=document.createElement("div");c.className="card";c.id="card_"+q.id;
+    c.innerHTML=`<div class="qhead"><span class="qid">${q.id}</span><span class="qt">${q.t}</span></div><p class="qd">${q.d}</p>`;
+    const seg=document.createElement("div");seg.className="seg";
+    q.opts.forEach(o=>seg.appendChild(segBtn(q.id,o[0],o[1],"sel-ac")));
+    c.appendChild(seg);c.appendChild(noteBox(q.id,"Nota (opcional)"));s.appendChild(c);
+  });
+  const r=document.getElementById("ratify");
+  RAT.forEach(q=>{
+    const c=document.createElement("div");c.className="card";c.id="card_"+q.id;
+    c.innerHTML=`<div class="qhead"><span class="qid">${q.id} · ${q.caso}</span><span class="qt">${q.t}</span></div><p class="qd">${q.d}</p>`;
+    const seg=document.createElement("div");seg.className="seg";
+    seg.appendChild(segBtn(q.id,"ratificar","Ratificar","sel-ok"));
+    seg.appendChild(segBtn(q.id,"vetar","Vetar (→ null)","sel-div"));
+    c.appendChild(seg);c.appendChild(noteBox(q.id,"Nota (opcional)"));r.appendChild(c);
+  });
+  const cs=document.getElementById("cases");
+  CASES.forEach(k=>{
+    const [id,fen,doi,st,conf]=k;
+    const c=document.createElement("div");c.className="card";c.id="card_"+id;
+    const tag=st==="roda"?'<span class="tag roda">motor roda</span>':st==="obito"?'<span class="tag obito">óbito · trava</span>':'<span class="tag trava">motor trava</span>';
+    c.innerHTML=`<div class="qhead"><span class="qid">${id}</span><span class="qt">${fen}</span>${tag}</div>
+      <p class="qd">${conf}</p><p class="meta"><a href="https://doi.org/${doi}" target="_blank" rel="noopener">doi:${doi}</a></p>`;
+    const seg=document.createElement("div");seg.className="seg";
+    seg.appendChild(segBtn(id,"concordante","Concordante","sel-ok"));
+    seg.appendChild(segBtn(id,"divergente","Divergente","sel-div"));
+    seg.appendChild(segBtn(id,"nao_avaliavel","Não avaliável (travou)","sel-na"));
+    c.appendChild(seg);c.appendChild(noteBox(id,"Notas de adjudicação (opcional) → adjudicacao.notas"));cs.appendChild(c);
+  });
+  refresh();
+}
+function allGroups(){return STRUCT.map(q=>q.id).concat(RAT.map(q=>q.id)).concat(CASES.map(k=>k[0]))}
+function refresh(){
+  const gs=allGroups();let done=0;
+  gs.forEach(g=>{
+    const v=A[g]&&A[g].v;if(v)done++;
+    const card=document.getElementById("card_"+g);if(!card)return;
+    card.classList.toggle("answered",!!v);
+    card.querySelectorAll(".seg button").forEach(b=>{
+      b.className="";if(v===b.dataset.v)b.classList.add(b.dataset.c);
+    });
+  });
+  document.getElementById("total").textContent=gs.length;
+  document.getElementById("done").textContent=done;
+  const pct=Math.round(100*done/gs.length);
+  document.getElementById("fill").style.width=pct+"%";
+  document.getElementById("pct").textContent=pct+"%";
+}
+function yq(s){return s?'"'+String(s).replace(/\\/g,"\\\\").replace(/"/g,'\\"').replace(/\n/g," ")+'"':"null"}
+function gen(){
+  const gs=allGroups();const missing=gs.filter(g=>!(A[g]&&A[g].v));
+  const w=document.getElementById("warn");
+  if(missing.length){w.style.display="block";w.textContent="Atenção: "+missing.length+" decisão(ões) sem resposta ("+missing.slice(0,6).join(", ")+(missing.length>6?"…":"")+") — sairão como PENDENTE no YAML.";}
+  else{w.style.display="none";}
+  const d=new Date().toISOString().slice(0,10);
+  let y="# CAD 360 · Fase 0 — resposta única do adjudicador\n";
+  y+="# Gerada pelo artefato de decisão em "+d+". Colar de volta na sessão do Claude Code.\n";
+  y+="resposta_unica_fase0:\n  data: \""+d+"\"\n  adjudicador: \"Dr. Matheus M. Coelho, CRM-SP 151.318\"\n";
+  y+="  decisoes_estruturais:\n";
+  STRUCT.forEach(q=>{const a=A[q.id]||{};y+="    "+q.id+": "+(a.v||"PENDENTE")+(a.n?"  # "+a.n.replace(/\n/g," "):"")+"\n";});
+  y+="  ratificacoes_de_extracao:\n";
+  RAT.forEach(q=>{const a=A[q.id]||{};y+="    "+q.id+"_"+q.caso.replace("-","")+": "+(a.v||"PENDENTE")+(a.n?"  # "+a.n.replace(/\n/g," "):"")+"\n";});
+  y+="  adjudicacoes:\n";
+  CASES.forEach(k=>{const id=k[0];const a=A[id]||{};
+    y+="    "+id+":\n      classificacao: "+(a.v||"PENDENTE")+"\n      notas: "+yq(a.n||"")+"\n";});
+  document.getElementById("yaml").textContent=y;
+  document.getElementById("out").style.display="block";
+  return y;
+}
+document.getElementById("gen").addEventListener("click",gen);
+document.getElementById("copy").addEventListener("click",()=>{const y=gen();navigator.clipboard.writeText(y).then(()=>{document.getElementById("copy").textContent="Copiado ✓";setTimeout(()=>document.getElementById("copy").textContent="Copiar",1600)})});
+document.getElementById("dl").addEventListener("click",()=>{const y=gen();const b=new Blob([y],{type:"text/yaml"});const a=document.createElement("a");a.href=URL.createObjectURL(b);a.download="resposta_unica_fase0.yaml";a.click()});
+document.getElementById("clear").addEventListener("click",()=>{if(confirm("Apagar todas as respostas salvas neste navegador?")){A={};save();document.getElementById("out").style.display="none";}});
+build();
+</script>
