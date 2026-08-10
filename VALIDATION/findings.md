@@ -117,3 +117,17 @@ POLICY, motor JS ou doutrina. Adjudicação clínica é do dono.
   adjudicar como divergência de desenho, não de cálculo.
 - **Status:** registrado 2026-08-10; sem correção nesta fase (congelamento).
   Candidata natural à mesma fase futura do F-006.
+
+## F-008 · Eixo cetônico frágil ao formato de publicação (unidade/escala)
+
+- **O que foi verificado:** dois relatos com painel rico travam o perfil só
+  pelo formato do dado cetônico: CASO-006 publica "ketonemia 1.39" **sem
+  unidade** (não entra como βHB mmol/L), e CASO-013 publica cetonúria
+  ">80 mg/dL" **sem escala em cruzes** — o mapeamento mg/dL→cruzes depende do
+  kit (Multistix: 80 ≈ "large" ≈ 3-4+), logo não é identidade aritmética e a
+  regra v0.2 não o cobre.
+- **Questão para o dono:** autorizar (ou não) uma classe
+  `convertido_de_escala` no schema (v0.3) com tabela de mapeamento declarada
+  por kit, nos moldes do `derivado_aritmetico`. Sem ela, esses relatos ficam
+  permanentemente fora do braço de acurácia por um detalhe de formatação.
+- **Status:** registrado 2026-08-10; aguardando decisão do dono.

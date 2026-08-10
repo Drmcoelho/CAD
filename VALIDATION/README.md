@@ -28,9 +28,9 @@ nenhuma execução.
 | Schema de caso | `case_schema.yaml` v0.1 — **aprovado pelo dono** em 2026-08-08 |
 | Runner + braços acurácia/UPA | `runner.py` — funciona ponta a ponta, determinístico |
 | Caso sintético de pipeline | `cases_synthetic/PIPE-001_SYNTHETIC.yaml` — roda nos 2 braços |
-| **Casos reais** | **10/30 extraídos de relatos publicados** (PMC texto completo, citação+DOI+PMID em cada YAML) |
-| Schema | **v0.2** — classe `derivado_aritmetico` (F-004 decidido pelo dono 2026-08-10) |
-| Adjudicação | toda linha nasce `PENDENTE_ADJUDICACAO` — campo do dono; **20 linhas aguardando** (`adjudication.md` é o dossiê) |
+| **Casos reais** | **13/30 extraídos de relatos publicados** (PMC texto completo, citação+DOI+PMID em cada YAML) |
+| Schema | **v0.2** — classe `derivado_aritmetico` (F-004 decidido pelo dono 2026-08-10); v0.3 (`convertido_de_escala`, F-008) aguarda decisão |
+| Adjudicação | toda linha nasce `PENDENTE_ADJUDICACAO` — campo do dono; **26 linhas aguardando** (`adjudication.md` é o dossiê) |
 
 Atenção a dois desvios do protocolo original, ambos verificados e decididos
 pelo dono (detalhe em `findings.md`): o substrato é `canon/policy.json` (não
@@ -81,10 +81,21 @@ Expansão 2026-08-10 (schema v0.2, Cl derivado onde o AG foi publicado):
 | CASO-009 | cetose 8,5 sem acidose + hiperosmolar | 10.7759/cureus.14125 | travou: pH de admissão não publicado (F-005) |
 | CASO-010 | AKA×CAD, pH 6,72, lactato 23 | 10.1002/ams2.660 | executou: `sepse-lactato`; bicarbonato retido <7,0 (✖ canon) |
 
+Lote 3 (2026-08-10):
+
+| Caso | Fenótipo | Fonte (DOI) | Resultado mecânico |
+|---|---|---|---|
+| CASO-011 | CAD clássica hiperglicêmica (KPDM pós-bariátrica, glicose 504) | 10.3389/fendo.2018.00812 | **executou**: `cad-hhs` (glicose ≥500), K 4,8→0,1 U/kg/h, Δ/Δ 0,5 |
+| CASO-012 | EDKA dieta cetogênica + SGLT2i suspenso | 10.1155/2022/4101975 | travou: nenhum pH publicado (F-005) |
+| CASO-013 | EDKA empagliflozina, painel completo | 10.7759/cureus.30106 | travou: cetonúria em mg/dL sem cruzes (F-008) |
+
 Achados da extração: F-004 (**decidido**: derivação aritmética autorizada, schema
-v0.2 — destravou CASO-003/004), F-005 (perfil exige pH; agora com 2 exemplares
-reais), F-006 (Δ/Δ denominador negativo — guarda especificada para fase futura),
-F-007 (sem rota para HHS dominante — CASO-004/008/009). Detalhe em `findings.md`.
+v0.2 — destravou CASO-003/004), F-005 (perfil exige pH; 3 exemplares reais:
+CASO-005 t18, CASO-009, CASO-012), F-006 (Δ/Δ denominador negativo — guarda
+especificada para fase futura), F-007 (sem rota para HHS dominante —
+CASO-004/008/009), F-008 (eixo cetônico frágil a unidade/escala de publicação —
+CASO-006/013; classe `convertido_de_escala` proposta p/ v0.3, decisão do dono).
+Detalhe em `findings.md`.
 
 ## Fluxo para adicionar um caso real
 
