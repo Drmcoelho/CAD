@@ -1,0 +1,80 @@
+# Extraído de relato publicado (texto completo lido via PubMed Central).
+meta:
+  id: CASO-030
+  synthetic: false
+  fonte:
+    citacao: "Monroig V, Tarquinio KM. Diabetic ketoacidosis and coronavirus disease 2019-associated mucormycosis: a case report. J Med Case Rep. 2022;16(1):400."
+    doi: "10.1186/s13256-022-03594-2"
+    pmid: "36316719"
+  ano: 2022
+  contexto: UTI
+  populacao: pediatrico
+  variante: classica
+  variante_observacao: "CAD inaugural de DM novo (HbA1c >16%) precipitada por COVID-19 em menina de 13 anos, complicada por mucormicose rinocerebral (Rhizopus) com cerebrite necrosante — 104 dias de internação, sobreviveu"
+
+pontos:
+  - t: 0
+    labs:
+      glucoseMgDl: 668
+      na: null
+      cl: null
+      hco3: null
+      k: null
+      ph: 6.92
+      pco2: 5
+      betaHydroxybutyrateMmolL: null
+      ketonuriaCruzes: null
+      albumin: null
+      lactateMmolL: null
+      bunMgDl: null
+      ureaMgDl: null
+    contexto_clinico:
+      knownDiabetes: false
+      suspectedSepsis: true
+      dialysisDependent: false
+      chronicityHint: null
+      pesoKg: null
+    disponibilidade: {}
+    observacoes: >-
+      Labs esparsos: pH 6,92, pCO2 publicado como "<5 torr" -> registrado
+      5 como TETO do publicado (hiperventilação extrema; qualquer
+      comparação de compensação fica no mesmo lado), BD 28. Na/Cl/K/HCO3
+      NÃO publicados. Cetonúria "positiva" sem cruzes -> null. HbA1c >16%
+      (teto de ensaio). suspectedSepsis=true: febre persistente +
+      cerebrite infecciosa + antimicrobianos de amplo espectro. Perfil
+      trava por múltiplos eixos — caso de executabilidade extrema com
+      desfecho riquíssimo.
+
+conduta_relatada:
+  insulina:
+    iniciada: true
+    adiada_por_potassio: false
+    taxa_inicial_U_kg_h: 0.1
+    reduzida_com_dextrose: null
+    bolus_inicial: false
+  potassio:
+    reposto_antes_da_insulina: null
+    reposto: null
+  bicarbonato:
+    administrado: null
+    ph_no_momento: null
+  fluidos:
+    texto: "protocolo institucional de CAD pediátrica: fluidos IV + insulina contínua + monitorização eletrolítica; salina hipertônica 3% em bolus x3 por suspeita de edema cerebral"
+  texto_livre: >-
+    Insulina 0,1 U/kg/h + HTS 3% por alteração persistente do sensório;
+    a NÃO-resposta ao manejo padrão de CAD foi o gatilho para investigar
+    patologia intracraniana -> mucormicose rinocerebral confirmada
+    (Karius/dia 9); anfotericina lipossomal + posaconazol ->
+    isavuconazol; craniotomia frontal com drenagem de abscesso fúngico e
+    desbridamento. Sem corticoide (não indicado para o COVID dela).
+
+desfecho:
+  resolucao: true
+  criterio_resolucao_do_relato: "derangements metabólicos corrigidos precocemente; internação dominada pela mucormicose (104 dias); alta em melhora funcional"
+  tempo_ate_resolucao_h: null
+  complicacoes: ["mucormicose rinocerebral com cerebrite necrosante e herniação temporal precoce", "craniotomia + desbridamento", "diabetes insipidus central", "hemiparesia esquerda", "nefrotoxicidade por anfotericina", "pneumonia aspirativa", "trombose associada a cateter", "QTc prolongado por posaconazol"]
+  obito: false
+
+adjudicacao:
+  classificacao: PENDENTE
+  notas: null

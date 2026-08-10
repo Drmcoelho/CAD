@@ -1,0 +1,76 @@
+# Extraído de relato publicado (texto completo lido via PubMed Central).
+# Série de casos: "Patient A" de Patel et al. (6 pacientes).
+meta:
+  id: CASO-026
+  synthetic: false
+  fonte:
+    citacao: "Patel D, Kania B, Salem A, et al. COVID-19 Viral Infection Presenting With Diabetic Ketoacidosis, Hyperosmolar Hyperglycemic Syndrome, or Mixed Hyperglycemic Crisis: A Case Series [Patient A]. J Community Hosp Intern Med Perspect. 2023;13(2):76-83."
+    doi: "10.55729/2000-9666.1163"
+    pmid: "37168059"
+  ano: 2023
+  contexto: UTI
+  populacao: adulto
+  variante: classica
+  variante_observacao: "CAD inaugural de DM novo (HbA1c 16,2%) precipitada por COVID-19 assintomático, 50 anos"
+
+pontos:
+  - t: 0
+    labs:
+      glucoseMgDl: 352
+      na: 133
+      cl: 96
+      hco3: 8.2
+      k: 5.7
+      ph: 7.29
+      pco2: 17
+      betaHydroxybutyrateMmolL: null
+      ketonuriaCruzes: null
+      albumin: null
+      lactateMmolL: 1.9
+      bunMgDl: null
+      ureaMgDl: null
+    contexto_clinico:
+      knownDiabetes: false
+      suspectedSepsis: null
+      dialysisDependent: false
+      chronicityHint: null
+      pesoKg: null
+    disponibilidade:
+      lactateMmolL: ausente_no_cenario_UPA
+    observacoes: >-
+      Eletrólitos completos (Na 133, Cl 96, K 5,7) + gasometria arterial
+      (pH 7,29, pCO2 17, HCO3 8,2). Cetona sérica publicada como
+      "moderate" SEM número nem escala -> null (F-008, forma qualitativa)
+      — o perfil trava pelo eixo cetônico apesar do painel rico. AG 27
+      relatado. HbA1c 16,2%. Infiltrados bibasais na radiografia;
+      COVID+ assintomático.
+
+conduta_relatada:
+  insulina:
+    iniciada: true
+    adiada_por_potassio: false
+    taxa_inicial_U_kg_h: null
+    reduzida_com_dextrose: null
+    bolus_inicial: null
+  potassio:
+    reposto_antes_da_insulina: null
+    reposto: null
+  bicarbonato:
+    administrado: null
+    ph_no_momento: null
+  fluidos:
+    texto: "manejo de CAD em UTI (protocolo não detalhado por paciente)"
+  texto_livre: >-
+    UTI para manejo de CAD; dexametasona iniciada por COVID e SUSPENSA
+    por causa da CAD (retomada após estabilização); remdesivir completo.
+
+desfecho:
+  resolucao: true
+  criterio_resolucao_do_relato: "estabilizado; permaneceu assintomático para COVID; sobrevida 100% na série"
+  tempo_ate_resolucao_h: null
+  complicacoes: null
+  obito: false
+
+adjudicacao:
+  classificacao: PENDENTE
+  notas: null

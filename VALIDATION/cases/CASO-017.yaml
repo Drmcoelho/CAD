@@ -1,0 +1,80 @@
+# Extraído de relato publicado (texto completo lido via PubMed Central).
+# Série de casos: paciente "Case 2" de Yomogida et al.
+meta:
+  id: CASO-017
+  synthetic: false
+  fonte:
+    citacao: "Yomogida D, Hasegawa S, Mizuta S, Horikawa S, Koshida Y. Euglycemic Diabetic Ketoacidosis With Sepsis and Acute Kidney Injury in Critically Ill Patients: A Case Series [Case 2]. Cureus. 2025;17(5):e83920."
+    doi: "10.7759/cureus.83920"
+    pmid: "40502910"
+  ano: 2025
+  contexto: UTI
+  populacao: adulto
+  variante: euglicemica_sglt2
+  variante_observacao: "EDKA em uso de dapagliflozina, 78 anos, precipitada por pneumonia aspirativa pós fraturas de costelas; agudização de DRC"
+
+pontos:
+  - t: 0
+    labs:
+      glucoseMgDl: 134
+      na: 148
+      cl: 113
+      hco3: 12.8
+      k: null
+      ph: 7.345
+      pco2: 32.8
+      betaHydroxybutyrateMmolL: 7.248
+      ketonuriaCruzes: null
+      albumin: null
+      lactateMmolL: 1.2
+      bunMgDl: null
+      ureaMgDl: null
+    contexto_clinico:
+      knownDiabetes: true
+      suspectedSepsis: true
+      dialysisDependent: false
+      chronicityHint: null
+      pesoKg: null
+    disponibilidade:
+      betaHydroxybutyrateMmolL: ausente_no_cenario_UPA
+      lactateMmolL: ausente_no_cenario_UPA
+    observacoes: >-
+      3-OHBA 7248 umol/L -> 7,248 mmol/L (identidade /1000); AcAc 3064.
+      pH 7,345 NÃO fecha o eixo ácido por pH (<7,30), mas HCO3 12,8 <18
+      fecha pelo OR — teste real do eixo ácido alternativo do motor.
+      K não publicado. Discrepância interna do relato: texto dá
+      creatinina 1,7 e PCR 2,94; a tabela traz 2,94 na coluna de
+      creatinina (provável desalinhamento; creatinina fora dos insumos
+      do motor). AG ajustado 26,45. IOT + CHDF dias 2-4.
+
+conduta_relatada:
+  insulina:
+    iniciada: null
+    adiada_por_potassio: null
+    taxa_inicial_U_kg_h: null
+    reduzida_com_dextrose: null
+    bolus_inicial: null
+  potassio:
+    reposto_antes_da_insulina: null
+    reposto: null
+  bicarbonato:
+    administrado: null
+    ph_no_momento: null
+  fluidos:
+    texto: null
+  texto_livre: >-
+    IOT por insuficiência respiratória; CHDF dias 2-4 por agudização de
+    insuficiência renal crônica; traqueostomia por falha de extubação;
+    alta da UTI no dia 12. Detalhes de insulina não publicados por
+    paciente.
+
+desfecho:
+  resolucao: true
+  criterio_resolucao_do_relato: "acidose resolvida; alta da UTI no dia 12 pós-traqueostomia"
+  tempo_ate_resolucao_h: null
+  complicacoes: ["pneumonia aspirativa", "agudização de DRC com CHDF", "falha de extubação -> traqueostomia"]
+  obito: false
+
+adjudicacao:
+  classificacao: PENDENTE
+  notas: null

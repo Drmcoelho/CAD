@@ -1,0 +1,101 @@
+{
+ "AVISO_SINTETICO": null,
+ "caso": "CASO-019",
+ "synthetic": false,
+ "arquivo_fonte": "VALIDATION/cases/CASO-019.yaml",
+ "braco": "acuracia",
+ "substrato": {
+  "canon/policy.json": "ee88734ae4ff3bd2badd4270bd6f15f6a86a6e75481443f3c85d12c72e6221e5",
+  "core/cad_core.js": "c07c37d62df6521b14097ddfb8321f9003f89c2a4eea7717ab63c820c9320c79",
+  "pyengine/cad_engine.py": "d068e0f22b4975962c4cab32dcbe489ceb253b12ba618334954f559ee7c92bcb",
+  "pyengine/abg_engine.py": "04d5f7db62a6cd29ae31c9a732a14c9eae5ec374b8092e2c546111edbd8f65ca"
+ },
+ "policy_version": "CAD360-ApA-2026-07-01",
+ "adjudicacao": {
+  "classificacao": "PENDENTE",
+  "notas": null
+ },
+ "pontos": [
+  {
+   "t": 0,
+   "braco": "acuracia",
+   "campos_mascarados_UPA": [],
+   "input_motor": {
+    "na": null,
+    "cl": null,
+    "hco3": 11.8,
+    "glucoseMgDl": 250,
+    "ph": 7.3,
+    "betaHydroxybutyrateMmolL": null,
+    "ketonuriaCruzes": null,
+    "kMmolL": null,
+    "lactateMmolL": null,
+    "knownDiabetes": true,
+    "suspectedSepsis": true,
+    "dialysisDependent": false
+   },
+   "labs_pos_mascara": {
+    "glucoseMgDl": 250,
+    "na": null,
+    "cl": null,
+    "hco3": 11.8,
+    "k": null,
+    "ph": 7.3,
+    "pco2": 24,
+    "betaHydroxybutyrateMmolL": null,
+    "ketonuriaCruzes": null,
+    "albumin": null,
+    "lactateMmolL": null,
+    "bunMgDl": null,
+    "ureaMgDl": null
+   },
+   "resultado_cad": {
+    "insufficient": true,
+    "missing": [
+     "na",
+     "cl",
+     "betaHydroxybutyrateMmolL|ketonuriaCruzes"
+    ]
+   },
+   "resultado_insulina": null,
+   "resultado_abg": {
+    "ph": 7.3,
+    "pco2": 24,
+    "hco3": 11.8,
+    "acidemia": true,
+    "alkalemia": false,
+    "phNormal": false,
+    "components": {
+     "metabolicAcidosis": true,
+     "metabolicAlkalosis": false,
+     "respiratoryAcidosis": false,
+     "respiratoryAlkalosis": true
+    },
+    "primary": [
+     {
+      "type": "metabolicAcidosis",
+      "reason": "pH 7.3 acidêmico com HCO₃ 11.8 < 22 — componente metabólico acidificante primário; pCO₂ 24 baixo é a resposta respiratória compensatória (Winter)."
+     }
+    ],
+    "compensationCheck": {
+     "for": "metabolicAcidosis",
+     "measured": 24,
+     "expected": 25.7,
+     "low": 23.7,
+     "high": 27.7,
+     "verdict": "adequado"
+    },
+    "ag": null,
+    "agc": null,
+    "notes": []
+   },
+   "flags_mecanicas": [
+    "insuficiente:na,cl,betaHydroxybutyrateMmolL|ketonuriaCruzes",
+    "sem_K_sem_plano_potassio"
+   ],
+   "labs_disponiveis": 4,
+   "labs_total": 13
+  }
+ ],
+ "classificacao_mecanica": "motor_travou_por_dado_ausente"
+}

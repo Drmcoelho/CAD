@@ -1,0 +1,133 @@
+# Extraído de relato publicado (texto completo lido via PubMed Central).
+meta:
+  id: CASO-022
+  synthetic: false
+  fonte:
+    citacao: "Liu X, Yu Q, Li L, Wei S, Zeng J, Jiang J. Acute pancreatitis associated with diabetic ketoacidosis in a child with COVID-19 infection. BMC Infect Dis. 2023;23(1):381."
+    doi: "10.1186/s12879-023-08371-0"
+    pmid: "37286981"
+  ano: 2023
+  contexto: UTI
+  populacao: pediatrico
+  variante: classica
+  variante_observacao: "CAD grave (pH 7,01) de DM1 novo em menina de 12 anos, precipitada por COVID-19, complicada por pancreatite aguda hipertrigliceridêmica (TG 25,5) e SIRS"
+
+pontos:
+  - t: 0
+    labs:
+      glucoseMgDl: 588.6
+      na: 132
+      cl: 94
+      hco3: 4.0
+      k: null
+      ph: 7.01
+      pco2: null
+      betaHydroxybutyrateMmolL: 6.83
+      ketonuriaCruzes: 3
+      albumin: null
+      lactateMmolL: null
+      bunMgDl: null
+      ureaMgDl: null
+    contexto_clinico:
+      knownDiabetes: false
+      suspectedSepsis: true
+      dialysisDependent: false
+      chronicityHint: null
+      pesoKg: 48
+    disponibilidade:
+      betaHydroxybutyrateMmolL: ausente_no_cenario_UPA
+    observacoes: >-
+      Glicose convertida 32,7 mmol/L -> 588,6 mg/dL (x18). Cl 94
+      PUBLICADO. βHB 6,83 mmol/L na tabela de monitoramento (linha de
+      admissão). Cetonúria 3+. K NÃO publicado. pCO2 não publicado
+      (BEecf -27). suspectedSepsis=true: SIRS declarada pelo relato
+      (febre 38, WBC 38,8 mil, PCR 123, PCT elevada) + COVID confirmado;
+      culturas bacterianas negativas. HbA1c 16,4%. TG 25,49 mmol/L,
+      amilase 666, lipase 1053 (pancreatite por TC). Diagnóstico prévio
+      não feito apesar de 6 meses de polis (knownDiabetes=false).
+  - t: 48
+    labs:
+      glucoseMgDl: null
+      na: null
+      cl: null
+      hco3: 8
+      k: null
+      ph: 7.2
+      pco2: null
+      betaHydroxybutyrateMmolL: 2.78
+      ketonuriaCruzes: 3
+      albumin: null
+      lactateMmolL: null
+      bunMgDl: null
+      ureaMgDl: null
+    contexto_clinico:
+      knownDiabetes: true
+      suspectedSepsis: true
+      dialysisDependent: false
+      chronicityHint: null
+      pesoKg: 48
+    disponibilidade:
+      betaHydroxybutyrateMmolL: ausente_no_cenario_UPA
+    observacoes: "Tabela 'Time Day 2': pH 7,2, HCO3 8, βHB 2,78, cetonúria 3+."
+  - t: 96
+    labs:
+      glucoseMgDl: null
+      na: null
+      cl: null
+      hco3: 24
+      k: null
+      ph: 7.45
+      pco2: null
+      betaHydroxybutyrateMmolL: 0.32
+      ketonuriaCruzes: 0
+      albumin: null
+      lactateMmolL: null
+      bunMgDl: null
+      ureaMgDl: null
+    contexto_clinico:
+      knownDiabetes: true
+      suspectedSepsis: false
+      dialysisDependent: false
+      chronicityHint: null
+      pesoKg: 48
+    disponibilidade:
+      betaHydroxybutyrateMmolL: ausente_no_cenario_UPA
+    observacoes: >-
+      Tabela 'Time Day 4': pH 7,45, HCO3 24, βHB 0,32 (normalizado),
+      cetonúria negativa -> cruzes 0. Resolução formal atingível pelos
+      eixos do canon (βHB <0,6 + pH >=7,3) — mas o perfil trava por
+      na/cl ausentes neste ponto (F-005-adjacente).
+
+conduta_relatada:
+  insulina:
+    iniciada: true
+    adiada_por_potassio: false
+    taxa_inicial_U_kg_h: 0.05
+    reduzida_com_dextrose: null
+    bolus_inicial: false
+  potassio:
+    reposto_antes_da_insulina: null
+    reposto: null
+  bicarbonato:
+    administrado: null
+    ph_no_momento: null
+  fluidos:
+    texto: "ressuscitação volêmica com queda de glicemia controlada em 2-5 mmol/L/h"
+  texto_livre: >-
+    Insulina IV contínua 0,05-0,1 U/kg/h (faixa relatada; registrado o
+    piso). Pancreatite: jejum + somatostatina + omeprazol + HBPM +
+    suporte nutricional. Hemodiafiltração venovenosa contínua no dia 2
+    para remoção de mediadores inflamatórios (SIRS + acidose de difícil
+    correção); sensório clareou e acidose corrigiu após 12h de CVVHDF.
+    Insulina SC a partir do dia 8; alta no dia 20.
+
+desfecho:
+  resolucao: true
+  criterio_resolucao_do_relato: "βHB normalizado e cetonúria negativa no dia 4; acidose corrigida após CVVHDF; glicemia estável no dia 20"
+  tempo_ate_resolucao_h: 96
+  complicacoes: ["pancreatite aguda moderada-grave hipertrigliceridêmica", "SIRS com CVVHDF", "necrose pancreática encapsulada leve residual"]
+  obito: false
+
+adjudicacao:
+  classificacao: PENDENTE
+  notas: null

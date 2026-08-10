@@ -1,0 +1,77 @@
+# Extraído de relato publicado (texto completo lido via PubMed Central).
+# Série de casos: paciente "Case 3" de Yomogida et al.
+meta:
+  id: CASO-018
+  synthetic: false
+  fonte:
+    citacao: "Yomogida D, Hasegawa S, Mizuta S, Horikawa S, Koshida Y. Euglycemic Diabetic Ketoacidosis With Sepsis and Acute Kidney Injury in Critically Ill Patients: A Case Series [Case 3]. Cureus. 2025;17(5):e83920."
+    doi: "10.7759/cureus.83920"
+    pmid: "40502910"
+  ano: 2025
+  contexto: UTI
+  populacao: adulto
+  variante: sepse_lactato
+  variante_observacao: "EDKA em choque séptico por peritonite pós-colectomia (D8), 84 anos, DM2 em pioglitazona + semaglutida"
+
+pontos:
+  - t: 0
+    labs:
+      glucoseMgDl: 103
+      na: 136
+      cl: 105
+      hco3: 14.7
+      k: null
+      ph: 7.316
+      pco2: 29.7
+      betaHydroxybutyrateMmolL: null
+      ketonuriaCruzes: null
+      albumin: null
+      lactateMmolL: 2.2
+      bunMgDl: null
+      ureaMgDl: null
+    contexto_clinico:
+      knownDiabetes: true
+      suspectedSepsis: true
+      dialysisDependent: false
+      chronicityHint: null
+      pesoKg: null
+    disponibilidade:
+      lactateMmolL: ausente_no_cenario_UPA
+    observacoes: >-
+      Cetonas séricas N/A na tabela; cetonúria "Positive" SEM cruzes ->
+      null (eixo cetônico sem insumo aproveitável — mesmo padrão F-008 de
+      quantificação ausente). pH 7,316 não fecha por pH; HCO3 14,7 fecha
+      pelo OR — mas o perfil trava antes, no eixo cetônico. AG 19,55.
+      Creatinina 2,05. Único da série em choque franco (PA 90/45,
+      FC 130).
+
+conduta_relatada:
+  insulina:
+    iniciada: null
+    adiada_por_potassio: null
+    taxa_inicial_U_kg_h: null
+    reduzida_com_dextrose: null
+    bolus_inicial: null
+  potassio:
+    reposto_antes_da_insulina: null
+    reposto: null
+  bicarbonato:
+    administrado: null
+    ph_no_momento: null
+  fluidos:
+    texto: null
+  texto_livre: >-
+    IOT + CHDF do dia 1 ao 3 por oligúria e acidose em progressão; alta
+    da UTI no dia 7. A cetonúria positiva pré-UTI levantou a suspeita de
+    EDKA precocemente neste paciente (diferente dos casos 1-2 da série).
+
+desfecho:
+  resolucao: true
+  criterio_resolucao_do_relato: "CHDF suspensa no dia 3; alta da UTI no dia 7"
+  tempo_ate_resolucao_h: null
+  complicacoes: ["choque séptico por peritonite", "LRA com CHDF"]
+  obito: false
+
+adjudicacao:
+  classificacao: PENDENTE
+  notas: null

@@ -1,0 +1,78 @@
+# Extraído de relato publicado (texto completo lido via PubMed Central).
+meta:
+  id: CASO-024
+  synthetic: false
+  fonte:
+    citacao: "Mahfooz RS, Khan MK, Al Hennawi H, Khedr A. SGLT-2 Inhibitor-Associated Euglycemic Diabetic Ketoacidosis: A Case Report and a Literature Review. Cureus. 2022;14(6):e26267."
+    doi: "10.7759/cureus.26267"
+    pmid: "35911365"
+  ano: 2022
+  contexto: PS
+  populacao: adulto
+  variante: euglicemica_sglt2
+  variante_observacao: "EDKA por empagliflozina iniciada 5 dias antes, DM2, 45 anos; K 2,0 na admissão — teste do hold de insulina por hipocalemia profunda; pós-COVID recente"
+
+pontos:
+  - t: 0
+    labs:
+      glucoseMgDl: 142
+      na: 140
+      cl: 98
+      hco3: 5.9
+      k: 2.0
+      ph: 7.03
+      pco2: 19
+      betaHydroxybutyrateMmolL: null
+      ketonuriaCruzes: 3
+      albumin: null
+      lactateMmolL: 1.53
+      bunMgDl: null
+      ureaMgDl: 14
+    contexto_clinico:
+      knownDiabetes: true
+      suspectedSepsis: null
+      dialysisDependent: false
+      chronicityHint: null
+      pesoKg: null
+    disponibilidade:
+      lactateMmolL: ausente_no_cenario_UPA
+    observacoes: >-
+      Painel completo (gasometria arterial). Cetona sérica publicada como
+      ">10 mmol/L" sem nomear o ensaio -> null (F-008); eixo cetônico
+      entra pela cetonúria 3+ publicada. Lactato 13,8 mg/dL -> 1,53
+      mmol/L (conversão /9,008, massa molar — identidade). AG 36
+      relatado (consistente: 140-98-5,9=36,1). K 2,0 (!) com
+      hipocalemia. HbA1c 10,4%. Dia 4: pH 7,4, HCO3 23,2, K 3,2,
+      cetonas negativas (sem Na/glicose completos -> ponto não incluído).
+
+conduta_relatada:
+  insulina:
+    iniciada: true
+    adiada_por_potassio: null
+    taxa_inicial_U_kg_h: null
+    reduzida_com_dextrose: null
+    bolus_inicial: null
+  potassio:
+    reposto_antes_da_insulina: null
+    reposto: true
+  bicarbonato:
+    administrado: null
+    ph_no_momento: null
+  fluidos:
+    texto: "fluidos IV pelo protocolo local de CAD"
+  texto_livre: >-
+    "IV fluids, insulin, and potassium replacement" pelo protocolo local —
+    a ORDEM insulina×potássio não é relatada, com K 2,0 na admissão
+    (ponto central de adjudicação: o canon manda repor K e adiar insulina
+    com K <3,5). Melhora clínica em 4 dias; alta estável.
+
+desfecho:
+  resolucao: true
+  criterio_resolucao_do_relato: "dia 4: gasometria, eletrólitos e metabolismo basal normalizados; alta estável"
+  tempo_ate_resolucao_h: 96
+  complicacoes: ["hipocalemia grave 2,0 mEq/L na admissão", "hipoxemia SpO2 88% em ar ambiente na chegada"]
+  obito: false
+
+adjudicacao:
+  classificacao: PENDENTE
+  notas: null

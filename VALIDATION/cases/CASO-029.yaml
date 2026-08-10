@@ -1,0 +1,78 @@
+# Extraído de relato publicado (texto completo lido via PubMed Central).
+# Série de casos: "Patient D" de Patel et al.
+meta:
+  id: CASO-029
+  synthetic: false
+  fonte:
+    citacao: "Patel D, Kania B, Salem A, et al. COVID-19 Viral Infection Presenting With Diabetic Ketoacidosis, Hyperosmolar Hyperglycemic Syndrome, or Mixed Hyperglycemic Crisis: A Case Series [Patient D]. J Community Hosp Intern Med Perspect. 2023;13(2):76-83."
+    doi: "10.55729/2000-9666.1163"
+    pmid: "37168059"
+  ano: 2023
+  contexto: UTI
+  populacao: adulto
+  variante: dialitica
+  variante_observacao: "HHS em DRC dialítica (ESRD em hemodiálise) + HIV + AVC prévio, 66 anos, COVID-19 em dexametasona — hiperglicemia >600 refratária a >100 U/dia SC"
+
+pontos:
+  - t: 0
+    labs:
+      glucoseMgDl: 600
+      na: null
+      cl: null
+      hco3: null
+      k: null
+      ph: null
+      pco2: null
+      betaHydroxybutyrateMmolL: null
+      ketonuriaCruzes: 0
+      albumin: null
+      lactateMmolL: null
+      bunMgDl: null
+      ureaMgDl: null
+    contexto_clinico:
+      knownDiabetes: true
+      suspectedSepsis: null
+      dialysisDependent: true
+      chronicityHint: null
+      pesoKg: null
+    disponibilidade: {}
+    observacoes: >-
+      Extração de PISO: glicose publicada como ">600" -> registrado 600
+      (qualquer limiar do motor — 200/250/500 — fica igualmente cruzado;
+      decisão-equivalente). "Acetone levels were negative" -> cetonúria 0
+      (ausência afirmada, não campo em branco). Na/Cl/K/pH/HCO3 não
+      publicados por paciente; AG ">20" atribuído pelo relato à uremia da
+      ESRD. Segundo caso dialítico do corpus (CASO-002 é o outro);
+      hiperglicemia iatrogênica por dexametasona (COVID).
+
+conduta_relatada:
+  insulina:
+    iniciada: true
+    adiada_por_potassio: false
+    taxa_inicial_U_kg_h: null
+    reduzida_com_dextrose: null
+    bolus_inicial: null
+  potassio:
+    reposto_antes_da_insulina: null
+    reposto: null
+  bicarbonato:
+    administrado: null
+    ph_no_momento: null
+  fluidos:
+    texto: "SF com potássio IV (dialítico!)"
+  texto_livre: >-
+    >100 U/dia de insulina SC sem controle -> UTI com insulin drip;
+    eletrólitos a cada 4h; ponte para SC com endocrinologia. AG >20
+    persistente atribuído à uremia (não tratado como cetoacidose).
+    Dexametasona mantida por COVID (infiltrados bilaterais).
+
+desfecho:
+  resolucao: true
+  criterio_resolucao_do_relato: "melhora marcada da hiperglicemia; ponte para insulina SC; retorno ao andar"
+  tempo_ate_resolucao_h: null
+  complicacoes: ["hiperglicemia refratária a >100 U/dia SC", "sintomas stroke-like na admissão (TC negativa)"]
+  obito: false
+
+adjudicacao:
+  classificacao: PENDENTE
+  notas: null

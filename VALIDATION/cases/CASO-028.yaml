@@ -1,0 +1,76 @@
+# Extraído de relato publicado (texto completo lido via PubMed Central).
+# Série de casos: "Patient C" de Patel et al.
+meta:
+  id: CASO-028
+  synthetic: false
+  fonte:
+    citacao: "Patel D, Kania B, Salem A, et al. COVID-19 Viral Infection Presenting With Diabetic Ketoacidosis, Hyperosmolar Hyperglycemic Syndrome, or Mixed Hyperglycemic Crisis: A Case Series [Patient C]. J Community Hosp Intern Med Perspect. 2023;13(2):76-83."
+    doi: "10.55729/2000-9666.1163"
+    pmid: "37168059"
+  ano: 2023
+  contexto: UTI
+  populacao: adulto
+  variante: cad_hhs_mista
+  variante_observacao: "'CAD × HHS' com hipernatremia extrema (Na 170, corrigido 183) em idosa de 61 anos com demência, COVID-19; DM2 em metformina"
+
+pontos:
+  - t: 0
+    labs:
+      glucoseMgDl: 521
+      na: 170
+      cl: null
+      hco3: null
+      k: null
+      ph: 7.33
+      pco2: null
+      betaHydroxybutyrateMmolL: null
+      ketonuriaCruzes: null
+      albumin: null
+      lactateMmolL: null
+      bunMgDl: null
+      ureaMgDl: null
+    contexto_clinico:
+      knownDiabetes: true
+      suspectedSepsis: null
+      dialysisDependent: false
+      chronicityHint: null
+      pesoKg: null
+    disponibilidade: {}
+    observacoes: >-
+      Gasometria venosa: pH 7,33 (não fecha o eixo ácido). Cl/HCO3/K não
+      publicados (AG 17 relatado; sem HCO3 não há derivação). Cetona
+      sérica "moderate" sem número -> null. Na 170 (!), corrigido 183
+      pelo relato. Osm efetiva calculável com Na medido: 2x170 + 521/18
+      = 368,9 >320 — território HHS (F-007), mas o perfil trava por
+      Cl/HCO3/eixo cetônico.
+
+conduta_relatada:
+  insulina:
+    iniciada: true
+    adiada_por_potassio: false
+    taxa_inicial_U_kg_h: null
+    reduzida_com_dextrose: null
+    bolus_inicial: null
+  potassio:
+    reposto_antes_da_insulina: null
+    reposto: null
+  bicarbonato:
+    administrado: null
+    ph_no_momento: null
+  fluidos:
+    texto: "fluidos IV + flushes de água livre (hipernatremia)"
+  texto_livre: >-
+    Insulin drip na UTI; transição para glargina após melhora do AG;
+    permaneceu confusa (demência de base); transferida ao andar após
+    estabilização.
+
+desfecho:
+  resolucao: true
+  criterio_resolucao_do_relato: "melhora do anion gap; hemodinamicamente estável; transferida ao andar"
+  tempo_ate_resolucao_h: null
+  complicacoes: ["hipernatremia extrema 170 (corrigida 183)", "confusão persistente (demência de base)"]
+  obito: false
+
+adjudicacao:
+  classificacao: PENDENTE
+  notas: null
