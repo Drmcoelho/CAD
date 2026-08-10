@@ -130,4 +130,11 @@ POLICY, motor JS ou doutrina. Adjudicação clínica é do dono.
   `convertido_de_escala` no schema (v0.3) com tabela de mapeamento declarada
   por kit, nos moldes do `derivado_aritmetico`. Sem ela, esses relatos ficam
   permanentemente fora do braço de acurácia por um detalhe de formatação.
+- **Exemplares adicionais (lote 4):** CASO-015 publica "beta-hydroxybutyrate
+  11.41" sem unidade num pH 6,75 (escala mmol/L é a compatível, mas mg/dL
+  daria 10x menos — não decidível sem inferência); CASO-014 publica "ketone
+  levels 4.5 mmol/L" sem nomear o ensaio — extraído como βHB (ensaio sérico
+  padrão em mmol/L) com a decisão marcada como revisável nas observacoes.
+  A fronteira exata do que o dono aceita como "identidade de formato" versus
+  "inferência" é dele.
 - **Status:** registrado 2026-08-10; aguardando decisão do dono.
