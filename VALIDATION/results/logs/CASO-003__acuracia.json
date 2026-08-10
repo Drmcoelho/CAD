@@ -22,7 +22,7 @@
    "campos_mascarados_UPA": [],
    "input_motor": {
     "na": 134,
-    "cl": null,
+    "cl": 100,
     "hco3": 6,
     "glucoseMgDl": 214,
     "ph": 6.99,
@@ -37,7 +37,7 @@
    "labs_pos_mascara": {
     "glucoseMgDl": 214,
     "na": 134,
-    "cl": null,
+    "cl": 100,
     "hco3": 6,
     "k": 3.8,
     "ph": 6.99,
@@ -50,9 +50,28 @@
     "ureaMgDl": null
    },
    "resultado_cad": {
-    "insufficient": true,
-    "missing": [
-     "cl"
+    "insufficient": false,
+    "computed": {
+     "ag": 28.0,
+     "agc": 32.5,
+     "deltaRatio": 1.14,
+     "deltaBand": "1-2",
+     "effectiveOsmolality": 279.9,
+     "hasDka": true,
+     "isResolvedDka": false,
+     "ketoneMarker": "betaHB",
+     "potassiumPlan": {
+      "band": "3.5-5.0",
+      "insulin": "allowed",
+      "potassium": "replace to maintain 4-5 mmol/L",
+      "target": "4-5 mmol/L"
+     }
+    },
+    "matches": [
+     {
+      "id": "euglicemica",
+      "reason": "glicose 214 < 250 apesar de o critério de CAD já estar fechado — fenótipo euglicêmico (SGLT2i/jejum/gestação/etilismo)."
+     }
     ]
    },
    "resultado_insulina": {
@@ -68,12 +87,12 @@
    },
    "resultado_abg": null,
    "flags_mecanicas": [
-    "insuficiente:cl",
-    "sem_pCO2_gasometria_nao_executada"
+    "sem_pCO2_gasometria_nao_executada",
+    "derivado_aritmetico:cl"
    ],
-   "labs_disponiveis": 9,
+   "labs_disponiveis": 10,
    "labs_total": 13
   }
  ],
- "classificacao_mecanica": "motor_travou_por_dado_ausente"
+ "classificacao_mecanica": "motor_degradou · PENDENTE_ADJUDICACAO"
 }

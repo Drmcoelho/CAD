@@ -18,7 +18,7 @@ pontos:
     labs:
       glucoseMgDl: 214
       na: 134
-      cl: null
+      cl: 100
       hco3: 6
       k: 3.8
       ph: 6.99
@@ -37,10 +37,11 @@ pontos:
       pesoKg: null
     disponibilidade:
       betaHydroxybutyrateMmolL: ausente_no_cenario_UPA
+      cl: derivado_aritmetico
     observacoes: >-
-      Cloro NÃO relatado; o relato dá AG=28, que permitiria derivar
-      Cl=134-6-28=100 — derivação NÃO aplicada (decisão metodológica
-      pendente com o dono; ver findings F-004). pH 6,99 em gasometria
+      Cloro NÃO publicado diretamente; DERIVADO por identidade aritmética
+      (schema v0.2, F-004, autorizado pelo dono 2026-08-10): Cl = Na - HCO3
+      - AG relatado = 134 - 6 - 28 = 100. pH 6,99 em gasometria
       venosa, pCO2 não relatado. Discrepâncias internas do relato:
       discussão cita glicose 212 (labs: 214) e HCO3 9 (labs: 6) —
       extração usa o parágrafo de labs. Etanolemia negativa; TC com

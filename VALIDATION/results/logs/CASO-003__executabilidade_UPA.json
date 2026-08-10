@@ -24,7 +24,7 @@
    ],
    "input_motor": {
     "na": 134,
-    "cl": null,
+    "cl": 100,
     "hco3": 6,
     "glucoseMgDl": 214,
     "ph": 6.99,
@@ -39,7 +39,7 @@
    "labs_pos_mascara": {
     "glucoseMgDl": 214,
     "na": 134,
-    "cl": null,
+    "cl": 100,
     "hco3": 6,
     "k": 3.8,
     "ph": 6.99,
@@ -54,7 +54,6 @@
    "resultado_cad": {
     "insufficient": true,
     "missing": [
-     "cl",
      "betaHydroxybutyrateMmolL|ketonuriaCruzes"
     ]
    },
@@ -71,10 +70,11 @@
    },
    "resultado_abg": null,
    "flags_mecanicas": [
-    "insuficiente:cl,betaHydroxybutyrateMmolL|ketonuriaCruzes",
-    "sem_pCO2_gasometria_nao_executada"
+    "insuficiente:betaHydroxybutyrateMmolL|ketonuriaCruzes",
+    "sem_pCO2_gasometria_nao_executada",
+    "derivado_aritmetico:cl"
    ],
-   "labs_disponiveis": 8,
+   "labs_disponiveis": 9,
    "labs_total": 13
   }
  ],
