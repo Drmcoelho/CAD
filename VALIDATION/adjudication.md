@@ -148,6 +148,24 @@ Motor trava pelo eixo cetônico apesar do painel rico: cetonúria ">80 mg/dL"
 sem escala em cruzes (F-008 — mapeamento de kit não é identidade aritmética).
 Se o dono autorizar `convertido_de_escala` (v0.3), o caso destrava.
 
+## Lote 4 (CASO-014..015, extraídos 2026-08-10)
+
+**CASO-014** · EDKA + sepse MRSA em empagliflozina · DOI 10.7759/cureus.87029
+**Motor RODA** (Cl derivado 98 via AG 31): perfil `euglicemica+sepse-lactato` —
+primeira vez que a bandeira de sepse dispara (via contexto clínico; lactato era
+NORMAL, 1,7). Confronto de taxa: motor recomenda 0,05 U/kg/h + dextrose
+(glicose 209 <250); relato usou 0,1 U/kg/h. Ressalva de extração: "ketone
+levels 4.5 mmol/L" sem ensaio nomeado, extraído como βHB (revisável — F-008).
+
+**CASO-015** · CAD pediátrica gravíssima (pH 6,75) com mielinólise pontina · DOI 10.1155/2018/4273971
+Motor trava (F-008: βHB "11.41" sem unidade; cetonúria sem cruzes) apesar de
+Cl derivável (109). O confronto central é de conduta: NaHCO₃ 50 mEq em bolus
+com pH 6,75 — **dentro** do gatilho <7,0 do canon adulto, mas em população
+pediátrica onde a literatura (e o próprio relato) associa bicarbonato a edema
+cerebral; desfecho: edema cerebral + CPM + HSD, recuperação quase completa.
+Terceiro vértice do triângulo do bicarbonato no corpus: CASO-002 deu acima do
+gatilho, CASO-010 reteve abaixo, CASO-015 deu dentro — e é o caso pediátrico.
+
 ## Resumo para assinatura
 
 | Caso | Confronto dominante | Rótulo sugerido pelo confronto mecânico* |
@@ -165,6 +183,8 @@ Se o dono autorizar `convertido_de_escala` (v0.3), o caso destrava.
 | CASO-011 | roda: cad-hhs por glicose ≥500 × "CAD simples" do relato ✖/◐ | — |
 | CASO-012 | travou (nenhum pH publicado — F-005) | — |
 | CASO-013 | travou (cetonúria em mg/dL sem cruzes — F-008) | — |
+| CASO-014 | roda: euglicemica+sepse-lactato; taxa 0,05 (motor) × 0,1 (relato) | — |
+| CASO-015 | travou (βHB sem unidade — F-008); bicarbonato DENTRO do gatilho, pediátrico ✖/◐ | — |
 
 \* Coluna deliberadamente vazia: o rótulo é seu. Os símbolos acima são
 descrição mecânica do confronto, não julgamento clínico.

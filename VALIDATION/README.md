@@ -28,9 +28,9 @@ nenhuma execução.
 | Schema de caso | `case_schema.yaml` v0.1 — **aprovado pelo dono** em 2026-08-08 |
 | Runner + braços acurácia/UPA | `runner.py` — funciona ponta a ponta, determinístico |
 | Caso sintético de pipeline | `cases_synthetic/PIPE-001_SYNTHETIC.yaml` — roda nos 2 braços |
-| **Casos reais** | **13/30 extraídos de relatos publicados** (PMC texto completo, citação+DOI+PMID em cada YAML) |
+| **Casos reais** | **15/30 extraídos de relatos publicados** (PMC texto completo, citação+DOI+PMID em cada YAML) |
 | Schema | **v0.2** — classe `derivado_aritmetico` (F-004 decidido pelo dono 2026-08-10); v0.3 (`convertido_de_escala`, F-008) aguarda decisão |
-| Adjudicação | toda linha nasce `PENDENTE_ADJUDICACAO` — campo do dono; **26 linhas aguardando** (`adjudication.md` é o dossiê) |
+| Adjudicação | toda linha nasce `PENDENTE_ADJUDICACAO` — campo do dono; **30 linhas aguardando** (`adjudication.md` é o dossiê) |
 
 Atenção a dois desvios do protocolo original, ambos verificados e decididos
 pelo dono (detalhe em `findings.md`): o substrato é `canon/policy.json` (não
@@ -88,6 +88,13 @@ Lote 3 (2026-08-10):
 | CASO-011 | CAD clássica hiperglicêmica (KPDM pós-bariátrica, glicose 504) | 10.3389/fendo.2018.00812 | **executou**: `cad-hhs` (glicose ≥500), K 4,8→0,1 U/kg/h, Δ/Δ 0,5 |
 | CASO-012 | EDKA dieta cetogênica + SGLT2i suspenso | 10.1155/2022/4101975 | travou: nenhum pH publicado (F-005) |
 | CASO-013 | EDKA empagliflozina, painel completo | 10.7759/cureus.30106 | travou: cetonúria em mg/dL sem cruzes (F-008) |
+
+Lote 4 (2026-08-10):
+
+| Caso | Fenótipo | Fonte (DOI) | Resultado mecânico |
+|---|---|---|---|
+| CASO-014 | EDKA + sepse MRSA (SGLT2i) | 10.7759/cureus.87029 | **executou**: `euglicemica+sepse-lactato` (Cl derivado 98); taxa 0,05 motor × 0,1 relato |
+| CASO-015 | CAD pediátrica pH 6,75 + mielinólise pontina | 10.1155/2018/4273971 | travou: βHB sem unidade (F-008); bicarbonato dentro do gatilho <7,0, população pediátrica |
 
 Achados da extração: F-004 (**decidido**: derivação aritmética autorizada, schema
 v0.2 — destravou CASO-003/004), F-005 (perfil exige pH; 3 exemplares reais:

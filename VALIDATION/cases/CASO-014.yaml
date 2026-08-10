@@ -1,0 +1,85 @@
+# Extraído de relato publicado (texto completo lido via PubMed Central).
+# Todos os valores vêm do texto; ausente no relato = null (nunca imputado).
+meta:
+  id: CASO-014
+  synthetic: false
+  fonte:
+    citacao: "Ramalingam A, Tewadros A, De Souza Goncalves B, Yelangi A, Elghul A. Euglycemic Diabetic Ketoacidosis Triggered by Sepsis in a Patient on Sodium-Glucose Co-transporter 2 (SGLT2) Inhibitor Therapy. Cureus. 2025;17(6):e87029."
+    doi: "10.7759/cureus.87029"
+    pmid: "40741547"
+  ano: 2025
+  contexto: UTI
+  populacao: adulto
+  variante: sepse_lactato
+  variante_observacao: "EDKA precipitada por sepse (pneumonia + bacteremia MRSA) em uso de empagliflozina; hipotensão, oligúria e rebaixamento em 24h"
+
+pontos:
+  - t: 0
+    labs:
+      glucoseMgDl: 209
+      na: 137
+      cl: 98
+      hco3: 8
+      k: 4.0
+      ph: 7.14
+      pco2: 23
+      betaHydroxybutyrateMmolL: 4.5
+      ketonuriaCruzes: null
+      albumin: null
+      lactateMmolL: 1.7
+      bunMgDl: 32
+      ureaMgDl: null
+    contexto_clinico:
+      knownDiabetes: true
+      suspectedSepsis: true
+      dialysisDependent: false
+      chronicityHint: null
+      pesoKg: null
+    disponibilidade:
+      cl: derivado_aritmetico
+      betaHydroxybutyrateMmolL: ausente_no_cenario_UPA
+      lactateMmolL: ausente_no_cenario_UPA
+    observacoes: >-
+      Cloro NÃO publicado na tabela; DERIVADO (v0.2, F-004): Cl = Na -
+      HCO3 - AG relatado = 137 - 8 - 31 = 98. Cetona sérica publicada
+      como "ketone levels 4.5 mmol/L" sem nomear o ensaio — extraída como
+      βHB por ser o ensaio sérico padrão reportado em mmol/L; decisão
+      revisável pelo dono (fronteira do F-008). Gasometria arterial:
+      pH 7,14, pCO2 23, pO2 129 (em O2 suplementar). Lactato NORMAL (1,7)
+      apesar da sepse — a bandeira de sepse do motor entra por
+      suspectedSepsis=true (bacteremia MRSA + pneumonia + hipotensão),
+      não pelo lactato. HbA1c 8%. Procalcitonina 0,53. Creatinina 1,1.
+
+conduta_relatada:
+  insulina:
+    iniciada: true
+    adiada_por_potassio: false
+    taxa_inicial_U_kg_h: 0.1
+    reduzida_com_dextrose: null
+    bolus_inicial: null
+  potassio:
+    reposto_antes_da_insulina: false
+    reposto: true
+  bicarbonato:
+    administrado: null
+    ph_no_momento: null
+  fluidos:
+    texto: "ressuscitação volêmica com SF 0,9%"
+  texto_livre: >-
+    Protocolo de CAD na UTI: insulina IV contínua 0,1 U/kg/h + reposição
+    de potássio + monitorização seriada de cetonas. Empagliflozina
+    suspensa imediatamente. Vancomicina 4 semanas + ceftriaxona 7 dias
+    (bacteremia MRSA); ecocardiograma sem endocardite; desbridamento de
+    abscesso de pé identificado depois. Metoprolol reduzido por
+    bradicardia.
+
+desfecho:
+  resolucao: true
+  criterio_resolucao_do_relato: "estado ácido-base normalizado em 48h; recuperação da sepse; alta em 10 dias"
+  tempo_ate_resolucao_h: 48
+  complicacoes: ["choque séptico com necessidade de UTI", "bradicardia clinicamente significativa", "bacteremia MRSA de foco inicialmente oculto (abscesso de pé)"]
+  obito: false
+
+adjudicacao:
+  classificacao: PENDENTE
+  notas: null

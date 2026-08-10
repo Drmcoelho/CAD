@@ -1,0 +1,109 @@
+# Extraído de relato publicado (texto completo lido via PubMed Central).
+# Todos os valores vêm do texto; ausente no relato = null (nunca imputado).
+meta:
+  id: CASO-015
+  synthetic: false
+  fonte:
+    citacao: "Kinoshita H, Grant L, Xoinis K, Purohit PJ. Central Pontine Myelinolysis in Pediatric Diabetic Ketoacidosis. Case Rep Crit Care. 2018;2018:4273971."
+    doi: "10.1155/2018/4273971"
+    pmid: "29973999"
+  ano: 2018
+  contexto: misto
+  populacao: pediatrico
+  variante: classica
+  variante_observacao: "CAD gravíssima (pH 6,75) de DM1 recém-diagnosticado, 16 anos; evoluiu com edema cerebral + mielinólise pontina central + hemorragia subdural — PS adulto inicial, depois UTI pediátrica"
+
+pontos:
+  - t: 0
+    labs:
+      glucoseMgDl: 472
+      na: 135
+      cl: 109
+      hco3: 2.5
+      k: null
+      ph: 6.75
+      pco2: 18.4
+      betaHydroxybutyrateMmolL: null
+      ketonuriaCruzes: null
+      albumin: null
+      lactateMmolL: null
+      bunMgDl: null
+      ureaMgDl: null
+    contexto_clinico:
+      knownDiabetes: false
+      suspectedSepsis: null
+      dialysisDependent: false
+      chronicityHint: null
+      pesoKg: 57
+    disponibilidade:
+      cl: derivado_aritmetico
+    observacoes: >-
+      Cloro NÃO publicado; DERIVADO (v0.2, F-004): Cl = Na - HCO3 - AG
+      relatado = 135 - 2,5 - 23,5 = 109. βHB publicado como "11.41" SEM
+      unidade declarada (escala compatível com mmol/L, mas mg/dL daria
+      valor 10x menor) -> null pela regra do F-008; cetonúria "presente"
+      sem cruzes -> null. Eixo cetônico do motor fica sem insumo apesar
+      do quadro. Gasometria: pH 6,75, pCO2 18,4, pO2 149, BD 32,6.
+      K não publicado. Osm medida 298. Lesões de pele infectadas em
+      virilha (fator possível, sepse não firmada -> null). PICU logo
+      depois (sem timestamp): pH 6,97, pCO2 26,7, HCO3 6,1.
+  - t: 11
+    labs:
+      glucoseMgDl: null
+      na: 143
+      cl: null
+      hco3: null
+      k: null
+      ph: null
+      pco2: null
+      betaHydroxybutyrateMmolL: null
+      ketonuriaCruzes: null
+      albumin: null
+      lactateMmolL: null
+      bunMgDl: null
+      ureaMgDl: null
+    contexto_clinico:
+      knownDiabetes: true
+      suspectedSepsis: null
+      dialysisDependent: false
+      chronicityHint: null
+      pesoKg: 57
+    disponibilidade: {}
+    observacoes: >-
+      Série de Na do relato: 135 (t0), 143 (11h, pré-terapia
+      hiperosmolar), 160 (71h, fim da hiperosmolar), 143 (131h). Osm
+      correspondentes: 298, 305, 335, 299. Queda de glicose mantida
+      <50 mg/dL/h (sem valores pontuais publicados).
+
+conduta_relatada:
+  insulina:
+    iniciada: true
+    adiada_por_potassio: false
+    taxa_inicial_U_kg_h: 0.1
+    reduzida_com_dextrose: null
+    bolus_inicial: false
+  potassio:
+    reposto_antes_da_insulina: false
+    reposto: true
+  bicarbonato:
+    administrado: true
+    ph_no_momento: 6.75
+  fluidos:
+    texto: "bolus 30 mL/kg SF 0,9% no PS adulto (acima dos 10-20 mL/kg do ISPAD); depois NaCl 0,45% + NaHCO3 75 mEq/L a 150 mL/h; trocado para isotônico com KCl+KPhos sem bicarbonato após consultoria da UTI pediátrica"
+  texto_livre: >-
+    NaHCO3 50 mEq em bolus no PS com pH 6,75 (DENTRO do gatilho <7,0 do
+    canon adulto; a literatura pediátrica associa bicarbonato a edema
+    cerebral — o próprio relato discute a contribuição possível). Terapia
+    hiperosmolar (salina 3% 5 mL/kg x2 + manitol 0,8 g/kg) por edema
+    cerebral; IOT por apneia recorrente; VM até o dia 7.
+
+desfecho:
+  resolucao: true
+  criterio_resolucao_do_relato: "CAD manejada com resolução; internação dominada pelas complicações neurológicas; alta no dia 14 deambulando com andador"
+  tempo_ate_resolucao_h: null
+  complicacoes: ["edema cerebral", "mielinólise pontina central (síndrome de desmielinização osmótica)", "hemorragia subdural parietal direita", "apneia com IOT/VM", "convulsão focal isolada", "TVP bilateral de membros superiores", "déficits neurológicos residuais leves em melhora"]
+  obito: false
+
+adjudicacao:
+  classificacao: PENDENTE
+  notas: null
